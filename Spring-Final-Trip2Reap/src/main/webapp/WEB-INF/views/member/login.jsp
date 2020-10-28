@@ -20,7 +20,7 @@
      
       
 </style>
-<link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/common/common.css"/>
+
 </head>
 <body>
     <header>
