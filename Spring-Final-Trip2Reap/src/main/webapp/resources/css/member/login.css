@@ -37,14 +37,15 @@
      /* 버튼 */      
      #space_8{ height: 15px; }
      #space_9{ height: 15px; font-size: 12px; }
+     .search{ cursor: pointer; }
      #space_10{ height: 20px; }
      #otherBtn{ text-align: center; }
      #space_11{ height: 10px; }
      #space_12{ height: 60px; }
      #loginButton{ background-color: rgb(119,175,130); color: white; border: none;
-                     width: 310px; height: 38px; font-weight: bold;}
-     #loginButton2{ width: 310px; height : 40px; }
-     #loginButton3{ width: 310px; height : 47px; }
+                     width: 310px; height: 38px; font-weight: bold; cursor: pointer; }
+     #loginButton2{ width: 310px; height : 40px; cursor: pointer; }
+     #loginButton3{ width: 310px; height : 47px; cursor: pointer; }
      
      
      /* 초록줄 아래  */

@@ -52,11 +52,11 @@
 	        <button id="loginButton" onclick="loginBtn()">로그인</button>
 	        <div id="space_8"></div>
 	        <div id="space_9">
-	            <label>아이디 찾기</label>
+	            <label class="search">아이디 찾기</label>
 	            <label>&nbsp;|&nbsp;</label>
-	            <label>비밀번호 찾기</label>
+	            <label class="search">비밀번호 찾기</label>
 	            <label>&nbsp;|&nbsp;</label>
-	            <label>회원가입</label>
+	            <label class="search">회원가입</label>
 	        </div>
 	    </div>  
 	    </form>  
