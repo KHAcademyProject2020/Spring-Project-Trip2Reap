@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- css파일 이용 -->
-    <link rel="stylesheet" href="resources/css/01_hotel_list.css">
+    <link rel="stylesheet" href="resources/css/hotel/01_hotel_list.css">
 
     <!-- API CDN-->
     <!--Bootstrap-->

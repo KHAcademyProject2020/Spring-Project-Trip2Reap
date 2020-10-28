@@ -7,45 +7,22 @@
 <meta charset="UTF-8">
 <title>전국방방곡곡</title>
 
-
 <!-- jquery CDN-->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <!--  menubar.css -->
-<link rel="stylesheet" href="resources/css/menubar.css">
-
-<!-- hamburger.js -->
-<script src="resources/js/hamburger.js"></script>
-
+<link rel="stylesheet" href="resources/css/common/menubar.css">
 
 </head>
 <body>
     <!-- 메뉴바는 어느 페이지든 포함하고 있을 테니 여기서 contextPath 변수 값 만들기 -->
 	<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
     
-    
-    <header>
-	    <!--  햄버거 컨테이너 -->
-	    <div id="hamburger_container">
-	    	<div></div>
-	    	
-	        <%-- 햄버거 버튼 --%>
-	        <div id="hamburger_wrapper">
-	            <span class="hamburger_bar"></span>
-	            <span class="hamburger_bar"></span>
-	            <span class="hamburger_bar"></span>
-	            <span class="hamburger_bar"></span>
-	        </div>
-	    </div>
-	    
-	    
-	    
-	    
+    <header>	    	    	    	    
 	    <div id="header_wrapper">
 	    	<!-- 로그아웃 상태 컨테이너 -->
 	    	<c:if test="${ empty sessionScope.loginUser}">
-	    		<%-- <div style=" display:inline-block; width: 1200px; height: 30px;"></div> --%>
-	            <div class="login_status_wrapper_logout">
+	    		<div style=" display:inline-block; width: 100vw; height: 30px;">
 	                <ul>
 	                    <li class="topBar" onclick="login();">로그인&nbsp;</li>
 	                    <li class="topBar" onclick="join();">&nbsp;회원가입</li>
@@ -56,8 +33,7 @@
 	    	
 	    	<!-- 로그인 상태 컨테이너 -->
 	    	<c:if test="${!empty sessionScope.loginUser }">
-	    		<!-- <div style=" display:inline-block; width: 1100px; height: 30px;"></div> -->
-	            <div class="login_status_wrapper_login">
+	    		<div style=" display:inline-block; width: 1100px; height: 30px;">
 	                <ul>
 	                    <li class="topBar">
 	                        <b><c:out value="${ loginUser.memberName }님 환영합니다!" />&nbsp;&nbsp;</b>
@@ -77,8 +53,7 @@
 	    
 	    
 	    <!-- 메뉴컨테이너 -->
-	    <div id="menu-container">
-	    	<%-- <div style="display: inline-block; width:258px; height : 50px;"></div> --%>
+	    	<div style="display: inline-block; width:258px; height : 50px;">
 	        <div id="menus_wrapper">
 		        <ul>
 		            <li class="menu">
@@ -103,14 +78,9 @@
 		            </li>
 		        </ul>
 	       </div>
-	       <%-- <div style="display: inline-block; width:258px; height : 50px;"></div> --%>
+	       <div style="display: inline-block; width:258px; height : 50px;"></div>
 	    </div>
     </header>
-    
-    <div>
-    	<%-- (은강왈) ????? type="text"는 무엇인가여 기쁨씨? --%>
-    	<input type="hidden" class="names" id="names" value="${ loginUser.memberName }">
-    </div>
     
     <script>
     function main(){
