@@ -17,38 +17,41 @@
     
     <section>
     <!-- 각자 구현할 부분  -->
-    <div id="board_list"><!-- 추가한 div(수진k) width:1000으로 가로길이도 맞추려했는데 왜 자꾸 오른쪽으로 밀릴까요.. 이것때문에 계속 수정하다가 너무 복잡해서 실패하고 오래걸렸어여 ㅠㅠ  일단 margin만 넣었어요-->
-        <div style="height:80px;"></div> 
-        <div style="display: inline-block; width: 530px;"></div>
-        <div style="display: inline-block; width:450px; height:3px; 
-                   background-color: rgb(119,175,130); border: none;"></div>     
-        <div style="height:50px;">
+    <div id="board_list">
+        <!-- 초록 선  -->
+        <div id="space_1"></div>         
+        <div id="space_2"></div>
+        <div id="space_3"></div>     
+        <div id="space_4"></div> 
         
-        </div> 
+        <!-- 로그인 라벨  -->
+        <div id="loginLabel_space">
+        <label id="loginLabel">로그인</label>
         
-        <div style="width:1530px; height:50px; text-align: center;">
-        <label style="font-size: 30px; font-weight:bold;">로그인</label>
-    
-	    <div style="width:1500px; height:20px;"></div>   
+        <!-- 로그인 form  -->
+	    <div id="space_5"></div>   
 	    <form action="loginCheck.me" method="post">
 	    <div id="loginDiv">
 	        <input type="text" id="loginInfo" name="memberId" placeholder="           아이디를 입력해주세요"
 	         onfocus="this.placeholder=''" onblur="this.placeholder='           아이디를 입력해주세요'" >
-	        <div style="height:15px;"></div>
+	        <div id="space_6"></div>
 	        <input type="text" id="loginInfo" name="memberPwd" placeholder="           비밀번호를 입력해주세요"
 	         onfocus="this.placeholder=''" onblur="this.placeholder='           비밀번호를 입력해주세요'">
 	    </div>
-	    <div style="width:1000px; height:25px;"></div>
-	    <div style="width:610px; display: inline-block;"></div>
-	    <div style="display: inline-block;">
-	        <input type="checkbox" style="width: 20px; vertical-align: middle;">
-	        <label style="font-size: 12px; vertical-align: middle;">아이디 저장</label>
+	    <div id="space_7"></div>
+	    
+	    <!-- 아이디 저장  -->
+	    <div id="idSave_1">
+	        <input type="checkbox" id="idSave_2">
+	        <label id="idSave_3">아이디 저장</label>
 	    </div>
-	    <div style="height: 15px;"></div>
+	    <div id="idSave_4"></div>
+	    
+	    <!-- 버튼  -->
 	    <div id="loginDiv">
 	        <button id="loginButton" onclick="loginBtn()">로그인</button>
-	        <div style="height: 15px;"></div>
-	        <div style="height: 15px; font-size: 12px;">
+	        <div id="space_8"></div>
+	        <div id="space_9">
 	            <label>아이디 찾기</label>
 	            <label>&nbsp;|&nbsp;</label>
 	            <label>비밀번호 찾기</label>
@@ -58,26 +61,23 @@
 	    </div>  
 	    </form>  
 	    <div>
-	        <div style="height: 20px;"></div>
-	        <div style="text-align: center;">
+	        <div id="space_10"></div>
+	        <div id="otherBtn">
 	            <img id="loginButton2" src="resources/images/카카오로그인.png">
 	        </div>
-	        <div style="height: 10px;"></div>
-	        <div style="text-align: center;">
+	        <div id="space_11"></div>
+	        <div id="otherBtn">
 	            <img id="loginButton3" src="resources/images/네이버로그인.png">
 	        </div>    
 	    </div>
-	    <div style="height:60px;"></div>
-	    <div style="display: inline-block; width:530px"></div>
-	    <div style="display: inline-block; width:450px; height:3px; 
-	                background-color: rgb(119,175,130); border: none;"></div>
+	    <div id="space_12"></div>
+	    
+	    <!-- 초록줄 아래  -->
+	    <div id="space_13"></div>
 	    </div> 
    </div>
     
- 
- 
-    
-    <div style="height: 300px;"></div>
+    <div style="height: 700px;"></div>
     </section>   
     
     <footer></footer>    
