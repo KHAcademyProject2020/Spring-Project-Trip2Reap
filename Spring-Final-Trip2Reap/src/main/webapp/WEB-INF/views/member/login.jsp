@@ -5,21 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
-<style>
-         
-       footer {height: 200px;}     
-      
-       #loginDiv{ height : 80px; text-align: center; }
-       #loginInfo{ width: 300px; height: 35px; font-size: 13px;
-                   border: 1px solid lightgray; }
-       #loginButton{ background-color: rgb(119,175,130); color: white; border: none;
-                     width: 310px; height: 38px; font-weight: bold;}
-       #loginButton2{ width: 310px; height : 40px; }
-       #loginButton3{ width: 310px; height : 47px; }
-       #board_list{ margin : 40px auto 0px auto;}
-     
-      
-</style>
+
+   <!--  login.css -->
+   <link rel="stylesheet" href="resources/css/member/login.css">
 
 </head>
 <body>

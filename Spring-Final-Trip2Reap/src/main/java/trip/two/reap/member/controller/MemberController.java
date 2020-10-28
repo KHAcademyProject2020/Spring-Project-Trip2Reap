@@ -1,7 +1,5 @@
 package trip.two.reap.member.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -9,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import trip.two.reap.member.model.service.MemberService;
 import trip.two.reap.member.model.vo.Member;
@@ -36,8 +35,8 @@ public class MemberController {
 		// Model : 전달하고자 하는 데이터가 있을 경우				
 		
 		Member loginUser = mService.memberLogin(m);
-		// String ek = bcryptPasswordEncoder.encode(m.getMemberPwd());
-		// System.out.println("암호화 된 비밀번호 : " + ek);
+		// String pwd = bcryptPasswordEncoder.encode(m.getMemberPwd());
+		// System.out.println("암호화 된 비밀번호 : " + pwd);
 		
 		boolean isPwdCorrect= bcryptPasswordEncoder.matches(m.getMemberPwd(),  loginUser.getMemberPwd());
 		// 맞으면 true / 틀리면 false => boolean타입으로 반환
@@ -46,7 +45,6 @@ public class MemberController {
 			// loginUser Data를 model에 저장
 		} else { // false
 			// alert창 띄워주기
-			// 임시코드
 			System.out.println("로그인 실패");
 		}
 		  System.out.println("로그인 한 유저" + m);
@@ -55,28 +53,25 @@ public class MemberController {
 			// JSP에서는 model에 저장된 data의 key값을 통해 값을 불러올 수 있다.
 			// JSP에서는 --> 로그인유저 : ${loginUser.변수이름}
 		  
-	  } // login 메소드 종료
+	  } // login() 종료
 
 	
 	// 로그아웃
 	@RequestMapping("logout.me")
-	public String logout(HttpSession session) {
-		System.out.println("session.invalidate() 실행 전");
-		System.out.println("session.getAttribute('member') [" + session.getAttribute("loginUser") + "]");
-		session.invalidate();
-		/*
-		 * System.out.println("session.invalidate() 실행 후");
-		 * System.out.println("session.getAttribute('member') [" +
-		 * session.getAttribute("loginUser") + "]");
-		 */
+	public String logout(SessionStatus status) {
+	// @SessionAttributes를 사용할 경우 세션이 파괴되거나, 명시적으로 지울 때까지 동일한 세션에서 사용가능
+    // HttpSession를 사용할 경우, @SessionAttributes를 쓰지않고 session.invalidate();를 사용하여 초기화해주면됨
+		status.setComplete(); // 세션 초기화
+		
 		return "redirect:home.do";
-	}
+	} // logout() 종료
+	
 	
 	// 마이페이지 뷰로 이동
 	@RequestMapping("myPage.me")
 	public String myPageView() {
 		return "myPage";
-	}
+	} // myPageView() 종료
 	
 	
 	

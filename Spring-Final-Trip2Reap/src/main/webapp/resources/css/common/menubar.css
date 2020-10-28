@@ -1,75 +1,33 @@
-ul {
-    list-style-type: none;
-    margin: 0px;
-    display: inline-block;
-}
+    header{ position: absolute; left:0px; top:0px; }
+    ul { margin : 0px; display: inline-block;}
+    a{ text-decoration:none;}
+    
+    /* 상단바   */
+    #rootBar{ background-color: rgb(207,227,225); width: 100vw; height: 45px; }
+    #root_1{ display:inline-block; width: 80vw; height: 30px; }
+    #root_2{ display: inline-block; width: 15vw; height: 25px; text-align: center; }
 
-div {
-	margin: 0px;
-    padding: 0px;
-}
-
-/* 상단바  */
-#rootBar{
-    background-color : rgb(207,227,225);
-    width: 100vw;
-    height: 50px;
-}
-
-.topBar {
-    display: inline-block;
-    font-size: 13px;
-    vertical-align: top;
-    cursor: pointer;
-}
-
-
-#header_wrapper{
-    display: block;
-
-    position: relative;
-    background-color:var(--top-cyan-color);
-    padding: 1em;
-}
+    /* 로그아웃 상태 */
+    .topBar{ display: inline-block; font-size: 13px; vertical-align: top; cursor:pointer; }
+    /* 로그인 상태  */
+    .topBar2{ display: inline-block; font-size: 13px; vertical-align: top; cursor:pointer; }
+    
+    
+    /*  메인로고(전국방방곡곡)  */
+    #mainDiv { text-align: center; }
+    #mainLogo { width:400px; cursor: pointer; }
+      
+    
+    /*  메뉴(여행지, 여행코스, 여행후기, 호텔)  */
+    #menu_1{ height:60px; border-bottom: 2px solid lightgray; }
+    #menu_2{ display: inline-block; width:258px; height : 50px; }
+    #menu_3{ display: inline-block; width : 1000px; height:50px; }
+    #menu_4{ display: inline-block; width:258px; height : 50px; }
+    .menu { display: inline-block; width:230px; height: 50px; 
+            text-align: center; border-right: 1px solid lightgray; }
+    .menuImg{ width:140px; }
+    
 
 
-#logo-img-container{
-    text-align: center;
-}
-
-#main-logo-img{
-    width: 330px;
-    cursor: pointer;
-}
-
-#menu-container{
-    display: block;
-    height:60px; 
-    border-bottom: 2px solid lightgray;
-    position: relative;
-    margin-bottom: 2em;
-}
-
-#menus_wrapper > ul{
-    display: flex; 
-    flex-direction: row;
-    justify-content: center;
-    position: relative;
-}
-
-.menu{
-    text-align: center;
-    border-right: 1px solid lightgray;
-    padding: 0 1em;
-}
-
-.menu  img{
-    width: 10em;
-    height: auto;
-}
-
-.menu:nth-child(4){
-    border-right-color: transparent;
-}
     
 }

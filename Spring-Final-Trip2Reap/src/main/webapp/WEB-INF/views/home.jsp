@@ -4,11 +4,10 @@
 <html>
 <head>
 	<title>전국방방곡곡</title>
-<style>
-       header { width: 100vw; height: 300px; }
-       section { position: absolute; top:250px; left:0px;}
-       
-</style>
+	
+	<!--  home.css -->
+    <link rel="stylesheet" href="resources/css/common/home.css">
+
 </head>
 <body>
 
@@ -21,7 +20,7 @@
     	<!--  메인배너 -->
 	    <section>
 	    	<!-- 각자 구현할 부분  -->
-	    	<img src="resources/images/메인배너1.JPG" style="width: 100%">
+	    	<img src="resources/images/메인배너1.JPG" id="mainBanner">
 	    	<div style="height: 1000px;"></div>
 	    </section>
 	    
