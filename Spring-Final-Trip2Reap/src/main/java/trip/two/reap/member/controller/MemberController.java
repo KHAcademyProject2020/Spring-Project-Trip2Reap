@@ -1,57 +1,62 @@
 package trip.two.reap.member.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import trip.two.reap.member.model.service.MemberService;
 import trip.two.reap.member.model.vo.Member;
 
+@SessionAttributes("loginUser")
 @Controller
 public class MemberController {
 	
 	@Autowired
 	private MemberService mService;
 	
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	
 	// 로그인 뷰로 이동
 	@RequestMapping("login.me")
-	  public String loginView() {
-		  return "login";
-	  }
-	
-	// 로그인 체크
-	@RequestMapping("loginCheck.me")
-	public ModelAndView login(Member m, HttpSession session, 
-			                  ModelAndView mv, HttpServletResponse response) {
-		Member loginUser = mService.memberLogin(m);
-			
-		if(loginUser != null) {
-			session.setAttribute("loginUser", loginUser);
-			System.out.println("로그인 세션 : ");
-			System.out.println("session.getAttribute('member') [" + session.getAttribute("loginUser") + "]");
-			mv.setViewName("redirect:home.do");
-		} else {
-			System.out.println("로그인 실패");
-			try {
-				PrintWriter out = response.getWriter();
-				out.print("<script>");
-				out.print("alert('아이디 또는 비밀번호를 다시 확인해주세요'); history.back(-2);");
-				out.print("</script>");
-				out.flush();
-				out.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return mv;
+	public String loginView() {
+		return "login";
 	}
+	
+	// 암호화 후 로그인
+	@RequestMapping("loginCheck.me")
+	  public String login(@ModelAttribute Member m, Model model) {
+		// @ModelAttribute : 넘겨온 값들이 setter를 통해 해당 멤버변수에 바인딩된다.
+		// Model : 전달하고자 하는 데이터가 있을 경우				
+		
+		Member loginUser = mService.memberLogin(m);
+		// String ek = bcryptPasswordEncoder.encode(m.getMemberPwd());
+		// System.out.println("암호화 된 비밀번호 : " + ek);
+		
+		boolean isPwdCorrect= bcryptPasswordEncoder.matches(m.getMemberPwd(),  loginUser.getMemberPwd());
+		// 맞으면 true / 틀리면 false => boolean타입으로 반환
+		if(isPwdCorrect) { // true
+			model.addAttribute("loginUser", loginUser); 
+			// loginUser Data를 model에 저장
+		} else { // false
+			// alert창 띄워주기
+			// 임시코드
+			System.out.println("로그인 실패");
+		}
+		  System.out.println("로그인 한 유저" + m);
+		  return "redirect:home.do";
+		    // 반환되는 view(home)는 data를 참고하여 결과를 출력한다.
+			// JSP에서는 model에 저장된 data의 key값을 통해 값을 불러올 수 있다.
+			// JSP에서는 --> 로그인유저 : ${loginUser.변수이름}
+		  
+	  } // login 메소드 종료
+
 	
 	// 로그아웃
 	@RequestMapping("logout.me")
