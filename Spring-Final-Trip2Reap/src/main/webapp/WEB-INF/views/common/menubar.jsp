@@ -7,9 +7,6 @@
 <meta charset="UTF-8">
 <title>전국방방곡곡</title>
 
-<!-- jquery CDN-->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
 <!--  menubar.css -->
 <link rel="stylesheet" href="resources/css/common/menubar.css">
 
@@ -22,7 +19,7 @@
 	    <div id="header_wrapper">
 	    	<!-- 로그아웃 상태 컨테이너 -->
 	    	<c:if test="${ empty sessionScope.loginUser}">
-	    		<div style=" display:inline-block; width: 100vw; height: 30px;">
+	    		<div id="rootBar" style=" display:inline-block; width: 100vw; height: 30px;">
 	                <ul>
 	                    <li class="topBar" onclick="login();">로그인&nbsp;</li>
 	                    <li class="topBar" onclick="join();">&nbsp;회원가입</li>

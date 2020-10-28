@@ -5,8 +5,7 @@
         select *
         from member
         where member_id=#{memberId}
-              and member_pwd=#{memberPwd}
-              and status='Y'
+              and m_status='Y'
     </select>
     <resultMap type="Member" id="memberResultSet">
         <id column="MEMBER_ID" property="memberId" />
@@ -16,7 +15,7 @@
         <result column="GENDER" property="gender" />
         <result column="PHONE" property="phone" />
         <result column="MEMBER_EMAIL" property="email" />
-        <result column="STATUS" property="mStatus" />
+        <result column="M_STATUS" property="mStatus" />
     </resultMap>
 
 
