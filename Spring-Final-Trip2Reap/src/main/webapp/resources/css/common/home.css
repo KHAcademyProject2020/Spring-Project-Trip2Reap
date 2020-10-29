@@ -1,4 +1,4 @@
-       header { margin : 0px auto; height: 500px; }
-       section { position: absolute; top:250px; margin: 0px auto;}
+       header { position: absolute; left:0px; top:0px;  }
+       section { position: absolute; left:0px; top:250px; margin: 0px auto; width:1530px; }
        
-       #mainBanner{ margin : 0px auto; }
+       #mainBanner{ margin : 0px auto; width:1530px; }
