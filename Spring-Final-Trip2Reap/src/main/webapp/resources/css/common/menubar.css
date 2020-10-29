@@ -6,9 +6,9 @@
     a{ text-decoration:none;}
     
     /* 상단바   */
-    #rootBar{ background-color: rgb(207,227,225); width : 1300px; margin : 0px auto; height: 45px; }
-    #root_1{ display:inline-block; width: 80vw; height: 30px; }
-    #root_2{ display: inline-block; width: 15vw; height: 25px; text-align: center; }
+    #rootBar{ background-color: rgb(207,227,225); margin : 0px auto; width:1530px; height: 45px; }
+    #root_1{ display:inline-block; width: 1250px; height: 30px; }
+    #root_2{ display: inline-block; width: 250px; height: 25px; text-align: center; }
 
     /* 로그아웃 상태 */
     .topBar{ display: inline-block; font-size: 13px; vertical-align: top; cursor:pointer; }
