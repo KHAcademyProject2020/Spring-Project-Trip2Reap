@@ -14,7 +14,7 @@
      
      
      /* 로그인 라벨 */
-     #loginLabel_space{ width:1530px; height:50px; text-align: center;}
+     #loginLabel_space{ width:100vw; height:50px; text-align: center;}
      #loginLabel{ font-size: 30px; font-weight:bold; }
      
      

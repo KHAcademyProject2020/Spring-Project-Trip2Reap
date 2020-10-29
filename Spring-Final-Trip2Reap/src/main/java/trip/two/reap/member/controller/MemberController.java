@@ -48,7 +48,7 @@ public class MemberController {
 			System.out.println("로그인 실패");
 		}
 		  System.out.println("로그인 한 유저" + m);
-		  return "redirect:home.do";
+		  return "redirect:/";
 		    // 반환되는 view(home)는 data를 참고하여 결과를 출력한다.
 			// JSP에서는 model에 저장된 data의 key값을 통해 값을 불러올 수 있다.
 			// JSP에서는 --> 로그인유저 : ${loginUser.변수이름}
@@ -63,7 +63,7 @@ public class MemberController {
     // HttpSession를 사용할 경우, @SessionAttributes를 쓰지않고 session.invalidate();를 사용하여 초기화해주면됨
 		status.setComplete(); // 세션 초기화
 		
-		return "redirect:home.do";
+		return "redirect:/";
 	} // logout() 종료
 	
 	
