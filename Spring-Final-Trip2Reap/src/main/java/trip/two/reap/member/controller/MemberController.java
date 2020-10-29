@@ -67,6 +67,13 @@ public class MemberController {
 	} // logout() 종료
 	
 	
+	// 아이디찾기 뷰로 이동
+	@RequestMapping("searchId.me")
+	public String searchId() {
+		return "searchId";
+	} // searchId() 종료
+	
+	
 	// 마이페이지 뷰로 이동
 	@RequestMapping("myPage.me")
 	public String myPageView() {

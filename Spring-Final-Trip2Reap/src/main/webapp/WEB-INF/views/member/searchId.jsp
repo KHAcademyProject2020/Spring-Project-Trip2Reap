@@ -4,9 +4,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>아이디 찾기</title>
+   <!--  searchId.css -->
+      <link rel="stylesheet" href="resources/css/member/searchId.css">   
 </head>
 <body>
-<h1>아이디찾기</h1>
+    <header>
+    <%@ include file="../common/menubar.jsp" %>
+    </header>
+    
+    <section>
+    <div id="board_list">
+    
+    </div>
+    
+    </section>
 </body>
 </html>

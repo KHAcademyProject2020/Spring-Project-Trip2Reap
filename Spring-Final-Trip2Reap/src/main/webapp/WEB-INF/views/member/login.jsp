@@ -32,10 +32,10 @@
 	    <div id="space_5"></div>   
 	    <form action="loginCheck.me" method="post">
 	    <div id="loginDiv">
-	        <input type="text" id="loginInfo" name="memberId" placeholder="           아이디를 입력해주세요"
+	        <input type="text" id="loginInfo" class="loginInfo_1" name="memberId" placeholder="           아이디를 입력해주세요"
 	         onfocus="this.placeholder=''" onblur="this.placeholder='           아이디를 입력해주세요'" >
 	        <div id="space_6"></div>
-	        <input type="text" id="loginInfo" name="memberPwd" placeholder="           비밀번호를 입력해주세요"
+	        <input type="text" id="loginInfo" class="loginInfo_2" name="memberPwd" placeholder="           비밀번호를 입력해주세요"
 	         onfocus="this.placeholder=''" onblur="this.placeholder='           비밀번호를 입력해주세요'">
 	    </div>
 	    <div id="space_7"></div>
@@ -52,7 +52,7 @@
 	        <button id="loginButton" onclick="loginBtn()">로그인</button>
 	        <div id="space_8"></div>
 	        <div id="space_9">
-	            <label class="search">아이디 찾기</label>
+	            <label class="search" onclick="searchId()">아이디 찾기</label>
 	            <label>&nbsp;|&nbsp;</label>
 	            <label class="search">비밀번호 찾기</label>
 	            <label>&nbsp;|&nbsp;</label>
@@ -81,6 +81,12 @@
     </section>   
     
     <footer></footer>    
+    
+    <script>
+       function searchId(){
+    	   location.href="<%= request.getContextPath() %>/searchId.me";
+       }
+    </script>
 
 </body>
 </html>

@@ -22,7 +22,10 @@
      #space_5{ width:90vw; height:25px; }        
      #loginDiv{ height : 80px; text-align: center; }
      #loginInfo{ width: 300px; height: 35px; font-size: 13px;
-                   border: 1px solid lightgray; }
+                 border: 1px solid lightgray; padding-left: 10px;}
+     #loginInfo, #loginButton:focus{ outline: none; }
+     .loginInfo_1{  }
+     .loginInfo_2{  }
      #space_6{ height:15px; }    
      #space_7{ width:1000px; height:25px; }    
      
@@ -43,7 +46,7 @@
      #space_11{ height: 10px; }
      #space_12{ height: 60px; }
      #loginButton{ background-color: rgb(119,175,130); color: white; border: none;
-                     width: 310px; height: 38px; font-weight: bold; cursor: pointer; }
+                     width: 310px; height: 38px; font-weight: bold; cursor: pointer;  }
      #loginButton2{ width: 310px; height : 40px; cursor: pointer; }
      #loginButton3{ width: 310px; height : 47px; cursor: pointer; }
      
