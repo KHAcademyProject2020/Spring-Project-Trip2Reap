@@ -1,5 +1,5 @@
      header { position: absolute; left:0px; top:0px; }
-     section { position: absolute; left:0px; top:250px; margin: 0px auto; width:1528px; } 
+     section { position: absolute; left:0px; top:250px; margin: 0px auto; width:1520px; } 
      
      /* 공통속성  */
      #board_list{ margin : 40px auto 0px auto;}  
@@ -14,7 +14,7 @@
      
      
      /* 로그인 라벨 */
-     #loginLabel_space{ margin: 0px auto; width:1528px; height:50px; text-align: center;}
+     #loginLabel_space{ margin: 0px auto; width:1520px; height:50px; text-align: center;}
      #loginLabel{ font-size: 30px; font-weight:bold; }
      
      
