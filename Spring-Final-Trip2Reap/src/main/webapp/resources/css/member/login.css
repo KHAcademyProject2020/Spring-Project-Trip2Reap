@@ -1,5 +1,5 @@
-     header { width: 100vw; height: 500px; }
-     section { position: absolute; top:250px; left:0px;} 
+     header { position: absolute; left:0px; top:0px; }
+     section { position: absolute; left:0px; top:250px; margin: 0px auto; width:1530px; } 
      
      /* 공통속성  */
      #board_list{ margin : 40px auto 0px auto;}  
@@ -14,12 +14,12 @@
      
      
      /* 로그인 라벨 */
-     #loginLabel_space{ width:100vw; height:50px; text-align: center;}
+     #loginLabel_space{ margin: 0px auto; width:1530px; height:50px; text-align: center;}
      #loginLabel{ font-size: 30px; font-weight:bold; }
      
      
      /* 로그인 form */
-     #space_5{ width:90vw; height:25px; }        
+     #space_5{ width:675px; height:25px; }        
      #loginDiv{ height : 80px; text-align: center; }
      .loginInfo_1 {      
          background-image: url(../../images/user.JPG);
