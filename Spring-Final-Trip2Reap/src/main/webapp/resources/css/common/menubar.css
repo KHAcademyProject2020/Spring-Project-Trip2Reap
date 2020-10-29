@@ -1,3 +1,6 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);    
+    
+    *{  font-family: 'Nanum Gothic';}/* 나눔고딕 폰트 설정 */
     header{ position: absolute; left:0px; top:0px; }
     ul { margin : 0px; display: inline-block;}
     a{ text-decoration:none;}
