@@ -6,9 +6,10 @@
 <link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/common/menubar.css"/>
 <meta charset="UTF-8">
 <body>
-	<section>
+<section>
+	<div class="board_list">
 		<div id = "ment" class="board_list_wrap">여행지</div>
-		
-       </section>     
+	</div>	
+</section>     
 </body>
 </html>

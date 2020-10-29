@@ -69,6 +69,21 @@
 	</servlet-mapping>
 	
 	
+	<!-- 여행지 관련  -->
+	<servlet>
+	    <servlet-name>travelServlet</servlet-name>
+	    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	    <init-param>
+	        <param-name>contextConfigLocation</param-name>
+	        <param-value>/WEB-INF/spring/appServlet/travel-context.xml</param-value>
+	    </init-param>	    
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>travelServlet</servlet-name>
+	    <url-pattern>*.tv</url-pattern>
+	</servlet-mapping>
+	
+	
 	<filter>
 	    <filter-name>encodingFilter</filter-name>
 	    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
