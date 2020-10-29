@@ -15,7 +15,8 @@
     
     <section>
     <div id="board_list">
-    
+        <div id="space_1"></div>
+        <div id="loginBox" style="height:300px; border: 1px solid red;"></div>
     </div>
     
     </section>

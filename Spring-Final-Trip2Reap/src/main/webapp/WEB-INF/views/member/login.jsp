@@ -33,11 +33,12 @@
 	    <div id="space_5"></div>   
 	    <form action="loginCheck.me" method="post">
 	    <div id="loginDiv">
+	      <!-- 글자입력시 padding값 없애주기  -->
 	        <input type="text" id="loginInfo" class="loginInfo_1" name="memberId" placeholder="아이디를 입력해주세요"
-	         onfocus="this.placeholder=''" onblur="this.placeholder='아이디를 입력해주세요'" >
+	         onfocus="this.placeholder=''" onblur="this.placeholder='아이디를 입력해주세요'" autocomplete="off" >
 	        <div id="space_6"></div>
 	        <input type="text" id="loginInfo" name="memberPwd" class="loginInfo_2" placeholder="비밀번호를 입력해주세요"
-	         onfocus="this.placeholder=''" onblur="this.placeholder='비밀번호를 입력해주세요'">
+	         onfocus="this.placeholder=''" onblur="this.placeholder='비밀번호를 입력해주세요'" autocomplete="off">
 	    </div>
 	    <div id="space_7"></div>
 	    
