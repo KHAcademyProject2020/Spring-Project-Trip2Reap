@@ -8,6 +8,7 @@
 
    <!--  login.css -->
    <link rel="stylesheet" href="resources/css/member/login.css">
+   <script src="https://kit.fontawesome.com/8828f475ef.js" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -32,11 +33,11 @@
 	    <div id="space_5"></div>   
 	    <form action="loginCheck.me" method="post">
 	    <div id="loginDiv">
-	        <input type="text" id="loginInfo" class="loginInfo_1" name="memberId" placeholder="           아이디를 입력해주세요"
-	         onfocus="this.placeholder=''" onblur="this.placeholder='           아이디를 입력해주세요'" >
+	        <input type="text" id="loginInfo" class="loginInfo_1" name="memberId" placeholder="아이디를 입력해주세요"
+	         onfocus="this.placeholder=''" onblur="this.placeholder='아이디를 입력해주세요'" >
 	        <div id="space_6"></div>
-	        <input type="text" id="loginInfo" class="loginInfo_2" name="memberPwd" placeholder="           비밀번호를 입력해주세요"
-	         onfocus="this.placeholder=''" onblur="this.placeholder='           비밀번호를 입력해주세요'">
+	        <input type="text" id="loginInfo" name="memberPwd" class="loginInfo_2" placeholder="비밀번호를 입력해주세요"
+	         onfocus="this.placeholder=''" onblur="this.placeholder='비밀번호를 입력해주세요'">
 	    </div>
 	    <div id="space_7"></div>
 	    
