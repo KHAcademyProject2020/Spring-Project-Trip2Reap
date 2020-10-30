@@ -1,9 +1,11 @@
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);    
     
     *{  font-family: 'Nanum Gothic'; margin: 0; padding: 0;}/* 나눔고딕 폰트 설정 */
-    header{/* position: absolute;  left:0px; top:0px; */ width:100%; margin: 0 auto;}
+    header{/* position: absolute;  left:0px; top:0px; */ width:1300px; margin: 0 auto;}
     ul { margin : 0px; display: inline-block;}
-    a{ text-decoration:none;}
+    a{ text-decoration:none;
+    	color:black;}
+    
     
     /* 상단바   */
     #rootBar{ background-color: rgb(207,227,225); margin : 0px auto; /* width:1520px; */ height: 45px; }
@@ -17,8 +19,8 @@
     
     
     /*  메인로고(전국방방곡곡)  */
-    #mainDiv {width: 1300px;text-align: center;margin:  0 auto;}
-    #mainLogo { width:400px; cursor: pointer; }
+    #mainDiv { width: 1300px; text-align: center; margin:  0 auto;}
+    #mainLogo { width: 400px; cursor: pointer; }
       
     
     /*  메뉴(여행지, 여행코스, 여행후기, 호텔)  */

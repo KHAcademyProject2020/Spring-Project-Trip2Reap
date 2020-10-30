@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="resources/css/common/menubar.css">
 <!-- swal코드 -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- <i>태그 사용 코드 -->
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
 <body>
     <!-- 메뉴바는 어느 페이지든 포함하고 있을 테니 여기서 contextPath 변수 값 만들기 -->
@@ -52,7 +54,7 @@
             <li class="menu">
             	<a href="travelList.tv">
                 	<img src="resources/images/여행지아이콘.png" class="menuImg">
-            	</a>
+            	</a><
             </li>
             <li class="menu">
             	<a>

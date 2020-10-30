@@ -21,10 +21,13 @@
     
     	<!--  메인배너 -->
 	    <section>
+	    	<div id="section_div">
 	    	<!-- 각자 구현할 부분  -->
 	    	<img src="resources/images/메인배너1.JPG" id="mainBanner">
 	    	<div style="height: 1000px;"></div>
+	    	</div>
 	    </section>
+	    
 	    
 	    <!-- footer -->
 	    <footer></footer>
