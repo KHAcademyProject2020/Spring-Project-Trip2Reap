@@ -15,9 +15,9 @@
 
 	<div class="total_container">
 		<!-- 메뉴바 -->
-    	<header>
-    		<c:import url="WEB-INF/views/common/menubar.jsp" />  
-    	</header>
+
+    	<c:import url="WEB-INF/views/common/menubar.jsp" />
+  
     
     	<!--  메인배너 -->
 	    <section>

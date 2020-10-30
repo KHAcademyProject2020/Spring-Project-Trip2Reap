@@ -10,6 +10,6 @@
 	<div class="board_list">
 		<div id = "ment" class="board_list_wrap">여행지</div>
 	</div>	
-</section>     
+</section>
 </body>
 </html>

@@ -19,7 +19,6 @@
     <!-- 상단바  -->
     <div id="rootBar">   
     <c:if test="${ empty sessionScope.loginUser}">
-    <div id="root_1"></div>
     <div id="root_2">   
         <ul>
             <!-- 로그아웃 상태 -->
@@ -47,7 +46,7 @@
     
     <!-- 메뉴(여행지, 여행코스, 여행후기, 호텔) -->
     <div id="menu_1">
-        <div id="menu_2"></div>
+     
         <div id="menu_3">
         <ul>
             <li class="menu">
@@ -72,7 +71,7 @@
             </li>
         </ul>
         </div>
-        <div id="menu_4"></div>
+    
     </div>
     </header>
     
