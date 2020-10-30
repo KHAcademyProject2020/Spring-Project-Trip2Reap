@@ -1,4 +1,4 @@
 /*   header { position: absolute; left:0px; top:0px;  } */
-  section {/*  position: absolute; left:0px; top:250px; */ margin: 0px auto; width:1300px; }
+  section {/*  position: absolute; left:0px; top:250px; */ margin: 0px auto; width:100% }
   
   #mainBanner{ margin : 0px auto; width:100%; }
