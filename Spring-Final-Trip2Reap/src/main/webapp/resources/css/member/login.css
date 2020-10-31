@@ -1,0 +1,72 @@
+     header { position: absolute; left:0px; top:0px; }
+     section { position: absolute; left:0px; top:250px; margin: 0px auto; width:1520px; } 
+     
+     /* 공통속성  */
+     #board_list{ margin : 40px auto 0px auto;}  
+     
+     
+     /* 초록 선  */
+     #space_1{ height: 50px; }
+     #space_2{ display: inline-block; width: 535px; }
+     #space_3{ display: inline-block; width:450px; height:3px; 
+               background-color: rgb(119,175,130); border: none; }
+     #space_4{ height: 45px; }
+     
+     
+     /* 로그인 라벨 */
+     #loginLabel_space{ margin: 0px auto; width:1520px; height:50px; text-align: center;}
+     #loginLabel{ font-size: 30px; font-weight:bold; }
+     
+     
+     /* 로그인 form */
+     #space_5{ width:675px; height:25px; }        
+     #loginDiv{ height : 80px; text-align: center; }
+     .loginInfo_1 {      
+         background-image: url(../../images/user.JPG);
+         background-size: contain;
+         background-repeat: no-repeat;
+         background-position: 10px center;
+         box-sizing: border-box;
+     } 
+     .loginInfo_2 {      
+         background-image: url(../../images/pwd.JPG);
+         background-size: contain;
+         background-repeat: no-repeat;
+         background-position: 10px center;
+         box-sizing: border-box;
+     }
+     #loginInfo{ width: 300px; height: 35px; font-size: 13px;
+                 border: 1px solid lightgray; padding-left: 50px; }
+     #loginInfo, #loginButton:focus{ outline: none; }
+     #space_6{ height:15px; }    
+     #space_7{ width:1000px; height:20px; }    
+     
+     
+     /* 아이디 저장  */
+     #idSave_1{ width:300px; display: inline-block; text-align:left; } 
+     #idSave_2{ width: 20px; vertical-align: middle; }
+     #idSave_3{ font-size: 12px; vertical-align: middle; }
+     #idSave_4{ height: 15px; }
+
+     
+     /* 버튼 */      
+     #space_8{ height: 15px; }
+     #space_9{ height: 15px; font-size: 12px; }
+     .search{ cursor: pointer; }
+     #space_10{ height: 15px; }
+     #otherBtn{ text-align: center; }
+     #space_11{ height: 10px; }
+     #space_12{ height: 50px; }
+     #loginButton{ background-color: rgb(119,175,130); color: white; border: none;
+                     width: 310px; height: 38px; font-weight: bold; cursor: pointer; }
+     #loginButton2{ width: 310px; height : 40px; cursor: pointer; }
+     #loginButton3{ width: 310px; height : 47px; cursor: pointer; }
+     
+     
+     /* 초록줄 아래  */
+     #space_13{ display: inline-block; width:450px; height:3px; 
+	            background-color: rgb(119,175,130); border: none; }
+     
+     
+     
+     

@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+/* 전체 div */
+#all_div{
+	margin: 50px auto;
+	width: 1000px;
+/* 	background: rgb(255, 225, 230, 0.5); */
+}
+
+/* img, 메뉴 이름 */
+#menu_div{
+	padding: 0px 10px;
+	display: flex;
+/* 	background: rgb(200, 200, 255, 0.5); */
+}
+
+#menu_img{
+	width: 40px;
+	height: 40px;
+	text-align: left;
+}
+
+#menu{
+	font-size: 30px;
+	font-weight: 700;
+	text-align: left;
+}
+
+/* 코스이름, 지역 div */
+#course_title_div{
+	text-align: right;
+	margin: 15px 0px;
+}
+
+#button_menu{
+	background: none;
+	border: none;
+	font-weight: 700;
+}
+
+#course_name_local_div{
+	text-align: center;
+}
+
+#course_name{
+	font-weight: 800;
+	font-size: 25px;
+}
+
+/* 코스 테마, 일정 table */
+#course_cate_table{
+/* 	width: 300px; */
+	margin: 15px auto;
+	text-align: center;
+/* 	border: 1px solid black; */
+	border-spacing: 20px;
+}
+
+#course_cate_table td{
+/* 	border: 1px solid black; */
+	padding: 0px;
+}
+
+.icon_img{
+	width: 50px;
+	height: 50px;
+}
+
+.td_cate{
+	font-size: 12px;
+	text-align: left;
+}
+
+.td_cate_value{
+	font-weight: 600;
+}
+
+.fa-parachute-box, .fa-calendar-alt{
+	font-size: 50px;
+	color: #77af82;
+}
+/* 코스 설명, 지도 div */
+#course_content_div{
+	text-align: center;
+}
+
+#course_content{
+	width: 900px;
+	text-align: left;
+	margin: 15px auto;
+}
+
+#map_img{
+	width: 900px;
+}
+
+/* input이나 button 클릭 시 outline 제거 */
+#button_menu:focus{
+	outline: none;
+}

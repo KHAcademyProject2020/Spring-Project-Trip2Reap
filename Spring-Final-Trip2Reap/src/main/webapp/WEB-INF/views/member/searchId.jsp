@@ -6,7 +6,8 @@
 <meta charset="UTF-8">
 <title>아이디 찾기</title>
    <!--  searchId.css -->
-      <link rel="stylesheet" href="resources/css/member/searchId.css">   
+      <link rel="stylesheet" href="resources/css/member/searchId.css">  
+      <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>  
 </head>
 <body>
     <header>
@@ -25,22 +26,45 @@
         </div>
         <div style="height: 25px;"></div>
         <div id="space_2" style="display:inline-block; width:400px;"></div>
-        <div id="loginBox" style="display:inline-block; height:400px; width:770px; border: 1px solid rgb(213, 213, 213);">
+        <div id="loginBox" class="tab" style="display:inline-block; height:400px; width:770px; border: 1px solid rgb(213, 213, 213);">
             <ul id="tab">
-                <li id="searchId">아이디 찾기</li>
-                <li>비밀번호 찾기</li>
+                <li id="id" class="tab-link current" >아이디 찾기</li>
+                <li id="pwd" class="tab-link">비밀번호 찾기</li>
             </ul>
-        <div></div>
-        <div id="checkEmail">
+
+        <div id="searchId" >
 	        <input type="radio" id="checkEmail_1" style="color: darkgray;">
-	        <label id="checkEmail_2">이메일로 찾기</label>
+	        <label id="checkEmail_2">아이디 찾기</label>
 	    </div>
-        <script>
+	    <div id="searchPwd" >
+	        <input type="radio" id="checkEmail_1" style="color: darkgray;">
+	        <label id="checkEmail_2">비밀번호 찾기</label>
+	    </div>
+	    </div>	    
+
+        
+	    
+        <!-- <script>
         $(document).ready(function(){
-        	$('ul.tab li').click(function(){
-        		var tab_id = $(this).attr('data')
+        	$('.tab li').click(function(){
+        		$('.tab li').css({'background' : 'rgb(246, 246, 246)', 'border-bottom-color' : 'rgb(213,213,213)'});        		
+        		$(this).css({'border-bottom-color' : 'white', 'background' : 'white'});
         	});
         });
+       </script> -->
+       
+       <script>
+           $(function(){
+        	   $('#id').on('click',function(){
+        		  $('#searchId').css('display','block');
+        		  $('#searchPwd').css('display','none');
+        	   });
+        	   
+        	   $('#pwd').on('click',function(){
+         		  $('#searchId').css('display','none');
+         		  $('#searchPwd').css('display','block');
+         	   });
+           });
        </script>
        
         </div>
