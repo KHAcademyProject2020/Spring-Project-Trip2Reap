@@ -1,14 +1,14 @@
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);    
     
     *{  font-family: 'Nanum Gothic'; margin: 0; padding: 0;}/* 나눔고딕 폰트 설정 */
-    header{/* position: absolute;  left:0px; top:0px; */ width:1300px; margin: 0 auto;}
+    header{ width:100%; margin: 0 auto;}
     ul { margin : 0px; display: inline-block;}
     a{ text-decoration:none;
     	color:black;}
     
     
     /* 상단바   */
-    #rootBar{ background-color: rgb(207,227,225); margin : 0px auto; /* width:1520px; */ height: 45px; }
+    #rootBar{ background-color: rgb(207,227,225); margin : 0px auto; height: 45px; }
     #root_1{ display:inline-block; width: 1250px; height: 30px; }
     #root_2{ display: inline-block; width: 250px; height: 25px; text-align: center; }
 
