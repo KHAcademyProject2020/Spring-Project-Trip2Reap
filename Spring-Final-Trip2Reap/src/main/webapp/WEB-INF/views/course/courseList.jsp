@@ -12,7 +12,7 @@
 	<div id="all_div">
 		<div id="menu_div">
 			<div id="menu_left_div">
-				<img src="../images/courseIcon.png" id="menu_img"/>
+				<img src="resources/images/courseIcon.png" id="menu_img"/>
 				<span id="menu">여행 코스</span>
 			</div>
 			<div id="menu_right_div">

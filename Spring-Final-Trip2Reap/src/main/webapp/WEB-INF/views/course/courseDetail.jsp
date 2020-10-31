@@ -12,7 +12,7 @@
 	<section>
 	<div id="all_div">
 		<div id="menu_div">
-			<img src="../images/courseIcon.png" id="menu_img"/>
+			<img src="resources/images/courseIcon.png" id="menu_img"/>
 			<span id="menu">여행 코스</span>
 		</div>
 		
@@ -49,7 +49,7 @@
 다른 분의 코스 중에서 좋아보이는 부분만 가져왔습니다.<br>
 이번 해에는 여행해볼 생각입니다.
 			</div>
-			<img src="../images/map.PNG" id="map_img"/>
+			<img src="resources/images/map.PNG" id="map_img"/>
 		</div>
 		
 		

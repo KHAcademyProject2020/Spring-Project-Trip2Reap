@@ -11,7 +11,7 @@
 	<section>
 	<div id="all_div">
 		<div id="menu_div">
-			<img src="../images/courseIcon.png" id="menu_img"/>
+			<img src="resources/images/courseIcon.png" id="menu_img"/>
 			<span id="menu">여행 코스 등록</span>
 		</div>
 		
