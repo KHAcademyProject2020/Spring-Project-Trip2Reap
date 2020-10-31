@@ -8,12 +8,14 @@
     
     
     /* 상단바   */
-    #rootBar{ background-color: rgb(207,227,225); margin : 0px auto; height: 45px; }
-    #root_1{ display:inline-block; width: 1250px; height: 30px; }
+    #rootBar{ background-color: rgb(207,227,225); margin : 0px auto; height: 35px; }
+    #root_1{ display:inline-block; width: 1150px; height: 25px; }
     #root_2{ display: inline-block; width: 250px; height: 25px; text-align: center; }
+    #root_3{ display:inline-block; width: 1050px; height: 25px; }
+    #root_4{ display: inline-block; width: 400px; height: 25px; text-align: center; }
 
     /* 로그아웃 상태 */
-    .topBar{ display: inline-block; font-size: 13px; vertical-align: top; cursor:pointer; }
+    .topBar{ display: inline-block; font-size: 13px; vertical-align: top; cursor:pointer; padding-right: 10px;  }
     /* 로그인 상태  */
     .topBar2{ display: inline-block; font-size: 13px; vertical-align: top; cursor:pointer; }
     
