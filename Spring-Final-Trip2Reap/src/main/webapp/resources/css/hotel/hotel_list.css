@@ -229,6 +229,7 @@ ul {
 .fa-heart{
   font-size: 30px;
   cursor: pointer;
+  color: var(--blue-gray);
 }
 
 .fa-heart:hover{

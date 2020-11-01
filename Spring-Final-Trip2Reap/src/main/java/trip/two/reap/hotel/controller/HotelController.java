@@ -7,10 +7,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @SessionAttributes("loginUser")
 @Controller
 public class HotelController {
-	
-	//�샇�뀛 由ъ뒪�듃 �럹�씠吏�濡� �씠�룞
+	// go to hotel main page
 	@RequestMapping("hotelList.ho")
 	public String goHotelListView() {
-		return "01_hotel_list";
+		return "hotel_list";
 	}
 }

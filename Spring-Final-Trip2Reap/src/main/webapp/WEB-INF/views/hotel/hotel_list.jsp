@@ -5,7 +5,6 @@
 
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,10 +13,12 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <!-- css -->
-    <link rel="stylesheet" href="resources/css/hotel/01_hotel_list.css">
+    <link rel="stylesheet" href="resources/css/hotel/hotel_list.css">
 
     <!-- font-awesome -->
     <script src="https://kit.fontawesome.com/09697e2134.js" crossorigin="anonymous"></script>
+    
+    
     <title>호텔 페이지</title>
 
 </head>
@@ -66,7 +67,7 @@
 
                             <!-- 좋아요 버튼 -->
                             <div class="i-like-btn-container">
-                                <i class="far fa-heart"></i>
+                                <i class="fas fa-heart"></i>
                             </div>
                         </div>
                         <hr>
@@ -122,7 +123,7 @@
 
                             <!-- 좋아요 버튼 -->
                             <div class="i-like-btn-container">
-                                <i class="far fa-heart"></i>
+                                <i class="fas fa-heart"></i>
                             </div>
                         </div>
                         <hr>
@@ -179,7 +180,7 @@
 
                             <!-- 좋아요 버튼 -->
                             <div class="i-like-btn-container">
-                                <i class="far fa-heart"></i>
+                                <i class="fas fa-heart"></i>
                             </div>
                         </div>
                         <hr>
@@ -236,7 +237,7 @@
 
                             <!-- 좋아요 버튼 -->
                             <div class="i-like-btn-container">
-                                <i class="far fa-heart"></i>
+                                <i class="fas fa-heart"></i>
                             </div>
                         </div>
                         <hr>
@@ -293,7 +294,7 @@
 
                             <!-- 좋아요 버튼 -->
                             <div class="i-like-btn-container">
-                                <i class="far fa-heart"></i>
+                                <i class="fas fa-heart"></i>
                             </div>
                         </div>
                         <hr>
