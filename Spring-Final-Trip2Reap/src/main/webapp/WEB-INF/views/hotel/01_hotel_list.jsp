@@ -14,7 +14,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <!-- css -->
-    <link rel="stylesheet" href="./cek_01_hotel_list.css">
+    <link rel="stylesheet" href="resources/css/hotel/01_hotel_list.css">
 
     <!-- font-awesome -->
     <script src="https://kit.fontawesome.com/09697e2134.js" crossorigin="anonymous"></script>
@@ -54,7 +54,7 @@
 
             <!-- 호텔 1개(샘플1) -->
             <div class="one-hotel-info-container">
-                <img src="./sample_hotel.jpg" alt="호텔이미지">
+                <img src="resources/images/sample_hotel.jpg" alt="호텔이미지">
 
                 <div class="detail-info-container">
                     <div>
@@ -110,7 +110,7 @@
 
             <!-- 호텔 1개(샘플2) -->
             <div class="one-hotel-info-container">
-                <img src="./trump.jpeg" alt="호텔이미지">
+                <img src="resources/images/trump.jpeg" alt="호텔이미지">
 
                 <div class="detail-info-container">
                     <div>
@@ -167,7 +167,7 @@
 
             <!-- 호텔 1개(샘플3) 시작 -->
             <div class="one-hotel-info-container">
-                <img src="./sinra.jpeg" alt="호텔이미지">
+                <img src="resources/images/sinra.jpeg" alt="호텔이미지">
 
                 <div class="detail-info-container">
                     <div>
@@ -224,7 +224,7 @@
 
             <!-- 호텔1개 (샘플4) 시작 -->
             <div class="one-hotel-info-container">
-                <img src="./sinra.jpeg" alt="호텔이미지">
+                <img src="resources/images/sinra.jpeg" alt="호텔이미지">
 
                 <div class="detail-info-container">
                     <div>
@@ -281,7 +281,7 @@
 
             <!-- 호텔 1개(샘플5) 시작 -->
             <div class="one-hotel-info-container">
-                <img src="./sinra.jpeg" alt="호텔이미지">
+                <img src="resources/images/sinra.jpeg" alt="호텔이미지">
 
                 <div class="detail-info-container">
                     <div>
