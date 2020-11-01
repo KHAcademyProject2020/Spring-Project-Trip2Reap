@@ -81,6 +81,13 @@ public class MemberController {
 	} // searchPwd() 종료
 	
 	
+	// 회원가입 뷰로 이동
+	@RequestMapping("join.me")
+	public String join() {
+		return "insert_1";
+	}	
+	
+	
 	// 마이페이지 뷰로 이동
 	@RequestMapping("myPage.me")
 	public String myPageView() {

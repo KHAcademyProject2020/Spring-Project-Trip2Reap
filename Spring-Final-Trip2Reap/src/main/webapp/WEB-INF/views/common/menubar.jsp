@@ -25,8 +25,10 @@
     <div id="root_2">   
         <ul>
             <!-- 로그아웃 상태 -->
-            <li class="topBar" onclick="login();">로그인&nbsp;</li>
-            <li class="topBar" onclick="join();">&nbsp;회원가입</li>
+            <li class="topBar" onclick="login();" onMouseOver="this.style.color='#77af82';" 
+            onMouseOut="this.style.color=''">로그인</li>
+            <li class="topBar" onclick="join();" onMouseOver="this.style.color='#77af82';" 
+            onMouseOut="this.style.color=''">회원가입</li>
         </ul>
     </div>
     </c:if>
@@ -35,9 +37,11 @@
     <div id="root_4">
         <ul>
             <!-- 로그인 상태  -->
-            <li class="topBar2"><b><c:out value="${ loginUser.memberName }님 환영합니다!"/>&nbsp;&nbsp;</b></li>
-            <li class="topBar2" onclick="logout();">로그아웃&nbsp;</li>
-            <li class="topBar2" onclick="myPage();">&nbsp;마이페이지</li>
+            <li class="topBar2_1"><b><c:out value="${ loginUser.memberName }님 환영합니다!"/></b></li>
+            <li class="topBar2_2" onclick="logout();" onMouseOver="this.style.color='#77af82';" 
+            onMouseOut="this.style.color=''">로그아웃</li>
+            <li class="topBar2_2" onclick="myPage();" onMouseOver="this.style.color='#77af82';" 
+            onMouseOut="this.style.color=''">마이페이지</li>
         </ul>
     </div>
     </c:if>

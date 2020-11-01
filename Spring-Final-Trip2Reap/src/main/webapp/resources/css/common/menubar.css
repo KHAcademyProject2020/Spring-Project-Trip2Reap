@@ -17,7 +17,8 @@
     /* 로그아웃 상태 */
     .topBar{ display: inline-block; font-size: 13px; vertical-align: top; cursor:pointer; padding-right: 10px;  }
     /* 로그인 상태  */
-    .topBar2{ display: inline-block; font-size: 13px; vertical-align: top; cursor:pointer; }
+    .topBar2_1{ display: inline-block; font-size: 13px; vertical-align: top; padding-right: 10px; }
+    .topBar2_2{ display: inline-block; font-size: 13px; vertical-align: top; padding-right: 10px; cursor:pointer; }
     
     
     /*  메인로고(전국방방곡곡)  */
