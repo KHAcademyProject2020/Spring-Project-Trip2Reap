@@ -74,6 +74,13 @@ public class MemberController {
 	} // searchId() 종료
 	
 	
+	// 비밀번호찾기 뷰로 이동
+	@RequestMapping("searchPwd.me")
+	public String searchPwd() {
+		return "searchPwd";
+	} // searchPwd() 종료
+	
+	
 	// 마이페이지 뷰로 이동
 	@RequestMapping("myPage.me")
 	public String myPageView() {

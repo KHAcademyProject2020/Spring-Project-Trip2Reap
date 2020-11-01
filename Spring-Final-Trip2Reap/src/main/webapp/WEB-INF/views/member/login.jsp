@@ -56,7 +56,7 @@
 	        <div id="space_9">
 	            <label class="search" onclick="searchId()">아이디 찾기</label>
 	            <label>&nbsp;|&nbsp;</label>
-	            <label class="search">비밀번호 찾기</label>
+	            <label class="search" onclick="searchPwd()">비밀번호 찾기</label>
 	            <label>&nbsp;|&nbsp;</label>
 	            <label class="search">회원가입</label>
 	        </div>
@@ -87,6 +87,10 @@
     <script>
        function searchId(){
     	   location.href="<%= request.getContextPath() %>/searchId.me";
+       }
+       
+       function searchPwd(){
+    	   location.href="<%= request.getContextPath() %>/searchPwd.me";
        }
     </script>
 
