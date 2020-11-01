@@ -1,5 +1,5 @@
-     header { position: absolute; left:0px; top:0px; }
-     section { position: absolute; left:0px; top:250px; margin: 0px auto; width:1520px; } 
+
+     section { margin: 0px auto; width:1300px; } 
      
      /* 공통속성  */
      #board_list{ margin : 40px auto 0px auto;}  
@@ -7,14 +7,14 @@
      
      /* 초록 선  */
      #space_1{ height: 50px; }
-     #space_2{ display: inline-block; width: 535px; }
+     #space_2{ display: inline-block; width: 410px; }
      #space_3{ display: inline-block; width:450px; height:3px; 
                background-color: rgb(119,175,130); border: none; }
      #space_4{ height: 45px; }
      
      
      /* 로그인 라벨 */
-     #loginLabel_space{ margin: 0px auto; width:1520px; height:50px; text-align: center;}
+     #loginLabel_space{ height:50px; text-align: center;}
      #loginLabel{ font-size: 30px; font-weight:bold; }
      
      
