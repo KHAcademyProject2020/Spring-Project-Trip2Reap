@@ -1,0 +1,128 @@
+@charset "UTF-8";
+/* common for all hotel pages */
+:root {
+    --dark-green: #497f55;
+    --mid-green: #77af82;
+    --bright-green: #a7e1af;
+    --emerald-green: #55c9a4;
+    --dark-gray: #515357;
+    --blue-gray: #cfe3e1;
+    --pink-gray: #eaeaea;
+    --heart-pink: #f52043;
+
+    --hash-gray: #c8cbcc;
+  }
+
+  #main-container {
+    margin: 50px auto;
+    width: 1000px;
+    box-sizing: content-box;
+
+    /* only :hotel-insert */
+    text-align: center;
+  }
+
+
+  #title-container {
+    box-sizing: content-box;
+    padding-left: 10px;
+    text-align: left;
+    vertical-align: bottom;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    
+    border-bottom: 4px solid #eee;
+  }
+
+  #hotel-icon {
+    width: 40px;
+    height: 40px;
+    vertical-align: bottom;
+    text-align: left;
+  }
+  
+  #title-name {
+    font-size: 30px;
+    font-weight: 700;
+    text-align: left;
+  }
+  
+
+
+/* start of common in insert_hotel */
+/* 해시태그 등록버튼 */
+input[type=text], input[type=url]{
+    padding: 10px;
+    border: 1px solid var(--pink-gray);
+    border-radius: 3px;
+}
+
+input:focus{
+    outline: none;
+}
+
+
+/* end of common in insert_hotel*/
+
+/*  start only hotel- insert css */
+  #sub-title-container{
+    position: relative;  
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+
+  .insert-common-container{
+    position: relative;  
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+    padding-left: 100px;
+  }
+
+
+  /* 해시태그 */
+  .insert-hashtag-guide-wrapper ul{
+    padding-left: 21px;
+    list-style: none;
+  }
+
+  .insert-hashtag-guide-wrapper .fa-hashtag{
+    padding-right: 5px;
+    color: var(--emerald-green);
+  }
+
+  #saved-hashtags{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    padding: 0;
+  }
+
+  #saved-hashtags li{
+    color: var(--hash-gray);
+    padding: 0 7px;
+  }
+
+/* 해시태그 등록버튼 */
+  #input-hashtag-btn{
+    background-color: var(--blue-gray);
+    border-color: transparent;
+    padding: 10px;
+    border-radius: 3px;
+  }
+
+  /* 호텔 등록하기 버튼 */
+  #insert-hotel-btn{
+      position: relative;
+      border-color: transparent;
+      font-size: 15px;
+      padding: 8px 0;
+      width:80%;
+      border-radius: 5px;
+      background-color: var(--blue-gray);
+  }
