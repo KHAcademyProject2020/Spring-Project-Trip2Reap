@@ -1,20 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
     
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- css -->
-    <!--  
-    <link rel="stylesheet" href="resources/css/hotel/insert_hotel.css">
-    -->
+    <%--css --%>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
-    <link rel="stylesheet" href="resources/css/hotel/insert_hotel.css">
+    <link rel="stylesheet" href="resources/css/hotel/hotel_insert.css">
 
     <title>호텔 등록하기</title>
 </head>
@@ -22,7 +20,7 @@
 <body>
 
     <div>
-        <!-- <c:import url="../common/menubar.jsp"/> -->
+        <c:import url="../common/menubar.jsp"/>
     </div>
 
     <!--(common all pages related with hotel) main-container -->
@@ -30,10 +28,8 @@
 
         <!-- (common all pages related with hotel) title-container -->
         <div id="title-container">
-            <!--for jsp 
-                <img id="hotel-icon" src="resources/images/hotel.png"> 
-            -->
-            <img id="hote-icon" src="./hotel.png">
+            
+            <img id="hotel-icon" src="resources/images/hotel.png"> 
             <span id="title-name">호텔 예약</span>
         </div>
 

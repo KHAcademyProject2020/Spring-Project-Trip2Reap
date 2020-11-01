@@ -37,13 +37,17 @@
         <div id="title-container">
             <img id="hotel-icon" src="resources/images/hotel.png">
             <span id="title-name">호텔 예약</span>
-            <!-- <hr> -->
         </div>
 
         <div id="button-container">
             <div id="left_btns_container">
                 <ul id="left_btns" class="btn_ul">
-                    <li><button id="insert-hotel" class="btn">호텔 등록하기</button></li>
+                	<!-- 호텔등록은 관리자 회원만 가능하다! / 관리자인지 확인하는 방법을 모색해보자. -->
+                	<%-- <c:if test="${loginUser }">
+                    	<li><button id="insert-hotel" class="btn" onclick="location.href='hotelInsertView.ho'">호텔 등록하기</button></li>
+                    </c:if>
+                    --%>
+                    <li><button id="insert-hotel" class="btn" onclick="location.href='hotelInsertView.ho'">호텔 등록하기</button></li>
                     <li><button id="detail-search" class="btn">상세검색</button></li>
                 </ul>
 
@@ -61,6 +65,67 @@
         </div>
 
         <div id="hotel-list-container">
+
+			<%-- 
+			<c:forEach var="hotel" items="${hotelList }">
+			    <div class="one-hotel-info-container">
+                	<img src="resources/images/sample_hotel.jpg" alt="호텔이미지">
+
+                	<div class="detail-info-container">
+	                    <div>
+	                        <div class="info-container">
+	                            <!-- 호텔이름 -->
+	                            <div class="hotel-name-container">
+	                                <h1>호텔 델루나{호텔이름}</h1>
+	                            </div>
+	
+	                            <!-- 좋아요 버튼 -->
+	                            <div class="i-like-btn-container">
+	                                <i class="fas fa-heart unlike"></i>
+	                            </div>
+	                        </div>
+	                        <hr>
+	                    </div>
+
+
+	                    <div class="detail-info-wrapper">
+	                        <!-- 호텔주소 -->
+	                        <div class="hotel-addr-wrapper">
+	                            <small>{호텔주소}</small>
+	                        </div>
+	
+	
+	                        <div class="hotel-info-wrapper">
+	                            <!-- 별점 -->
+	                            <div class="hotel-review-container">
+	                                <span class="star-point">
+	                                    <i class="fas fa-star"></i>
+	                                    <i class="fas fa-star"></i>
+	                                    <i class="fas fa-star-half-alt"></i>
+	                                    <i class="far fa-star"></i>
+	                                    <i class="far fa-star"></i>
+	                                </span>
+	                                <span> 2.54 / 5 </span>
+	                            </div>
+	
+	                            <hr>
+	                            <!-- 1박 가격 -->
+	                            <div class="hotel-per-day-price-container info-container">
+	                                <p>
+	                                    <small>1박 중</small>&nbsp;&nbsp;<b>47,216원</b>
+	                                </p>
+	                            </div>
+	                        </div>
+	                    </div>
+	
+	                    <button class="hotel-reserve-btn">예약하기</button>
+                </div>
+            </div>
+			
+			
+			
+			</c:forEach>
+			--%>
 
             <!-- 호텔 1개(샘플1) -->
             <div class="one-hotel-info-container">
