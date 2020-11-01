@@ -16,37 +16,57 @@
     
     <section>
     <div id="board_list">
+    
+        <!-- 인증방법 설명란  -->
         <div id="space_1"></div>
-        <div style="height: 100px; width:1300px;">
-            <div style="display: inline-block; width:500px;"></div>
-            <div style="display: inline-block; height: 50px; font-size: 30px; font-weight:bold; text-align: center;">아이디/비밀번호 찾기</div>
-            <div style="display: inline-block; width:200px;"></div>
-            <div style="display: inline-block; width:425px;"></div>
-            <div style="display: inline-block; font-weight:bold; color:darkgray; text-align: right;">원하는 인증방법을 선택해 아이디/비밀번호를 확인할 수 있어요!</div>
+        <div id="space_2">
+            <div id="info1"></div>
+            <div id="info2">아이디/비밀번호 찾기</div>
+            <div id="info3"></div>
+            <div id="info4"></div>
+            <div id="info5">원하는 인증방법을 선택해 아이디/비밀번호를 확인할 수 있어요!</div>
         </div>
-        <div style="height: 25px;"></div>
-        <div id="space_2" style="display:inline-block; width:260px;"></div>
-        <div id="loginBox" class="tab" style="display:inline-block; height:400px; width:770px; border: 1px solid rgb(213, 213, 213);">
+        
+        <!-- 테이블 상단바  -->
+        <div id="space_3"></div>
+        <div id="space_4"></div>
+        <div id="loginBox" class="tab">
             <ul id="tab">
                 <li id="id" class="tab-link current" >아이디 찾기</li>
                 <li id="pwd" class="tab-link">비밀번호 찾기</li>
             </ul>
-
-        <div id="searchId" style="line-height: 80px;" >
-            <div style="display: inline-block; width: 200px;"></div>
-	        <input type="radio" id="checkPhone_1" name="idPhoneEmail" style="color: darkgray; width: 30px;" checked="checked">
-	        <label id="checkPhone_2" style="margin-right: 50px;">휴대전화로 찾기</label>
-	        <input type="radio" id="checkEmail_1" name="idPhoneEmail" style="color: darkgray; width: 30px;">
+        
+        <!-- 아이디 찾기  -->  
+        <div id="searchId">
+            <div id="searchId_2"></div>
+	        <input type="radio" id="checkPhone_1" name="idPhoneEmail" checked="checked">
+	        <label id="checkPhone_2">휴대전화로 찾기</label>
+	        <input type="radio" id="checkEmail_1" name="idPhoneEmail">
 	        <label id="checkEmail_2">이메일로 찾기</label>
 	    </div>  
 	    
-	    <div id="searchPwd" style="display: none; line-height: 80px;">
-	        <div style="display: inline-block; width: 300px;"></div>
-	        <input type="radio" id="checkEmail_3" name="idPhoneEmail" style="color: darkgray; width: 30px;">
+	    <!-- 비밀번호 찾기  -->
+	    <div id="searchPwd">
+	        <div id="space_5"></div>
+	        <input type="radio" id="checkEmail_3" name="idPhoneEmail">
 	        <label id="checkEmail_4" >이메일로 찾기</label>
 	    </div>
-	    <div id="phone">휴대전화로 찾기ㅎㅎ</div>
+	    
+	    <!-- 아이디 찾기 : 내용  -->
+	    <div id="space_6"></div>
+	    <div id="phone">
+	        <div id="space_7"></div>
+	        <input type="text" id="nameBox" placeholder="이름">
+	        <div id="space_8"></div>	
+	        <div id="space_7"></div>	        
+	        <input type="text" id="phoneBox" placeholder="휴대전화 -없이 입력">
+	        <div id="space_9"></div>
+	        <div id="space_7"></div>
+	        <button id="idBtn">아이디 확인</button>
+	    </div>
 	    <div id="email" style="display: none;">이메일로 찾기ㅎㅎ</div>
+	    
+	    <!-- 비밀번호 찾기 : 내용  -->
 	    <div id="pwdEmail" style="display: none;">비밀번호 : 이메일로 찾기</div>
 	    </div>	          
        
