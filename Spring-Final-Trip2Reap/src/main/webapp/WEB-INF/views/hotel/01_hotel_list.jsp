@@ -25,7 +25,7 @@
 <body>
     <div id="main-container">
         <div id="title-container">
-            <img id="hotel-icon" src="./hotel.png">
+            <img id="hotel-icon" src="resources/images/hotel.png">
             <span id="title-name">호텔 예약</span>
             <hr>
         </div>
