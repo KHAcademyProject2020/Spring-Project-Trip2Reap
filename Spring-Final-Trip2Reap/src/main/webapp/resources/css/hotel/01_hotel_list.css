@@ -1,404 +1,523 @@
 :root {
-  --hotel-info-bg-color: #cfe3e1;
-  --insert-hotel-btn-bg-color: #497f55;
-  --search-hotel-btn-bg-color: #77af82;
-  --category-btn-bg-color: #a7e1af;
-  --category-btn-txt-color: #515357;
-
-  --bright-btn-active: #55c9a4;
-  --insert-hotel-btn-active: #a7e1af;
-
-  --pagination-bg-color: #eaeaea;
-  --pagination-txt-color: #497f55;
-  --pagination-hover-txt-color: #55c9a4;
-
-  --pagination-active-bg-color: #497f55;
-  --pagination-active-txt-color: #fff;
+  --dark-green: #497f55;
+  --mid-green: #77af82;
+  --bright-green: #a7e1af;
+  --emerald-green: #55c9a4;
+  --dark-gray: #515357;
+  --blue-gray: #cfe3e1;
+  --pink-gray: #eaeaea;
 }
 
-/*
-=============================================================
-怨듯넻 container
-*/
-body {
-  width: 100vw;
-  overflow-x: auto;
-  overflow-y: scroll;
+/* focus 검은색 라운드 처리 해제하기 */
+input:focus,
+button:focus {
+  outline: none;
 }
 
-.main-container{
-	height: 100vh;
-	overflow-y: scroll;
-}
-
-.container {
-  position: relative;
-  width: 100%;
-  margin: 1.5em auto; /*16px*1.5=24px*/
+#main-container {
+  margin: 50px auto;
+  width: 1000px;
   box-sizing: content-box;
 }
 
-.main-container {
-  display: flex;
-  flex-direction: column;
-  margin: 10px auto;
+/* 타이틀 */
+#title-container {
   box-sizing: content-box;
-}
-
-/*
-===============================================================
-�샇�뀛�삁�빟 ���씠��
-*/
-#title_img_container {
-  padding: 1em;
-  /*div:16px => 1em* 16 => 16px留뚰겮�쓽 �뙣�뵫�씠 �깮源�.*/
-  margin-bottom: 0.5em;
-}
-
-#hotel_menu_container {
-  display: flex;
-  flex-direction: row;
-  justify-content: baseline;
-  position: relative;
-}
-
-#hotel_menu_container > .img {
-	background-image: url('../images/hotel.png');
-  width: 95px;
-  height: 93px;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-#hotel_menu_container div.img {
-  margin-right: 10px;
-}
-
-#main-title {
-  padding-top: 1em;
-}
-
-/*
-============================================================= 
-硫붾돱寃��깋諛� 
- */
-ul {
-  list-style-type: none;
-}
-
-#nav_container {
-  margin: 0.5em auto;
-}
-
-/*寃��깋硫붾돱諛�*/
-#top_menu_bar {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-/*�긽�꽭寃��깋*/
-#detail_search {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: flex-start;
   padding-left: 10px;
+  vertical-align: bottom;
 }
 
-#detail_search li {
-  padding: 0 10px;
+#hotel-icon {
+  width: 40px;
+  height: 40px;
 }
 
-/*移댄뀒怨좊━ 寃��깋*/
-#category_search {
+#title-name {
+  font-size: 30px;
+}
+
+/* 버튼 */
+#button-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  align-items: flex-end;
-}
-
-#top_menu_bar > div:nth-child(2) {
-  display: block;
-  flex-grow: 2;
-}
-
-#category_search li {
-  padding: 0 10px;
-}
-
-/*踰꾪듉 �뵒�옄�씤*/
-button.btn {
-  border-style: none;
-  font-weight: bold;
-}
-
-#insertHotel {
-  background-color: var(--insert-hotel-btn-bg-color);
-}
-
-#searchHotel {
-  background-color: var(--search-hotel-btn-bg-color);
-}
-
-#insertHotel:hover,
-#searchHotel:hover {
-  background-color: var(--bright-btn-active);
-  color: var(--category-btn-txt-color);
-}
-
-button.category_btns {
-  background-color: var(--category-btn-bg-color);
-  color: var(--category-btn-txt-color);
-}
-
-#insertHotel:active {
-  background-color: var(--insert-hotel-btn-active);
-}
-
-/*
- ===========================================================
- �샇�뀛由ъ뒪�듃
- */
-
-/*
- ===========================================================
- �샇�뀛 �젙蹂�
- */
-
-#hotel_lists_container {
-  display: flex;
-  flex-direction: column;
-  justify-content: sapce-around;
-}
-
-/*�샇�뀛 �븳媛� 釉붾줉*/
-.one-hotel-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  background-color: var(--hotel-info-bg-color);
-  border-radius: 10px;
-  position: relative;
+  justify-content: center;
   box-sizing: content-box;
-  margin: 1em;
 }
 
-/*醫뗭븘�슂 踰꾪듉 而⑦뀒�씠�꼫*/
-.like-container {
+ul {
+  list-style: none;
+}
+
+#left_btns,
+#right_btns {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+}
+
+#right_btns{
+  justify-content: flex-end;
+}
+
+#button-container > div:nth-child(2) {
+  flex-basis: 46%;
+}
+
+.btn_ul > li > button {
+  margin: auto 13px;
+}
+
+.btn {
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  border-color: transparent;
+  text-align: center;
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+#insert-hotel {
+  background-color: var(--emerald-green);
+  color: #fff;
+}
+
+#left_btns > li:nth-child(2) > button {
+  background-color: var(--dark-green);
+  color: #fff;
+}
+
+#right_btns .btn {
+  background-color: var(--bright-green);
+  color: var(--dark-gray);
+}
+
+/* 상세검색 modal */
+#modal-close-container{
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  padding: 1.2em;
-  box-sizing: content;
+}
+
+/* modal내용부 */
+#modal-content-container{
+  position: flex;
+  margin: 10px auto;
+}
+
+.search-content{
   position: relative;
-}
-
-/*醫뗭븘�슂踰꾪듉*/
-.fa-heart {
-  font-size: 2em;
-  z-index: 1;
-}
-
-/*�샇�뀛�젙蹂� 而⑦뀒�씠�꼫*/
-.hotel-info-container {
   display: flex;
   flex-direction: row;
-  justify-content: stretch;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  position: relative;
-  padding: 0 1em;
-  padding-bottom: 1.2em;
+  justify-content: center;
+  align-items: baseline;
 }
 
-.hotel-thumbnail-img-container {
-  width: 50%;
+.search-content > div{
+  padding: 30px;
   position: relative;
-  padding: 0 1em;
 }
 
-/*�샇�뀛�뜽�꽕�씪*/
-.hotel-thumbnail-img-container img {
+/*샘플 모달 시작*/
+/* #detail-search-modal{
+  position: relative;
   width: 100%;
-  height: 12em;
-  position: relative;
+  height: 100%;
+  z-index: 1;
+  transform: sacle(0);
+  
 }
 
-/*�샇�뀛 �뵒�뀒�씪 info*/
-.hotel-detail-info-container {
-  width: 50%;
-  padding: 0 1.5em;
-  text-align: center;
-  position: relative;
+
+#detail-search-modal h2{
+  margin:0;
+}
+
+#detail-search-modal button{
+  display: inline-block;
+  width: 100px;
+  margin-left: calc(100% -100px -10px);
+}
+
+#detail-search-modal .modal_content{
+  width: 300px;
+  margin: 100px auto;
+  padding: 20px 10px;
+  background: #a7e1af;
+  border: 2px solid black;
+}
+
+#detail-search-modal .modal_layer{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0, 0.5);
+  z-index: -1;
+} */
+
+/* 샘플 모달 끝 */
+
+
+/* 호텔리스트 */
+
+#hotel-list-container{
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
+
+  position: relative;
+  margin-top: 50px;
+  
 }
 
-/*
-==============================================================
-pagenation
-*/
-#paginations_container {
+
+
+/* 호텔한개 카드 */
+
+.one-hotel-info-container{
+  width: 800px;
+  position: relative;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  justify-content: flex-start;
+  border: 1px solid black;
+  margin: 10px auto;
+}
+
+.photo-container{
+  position: relative;
+  flex-basis: 50%;
+  box-sizing: content-box;
+  height: 100%;
+}
+
+.one-hotel-info-container img{
+  width: 300px;
+}
+
+
+.detail-info-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-basis: 50%;
+  padding: 10px 50px;
+}
+
+.info-container{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: baseline;
+  text-align: center;
+}
+
+.hotel-name-container{ 
+  flex-basis: 90%;
+ 
+}
+
+
+/* 좋아요버튼 */
+.i-like-btn-container{
+  flex-basis: 10%;
+}
+
+.fa-heart{
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.fa-heart:hover{
+  color: palevioletred;
+}
+
+
+
+/* 호텔 상세정보 컨테이너 */
+.detail-info-wrapper{
+  display: flex;
+  flex-direction: column;
+
+}
+
+.hotel-addr-wrapper{
+  display:flex;
+  flex-direction: row;
   justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.hotel-info-wrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  /* align-items: center; */
+}
+
+.hotel-review-container{
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+}
+
+.star-point{
+  padding-right: 15px;
+}
+
+.hotel-reserve-btn{
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.hotel-per-day-price-container{
+  align-items: flex-end;
+}
+
+button.hotel-reserve-btn{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: bold;
+  border-color: transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: var(--emerald-green);
+}
+
+/* pagination */
+
+
+/* modal */
+.close-modal-container{
+  display: flex;
+  flex-direction: row; 
+}
+
+.close-modal-container > div:nth-child(1){
+  flex-basis:95%;
+}
+
+.close-modal-container > div:nth-child(2){
+  flex-basis:5%;
+}
+
+#close_btn{
+  color: var(--dark-gray);
+  font-size: 2em;
+}
+
+#close_btn:hover{
+  color: var(--dark-green);
+}
+
+.modal{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.modal-body-container{
+  margin: 10px auto;
+  text-align: center;
+}
+
+.modal-body-container td{
+  box-sizing: content-box;
+  position: relative;
+}
+
+.detail-search-option{
+  width: 200px;
+  position: relative;
+  padding: 10px 0;
+  margin-left: 10px;
+}
+
+.detail-search-option:focus{
+  outline: none;
+}
+
+td > h5{
+  font-weight: bold;
+}
+
+.detail-search-option:nth-child(4){
+  margin-left: 11px;
+  padding-left: 10px;
+  border-style: 1px solid rgb(118,118,118);
+}
+
+
+
+/* 호텔검색 버튼 */
+#detail-hotel-search{
   width: 100%;
-  box-sizing: content-box;
-}
-
-#paginations_container > nav {
   position: relative;
-  box-sizing: content-box;
+  padding: 10px 0;
+  font-weight: bold;
+  font-size: 15px;
+
+  border-color: transparent;
+  border-radius: 5px;
+  background-color: var(--dark-green);
+  color: #fff;
+  cursor:pointer;
 }
 
-#paginations_container ul {
+#detail-hotel-search:hover{
+  background-color: var(--emerald-green);
+  color: var(--dark-gray);
+}
+
+/* animated modal=============== */
+html.modal-active,
+body.modal-active{
+  overflow: hidden;
+}
+
+#modal-container{
+  position: fixed;
+  left:0;
+  top:0;
+  display: table;
+  height: 100%;
+  width: 100%;
+  z-index:1;
+  transform: scale(0);
+}
+
+#modal-container .modal-background{
+  display: table-cell;
+  background: rgba(0,0,0,.8);
+  text-align: center;
+  vertical-align: middle;
+}
+
+#modal-container .modal-background .modal{
+  background: #fff;
+  padding: 90px;
+  display: inline-block;
+  border-radius: 3px;
   position: relative;
-  box-sizing: content-box;
 }
 
-a.page-link {
-  color: var(--pagination-txt-color);
+
+/* modal-animation */
+#modal-container.detail-search{
+  transform: scale(1);
 }
 
-a.page-link:hover {
-  background-color: var(--pagination-bg-color);
-  color: var(--pagination-hover-txt-color);
+#modal-container.detail-search .modal-background{
+  background: transparent;
+  animation: fadeIn .5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
 
-a.page-link:active {
-  background-color: var(--pagination-active-bg-color);
-  color: var(--pagination-active-txt-color);
-}
-/*
-=============================================================
-*/
-
-/*紐⑤컮�씪*/
-
-@media screen and (max-width: 600px){
-	.container{
-		padding:0
-	}
-	.main-container{
-		padding:0
-	}
-	
-	#category_search, #detail_search {
-    flex-direction: column;
-    width: 100%;
-    position: relative;
-    padding: 0;
-    margin-bottom: 0;
-  }
-  
-  #category_search li, #detail_search li{
-    padding:0;
-  }
-  
-  #nav_container{
-  	padding-left: 0;
-  }
+#modal-conatiner.detial-search .modal-background .modal{
+  opacity: 0;
+  animation: scaleUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
 
-/*�솕硫댁쓽 screen 768px蹂대떎 �옉�떎硫�*/
-@media screen and (max-width: 768px) {
-	body{
-		overflow-y: scroll;
-	}
-  /*�샇�뀛�삁�빟 ���씠��*/
-  #hotel_menu_container {
-    justify-content: center;
-    align-items: center;
+#main-container.detail-search{
+  animation: scaleBack 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.detail-search.out{
+  animation: quickScaleDown 0s .5s linear forwards;
+}
+
+#modal-container.detail-search.out .modal-background{
+  animation: fadeOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.detail-search.out .modal-background .modal{
+  animation: scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#main-container.detail-search.out{
+  animation: scaleForward 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes fadeIn{
+  0% {
+      background: transparent;
   }
 
-  #main-title {
-    /* font-size: 1.5em; */
-    /* visibility: hidden; */
-    display: none;
-  }
-
-  /* #hotel_menu_container > div.img {
-  } */
-
-  /* 寃��깋硫붾돱諛� */
-  #top_menu_bar {
-    flex-direction: column;
-    justify-items: center;
-    width: 100%;
-    position: relative;
-  }
-
-  #top_menu_bar > div:nth-child(2) {
-    display: none;
-  }
-
-  #top_menu_bar > div {
-    width: 100%;
-  }
-
-  /*�긽�꽭寃��깋*/
-  #detail_search {
-    flex-direction: column;
-    padding: 0;
-    position: relative;
-    width: 100%;
-    justify-content: space-between;
-    margin-bottom: 0;
-  }
-
-  /*移댄뀒怨좊━ 寃��깋*/
-  #category_search {
-    flex-direction: column;
-    width: 100%;
-    position: relative;
-    padding: 0;
-    justify-content: space-between;
-    margin-bottom: 0;
-  }
-
-  #detail_search li,
-  #category_search li {
-    width: 100%;
-    position: relative;
-    padding: 10px 1em;
-  }
-
-  .btn-success {
-    width: 100%;
-    position: relative;
-  }
-
-  /* hotel lists */
-  /*�샇�뀛1媛� 而⑦뀒�씠�꼫*/
-  .one-hotel-container {
-    flex-direction: column;
-    justify-content: center;
-  }
-  .hotel-thumbnail-img-container {
-    width: 100%;
-    padding: 1em;
-  }
-  .hotel-thumbnail-img-container img {
-    width: 100%;
-  }
-
-  /*�샇�뀛�젙蹂� 而⑦뀒�씠�꼫*/
-  .hotel-info-container {
-    padding: 0;
-    flex-direction: column;
-    flex-wrap: nowrap;
-  }
-
-  .hotel-detail-info-container {
-    width: 100%;
-    padding: 2em;
+  100% {
+      background: rgba(0,0,0, .8);
   }
 }
 
-/*768px蹂대떎 �겙寃쎌슦..*/
-@media screen and (min-width: 768px) {
+@keyframes scaleUp{
+  0% {
+      transform: scale(.8) translateY(1000px);
+      opacity: 0;
+  }
+
+  100%{
+      transform: scale(1) translateY(0);
+      opacity: 1;
+  }
 }
+
+@keyframes quickScaleDown{
+  0%{
+      transform: scale(1);
+  }
+
+  99.9%{
+      transform: scale(1);
+  }
+
+  100%{
+      transform: scale(0);
+  }
+}
+
+@keyframes fadeOut{
+  0%{
+      background: rgba(0,0,0, .8);
+  }
+
+  100%{
+      background: transparent;
+  }
+}
+
+@keyframes scaleDown{
+  0%{
+      transform: scale(1) translateY(0);
+      opacity: 1;
+  }
+
+  100%{
+      transform: scale(.8) translateY(1000px);
+      opacity:0;
+  }
+}
+
+@keyframes scaleBack{
+  0%{
+      transform: scale(1);
+  }
+
+  100%{
+      transform: scale(.85);
+  }
+}
+
+@keyframes scaleForward{
+  0%{
+      transform: scale(0.85);
+  }
+
+  100%{
+      transform: scale(1); 
+  }
+}
+
+/* animated modal 끝 */
