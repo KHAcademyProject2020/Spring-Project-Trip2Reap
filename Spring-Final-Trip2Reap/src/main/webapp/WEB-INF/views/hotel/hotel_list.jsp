@@ -24,7 +24,15 @@
 </head>
 
 <body>
+
+	<div>
+   	 	<c:import url="../common/menubar.jsp" />
+	</div>
+	
     <div id="main-container">
+    
+    	
+    
         <div id="title-container">
             <img id="hotel-icon" src="resources/images/hotel.png">
             <span id="title-name">호텔 예약</span>
@@ -342,12 +350,14 @@
 
         <!-- 호텔페이지네이션 시작 -->
         <div id="pagination-container">
-            <nav>
-                <ul>
+        	<nav>
+                <ul id="pagination-ul">
 
                     <!-- 맨앞으로 -->
                     <li><a href="">&laquo;</a></li>
-                    <li></li>
+
+                    <!-- 이전페이지 -->
+                    <li><a href="">&lt;</a></li>
 
                     <!-- 페이지번호 -->
                     <li><a href="">1</a></li>
@@ -356,11 +366,12 @@
                     <li><a href="">4</a></li>
                     <li><a href="">5</a></li>
 
+                    <!-- 이후페이지 -->
+                    <li><a href="">&gt;</a></li>
                     <!-- 맨뒤로 이동 -->
                     <li><a href="">&raquo;</a></li>
                 </ul>
             </nav>
-
         </div>
         <!-- 호텔페이지네이션 끝 -->
     </div>

@@ -25,6 +25,8 @@ button:focus {
   box-sizing: content-box;
   padding-left: 10px;
   vertical-align: bottom;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 #hotel-icon {
@@ -42,6 +44,8 @@ button:focus {
   flex-direction: row;
   justify-content: center;
   box-sizing: content-box;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 ul {
@@ -168,7 +172,7 @@ ul {
   justify-content: space-around;
 
   position: relative;
-  margin-top: 50px;
+  margin-top: 10px;
   
 }
 
@@ -182,7 +186,7 @@ ul {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  border: 1px solid black;
+  border: 1px solid var(--dark-gray);
   margin: 10px auto;
 }
 
@@ -217,6 +221,8 @@ ul {
 
 .hotel-name-container{ 
   flex-basis: 90%;
+  padding-top: 10px;
+  padding-bottom: 10px;
  
 }
 
@@ -224,6 +230,8 @@ ul {
 /* 좋아요버튼 */
 .i-like-btn-container{
   flex-basis: 10%;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .fa-heart{
@@ -242,6 +250,8 @@ ul {
 .detail-info-wrapper{
   display: flex;
   flex-direction: column;
+  padding-top: 10px;
+  padding-bottom: 10px;
 
 }
 
@@ -250,7 +260,7 @@ ul {
   flex-direction: row;
   justify-content: center;
   padding-top: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
 }
 
 .hotel-info-wrapper{
@@ -291,8 +301,56 @@ button.hotel-reserve-btn{
 
 /* pagination */
 
+#pagination-container{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
 
-/* modal */
+#pagination-ul{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#pagination-ul li{
+  background-color: transparent;
+  padding: 10px;
+  border: 0.1px solid var(--pink-gray);
+  text-align: center;
+}
+
+#pagination-ul a{
+  text-decoration: none;
+  color: var(--dark-gray);
+  position: relative;
+}
+
+#pagination-ul li{
+  border-left-color: transparent;
+}
+
+#pagination-ul li:nth-child(1){
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-left-color: var(--pink-gray);
+}
+
+#pagination-ul li:nth-last-child(1){
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+#pagination-ul li:hover,
+#pagination-ul li:active{
+  background-color: var(--blue-gray);
+  font-weight: bold;
+}
+
+
+
+/*pagination end--------  */
+
+/* modal start----------- */
 .close-modal-container{
   display: flex;
   flex-direction: row; 
