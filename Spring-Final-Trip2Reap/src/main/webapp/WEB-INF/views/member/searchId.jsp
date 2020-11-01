@@ -56,18 +56,50 @@
 	    <div id="space_6"></div>
 	    <div id="phone">
 	        <div id="space_7"></div>
-	        <input type="text" id="nameBox" placeholder="이름">
+	        <input type="text" id="nameBox" placeholder="이름" 
+	        onfocus="this.placeholder=''" onblur="this.placeholder='이름'" autocomplete="off">
 	        <div id="space_8"></div>	
 	        <div id="space_7"></div>	        
-	        <input type="text" id="phoneBox" placeholder="휴대전화 -없이 입력">
+	        <input type="text" id="phoneBox" placeholder="휴대전화 -없이 입력"
+	        onfocus="this.placeholder=''" onblur="this.placeholder='휴대전화 -없이 입력'" autocomplete="off">
 	        <div id="space_9"></div>
 	        <div id="space_7"></div>
 	        <button id="idBtn">아이디 확인</button>
 	    </div>
-	    <div id="email" style="display: none;">이메일로 찾기ㅎㅎ</div>
+	    <div id="email">
+	    <div id="space_7"></div>
+	        <input type="text" id="idBox" placeholder="아이디" 
+	        onfocus="this.placeholder=''" onblur="this.placeholder='아이디'" autocomplete="off">
+	        <div id="space_8"></div>	
+	        <div id="space_7"></div>	        
+	        <input type="text" id="emailBox" placeholder="이메일"
+	        onfocus="this.placeholder=''" onblur="this.placeholder='이메일'" autocomplete="off">
+	        <div id="space_8"></div>	
+	        <div id="space_7"></div>	        
+	        <input type="text" id="numberBox" placeholder="인증번호 10분이내 입력"
+	        onfocus="this.placeholder=''" onblur="this.placeholder='인증번호 10분이내 입력'" autocomplete="off">	        	        
+	        <div id="space_9"></div>
+	        <div id="space_7"></div>
+	        <button id="idBtn2">아이디 확인</button>
+	    </div>
 	    
 	    <!-- 비밀번호 찾기 : 내용  -->
-	    <div id="pwdEmail" style="display: none;">비밀번호 : 이메일로 찾기</div>
+	    <div id="pwdEmail">
+	    <div id="space_7"></div>
+	        <input type="text" id="idBox2" placeholder="아이디" 
+	        onfocus="this.placeholder=''" onblur="this.placeholder='아이디'" autocomplete="off">
+	        <div id="space_8"></div>	
+	        <div id="space_7"></div>	        
+	        <input type="text" id="emailBox2" placeholder="이메일"
+	        onfocus="this.placeholder=''" onblur="this.placeholder='이메일'" autocomplete="off">
+	        <div id="space_8"></div>	
+	        <div id="space_7"></div>	        
+	        <input type="text" id="numberBox2" placeholder="인증번호 10분이내 입력"
+	        onfocus="this.placeholder=''" onblur="this.placeholder='인증번호 10분이내 입력'" autocomplete="off">	        	        
+	        <div id="space_9"></div>
+	        <div id="space_7"></div>
+	        <button id="idBtn3">비밀번호 확인</button>
+	    </div>
 	    </div>	          
        
        <script>
