@@ -6,6 +6,7 @@
   --dark-gray: #515357;
   --blue-gray: #cfe3e1;
   --pink-gray: #eaeaea;
+  --heart-pink: #f52043;
 }
 
 /* focus 검은색 라운드 처리 해제하기 */
@@ -24,18 +25,25 @@ button:focus {
 #title-container {
   box-sizing: content-box;
   padding-left: 10px;
+  text-align: left;
   vertical-align: bottom;
   padding-top: 20px;
   padding-bottom: 20px;
+  
+  border-bottom: 4px solid #eee;
 }
 
 #hotel-icon {
   width: 40px;
   height: 40px;
+  vertical-align: bottom;
+  text-align: left;
 }
 
 #title-name {
   font-size: 30px;
+  font-weight: 700;
+  text-align: left;
 }
 
 /* 버튼 */
@@ -210,6 +218,12 @@ ul {
   padding: 10px 50px;
 }
 
+
+.detail-info-container > div:nth-child(1) hr{
+	border: 2px solid #eee;
+}
+
+
 .info-container{
   position: relative;
   display: flex;
@@ -241,8 +255,19 @@ ul {
 }
 
 .fa-heart:hover{
-  color: palevioletred;
+	color: palevioletred; 
 }
+
+
+.unlike{
+  color: var(--blue-gray);
+}
+
+.like{
+  color: var(--heart-pink);
+}
+
+
 
 
 
@@ -269,6 +294,7 @@ ul {
   justify-content: space-around;
   /* align-items: center; */
 }
+
 
 .hotel-review-container{
   display: flex;

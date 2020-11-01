@@ -23,6 +23,7 @@
 
 </head>
 
+
 <body>
 
 	<div>
@@ -36,7 +37,7 @@
         <div id="title-container">
             <img id="hotel-icon" src="resources/images/hotel.png">
             <span id="title-name">호텔 예약</span>
-            <hr>
+            <!-- <hr> -->
         </div>
 
         <div id="button-container">
@@ -75,7 +76,7 @@
 
                             <!-- 좋아요 버튼 -->
                             <div class="i-like-btn-container">
-                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-heart unlike"></i>
                             </div>
                         </div>
                         <hr>
@@ -131,7 +132,7 @@
 
                             <!-- 좋아요 버튼 -->
                             <div class="i-like-btn-container">
-                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-heart unlike"></i>
                             </div>
                         </div>
                         <hr>
@@ -188,7 +189,7 @@
 
                             <!-- 좋아요 버튼 -->
                             <div class="i-like-btn-container">
-                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-heart unlike"></i>
                             </div>
                         </div>
                         <hr>
@@ -245,7 +246,7 @@
 
                             <!-- 좋아요 버튼 -->
                             <div class="i-like-btn-container">
-                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-heart unlike"></i>
                             </div>
                         </div>
                         <hr>
@@ -302,7 +303,7 @@
 
                             <!-- 좋아요 버튼 -->
                             <div class="i-like-btn-container">
-                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-heart unlike"></i>
                             </div>
                         </div>
                         <hr>
@@ -354,7 +355,7 @@
                 <ul id="pagination-ul">
 
                     <!-- 맨앞으로 -->
-                    <li><a href="">&laquo;</a></li>
+                    <li><a href="">&lt;&lt;</a></li>
 
                     <!-- 이전페이지 -->
                     <li><a href="">&lt;</a></li>
@@ -369,7 +370,7 @@
                     <!-- 이후페이지 -->
                     <li><a href="">&gt;</a></li>
                     <!-- 맨뒤로 이동 -->
-                    <li><a href="">&raquo;</a></li>
+                    <li><a href="">&gt;&gt;</a></li>
                 </ul>
             </nav>
         </div>
@@ -475,10 +476,39 @@
     <!-- modal끝 -->
 
 
+
+
+
 </body>
 <script>
-    // modal
-    $(function(){
+//heart -btn
+$(function(){
+	let heart_btns= document.querySelectorAll('.fa-heart');
+	heart_btns.forEach(function(heart_btn){
+		heart_btn.onclick=function(){
+			//unlike 라는 이름의 클래스를 가지고있다.
+			if( heart_btn.classList.contains('unlike') ){
+				console.log('좋아요!');
+				this.classList.toggle('like');
+				this.classList.remove('unlike');
+					
+				//ajax요청해서 해당 호텔 좋아요 수 +1카운트...^^;
+				//그런데 일단은 로그인을 한 상태에만 가능하다는것 !!
+				
+			}else if(heart_btn.classList.contains('like')){
+				console.log('좋아요 해제');
+				
+				this.classList.toggle('unlike');
+				//this.classList.remove('like');
+			}
+		}
+	});
+}); //smash-heart-btn wrapper finised
+
+
+
+// modal
+$(function(){
         var $detailSearchBtn=$('#detail-search'),
         $modalContainer = $('#modal-container'),
         $body = $('body'),
@@ -514,13 +544,14 @@
                 $content.addClass('out');
             }
         });
-    });
+        
+}); //modal- wrapper finished
 
-    $(function(){
-        $('.far-heart').click(function(){
-            
-        });
-    });
+ 
+
+	
+    
+    
 
 </script>
 
