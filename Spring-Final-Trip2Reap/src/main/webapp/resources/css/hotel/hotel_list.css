@@ -27,7 +27,7 @@ button:focus {
   padding-left: 10px;
   text-align: left;
   vertical-align: bottom;
-  padding-top: 20px;
+  padding-top: 30px;
   padding-bottom: 20px;
   
   border-bottom: 4px solid #eee;
@@ -50,9 +50,9 @@ button:focus {
 #button-container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+/*   justify-content: center; */
   box-sizing: content-box;
-  padding-top: 20px;
+  padding-top: 30px;
   padding-bottom: 20px;
 }
 
@@ -67,41 +67,47 @@ ul {
   padding: 0;
 }
 
+#left_btns{
+	justify-content: flex-start;
+}
+
 #right_btns{
   justify-content: flex-end;
 }
 
 #button-container > div:nth-child(2) {
-  flex-basis: 46%;
+  flex-basis: 60%;
 }
 
 .btn_ul > li > button {
-  margin: auto 13px;
+  margin: auto 8px;
 }
 
 .btn {
-  padding: 10px;
+  padding: 5px;
   border-radius: 5px;
   text-align: center;
   border-color: transparent;
   text-align: center;
   font-weight: bolder;
   cursor: pointer;
+  
+  height: 30px;
 }
 
 #insert-hotel {
-  background-color: var(--emerald-green);
+  background-color: var(--mid-green);
   color: #fff;
 }
 
 #left_btns > li:nth-child(2) > button {
-  background-color: var(--dark-green);
+  background-color: var(--mid-green);
   color: #fff;
 }
 
 #right_btns .btn {
-  background-color: var(--bright-green);
-  color: var(--dark-gray);
+  background-color: var(--mid-green);
+  color: #fff;
 }
 
 /* 상세검색 modal */
@@ -322,7 +328,8 @@ button.hotel-reserve-btn{
   border-color: transparent;
   border-radius: 5px;
   cursor: pointer;
-  background-color: var(--emerald-green);
+  background-color: var(--mid-green);
+  color: #fff;
 }
 
 /* pagination */
