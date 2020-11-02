@@ -58,7 +58,7 @@
         <div id="menu_3">
         <ul>
             <li class="menu">
-            	<a href="travelList.tv">
+            	<a href="tList.tv">
                 	<img src="resources/images/여행지아이콘.png" class="menuImg">
             	</a><
             </li>

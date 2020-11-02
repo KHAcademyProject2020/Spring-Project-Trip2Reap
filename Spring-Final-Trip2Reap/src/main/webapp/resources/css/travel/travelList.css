@@ -191,6 +191,13 @@
 	margin-bottom: 20px;
 }
 
+
+#travel_name:hover{
+	cursor: pointer;
+	text-decoration: underline;
+	
+}
+
 #travel_cate_tag_div{
 	padding: 40px 20px;
 	/* flex: 1; */
@@ -198,4 +205,37 @@
 
 #travel_cate{
 	margin: 20px 0px;
+}
+
+
+/* 등록하기 버튼 div */
+#button_write_div{
+	width: 900px;
+	margin: 30px auto;
+	text-align: right;
+}
+
+#button_write{
+	width: 70px;
+	height: 30px;
+	border: none;
+	background: #77af82;
+	color: white;
+	border-radius: 5px;
+}
+
+/* 페이징 */
+#paging_div{
+	text-align: center;
+}
+
+#paging_div button{
+	width: 25px;
+	height: 25px;
+	border: none;
+}
+
+#current{
+	background: #77af82;
+	color: white;
 }

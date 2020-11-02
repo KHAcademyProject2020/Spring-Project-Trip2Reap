@@ -9,8 +9,19 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 public class TravelController {
 	
 	
-	@RequestMapping("travelList.tv")
+	@RequestMapping("tList.tv")
 	public String goTravelList() {
 		return "travelList";
-	}
+	} // 여행지 목록보기 이동.
+	
+	
+	
+	@RequestMapping("tDetail.tv")
+	public String goTravelDetail() {
+		return "travelDetail";
+	} // 여행지 상세보기 이동.
+	
+	
+	
+	
 }
