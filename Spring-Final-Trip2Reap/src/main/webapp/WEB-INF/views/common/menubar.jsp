@@ -60,7 +60,7 @@
             <li class="menu">
             	<a href="travelList.tv">
                 	<img src="resources/images/여행지아이콘.png" class="menuImg">
-            	</a><
+            	</a>
             </li>
             <li class="menu">
             	<a>
