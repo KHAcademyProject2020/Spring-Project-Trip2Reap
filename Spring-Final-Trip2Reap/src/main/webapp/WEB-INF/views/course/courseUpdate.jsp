@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>여행 코스 등록하기</title>
-<link rel="stylesheet" type="text/css" href="../css/courseInsert.css"/>
+<title>여행 코스 수정하기</title>
+<link rel="stylesheet" type="text/css" href="../css/courseUpdate.css"/>
 <script src="https://kit.fontawesome.com/8828f475ef.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -13,7 +13,7 @@
 	<div id="all_div">
 		<div id="menu_div">
 			<img src="../images/courseIcon.png" id="menu_img"/>
-			<span id="menu">여행 코스 등록</span>
+			<span id="menu">여행 코스 수정</span>
 		</div>
 		
 		<hr>
@@ -81,6 +81,22 @@
 			</table>
 		</div>
 		
+		<div id="list_travel_div">
+			<div id="travel_img_div">
+				<img src="../images/travel.PNG" id="travel_img"/>
+			</div>
+			<div id="travel_info_div">
+				<div id="travel_name">여행지 이름</div>
+				<div id="travel_cate">관광지</div>
+				<br>
+				<div id="travel_local">경남 사천시</div>
+				<div id="travel_tag">#가족들과함께 #기차여행좋다 #즐거운나들이</div>
+			</div>
+			<div id="travel_menu_div">
+				<i class="fas fa-ellipsis-v"></i>
+			</div>
+		</div>
+		
 		<div id="course_content_div">
 			<textarea rows="20" cols="125" id="course_content"></textarea>
 			<div id="text_count_div">
@@ -92,7 +108,7 @@
 		
 		<div id="button_div">
 			<button id="button_cancel">취소</button>
-			<button id="button_write">등록</button>
+			<button id="button_update">수정</button>
 		</div>
 	</div>
 	</section>

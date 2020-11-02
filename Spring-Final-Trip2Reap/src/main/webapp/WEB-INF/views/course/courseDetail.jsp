@@ -12,16 +12,18 @@
 	<section>
 	<div id="all_div">
 		<div id="menu_div">
-			<img src="resources/images/courseIcon.png" id="menu_img"/>
+			<img src="../images/courseIcon.png" id="menu_img"/>
 			<span id="menu">여행 코스</span>
 		</div>
 		
 		<hr>
 		
 		<div id="course_title_div">
-			<button id="button_menu">:</button>
 			<div id="course_name_local_div">
 				<div id="course_name">군산맛집여행</div>
+				<div id="course_menu_div">
+					<i class="fas fa-ellipsis-v"></i>
+				</div>
 				<div id="course_local">전북 군산시</div>
 			</div>
 		</div>
@@ -49,10 +51,19 @@
 다른 분의 코스 중에서 좋아보이는 부분만 가져왔습니다.<br>
 이번 해에는 여행해볼 생각입니다.
 			</div>
-			<img src="resources/images/map.PNG" id="map_img"/>
+			<img src="../images/map.PNG" id="map_img"/>
 		</div>
 		
-		
+		<div class="travel_all_div">
+			<span id="travel_div">
+				<span id="travel_num">1</span>
+				<br>
+				<span id="travel_name">연천 경순왕릉</span>
+			</span>
+		</div>
+		<div class="travel_all_div">
+			
+		</div>
 	</div>
 	</section>
 </body>

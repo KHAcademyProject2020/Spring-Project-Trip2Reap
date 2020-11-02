@@ -12,7 +12,7 @@
 	<div id="all_div">
 		<div id="menu_div">
 			<div id="menu_left_div">
-				<img src="resources/images/courseIcon.png" id="menu_img"/>
+				<img src="../images/courseIcon.png" id="menu_img"/>
 				<span id="menu">여행 코스</span>
 			</div>
 			<div id="menu_right_div">
@@ -95,7 +95,11 @@
 						<span> | </span>
 						<span id="course_calendar">1박2일</span>
 					</div>
-					<div id="course_tag">#공예품 #가족과함께 #사천여행</div>
+					<div id="course_tag">
+						#공예품라라라<br>
+						#가족들과함께<br>
+						#룰루사천여행
+					</div>
 				</div>
 			</div>
 		</div>
