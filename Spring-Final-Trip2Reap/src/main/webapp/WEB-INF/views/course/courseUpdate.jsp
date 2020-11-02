@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>여행 코스 수정하기</title>
 <link rel="stylesheet" type="text/css" href="../css/courseUpdate.css"/>
-<script src="https://kit.fontawesome.com/8828f475ef.js" crossorigin="anonymous"></script>
+<!-- <script src="https://kit.fontawesome.com/8828f475ef.js" crossorigin="anonymous"></script> -->
 </head>
 <body>
 	<section>
