@@ -19,6 +19,7 @@
     <section>
     <!-- 각자 구현할 부분  -->
     <div id="board_list">
+
         <!-- 초록 선  -->
         <div id="space_1"></div>         
         <div id="space_2"></div>
