@@ -16,7 +16,7 @@
     
     <section>
     <div id="board_list">
-		
+    
         <!-- 인증방법 설명란  -->
         <div id="space_1"></div>
         <div id="space_2">

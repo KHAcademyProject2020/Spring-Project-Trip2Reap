@@ -6,7 +6,6 @@
      #board_list{ margin : 40px auto 0px auto; width: 1300px;} 
      
      
-     
      /* 인증방법 설명란 */
      #space_1{ height: 50px; }
      #space_2{ height: 100px; width:1300px; }
@@ -84,7 +83,7 @@
               width: 385px; height: 40px; font-weight: bold; cursor: pointer; }
      
      
-     /* 비밀번호 찾기 : 내용 */
+     /* 비밀번호 찾기 : 내용  */
      #pwdEmail { display: none; }
      #idBox2 { width: 350px; height: 45px; border: 2px solid rgb(213,213,213); padding-left: 30px; }
      #emailBox2 { width: 350px; height: 45px; border: 2px solid rgb(213,213,213); border-top: none; padding-left: 30px; }
