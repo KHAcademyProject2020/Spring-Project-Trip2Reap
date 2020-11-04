@@ -12,6 +12,7 @@
 		<config>src/main/webapp/WEB-INF/spring/appServlet/hotel-context.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/spring-security.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/travel-context.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/course-context.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</config>
