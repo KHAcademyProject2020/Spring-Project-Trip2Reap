@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>여행 코스 목록보기</title>
 <link rel="stylesheet" type="text/css" href="resources/css/course/courseList.css"/>
 </head>
 <body>
 	<section>
+	<header>
+   	 <c:import url="../common/menubar.jsp" />
+	</header>
 	<div id="all_div">
 		<div id="menu_div">
 			<div id="menu_left_div">
@@ -21,10 +24,9 @@
 			</div>
 		</div>
 		
-		<hr>
-		
 		<div id="cate_table_div">
-			<b>지역</b>
+			<span class="cate_name">지역</span>
+			<i class="fas fa-leaf"></i>
 			<table id="local_table">
 				<tr>
 					<td>전체</td>
@@ -50,7 +52,8 @@
 				</tr>
 			</table>
 			
-			<b>테마</b>
+			<span class="cate_name">테마</span>
+			<i class="fas fa-leaf"></i>
 			<table id="theme_table">
 				<tr>
 					<td>전체</td>
@@ -63,7 +66,8 @@
 				</tr>
 			</table>
 			
-			<b>일정</b>
+			<span class="cate_name">일정</span>
+			<i class="fas fa-leaf"></i>
 			<table id="calendar_table">
 				<tr>
 					<td>전체</td>
@@ -81,7 +85,7 @@
 			<!-- 코스마다마다의 div -->
 			<div id="list_course_div">
 				<div id="course_img_div">
-					<img src="resources/images/travel.PNG" id="travel_img"/>
+					<img src="resources/images/travel_img.PNG" id="travel_img"/>
 				</div>
 				<div id="course_name_writer_div">
 					<div id="course_name">코스 이름</div>
@@ -104,7 +108,7 @@
 			</div>
 			<div id="list_course_div">
 				<div id="course_img_div">
-					<img src="resources/images/travel.PNG" id="travel_img"/>
+					<img src="resources/images/travel_img.PNG" id="travel_img"/>
 				</div>
 				<div id="course_name_writer_div">
 					<div id="course_name">코스 이름</div>
@@ -127,7 +131,7 @@
 			</div>
 			<div id="list_course_div">
 				<div id="course_img_div">
-					<img src="resources/images/travel.PNG" id="travel_img"/>
+					<img src="resources/images/travel_img.PNG" id="travel_img"/>
 				</div>
 				<div id="course_name_writer_div">
 					<div id="course_name">코스 이름</div>
