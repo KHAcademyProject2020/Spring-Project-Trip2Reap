@@ -22,6 +22,12 @@ public class TravelController {
 	} // 여행지 상세보기 이동.
 	
 	
+	@RequestMapping("tInsert.tv")
+	public String goTravelInsert() {
+		return "travelInsert";
+	} // 여행지 상세보기 이동.
+	
+	
 	
 	
 }

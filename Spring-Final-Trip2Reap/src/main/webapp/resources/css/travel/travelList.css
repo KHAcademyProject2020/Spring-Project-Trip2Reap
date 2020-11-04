@@ -224,6 +224,10 @@
 	border-radius: 5px;
 }
 
+#button_write:hover{
+	cursor: pointer;
+}
+
 /* 페이징 */
 #paging_div{
 	text-align: center;
@@ -238,4 +242,10 @@
 #current{
 	background: #77af82;
 	color: white;
+}
+
+
+/* input이나 button 클릭 시 outline 제거 */
+#input_search, #button_search, #button_write, #paging_div button{
+	outline: none;
 }

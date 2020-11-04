@@ -28,22 +28,22 @@
 		<div id="hashtag_div">
 			<ul>
 				<li>
-					<a href=" ${pageContext.request.contextPath}/resources/css/travel/travelList.jsp">#전체</a>&nbsp;&nbsp;
+					<a href=" ${pageContext.request.contextPath}/tList.tv">#전체</a>&nbsp;&nbsp;
 				</li>
 				<li>
-					<a href=" ${pageContext.request.contextPath}/resources/css/travel/travelList.jsp">#문화시설</a>&nbsp;&nbsp;
+					<a href=" ${pageContext.request.contextPath}/tList.tv">#문화시설</a>&nbsp;&nbsp;
 				</li>
 				<li>
-					<a href=" ${pageContext.request.contextPath}/resources/css/travel/travelList.jsp">#레포츠</a>&nbsp;&nbsp;
+					<a href=" ${pageContext.request.contextPath}/tList.tv">#레포츠</a>&nbsp;&nbsp;
 				</li>
 				<li>
-					<a href=" ${pageContext.request.contextPath}/resources/css/travel/travelList.jsp">#쇼핑</a>&nbsp;&nbsp;
+					<a href=" ${pageContext.request.contextPath}/tList.tv">#쇼핑</a>&nbsp;&nbsp;
 				</li>
 				<li>
-					<a href=" ${pageContext.request.contextPath}/resources/css/travel/travelList.jsp">#자연</a>&nbsp;&nbsp;
+					<a href=" ${pageContext.request.contextPath}/tList.tv">#자연</a>&nbsp;&nbsp;
 				</li>
 				<li>
-					<a href=" ${pageContext.request.contextPath}/resources/css/travel/travelList.jsp">#축제</a>&nbsp;&nbsp;
+					<a href=" ${pageContext.request.contextPath}/tList.tv">#축제</a>&nbsp;&nbsp;
 				</li>
 			</ul>
 		</div>
@@ -160,7 +160,7 @@
 			</div>
 		</div>
 				<div id="button_write_div">
-				<button id="button_write">등록하기</button>
+				<button id="button_write" onclick="insertView()">등록하기</button>
 				</div>
 				
 			
@@ -182,6 +182,11 @@
 		function detailView(){
  		   location.href="<%= request.getContextPath() %>/tDetail.tv";
  	   }
+		
+		
+		function insertView(){
+			location.href="<%= request.getContextPath() %>/tInsert.tv";
+		}
 	</script>
 	
 </section>

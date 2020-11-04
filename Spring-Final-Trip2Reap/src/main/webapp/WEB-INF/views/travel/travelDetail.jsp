@@ -62,21 +62,31 @@
 					</div>
 			
 				 <div id="hashtag_div">
-					<a href=" ${pageContext.request.contextPath}/resources/css/travel/travelList.jsp">#인천</a>&nbsp;&nbsp;
-						<a href=" ${pageContext.request.contextPath}/resources/css/travel/travelList.jsp">#공원</a>&nbsp;&nbsp;
-						<a href=" ${pageContext.request.contextPath}/resources/css/travel/travelList.jsp">#산책하기짱</a>&nbsp;&nbsp;
-						<a href=" ${pageContext.request.contextPath}/resources/css/travel/travelList.jsp">#야경</a>&nbsp;&nbsp;
-						<a href=" ${pageContext.request.contextPath}/resources/css/travel/travelList.jsp">#레포츠</a>&nbsp;&nbsp;
+					<a href=" ${pageContext.request.contextPath}/tList.tv">#인천</a>&nbsp;&nbsp;
+						<a href=" ${pageContext.request.contextPath}/tList.tv">#공원</a>&nbsp;&nbsp;
+						<a href=" ${pageContext.request.contextPath}/tList.tv">#산책하기짱</a>&nbsp;&nbsp;
+						<a href=" ${pageContext.request.contextPath}/tList.tv">#야경</a>&nbsp;&nbsp;
+						<a href=" ${pageContext.request.contextPath}/tList.tv">#레포츠</a>&nbsp;&nbsp;
 				</div> 
 					<br><br>
 				<hr>
 				
 				<div id="button_div">
-					<button id="button_update">수정하기</button>
-					<button id="button_delete">삭제하기</button>
+					<button id="button_update" onclick="updateView()">수정하기</button>
+					<button id="button_delete" onclick="deleteView()">삭제하기</button>
 				</div>
 			</div>
 		</div>
+		
+	<script>
+		public String updateView(){	//수정하기 뷰로 이동
+			location.href=" ${pageContext.request.contextPath}/tList.tv"
+		}
+		
+		public String deleteView(){ //삭제하기 뷰로 이동ㄹ
+			location.href=" ${pageContext.request.contextPath}/tList.tv"
+		}
+	</script>	
 </section>
 </body>
 </html>
