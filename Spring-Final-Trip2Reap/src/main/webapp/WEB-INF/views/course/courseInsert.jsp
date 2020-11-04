@@ -5,14 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>여행 코스 등록하기</title>
-<link rel="stylesheet" type="text/css" href="../css/courseInsert.css"/>
+<link rel="stylesheet" type="text/css" href="resources/css/course/courseInsert.css"/>
 <!-- <script src="https://kit.fontawesome.com/8828f475ef.js" crossorigin="anonymous"></script> -->
 </head>
 <body>
 	<section>
 	<div id="all_div">
 		<div id="menu_div">
-			<img src="../images/courseIcon.png" id="menu_img"/>
+			<img src="resources/images/courseIcon.png" id="menu_img"/>
 			<span id="menu">여행 코스 등록</span>
 		</div>
 		
@@ -43,10 +43,10 @@
 						<select id="select_course_theme">
 							<option>가족 여행</option>
 							<option>나 홀로 여행</option>
-							<option>힐링 코스</option>
+							<option>커플 여행</option>
+							<option>친구와 함께</option>
 							<option>뚜벅이 코스</option>
 							<option>캠핑</option>
-							<option>맛집 투어</option>
 						</select>
 					</td>
 					<td>

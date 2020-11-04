@@ -5,14 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>여행 코스 상세보기</title>
-<link rel="stylesheet" type="text/css" href="../css/courseDetail.css"/>
+<link rel="stylesheet" type="text/css" href="resources/css/course/courseDetail.css"/>
 <!-- <script src="https://kit.fontawesome.com/8828f475ef.js" crossorigin="anonymous"></script> -->
 </head>
 <body>
 	<section>
 	<div id="all_div">
 		<div id="menu_div">
-			<img src="../images/courseIcon.png" id="menu_img"/>
+			<img src="resources/images/courseIcon.png" id="menu_img"/>
 			<span id="menu">여행 코스</span>
 		</div>
 		
@@ -51,18 +51,69 @@
 다른 분의 코스 중에서 좋아보이는 부분만 가져왔습니다.<br>
 이번 해에는 여행해볼 생각입니다.
 			</div>
-			<img src="../images/map.PNG" id="map_img"/>
+			<img src="resources/images/map.PNG" id="map_img"/>
 		</div>
 		
-		<div class="travel_all_div">
-			<span id="travel_div">
-				<span id="travel_num">1</span>
-				<br>
-				<span id="travel_name">연천 경순왕릉</span>
-			</span>
+		<div id="travel_first_div">
+			<table class="table_travel">
+				<tr>
+					<td rowspan="3">
+						<div class="travel_num">1</div>
+					</td>
+					<td rowspan="3" align="center">
+						<img src="resources/images/travel_img.PNG" class="travel_img">
+					</td>
+					<td>
+						<div class="travel_name">송도 센트럴파크</div>
+						<div class="travel_local">인천 송도</div>
+						<div class="travel_tag">#레포츠 #가족과함께 #자연</div>
+					</td>
+				</tr>
+			</table>
+			<div class="empty_div">
+				<i class="fas fa-ellipsis-v" id="dot"></i>
+			</div>
 		</div>
 		<div class="travel_all_div">
-			
+			<table class="table_travel">
+				<tr>
+					<td rowspan="3">
+						<div class="travel_num">2</div>
+					</td>
+					<td rowspan="3" align="center">
+						<img src="resources/images/travel_img.PNG" class="travel_img">
+					</td>
+					<td>
+						<div class="travel_name">송도 센트럴파크</div>
+						<div class="travel_local">인천 송도</div>
+						<div class="travel_tag">#레포츠 #가족과함께 #자연</div>
+					</td>
+				</tr>
+			</table>
+			<div class="empty_div">
+				<i class="fas fa-ellipsis-v" id="dot"></i>
+			</div>
+		</div>
+		<div id="travel_last_div">
+			<table class="table_travel">
+				<tr>
+					<td rowspan="3">
+						<div class="travel_num">3</div>
+					</td>
+					<td rowspan="3" align="center">
+						<img src="resources/images/travel_img.PNG" class="travel_img">
+					</td>
+					<td>
+						<div class="travel_name">송도 센트럴파크</div>
+						<div class="travel_local">인천 송도</div>
+						<div class="travel_tag">#레포츠 #가족과함께 #자연</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div id="button_div">
+			<button id="button_list">목록</button>
 		</div>
 	</div>
 	</section>

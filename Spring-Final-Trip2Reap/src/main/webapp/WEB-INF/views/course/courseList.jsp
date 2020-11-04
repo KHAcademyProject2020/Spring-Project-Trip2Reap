@@ -5,14 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>여행 코스 목록보기</title>
-<link rel="stylesheet" type="text/css" href="../css/courseList.css"/>
+<link rel="stylesheet" type="text/css" href="resources/css/course/courseList.css"/>
 </head>
 <body>
 	<section>
 	<div id="all_div">
 		<div id="menu_div">
 			<div id="menu_left_div">
-				<img src="../images/courseIcon.png" id="menu_img"/>
+				<img src="resources/images/courseIcon.png" id="menu_img"/>
 				<span id="menu">여행 코스</span>
 			</div>
 			<div id="menu_right_div">
@@ -56,10 +56,10 @@
 					<td>전체</td>
 					<td>가족 여행</td>
 					<td>나 홀로 여행</td>
-					<td>힐링 코스</td>
+					<td>커플 여행</td>
+					<td>친구와 함께</td>
 					<td>뚜벅이 코스</td>
 					<td>캠핑</td>
-					<td>맛집 투어</td>
 				</tr>
 			</table>
 			
@@ -81,10 +81,56 @@
 			<!-- 코스마다마다의 div -->
 			<div id="list_course_div">
 				<div id="course_img_div">
-					<img src="../images/travel.PNG" id="travel_img"/>
+					<img src="resources/images/travel.PNG" id="travel_img"/>
 				</div>
 				<div id="course_name_writer_div">
-					<div id="course_name">코스 이름1</div>
+					<div id="course_name">코스 이름</div>
+					<div id="course_writer">뿌슝빠슝</div>
+				</div>
+				<div id="course_cate_tag_div">
+					<div id="course_cate">
+						<span id="course_local">대구 중구</span>
+						<span> | </span>
+						<span id="course_theme">가족 여행</span>
+						<span> | </span>
+						<span id="course_calendar">1박2일</span>
+					</div>
+					<div id="course_tag">
+						#공예품라라라<br>
+						#가족들과함께<br>
+						#룰루사천여행
+					</div>
+				</div>
+			</div>
+			<div id="list_course_div">
+				<div id="course_img_div">
+					<img src="resources/images/travel.PNG" id="travel_img"/>
+				</div>
+				<div id="course_name_writer_div">
+					<div id="course_name">코스 이름</div>
+					<div id="course_writer">뿌슝빠슝</div>
+				</div>
+				<div id="course_cate_tag_div">
+					<div id="course_cate">
+						<span id="course_local">대구 중구</span>
+						<span> | </span>
+						<span id="course_theme">가족 여행</span>
+						<span> | </span>
+						<span id="course_calendar">1박2일</span>
+					</div>
+					<div id="course_tag">
+						#공예품라라라<br>
+						#가족들과함께<br>
+						#룰루사천여행
+					</div>
+				</div>
+			</div>
+			<div id="list_course_div">
+				<div id="course_img_div">
+					<img src="resources/images/travel.PNG" id="travel_img"/>
+				</div>
+				<div id="course_name_writer_div">
+					<div id="course_name">코스 이름</div>
 					<div id="course_writer">뿌슝빠슝</div>
 				</div>
 				<div id="course_cate_tag_div">

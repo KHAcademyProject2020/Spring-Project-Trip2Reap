@@ -42,7 +42,6 @@
 #course_info_table{
 	text-align: left;
 	margin: 15px 0px;
-/* 	border-spacing: 10px; */
 	padding: 15px;
 }
 
@@ -52,13 +51,8 @@
 }
 
 #course_info_table td{
-/* 	padding: 15px 5px; */
 	padding: 8px;
 }
-
-/* .padding_none_td{ */
-/* 	padding-left: 0px; */
-/* } */
 
 #input_course_name{
 	width: 250px;
@@ -96,11 +90,52 @@
 	color: white;
 }
 
+/* 코스에 담긴 각 여행지마다 div */
+#list_travel_div{
+	margin: 20px auto;
+	padding: 20px 60px 0px 60px;
+	width: 780px;
+	border-top: 1px solid black;
+/* 	border-bottom: 1px solid black; */
+	display: flex;
+}
+
+#travel_img_div{
+	flex: 2;
+}
+
+#travel_img{
+	width: 250px;
+	height: 170px;
+}
+
+#travel_info_div{
+	padding: 20px 0px;
+	flex: 3;
+}
+
+#travel_name{
+	font-size: 30px;
+	font-weight: 900;
+}
+
+#travel_cate{
+	font-size: 15px;
+}
+
+#travel_menu_div{
+	padding-top: 5px;
+	text-align: right;
+	flex: 0.5;
+}
+
 /* 코스 설명 div */
 #course_content_div{
 	margin: 0px auto;
+	padding-top: 20px;
 	width: 900px;
 	text-align: center;
+	border-top: 1px solid black;
 }
 
 #course_content{
@@ -130,7 +165,7 @@
 	border-radius: 5px;
 }
 
-#button_write{
+#button_update{
 	width: 60px;
 	height: 30px;
 	border: none;
@@ -141,6 +176,6 @@
 
 /* input이나 button 클릭 시 outline 제거 */
 #input_course_name, #select_course_theme, #select_course_calendar, 
-#input_course_tag, #course_content, #button_cancel, #button_write:focus{
+#input_course_tag, #course_content, #button_cancel, #button_update:focus{
 	outline: none;
 }

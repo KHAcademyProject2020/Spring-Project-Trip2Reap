@@ -2,7 +2,7 @@
 
 /* 전체 div */
 #all_div{
-	margin: 50px auto;
+	margin: 40px auto 0px auto;
 	width: 1000px;
 /* 	background: rgb(255, 225, 230, 0.5); */
 }
@@ -32,12 +32,6 @@
 	margin: 15px 0px;
 }
 
-#button_menu{
-	background: none;
-	border: none;
-	font-weight: 700;
-}
-
 #course_name_local_div{
 	text-align: center;
 }
@@ -45,6 +39,12 @@
 #course_name{
 	font-weight: 800;
 	font-size: 25px;
+}
+
+#course_menu_div{
+	position: relative;
+	left: 480px;
+	bottom: 30px;
 }
 
 /* 코스 테마, 일정 table */
@@ -94,7 +94,85 @@
 	width: 900px;
 }
 
+/* 코스에 담긴 여행지 목록 중 첫번째 div */
+#travel_first_div{
+	width: 900px;
+    margin: 50px auto 0px auto;
+}
+
+.table_travel{
+	margin: 0px auto;
+	width: 900px;
+	border: 2px solid #efefef;
+}
+
+.table_travel td{
+	padding: 10px;
+	height: 60px;
+}
+
+.travel_num{
+	margin: 35px 40px 35px 50px;
+	width: 30px;
+	height: 30px;
+	background: rgb(73, 127, 85);
+	color: white;
+	text-align: center;
+	line-height: 27px;
+	border-radius: 50%;
+}
+
+.travel_img{
+	width: 150px;
+	height: 150px;
+}
+
+.travel_name{
+	margin-bottom: 20px;
+	width: 500px;
+	font-size: 30px;
+	font-weight: 900;
+}
+
+.empty_div{
+	margin: 0px auto;
+	width: 842px;
+	background: #efefef;
+}
+
+#dot{
+	margin: 10px 47px;
+	color: rgb(73, 127, 85);
+}
+
+/* 코스에 담긴 여행지 목록 중 두번째부터의 div */
+.travel_all_div{
+	width: 900px;
+    margin: 0px auto;
+}
+
+/* 코스에 담긴 여행지 목록 중 첫번째 div */
+#travel_last_div{
+	width: 900px;
+    margin: 0px auto 50px auto;
+}
+
+/* 목록보기 버튼 div */
+#button_div{
+	text-align: center;
+	margin: 20px 0px;
+}
+
+#button_list{
+	width: 60px;
+	height: 30px;
+	border: none;
+	background: #77af82;
+	color: white;
+	border-radius: 5px;
+}
+
 /* input이나 button 클릭 시 outline 제거 */
-#button_menu:focus{
+#button_list:focus{
 	outline: none;
 }

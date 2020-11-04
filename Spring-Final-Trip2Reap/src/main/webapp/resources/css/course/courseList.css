@@ -103,14 +103,14 @@
 /* 목록 전체 div */
 #list_all_div{
 	margin: 20px auto;
-	padding: 10px 30px 35px 30px;
+	padding: 10px 30px 20px 30px;
 	width: 840px;
 	background: #efefef;
 }
 
 #list_count_div{
 	font-weight: 600;
-	margin: 10px 0px;
+	margin: 20px 10px;
 }
 
 #list_count{
@@ -120,8 +120,9 @@
 
 /* 각 코스마다 div */
 #list_course_div{
-	width: 820px;
 	padding: 10px;
+	margin-bottom: 50px;
+	width: 820px;
 	background: white;
 	display: flex;
 }
@@ -136,7 +137,7 @@
 }
 
 #course_name_writer_div{
-	padding: 40px 20px;
+	padding: 30px 20px;
 	flex: 1;
 }
 
@@ -147,12 +148,12 @@
 }
 
 #course_cate_tag_div{
-	padding: 40px 20px;
+	padding: 20px 20px;
 	flex: 1.5;
 }
 
 #course_cate{
-	margin: 20px 0px;
+	margin: 29px 0px 20px 0px;
 }
 
 /* 등록하기 버튼 div */
