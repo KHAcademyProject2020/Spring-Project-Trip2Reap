@@ -63,7 +63,7 @@
             	</a>
             </li>
             <li class="menu">
-            	<a>
+            	<a href="courseList.co">
                 	<img src="resources/images/여행코스아이콘.png" class="menuImg">
             	</a>
             </li>
