@@ -5,7 +5,6 @@
 <html>
 <head>
 <link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/travel/travelInsert.css"/>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>

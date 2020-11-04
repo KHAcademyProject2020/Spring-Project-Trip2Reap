@@ -13,6 +13,8 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- <i>태그 사용 코드 -->
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<!-- jQuery코드 -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
     <!-- 메뉴바는 어느 페이지든 포함하고 있을 테니 여기서 contextPath 변수 값 만들기 -->
