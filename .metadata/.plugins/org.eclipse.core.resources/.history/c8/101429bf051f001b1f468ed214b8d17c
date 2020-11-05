@@ -1,0 +1,10 @@
+package trip.two.reap.review.model.service;
+
+import org.springframework.stereotype.Service;
+
+import trip.two.reap.member.model.service.MemberService;
+
+@Service("rService")
+public interface ReviewServiceImpl implements MemberService{
+
+}

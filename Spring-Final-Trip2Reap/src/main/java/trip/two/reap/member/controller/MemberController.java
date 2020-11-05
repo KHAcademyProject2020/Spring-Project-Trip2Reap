@@ -94,6 +94,7 @@ public class MemberController {
 		return "myPage";
 	} // myPageView() 종료
 	
+	//
 	
 	
 

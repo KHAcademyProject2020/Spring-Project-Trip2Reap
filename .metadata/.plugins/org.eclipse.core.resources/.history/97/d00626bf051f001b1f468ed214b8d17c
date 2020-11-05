@@ -1,0 +1,5 @@
+package trip.two.reap.review.model.service;
+
+public interface ReviewServiceImpl {
+
+}
