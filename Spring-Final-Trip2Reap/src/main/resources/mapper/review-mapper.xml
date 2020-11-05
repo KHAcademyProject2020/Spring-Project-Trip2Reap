@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis/org//DTD Mapper 3.0/EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper>
-  <cache-ref namespace=""/>
+  <cache-ref namespace="reviewMapper"/>
+  	<select id="getListCount" resultType="_int">
+		select count(*)
+		from board 
+		where b_status='Y'  	
+  	</select>
+  	
+  	<resultMap type="Board" id="boardResultSet">
+      <id column="BO_NO" property="boNo"/>
+      <result column="CA_CODE" property="caCode"/>
+      <result column="BO_TITLE" property="boTitle"/>
+      <result column="BO_CONTENT" property="boContent"/>
+      <result column="MEMBER_ID" property="boCount"/>
+      <result column="BO_COUNT" property="boCount"/>
+      <result column="BO_TAG" property="boTag"/>
+      <result column="BO_DELETE_YN" property="boDeleteYN"/>
+   </resultMap>
+   
 </mapper>
