@@ -69,11 +69,11 @@
                 	<img src="resources/images/여행코스아이콘.png" class="menuImg">
             	</a>
             </li>
-            <li class="menu">
-            	<a>
-            	   <img src="resources/images/여행후기아이콘.png" class="menuImg">
-            	</a>
-         	</li>
+             <li class="menu">
+               <a href="reviewList.bo">
+                  <img src="resources/images/여행후기아이콘.png" class="menuImg">
+               </a>
+            </li>
             <li class="menu">
             	<a href="hotelList.ho">
             		<img src="resources/images/호텔아이콘.png" class="menuImg">
@@ -105,6 +105,7 @@
     function myPage(){
       location.href="<%= request.getContextPath() %>/myPage.me";
     }
+    
     </script>
     
 </body>
