@@ -43,13 +43,13 @@
     height: 26px;
 }
 
-#button_search{
+#menu_right_div button{
 	width: 60px;
 	height: 30px;
 	border: none;
 	background: #77af82;
 	color: white;
-	border-radius: 5px;
+	border-radius: 5px;		
 }
 
 
@@ -74,6 +74,10 @@
 		list-style: none;
 		padding: 5px;
 }
+
+
+
+
 /* 카테고리 테이블 div */
 #cate_name {
     font-size: x-large;

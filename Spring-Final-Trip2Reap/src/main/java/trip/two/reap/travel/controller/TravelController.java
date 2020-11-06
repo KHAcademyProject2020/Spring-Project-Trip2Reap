@@ -25,9 +25,18 @@ public class TravelController {
 	@RequestMapping("tInsert.tv")
 	public String goTravelInsert() {
 		return "travelInsert";
-	} // 여행지 상세보기 이동.
+	} // 여행지 작성하기 이동.
 	
 	
+	@RequestMapping("tUpdate.tv")
+	public String goTravelUpdate() {
+		return "travelUpdate";
+	} // 여행지 수정하기 이동
 	
+	
+	@RequestMapping("tSearchError.tv")
+	public String goTravelError() {
+		return "search_errorPage";
+	} // 검색 에러페이지 이동
 	
 }

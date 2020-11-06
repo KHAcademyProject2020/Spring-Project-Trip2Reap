@@ -79,11 +79,11 @@
 		</div>
 		
 	<script>
-		public String updateView(){	//수정하기 뷰로 이동
-			location.href=" ${pageContext.request.contextPath}/tList.tv"
+		function updateView(){	//수정하기 뷰로 이동
+			location.href=" ${pageContext.request.contextPath}/tUpdate.tv"
 		}
 		
-		public String deleteView(){ //삭제하기 뷰로 이동ㄹ
+		function deleteView(){ //삭제하기 뷰로 이동
 			location.href=" ${pageContext.request.contextPath}/tList.tv"
 		}
 	</script>	

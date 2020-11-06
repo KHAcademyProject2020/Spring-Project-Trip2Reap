@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/travel/travelInsert.css"/>
+<link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/travel/travelUpdate.css"/>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -19,7 +19,7 @@
 		<div id="menu_div">
 			<div id="menu_left_div">
 				<img src="resources/images/travelIcon.png" id="menu_img"/>
-				<span id="menu">여행지 작성하기</span>
+				<span id="menu">여행지 수정하기</span>
 			</div>
 		</div>
 		
@@ -44,14 +44,14 @@
 			
 			<div id="titleImgTxt">
 				<div class="pictureName">
-					<span class="astro_span">*</span>대표이미지
+					<span class="astro_span">*</span>대표 이미지
 				</div>
 			</div>
 			<div id="contentImgTxt">
-				<div class="pictureName">내용이미지1</div>
+				<div class="pictureName">내용 이미지1</div>
 			</div>
 			<div id="contentImgTxt">
-				<div class="pictureName">내용이미지2</div>
+				<div class="pictureName">내용 이미지2</div>
 			</div>
 			
 			
@@ -156,7 +156,7 @@
 		<!-- 버튼 div -->
 		<div id="button_div">
 			<button id="button_cancel">취소</button>
-			<button id="button_write">등록</button>
+			<button id="button_write">수정</button>
 		</div>
 	
 	</div>

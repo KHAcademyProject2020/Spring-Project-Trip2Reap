@@ -19,14 +19,14 @@
 				<span id="menu">여행지</span>
 			</div>
 			<div id="menu_right_div">
-				<input type="text" id="input_search"/>
-				<input type="button" value="검색" id="button_search"/>
+				<input type="text" id="input_search" />
+				<button id="button_serarch" onclick="goSearchError()">검색</button>
 			</div>
 		</div>
 		
 		<!-- 해쉬태그 카테고리 -->
 		<div id="hashtag_div">
-			<ul>
+			<ul id="hashtag_ul">
 				<li>
 					<a href=" ${pageContext.request.contextPath}/tList.tv">#전체</a>&nbsp;&nbsp;
 				</li>
@@ -190,6 +190,10 @@
 		
 		function insertView(){
 			location.href="<%= request.getContextPath() %>/tInsert.tv";
+		}
+		
+		function goSearchError(){
+			location.href="<%= request.getContextPath() %>/tSearchError.tv";
 		}
 	</script>
 	
