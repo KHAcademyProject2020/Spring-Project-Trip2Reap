@@ -15,7 +15,7 @@
 	<div id="all_div">
 		<div id="menu_div">
 			<div id="menu_left_div">
-				<img src="resources/images/travel.JPG" id="menu_img"/>
+				<img src="resources/images/travelIcon.png" id="menu_img"/>
 				<span id="menu">여행지</span>
 			</div>
 			<div id="menu_right_div">
@@ -106,10 +106,11 @@
 				</div>
 				<div id="travel_name_writer_div">
 					<div id="travel_name" onclick="detailView()">송도 센트럴파크</div>
+					<div id="travel_theme">관광지</div>
 					<div id="travel_writer">인천 송도</div>
 					<div id="travel_tag">#레포츠 #가족과함께 #자연</div>
 				</div>
-				<span id="list_etc"><i class="fas fa-ellipsis-h" style="width:30px; height:30px; font-weight: 1px;"></i></span>
+				<span id="list_etc">…</span>
 			</div>
 			
 			<br><br>
@@ -118,12 +119,13 @@
 				<div id="travel_img_div">
 					<img src="resources/images/송도.JPG" id="travel_img"/>
 				</div>
-				<div id="travel_name_writer_div" onclick="detailView()">
-					<div id="travel_name">송도 센트럴파크</div>
+				<div id="travel_name_writer_div">
+					<div id="travel_name" onclick="detailView()">송도 센트럴파크</div>
+					<div id="travel_theme">관광지</div>
 					<div id="travel_writer">인천 송도</div>
 					<div id="travel_tag">#공원 #가족과함께 #자연</div>
 				</div>
-				<span id="list_etc"><i class="fas fa-ellipsis-h" style="width:30px; height:30px; font-weight: 1px;"></i></span>
+				<span id="list_etc">…</span>
 			</div>
 			
 			<br><br>
@@ -135,10 +137,11 @@
 				</div>
 				<div id="travel_name_writer_div">
 					<div id="travel_name" onclick="detailView()">송도 센트럴파크</div>
+					<div id="travel_theme">관광지</div>
 					<div id="travel_writer">인천 송도</div>
 					<div id="travel_tag">#공원 #가족과함께 #자연</div>
 				</div>
-				<span id="list_etc"><i class="fas fa-ellipsis-h" style="width:30px; height:30px; font-weight: 1px;"></i></span>
+				<span id="list_etc">…</span>
 			</div>
 			
 			<br><br>
@@ -150,10 +153,11 @@
 				</div>
 				<div id="travel_name_writer_div">
 					<div id="travel_name" onclick="detailView()">송도 센트럴파크</div>
+					<div id="travel_theme">관광지</div>
 					<div id="travel_writer">인천 송도</div>
 					<div id="travel_tag">#관광지 #미세먼지x #식물원</div>
 				</div>
-				<span id="list_etc"><i class="fas fa-ellipsis-h" style="width:30px; height:30px; font-weight: 1px;"></i></span>
+				<span id="list_etc">…</span>
 			
 				
 			

@@ -9,7 +9,7 @@
 #menu_div {
     padding: 0px 10px;
     display: flex;
-    border-bottom: 4px solid #eee;
+    border-bottom: 4px solid #efefef;
 }
 
 #menu_left_div {
@@ -150,7 +150,7 @@
 
 #list_count_div{
 	font-weight: 600;
-	margin: 10px 0px;
+	margin: 10px 0px 30px 0px;
 }
 
 #list_count{
@@ -160,16 +160,15 @@
 
 #list_etc{
 	margin: 0px 3px 0px 285px;
+	font-weight: bold;
+	font-size: xx-large;
 }
-
-
-
 
 
 
 #list_travel_div{
 	width: 820px;
-	padding: 10px;
+	padding: 12px 12px 10px 12px;
 	background: white;
 	display: flex;
 }
@@ -181,14 +180,23 @@
 }
 
 #travel_name_writer_div{
-	padding: 40px 20px;
+	padding: 30px 20px 0px 20px;
 	/* flex: 1; */
 }
 
 #travel_name{
 	font-size: 30px;
 	font-weight: 900;
-	margin-bottom: 20px;
+	margin-bottom: 5px;
+}
+
+
+#travel_theme{
+
+    margin-bottom: 22px;
+    color: #497f55;
+    font-weight: 700;
+	margin-bottom: 22px;
 }
 
 

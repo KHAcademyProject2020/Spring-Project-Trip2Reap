@@ -18,7 +18,7 @@
 		<!-- 메뉴 이름 div -->
 		<div id="menu_div">
 			<div id="menu_left_div">
-				<img src="resources/images/travel.png" id="menu_img"/>
+				<img src="resources/images/travelIcon.png" id="menu_img"/>
 				<span id="menu">여행지 작성하기</span>
 			</div>
 		</div>
@@ -28,7 +28,6 @@
 		<div id="insert_div">
 			<div id="info_ment_div">
 						<span class="astro_span">*은 필수 입력 사항입니다.</span>
-			
 			</div>
 			
 			
@@ -43,6 +42,18 @@
 				<img id="contentImg2"/>
 			</div>
 			
+			<div id="titleImgTxt">
+				<div class="pictureName">
+					<span class="astro_span">*</span>대표사진
+				</div>
+			</div>
+			<div id="contentImgTxt">
+				<div class="pictureName">내용사진1</div>
+			</div>
+			<div id="contentImgTxt">
+				<div class="pictureName">내용사진2</div>
+			</div>
+			
 			
 			<!-- 작성하기 table 시작 -->	
 			<table id="travel_table">
@@ -50,7 +61,7 @@
 			   		 <td>
 			   			 <span class="astro_span">*</span><span>사진첨부</span></td>
 			   		 <td colspan="6">
-			   			 <input type="file" id="ex_file" name="file" accept=".png, .jpg">		
+			   			
 						<span id="span_text">&nbsp;&nbsp;&nbsp;&nbsp;이미지파일(PNG, JPG)만 첨부 가능합니다.</span>
 			   		 </td>
 				</tr>
@@ -132,7 +143,7 @@
 			</div>
 			
 			
-		</div>
+		</div><!-- 전체 div 끝 -->
 		
 		
 		<div id="fileArea">	<!-- 파일 업로드 부분 -->
