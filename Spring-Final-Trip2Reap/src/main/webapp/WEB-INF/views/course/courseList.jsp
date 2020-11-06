@@ -20,7 +20,7 @@
 			</div>
 			<div id="menu_right_div">
 				<input type="text" id="input_search"/>
-				<input type="button" value="검색" id="button_search"/>
+				<input type="button" value="검색" id="button_search" onclick="errorView();"/>
 			</div>
 		</div>
 		
@@ -174,6 +174,10 @@
 		
 		function insertView(){
 			location.href="<%= request.getContextPath() %>/courseInsert.co";
+		}
+		
+		function errorView(){
+			location.href="<%= request.getContextPath() %>/searchError.co";
 		}
 	</script>
 	</section>

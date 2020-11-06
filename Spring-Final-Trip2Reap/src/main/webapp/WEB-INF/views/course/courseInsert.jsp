@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>여행 코스 등록하기</title>
 <link rel="stylesheet" type="text/css" href="resources/css/course/courseInsert.css"/>
-<!-- <script src="https://kit.fontawesome.com/8828f475ef.js" crossorigin="anonymous"></script> -->
 </head>
 <body>
 	<section>
@@ -19,8 +18,6 @@
 			<img src="resources/images/courseIcon.png" id="menu_img"/>
 			<span id="menu">여행 코스 등록</span>
 		</div>
-		
-		<hr>
 		
 		<div id="insert_ment_div">
 			<table id="course_info_table">
@@ -72,34 +69,36 @@
 						<input type="text" id="input_course_tag"/>
 						<i class="fas fa-plus-square" id="button_tag_plus"></i>
 					</td>
-					<td>
+					<td class="tdtdtd">
 						<div class="hashtag">#인천여행코스</div>
 					</td>
-					<td>
+					<td class="tdtdtd">
 						<span class="hashtag">#드라이브코스</span>
 					</td>
-					<td>
+					<td class="tdtdtd">
 						<span class="hashtag">#여섯글자태그</span>
 					</td>
 				</tr>
 			</table>
 			
-			<textarea rows="20" cols="125" id="course_content"></textarea>
-			<div id="text_count_div">
-				<span>현재 글자 수 </span>
-				<span id="text_count">8</span>
-				<span>자 / 최대 글자 수 2000자</span>
+			<div id="course_content_div">
+				<textarea rows="20" cols="125" id="course_content"></textarea>
+				<div id="text_count_div">
+					<span>현재 글자 수 </span>
+					<span id="text_count">8</span>
+					<span>자 / 최대 글자 수 2000자</span>
+				</div>
 			</div>
 		</div>
-		
-<!-- 		<div id="course_content_div"> -->
-<!-- 		</div> -->
 		
 		<div id="button_div">
 			<button id="button_cancel">취소</button>
 			<button id="button_write">등록</button>
 		</div>
 	</div>
+	
+	<script>
+	</script>
 	</section>
 </body>
 </html>

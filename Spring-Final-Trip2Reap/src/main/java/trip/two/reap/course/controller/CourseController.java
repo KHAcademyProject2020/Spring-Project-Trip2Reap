@@ -22,4 +22,14 @@ public class CourseController {
 	public String insertView() {
 		return "courseInsert";
 	}
+	
+	@RequestMapping("courseUpdate.co")
+	public String updateView() {
+		return "courseUpdate";
+	}
+	
+	@RequestMapping("searchError.co")
+	public String errorView() {
+		return "searchErrorPage";
+	}
 }

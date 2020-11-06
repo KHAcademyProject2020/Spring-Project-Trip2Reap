@@ -9,7 +9,7 @@
 /* img, 메뉴 이름, 검색 div */
 #menu_div{
 	padding: 0px 10px;
-    border-bottom: 4px solid #eee;
+    border-bottom: 4px solid #efefef;
 	display: flex;
 }
 
@@ -51,10 +51,6 @@
 	background: #77af82;
 	color: white;
 	border-radius: 5px;
-}
-
-#button_search:hover{
-	cursor: pointer;
 }
 
 /* 카테고리 테이블 div */
@@ -223,10 +219,6 @@
 	border-radius: 5px;
 }
 
-#button_write:hover{
-	cursor: pointer;
-}
-
 /* 페이징 */
 #paging_div{
 	text-align: center;
@@ -241,6 +233,11 @@
 #current{
 	background: #77af82;
 	color: white;
+}
+
+/* button hover 시 cursor 변경 */
+#button_search, #button_write:hover{
+	cursor: pointer;
 }
 
 /* input이나 button 클릭 시 outline 제거 */

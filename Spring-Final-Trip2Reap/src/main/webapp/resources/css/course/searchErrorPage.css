@@ -2,7 +2,7 @@
 
 /* 전체 div */
 #all_div{
-	margin: 40px auto 0px auto;
+	margin: 80px auto 0px auto;
 	width: 1000px;
 /* 	background: rgb(255, 225, 230, 0.5); */
 }
@@ -10,11 +10,13 @@
 /* img, 메뉴 이름, 검색 div */
 #menu_div{
 	padding: 0px 10px;
+    border-bottom: 4px solid #efefef;
 	display: flex;
 /* 	background: rgb(200, 200, 255, 0.5); */
 }
 
 #menu_left_div{
+	margin-bottom: 20px;
 	flex: 1;
 	text-align: left;
 }
@@ -41,6 +43,7 @@
 
 #input_search{
 	width: 200px;
+	height: 26px;
 }
 
 #button_search{
@@ -79,6 +82,11 @@
 	background: #77af82;
 	color: white;
 	border-radius: 5px;
+}
+
+/* button hover 시 cursor 변경 */
+#button_search, #button_list:hover{
+	cursor: pointer;
 }
 
 /* input이나 button 클릭 시 outline 제거 */

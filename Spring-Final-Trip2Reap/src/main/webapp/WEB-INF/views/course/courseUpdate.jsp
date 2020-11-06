@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>여행 코스 수정하기</title>
 <link rel="stylesheet" type="text/css" href="resources/css/course/courseUpdate.css"/>
-<!-- <script src="https://kit.fontawesome.com/8828f475ef.js" crossorigin="anonymous"></script> -->
 </head>
 <body>
 	<section>
@@ -19,8 +18,6 @@
 			<img src="resources/images/courseIcon.png" id="menu_img"/>
 			<span id="menu">여행 코스 수정</span>
 		</div>
-		
-		<hr>
 		
 		<div id="insert_ment_div">
 			<table id="course_info_table">
@@ -87,7 +84,7 @@
 		
 		<div id="list_travel_div">
 			<div id="travel_img_div">
-				<img src="resources/images/travel.PNG" id="travel_img"/>
+				<img src="resources/images/travel_img.PNG" id="travel_img"/>
 			</div>
 			<div id="travel_info_div">
 				<div id="travel_name">여행지 이름</div>
@@ -97,7 +94,23 @@
 				<div id="travel_tag">#가족들과함께 #기차여행좋다 #즐거운나들이</div>
 			</div>
 			<div id="travel_menu_div">
-				<i class="fas fa-ellipsis-v"></i>
+				<span id="list_etc">…</span>
+			</div>
+		</div>
+		
+		<div id="list_travel_div">
+			<div id="travel_img_div">
+				<img src="resources/images/travel_img.PNG" id="travel_img"/>
+			</div>
+			<div id="travel_info_div">
+				<div id="travel_name">여행지 이름</div>
+				<div id="travel_cate">관광지</div>
+				<br>
+				<div id="travel_local">경남 사천시</div>
+				<div id="travel_tag">#가족들과함께 #기차여행좋다 #즐거운나들이</div>
+			</div>
+			<div id="travel_menu_div">
+				<span id="list_etc">…</span>
 			</div>
 		</div>
 		
@@ -115,6 +128,9 @@
 			<button id="button_update">수정</button>
 		</div>
 	</div>
+	
+	<script>
+	</script>
 	</section>
 </body>
 </html>

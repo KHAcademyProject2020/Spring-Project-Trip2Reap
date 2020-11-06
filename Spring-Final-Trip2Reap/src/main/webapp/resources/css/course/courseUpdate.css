@@ -2,14 +2,15 @@
 
 /* 전체 div */
 #all_div{
-	margin: 40px auto 0px auto;
+	margin: 80px auto 0px auto;
 	width: 1000px;
 /* 	background: rgb(255, 225, 230, 0.5); */
 }
 
 /* img, 메뉴 이름 */
 #menu_div{
-	padding: 0px 10px;
+	padding: 0px 0px 20px 10px;
+    border-bottom: 4px solid #efefef;
 	display: flex;
 /* 	background: rgb(200, 200, 255, 0.5); */
 }
@@ -80,7 +81,7 @@
 	font-size: 28px;
 	color: rgb(119, 175, 130);
 	position: relative;
-	right: 30px;
+	right: 29px;
 	top: 6px;
 }
 
@@ -130,6 +131,11 @@
 	flex: 0.5;
 }
 
+#list_etc{
+	font-weight: bold;
+	font-size: xx-large;
+}
+
 /* 코스 설명 div */
 #course_content_div{
 	margin: 0px auto;
@@ -173,6 +179,11 @@
 	background: #77af82;
 	color: white;
 	border-radius: 5px;
+}
+
+/* button hover 시 cursor 변경 */
+#button_tag_plus, #list_etc, #button_cancel, #button_write:hover{
+	cursor: pointer;
 }
 
 /* input이나 button 클릭 시 outline 제거 */
