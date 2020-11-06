@@ -385,19 +385,30 @@ ul.room_btn_remote_controller li{
   justify-content: center;
 }
 
-.fa-angle-up,
+/* .fa-angle-up,
 .fa-angle-down,
 .fa-minus{
   width: 17px;
   height: 17px;
 }
-
+ */
 #add_room_btn,
-.room_btn_remote_controller li i{
+.room_btn_remote_controller .fa-angle-up,
+.room_btn_remote_controller .fa-angle-down,
+.room_btn_remote_controller .fa-minus{
   background-color: var(--mid-green);
   color: var(--btn-color);
   border-radius : 3px;
   cursor: pointer;
+}
+
+.room_btn_remote_controller li{
+	background-color: var(--mid-green);
+	padding: 1px 2px;
+	width: 17px;
+	height: 17px;
+	text-align: center;
+	border-radius: 3px;
 }
 
 
