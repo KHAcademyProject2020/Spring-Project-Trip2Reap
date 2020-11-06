@@ -24,6 +24,23 @@ public class ReviewController {
    public String list() {
 	   return "";
    }
+   // 리뷰 상세보기로 이동
+   
+   @RequestMapping("reviewDetail.bo")
+   public String ReviewDetail() {
+    return "reviewDetail";
+   }
+   
+   @RequestMapping("reviewInsert.bo")
+   public String ReviewInsert() {
+	   return "reviewInsert";
+   }
+   
+   
+   
+   
+   
+   
    
 
 }
