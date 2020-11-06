@@ -4,8 +4,15 @@
   <cache-ref namespace="reviewMapper"/>
   	<select id="getListCount" resultType="_int">
 		select count(*)
-		from board 
-		where b_status='Y'  	
+    	from board
+  		where BO_DELETE_YN='N'
+  	</select>
+  	
+  	<select id="selectList" resultMap="boardResultSet">
+  		 select * 
+  		 from board 
+   		 where BO_DELETE_YN='N'
+   		 order by BO_NO desc
   	</select>
   	
   	<resultMap type="Board" id="boardResultSet">
@@ -19,4 +26,37 @@
       <result column="BO_DELETE_YN" property="boDeleteYN"/>
    </resultMap>
    
+   <insert id="insertReview">
+   		 insert into board
+        values(seq_boNo.nextval, #{boTitle}, #{memberId}, #{boContent})
+   </insert>
+   
+   <update id="addReadCount">
+   
+   </update>
+   
+   <select id="selectReview" resultMap="boardResultSet">
+   
+   </select> 
+   
+   <update id="updateBoard">
+   
+   </update>
+   
+   <update id="deleteBoard">
+   
+   </update>
+   
+   
+   
 </mapper>
+
+
+
+
+
+
+
+
+
+

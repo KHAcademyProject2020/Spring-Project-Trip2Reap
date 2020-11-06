@@ -10,6 +10,7 @@
 #menu_div{
 	padding: 0px 10px;
     border-bottom: 4px solid #eee;
+    border-top: 4px solid black;
 	display: flex;
 }
 
