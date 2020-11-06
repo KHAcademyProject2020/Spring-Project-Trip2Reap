@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,9 @@
 </head>
 <body>
 	<section>
+	<header>
+   	 <c:import url="../common/menubar.jsp" />
+	</header>
 	<div id="all_div">
 		<div id="menu_div">
 			<img src="resources/images/courseIcon.png" id="menu_img"/>
@@ -22,7 +26,7 @@
 			<div id="course_name_local_div">
 				<div id="course_name">군산맛집여행</div>
 				<div id="course_menu_div">
-					<i class="fas fa-ellipsis-v"></i>
+					<span id="menu_etc">…</span>
 				</div>
 				<div id="course_local">전북 군산시</div>
 			</div>
@@ -113,9 +117,15 @@
 		</div>
 		
 		<div id="button_div">
-			<button id="button_list">목록</button>
+			<button id="button_list" onclick="listView();">목록</button>
 		</div>
 	</div>
+	
+	<script>
+		function listView(){
+			location.href = "<%= request.getContextPath() %>/courseList.co";
+		}
+	</script>
 	</section>
 </body>
 </html>

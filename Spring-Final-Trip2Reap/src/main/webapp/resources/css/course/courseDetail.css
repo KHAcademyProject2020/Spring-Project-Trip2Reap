@@ -2,22 +2,22 @@
 
 /* 전체 div */
 #all_div{
-	margin: 40px auto 0px auto;
+/* 	margin: 40px auto 0px auto; */
+	margin: 80px auto 0px auto;
 	width: 1000px;
-/* 	background: rgb(255, 225, 230, 0.5); */
 }
 
 /* img, 메뉴 이름 */
 #menu_div{
 	padding: 0px 10px;
 	display: flex;
-/* 	background: rgb(200, 200, 255, 0.5); */
 }
 
 #menu_img{
 	width: 40px;
 	height: 40px;
 	text-align: left;
+	vertical-align: bottom;
 }
 
 #menu{
@@ -43,8 +43,13 @@
 
 #course_menu_div{
 	position: relative;
-	left: 480px;
-	bottom: 30px;
+	left: 470px;
+	bottom: 35px;
+}
+
+#menu_etc{
+	font-weight: bold;
+	font-size: xx-large;
 }
 
 /* 코스 테마, 일정 table */

@@ -88,7 +88,7 @@
 					<img src="resources/images/travel_img.PNG" id="travel_img"/>
 				</div>
 				<div id="course_name_writer_div">
-					<div id="course_name">코스 이름</div>
+					<div id="course_name" onclick="detailView();">코스 이름</div>
 					<div id="course_writer">뿌슝빠슝</div>
 				</div>
 				<div id="course_cate_tag_div">
@@ -111,7 +111,7 @@
 					<img src="resources/images/travel_img.PNG" id="travel_img"/>
 				</div>
 				<div id="course_name_writer_div">
-					<div id="course_name">코스 이름</div>
+					<div id="course_name" onclick="detailView();">코스 이름</div>
 					<div id="course_writer">뿌슝빠슝</div>
 				</div>
 				<div id="course_cate_tag_div">
@@ -134,7 +134,7 @@
 					<img src="resources/images/travel_img.PNG" id="travel_img"/>
 				</div>
 				<div id="course_name_writer_div">
-					<div id="course_name">코스 이름</div>
+					<div id="course_name" onclick="detailView();">코스 이름</div>
 					<div id="course_writer">뿌슝빠슝</div>
 				</div>
 				<div id="course_cate_tag_div">
@@ -155,7 +155,7 @@
 		</div>
 		
 		<div id="button_write_div">
-			<button id="button_write">등록하기</button>
+			<button id="button_write" onclick="insertView();">등록하기</button>
 		</div>
 		
 		<div id="paging_div">
@@ -166,6 +166,16 @@
 			<button id="after">&gt;</button>
 		</div>
 	</div>
+	
+	<script>
+		function detailView(){
+			location.href="<%= request.getContextPath() %>/courseDetail.co";
+		}
+		
+		function insertView(){
+			location.href="<%= request.getContextPath() %>/courseInsert.co";
+		}
+	</script>
 	</section>
 </body>
 </html>

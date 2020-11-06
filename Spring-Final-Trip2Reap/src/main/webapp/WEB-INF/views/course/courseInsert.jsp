@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,9 @@
 </head>
 <body>
 	<section>
+	<header>
+   	 <c:import url="../common/menubar.jsp" />
+	</header>
 	<div id="all_div">
 		<div id="menu_div">
 			<img src="resources/images/courseIcon.png" id="menu_img"/>
@@ -79,9 +83,7 @@
 					</td>
 				</tr>
 			</table>
-		</div>
-		
-		<div id="course_content_div">
+			
 			<textarea rows="20" cols="125" id="course_content"></textarea>
 			<div id="text_count_div">
 				<span>현재 글자 수 </span>
@@ -89,6 +91,9 @@
 				<span>자 / 최대 글자 수 2000자</span>
 			</div>
 		</div>
+		
+<!-- 		<div id="course_content_div"> -->
+<!-- 		</div> -->
 		
 		<div id="button_div">
 			<button id="button_cancel">취소</button>

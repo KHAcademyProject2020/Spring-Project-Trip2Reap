@@ -13,4 +13,13 @@ public class CourseController {
 		return "courseList";
 	}
 	
+	@RequestMapping("courseDetail.co")
+	public String detailView() {
+		return "courseDetail";
+	}
+	
+	@RequestMapping("courseInsert.co")
+	public String insertView() {
+		return "courseInsert";
+	}
 }
