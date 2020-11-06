@@ -35,7 +35,7 @@
     	
     
         <div id="title-container">
-            <img id="hotel-icon" src="resources/images/hotel.png">
+            <img id="hotel-icon" src="resources/images/hotelIcon.png">
             <span id="title-name">호텔 예약</span>
         </div>
 
