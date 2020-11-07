@@ -23,18 +23,24 @@
     
     /*  메인로고(전국방방곡곡)  */
     #mainDiv { width: 1300px; text-align: center; margin:  0 auto;}
-    #mainLogo { width: 400px; cursor: pointer; }
+    #mainLogo { width: 250px; cursor: pointer; }
       
     
     /*  메뉴(여행지, 여행코스, 여행후기, 호텔)  */
-    #menu_1{height:60px;border-bottom: 2px solid lightgray;text-align: center;margin: 0 auto;/* width: 1000px; */}
-    #menu_2{ display: inline-block; width:258px; height : 50px; }
-    #menu_3{display: inline-block;width : 1300px;height:50px;}
-    #menu_4{ display: inline-block; width:258px; height : 50px; }
-    .menu { display: inline-block; width:230px; height: 50px; 
-            text-align: center; border-right: 1px solid lightgray; }
-    .menuImg{ width:140px; }
-    
+    #menu_1{ height:100px; border-bottom: 2px solid lightgray; text-align: center; margin: 0 auto; }
+    #menu_2{ height : 20px; }
+    .menu { display: inline-block; width:200px; height: 50px; text-align: center; 
+            border-right: 1px solid lightgray; }
+    .menuLabel { vertical-align : top; line-height: 50px; font-weight : bold; cursor: pointer; }
+    #menuIcon1 { font-size: 40px; margin-right: 4px; color : rgb(228,247,186); }
+    #menuIcon2 { font-size: 40px; margin-right: 4px; color : rgb(242,203,97); }
+    #menuIcon3 { font-size: 40px; margin-right: 4px; color : rgb(218,219,255); }
+    #menuIcon4 { font-size: 40px; margin-right: 4px; color : rgb(255,167,167); }
+    #menu_3{ display : inline-block; width : 100px; margin: 0 auto; vertical-align: top; }
+    #menu_4{ display : inline-block; height : 50px; }
+    #space1{ display: inline-block; width: 70px; }
+    #space2{ display: inline-block; width: 230px; }
+    #space3{ display: inline-block; width: 250px; }
 
 
     
