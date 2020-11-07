@@ -1,31 +1,17 @@
-     div { margin: 0px; padding: 0px; }
-     input[type=text]:focus{ outline: none; }
-     input[type=button]:focus{ outline: none; }
-     
-     
+
      /* 공통속성  */
-     #board_list{ margin : 40px auto 0px auto; width: 1300px;}
-          
-          
-     /* 회원가입 설명란 */
-     #space_1{ height: 50px; }
-     #space_2{ height: 100px; width:1300px; }
-     #info1 { display: inline-block; width:585px; }
-     #info2 { display: inline-block; height: 50px; font-size: 30px; font-weight:bold; text-align: center; }
-     #info3 { display: inline-block; width:200px; }
-     #info4 { display: inline-block; width:490px; }
-     #info5 { display: inline-block; font-weight: bold; background: rgb(119,175,130); border-radius: 10px; color: white;
-              height : 23px; width: 24px; text-align: center; line-height: 23px; font-size: 14px; }
-     #info6 { display: inline-block; font-weight:bold; text-align: right; }
-     #info7 { display: inline-block; font-weight:bold; color:darkgray; }
-     #space_3 { height : 30px; }
+     #board_list{ margin : 40px auto 0px auto; width: 1300px;}                 
      
      
      /* 정보입력란  */
+     #infor1 { height: 50px; }
+     #infor2 { display: inline-block; width:570px; }
+     #infor3 { display: inline-block; height: 50px; font-size: 30px; font-weight:bold; text-align: center; }
      #infoDiv1 { display : inline-block; width: 810px; }
      #infoDiv2 { display : inline-block; color: red; }
      #infoDiv3 { display : inline-block; font-size: 15px; }
-     #space_4 { height : 10px; }
+     #space1 { height : 30px; }
+     #space2 { height : 10px; }
      #infoDiv4 { display : inline-block; width : 288px; height : 30px; }
      
      
@@ -37,7 +23,7 @@
      .infoRight { display : inline-block; border: 1px solid lightgray; width : 520px; height : 50px; 
                   border-left: none; vertical-align: top; border-top: none; }
      .infoText { width : 480px; height : 50px; border: none; font-size: 13px; color: darkgray;  }
-     /* .infoText { width : 510px; height : 50px; border: none; font-size: 17px; font-weight: bold; } */
+     .infoText2 { width : 480px; height : 50px; border: none; font-size: 14px; font-weight: bold; }
      #space_5 { display : inline-block; width : 200px; }
      
      
@@ -46,7 +32,15 @@
             background: rgb(251, 251, 251); vertical-align: top; }         
      #id2 { display : inline-block; border: 1px solid lightgray; width : 520px; height : 50px; 
             border-left: none; vertical-align: top; }
-      
+     #idText { width : 480px; height : 50px; border: none; font-size: 14px; margin-left: 20px; font-weight: bold; }
+     
+     
+    /* 비밀번호  */
+     #pwdMessage { display : inline-block; width : 100px; height : 30px; background: rgb(226,240,217); font-size: 13px; 
+                    color : rgb(119,175,130); border : 1px solid rgb(119,175,130); text-align: center; vertical-align: middle; }
+     #pwdLabel { line-height: 27px; cursor: pointer; }
+     #pwdText2 { width : 360px; height : 50px; border: none; font-size: 13px; color: darkgray; }
+     
      
      /* 이름  */
      #name { display : inline-block; border: 1px solid lightgray; width : 180px; height : 50px; 
@@ -56,7 +50,8 @@
      
               
      /* 이메일  */
-     #emailText { width : 360px; height : 50px; border: none; font-size: 13px; color: darkgray; }
+     /* #emailText { width : 360px; height : 50px; border: none; font-size: 13px; color: darkgray; } */
+     #emailText { width : 360px; height : 50px; border: none; font-size: 14px; font-weight: bold; }
      #sendMessage { display : inline-block; width : 100px; height : 30px; background: rgb(226,240,217); font-size: 13px; 
                     color : rgb(119,175,130); border : 1px solid rgb(119,175,130); text-align: center; vertical-align: middle; }
      #mailLabel { line-height: 27px; cursor: pointer; }

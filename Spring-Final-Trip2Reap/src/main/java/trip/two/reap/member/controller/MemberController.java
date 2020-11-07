@@ -96,10 +96,14 @@ public class MemberController {
 	// 마이페이지 뷰로 이동
 	@RequestMapping("myPage.me")
 	public String myPageView() {
-		return "myPage";
+		return "myPageHome";
 	} // myPageView() 종료
 	
-	//
+	// 회원탈퇴 뷰로 이동
+	@RequestMapping("memberOut.me")
+	public String memberOut() {
+		return "memberOut";
+	}
 	
 	
 

@@ -58,7 +58,7 @@
 	            <label>&nbsp;|&nbsp;</label>
 	            <label class="search" onclick="searchPwd()">비밀번호 찾기</label>
 	            <label>&nbsp;|&nbsp;</label>
-	            <label class="search">회원가입</label>
+	            <label class="search" onclick="join();">회원가입</label>
 	        </div>
 	    </div>  
 	    </form>  
