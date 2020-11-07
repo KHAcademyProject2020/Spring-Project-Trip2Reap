@@ -85,8 +85,13 @@ public class MemberController {
 	@RequestMapping("join.me")
 	public String join() {
 		return "insert_1";
-	}	
+	}
 	
+	// 회원가입2 뷰로 이동
+	@RequestMapping("insert2.me")
+	public String insert2() {
+		return "insert_2";
+	}	
 	
 	// 마이페이지 뷰로 이동
 	@RequestMapping("myPage.me")

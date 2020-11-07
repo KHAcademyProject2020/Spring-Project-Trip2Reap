@@ -39,7 +39,7 @@
             <div id="apply5"></div>
             <div id="apply6"></div>
             <div id="space_4"></div>
-            <div id="apply2"></div>
+            <div id="apply2"></div>          
             <div id="apply7"><input type="checkbox" id="applyRadio2" class="applyRadio"></div>
             <div id="apply8">이용약관 동의</div>
             <div id="apply9">(필수)</div>
@@ -54,7 +54,7 @@
 전국방방곡곡 서비스와 관련하여 궁금하신 사항이 있으시면 <br> 
 고객센터 (대표번호: 0000 – 0000/ 평일 09:00~18:00)로 문의 주시기 바랍니다.<br><br> 
 감사합니다.<br><br></div>
-            <div id="space_4"></div>
+            <div id="space_8"></div>
             <div id="apply2"></div>
             <div id="apply7"><input type="checkbox" id="applyRadio3" class="applyRadio"></div>
             <div id="apply8">개인정보 수집 및 이용동의</div>
@@ -89,9 +89,9 @@
         <!-- 버튼  -->
         <div id="space_4"></div>
         <div id="space_6"></div>
-        <input type="button" id="applyBtn1" value="취소">
+        <input type="button" id="applyBtn1" value="취소" onclick="cancel();">
         <div id="space_7"></div>
-        <input type="button" id="applyBtn2" value="확인">                         
+        <input type="button" id="applyBtn2" value="확인" onclick="ok();">                         
     </div>
     </section>
     <div style="height:1000px;"></div>
@@ -131,6 +131,19 @@
 		   }
 	   });     
     });
+    
+    function cancel(){
+    	location.href="<%= request.getContextPath() %>/home.do";
+    }
+    
+    function ok(){
+    	if($("#applyRadio1").is(":checked")){
+    		location.href="<%= request.getContextPath() %>/insert2.me";
+    	} else {
+    		alert("이용약관에 동의해주세요.");
+    		$(window).scrollTop($("#applyRadio1").offset().top);
+    	}   	
+    }
     </script>
 
 </body>

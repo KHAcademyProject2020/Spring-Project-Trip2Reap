@@ -3,7 +3,7 @@
      /* 공통속성  */
      #board_list{ margin : 40px auto 0px auto; width: 1300px;}
      
-     /* 인증방법 설명란 */
+     /* 회원가입 설명란 */
      #space_1{ height: 50px; }
      #space_2{ height: 100px; width:1300px; }
      #info1 { display: inline-block; width:585px; }
@@ -27,6 +27,7 @@
      #apply5 { display : inline-block; width : 43px; }
      #apply6 { display : inline-block; height : 20px; width : 600px; border-bottom: 2px solid lightgray; }
      #space_4 { height : 30px; }
+     #space_8 { height : 40px; }
      #apply7 { display : inline-block; }
      #apply8 { display : inline-block; font-size: 15px; }
      #apply9 { display : inline-block; font-size: 15px; color: red; }  
