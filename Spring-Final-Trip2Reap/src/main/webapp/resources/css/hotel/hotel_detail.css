@@ -1,0 +1,55 @@
+/* common for all hotel pages */
+:root {
+    --dark-green: #497f55;
+    --mid-green: #77af82;
+    --bright-green: #a7e1af;
+    --emerald-green: #55c9a4;
+    --dark-gray: #515357;
+    --blue-gray: #cfe3e1;
+    --pink-gray: #eaeaea;
+    --heart-pink: #f52043;
+
+    --hash-gray: #c8cbcc;
+    --btn-color: #fff;
+
+
+    --minus-color: #f56c85;
+    --minus-hover-color: #cc370e;
+ }
+ 
+ 
+
+ #main-container {
+    margin: 50px auto;
+    width: 1000px;
+    box-sizing: content-box;
+
+    /* only :hotel-insert */
+    text-align: center;
+ }
+
+
+  #title-container {
+    box-sizing: content-box;
+    padding-left: 10px;
+    text-align: left;
+    vertical-align: bottom;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    border-bottom: 4px solid #eee;
+  	
+  }
+
+  #hotel-icon {
+    width: 40px;
+    height: 40px;
+    vertical-align: bottom;
+    text-align: left;
+  }
+  
+  #title-name {
+    font-size: 30px;
+    font-weight: 700;
+    text-align: left;
+  }
+  

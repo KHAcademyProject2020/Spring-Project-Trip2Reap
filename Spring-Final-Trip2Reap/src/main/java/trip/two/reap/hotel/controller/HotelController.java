@@ -28,4 +28,11 @@ public class HotelController {
 		return "hotel_insert";
 		
 	}
+	
+	@RequestMapping("hotelDetailView.ho")
+	public String goHotelDetailView() {
+		// caution! it's not final controller
+		// it's just for beta test to see view page
+		return "hotel_detail";
+	}
 }

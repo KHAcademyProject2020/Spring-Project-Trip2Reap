@@ -405,7 +405,13 @@
                         </div>
                     </div>
 
-                    <button class="hotel-reserve-btn">예약하기</button>
+					<%--
+					[caution - i want you to understand this caution...^^] 
+					
+					hotel_detail 이 만들어졌는지 확인하기 위한 테스트용 버튼이라서 링크를 걸어놨습니다 ^^
+					just test for web view page if smashed the button of reservation 
+					--%>
+                    <button class="hotel-reserve-btn" onclick="location.href='<%= request.getContextPath() %>/hotelDetailView.ho'">예약하기</button>
                 </div>
             </div>
             <!-- 호텔1개(샘플5) 끝 -->
