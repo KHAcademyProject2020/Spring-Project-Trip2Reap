@@ -99,6 +99,7 @@ input:focus{
   }
 
 
+
   .insert-common-container{
     position: relative;  
     display: flex;
@@ -112,10 +113,10 @@ input:focus{
     margin-bottom: 20px;
   }
   
-  div.insert-common-container div{
-  	margin: 10px;
+ 
+   div.insert-common-container div{
+  	margin: 8px;
   }
-  
   
 
   /* 해시태그 */
@@ -239,7 +240,6 @@ input:focus{
     border-radius: 10px;
     font-size: 11px;
     padding: 7px;
-    
     background-color: transparent;
     border: var(--blue-gray) 1px solid;
     color: var(--mid-green);
@@ -250,8 +250,8 @@ input:focus{
 
 
   #search_hotel_addr_btn{
-    height: 39px;
     margin-left: 15px;
+    font-size: 15px;
   }
 
 
@@ -314,7 +314,7 @@ ul.uploaded_img_names{
   border: var(--blue-gray) solid 1px;
   border-radius: 3px;
   margin-bottom: 21px;
-  padding: 20px 10px;
+  padding: 17px 10px;
 }
 
 .room_btn_remote_controller{
@@ -442,6 +442,7 @@ input[type="text"].room_name{
 
 .room_kind_label{
   padding-right: 10px;
+  padding-left: 10px;
 }
 
 .insert_room_kinds select{
@@ -462,8 +463,8 @@ input[type="text"].room_name{
 
 #hotel_address{
     border: var(--blue-gray) solid 1px;
-    padding: 11px;
-    margin-left: 10px;
+    padding: 12px;
+    margin-left: 8px;
     width: 400px;
     border-radius: 3px;
 }
@@ -491,6 +492,7 @@ input[type="text"].room_name{
   position: relative;
   padding: 11px;
   width: 200px;
+  margin-left: -8px;
 }
 
 /* 호텔 운영시간 선택 */
@@ -589,3 +591,11 @@ input[type="text"].room_name{
 .hotel_option_table td:nth-child(1){
   font-weight: bold;
 }
+
+
+/*호텔 객실 정보 입력 수정   */
+.room_btn_remote_controller_wrapper{
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
