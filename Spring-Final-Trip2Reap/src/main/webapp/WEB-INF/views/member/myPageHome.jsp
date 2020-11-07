@@ -21,13 +21,13 @@
             <div id="infor2"></div>
             <div id="infor3">개인정보 수정</div>            
         </div>
-        <div id="space1"></div>
+        <div id="up_space1"></div>
         
         <!-- 정보입력란 -->
         <div id="infoDiv1"></div>
         <div id="infoDiv2">*</div>
         <div id="infoDiv3">는 필수 입력 항목입니다.</div>
-        <div id="space2"></div>
+        <div id="up_space2"></div>
         <div id="infoDiv4"></div>
         
         <!-- 아이디  -->
@@ -144,9 +144,6 @@
        	location.href="<%= request.getContextPath() %>/home.do";
        }
        
-       function ok(){
-       	   	
-       }
     </script>
 
 
