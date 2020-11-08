@@ -1,55 +1,225 @@
 /* common for all hotel pages */
-:root {
-    --dark-green: #497f55;
-    --mid-green: #77af82;
-    --bright-green: #a7e1af;
-    --emerald-green: #55c9a4;
-    --dark-gray: #515357;
-    --blue-gray: #cfe3e1;
-    --pink-gray: #eaeaea;
-    --heart-pink: #f52043;
+:root { 
+	--dark-green: #497f55; 
+	--mid-green: #77af82; 
+	--bright-green: #a7e1af; 
+	--emerald-green: #55c9a4; 
+	--dark-gray: #515357; 
+	--blue-gray: #cfe3e1; 
+	--pink-gray: #eaeaea; 
+	--heart-pink: #f52043; 
+	--hash-gray: #c8cbcc; 
+	--btn-color: #fff; 
+	--edit-red: #f56c85; 
+	--edit-red-hover: #bd3951;
+}
 
-    --hash-gray: #c8cbcc;
-    --btn-color: #fff;
+body{
+	margin: 0;
+	padding: 0;
+}
+
+#main-container {
+	width: 1000px;
+	margin: 50px auto;
+	box-sizing: content-box;
+}
+
+#title-container {
+	box-sizing: content-box;
+	padding-left: 10px;
+	text-align: left;
+	vertical-align: bottom;
+	padding-top: 30px;
+	padding-bottom: 20px;
+	border-bottom: 4px solid #eee;
+}
+
+#hotel-icon {
+	width: 40px;
+	height: 40px;
+	vertical-align: bottom;
+	text-align: left;
+}
+
+#title-name {
+	font-size: 30px;
+	font-weight: 700;
+	text-align: left;
+}
+
+/*  
+========================================================
+*/
+
+ul{
+	list-style: none;
+}
+
+a, a:hover, a:active{
+	text-decoration: none;
+}
+
+/*  
+========================================================
+
+ hotel detail only
+========================================================
+*/
+
+/* setting for the unity into the other pages  */
+#main-container{
+	display: flex;
+	flex-direction: column;
+	
+	justify-content: center;
+	margin-left: 132.5px;
+	margin-right: 132.5px;
+}
+
+/*
+========================================================
+	common- hotel info options  
+*/
+.hotel_detail_common_container{
+	position: relative;
+	text-align: center;
+	padding: 50px 0;
+	
+	display:flex;
+	flex-direction: column;
+	justify-content: space-beween;
+	
+}
+
+.subtitle-container{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-bottom: 50px;
+}
+
+.hotel-info-container{
+	display:flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+}
 
 
-    --minus-color: #f56c85;
-    --minus-hover-color: #cc370e;
- }
- 
- 
+/*
+========================================================
+01. 호텔 이름/ 소개  
+ */
 
- #main-container {
-    margin: 50px auto;
-    width: 1000px;
-    box-sizing: content-box;
+#thumbnail-img-hashtag-container{
+	position: relative;
+	display:flex;
+	flex-direction: column;
+	padding-left: 30px;
+	
+	flex-basis: 60%;
+	justify-content: center;
+}
 
-    /* only :hotel-insert */
-    text-align: center;
- }
+/* 썸네일이미지  */
+#thumbnail-img{
+	position: relative;
+	width: 400px;
+	height: 400px;
+}
 
 
-  #title-container {
-    box-sizing: content-box;
-    padding-left: 10px;
-    text-align: left;
-    vertical-align: bottom;
-    padding-top: 30px;
-    padding-bottom: 20px;
-    border-bottom: 4px solid #eee;
-  	
-  }
+/* 해시태그   */
+#hash-tags{
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	
+}
 
-  #hotel-icon {
-    width: 40px;
-    height: 40px;
-    vertical-align: bottom;
-    text-align: left;
-  }
-  
-  #title-name {
-    font-size: 30px;
-    font-weight: 700;
-    text-align: left;
-  }
-  
+#hash-tags li{
+	padding: 0 5px;
+}
+
+#hash-tags .fa-hashtag{
+	color: var(--mid-green);
+}
+
+/* 호텔 정보 컨테이너  */
+#hotel-info-wrapper{
+	position: relative;
+	
+	padding-top: 10px;
+	padding-bottom: 10px;
+	
+	padding-right: 30px;
+	flex-basis: 40%;
+	
+}
+
+/* #hotel-detail-info-ul-container{
+	padding: 30px 0;
+} */
+
+#hotel-detail-info-ul{
+	text-align: left;
+}
+
+#hotel-detail-info-ul li{
+	padding: 5px 0;
+}
+
+
+span.info-icon-container{
+	font-size: 30px;
+	color: var(--mid-green);
+	padding-right: 10px;
+}
+
+
+/* 버튼 wrapper */
+#btn-wrapper{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	text-align: center;
+	
+	padding-top: 30px;
+	padding-bottom:10px;
+}
+
+#btn-wrapper > button{
+	padding: 10px 0;
+	margin: 5px 0;
+	
+	position: relative;
+	color: var(--btn-color);
+	font-weight: bold;
+	border-radius: 3px;
+	border-color: transparent;
+	
+	cursor:pointer;
+}
+
+/* 예약하기 버튼  */
+#go-reservation-btn{
+	background-color: var(--mid-green);
+}
+
+/* 예약하기 버튼hover 효과   */
+#go-reservation-btn:hover{
+	background-color: var(--dark-green);
+}
+
+
+/* 수정하기 버튼  */
+#edit-hotel-detail-info-page-btn{
+	background-color: var(--edit-red);
+}
+
+/* 수정하기 버튼 hover효과 */
+#edit-hotel-detail-info-page-btn:hover{
+	background-color: var(--edit-red-hover);
+}
