@@ -3,11 +3,18 @@
 #contentBox{
 	
 	width:1000px;
-	height:1000px;
+	height:10000px;
 	
 	margin-left:190px;
-	border:1px  black;
-	background-color: rgb(207,227,225);;
+	background-color: rgb(207,227,225);
+
+}
+
+#content{
+	width:800px;
+	height:500px;
+	 
+	border: 1px solid black;
 	
 	
 }

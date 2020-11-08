@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="resources/css/review/reviewList.css"/>
+<link rel="stylesheet" type="text/css" href="resources/css/review/reviewList.css">
 <link rel="stylesheet" type="text/css" href="resources/css/review/reviewDetail.css"/>
  <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>  
 <title>Insert title here</title>
@@ -26,11 +26,27 @@
 		<br>
 		<div id="contentBox"><br>
 		
-		<div id="title">제목</div><br>
-		<div id="writer">작성자</div><br>
-		<div id="info">정보</div><br>
-		<div id="hashTag">해쉬태그</div><br>
-		<div id="photo">사진</div><br>
+		<div id="title">
+		
+		<span>[여행지] 경치가 너무 좋은 율동공원</span>
+		
+		</div><br>
+		
+		<div id="writer">
+			<span>글쓴이 :  여행 is best</span>
+		</div><br>
+		<div id="info">
+		<span>2020.09.21. 11:23</span>
+		
+		<span>#여행지 #공원 #분당</span>
+		
+		<br><br><br><br>
+		<hr>
+		
+		</div><br>
+		<div id="photo" >
+			<img src="resources/images/review.jpg" width="800px;" height="500px;" >
+		</div><br>
 		<div id="content">내용</div><br>
 		<div id="infoLike">좋아요</div><br>
 		<div id="reply">댓글</div><br>

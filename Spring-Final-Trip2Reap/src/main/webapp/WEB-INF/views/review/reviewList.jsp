@@ -7,48 +7,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="resources/css/review/reviewList.css"/>
  <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>  
-  <style>
-table{
 
-    width: 800px;
-
-    border-top: 1px solid #444444;
-
-    border-collapse: collapse;
-    
-    margin: 50px;
-
-  }
-
-th, td{
-
-    border-bottom: 1px solid #444444;
-
-    padding: 5px;
-
-  }
-  #searchBar{
-	border-top: 4px solid black;
-	display: flex;
-	
-}
-#board{
-	display:flex;
-	padding-left:120px;
-}
-  .dropdown {
-    margin-top: 5px;
-    margin-bottom: 10px;
-    padding: 3px 2px;
-    width: 312px; 
-}
-
-option {
-    width: 312px !important;
-}
-
-
-  </style>
 		
 
 <title>Insert title here</title>
@@ -69,39 +28,43 @@ option {
 		</div>
 		</div>
 		<!-- text-align뿐만 아니라 대부분 div안에서 작동한다. -->
-		<div id="cate_btn" style="display: inline-block; width: 1000px">
+		<div id="cate_btn" style="display: inline-block; width: 770px">
 			<button class="cate_btn">전체보기</button>
 			<button class="cate_btn">여행지</button>
 			<button class="cate_btn">맛집</button>
 			</div>
-			<div style="display: inline-block;">
-			<button class="bo_btn">사진형</button>
+			<div id="bo_btn" style="display: inline-block;">
+			<button class="bo_btn"  onclick="location.href='reviewPhotoList.bo';">사진형</button>
 			<button class="bo_btn">게시판형</button>
 		</div>	
 		
 	
 	    <div id="board">
 		<table>
-		<tr align="center" bgcolor="#efefef">
-			<th>번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>날짜</th>
-			<th>조회수</th>
-			<th>좋아요</th>
+		<tr class="board_list" align="center" bgcolor="#efefef">
+			<th class="board_list">번호</th>
+			<th class="board_list">제목</th>
+			<th class="board_list">작성자</th>
+			<th class="board_list">날짜</th>
+			<th class="board_list">조회수</th>
+			<th class="board_list">좋아요</th>
 		</tr>
 		
 		<c:forEach var="i" begin="1" end="10" step="1" varStatus="loop">
-		<tr align="center">
-			<td>test</td>
-			<td><a href="reviewDetail.bo">tesddddddddddddddt</a></td>
-			<td>test</td>
-			<td>test</td>
-			<td>test</td>
-			<td>test</td>
+		<tr align="center" class="board_list">
+			<td class="board_list">test</td>
+			<td class="board_list"><a href="reviewDetail.bo">tesddddddddddddddt</a></td>
+			<td class="board_list">test</td>
+			<td class="board_list">test</td>
+			<td class="board_list">test</td>
+			<td class="board_list">test</td>
 		</tr>
 		</c:forEach>
+		</table>
+		</div>
 		
+		
+		<table id="table1">
 		
 		<!-- 페이징 처리 -->
 		<tr align="center" height="20" id="buttonTab">
@@ -168,12 +131,13 @@ option {
 	</table>
 		
 	
- </div>
+
  
 
 
 	
-	</div>
+
+	</section>
 	
 	
 

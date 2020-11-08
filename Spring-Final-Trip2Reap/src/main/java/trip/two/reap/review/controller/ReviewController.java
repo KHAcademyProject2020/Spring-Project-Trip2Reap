@@ -36,6 +36,12 @@ public class ReviewController {
 	   return "reviewInsert";
    }
    
+   @RequestMapping("reviewPhotoList.bo")
+   public String ReviewPhotoList(){
+	   return "reviewPhotoList";
+   }
+   
+   
    
    
    
