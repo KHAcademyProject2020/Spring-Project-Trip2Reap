@@ -103,12 +103,14 @@ a, a:hover, a:active{
 	flex-direction: row;
 	justify-content: space-around;
 	align-items: center;
+	
+	padding:0 50px;
 }
 
 
 /*
 ========================================================
-01. 호텔 이름/ 소개  
+01. 호텔 이름  
  */
 
 #thumbnail-img-hashtag-container{
@@ -185,8 +187,9 @@ span.info-icon-container{
 	flex-direction: column;
 	justify-content: space-around;
 	text-align: center;
+	align-items: center;
 	
-	padding-top: 30px;
+	padding-top: 25px;
 	padding-bottom:10px;
 }
 
@@ -201,6 +204,7 @@ span.info-icon-container{
 	border-color: transparent;
 	
 	cursor:pointer;
+	width: 85%;
 }
 
 /* 예약하기 버튼  */
@@ -223,3 +227,45 @@ span.info-icon-container{
 #edit-hotel-detail-info-page-btn:hover{
 	background-color: var(--edit-red-hover);
 }
+
+
+/*
+========================================================
+02. 호텔 소개   
+ */
+ 
+#hotel-introduction{
+	padding: 0 100px;
+} 
+ 
+ 
+ /*
+========================================================
+03. 호텔 이미지 뷰어   
+ */
+ 
+ 
+ 
+ 
+ /*
+========================================================
+04. 1박이용 가격비교   
+ */
+
+
+/*
+========================================================
+05. 호텔시설정보   
+ */
+
+ 
+ /*
+========================================================
+06. 호텔 위치   
+ */
+ 
+ 
+/*
+========================================================
+07. 호텔 리뷰   
+ */

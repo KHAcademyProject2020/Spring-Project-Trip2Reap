@@ -11,8 +11,6 @@
 	<%--css --%>
 	<link rel="stylesheet" type="text/css" href="resources/css/hotel/hotel_detail.css">
 	
-	<%--fontawesome --%>
-	
 	<%-- swipper api cdn 	--%>
 	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
 	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
@@ -35,7 +33,7 @@
 	</div>
 	
 	
-	<!-- 호텔이름 / 호텔소 -->
+	<!-- 호텔이름 -->
 	<div class="hotel_detail_common_container">
 		
 		<div class="subtitle-container">
@@ -160,11 +158,34 @@
 	</div>
 	
 	
+	<!--호텔소개 -->
+	<div class="hotel_detail_common_container">
+		<div class="subtitle-container">
+			<h1>호텔 소개 </h1>
+		</div>
+		
+		<div class="hotel-info-container">
+			<p id="hotel-introduction">
+			이 금연 호텔에는 6 개의 레스토랑 외에 풀서비스 스파 및 실내 수영장도 있습니다. 
+			공용 장소에서의 무료 WiFi, 무료 지역 셔틀 및 무료 쇼핑센터 셔틀도 제공됩니다. 
+			또한, 피트니스 시설, 바/라운지 및 스파 욕조도 이용하실 수 있습니다.
+			</p>
+		</div>
+	</div>
 	
 	<!--호텔 이미지 뷰 -->
 	<div class="hotel_detail_common_container">
-		<div class="subtitle-container"></div>
-		<div class="hotel-info-container"></div>
+		<div class="subtitle-container">
+			<h1>호텔 이미지 뷰 </h1>
+		</div>
+		<div class="hotel-info-container">
+			<ul id="hotel-detail-view-photos">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
 	</div>
 	
 	<!-- 1박이용 가격비교  -->
@@ -193,10 +214,12 @@
 		<div class="hotel-info-container"></div>	
 	</div>
 	
-	
-	
-	
 </div>
 
 </body>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+</script>
+
 </html>
