@@ -402,8 +402,10 @@ button.hotel-reserve-btn{
   font-size: 2em;
 }
 
+
 #close_btn:hover{
   color: var(--dark-green);
+  cursor: pointer;
 }
 
 .modal{

@@ -30,8 +30,8 @@
 		<!-- (common all pages related with hotel) title-container -->
 		<div id="title-container">
 
-			<img id="hotel-icon" src="resources/images/hotelIcon.png"> <span
-				id="title-name">호텔 예약</span>
+			<img id="hotel-icon" src="resources/images/hotelIcon.png"> 
+			<span id="title-name">호텔 예약</span>
 		</div>
 
 		<div>
