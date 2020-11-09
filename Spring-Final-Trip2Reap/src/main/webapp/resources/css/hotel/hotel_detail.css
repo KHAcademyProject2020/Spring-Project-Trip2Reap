@@ -300,16 +300,15 @@ div.detail_view_under_wrapper{
 	background-color: var(--dark-gray);
 	text-align: center;
 	position: relative;
-	vertical-align: middle;
-
+	display : inline-block;
+	vertical-align: bottom;
 }
 
 #more_photo_num{
-	position: relative;
-	font-size: 2em;
+	font-size: 30px;
 	color: #fff;
 	font-weight: bold;
-	padding: 55px 0;
+	line-height: 150px;
 }
  
  
