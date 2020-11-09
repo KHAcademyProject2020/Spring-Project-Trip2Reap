@@ -13,11 +13,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<section>
-	
+
 		<header>
 		<c:import url="../common/menubar.jsp" />
 		</header>
+		
+		<section>
 		<div id="all_div">
 		<div id="menu_div">
 			<div id="menu_left_div">
