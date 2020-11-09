@@ -18,11 +18,19 @@ width:1000px;
 }
 
 .divcontent {
-width:500px;
+width:400px;
 display:inline-block;
+padding-right:100px;
+
 
 
 }
+
+#table5{
+ background-color: rgb(239, 239, 239);
+}
+
+
 
 </style>
 
@@ -63,15 +71,17 @@ display:inline-block;
 					
 					<c:forEach var="j" begin="1" end="5" step="1" varStatus="loop">
 					<div class="divcontent">
-						<table>
+						<table id="table5">
 							<tr>
 								<td><img src="resources/images/송도.JPG" width="200px" height="200px">
 								</td>
+								
 								<td>제목
 									<hr>
 									<p>태그</p> <span>작성자</span> <span style="float: right">수
 										1 댓 0 요 0</span>
 								</td>
+								
 							</tr>
 						</table>
 

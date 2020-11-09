@@ -50,13 +50,13 @@
 			<th class="board_list">좋아요</th>
 		</tr>
 		
-		<c:forEach var="i" begin="1" end="10" step="1" varStatus="loop">
+		<c:forEach var="b" items="${list}">
 		<tr align="center" class="board_list">
-			<td class="board_list">test</td>
-			<td class="board_list"><a href="reviewDetail.bo">tesddddddddddddddt</a></td>
-			<td class="board_list">test</td>
-			<td class="board_list">test</td>
-			<td class="board_list">test</td>
+			<td class="board_list">${b.boNo}</td>
+			<td class="board_list" onclick="location.href='reviewDetail.bo';">${b.boTitle}[${b.boTag }]</td>
+			<td class="board_list">${b.memberId}</td>
+			<td class="board_list"></td>
+			<td class="board_list">${b.boCount}</td>
 			<td class="board_list">test</td>
 		</tr>
 		</c:forEach>

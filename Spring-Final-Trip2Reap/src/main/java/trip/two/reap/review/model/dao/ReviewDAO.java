@@ -18,30 +18,18 @@ public class ReviewDAO {
 	}
 	
 	public ArrayList<Review> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
 		int offset=(pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("reviewMappaer.selectList", null,rowBounds);
-	}
-	
-	public int insertReview(SqlSessionTemplate sqlSession, Review r) {
-		return sqlSession.insert("reviewMapper.insertReview",r);
-	}
-	
-	public int addReadCount(SqlSessionTemplate sqlSession, int boNo) {
-		return sqlSession.update("reviewMapper.addReadCount",boNo);
+		return (ArrayList)sqlSession.selectList("reviewMapper.selectList", null,rowBounds);
 	}
 	
 	public Review selectReview(SqlSessionTemplate sqlSession, int boNo) {
 		return (Review)sqlSession.selectOne("reviewMapper.selectReview",boNo);
 	}
-	
-	public int updateReview(SqlSessionTemplate sqlSession, Review r) {
-		return sqlSession.update("reviewMapper.updateReview",r);
+
+	public int addReadCount(SqlSessionTemplate sqlSession, int boNo) {
+		 return sqlSession.update("reviewMapper.addReadCount", boNo);
 	}
-	
-	public int deleteReview(SqlSessionTemplate sqlSession, int boNo) {
-		return sqlSession.update("reviewMapper.deleteReview",boNo);
-	}
-	
 }

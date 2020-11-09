@@ -11,13 +11,9 @@ public interface ReviewService {
 	
 	ArrayList<Review> selectList(PageInfo pi);
 	
-	int insertReview(Review r);
+
 	
 	Review selectReview(int boNO);
-	
-	int updateReview(Review r);
-	
-	int deleteReview(int boNo);
 	
 
 }

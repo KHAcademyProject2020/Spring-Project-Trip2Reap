@@ -1,52 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis/org//DTD Mapper 3.0/EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper>
-  <cache-ref namespace="reviewMapper"/>
+<mapper namespace="reviewMapper">
+	
   	<select id="getListCount" resultType="_int">
 		select count(*)
     	from board
   		where BO_DELETE_YN='N'
   	</select>
   	
-  	<select id="selectList" resultMap="boardResultSet">
+  	<select id="selectList" resultMap="reviewResultSet">
   		 select * 
   		 from board 
    		 where BO_DELETE_YN='N'
    		 order by BO_NO desc
   	</select>
-  	
-  	<resultMap type="Board" id="boardResultSet">
+
+  <resultMap type="Review" id="reviewResultSet">
       <id column="BO_NO" property="boNo"/>
       <result column="CA_CODE" property="caCode"/>
       <result column="BO_TITLE" property="boTitle"/>
       <result column="BO_CONTENT" property="boContent"/>
-      <result column="MEMBER_ID" property="boCount"/>
+      <result column="MEMBER_ID" property="memberId"/>
       <result column="BO_COUNT" property="boCount"/>
       <result column="BO_TAG" property="boTag"/>
       <result column="BO_DELETE_YN" property="boDeleteYN"/>
    </resultMap>
    
-   <insert id="insertReview">
-   		 insert into board
-        values(seq_boNo.nextval, #{boTitle}, #{memberId}, #{boContent})
-   </insert>
-   
-   <update id="addReadCount">
-   
-   </update>
-   
-   <select id="selectReview" resultMap="boardResultSet">
-   
+  	
+
+   <select id="selectReview" resultMap="reviewResultSet">
+   	   select *
+       from board
+       where boNo=#{boNo} and b_status='Y'
    </select> 
-   
-   <update id="updateBoard">
-   
-   </update>
-   
-   <update id="deleteBoard">
-   
-   </update>
-   
+
    
    
 </mapper>
