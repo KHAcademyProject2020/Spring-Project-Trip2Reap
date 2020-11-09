@@ -41,13 +41,9 @@
 		</div>
 		
 		<div id="count_div">
-			<div id="count_left_div">
-			<span>조회수 | </span> <span id="count">876</span>
-			</div>
-			<div id="count_right_div">
+<!-- 나중에 추가 예정 -->
 <!-- 			<span>조회수 | </span> <span id="count">876</span> -->
-			<i class="fas fa-share-alt"></i>
-			</div>
+			<i class="fas fa-share-alt"></i> <span id="share_span">공유하기</span>
 		</div>
 		
 		<hr>
@@ -121,7 +117,6 @@
 		</div>
 		
 		<div id="button_div">
-			<button id="button_list" onclick="listView();">목록보기</button>
 			<button id="button_update" onclick="updateView()">수정하기</button>
 			<button id="button_delete" onclick="deleteView()">삭제하기</button>
 		</div>
