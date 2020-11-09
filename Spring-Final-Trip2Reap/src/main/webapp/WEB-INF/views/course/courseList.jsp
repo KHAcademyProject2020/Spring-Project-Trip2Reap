@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="resources/css/course/courseList.css"/>
+<style type="text/css">
+    #menuIcon2 { font-size: 40px; margin-right: 4px; color : rgb(242,203,97); }
+</style>
 </head>
 <body>
 	<section>
@@ -15,7 +18,8 @@
 	<div id="all_div">
 		<div id="menu_div">
 			<div id="menu_left_div">
-				<img src="resources/images/courseIcon.png" id="menu_img"/>
+<!-- 				<img src="resources/images/courseIcon.png" id="menu_img"/> -->
+				<i class="fas fa-map-signs" id="menuIcon2"></i>
 				<span id="menu">여행 코스</span>
 			</div>
 			<div id="menu_right_div">

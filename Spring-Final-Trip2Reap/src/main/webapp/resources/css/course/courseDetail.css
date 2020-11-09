@@ -8,8 +8,7 @@
 
 /* img, 메뉴 이름 */
 #menu_div{
-	padding: 0px 0px 20px 10px;
-    border-bottom: 4px solid #efefef;
+	padding: 0px 0px 100px 10px;
 	display: flex;
 }
 
@@ -78,26 +77,23 @@
 
 /* 조회수, 공유하기 div */
 #count_div{
-	padding-bottom: 10px;
-	display: flex;
-}
-
-#count_left_div{
-/* 	padding-left: 50px; */
-	text-align: left;
-	flex: 1;
-}
-
-#count_right_div{
-/* 	padding-right: 50px; */
+	padding: 0px 5px 10px 0px;
 	text-align: right;
-	flex: 1;
+}
+
+.fa-share-alt{
+	width: 18px;
+	height: 18px;
+}
+
+#share_span{
+	font-size: 12px;
 }
 
 /* 코스 설명 div */
 #course_content{
 	width: 900px;
-	margin: 15px auto;
+	margin: 20px auto;
 }
 
 /* 코스 지도 div => API 사용 예정 */
@@ -178,15 +174,6 @@
 	margin: 50px 0px;
 }
 
-#button_list{
-	width: 67px;
-	height: 30px;
-	border: none;
-	background: #77af82;
-	color: white;
-	border-radius: 5px;
-}
-
 #button_update{
 	width: 67px;
 	height: 30px;
@@ -205,11 +192,11 @@
 }
 
 /* button hover 시 cursor 변경 */
-.fa-share-alt, #button_list, #button_update, #button_delete:hover{
+.fa-share-alt, #button_update, #button_delete:hover{
 	cursor: pointer;
 }
 
 /* input이나 button 클릭 시 outline 제거 */
-#button_list, #button_update, #button_delete:focus{
+#button_update, #button_delete:focus{
 	outline: none;
 }

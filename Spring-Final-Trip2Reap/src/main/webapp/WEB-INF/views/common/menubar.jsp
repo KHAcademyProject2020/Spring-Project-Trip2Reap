@@ -25,7 +25,7 @@
 		<!-- 상단바  -->
 		<div id="rootBar">
 			<c:if test="${ empty sessionScope.loginUser}">
-				<div id="root_1"></div>
+<!-- 				<div id="root_1"></div> -->
 				<div id="root_2">
 					<ul>
 						<!-- 로그아웃 상태 -->

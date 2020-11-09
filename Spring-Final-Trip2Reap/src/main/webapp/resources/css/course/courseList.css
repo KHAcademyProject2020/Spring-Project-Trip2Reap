@@ -142,16 +142,15 @@
 
 /* 목록 전체 div */
 #list_all_div{
-	margin: 20px auto;
-	padding: 10px 30px 35px 30px;
+	margin: 20px auto 0px auto;
+	padding: 10px 30px 1px 30px;
 	width: 840px;
 	background: #efefef;
 }
 
 #list_count_div {
     font-weight: 600;
-/*     margin: 10px 0px 30px 0px; */
-	margin: 10px 0px; /*수진언니*/
+    margin: 10px 0px 30px 0px;
 }
 
 #list_count{
@@ -221,6 +220,7 @@
 
 /* 페이징 */
 #paging_div{
+	margin: 50px 0px;
 	text-align: center;
 }
 
