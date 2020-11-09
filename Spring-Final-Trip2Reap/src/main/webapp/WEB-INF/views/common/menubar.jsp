@@ -25,8 +25,7 @@
 		<!-- 상단바  -->
 		<div id="rootBar">
 			<c:if test="${ empty sessionScope.loginUser}">
-<!-- 				<div id="root_1"></div> -->
-				<div id="root_2">
+				<div id="root_1">
 					<ul>
 						<!-- 로그아웃 상태 -->
 						<li class="topBar" onclick="login();"
@@ -39,8 +38,7 @@
 				</div>
 			</c:if>
 			<c:if test="${ !empty sessionScope.loginUser }">
-				<div id="root_3"></div>
-				<div id="root_4">
+				<div id="root_2">
 					<ul>
 						<!-- 로그인 상태  -->
 						<li class="topBar2_1"><b><c:out
@@ -58,32 +56,27 @@
 
 		<!-- 메뉴(여행지, 여행코스, 여행후기, 호텔) -->
 		<div id="menu_1">
-			<div id="menu_2"></div>
-			<div id="space1"></div>
-			<div id="menu_3"><img src="resources/images/로고2.png" id="mainLogo" onclick="main();"> </div>
-			<div id="space2"></div>
-			<div id="menu_4">
-				<ul>
-					<li class="menu"><a href="tList.tv"> 
-					<i class="fas fa-suitcase-rolling" id="menuIcon1"></i>
-							<label
-							class="menuLabel">여행지</label>
-					</a></li>
-					<li class="menu"><a href="courseList.co"> 
-					<i class="fas fa-map-signs" id="menuIcon2"></i>
-							<label class="menuLabel">여행코스</label>
-					</a></li>
-					<li class="menu"><a href="reviewList.bo"> 
-					<i class="fas fa-camera-retro" id="menuIcon3"></i>
-							<label class="menuLabel">여행후기</label>
-					</a></li>
-					<li class="menu"><a href="hotelList.ho"> 
-					<i class="fas fa-hotel" id="menuIcon4"></i>
-					<label class="menuLabel">호텔</label></a></li>
-				</ul>	
+			<div id="menu_2">
+				<img src="resources/images/로고2.png" id="mainLogo" onclick="main();">
 			</div>
-			<div id="space3"></div>
-			<div id="menu_4"></div>
+			<div id="menu_3">
+				<span id="menu_travel" class="menus">
+					<i class="fas fa-suitcase-rolling" id="menuIcon1"></i>
+					<span class="menu_name">여행지</span>
+				</span>
+				<span id="menu_course" class="menus">
+					<i class="fas fa-map-signs" id="menuIcon2"></i>
+					<span class="menu_name">여행 코스</span>
+				</span>
+				<span id="menu_review" class="menus">
+					<i class="fas fa-camera-retro" id="menuIcon3"></i>
+					<span class="menu_name">여행 후기</span>
+				</span>
+				<span id="menu_hotel" class="menus">
+					<i class="fas fa-hotel" id="menuIcon4"></i>
+					<span class="menu_name">호텔</span>
+				</span>
+			</div>
 		</div>
 	</header>
 
@@ -107,6 +100,22 @@
     function myPage(){
       location.href="<%= request.getContextPath() %>/myPage.me";
     }
+    
+    $('#menu_travel').click(function(){
+    	location.href="<%= request.getContextPath() %>/tList.tv";
+    });
+    
+    $('#menu_course').click(function(){
+    	location.href="<%= request.getContextPath() %>/courseList.co";
+    });
+    
+    $('#menu_review').click(function(){
+    	location.href="<%= request.getContextPath() %>/reviewList.bo";
+    });
+    
+    $('#menu_hotel').click(function(){
+    	location.href="<%= request.getContextPath() %>/hotelList.ho";
+    });
     
     </script>
 

@@ -9,11 +9,8 @@
     
     /* 상단바   */
     #rootBar{ background-color: rgb(207,227,225); margin : 0px auto; height: 35px; text-align: center; }
-/*     #root_1{ display:inline-block; width: 1150px; height: 25px; } */
-/*     #root_2{ display: inline-block; width: 250px; height: 25px; text-align: center; } */
-	#root_2{ width: 1000px; height: 25px; text-align: right; margin: 0px auto; padding-top: 10px; }
-    #root_3{ display:inline-block; width: 1050px; height: 25px; }
-    #root_4{ display: inline-block; width: 400px; height: 25px; text-align: center; }
+	#root_1{ width: 1450px; height: 25px; text-align: right; margin: 0px auto; padding-top: 10px; }
+	#root_2{ width: 1450px; height: 25px; text-align: right; margin: 0px auto; padding-top: 10px; }
 
     /* 로그아웃 상태 */
     .topBar{ display: inline-block; font-size: 13px; vertical-align: top; cursor:pointer; padding-right: 10px;  }
@@ -23,22 +20,18 @@
     
     
     /*  메인로고(전국방방곡곡)  */
-    #mainDiv { width: 1300px; text-align: center; margin:  0 auto;}
     #mainLogo { width: 280px; cursor: pointer; }
       
     
     /*  메뉴(여행지, 여행코스, 여행후기, 호텔)  */
-    #menu_1{ height:100px; border-bottom: 2px solid lightgray; text-align: center; margin: 0 auto; }
-    #menu_2{ height : 20px; }
-    .menu { display: inline-block; width:200px; height: 50px; text-align: center; 
-            border-right: 1px solid lightgray; }
-    .menuLabel { vertical-align : top; line-height: 50px; font-weight : bold; cursor: pointer; }
-    #menuIcon1 { font-size: 40px; margin-right: 4px; color : rgb(228,247,186); }
-    #menuIcon2 { font-size: 40px; margin-right: 4px; color : rgb(242,203,97); }
-    #menuIcon3 { font-size: 40px; margin-right: 4px; color : rgb(218,219,255); }
-    #menuIcon4 { font-size: 40px; margin-right: 4px; color : rgb(255,167,167); }
-    #menu_3{ display : inline-block; width : 100px; margin: 0 auto; vertical-align: top; }
-    #menu_4{ display : inline-block; height : 50px; }
-    #space1{ display: inline-block; width: 70px; }
-    #space2{ display: inline-block; width: 250px; }
-    #space3{ display: inline-block; width: 250px; }
+	#menu_1{ display: flex; width: 1500px; margin: 15px auto;}
+	#menu_2{ flex: 1; text-align: left; padding: 10px;}
+	#menu_3{ flex: 2; text-align: right; padding: 15px;}
+	
+	.menus{ display: inline-block; border-right: 3px solid #efefef; padding: 10px 25px;}
+	.menus:hover{ cursor: pointer; }
+    #menuIcon1{ font-size: 40px; margin-right: 4px; color : rgb(228,247,186); }
+    #menuIcon2{ font-size: 40px; margin-right: 4px; color : rgb(242,203,97); }
+    #menuIcon3{ font-size: 40px; margin-right: 4px; color : rgb(218,219,255); }
+    #menuIcon4{ font-size: 40px; margin-right: 4px; color : rgb(255,167,167); }
+	.menu_name{ font-weight: bold; }
