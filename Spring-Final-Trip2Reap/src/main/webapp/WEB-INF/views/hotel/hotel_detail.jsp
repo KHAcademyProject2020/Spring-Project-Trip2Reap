@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 	<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
 	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+	
 
 	<title>호텔 게시글 상세보기 </title>
 </head>
@@ -77,7 +78,8 @@
 							
 							<span>
 								<!--도로명주소   -->
-								<b>{서울특별시 중구 장충동 동호로 249}</b>	
+								<%-- href:https://map.naver.com/v5/search/{호텔이름}  --%>
+								<b> <a target="_blank" href="https://map.naver.com/v5/search/신라호텔">{서울특별시 중구 장충동 동호로 249}</a> </b>	
 							</span>
 						</li>
 						
@@ -179,39 +181,83 @@
 			<h1>호텔 이미지 뷰 </h1>
 		</div>
 		<div class="hotel-info-container">
-			<ul id="hotel-detail-view-photos">
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-			</ul>
+			<div class="hotel-image-viewer">
+				<ul id="hotel-detail-view-photos">
+					<li id="first_detail_view_container">
+						<div id="first_detail_view_wrapper" style="background-image:url(resources/images/sinra.jpeg)">
+						</div>
+					</li>
+					
+					<li class="detail_view_under_container">
+						<div class="detail_view_under_wrapper" style="background-image:url(resources/images/trump.jpeg)">
+						</div>
+					</li>
+					
+					<li class="detail_view_under_container">
+						<div class="detail_view_under_wrapper" style="background-image:url(resources/images/sample_hotel.jpg)">
+						</div>
+					</li>
+					
+					<li class="detail_view_under_container" id="more_detail_view">
+						<div class="detail_view_under_wrapper">
+							<!--몇장의 사진이 더 있는지 확인해주는   -->
+							<p id="more_photo_num">+134</p> 
+						</div>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 	
 	<!-- 1박이용 가격비교  -->
 	<div class="hotel_detail_common_container">
-		<div class="subtitle-container"></div>
+		<div class="subtitle-container">
+			<h1>1박이용 가격비교 </h1>
+		</div>
 		<div class="hotel-info-container"></div>
 	</div>
 	
 	<!-- 호텔 시설정보  -->
 	<div class="hotel_detail_common_container">
-		<div class="subtitle-container"></div>
-		<div class="hotel-info-container"></div>	
+		<div class="subtitle-container">
+			<h1>호텔 시설정보 </h1>
+		</div>
+		<div class="hotel-info-container">
+			<ul>
+				<li>와이파이 </li>
+				<li>조식 </li>
+				<li>레스토랑 </li>
+				<li>세탁 </li>
+				<li>24시간 리셉션 </li>
+				<li>수하물 보관 </li>
+				<li>수영장 </li>
+				<li>피트니스 </li>
+				<li>스파 </li>
+				<li>사우나 </li>
+				<li>카페 </li>
+				<li>비즈니스 시설 </li>
+				<li>주차 </li>
+				<li>공항셔틀</li>
+				<li>장애인 편의시설 </li>
+				<li>바 & 라운지 </li>
+				<li>주방 </li>
+				<li>발렛파킹 </li>
+				<li>룸서비스 </li>
+				<li>애완동물 동반 </li>
+			</ul>
+		</div>	
 	</div>
 	
-	
-	<!-- 호텔위치  -->
-	<div class="hotel_detail_common_container">
-		<div class="subtitle-container"></div>
-		<div class="hotel-info-container"></div>	
-	</div>
 	
 	
 	<!--호텔리뷰   -->
 	<div class="hotel_detail_common_container">
-		<div class="subtitle-container"></div>
-		<div class="hotel-info-container"></div>	
+		<div class="subtitle-container">
+			<h1>호텔 리뷰</h1>
+		</div>
+		<div class="hotel-info-container">
+			
+		</div>	
 	</div>
 	
 </div>

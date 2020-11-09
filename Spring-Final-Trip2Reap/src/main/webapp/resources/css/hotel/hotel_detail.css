@@ -73,8 +73,7 @@ a, a:hover, a:active{
 	flex-direction: column;
 	
 	justify-content: center;
-	margin-left: 132.5px;
-	margin-right: 132.5px;
+	margin: 50px auto;
 }
 
 /*
@@ -244,7 +243,72 @@ span.info-icon-container{
 03. 호텔 이미지 뷰어   
  */
  
+#hotel-image-viewer{
+	position: relative;
+	
+} 
  
+#hotel-detail-view-photos{
+	position: relative;
+/* 	display: block; */
+	width: 100%;
+}
+
+
+#first_detail_view_wrapper,
+div.detail_view_under_wrapper{
+	position: relative;
+	background-repeat: no-repeat;
+	background-size: cover; /* full of the image */
+	background-clip: content-box;
+	box-sizing:content-box;
+}
+
+/* 가장 첫번째 호텔 디테일사진*/
+#first_detail_view_container{
+	position: relative;
+	display: block;
+	text-align: center;
+	margin-bottom: 5px;
+}
+
+
+#first_detail_view_wrapper{
+	width: 600px;
+	height: 500px;
+	background-position: 50%;
+}
+
+.detail_view_under_container{
+	position: relative;
+	display: inline-block;
+	margin-right: 2px;
+}
+
+.detail_view_under_container:last-child(1){
+	margin-right:0;
+}
+
+div.detail_view_under_wrapper{
+	width: 200px;
+	height: 150px;
+}
+
+#more_detail_view > .detail_view_under_wrapper{
+	background-color: var(--dark-gray);
+	text-align: center;
+	position: relative;
+	vertical-align: middle;
+	padding: 10px;
+}
+
+#more_photo_num{
+	position: relative;
+	font-size: 2em;
+	color: #fff;
+	font-weight: bold;
+	top:50%;
+}
  
  
  /*
