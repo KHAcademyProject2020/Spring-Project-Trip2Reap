@@ -23,7 +23,7 @@
     
     /*  메인로고(전국방방곡곡)  */
     #mainDiv { width: 1300px; text-align: center; margin:  0 auto;}
-    #mainLogo { width: 300px; cursor: pointer; }
+    #mainLogo { width: 280px; cursor: pointer; }
       
     
     /*  메뉴(여행지, 여행코스, 여행후기, 호텔)  */
@@ -39,5 +39,5 @@
     #menu_3{ display : inline-block; width : 100px; margin: 0 auto; vertical-align: top; }
     #menu_4{ display : inline-block; height : 50px; }
     #space1{ display: inline-block; width: 70px; }
-    #space2{ display: inline-block; width: 230px; }
+    #space2{ display: inline-block; width: 250px; }
     #space3{ display: inline-block; width: 250px; }
