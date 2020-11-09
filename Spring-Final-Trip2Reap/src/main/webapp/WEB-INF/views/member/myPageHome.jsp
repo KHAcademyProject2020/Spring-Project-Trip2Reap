@@ -50,7 +50,7 @@
 	         <div id="pwdMessage"><label id="pwdLabel">비밀번호 변경</label></div></div>
 	    <div id="space_5"></div>
 	    
-	    <div id="space1"></div>	    
+	    <div id="up_space1"></div>	    
 	    
 	    <!-- 이름  -->
         <div id="infoDiv4"></div>
