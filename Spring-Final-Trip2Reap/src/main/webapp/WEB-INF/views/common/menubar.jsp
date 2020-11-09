@@ -56,16 +56,10 @@
 			</c:if>
 		</div>
 
-		<!--     메인로고 
-    <div id="mainDiv">
-        <img src="resources/images/메인로고.JPG" id="mainLogo" onclick="main();">        
-    </div> -->
-
 		<!-- 메뉴(여행지, 여행코스, 여행후기, 호텔) -->
 		<div id="menu_1">
 			<div id="menu_2"></div>
 			<div id="space1"></div>
-			<!-- <div id="menu_3"><img src="resources/images/메인로고.JPG" id="mainLogo" onclick="main();"> </div> -->
 			<div id="menu_3"><img src="resources/images/로고2.png" id="mainLogo" onclick="main();"> </div>
 			<div id="space2"></div>
 			<div id="menu_4">
