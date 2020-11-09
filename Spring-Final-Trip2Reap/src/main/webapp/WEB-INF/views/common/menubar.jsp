@@ -56,6 +56,7 @@
 
 		<!-- 메뉴(여행지, 여행코스, 여행후기, 호텔) -->
 		<div id="menu_1">
+		    <div id="menu_4"></div>
 			<div id="menu_2">
 				<img src="resources/images/로고2.png" id="mainLogo" onclick="main();">
 			</div>

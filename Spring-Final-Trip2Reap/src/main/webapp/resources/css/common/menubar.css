@@ -1,7 +1,7 @@
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);    
     
     *{  font-family: 'Nanum Gothic'; margin: 0; padding: 0;}/* 나눔고딕 폰트 설정 */
-    header{ width:100%; margin: 0 auto;}
+    header{ width:100%; margin: 0 auto; }
     ul { margin : 0px; display: inline-block;}
     a{ text-decoration:none;
     	color:black;}
@@ -9,7 +9,7 @@
     
     /* 상단바   */
     #rootBar{ background-color: rgb(207,227,225); margin : 0px auto; height: 35px; text-align: center; }
-	.root{ width: 1500px; height: 25px; text-align: right; margin: 0px auto; padding: 10px 200px 0px 0px; }
+	.root{ height: 25px; text-align: right; margin: 0px auto; padding: 10px 200px 0px 0px; }
 
     /* 로그아웃 상태 */
     .topBar{ display: inline-block; font-size: 13px; vertical-align: top; cursor:pointer; padding-right: 10px;  }
@@ -23,14 +23,15 @@
       
     
     /*  메뉴(여행지, 여행코스, 여행후기, 호텔)  */
-	#menu_1{ display: flex; width: 1500px; margin: 0px auto; text-align: center; }
+	#menu_1{ display: flex; width: 100%; margin: 0px auto; }
 	#menu_2{ flex: 1; padding: 10px;}
 	#menu_3{ flex: 2; padding: 15px;}
+	#menu_4{ width: 90px;}
 	
 	.menus{ display: inline-block; border-right: 3px solid #efefef; padding: 10px 45px;}
 	.menus:hover{ cursor: pointer; }
-    #menuIcon1{ font-size: 40px; margin-right: 4px; color : rgb(228,247,186); }
-    #menuIcon2{ font-size: 40px; margin-right: 4px; color : rgb(242,203,97); }
-    #menuIcon3{ font-size: 40px; margin-right: 4px; color : rgb(218,219,255); }
-    #menuIcon4{ font-size: 40px; margin-right: 4px; color : rgb(255,167,167); }
+    #menuIcon1{ font-size: 30px; margin-right: 4px; color : rgb(228,247,186); vertical-center : super; margin-top:10px; }
+    #menuIcon2{ font-size: 30px; margin-right: 4px; color : rgb(242,203,97); vertical-center : super; margin-top:10px; }
+    #menuIcon3{ font-size: 30px; margin-right: 4px; color : rgb(218,219,255); vertical-center : super; margin-top:10px; }
+    #menuIcon4{ font-size: 30px; margin-right: 4px; color : rgb(255,167,167); vertical-center : super; margin-top:10px; }
 	.menu_name{ font-weight: bold; }
