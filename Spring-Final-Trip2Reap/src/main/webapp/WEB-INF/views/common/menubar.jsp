@@ -69,21 +69,26 @@
 			<div id="space2"></div>
 			<div id="menu_4">
 				<ul>
-					<li class="menu"><a href="tList.tv"> <i
-							class="fas fa-suitcase-rolling" id="menuIcon1"></i><label
+					<li class="menu"><a href="tList.tv"> 
+					<!-- <i class="fas fa-suitcase-rolling" id="menuIcon1"></i> -->
+					<img src="resources/images/travelIcon.png" style="width : 40px;">
+							<label
 							class="menuLabel">여행지</label>
 					</a></li>
-					<li class="menu"><a href="courseList.co"> <i
-							class="fas fa-map-signs" id="menuIcon2"></i><label
-							class="menuLabel">여행코스</label>
+					<li class="menu"><a href="courseList.co"> 
+					<!-- <i class="fas fa-map-signs" id="menuIcon2"></i> -->
+					<img src="resources/images/courseIcon.png" style="width : 40px;">
+							<label class="menuLabel">여행코스</label>
 					</a></li>
-					<li class="menu"><a href="reviewList.bo"> <i
-							class="fas fa-camera-retro" id="menuIcon3"></i><label
-							class="menuLabel">여행후기</label>
+					<li class="menu"><a href="reviewList.bo"> 
+					<!-- <i class="fas fa-camera-retro" id="menuIcon3"></i> -->
+					<img src="resources/images/reviewIcon.png" style="width : 40px;">
+							<label class="menuLabel">여행후기</label>
 					</a></li>
-					<li class="menu"><a href="hotelList.ho"> <i
-							class="fas fa-hotel" id="menuIcon4"></i><label class="menuLabel">호텔</label>
-					</a></li>
+					<li class="menu"><a href="hotelList.ho"> 
+					<!-- <i class="fas fa-hotel" id="menuIcon4"></i> -->
+					<img src="resources/images/hotelIcon.png" style="width : 40px;">
+					<label class="menuLabel">호텔</label></a></li>
 				</ul>
 			</div>
 			<div id="space3"></div>
