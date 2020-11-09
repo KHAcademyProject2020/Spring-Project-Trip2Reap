@@ -24,9 +24,12 @@
     
     /*  메뉴(여행지, 여행코스, 여행후기, 호텔)  */
 	#menu_1{ display: flex; width: 100%; margin: 0px auto; }
-	#menu_2{ flex: 1; padding: 10px;}
+	/* #menu_2{ flex: 1; padding: 10px;}
 	#menu_3{ flex: 2; padding: 15px;}
-	#menu_4{ width: 90px;}
+	#menu_4{ width: 90px;} */
+	#menu_2{ width: 27%; padding: 10px; text-align: left; }
+	#menu_3{ width: 50%; padding: 15px;}
+	#menu_4{ width: 5%;}
 	
 	.menus{ display: inline-block; border-right: 3px solid #efefef; padding: 10px 45px;}
 	.menus:hover{ cursor: pointer; }
