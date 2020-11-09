@@ -323,14 +323,37 @@ div.detail_view_under_wrapper{
 05. 호텔시설정보   
  */
 
+/* #hotel-options-ul > li >span:nth-child(1) > *{
+	font-size: 30px;
+} */
+
+#hotel-options-ul{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	align-items: baseline;
+	
+	padding: 0 50px;
+}
+
+#hotel-options-ul li{
+	padding: 10px;
+	margin: 0 10px;
+}
+
+#hotel-options-ul .hotel-option-icon{
+	/* font-size: 30px; */
+	width: 45px;
+	height: 45px;
+}
+
+
+#hotel-options-ul span{
+	display: block;
+}
  
  /*
 ========================================================
-06. 호텔 위치   
- */
- 
- 
-/*
-========================================================
-07. 호텔 리뷰   
+06.  호텔 리뷰   
  */

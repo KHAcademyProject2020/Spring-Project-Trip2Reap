@@ -382,14 +382,14 @@
 								</tr>
 
 								<tr>
-									<td>스파</td>
+									<td>스파 & 사우나</td>
 									<td><input type="checkbox" name="hotel_option" value="스파" />
 									</td>
 								</tr>
 
 								<tr>
-									<td>사우나</td>
-									<td><input type="checkbox" name="hotel_option" value="사우나" />
+									<td>미용실 </td>
+									<td><input type="checkbox" name="hotel_option" value="미용실" />
 									</td>
 								</tr>
 							</table>
@@ -446,9 +446,9 @@
 								</tr>
 
 								<tr>
-									<td>발렛파킹</td>
+									<td>아이돌봄 서비스 </td>
 									<td><input type="checkbox" name="hotel_option"
-										value="발렛파킹" /></td>
+										value="아이돌봄 서비스" /></td>
 								</tr>
 
 								<tr>

@@ -223,27 +223,136 @@
 			<h1>호텔 시설정보 </h1>
 		</div>
 		<div class="hotel-info-container">
-			<ul>
-				<li>와이파이 </li>
-				<li>조식 </li>
-				<li>레스토랑 </li>
-				<li>세탁 </li>
-				<li>24시간 리셉션 </li>
-				<li>수하물 보관 </li>
-				<li>수영장 </li>
-				<li>피트니스 </li>
-				<li>스파 </li>
-				<li>사우나 </li>
-				<li>카페 </li>
-				<li>비즈니스 시설 </li>
-				<li>주차 </li>
-				<li>공항셔틀</li>
-				<li>장애인 편의시설 </li>
-				<li>바 & 라운지 </li>
-				<li>주방 </li>
-				<li>발렛파킹 </li>
-				<li>룸서비스 </li>
-				<li>애완동물 동반 </li>
+			<ul id="hotel-options-ul">
+				<li>
+					<span>
+						<i class="hotel-option-icon  fas fa-wifi"></i>
+					</span>
+					<span><b>와이파이</b></span>
+				 </li>
+				 
+				<li>
+					<span>
+						<embed class="hotel-option-icon" src="resources/svgs/breakfast.svg" type="text/svg+xml">
+					</span>
+					<span><b>조식</b></span> 
+				</li>
+				
+				<li>
+					<span>
+						<embed class="hotel-option-icon" src="resources/svgs/restaurant.svg" type="text/svg+xml">
+					</span>
+					<span><b>레스토랑</b></span> 
+				</li>
+				
+				<li>
+					<span>
+						<embed class="hotel-option-icon" src="resources/svgs/laundry.svg" type="text/svg+xml">
+					</span>
+					<span><b>세탁 </b></span>
+				</li>
+				
+				<li>
+					<span>
+						<embed class="hotel-option-icon" src="resources/svgs/reception.svg" type="text/svg+xml">
+					</span>
+					<span><b>24시간 리셉션 </b></span>
+				</li>
+				
+				<li>
+					<span>
+						<embed class="hotel-option-icon" src="resources/svgs/luggage.svg" type="text/svg+xml">
+					</span>
+					<span><b>수하물 보관 </b></span>
+				</li>
+				
+				<li>
+					<span><i class="hotel-option-icon fas fa-swimming-pool"></i></span>
+					<span><b>수영장</b></span> 
+				</li>
+				
+				<li>
+					<span><i class="hotel-option-icon  fas fa-dumbbell"></i></span>
+					<span><b>피트니스</b></span> 
+				</li>
+				
+				<li>
+					<span><i class="hotel-option-icon fas fa-hot-tub"></i></span>
+					<span><b>스파 & 사우나 </b></span>
+				</li>
+				
+				<li>
+					<span>
+						<embed class="hotel-option-icon" src="resources/svgs/hairdresser.svg" type="text/svg+xml">
+					</span>
+					<span><b>미용실 </b></span> 
+				</li>
+				
+				<li>
+					<span><i class="hotel-option-icon fas fa-coffee"></i></span>
+					<span><b>카페</b></span> 
+				</li>
+				
+				<li>
+					<span>
+						<i class="hotel-option-icon fas fa-user-tie"></i>
+					</span>
+					<span><b>비즈니스 시설</b></span>	
+				</li>
+				
+				<li>
+					<span>
+						<i class="hotel-option-icon fas fa-parking"></i>
+					</span>
+					<span><b>주차</b></span>
+				</li>
+				
+				<li>
+					<span><i class="hotel-option-icon fas fa-bus-alt"></i></span>
+					<span><b>공항셔틀</b></span>
+				</li>
+				
+				<li>
+					<span>
+						<i class="fas fa-wheelchair hotel-option-icon"></i>
+					</span>
+					<span><b>장애인 편의시설</b></span> 
+				</li>
+				
+				<li>
+					<span>
+						<i class="fas fa-glass-martini-alt hotel-option-icon"></i>
+					</span>
+					<span><b>바 &amp; 라운지</b></span> 
+				</li>
+				
+				<li>
+					<span>
+						<embed class="hotel-option-icon" src="resources/svgs/kitchen.svg" type="text/svg+xml">
+					</span>
+					<span><b>주방</b></span> 
+				</li>
+				
+				<li>
+					<span>
+						<embed class="hotel-option-icon" src="resources/svgs/baby1.svg" type="text/svg+xml">
+					</span>
+					<span><b>아이돌봄 서비스 </b></span> 
+				</li>
+				
+				<li>
+					<span>
+						<embed class="hotel-option-icon" src="resources/svgs/roomservice.svg" type="text/svg+xml">
+					</span>
+					<span><b>룸서비스</b></span> 
+				</li>
+				
+				<li>
+					<span>
+						<i class="hotel-option-icon fas fa-paw"></i>
+					</span>
+					<span><b>애완동물 동반</b></span> 
+				</li>
 			</ul>
 		</div>	
 	</div>
