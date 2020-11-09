@@ -25,7 +25,7 @@
 		<!-- 상단바  -->
 		<div id="rootBar">
 			<c:if test="${ empty sessionScope.loginUser}">
-				<div id="root_1">
+				<div class="root">
 					<ul>
 						<!-- 로그아웃 상태 -->
 						<li class="topBar" onclick="login();"
@@ -38,7 +38,7 @@
 				</div>
 			</c:if>
 			<c:if test="${ !empty sessionScope.loginUser }">
-				<div id="root_2">
+				<div class="root">
 					<ul>
 						<!-- 로그인 상태  -->
 						<li class="topBar2_1"><b><c:out
