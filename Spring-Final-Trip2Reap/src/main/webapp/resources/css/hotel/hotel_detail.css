@@ -12,9 +12,10 @@
 	--btn-color: #fff; 
 	--edit-red: #f56c85; 
 	--edit-red-hover: #bd3951;
+	--viewer-black: #222;
 }
 
-body{
+html, body{
 	margin: 0;
 	padding: 0;
 }
@@ -94,7 +95,7 @@ a, a:hover, a:active{
 .subtitle-container{
 	margin-top: 10px;
 	margin-bottom: 10px;
-	padding-bottom: 50px;
+	padding-bottom: 20px;
 }
 
 .hotel-info-container{
@@ -243,11 +244,16 @@ span.info-icon-container{
 03. 호텔 이미지 뷰어   
  */
  
+ 
+ /*마이리얼트립 모델 활용(사용안함)  */
+/*  
 #hotel-image-viewer{
 	position: relative;
 	width: 700px;
 	
-} 
+}  
+*/
+
  
 #hotel-detail-view-photos{
 	position: relative;
@@ -275,7 +281,7 @@ div.detail_view_under_wrapper{
 
 
 #first_detail_view_wrapper{
-	width: 650px;
+	width: 610px;
 	height: 500px;
 	background-position: 50%;
 }
@@ -284,7 +290,7 @@ div.detail_view_under_wrapper{
 	position: relative;
 		
 	display: inline-block;
-	margin-right: 2px;
+	margin-right: 5px;
 }
 
 .detail_view_under_container:nth-child(4){
@@ -304,12 +310,318 @@ div.detail_view_under_wrapper{
 	vertical-align: bottom;
 }
 
-#more_photo_num{
+.more_photo_num{
 	font-size: 30px;
-	color: #fff;
+	color: #999;
 	font-weight: bold;
 	line-height: 150px;
 }
+
+#more_detail_view:hover,
+.more_photo_num:hover{
+	color: #fff;
+	cursor:pointer;
+}
+
+
+
+ /*=========================
+ 03-2. swiper api를 활용  
+ */
+ 
+ 	/*hotel-info-container 바로 밑에있는 컴포넌트에서 패딩적용할것!
+	시설정보/ 이미지뷰어 공통으로 적용.  */
+.hotel-image-viewer{
+	position: relative;
+	width: 80%;
+	background-color: var(--viewer-black);
+	height: 500px;
+	padding-bottom: 20px;
+}  
+ 
+ 
+ .swiper-container{
+	position: relative;
+	width: 98%;
+	height: 500px;
+	margin-left: auto;
+ 	margin-right: auto;
+ }
+ 
+ .swiper-slide{
+ 	position: relative;
+ 	background-size: cover;
+ 	background-position: center;
+ 	background-repeat: no-repeat;
+ }
+ 
+ .gallery-top{
+	position: relative;
+ 	height: 80%;
+ 	width:100%;
+ 	margin-bottom: 10px;
+ }
+ 
+ .swiper-wrapper{
+ 	position: relative;
+ }
+ 
+ 
+ .gallery-thumbs{
+ 	position: relative;
+ 	height: 20%;
+ 	box-sizing: border-box;
+
+ }
+ 
+ .gallery-thumbs .swiper-slide{
+ 	position: relative;
+	height: 100%;
+ 	opacity: 0.4;
+ }
+ 
+ .gallery-thumbs .swiper-slide-thumb-active{
+ position: relative;
+ 	opacity: 1;
+ }
+ 
+ 
+ 
+ /*
+========================================================
+03-3.  호텔 이미지 뷰어 모달창  (사용안함.)  
+ */
+
+ 
+ #image-viewer-modal-container{
+ 	position: fixed;
+ 	left:0;
+ 	top: 0;
+ 	display: table;
+ 	height: 100%;
+ 	width: 100%;
+ 	z-index: 1;
+ 	
+ 	transform: scale(0);
+ }
+
+#image-viewer-modal-container .modal-background{
+	display: table-cell;
+	background: rgba(0,0,0, .8);
+	text-align: center;
+	vertical-align: middle;
+}
+
+
+#image-viewer-modal-container .modal-background .modal{
+	background: #fff; /* modal content background default */
+	padding: 50px; 
+	display: inline-block;
+	border-radius: 3px;
+	position: relative;
+}
+
+
+/* design the contents of modal */
+ #image-viewer-modal-content-container{
+ 	position: relative;
+ 	display: flex;
+ 	flex-direction: column;
+ 	
+ }
+ 
+ 
+ .modal-close-btn-container,
+ #modal-content-container{
+ 	position: relative;
+ }
+ 
+ /* modal창 닫기   */
+ .modal .modal-close-btn-container{	
+ 	display: flex;
+ 	flex-direction: row;
+ 	justify-content: flex-end;
+ }
+ 
+ 
+ #close_modal_btn{
+ 	font-size: 30px;
+ 	cursor: pointer;
+ }
+ 
+ #close_modal_btn:hover{
+ 	color: var(--mid-green);
+ 	
+ }
+ 
+ 
+ /* modal창 내용 컨테이너  */
+ #modal-content-container{
+ 	margin: 30px 0;
+ }
+ 
+
+ 
+/*
+ * ------------------------------
+ * Revealing Animation (사용안함)
+ * ------------------------------
+ */
+ html, body{
+	min-height: 100%;
+	height: 100%;
+ }
+ 
+ html.modal-active,
+ body.modal-active{
+ 	overflow: hidden;
+ } 
+ 
+ #image-viewer-modal-container{
+ 	position: fixed;
+ 	left:0;
+ 	top:0;
+ 	display: table;
+ 	height: 100%;
+ 	width: 100%;
+ 	z-index: 1;
+ 	transform: scale(0);
+ }
+ 
+ #image-viewer-modal-container .modal-background{
+ 	display: table-cell;
+ 	background: rgba(0,0,0, .8);
+ 	text-align: center;
+ 	vertical-align: middle;
+ }
+ 
+ #image-viewer-modal-container .modal-background .modal{
+ 	background: #fff;
+ 	padding: 50px;
+ 	display: inline-block;
+ 	border-radius: 3px;
+ 	position: relative;
+ }
+ 
+ #image-viewer-modal-container.photo_viewer_modal{
+ 	transform: scale(1);
+ }
+ 
+ #image-viewer-modal-container.photo_viewer_modal .modal-background{
+ 	background: transparent;
+ 	animation: fadeIn .5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+ }
+ 
+ #image-viewer-modal-container.photo_viewer_modal .modal-background .modal{
+ 	opacity: 0;
+ 	animation: scaleUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+ }
+ 
+ .hotel-info-container:nth-child(3).photo_viewer_modal{
+ 	animation: scaleBack 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+ }
+ 
+ /* disappearing modal  */
+ #image-viewer-modal-container.photo_viewer_modal.out{
+ 	animation: quickScaleDown 0s .5s linear forwards;
+ }
+ 
+ #image-viewer-modal-container.photo_viewer_modal.out .modal-background{
+ 	animation: fadeOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+ }
+ 
+ #image-viewer-modal-container.photo_viewer_modal.out .modal-background .modal{
+ 	animation: scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+ }
+ 
+ .hotel-info-container:nth-child(3).photo_viewer_modal.out{
+ 	animation: scaleForward 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+ }
+
+
+
+/* Dimmed showing */
+@keyframes fadeIn {
+	0% {
+		background: transparent;
+	}
+	100% {
+		background: rgba(0, 0, 0, .7);
+	}
+}
+/* Show modal content from bottom to top */
+@keyframes scaleUp {
+	0% {
+		/* 모달 콘텐츠를 하단에 위치시킴 */
+		transform: scale(.8) translateY(1000px);
+		opacity: 0;
+	}
+	100% {
+		/* 모달 콘텐츠를 본래 위치로 돌려놓음 */
+		transform: scale(1) translateY(0);
+		opacity: 1;
+	}
+}
+/* Shrink content */
+@keyframes scaleBack {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(.8);
+	}
+}
+/* Hide modal container*/
+@keyframes quickScaleDown {
+	0% {
+		transform: scale(1);
+	}
+	99.9% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(0);
+	}
+}
+/* Dimmed hiding */
+@keyframes fadeOut {
+	0% {
+		background: rgba(0, 0, 0, .7);
+	}
+	100% {
+		background: transparent;
+	}
+}
+/* modal content from top to bottom */
+@keyframes scaleDown {
+	0% {
+		transform: scale(1) translateY(0);
+		opacity: 1;
+	}
+	100% {
+		transform: scale(.8) translateY(1000px);
+		opacity: 0;
+	}
+}
+
+@keyframes scaleBack {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(.85);
+	}
+}
+@keyframes scaleForward {
+	0% {
+		transform: scale(0.85);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+ 
  
  
  /*
@@ -352,8 +664,18 @@ div.detail_view_under_wrapper{
 #hotel-options-ul span{
 	display: block;
 }
+
+
+
  
  /*
 ========================================================
 06.  호텔 리뷰   
  */
+ 
+ 
+ 
+ 
+ 
+  
+ 

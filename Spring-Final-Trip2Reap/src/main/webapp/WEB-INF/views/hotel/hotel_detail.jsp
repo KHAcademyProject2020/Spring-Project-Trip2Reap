@@ -7,6 +7,8 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<%-- jquery cdn --%>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	
 	<%--css --%>
 	<link rel="stylesheet" type="text/css" href="resources/css/hotel/hotel_detail.css">
@@ -21,9 +23,9 @@
 	<title>호텔 게시글 상세보기 </title>
 </head>
 
+
 <body>
 
-	
 <c:import url="../common/menubar.jsp" />
 
 
@@ -43,7 +45,7 @@
 			<h1 id="hotel-name">신라 호텔 </h1>	
 		</div>
 		
-		
+		<%--(1) hotel-info-container --%>
 		<div class="hotel-info-container">
 		
 			<!--호텔썸네일 이미지/ 해시태그 기록   -->
@@ -166,6 +168,7 @@
 			<h1>호텔 소개 </h1>
 		</div>
 		
+		<%--(2) --%>
 		<div class="hotel-info-container">
 			<p id="hotel-introduction">
 			이 금연 호텔에는 6 개의 레스토랑 외에 풀서비스 스파 및 실내 수영장도 있습니다. 
@@ -180,7 +183,10 @@
 		<div class="subtitle-container">
 			<h1>호텔 이미지 뷰 </h1>
 		</div>
+		<%--(3) --%>
 		<div class="hotel-info-container">
+	
+			<%-- 
 			<div class="hotel-image-viewer">
 				<ul id="hotel-detail-view-photos">
 					<li id="first_detail_view_container">
@@ -200,13 +206,51 @@
 					
 					<li class="detail_view_under_container" id="more_detail_view">
 						<div class="detail_view_under_wrapper">
-							<!--몇장의 사진이 더 있는지 확인해주는   -->
-							<p id="more_photo_num">+134</p> 
+							<!--몇장의 사진이 더 있는지 확인해준다. -->
+							<p id="photo_viewer_modal" class="more_photo_num">+134</p>
 						</div>
 					</li>
 				</ul>
 			</div>
-		</div>
+			 --%>
+			
+			
+			<div class="hotel-image-viewer">
+				<div class="swiper-container gallery-top">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+					</div>
+					
+					<div class="swiper-button-next swiper-button-white"></div>
+					<div class="swiper-button-prev swiper-button-white"></div>
+				</div> 
+						
+				<div class="swiper-container gallery-thumbs">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+					</div>
+				</div>
+			</div>
+			<%--hotel-image-viewer --%>
+		</div> <%-- hotel-info-container --%>
 	</div>
 	
 	<!-- 1박이용 가격비교  -->
@@ -214,6 +258,7 @@
 		<div class="subtitle-container">
 			<h1>1박이용 가격비교 </h1>
 		</div>
+		<%--(4) --%>
 		<div class="hotel-info-container"></div>
 	</div>
 	
@@ -222,6 +267,8 @@
 		<div class="subtitle-container">
 			<h1>호텔 시설정보 </h1>
 		</div>
+		
+		<%--(5) --%>
 		<div class="hotel-info-container">
 			<ul id="hotel-options-ul">
 				<li>
@@ -278,7 +325,7 @@
 				
 				<li>
 					<span><i class="hotel-option-icon fas fa-hot-tub"></i></span>
-					<span><b>스파 & 사우나 </b></span>
+					<span><b>스파 &amp; 사우나 </b></span>
 				</li>
 				
 				<li>
@@ -364,17 +411,189 @@
 		<div class="subtitle-container">
 			<h1>호텔 리뷰</h1>
 		</div>
+		
+		<%--(6) --%>
 		<div class="hotel-info-container">
 			
 		</div>	
 	</div>
 	
-</div>
 
+	<%-- 
+		이미지 더보기 버튼(id="photo_viewer_modal)을 누를때 
+		발생하는 모달.
+	 --%>
+	 
+	 <%--
+	<div id="image-viewer-modal-container">
+		<div class="modal-background">
+			<div class="modal">
+				<div id="image-viewer-modal-content-container">
+					<div class="modal-close-btn-container">
+						<i id="close_modal_btn" class="fas fa-times"></i>
+					</div>
+					
+					<div id="modal-content-container">
+						<div class="swiper-container gallery-top">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+					            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+					            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+					            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+					            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+					            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+					            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+					            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+					            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+					            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+							</div>
+							
+							<div class="swiper-button-next swiper-button-white"></div>
+							<div class="swiper-button-prev swiper-button-white"></div>
+						</div> 
+						
+						<div class="swiper-container gallery-thumbs">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+					            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+					            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+					            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+					            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+					            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+					            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+					            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+					            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+					            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+							</div>
+						</div>
+					</div> 
+				</div>
+			</div>
+		</div>
+	</div>
+	 --%>
+	
+</div>
 </body>
+
+	
+<%--the script for swiper --%>
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script>
+	var galleryThumbs= new Swiper('.gallery-thumbs',{
+		spaceBetween: 10, // swiper-wrapper안에 있는 swiper-slide의 개수를 의미합니다.
+		slidesPerView: 4,  // 슬라이드에서 보여줄수 있는 섬네일개수
+		loop: false,
+		freeMode: true,
+		loopedSlides: 5,
+		watchSlidesVisibility: true,
+		watchSlidesProgress: true,
+	});
+	
+	var galleryTop= new Swiper('.gallery-top',{
+		spaceBetween: 10,
+		loop: false,
+		loopedSlides: 5,
+		navigation:{
+			nextEl:'.swiper-button-next',
+			prevEl:'.swiper-button-prev',
+		},
+		
+		keyboard:{
+			enabled: true,
+		},
+		
+		thumbs:{
+			swiper: galleryThumbs,
+		}
+	});
 </script>
+
+
+<%-- The script for modal... --%>
+<%--
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+	
+	$(function(){
+		var $button=$('#photo_viewer_modal');
+		var $modalContainer= $('#image-viewer-modal-container');
+		var $body=$('body');
+		var $content=$('.hotel-info-container:nth-child(3)');
+		var $btnId;
+		var $closeBtn=$('#close_modal_btn');
+
+		
+		// 버튼을 클릭하면 modal이 오픈!
+		$button.on('click', function(){			
+			$btnId= $(this).attr('id');
+			
+			// modalContainer에적용된 클래스들을 지우고
+			// $btnId에 해당하는 클래스를 추가...
+			$modalContainer
+				.removeAttr('class')
+				.addClass($btnId);
+			
+			$content
+				.removeAttr('class')
+				.addClass('content');
+			
+			//body를 modal-active 상태로 한다.
+			$body.addClass('modal-active');
+
+			$content.addClass($btnId);
+			
+		});
+		
+		
+		$button.on('click',function(){
+			var galleryThumbs= new Swiper('.gallery-thumbs',{
+				spaceBetween: 10, // swiper-wrapper안에 있는 swiper-slide의 개수를 의미합니다.
+				slidePerView: 3,  // 슬라이드에서 보여줄수 있는 섬네일개수
+				loop: true,
+				freeMode: true,
+				loopedSlides: 5,
+				watchSlidesVisibility: true,
+				watchSlidesProgress: true,
+			});
+			
+			var galleryTop= new Swiper('.gallery-top',{
+				spaceBetween: 10,
+				loop: true,
+				loopedSlides: 5,
+				navigation:{
+					nextEl:'.swiper-button-next',
+					prevEl:'.swiper-button-prev',
+				},
+				
+				keyboard:{
+					enabled: true,
+				},
+				
+				thumbs:{
+					swiper: galleryThumbs,
+				}
+			});
+			
+		});
+		
+		
+		//닫기 버튼을 누르면 modal을 닫는다.
+		$closeBtn.on('click', function(){
+			$modalContainer.addClass('out');
+			$body.removeClass('modal-active');
+			if( $modalContainer.hasClass($btnId) ){
+				$content.addClass('out');
+			}
+			
+		});
+		
+	});	
+</script>
+  --%>
+
+
+
 
 </html>
