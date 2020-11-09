@@ -14,7 +14,7 @@
 </head>
 <body>
 	<section>
-	<div id="board_list">
+	
 		<header>
 		<c:import url="../common/menubar.jsp" />
 		</header>
@@ -136,7 +136,7 @@
 
 
 	
-
+		
 	</section>
 	
 	
