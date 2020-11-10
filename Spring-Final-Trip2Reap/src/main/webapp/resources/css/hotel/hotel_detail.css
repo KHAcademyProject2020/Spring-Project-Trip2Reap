@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* common for all hotel pages */
 :root { 
 	--dark-green: #497f55; 
@@ -60,6 +61,12 @@ ul{
 a, a:hover, a:active{
 	text-decoration: none;
 }
+
+button:focus, 
+input[type="button"]:focus{
+	outline: none;
+}
+
 
 /*  
 ========================================================
@@ -257,8 +264,8 @@ span.info-icon-container{
  
 #hotel-detail-view-photos{
 	position: relative;
-/* 	display: block; */
-font-size: 0;
+	/* 	display: block; */
+	font-size: 0;
 }
 
 
@@ -337,6 +344,7 @@ div.detail_view_under_wrapper{
 	background-color: var(--viewer-black);
 	height: 500px;
 	padding-bottom: 20px;
+	
 }  
  
  
@@ -629,6 +637,168 @@ div.detail_view_under_wrapper{
 04. 1박이용 가격비교   
  */
 
+/*collapse buttons */
+#hotel-accordion-container{
+	position: relative;
+	width: 100%;
+	font-size: 15px;
+	padding: 0 100px;
+}
+
+.collapse-list {
+	position: relative;
+	width: 100%;
+    margin-bottom: 0;
+    padding-left: 0;
+    
+    margin: 0 50px;
+    
+    
+    list-style: none;
+    border-left: 1px solid var(--blue-gray);
+    border-right:1px solid var(--blue-gray);
+    border-bottom: 1px solid var(--blue-gray);
+}
+
+.collapse-open {
+    display: none;
+}
+
+.collapse-painel {
+    visibility: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height .1s,
+    visibility .3s,
+    opacity .3s;
+}
+
+.collapse-open:checked ~ .collapse-painel {
+    max-height: 100%;
+    opacity: 100;
+    visibility: visible
+}
+
+
+.collapse-list li {
+    margin-bottom: 0;
+}
+
+.collapse-list .collapse-btn {
+    border-top: 1px solid var(--blue-gray);
+    cursor: pointer;
+    display: block;
+    padding: 15px 10px;
+    margin-bottom: 0;
+    
+    color: var(--dark-gray);
+    font-weight: bold;
+    transition: background-color .2s ease;
+}
+
+.collapse .collapse-btn:nth-child(1){
+	border-color: transparent;
+}
+
+.collapse-list .collapse-btn:hover {
+    background: var(--bright-green);
+    color: #000;
+    font-weight: 900;
+}
+
+.collapse-btn{
+	font-size: 1.2em;
+}
+
+/* 
+.collapse-open ~ .collapse-btn:before {
+    content: "↓";
+    float: right;
+}
+
+.collapse-open:checked ~ .collapse-btn:before {
+    content: "↑";
+}
+ */
+
+
+/* .collapse-list .collapse-inner {
+    padding-bottom: 1px;
+} */
+
+ 
+.collapse-open:checked ~ .collapse-btn{
+	background-color: var(--bright-green);
+	opacity: 1;
+} 
+ 
+
+/*호텔 방 타입 1개 정보 ul  */
+.one-room-type-prices-ul{
+	position: relative;
+	width: 100%;
+}
+
+
+/*one-room-price-info-container  */
+.one-room-price-info-container{
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+
+	padding: 30px;
+	border-bottom: var(--blue-gray) 1px solid;
+}
+
+.one-room-price-info-container:last-child(1){
+	border-color: transparent;
+}
+
+
+.room-name-price-wrapper,
+.room-reservation-btn-container,
+.room-name-wrapper,
+.price-wrapper{
+	position: relative;
+}
+
+.room-name-price-wrapper{
+	flex-basis: 80%;
+	text-align: left;
+	
+	display: flex;
+	flex-direction: column;
+}
+
+.room-reservation-btn-container{
+	flex-basis: 20%;
+	text-align: center;
+	justify-content: space-around;
+}
+
+
+.price-wrapper{
+	padding-top: 20px;
+}
+.price-wrapper span{
+	font-size: 1.5em;
+}
+
+
+/* 예약하기 버튼  */
+button.room-reservation-btn{
+	border: var(--bright-green) 1.5px solid;
+	padding: 20px 10px;
+	border-radius: 3px;
+	cursor: pointer;
+	background-color: transparent;
+}
+
+button.room-reservation-btn:hover{
+	font-weight: 900;
+}
 
 /*
 ========================================================

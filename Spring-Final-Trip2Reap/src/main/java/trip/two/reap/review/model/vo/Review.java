@@ -1,5 +1,6 @@
 package trip.two.reap.review.model.vo;
 
+import java.sql.Date;
 
 public class Review {
 	
@@ -11,12 +12,14 @@ public class Review {
 	private int boCount;
 	private String boTag;
 	private String boDeleteYN;
+	private Date regDate;
+
 	
 	public Review() {}
-	
+
 
 	public Review(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount, String boTag,
-			String boDeleteYN) {
+			String boDeleteYN, Date regDate) {
 		super();
 		this.boNo = boNo;
 		this.caCode = caCode;
@@ -26,7 +29,11 @@ public class Review {
 		this.boCount = boCount;
 		this.boTag = boTag;
 		this.boDeleteYN = boDeleteYN;
+		this.regDate = regDate;
 	}
+
+
+
 
 
 
@@ -94,13 +101,26 @@ public class Review {
 		this.boDeleteYN = boDeleteYN;
 	}
 	
+	
+	public Date getRegDate() {
+		return regDate;
+	}
+
+
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+
 
 	@Override
 	public String toString() {
 		return "Review [boNo=" + boNo + ", caCode=" + caCode + ", boTitle=" + boTitle + ", boContent=" + boContent
 				+ ", memberId=" + memberId + ", boCount=" + boCount + ", boTag=" + boTag + ", boDeleteYN=" + boDeleteYN
-				+ "]";
+				+ ", regDate=" + regDate + "]";
 	}
+
+
+	
 
 	
 	

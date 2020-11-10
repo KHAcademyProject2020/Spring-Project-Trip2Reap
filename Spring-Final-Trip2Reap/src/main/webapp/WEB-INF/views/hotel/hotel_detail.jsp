@@ -152,7 +152,7 @@
 				
 				<div id="btn-wrapper">
 					<!--버튼  -->
-					<button id="go-reservation-btn">예약하기</button>
+					<button id="go-reservation-btn">최저가 예약하기</button>
 					
 					<!--only administrator (관리자)  -->
 					<button id="edit-hotel-detail-info-page-btn">수정하기</button>
@@ -185,71 +185,68 @@
 		</div>
 		<%--(3) --%>
 		<div class="hotel-info-container">
-	
-			<%-- 
-			<div class="hotel-image-viewer">
-				<ul id="hotel-detail-view-photos">
-					<li id="first_detail_view_container">
-						<div id="first_detail_view_wrapper" style="background-image:url(resources/images/sinra.jpeg)">
-						</div>
-					</li>
+		<div class="hotel-image-viewer">
+			<div class="swiper-container gallery-top">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+		            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+		            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+		            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+		            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+		            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+		            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+		            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+		            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+		            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+				</div>
+				
+				<div class="swiper-button-next swiper-button-white"></div>
+				<div class="swiper-button-prev swiper-button-white"></div>
+			</div> 
 					
-					<li class="detail_view_under_container">
-						<div class="detail_view_under_wrapper" style="background-image:url(resources/images/trump.jpeg)">
-						</div>
-					</li>
-					
-					<li class="detail_view_under_container">
-						<div class="detail_view_under_wrapper" style="background-image:url(resources/images/sample_hotel.jpg)">
-						</div>
-					</li>
-					
-					<li class="detail_view_under_container" id="more_detail_view">
-						<div class="detail_view_under_wrapper">
-							<!--몇장의 사진이 더 있는지 확인해준다. -->
-							<p id="photo_viewer_modal" class="more_photo_num">+134</p>
-						</div>
-					</li>
-				</ul>
-			</div>
-			 --%>
-			
-			
-			<div class="hotel-image-viewer">
-				<div class="swiper-container gallery-top">
-					<div class="swiper-wrapper">
-						<div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
-					</div>
-					
-					<div class="swiper-button-next swiper-button-white"></div>
-					<div class="swiper-button-prev swiper-button-white"></div>
-				</div> 
-						
-				<div class="swiper-container gallery-thumbs">
-					<div class="swiper-wrapper">
-						<div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
-					</div>
+			<div class="swiper-container gallery-thumbs">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+		            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+		            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+		            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+		            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+		            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+		            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+		            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+		            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+		            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
 				</div>
 			</div>
-			<%--hotel-image-viewer --%>
+		</div> <%--hotel-image-viewer --%>
+	
+		<%-- 
+		<div class="hotel-image-viewer">
+			<ul id="hotel-detail-view-photos">
+				<li id="first_detail_view_container">
+					<div id="first_detail_view_wrapper" style="background-image:url(resources/images/sinra.jpeg)">
+					</div>
+				</li>
+				
+				<li class="detail_view_under_container">
+					<div class="detail_view_under_wrapper" style="background-image:url(resources/images/trump.jpeg)">
+					</div>
+				</li>
+				
+				<li class="detail_view_under_container">
+					<div class="detail_view_under_wrapper" style="background-image:url(resources/images/sample_hotel.jpg)">
+					</div>
+				</li>
+				
+				<li class="detail_view_under_container" id="more_detail_view">
+					<div class="detail_view_under_wrapper">
+						<!--몇장의 사진이 더 있는지 확인해준다. -->
+						<p id="photo_viewer_modal" class="more_photo_num">+134</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		 --%>
 		</div> <%-- hotel-info-container --%>
 	</div>
 	
@@ -259,7 +256,381 @@
 			<h1>1박이용 가격비교 </h1>
 		</div>
 		<%--(4) --%>
-		<div class="hotel-info-container"></div>
+		<div class="hotel-info-container">
+		
+		<ul class="collapse-list">
+			<%--one accordion(1) --%>
+	        <li>
+	            <input class="collapse-open" type="checkbox" id="collapse-1">
+	            <label class="collapse-btn" for="collapse-1">스탠다드룸 </label>
+	            <div class="collapse-painel">
+	                <div class="collapse-inner">
+	                    <ul class="one-room-type-prices-ul">
+	                        <li>
+		                        <div class="one-room-price-info-container">
+		                        	<%--방 이름과 가격  --%>
+		                        	<div class="room-name-price-wrapper">
+		                        		<div class="room-name-wrapper">
+		                        			<h4>스탠다드 트윈룸-산전망</h4>
+		                        		</div>
+		                        		
+		                        		 <div class="price-wrapper">
+		                        		 	<span>404,623 </span>원 
+		                        		 </div>
+		                        	</div>
+		                        	
+		                        	<%--예약하기 버튼 --%>
+		                        	<div class="room-reservation-btn-container">
+		                        		<button class="room-reservation-btn">예약 하기 </button>
+		                        	</div>
+		                        </div>
+	                         </li>
+	                         
+	                         
+	                        <li> 
+	                        	<div class="one-room-price-info-container">
+		                        	<%--방 이름과 가격  --%>
+		                        	<div class="room-name-price-wrapper">
+		                        		<div class="room-name-wrapper">
+		                        			<h4>스탠다드 더블룸-산전망</h4>
+		                        		</div>
+		                        		
+		                        		 <div class="price-wrapper">
+		                        		 	<span>404,624 </span>원 
+		                        		 </div>
+		                        	</div>
+		                        	
+		                        	<%--예약하기 버튼 --%>
+		                        	<div class="room-reservation-btn-container">
+		                        		<button class="room-reservation-btn">예약 하기 </button>
+		                        	</div>
+		                        </div>
+		                    </li>
+		                    
+	                        <li>
+	                        	<div class="one-room-price-info-container">
+		                        	<%--방 이름과 가격  --%>
+		                        	<div class="room-name-price-wrapper">
+		                        		<div class="room-name-wrapper">
+		                        			<h4>스탠다드 트윈룸-정원전망</h4>
+		                        		</div>
+		                        		
+		                        		 <div class="price-wrapper">
+		                        		 	<span>439,823</span>원 
+		                        		 </div>
+		                        	</div>
+		                        	
+		                        	<%--예약하기 버튼 --%>
+		                        	<div class="room-reservation-btn-container">
+		                        		<button class="room-reservation-btn">예약 하기 </button>
+		                        	</div>
+		                        </div>
+	                        </li>
+	                        
+	                        <li> 
+	                        	<div class="one-room-price-info-container">
+		                        	<%--방 이름과 가격  --%>
+		                        	<div class="room-name-price-wrapper">
+		                        		<div class="room-name-wrapper">
+		                        			<h4>스탠다드 더블룸-정원전망 </h4>
+		                        		</div>
+		                        		
+		                        		 <div class="price-wrapper">
+		                        		 	<span>499,823 </span>원 
+		                        		 </div>
+		                        	</div>
+		                        	
+		                        	<%--예약하기 버튼 --%>
+		                        	<div class="room-reservation-btn-container">
+		                        		<button class="room-reservation-btn">예약 하기 </button>
+		                        	</div>
+		                        </div>
+	                        </li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </li>  <%--one-accordion(1) -end --%>
+	        
+	        <%--one accordion(2) --%>
+	        <li>
+	            <input class="collapse-open" type="checkbox" id="collapse-2">
+	            <label class="collapse-btn" for="collapse-2">디럭스룸 </label>
+	            <div class="collapse-painel">
+	                <div class="collapse-inner">
+	                	<ul class="one-room-type-prices-ul">
+	                        <li>
+		                        <div class="one-room-price-info-container">
+		                        	<%--방 이름과 가격  --%>
+		                        	<div class="room-name-price-wrapper">
+		                        		<div class="room-name-wrapper">
+		                        			<h4>스탠다드 트윈룸-산전망</h4>
+		                        		</div>
+		                        		
+		                        		 <div class="price-wrapper">
+		                        		 	<span>404,623 </span>원 
+		                        		 </div>
+		                        	</div>
+		                        	
+		                        	<%--예약하기 버튼 --%>
+		                        	<div class="room-reservation-btn-container">
+		                        		<button class="room-reservation-btn">예약 하기 </button>
+		                        	</div>
+		                        </div>
+	                         </li>
+	                         
+	                         
+	                        <li> 
+	                        	<div class="one-room-price-info-container">
+		                        	<%--방 이름과 가격  --%>
+		                        	<div class="room-name-price-wrapper">
+		                        		<div class="room-name-wrapper">
+		                        			<h4>스탠다드 더블룸-산전망</h4>
+		                        		</div>
+		                        		
+		                        		 <div class="price-wrapper">
+		                        		 	<span>404,624 </span>원 
+		                        		 </div>
+		                        	</div>
+		                        	
+		                        	<%--예약하기 버튼 --%>
+		                        	<div class="room-reservation-btn-container">
+		                        		<button class="room-reservation-btn">예약 하기 </button>
+		                        	</div>
+		                        </div>
+		                    </li>
+		                    
+	                        <li>
+	                        	<div class="one-room-price-info-container">
+		                        	<%--방 이름과 가격  --%>
+		                        	<div class="room-name-price-wrapper">
+		                        		<div class="room-name-wrapper">
+		                        			<h4>스탠다드 트윈룸-정원전망</h4>
+		                        		</div>
+		                        		
+		                        		 <div class="price-wrapper">
+		                        		 	<span>439,823</span>원 
+		                        		 </div>
+		                        	</div>
+		                        	
+		                        	<%--예약하기 버튼 --%>
+		                        	<div class="room-reservation-btn-container">
+		                        		<button class="room-reservation-btn">예약 하기 </button>
+		                        	</div>
+		                        </div>
+	                        </li>
+	                        
+	                        <li> 
+	                        	<div class="one-room-price-info-container">
+		                        	<%--방 이름과 가격  --%>
+		                        	<div class="room-name-price-wrapper">
+		                        		<div class="room-name-wrapper">
+		                        			<h4>스탠다드 더블룸-정원전망 </h4>
+		                        		</div>
+		                        		
+		                        		 <div class="price-wrapper">
+		                        		 	<span>499,823 </span>원 
+		                        		 </div>
+		                        	</div>
+		                        	
+		                        	<%--예약하기 버튼 --%>
+		                        	<div class="room-reservation-btn-container">
+		                        		<button class="room-reservation-btn">예약 하기 </button>
+		                        	</div>
+		                        </div>
+	                        </li>
+	                    </ul>
+	                    
+	                </div>
+	            </div>
+	        </li>  <%--one-accordion(2) -end --%>
+	        
+	        <%--one accordion(3) --%>
+	        <li>
+	            <input class="collapse-open" type="checkbox" id="collapse-3">
+	            <label class="collapse-btn" for="collapse-3">프리미어룸 </label>
+	            <div class="collapse-painel">
+	                <div class="collapse-inner">
+	                    <ul class="one-room-type-prices-ul">
+	                        <li>
+		                        <div class="one-room-price-info-container">
+		                        	<%--방 이름과 가격  --%>
+		                        	<div class="room-name-price-wrapper">
+		                        		<div class="room-name-wrapper">
+		                        			<h4>스탠다드 트윈룸-산전망</h4>
+		                        		</div>
+		                        		
+		                        		 <div class="price-wrapper">
+		                        		 	<span>404,623 </span>원 
+		                        		 </div>
+		                        	</div>
+		                        	
+		                        	<%--예약하기 버튼 --%>
+		                        	<div class="room-reservation-btn-container">
+		                        		<button class="room-reservation-btn">예약 하기 </button>
+		                        	</div>
+		                        </div>
+	                         </li>
+	                         
+	                         
+	                        <li> 
+	                        	<div class="one-room-price-info-container">
+		                        	<%--방 이름과 가격  --%>
+		                        	<div class="room-name-price-wrapper">
+		                        		<div class="room-name-wrapper">
+		                        			<h4>스탠다드 더블룸-산전망</h4>
+		                        		</div>
+		                        		
+		                        		 <div class="price-wrapper">
+		                        		 	<span>404,624 </span>원 
+		                        		 </div>
+		                        	</div>
+		                        	
+		                        	<%--예약하기 버튼 --%>
+		                        	<div class="room-reservation-btn-container">
+		                        		<button class="room-reservation-btn">예약 하기 </button>
+		                        	</div>
+		                        </div>
+		                    </li>
+		                    
+	                        <li>
+	                        	<div class="one-room-price-info-container">
+		                        	<%--방 이름과 가격  --%>
+		                        	<div class="room-name-price-wrapper">
+		                        		<div class="room-name-wrapper">
+		                        			<h4>스탠다드 트윈룸-정원전망</h4>
+		                        		</div>
+		                        		
+		                        		 <div class="price-wrapper">
+		                        		 	<span>439,823</span>원 
+		                        		 </div>
+		                        	</div>
+		                        	
+		                        	<%--예약하기 버튼 --%>
+		                        	<div class="room-reservation-btn-container">
+		                        		<button class="room-reservation-btn">예약 하기 </button>
+		                        	</div>
+		                        </div>
+	                        </li>
+	                        
+	                        <li> 
+	                        	<div class="one-room-price-info-container">
+		                        	<%--방 이름과 가격  --%>
+		                        	<div class="room-name-price-wrapper">
+		                        		<div class="room-name-wrapper">
+		                        			<h4>스탠다드 더블룸-정원전망 </h4>
+		                        		</div>
+		                        		
+		                        		 <div class="price-wrapper">
+		                        		 	<span>499,823 </span>원 
+		                        		 </div>
+		                        	</div>
+		                        	
+		                        	<%--예약하기 버튼 --%>
+		                        	<div class="room-reservation-btn-container">
+		                        		<button class="room-reservation-btn">예약 하기 </button>
+		                        	</div>
+		                        </div>
+	                        </li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </li> <%--one-accordion(3) -end --%>
+	        
+	        <%--one accordion(4) --%>
+	        <li>
+	            <input class="collapse-open" type="checkbox" id="collapse-4">
+	            <label class="collapse-btn" for="collapse-4">스위트룸</label>
+	            <div class="collapse-painel">
+	                <div class="collapse-inner">
+	                	<ul class="one-room-type-prices-ul">
+	                        <li>
+		                        <div class="one-room-price-info-container">
+		                        	<%--방 이름과 가격  --%>
+		                        	<div class="room-name-price-wrapper">
+		                        		<div class="room-name-wrapper">
+		                        			<h4>스탠다드 트윈룸-산전망</h4>
+		                        		</div>
+		                        		
+		                        		 <div class="price-wrapper">
+		                        		 	<span>404,623 </span>원 
+		                        		 </div>
+		                        	</div>
+		                        	
+		                        	<%--예약하기 버튼 --%>
+		                        	<div class="room-reservation-btn-container">
+		                        		<button class="room-reservation-btn">예약 하기 </button>
+		                        	</div>
+		                        </div>
+	                         </li>
+	                         
+	                         
+	                        <li> 
+	                        	<div class="one-room-price-info-container">
+		                        	<%--방 이름과 가격  --%>
+		                        	<div class="room-name-price-wrapper">
+		                        		<div class="room-name-wrapper">
+		                        			<h4>스탠다드 더블룸-산전망</h4>
+		                        		</div>
+		                        		
+		                        		 <div class="price-wrapper">
+		                        		 	<span>404,624 </span>원 
+		                        		 </div>
+		                        	</div>
+		                        	
+		                        	<%--예약하기 버튼 --%>
+		                        	<div class="room-reservation-btn-container">
+		                        		<button class="room-reservation-btn">예약 하기 </button>
+		                        	</div>
+		                        </div>
+		                    </li>
+		                    
+	                        <li>
+	                        	<div class="one-room-price-info-container">
+		                        	<%--방 이름과 가격  --%>
+		                        	<div class="room-name-price-wrapper">
+		                        		<div class="room-name-wrapper">
+		                        			<h4>스탠다드 트윈룸-정원전망</h4>
+		                        		</div>
+		                        		
+		                        		 <div class="price-wrapper">
+		                        		 	<span>439,823</span>원 
+		                        		 </div>
+		                        	</div>
+		                        	
+		                        	<%--예약하기 버튼 --%>
+		                        	<div class="room-reservation-btn-container">
+		                        		<button class="room-reservation-btn">예약 하기 </button>
+		                        	</div>
+		                        </div>
+	                        </li>
+	                        
+	                        <li> 
+	                        	<div class="one-room-price-info-container">
+		                        	<%--방 이름과 가격  --%>
+		                        	<div class="room-name-price-wrapper">
+		                        		<div class="room-name-wrapper">
+		                        			<h4>스탠다드 더블룸-정원전망 </h4>
+		                        		</div>
+		                        		
+		                        		 <div class="price-wrapper">
+		                        		 	<span>499,823 </span>원 
+		                        		 </div>
+		                        	</div>
+		                        	
+		                        	<%--예약하기 버튼 --%>
+		                        	<div class="room-reservation-btn-container">
+		                        		<button class="room-reservation-btn">예약 하기 </button>
+		                        	</div>
+		                        </div>
+	                        </li>
+	                    </ul>
+	                    
+	                </div>
+	            </div>
+	        </li> <%--one-accordion(4) -end --%>
+	        
+	    </ul>  <%--collapse-list -end --%>
+		</div><%-- hotel-info-container(4) --%>
 	</div>
 	
 	<!-- 호텔 시설정보  -->
@@ -415,7 +786,7 @@
 		<%--(6) --%>
 		<div class="hotel-info-container">
 			
-		</div>	
+		</div><%-- hotel-info-container --%>	
 	</div>
 	
 

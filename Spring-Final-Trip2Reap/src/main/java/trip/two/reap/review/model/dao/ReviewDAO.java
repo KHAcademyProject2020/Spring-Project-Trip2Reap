@@ -32,4 +32,9 @@ public class ReviewDAO {
 	public int addReadCount(SqlSessionTemplate sqlSession, int boNo) {
 		 return sqlSession.update("reviewMapper.addReadCount", boNo);
 	}
+
+	public int updateReview(SqlSessionTemplate sqlSession, Review r) {
+	
+		return sqlSession.update("reviewMapper.updateReview",r);
+	}
 }

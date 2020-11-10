@@ -23,13 +23,11 @@ section { margin: 0px auto; width:1300px; }
 }
 table{
 
-    width: 500px;
-
-    border-top: 1px solid #444444;
+    width: 300px;
 
     border-collapse: collapse;
     
-    margin-top: 50px;
+    margin-top: 10px;
    
 
   }
@@ -92,19 +90,9 @@ table{
 	top: 10px;
 }
 
-#input_search{
-	width: 200px;
-	height: 26px;
-}
 
-#button_search{
-	width: 60px;
-	height: 30px;
-	border: none;
-	background: #77af82;
-	color: white;
-	border-radius: 5px;
-}
+
+
 .bo_btn{
 	width: 60px;
 	height: 30px;
@@ -118,11 +106,7 @@ table{
 }
 
 /* 카테고리 테이블 div */
-#cate_table_div{
-	width: 9000px;
-	margin: 0px auto;
-	padding: 60px 0px 30px 0px;
-}
+
 #cate_btn{
 
 	padding-left: 150px;
@@ -146,152 +130,13 @@ table{
     font-weight: bold;
 }
 
-.fa-leaf{
-	height:13px;
-	width:13px;
-	color:#a7e1af;
-}
 
-#local_table{
-	border: 1px solid black;
-	border-collapse: collapse;
-	text-align: center;
-	margin: 16px 0px 30px 0px;
-	width: 900px;
-}
 
-#local_table td{
-	border: 1px solid black;
-	width: 100px;
-	height: 30px;
-}
 
-#local_table td:hover {
-    border: 1px solid black;
-    width: 100px;
-    height: 30px;
-    background-color: #77af82;
-    color: white;
-    cursor: pointer;
-}
 
-#theme_table{
-	border: 1px solid black;
-	border-collapse: collapse;
-	text-align: center;
-	margin: 16px 0px 30px 0px;
-	width: 900px;
-}
 
-#theme_table td{
-	border: 1px solid black;
-	width: 129px;
-	height: 30px;
-}
 
-#theme_table td:hover{
-	border: 1px solid black;
-	width: 129px;
-	height: 30px;
-	background-color: #77af82;
-    color: white;
-    cursor: pointer;
-}
 
-#calendar_table{
-	border: 1px solid black;
-	border-collapse: collapse;
-	text-align: center;
-	margin: 16px 0px 30px 0px;
-	width: 900px;
-}
-
-#calendar_table td{
-	border: 1px solid black;
-	width: 129px;
-	height: 30px;
-}
-
-#calendar_table td:hover{
-	border: 1px solid black;
-	width: 129px;
-	height: 30px;
-	background-color: #77af82;
-    color: white;
-    cursor: pointer;
-}
-
-/* 목록 전체 div */
-#list_all_div{
-	margin: 20px auto;
-	padding: 10px 30px 35px 30px;
-	width: 840px;
-	background: #efefef;
-}
-
-#list_count_div{
-	font-weight: 600;
-	margin: 10px 0px;
-}
-
-#list_count{
-	color: #497f55;
-	margin: 0px 10px;
-}
-
-/* 각 코스마다 div */
-#list_course_div{
-	padding: 10px;
-	margin-bottom: 50px;
-	width: 820px;
-	background: white;
-	display: flex;
-}
-
-#course_img_div{
-	flex: 1;
-}
-
-#travel_img{
-	width: 250px;
-	height: 170px;
-}
-
-#course_name_writer_div{
-	padding: 30px 20px;
-	flex: 1;
-}
-
-#course_name{
-	font-size: 30px;
-	font-weight: 900;
-	margin-bottom: 20px;
-}
-
-#course_cate_tag_div{
-	padding: 20px 20px;
-	flex: 1.5;
-}
-
-#course_cate{
-	margin: 29px 0px 20px 0px;
-}
-
-/* 등록하기 버튼 div */
-#button_write_div{
-	width: 900px;
-	margin: 0px auto;
-	text-align: right;
-}
-
-#button_write{
-	width: 70px;
-	height: 30px;
-	border: none;
-	background: #77af82;
-	color: white;
-	border-radius: 5px;
-}
 
 /* 페이징 */
 #paging_div{
