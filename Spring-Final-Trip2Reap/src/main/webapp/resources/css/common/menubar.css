@@ -30,7 +30,7 @@
 	
 	.menus{ display: inline-block; border-right: 3px solid #efefef; padding: 10px 45px;}
 	.menus:hover{ cursor: pointer; }
-    #menuIcon1{ font-size: 30px; margin-right: 4px; color : rgb(228,247,186); vertical-center : super; margin-top:10px; }
+    #menuIcon1{ font-size: 30px; margin-right: 4px; color : rgb(202,240,170); vertical-center : super; margin-top:10px; }
     #menuIcon2{ font-size: 30px; margin-right: 4px; color : rgb(242,203,97); vertical-center : super; margin-top:10px; }
     #menuIcon3{ font-size: 30px; margin-right: 4px; color : rgb(218,219,255); vertical-center : super; margin-top:10px; }
     #menuIcon4{ font-size: 30px; margin-right: 4px; color : rgb(255,167,167); vertical-center : super; margin-top:10px; }
