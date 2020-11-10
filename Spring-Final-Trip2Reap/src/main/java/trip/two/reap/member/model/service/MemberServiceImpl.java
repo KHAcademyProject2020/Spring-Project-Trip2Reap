@@ -22,5 +22,10 @@ public class MemberServiceImpl implements MemberService{
 	public Member memberLogin(Member m) {
 		return mDAO.memberLogin(sqlSession, m);
 	}
+	
+	@Override
+	public int memberCheck(String userId) {
+		return mDAO.memberCheck(sqlSession, userId);
+	}
 
 } // 클래스 종료

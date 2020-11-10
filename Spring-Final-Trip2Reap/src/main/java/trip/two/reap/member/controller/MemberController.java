@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -97,6 +98,15 @@ public class MemberController {
 	@RequestMapping("memberOut.me")
 	public String memberOut() {
 		return "memberOut";
+	}
+	
+	// 아이디 중복 체크
+	@RequestMapping("checkId.me")
+	public void memberCheck(Model model, @RequestParam("userId") String userId) {
+		System.out.println("userId : " + userId);
+		int result = mService.memberCheck(userId);
+		System.out.println("result : " + result);
+		
 	}
 	
 	

@@ -17,6 +17,12 @@
         <result column="MEMBER_EMAIL" property="email" />
         <result column="M_STATUS" property="mStatus" />
     </resultMap>
+    
+    <select id="memberCheck" resultType="_int">
+        select count(*)
+        from member
+        where member_id=#{memberId}
+    </select>
 
 
 </mapper>

@@ -40,8 +40,11 @@
         <!-- 아이디  -->
         <div id="id1"><label class="infoLabel">아이디</label></div><div id="id2"><label id="commonLabel">*</label>
         <input type="text" id="idText" class="infoText" name="idText" placeholder="6~12자 영문,숫자"
-	         onfocus="this.placeholder=''" onblur="this.placeholder='6~12자 영문,숫자'" autocomplete="off"></div>
+	         onfocus="this.placeholder=''" onblur="this.placeholder='6~12자 영문,숫자'" autocomplete="off">
+	    <div id="idInfoBox">필수 입력사항입니다.</div>     
+	    </div>
         <div id="space_5"></div>
+
         
         <!-- 비밀번호  -->       
         <div id="infoDiv4"></div>
@@ -152,13 +155,50 @@
    		   });
        });
        
+       $("#idText").blur(function(){
+    	  var userId = $("#idText").val();
+    	  var regType1 = /^[a-zA-Z0-9]*$/;
+    	  if(userId == ""){
+    		  $("#id1").css('height','70px');
+    		  $("#id2").css('height','70px');
+    		  $('#idInfoBox').text("필수 입력항목입니다.");
+    		  $('#idInfoBox').css('display', 'block');
+    	  } else if(userId.length < 6 || userId.length >12){
+    		  $("#id1").css('height','70px');
+    		  $("#id2").css('height','70px');
+    		  $('#idInfoBox').text("아이디는 6~12자입니다.");
+    		  $('#idInfoBox').css('display', 'block');
+    	  } else if(!regType1.test(userId)){
+    		  $("#id1").css('height','70px');
+    		  $("#id2").css('height','70px');
+    		  $('#idInfoBox').text("영문 혹은 숫자를 입력해주세요.");
+    		  $('#idInfoBox').css('display', 'block');
+    	  } else {
+    		  // 1. 아이디가 중복되었을 경우
+    		  $.ajax({
+    			 url : 'checkId.me',
+    			 type : 'post',
+    			 dataType : 'json',
+    			 data : {userId:userId},
+    			 success : function(response){
+    				 console.log("서버 성공");
+    				 console.log(response);
+    			 },
+    			 error : function(data){
+    				 console.log("서버 실패");
+    			 }
+    		  });
+    		  
+    		  // 2. 아이디가 중복되지 않았을 경우
+    	  }
+    	  
+       });
+       
        function cancel(){
        	location.href="<%= request.getContextPath() %>/home.do";
        }
        
-       function ok(){
-       	   	
-       }
+       
     </script>
 </body>
 </html>
