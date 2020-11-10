@@ -76,17 +76,18 @@ border-radius: 10px;
 				<c:forEach var="i" begin="1" end="3" step="1" varStatus="loop">
 				<div class="divlist">
 					
-					<c:forEach var="j" begin="1" end="5" step="1" varStatus="loop">
+					<c:forEach var="j" begin="1" end="5" step="1" varStatus="loop" items="${list}">
 					<div class="divcontent">
-						<table id="table5">
+						<table id="table5"  onclick="location.href='reviewDetail.bo';">
 							<tr>
 								<td><img src="resources/images/송도.JPG" width="150px" height="150px">
 								</td>
 								
-								<td>제목
+								<td>${j.boTitle}
 									<hr>
-									<p>태그</p> <span>작성자</span> <span style="float: right">수
-										1 댓 0 요 0</span>
+									<p>${j.boTag}</p> <span>${j.memberId }</span> 
+									<span style="float: right">
+									조회수1 댓글 0 좋아요 0</span>
 								</td>
 								
 							</tr>

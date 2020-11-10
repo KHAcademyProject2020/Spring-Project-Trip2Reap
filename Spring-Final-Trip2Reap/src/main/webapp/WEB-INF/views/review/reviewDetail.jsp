@@ -51,7 +51,7 @@ table td {
 						<tr>
 							<td colspan="5"><span>
 									<h2>
-										[여행지] 경치가 너무좋은 율동공원<br>
+										[여행지] ${b.boTitle}<br>
 									</h2>
 							</span></td>
 						</tr>

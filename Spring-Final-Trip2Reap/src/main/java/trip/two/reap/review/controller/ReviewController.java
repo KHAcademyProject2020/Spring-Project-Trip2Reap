@@ -49,8 +49,28 @@ public class ReviewController {
    // 리뷰 상세보기로 이동
    
    @RequestMapping("reviewDetail.bo")
-   public String ReviewDetail() {
-    return "reviewDetail";
+   public ModelAndView reviewDetail(@RequestParam(value="page",required=false) Integer page, ModelAndView mv) {
+	   
+	   int currentPage=1;
+	   if(page != null) {
+		   currentPage = page;
+	   }
+	   
+	   int listCount = rService.getListCount();
+	   
+	   PageInfo pi = Pagination.getPageInfo(currentPage,listCount);
+	   
+	   ArrayList<Review> list = rService.selectList(pi);
+	   
+	   if(list !=null) {
+		   mv.addObject("list",list);
+		   mv.addObject("pi",pi);
+	       mv.setViewName("reviewDetail");
+	         } else {
+	            throw new ReviewException("게시글 전체 조회에 실패 하였습니다.");
+	         }
+	   
+	   return mv;
    }
    
    @RequestMapping("reviewInsert.bo")
@@ -59,11 +79,29 @@ public class ReviewController {
    }
    
    @RequestMapping("reviewPhotoList.bo")
-   public String ReviewPhotoList(){
-	   return "reviewPhotoList";
+   public ModelAndView reviewPhotoList(@RequestParam(value="page",required=false) Integer page, ModelAndView mv) {
+	   
+	   int currentPage=1;
+	   if(page != null) {
+		   currentPage = page;
+	   }
+	   
+	   int listCount = rService.getListCount();
+	   
+	   PageInfo pi = Pagination.getPageInfo(currentPage,listCount);
+	   
+	   ArrayList<Review> list = rService.selectList(pi);
+	   
+	   if(list !=null) {
+		   mv.addObject("list",list);
+		   mv.addObject("pi",pi);
+	       mv.setViewName("reviewPhotoList");
+	         } else {
+	            throw new ReviewException("게시글 전체 조회에 실패 하였습니다.");
+	         }
+	   
+	   return mv;
    }
- 
-   
 
    
 
