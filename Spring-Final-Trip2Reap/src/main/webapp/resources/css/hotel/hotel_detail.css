@@ -196,13 +196,13 @@ span.info-icon-container{
 	text-align: center;
 	align-items: center;
 	
-	padding-top: 25px;
+	padding-top: 20px;
 	padding-bottom:10px;
 }
 
 #btn-wrapper > button{
 	padding: 10px 0;
-	margin: 5px 0;
+	margin: 3px 0;
 	
 	position: relative;
 	color: var(--btn-color);
@@ -230,12 +230,21 @@ span.info-icon-container{
 	background-color: var(--edit-red);
 }
 
+/*삭제하기 버튼 */
+#remove-hotel-btn{
+	background-color: var(--edit-red);
+}
+
 /* 수정하기 버튼 hover효과 */
 #edit-hotel-detail-info-page-btn:hover{
 	background-color: var(--edit-red-hover);
 }
 
 
+/*삭제하기 버튼 Hover 효과   */
+#remove-hotel-btn:hover{
+	background-color: var(--edit-red-hover);
+}
 /*
 ========================================================
 02. 호텔 소개   
@@ -728,7 +737,7 @@ div.detail_view_under_wrapper{
 
  
 .collapse-open:checked ~ .collapse-btn{
-	background-color: var(--bright-green);
+	background-color: var(--mid-green);
 	opacity: 1;
 } 
  
@@ -791,13 +800,16 @@ div.detail_view_under_wrapper{
 button.room-reservation-btn{
 	border: var(--bright-green) 1.5px solid;
 	padding: 20px 10px;
-	border-radius: 3px;
+	border-radius: 5px;
 	cursor: pointer;
 	background-color: transparent;
 }
 
 button.room-reservation-btn:hover{
 	font-weight: 900;
+	background-color: var(--mid-green);
+	border-color: transparent;
+	color: #fff;
 }
 
 /*
@@ -842,10 +854,75 @@ button.room-reservation-btn:hover{
 ========================================================
 06.  호텔 리뷰   
  */
+ #hotel-review-container{
+ 	position: relative;
+ 	width: 100%;
+ 	padding: 0 100px;
+ }
  
  
+ /* 리뷰등록창 불러오는 버튼 과 리 등록버튼   
+ 리뷰등록창 불러오는 버튼: #insert-review-btn
+ 리뷰등록 버튼: #insert-btn
+ */
+ #insert-review-btn,
+ #insert-btn{
+	margin: 15px;
+ 	padding: 10px 20px;
+ 	border-color: transparent;
+ 	background-color: transparent;
+ 	border: var(--mid-green) 2px solid;
+ 	
+ 	font-size: 1.1em;
+ 	font-weight: bold;
+ 	border-radius: 5px;
+ 	cursor: pointer;
+ }
+ 
+ #insert-review-btn:hover,
+ #insert-btn:hover{
+ 	background-color: var(--mid-green);
+ 	color: #fff;
+ }
+ 
+ #insert-btn{
+ 	width: 50%;
+ }
  
  
+ /* 리뷰작성 컨테이너  */
+ #insert-review-container{
+ 	display: none;
+ 	position: relative;
+ 	width: 100%;
+ 	padding: 20px 10px;
+ 	
+ 	
+ 	/* sample background color  */
+ 	background-color: var(--blue-gray);
+ 	
+ } 
+ 
+ 
+.insert-review-wrapper{
+	
+} 
+ 
+ 
+ /* 리뷰점수 selector */
+ #reivew_score{
+ 
+ }
+ 
+ 
+ /* 리뷰내용 작성 */
+ #review_content{
+ 	padding: 10px;
+ 	width: 100%;
+ 	height: 200px;
+ 	wrap: hard;
+ }
+
  
   
  

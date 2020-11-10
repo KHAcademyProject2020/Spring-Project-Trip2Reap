@@ -155,7 +155,12 @@
 					<button id="go-reservation-btn">최저가 예약하기</button>
 					
 					<!--only administrator (관리자)  -->
+					<%--
+					#edit-hotel-detail-info-page-btn: 호텔수정 페이지로 이동
+					#remove-hotel-btn: 호텔게시물 삭제  
+					 --%>
 					<button id="edit-hotel-detail-info-page-btn">수정하기</button>
+					<button id="remove-hotel-btn">삭제하기 </button>
 				</div>
 			</div>			
 		</div>
@@ -651,35 +656,35 @@
 				 
 				<li>
 					<span>
-						<embed class="hotel-option-icon" src="resources/svgs/breakfast.svg" type="text/svg+xml">
+						<embed class="hotel-option-icon" src="resources/svgs/breakfast.svg" type="image/svg+xml">
 					</span>
 					<span><b>조식</b></span> 
 				</li>
 				
 				<li>
 					<span>
-						<embed class="hotel-option-icon" src="resources/svgs/restaurant.svg" type="text/svg+xml">
+						<embed class="hotel-option-icon" src="resources/svgs/restaurant.svg" type="image/svg+xml">
 					</span>
 					<span><b>레스토랑</b></span> 
 				</li>
 				
 				<li>
 					<span>
-						<embed class="hotel-option-icon" src="resources/svgs/laundry.svg" type="text/svg+xml">
+						<embed class="hotel-option-icon" src="resources/svgs/laundry.svg" type="image/svg+xml">
 					</span>
 					<span><b>세탁 </b></span>
 				</li>
 				
 				<li>
 					<span>
-						<embed class="hotel-option-icon" src="resources/svgs/reception.svg" type="text/svg+xml">
+						<embed class="hotel-option-icon" src="resources/svgs/reception.svg" type="image/svg+xml">
 					</span>
 					<span><b>24시간 리셉션 </b></span>
 				</li>
 				
 				<li>
 					<span>
-						<embed class="hotel-option-icon" src="resources/svgs/luggage.svg" type="text/svg+xml">
+						<embed class="hotel-option-icon" src="resources/svgs/luggage.svg" type="image/svg+xml">
 					</span>
 					<span><b>수하물 보관 </b></span>
 				</li>
@@ -701,7 +706,7 @@
 				
 				<li>
 					<span>
-						<embed class="hotel-option-icon" src="resources/svgs/hairdresser.svg" type="text/svg+xml">
+						<embed class="hotel-option-icon" src="resources/svgs/hairdresser.svg" type="image/svg+xml">
 					</span>
 					<span><b>미용실 </b></span> 
 				</li>
@@ -746,21 +751,21 @@
 				
 				<li>
 					<span>
-						<embed class="hotel-option-icon" src="resources/svgs/kitchen.svg" type="text/svg+xml">
+						<embed class="hotel-option-icon" src="resources/svgs/kitchen.svg" type="image/svg+xml">
 					</span>
 					<span><b>주방</b></span> 
 				</li>
 				
 				<li>
 					<span>
-						<embed class="hotel-option-icon" src="resources/svgs/baby1.svg" type="text/svg+xml">
+						<embed class="hotel-option-icon" src="resources/svgs/baby1.svg" type="image/svg+xml">
 					</span>
 					<span><b>아이돌봄 서비스 </b></span> 
 				</li>
 				
 				<li>
 					<span>
-						<embed class="hotel-option-icon" src="resources/svgs/roomservice.svg" type="text/svg+xml">
+						<embed class="hotel-option-icon" src="resources/svgs/roomservice.svg" type="image/svg+xml">
 					</span>
 					<span><b>룸서비스</b></span> 
 				</li>
@@ -785,7 +790,81 @@
 		
 		<%--(6) --%>
 		<div class="hotel-info-container">
+			<div id="hotel-review-container">
 			
+				<div id="review-introduction-container">
+					<div>
+						<p>
+							즐거운 여행을 하셨나요?<br>
+							호텔 이용후기를 작성해주세요.<br>
+						</p>
+						<button id="insert-review-btn">리뷰 등록 하기</button>
+					</div>
+				</div>
+				
+				<%--리뷰등록 컨테이너  --%>
+				<div id="insert-review-container">
+					<div>
+						<h3>리뷰 등록하기</h3>
+						
+						<div class="insert-review-wrapper">
+							<table>
+								<tr>
+									<td class="review_label">리뷰 점수 </td>
+									<td class="review_insert_td">
+										<select id="review_score">
+											<option value="5">5 점 </option>
+											<option value="4">4 점 </option>
+											<option value="3">3 점 </option>
+											<option value="2">2 점 </option>
+											<option value="1">1 점 </option>
+											<option value="0">0 점 </option>
+										</select>
+									</td>
+								</tr>
+								
+								<tr>
+									<td class="review_label">리뷰 내용 </td>
+									<td class="review_insert_td">
+										<textarea id="review_content" placeholder="리뷰내용을 작성해주세요." ></textarea>
+									</td>
+								</tr>
+							</table>
+							<button id="insert-btn">등록</button>
+						</div>
+					</div>
+				</div>
+				
+				
+				<%-- 리뷰수정 컨테이너  --%>
+				<div id="edit-review-container">
+					
+				</div>
+			
+			</div> <%-- 호텔리뷰 컨테이너  --%>
+		
+		<%--hotel-review-container에서 발생하는 자바스크립트 함수  --%>
+		<script>
+		$(function(){
+			
+			$('#insert-review-btn').click(function(){
+				console.log('어머 리뷰등록버튼을 누르셨군요?');
+				
+				let $insertContainer= $('#insert-review-container');
+				
+				if( $insertContainer.css('display')=='none'){
+					// 리뷰등록창이 원래 닫혀있던 상태  => 연다.
+					$insertContainer.css('display', 'block');
+					$(this).text('리뷰 등록 닫기');
+				}else{
+					// 리뷰등록창이 원래  열려있는 상태 => 닫는다.
+					$insertContainer.css('display', 'none');
+					$(this).text('리뷰 등록 하기');
+				}
+			});
+		});
+		
+		</script>
 		</div><%-- hotel-info-container --%>	
 	</div>
 	
