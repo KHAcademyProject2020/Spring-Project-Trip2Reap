@@ -16,7 +16,7 @@
 	<div id="all_div">
 		<div id="menu_div">
 			<div id="menu_left_div">
-				<img src="resources/images/travelIcon.png" id="menu_img"/>
+				<i class="fas fa-suitcase-rolling" id="menu_img"></i>
 				<span id="menu">여행지</span>
 			</div>
 			<div id="menu_right_div">

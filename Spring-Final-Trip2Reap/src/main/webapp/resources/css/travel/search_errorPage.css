@@ -19,11 +19,12 @@
 	text-align: left;
 }
 
-#menu_img{
-	width: 40px;
-	height: 40px;
-	text-align: left;
-	vertical-align: bottom;
+#menu_img {
+    width: 40px;
+    height: 40px;
+    text-align: left;
+    vertical-align: bottom;
+    color: rgb(202,240,170);
 }
 
 #menu{

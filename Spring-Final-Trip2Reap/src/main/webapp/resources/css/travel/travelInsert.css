@@ -18,11 +18,12 @@
     padding-bottom: 20px;
 }
 
-#menu_img{
-	width: 40px;
-	height: 40px;
-	text-align: left;
-	vertical-align: bottom;
+#menu_img {
+    width: 40px;
+    height: 40px;
+    text-align: left;
+    vertical-align: bottom;
+    color: rgb(202,240,170);
 }
 
 #menu{
@@ -69,7 +70,7 @@
 
 #info_ment_div{
     height: 70px;
-    padding: 15px 15px 0 15px;
+    padding: 23px 15px 0 23px;
 }
 
 
@@ -163,7 +164,7 @@
 }
 
 #span_text{
-	font-size: x-small;
+	font-size: small;
 }
 
 

@@ -17,7 +17,7 @@
 	<div id="all_div">
 			<div id="menu_div">
 				<div id="menu_left_div">
-					<img src="resources/images/travelIcon.png" id="menu_img"/>
+					<i class="fas fa-suitcase-rolling" id="menu_img"></i>
 					<span id="menu">여행지</span>
 				</div>
 			</div>
@@ -26,15 +26,17 @@
 				<div id="name_travel">송도 센트럴파크</div>
 				<div id="add_travel">인천 연수구</div>
 				<div id="share">
-				<span>조회수  |  1000</span>
-					<span onclick="location">
-						<i class="fas fa-share-alt" style="float:right; margin-right:5px; width:18px; height:18px;"></i>
-					</span>
-					<span>
-						<i class="fas fa-download" style="float:right; margin-right:10px; width:18px; height:18px;"></i>
-					</span>	
-				</div>
-			</div>	
+					<!-- <span>조회 1000</span> 나중에 수정 -->
+						<span id="share_span" onclick="location">
+							<i class="fas fa-share-alt"></i>
+								<span class="share_name">공유하기</span>
+						</span>
+						<span>
+							<i class="fas fa-download" ></i>
+								<span class="share_name">코스에 담기</span>
+						</span>	
+					</div>
+				</div>	
 			
 			<!-- 여행지 내용 부분 시작 -->
 			<div id="travel_content">

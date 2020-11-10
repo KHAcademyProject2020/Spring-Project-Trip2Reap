@@ -18,7 +18,7 @@
 		<!-- 메뉴 이름 div -->
 		<div id="menu_div">
 			<div id="menu_left_div">
-				<img src="resources/images/travelIcon.png" id="menu_img"/>
+				<i class="fas fa-suitcase-rolling" id="menu_img"></i>
 				<span id="menu">여행지 수정하기</span>
 			</div>
 		</div>

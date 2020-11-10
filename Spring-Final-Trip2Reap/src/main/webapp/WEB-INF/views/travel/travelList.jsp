@@ -15,7 +15,7 @@
 	<div id="all_div">
 		<div id="menu_div">
 			<div id="menu_left_div">
-				<img src="resources/images/travelIcon.png" id="menu_img"/>
+				<i class="fas fa-suitcase-rolling" id="menu_img"></i>
 				<span id="menu">여행지</span>
 			</div>
 			<div id="menu_right_div">
@@ -113,7 +113,7 @@
 				<span id="list_etc">…</span>
 			</div>
 			
-			<br><br>
+			
 			
 			<div id="list_travel_div">
 				<div id="travel_img_div">
@@ -128,7 +128,7 @@
 				<span id="list_etc">…</span>
 			</div>
 			
-			<br><br>
+			
 			
 		
 			<div id="list_travel_div">
@@ -144,7 +144,7 @@
 				<span id="list_etc">…</span>
 			</div>
 			
-			<br><br>
+			
 			
 				
 			<div id="list_travel_div">
@@ -176,8 +176,7 @@
 					<button id="after">&gt;</button>
 				</div>
 		
-		<div><br><br><br>
-		</div>
+		
 		
 	</div><!-- 전체 div끝 -->
 	
