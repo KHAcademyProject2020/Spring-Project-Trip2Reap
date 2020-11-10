@@ -24,6 +24,7 @@
       <result column="BO_COUNT" property="boCount"/>
       <result column="BO_TAG" property="boTag"/>
       <result column="BO_DELETE_YN" property="boDeleteYN"/>
+      <result column="REGDATE" property="regDate"/>
    </resultMap>
    
   	
@@ -33,9 +34,14 @@
        from board
        where boNo=#{boNo} and b_status='Y'
    </select> 
+   
+   <update id="addReadCount">
+   		update review
+   		set boCount = boCount + 1
+   		where boNo = #{boNo};
+   </update>
+ 
 
-   
-   
 </mapper>
 
 

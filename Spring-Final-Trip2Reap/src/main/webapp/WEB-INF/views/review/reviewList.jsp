@@ -56,7 +56,7 @@
 			<td class="board_list">${b.boNo}</td>
 			<td class="board_list" onclick="location.href='reviewDetail.bo';">${b.boTitle}[${b.boTag }]</td>
 			<td class="board_list">${b.memberId}</td>
-			<td class="board_list"></td>
+			<td class="board_list">${b.regDate }</td>
 			<td class="board_list">${b.boCount}</td>
 			<td class="board_list">test</td>
 		</tr>
@@ -69,27 +69,28 @@
 		
 		<!-- 페이징 처리 -->
 		<tr align="center" height="20" id="buttonTab">
-			<td colspan="5" >
+			<td colspan="6" >
 			
 				<!-- [이전] -->
 				<c:if test="${ pi.currentPage <= 1 }">
 					[이전] &nbsp;
 				</c:if>
 				<c:if test="${ pi.currentPage > 1 }">
-					<c:url var="before" value="blist.bo">
+					<c:url var="before" value="reviewList.bo">
 						<c:param name="page" value="${ pi.currentPage - 1 }"/>
 					</c:url>
 					<a href="${ before }">[이전]</a> &nbsp;
 				</c:if>
 				
 				<!-- 페이지 -->
+				
 				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 					<c:if test="${ p eq pi.currentPage }">
 						<font color="red" size="4"><b>[${ p }]</b></font>
 					</c:if>
 					
 					<c:if test="${ p ne pi.currentPage }">
-						<c:url var="pagination" value="blist.bo">
+						<c:url var="pagination" value="reviewList.bo">
 							<c:param name="page" value="${ p }"/>
 						</c:url>
 						<a href="${ pagination }">${ p }</a> &nbsp;
@@ -101,7 +102,7 @@
 					[다음]
 				</c:if>
 				<c:if test="${ pi.currentPage < pi.maxPage }">
-					<c:url var="after" value="blist.bo">
+					<c:url var="after" value="reviewList.bo">
 						<c:param name="page" value="${ pi.currentPage + 1 }"/>
 					</c:url> 
 					<a href="${ after }">[다음]</a>
