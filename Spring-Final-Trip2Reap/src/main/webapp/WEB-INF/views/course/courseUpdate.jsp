@@ -23,7 +23,7 @@
 			<table id="course_info_table">
 				<tr id="ment_tr">
 					<td colspan="6">
-						<b style="color: #666666;">코스에 담을 여행지는 여행지 메뉴에서 선택해주세요.</b>
+						<b style="color: #666666;">코스에 담긴 여행지의 오른쪽 상단 메뉴 클릭 시, 순서 변경 및 삭제 가능합니다.</b>
 						<br>
 						<span class="required_fields">*은 필수 입력 사항입니다.</span>
 					</td>

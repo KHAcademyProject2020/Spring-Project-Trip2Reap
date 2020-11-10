@@ -14,13 +14,16 @@
 
 .divlist {
 width:1000px;
-  
+
 }
 
 .divcontent {
-width:400px;
+
+width:300px;
 display:inline-block;
-padding-right:100px;
+padding-right:50px;
+border-radius: 10px;
+
 
 
 
@@ -28,9 +31,13 @@ padding-right:100px;
 
 #table5{
  background-color: rgb(239, 239, 239);
+
+ border-radius: 10px;
 }
 
-
+#table1{
+	width:1000px;
+}
 
 </style>
 
@@ -66,14 +73,14 @@ padding-right:100px;
 			<div id="board">
 
 				
-				<c:forEach var="i" begin="1" end="2" step="1" varStatus="loop">
+				<c:forEach var="i" begin="1" end="3" step="1" varStatus="loop">
 				<div class="divlist">
 					
 					<c:forEach var="j" begin="1" end="5" step="1" varStatus="loop">
 					<div class="divcontent">
 						<table id="table5">
 							<tr>
-								<td><img src="resources/images/송도.JPG" width="200px" height="200px">
+								<td><img src="resources/images/송도.JPG" width="150px" height="150px">
 								</td>
 								
 								<td>제목
@@ -89,8 +96,73 @@ padding-right:100px;
 					</c:forEach>
 				</div>
 				</c:forEach>
-
 			</div>
+		<table id="table1">
+		
+		<!-- 페이징 처리 -->
+		<tr align="center" height="20" id="buttonTab">
+			<td colspan="6" >
+			
+				<!-- [이전] -->
+				<c:if test="${ pi.currentPage <= 1 }">
+					[이전] &nbsp;
+				</c:if>
+				<c:if test="${ pi.currentPage > 1 }">
+					<c:url var="before" value="reviewList.bo">
+						<c:param name="page" value="${ pi.currentPage - 1 }"/>
+					</c:url>
+					<a href="${ before }">[이전]</a> &nbsp;
+				</c:if>
+				
+				<!-- 페이지 -->
+				
+				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+					<c:if test="${ p eq pi.currentPage }">
+						<font color="red" size="4"><b>[${ p }]</b></font>
+					</c:if>
+					
+					<c:if test="${ p ne pi.currentPage }">
+						<c:url var="pagination" value="reviewList.bo">
+							<c:param name="page" value="${ p }"/>
+						</c:url>
+						<a href="${ pagination }">${ p }</a> &nbsp;
+					</c:if>
+				</c:forEach>
+				
+				<!-- [다음] -->
+				<c:if test="${ pi.currentPage >= pi.maxPage }">
+					[다음]
+				</c:if>
+				<c:if test="${ pi.currentPage < pi.maxPage }">
+					<c:url var="after" value="reviewList.bo">
+						<c:param name="page" value="${ pi.currentPage + 1 }"/>
+					</c:url> 
+					<a href="${ after }">[다음]</a>
+				</c:if>
+			</td>
+			<td>
+				
+					<button onclick="location.href='reviewInsert.bo';">글쓰기</button>
+			
+			</td>
+		</tr>
+		<tr>
+			
+			<td colspan="6">
+				<form id="content" style="text-align: center;">
+				 <select name="search">
+    			 <option value="작성자">작성자</option>
+    			 <option value="제목">제목</option>
+   				 <option value="내용">내용</option>
+   				 <option value="해쉬태그">해쉬태그</option>
+				</select>
+  					<input type="text" name="input" class="input" id="search-input">
+  					<button type="reset" class="search" id="search-btn">검색</button>
+				</form>
+			</td>
+			
+		</tr>
+	</table>
 
 
 

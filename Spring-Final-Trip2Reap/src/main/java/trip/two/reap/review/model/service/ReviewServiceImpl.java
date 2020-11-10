@@ -41,6 +41,12 @@ public class ReviewServiceImpl implements ReviewService{
 	      
 	    return r;
 	}
+
+	@Override
+	public int updateReview(Review r) {
+	
+		return rDAO.updateReview(sqlSession, r);
+	}
 	
 	
 }
