@@ -22,12 +22,6 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
-	// 로그인 뷰로 이동
-	@RequestMapping("login.me")
-	public String loginView() {
-		return "login";
-	}
-	
 	// 암호화 후 로그인
 	@RequestMapping("loginCheck.me")
 	  public String login(@ModelAttribute Member m, Model model) {
