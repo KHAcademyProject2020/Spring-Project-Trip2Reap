@@ -40,7 +40,7 @@
 			</table>
 		</div>
 		
-		<div id="count_div">
+		<div id="share_div">
 <!-- 나중에 추가 예정 -->
 <!-- 			<span>조회수 | </span> <span id="count">876</span> -->
 			<i class="fas fa-share-alt"></i> <span id="share_span">공유하기</span>

@@ -119,10 +119,14 @@
 #travel_name{
 	font-size: 30px;
 	font-weight: 900;
+    margin-bottom: 5px;
 }
 
 #travel_cate{
-	font-size: 15px;
+/* 	font-size: 15px; */
+	color: #497f55;
+    font-weight: 700;
+    margin-bottom: 22px;
 }
 
 #travel_menu_div{

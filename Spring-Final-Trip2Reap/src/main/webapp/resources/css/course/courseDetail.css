@@ -76,7 +76,7 @@
 }
 
 /* 조회수, 공유하기 div */
-#count_div{
+#share_div{
 	padding: 0px 5px 10px 0px;
 	text-align: right;
 }
@@ -192,7 +192,7 @@
 }
 
 /* button hover 시 cursor 변경 */
-.fa-share-alt, #button_update, #button_delete:hover{
+#share_span, #button_update, #button_delete:hover{
 	cursor: pointer;
 }
 
