@@ -15,6 +15,7 @@
 
     --minus-color: #f56c85;
     --minus-hover-color: #cc370e;
+    --menu-icon:  rgb(255,167,167); 
   }
 
 input[type=submit]{
@@ -55,6 +56,8 @@ input[type=submit]{
     height: 40px;
     vertical-align: bottom;
     text-align: left;
+    color: var(--menu-icon);
+    margin-right: 4px;
   }
   
   #title-name {

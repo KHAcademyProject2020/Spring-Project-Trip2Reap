@@ -31,7 +31,8 @@
 
 <div id="main-container">
 	<div id="title-container">
-		<img id="hotel-icon" src="resources/images/hotelIcon.png" />
+		<!-- <img id="hotel-icon" src="resources/images/hotelIcon.png" /> -->
+		<i class="fas fa-hotel" id="hotel-icon"></i>
 		<span id="title-name">호텔 예약</span>
 	</div>
 	

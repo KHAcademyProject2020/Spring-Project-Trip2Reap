@@ -7,6 +7,7 @@
   --blue-gray: #cfe3e1;
   --pink-gray: #eaeaea;
   --heart-pink: #f52043;
+  --menu-icon:  rgb(255,167,167); 
 }
 
 /* focus 검은색 라운드 처리 해제하기 */
@@ -38,6 +39,9 @@ button:focus {
   height: 40px;
   vertical-align: bottom;
   text-align: left;
+  
+  color: var(--menu-icon);
+  margin-right: 4px;
 }
 
 #title-name {
@@ -83,6 +87,11 @@ ul {
   margin: auto 8px;
 }
 
+
+
+
+/* 
+
 .btn {
   padding: 5px;
   border-radius: 5px;
@@ -95,10 +104,12 @@ ul {
   height: 30px;
 }
 
+
 #insert-hotel {
   background-color: var(--mid-green);
   color: #fff;
 }
+
 
 #left_btns > li:nth-child(2) > button {
   background-color: var(--mid-green);
@@ -106,9 +117,31 @@ ul {
 }
 
 #right_btns .btn {
-  background-color: var(--mid-green);
-  color: #fff;
+  
+} 
+
+*/
+
+button.btn{
+	background-color: transparent;
+	border: var(--mid-green) 1px solid;
+	padding: 5px;
+	
+	border-radius: 5px;
+	text-align: center;
+	font-weight: bold;
+	color: var(--dark-gray);
+	cursor: pointer;
+	height: 30px;
 }
+
+
+#left_btns button.btn:hover,
+#right_btns button.btn:hover{
+	background-color: var(--mid-green);
+  	color: #fff;
+}
+
 
 /* 상세검색 modal */
 #modal-close-container{
@@ -204,6 +237,10 @@ ul {
   margin: 10px auto;
 }
 
+.one-hotel-info-container:hover{
+	border: 1px solid var(--dark-green);
+}
+
 .photo-container{
   position: relative;
   flex-basis: 50%;
@@ -244,6 +281,10 @@ ul {
   padding-top: 10px;
   padding-bottom: 10px;
  
+}
+
+.hotel-name-container>  h1{
+	font-size: 1.3em;
 }
 
 
@@ -294,9 +335,13 @@ ul {
   padding-bottom: 20px;
 }
 
+.hotel-addr-wrapper{
+	border-top: var(--blue-gray) 5px solid;
+}
+
 .hotel-info-wrapper{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   /* align-items: center; */
 }
@@ -310,15 +355,20 @@ ul {
 
 .star-point{
   padding-right: 15px;
+  color: var(--mid-green);
 }
 
 .hotel-reserve-btn{
-  margin-top: 30px;
+  margin-top: 5px;
   margin-bottom: 10px;
 }
 
+button.hotel-reserve-btn:hover{
+	background-color: var(--dark-green);
+}
+
 .hotel-per-day-price-container{
-  align-items: flex-end;
+  padding: 10px 0;
 }
 
 button.hotel-reserve-btn{

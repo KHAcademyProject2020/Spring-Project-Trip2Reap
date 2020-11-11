@@ -35,7 +35,8 @@
     	
     
         <div id="title-container">
-            <img id="hotel-icon" src="resources/images/hotelIcon.png">
+            <!-- <img id="hotel-icon" src="resources/images/hotelIcon.png"> -->
+            <i class="fas fa-hotel" id="hotel-icon"></i>
             <span id="title-name">호텔 예약</span>
         </div>
 
@@ -65,68 +66,8 @@
         </div>
 
         <div id="hotel-list-container">
-
-			<%-- 
-			<c:forEach var="hotel" items="${hotelList }">
-			    <div class="one-hotel-info-container">
-                	<img src="resources/images/sample_hotel.jpg" alt="호텔이미지">
-
-                	<div class="detail-info-container">
-	                    <div>
-	                        <div class="info-container">
-	                            <!-- 호텔이름 -->
-	                            <div class="hotel-name-container">
-	                                <h1>호텔 델루나{호텔이름}</h1>
-	                            </div>
-	
-	                            <!-- 좋아요 버튼 -->
-	                            <div class="i-like-btn-container">
-	                                <i class="fas fa-heart unlike"></i>
-	                            </div>
-	                        </div>
-	                        <hr>
-	                    </div>
-
-
-	                    <div class="detail-info-wrapper">
-	                        <!-- 호텔주소 -->
-	                        <div class="hotel-addr-wrapper">
-	                            <small>{호텔주소}</small>
-	                        </div>
-	
-	
-	                        <div class="hotel-info-wrapper">
-	                            <!-- 별점 -->
-	                            <div class="hotel-review-container">
-	                                <span class="star-point">
-	                                    <i class="fas fa-star"></i>
-	                                    <i class="fas fa-star"></i>
-	                                    <i class="fas fa-star-half-alt"></i>
-	                                    <i class="far fa-star"></i>
-	                                    <i class="far fa-star"></i>
-	                                </span>
-	                                <span> 2.54 / 5 </span>
-	                            </div>
-	
-	                            <hr>
-	                            <!-- 1박 가격 -->
-	                            <div class="hotel-per-day-price-container info-container">
-	                                <p>
-	                                    <small>1박 중</small>&nbsp;&nbsp;<b>47,216원</b>
-	                                </p>
-	                            </div>
-	                        </div>
-	                    </div>
-	
-	                    <button class="hotel-reserve-btn">예약하기</button>
-                </div>
-            </div>
 			
-			
-			
-			</c:forEach>
-			--%>
-
+			 <%------------  호텔샘플  ---------%>
             <!-- 호텔 1개(샘플1) -->
             <div class="one-hotel-info-container">
                 <img src="resources/images/sample_hotel.jpg" alt="호텔이미지">
@@ -144,7 +85,7 @@
                                 <i class="fas fa-heart unlike"></i>
                             </div>
                         </div>
-                        <hr>
+                       
                     </div>
 
 
@@ -160,15 +101,11 @@
                             <div class="hotel-review-container">
                                 <span class="star-point">
                                     <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
                                 </span>
                                 <span> 2.54 / 5 </span>
                             </div>
 
-                            <hr>
+       
                             <!-- 1박 가격 -->
                             <div class="hotel-per-day-price-container info-container">
                                 <p>
@@ -182,6 +119,7 @@
                 </div>
             </div>
             <!-- 호텔1개(샘플1) 끝-->
+            <%------------  호텔샘플  ---------%>
 
             <!-- 호텔 1개(샘플2) -->
             <div class="one-hotel-info-container">
@@ -200,7 +138,7 @@
                                 <i class="fas fa-heart unlike"></i>
                             </div>
                         </div>
-                        <hr>
+                        
                     </div>
 
 
@@ -216,15 +154,11 @@
                             <div class="hotel-review-container">
                                 <span class="star-point">
                                     <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
                                 </span>
                                 <span> 3.0 / 5 </span>
                             </div>
 
-                            <hr>
+                           
                             <!-- 1박 가격 -->
                             <div class="hotel-per-day-price-container info-container">
                                 <p>
@@ -257,7 +191,7 @@
                                 <i class="fas fa-heart unlike"></i>
                             </div>
                         </div>
-                        <hr>
+                    
                     </div>
 
 
@@ -273,15 +207,10 @@
                             <div class="hotel-review-container">
                                 <span class="star-point">
                                     <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
                                 </span>
                                 <span> 3.0 / 5 </span>
                             </div>
-
-                            <hr>
+               
                             <!-- 1박 가격 -->
                             <div class="hotel-per-day-price-container info-container">
                                 <p>
@@ -314,7 +243,7 @@
                                 <i class="fas fa-heart unlike"></i>
                             </div>
                         </div>
-                        <hr>
+                        
                     </div>
 
 
@@ -330,15 +259,10 @@
                             <div class="hotel-review-container">
                                 <span class="star-point">
                                     <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
                                 </span>
                                 <span> 3.0 / 5 </span>
                             </div>
 
-                            <hr>
                             <!-- 1박 가격 -->
                             <div class="hotel-per-day-price-container info-container">
                                 <p>
@@ -371,7 +295,7 @@
                                 <i class="fas fa-heart unlike"></i>
                             </div>
                         </div>
-                        <hr>
+                        
                     </div>
 
 
@@ -387,15 +311,10 @@
                             <div class="hotel-review-container">
                                 <span class="star-point">
                                     <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
                                 </span>
                                 <span> 3.0 / 5 </span>
                             </div>
-
-                            <hr>
+                            
                             <!-- 1박 가격 -->
                             <div class="hotel-per-day-price-container info-container">
                                 <p>
