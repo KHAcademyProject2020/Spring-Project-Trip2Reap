@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import trip.two.reap.review.model.dao.ReviewDAO;
@@ -13,7 +14,8 @@ import trip.two.reap.review.model.vo.Review;
 @Service("rService")
 public class ReviewServiceImpl implements ReviewService{
 
-	@Autowired
+	@Autowired(required=false)
+	@Qualifier("sqlSessionTemplateMacOS")
 	private SqlSessionTemplate sqlSession;
 	
 	@Autowired

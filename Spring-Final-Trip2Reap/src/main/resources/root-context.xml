@@ -10,20 +10,50 @@
 	       <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
 	       <property name="username" value="TRIP2REAP"/>
 	       <property name="password" value="TRIP2REAP"/>
-	</bean>	
+	</bean>
+	
 	
  	<!-- sqlSession 빈 등록  -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 	    <property name="configLocation" value="classpath:mybatis-config.xml"/>
 	    <property name="dataSource" ref="dataSource"/>
 	</bean>
+	
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 	    <constructor-arg ref="sqlSession"/>
 	</bean>
 	
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 	    <property name="dataSource" ref="dataSource"></property>
-	</bean> 
+	</bean>  
+	
+	
+	
+	<!-- DataSource for MAC OS -->
+	<bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSourceMacOS" destroy-method="close">
+			<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+			<property name="url" value="jdbc:oracle:thin:@localhost:49161:xe"/>
+			<property name="username" value="TRIP2REAP"/>
+			<property name="password" value="TRIP2REAP"/>
+	</bean>	
+	
+	
+	<!--sqlSession bean for Mac OS  -->
+	<bean id="sqlSessionMacOS" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis-config.xml"/> 
+		<property name="dataSource" ref="dataSourceMacOS"/>
+	</bean>
+	
+	<bean id="sqlSessionTemplateMacOS" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionMacOS"/>
+	</bean>
+	
+	<bean id="transactionManagerMacOS" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSourceMacOS"/>
+	</bean>
+	
+	
+	
 	
 	<!-- Email 빈 등록  -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
