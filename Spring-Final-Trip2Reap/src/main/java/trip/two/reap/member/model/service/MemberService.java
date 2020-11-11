@@ -8,8 +8,4 @@ public interface MemberService {
 
 	int memberCheck(String userId);
 
-	Member memberLoginMacOS(Member m);
-
-	int memberCheckMacOS(String userId);
-
 }

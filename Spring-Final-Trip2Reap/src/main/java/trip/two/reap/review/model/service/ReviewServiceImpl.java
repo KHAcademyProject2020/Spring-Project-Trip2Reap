@@ -13,20 +13,13 @@ import trip.two.reap.review.model.vo.Review;
 
 @Service("rService")
 public class ReviewServiceImpl implements ReviewService{
-	// windows os
-	@Autowired(required=false)
-	@Qualifier("sqlSessionTemplate")
+
+	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
-	// mac os
-	@Autowired(required=false)
-	@Qualifier("sqlSessionTemplateMacOS")
-	private SqlSessionTemplate sqlSessionMacOS;
 	
 	@Autowired
 	private ReviewDAO rDAO;
 	
-	// windows -methods //
 	@Override
 	public int getListCount() {
 		return rDAO.getListCount(sqlSession);
@@ -55,37 +48,4 @@ public class ReviewServiceImpl implements ReviewService{
 	
 		return rDAO.updateReview(sqlSession, r);
 	}
-	
-	
-	//mac os - methods //
-	
-	@Override
-	public int getListCountMacOS() {
-		return rDAO.getListCount(sqlSessionMacOS);
-	}
-	
-	@Override
-	public ArrayList<Review> selectListMacOS(PageInfo pi) {
-		return rDAO.selectList(sqlSessionMacOS, pi);
-	}
-	
-	@Override
-	public Review selectReviewMacOS(int boNo) {
-		Review r = null;
-	      
-	    int result = rDAO.addReadCount(sqlSessionMacOS, boNo);   // 조회수
-	    
-	    if(result > 0) {
-	    	r = rDAO.selectReview(sqlSessionMacOS, boNo);
-	    }
-	      
-	    return r;
-	}
-
-	@Override
-	public int updateReviewMacOS(Review r) {
-	
-		return rDAO.updateReview(sqlSessionMacOS, r);
-	}	
-	
 }
