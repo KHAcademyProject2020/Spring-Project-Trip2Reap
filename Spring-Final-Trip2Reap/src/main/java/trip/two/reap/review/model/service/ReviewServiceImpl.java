@@ -13,17 +13,20 @@ import trip.two.reap.review.model.vo.Review;
 
 @Service("rService")
 public class ReviewServiceImpl implements ReviewService{
-	// common
+	// windows os
+	@Autowired(required=false)
+	@Qualifier("sqlSessionTemplate")
+	private SqlSessionTemplate sqlSession;
+	
+	// mac os
+	@Autowired(required=false)
+	@Qualifier("sqlSessionTemplateMacOS")
+	private SqlSessionTemplate sqlSessionMacOS;
+	
 	@Autowired
 	private ReviewDAO rDAO;
 	
-	
-	// windows os
-	@Autowired(required=false)
-	@Qualifier("sqlSessionTemplateMacOS")
-	private SqlSessionTemplate sqlSession;
-	
-	
+	// windows -methods //
 	@Override
 	public int getListCount() {
 		return rDAO.getListCount(sqlSession);
@@ -54,11 +57,7 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 	
 	
-	
-	// mac os
-	@Autowired(required=false)
-	@Qualifier("sqlSessionTemplateMacOS")
-	private SqlSessionTemplate sqlSessionMacOS;
+	//mac os - methods //
 	
 	@Override
 	public int getListCountMacOS() {
