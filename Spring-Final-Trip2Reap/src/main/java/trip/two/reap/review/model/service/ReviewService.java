@@ -16,5 +16,15 @@ public interface ReviewService {
 	int updateReview(Review r);
 	
 	
+	// macOS
+	int updateReviewMacOS(Review r);
+
+	Review selectReviewMacOS(int boNo);
+
+	ArrayList<Review> selectListMacOS(PageInfo pi);
+
+	int getListCountMacOS();
+	
+	
 
 }
