@@ -933,11 +933,11 @@
 									<div class="review_point">
 										<%-- 리뷰 부여 별점.. --%>
 										<span class="review_stars">
+											<i class="fas fa-star"></i>
 											<i class="far fa-star"></i>
-											<i class="fas fa-star"></i>
-											<i class="fas fa-star"></i>
-											<i class="fas fa-star"></i>
-											<i class="fas fa-star"></i>
+											<i class="far fa-star"></i>
+											<i class="far fa-star"></i>
+											<i class="far fa-star"></i>
 										</span>
 									</div>
 									
@@ -993,9 +993,14 @@
 									</div>
 								</div>
 							</div>
-						</li>
-						<%--리뷰 1개 표본  끝 --%>
+						</li> <%--리뷰 1개 표본  끝 --%>
+						
 					</ul>
+					
+					<%-- 더보기 버튼  --%>
+					<div class="review_more_btn_container">
+						<button id="review_more_btn">더보기 </button>
+					</div>
 					
 				</div><%-- 등록한 리뷰 컨테이너 (reviews-container) --%>
 			</div> <%-- 호텔리뷰 컨테이너  --%>

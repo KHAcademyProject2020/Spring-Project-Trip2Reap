@@ -1054,4 +1054,29 @@ span.review_stars{
 	padding: 10px 0;
 	
 }
+
+/* 리뷰 더보기 버튼   */
+.review_more_btn_container{
+	position: relative;
+	margin: 30px;
+}
+
+#review_more_btn{
+	position: relative;
+	font-size: 1.2em;
+	width: 80%;
+	padding: 10px;
+	border: var(--mid-green) 1px solid;
+	background-color: transparent;
+	font-weight: bold;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+#review_more_btn:hover{
+	background-color: var(--mid-green);
+	color: #fff;
+}
+
+
  
