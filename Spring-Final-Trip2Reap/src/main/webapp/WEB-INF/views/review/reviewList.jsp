@@ -13,7 +13,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 		<header>
 		<c:import url="../common/menubar.jsp" />
 		</header>
@@ -22,7 +21,7 @@
 		<div id="all_div">
 		<div id="menu_div">
 			<div id="menu_left_div">
-				<img src="resources/images/review.jpg" id="menu_img"/>
+				<img src="resources/images/reviewIcon.png" id="menu_img"/>
 				<span id="menu" >여행 후기</span>
 			</div>
 		
@@ -54,11 +53,25 @@
 		<c:forEach var="b" items="${list}">
 		<tr align="center" class="board_list">
 			<td class="board_list">${b.boNo}</td>
-			<td class="board_list" onclick="location.href='reviewDetail.bo';">${b.boTitle}[${b.boTag }]</td>
-			<td class="board_list">${b.memberId}</td>
+			<td class="board_list">
+				<c:if test="${ !empty loginUser }">
+					<c:url var="reviewDetail" value="reviewDetail.bo">
+						<c:param name="boNo" value="${ b.boNo }"/>
+						<c:param name="page" value="${ pi.currentPage }"/>
+					</c:url>
+					<a href="${ reviewDetail}">${ b.boTitle }${b.boTag }</a>
+				</c:if>
+				<c:if test="${ empty loginUser }">
+					${ b.boTitle }${b.boTag }		
+				</c:if>
+			
+			</td>
+			<td class="board_list">${b.memberId }</td>
 			<td class="board_list">${b.regDate }</td>
-			<td class="board_list">${b.boCount}</td>
-			<td class="board_list">test</td>
+			<td class="board_list">${b.boCount }</td>
+			<td class="board_list">like</td>
+
+		
 		</tr>
 		</c:forEach>
 		</table>

@@ -52,7 +52,7 @@ border-radius: 10px;
 			<div id="all_div">
 				<div id="menu_div">
 					<div id="menu_left_div">
-						<img src="resources/images/review.jpg" id="menu_img" /> <span
+						<img src="resources/images/reviewIcon.png" id="menu_img" /> <span
 							id="menu">여행 후기</span>
 					</div>
 
@@ -73,7 +73,7 @@ border-radius: 10px;
 			<div id="board">
 
 				
-				<c:forEach var="i" begin="1" end="3" step="1" varStatus="loop">
+				<c:forEach begin="1" end="3" step="1" varStatus="loop" >
 				<div class="divlist">
 					
 					<c:forEach var="j" begin="1" end="5" step="1" varStatus="loop" items="${list}">
@@ -83,7 +83,7 @@ border-radius: 10px;
 								<td><img src="resources/images/송도.JPG" width="150px" height="150px">
 								</td>
 								
-								<td>${j.boTitle}
+								<td>${j.boTitle}${j.boNo}
 									<hr>
 									<p>${j.boTag}</p> <span>${j.memberId }</span> 
 									<span style="float: right">
@@ -109,7 +109,7 @@ border-radius: 10px;
 					[이전] &nbsp;
 				</c:if>
 				<c:if test="${ pi.currentPage > 1 }">
-					<c:url var="before" value="reviewList.bo">
+					<c:url var="before" value="reviewPhotoList.bo">
 						<c:param name="page" value="${ pi.currentPage - 1 }"/>
 					</c:url>
 					<a href="${ before }">[이전]</a> &nbsp;
@@ -123,9 +123,7 @@ border-radius: 10px;
 					</c:if>
 					
 					<c:if test="${ p ne pi.currentPage }">
-						<c:url var="pagination" value="reviewList.bo">
-							<c:param name="page" value="${ p }"/>
-						</c:url>
+						
 						<a href="${ pagination }">${ p }</a> &nbsp;
 					</c:if>
 				</c:forEach>
@@ -135,7 +133,7 @@ border-radius: 10px;
 					[다음]
 				</c:if>
 				<c:if test="${ pi.currentPage < pi.maxPage }">
-					<c:url var="after" value="reviewList.bo">
+					<c:url var="after" value="reviewPhotoList.bo">
 						<c:param name="page" value="${ pi.currentPage + 1 }"/>
 					</c:url> 
 					<a href="${ after }">[다음]</a>

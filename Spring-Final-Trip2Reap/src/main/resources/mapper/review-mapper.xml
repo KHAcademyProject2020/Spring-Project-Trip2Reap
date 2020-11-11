@@ -27,20 +27,20 @@
       <result column="REGDATE" property="regDate"/>
    </resultMap>
    
-  	
+  	 <update id="addReadCount">
+   		update board
+   		set BO_COUNT= BO_COUNT + 1
+   		where BO_NO= #{boNo}
+   </update>
+ 
 
    <select id="selectReview" resultMap="reviewResultSet">
    	   select *
        from board
-       where boNo=#{boNo} and b_status='Y'
+       where BO_NO=#{boNo} and BO_DELETE_YN='N'
    </select> 
    
-   <update id="addReadCount">
-   		update review
-   		set boCount = boCount + 1
-   		where boNo = #{boNo};
-   </update>
- 
+  
 
 </mapper>
 

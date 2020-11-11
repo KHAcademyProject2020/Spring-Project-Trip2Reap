@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,7 +40,7 @@ table td {
 						id="menu">여행 후기</span>
 				</div>
 			</div>
-
+			
 
 			<!-- 작성하기 div 시작 -->
 			<div id="insert_div">
@@ -49,19 +50,20 @@ table td {
 					<table id="travel_table">
 
 						<tr>
-							<td colspan="5"><span>
-									<h2>
-										[여행지] ${b.boTitle}<br>
-									</h2>
-							</span></td>
+							<td colspan="5">
+									
+										[여행지] ${review.boTitle}
+									
+										
+							</td>
 						</tr>
 						<tr>
-							<td colspan="5"><span><b>글쓴이 : 여행 is best</b></span></td>
+							<td colspan="5"><span><b>글쓴이 : ${review.memberId }</b></span></td>
 						</tr>
 						<tr>
-							<td>2020.09.21.11:23</td>
+							<td>${review.regDate }</td>
 							<td colspan="3"></td>
-							<td>#여행지 #공원 #분당</td>
+							<td>${review.boTag }</td>
 						</tr>
 
 						<tr>
@@ -78,8 +80,7 @@ table td {
 
 						<tr>
 							<td colspan="5">
-								<div>국내 방방곡곡에서 추천해준 분당 율동공원에 다녀왔습니다! 사람도 별로 없었고 날씨도 너무
-									좋았습니다. 다른 분들도 시간날 때 한번 오시면 후회안하실 거 같습니다!</div>
+								<div>${review.boContent }</div>
 							</td>
 						</tr>
 						<tr>
