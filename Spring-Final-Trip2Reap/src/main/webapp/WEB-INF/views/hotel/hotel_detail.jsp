@@ -826,21 +826,178 @@
 								<tr>
 									<td class="review_label">리뷰 내용 </td>
 									<td class="review_insert_td">
-										<textarea id="review_content" placeholder="리뷰내용을 작성해주세요." cols="80" rows="5" ></textarea>
+										<textarea id="review_content" placeholder="리뷰내용을 작성해주세요." cols="50" rows="3" ></textarea>
+										<div class="review_content_counter_wrapper">
+											<span id="review_content_cnt">0</span>/200
+										</div>
 									</td>
 								</tr>
 							</table>
+							
+							<script>
+									$(function(){
+										let reviewCnt= $('#review_content_cnt');
+										
+										$('#review_content').on({
+											'keyup': function(){
+												let nowLen= $(this).val().length;
+												
+												if(nowLen>200){
+													alert('200자를 초과하였습니다!');
+													// 최대 200자까지만 제한해둔다.
+													$(this).val( $(this).val().substring(0,200) );
+													nowLen=$(this).val().length;
+												}
+												
+												// 현재 글자 수 
+												reviewCnt.text(nowLen);
+											}
+										});
+									});
+									
+									</script>
 							<button id="insert-btn">등록</button>
 						</div>
 					</div>
-				</div>
+				</div><%-- 리뷰등록 컨테이너 (insert-review-container)  --%>
 				
 				
-				<%-- 리뷰수정 컨테이너  --%>
-				<div id="edit-review-container">
+				<%-- 등록한 리뷰컨테이너(reviews-container) --%>
+				<div id="reviews-container">
 					
-				</div>
-			
+					<ul id="reviews_wrappers_ul">
+						<%--리뷰 1개  --%>
+						<li class="one_review_container">
+							<div class="one_review_wrapper">
+							
+								<%--리뷰삭제버튼은 관리자/ 리뷰작성자 본인 만 보인다. --%>
+								<div class="remove_review_wrapper">
+									<i class="remove_review fas fa-times"></i> <%--리뷰 삭제버튼 --%>
+								</div>
+								
+								<%--작성자 / 리뷰 내용 관련  --%>
+								<div class="review_writer_control_wrapper">
+									<div class="review_writer_nickname_wrapper">
+											<h3>doubleYY{리뷰작성자 닉네임 }</h3> <%--리뷰작성자 닉네임  --%>
+									</div>
+										
+									<div class="review_upload_date">
+										<small>2020.06.02 {리뷰작성 날짜 } </small> <%--리뷰 업로드날짜 --%>
+									</div>
+									
+									<div class="review_point">
+										<%-- 리뷰 부여 별점.. --%>
+										<span class="review_stars">
+											<i class="fas fa-star"></i>
+											<i class="fas fa-star"></i>
+											<i class="fas fa-star"></i>
+											<i class="far fa-star"></i>
+											<i class="far fa-star"></i>
+										</span>
+									</div>
+									
+									<div class="review_content_container">
+										<%--리뷰 내용  --%>
+										<span class="reivewer_review_content">
+										{ 리뷰 내용 }
+										여자친구랑 처음으로 같이 호텔갔는데 뷰전망은 진짜 좋네요.
+										조식이나 레스토랑 음식은 그냥 먹을만했어요.
+										카페나 편의 시설이 많이 부족한게 아쉬워요.
+										</span>
+									</div>
+								</div>
+							</div>
+						</li>
+						<%--리뷰 1개 표본  끝 --%>
+						
+						
+						<%-- 2번째 샘플덧글  --%>
+						<li class="one_review_container">
+							<div class="one_review_wrapper">
+							
+								<%--리뷰삭제버튼은 관리자/ 리뷰작성자 본인 만 보인다. --%>
+								<div class="remove_review_wrapper">
+									<i class="remove_review fas fa-times"></i> <%--리뷰 삭제버튼 --%>
+								</div>
+								
+								<%--작성자 / 리뷰 내용 관련  --%>
+								<div class="review_writer_control_wrapper">
+									<div class="review_writer_nickname_wrapper">
+											<h3>werty12123</h3> <%--리뷰작성자 닉네임  --%>
+									</div>
+										
+									<div class="review_upload_date">
+										<small>2020.07.17</small> <%--리뷰 업로드날짜 --%>
+									</div>
+									
+									<div class="review_point">
+										<%-- 리뷰 부여 별점.. --%>
+										<span class="review_stars">
+											<i class="far fa-star"></i>
+											<i class="fas fa-star"></i>
+											<i class="fas fa-star"></i>
+											<i class="fas fa-star"></i>
+											<i class="fas fa-star"></i>
+										</span>
+									</div>
+									
+									<div class="review_content_container">
+										<%--리뷰 내용  --%>
+										<span class="reivewer_review_content">
+										룸서비스에서 만족스럽지 못했어요. 오히려 실망했어요.
+										룸서비스 퀄리티도 별로고, 무엇보다도 호텔직원이 너무 불친절했어요.
+										</span>
+									</div>
+								</div>
+							</div>
+						</li>
+						 <%--리뷰 1개 표본  끝 --%>
+						
+						<%-- 3번째 샘플덧글  --%>
+						<li class="one_review_container">
+							<div class="one_review_wrapper">
+							
+								<%--리뷰삭제버튼은 관리자/ 리뷰작성자 본인 만 보인다. --%>
+								<div class="remove_review_wrapper">
+									<i class="remove_review fas fa-times"></i> <%--리뷰 삭제버튼 --%>
+								</div>
+								
+								<%--작성자 / 리뷰 내용 관련  --%>
+								<div class="review_writer_control_wrapper">
+									<div class="review_writer_nickname_wrapper">
+											<h3>ek12mv2</h3> <%--리뷰작성자 닉네임  --%>
+									</div>
+										
+									<div class="review_upload_date">
+										<small>2020.09.28 </small> <%--리뷰 업로드날짜 --%>
+									</div>
+									
+									<div class="review_point">
+										<%-- 리뷰 부여 별점.. --%>
+										<span class="review_stars">
+											<i class="fas fa-star"></i>
+											<i class="fas fa-star"></i>
+											<i class="fas fa-star"></i>
+											<i class="far fa-star"></i>
+											<i class="far fa-star"></i>
+										</span>
+									</div>
+									
+									<div class="review_content_container">
+										<%--리뷰 내용  --%>
+										<span class="reivewer_review_content">
+										앞에 뷰가 너무 좋아요. 앞에 바다가 있어서 경치보는 재미가있어요!
+										서비스나 조식은 그냥그래도 경치가 좋아서 만족스러워요!
+										
+										</span>
+									</div>
+								</div>
+							</div>
+						</li>
+						<%--리뷰 1개 표본  끝 --%>
+					</ul>
+					
+				</div><%-- 등록한 리뷰 컨테이너 (reviews-container) --%>
 			</div> <%-- 호텔리뷰 컨테이너  --%>
 		
 		<%--hotel-review-container에서 발생하는 자바스크립트 함수  --%>

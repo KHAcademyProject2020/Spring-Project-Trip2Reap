@@ -858,6 +858,7 @@ button.room-reservation-btn:hover{
  	position: relative;
  	width: 100%;
  	padding: 0 100px;
+ 	padding-top: 20px;
  }
  
  
@@ -879,11 +880,23 @@ button.room-reservation-btn:hover{
  	cursor: pointer;
  }
  
- #insert-review-btn:hover,
- #insert-btn:hover{
+
+ 
+ #insert-review-btn:hover{
  	background-color: var(--mid-green);
  	color: #fff;
  }
+ 
+ #insert-btn{
+ 	background-color: var(--mid-green);
+ 	color: #fff;
+ 	border-color: transparent;
+ }
+ 
+ #insert-btn:hover{
+ 	background-color: var(--dark-green);	
+ }
+ 
  
  #insert-btn{
  	width: 50%;
@@ -894,33 +907,151 @@ button.room-reservation-btn:hover{
  #insert-review-container{
  	display: none;
  	position: relative;
- 	width: 100%;
  	padding: 20px 10px;
- 	
- 	
+
+ 	margin: 30px;
  	/* sample background color  */
- 	background-color: var(--blue-gray); 	
+ 	background-color: var(--pink-gray);
+ 	
+ 	border: var(--mid-geen) 1px solid;
+ 	border-radius: 3px; 	
  } 
  
 
-.insert-review-wrapper td{
+.insert-review-wrapper{
 	margin: 20px;
+	margin-top: 40px;
+	margin-bottom: 10px;
+}
+
+.insert-review-wrapper table{
+	margin-left: 15px;
 }
 
 
+.review_label{
+	padding-right: 10px;
+	font-weight: bold;
+}
  
  /* 리뷰점수 selector */
- #reivew_score{
- 	
+ .review_insert_td{
+ 	padding: 20px 25px;
+ 	text-align: left;
  }
  
- 
+/* 리뷰 내용 글자 카운터 td셀   */
+.review_content_counter_wrapper{
+	position: relative;
+	width: 100%;
+	text-align: right;
+}
+
  /* 리뷰내용 작성 */
  #review_content{
  	padding: 10px;
 	resize: none; /*크기 고정 */
+	border-color: var(--mid-green);
+ }
+ 
+ #review_content,
+ #review_score{
+ 	border-radius: 3px;
+ }
+ 
+ #review_content:focus,
+ #review_score:focus{
+ 	outline: var(--mid-green);
  }
 
- 
-  
+/* 리뷰점수 selector   */
+#review_score{
+	width: 376px;
+	height: 25px;
+	border-color: var(--mid-green);
+}
+
+
+/* 등록된 댓글  */
+/* 리뷰 댓글 컨테이너   */
+#reviews-container{
+	position: relative;	
+	margin-top: 50px;
+	width: 100%;
+}
+
+#review_wrappers_ul{
+	position: relative;
+}
+
+li.one_review_container{
+	padding: 10px 0;
+	margin: 10px 0;	
+}
+
+/*덧글 1개 */
+.one_review_wrapper{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: flex-start;
+	width: 80%;
+	position: relative;
+
+}
+
+.remove_review_wrapper{
+	position: relative;
+	flex-basis: 20%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: flex-start;
+	
+	padding-right: 5px;
+	padding-top: 5px;
+}
+
+.remove_review{
+	color: var(--edit-red);
+	cursor: pointer;
+}
+
+.remove_review:hover{
+	color: var(--edit-red-hover);
+}
+
+
+.review_writer_control_wrapper{
+	position: relative;
+	flex-basis: 80%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+.review_content_container,
+.reviewer_review_content{
+	text-align: left;
+}
+
+.review_upload_date{
+	padding: 5px 0;
+}
+
+.review_point{
+	padding-bottom: 7px 0;
+}
+
+span.review_stars{
+	color: var(--mid-green);
+}
+
+.review_content_container{
+	position: relative;
+	width: 100%;
+	padding: 10px 0;
+	
+}
  
