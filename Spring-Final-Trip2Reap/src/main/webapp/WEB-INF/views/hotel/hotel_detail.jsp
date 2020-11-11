@@ -826,7 +826,7 @@
 								<tr>
 									<td class="review_label">리뷰 내용 </td>
 									<td class="review_insert_td">
-										<textarea id="review_content" placeholder="리뷰내용을 작성해주세요." ></textarea>
+										<textarea id="review_content" placeholder="리뷰내용을 작성해주세요." cols="80" rows="5" ></textarea>
 									</td>
 								</tr>
 							</table>
