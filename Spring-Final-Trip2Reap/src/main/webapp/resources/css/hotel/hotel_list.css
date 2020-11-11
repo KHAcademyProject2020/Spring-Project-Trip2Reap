@@ -465,14 +465,22 @@ button.hotel-reserve-btn{
   justify-content: space-around;
 }
 
+.modal-title-container{
+	position: relative;
+	text-align: center;
+	padding-bottom: 15px;
+}
+
 .modal-body-container{
   margin: 10px auto;
+  margin-left: 30px;
   text-align: center;
 }
 
 .modal-body-container td{
   box-sizing: content-box;
   position: relative;
+  padding: 5px 0;
 }
 
 .detail-search-option{
@@ -492,7 +500,7 @@ td > h5{
 
 .detail-search-option:nth-child(4){
   margin-left: 11px;
-  padding-left: 10px;
+  padding-left: 10px 1px;
   border-style: 1px solid rgb(118,118,118);
 }
 
@@ -508,14 +516,13 @@ td > h5{
 
   border-color: transparent;
   border-radius: 5px;
-  background-color: var(--dark-green);
+  background-color: var(--mid-green);
   color: #fff;
   cursor:pointer;
 }
 
 #detail-hotel-search:hover{
-  background-color: var(--emerald-green);
-  color: var(--dark-gray);
+  background-color: var(--dark-green);
 }
 
 /* animated modal=============== */
@@ -544,7 +551,7 @@ body.modal-active{
 
 #modal-container .modal-background .modal{
   background: #fff;
-  padding: 90px;
+  padding: 80px;
   display: inline-block;
   border-radius: 3px;
   position: relative;
