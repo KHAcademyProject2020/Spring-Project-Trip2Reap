@@ -1,5 +1,6 @@
      div { margin: 0px; padding: 0px; }
      input[type=text]:focus{ outline: none; }
+     input[type=password]:focus{ outline: none; }
      input[type=button]:focus{ outline: none; }
      
      
@@ -18,7 +19,7 @@
               height : 23px; width: 24px; text-align: center; line-height: 23px; font-size: 14px; }
      #info6 { display: inline-block; font-weight:bold; text-align: right; }
      #info7 { display: inline-block; font-weight:bold; color:darkgray; }
-     #space_3 { height : 30px; }
+     #space_3 { height : 20px; }
      
      
      /* 정보입력란  */
@@ -37,7 +38,6 @@
      .infoRight { display : inline-block; border: 1px solid lightgray; width : 520px; height : 50px; 
                   border-left: none; vertical-align: top; border-top: none; }
      .infoText { width : 480px; height : 50px; border: none; font-size: 13px; color: darkgray;  }
-     /* .infoText { width : 510px; height : 50px; border: none; font-size: 17px; font-weight: bold; } */
      #space_5 { display : inline-block; width : 200px; }
      
      
@@ -46,12 +46,29 @@
             background: rgb(251, 251, 251); vertical-align: top; }         
      #id2 { display : inline-block; border: 1px solid lightgray; width : 520px; height : 50px; 
             border-left: none; vertical-align: top; }
-     /* 변경후  */
-     /* #id1 { display : inline-block; border: 1px solid lightgray; width : 180px; height : 70px; 
-            background: rgb(251, 251, 251); vertical-align: top; }         
-     #id2 { display : inline-block; border: 1px solid lightgray; width : 520px; height : 70px; 
-            border-left: none; vertical-align: top; } */
+     #idText { width : 430px; height : 50px; border: none; font-size: 13px; color: darkgray;  }
      #idInfoBox { color: red; font-size: 13px; line-height: 3px; margin-left: 23px; display: none; }
+     #idCheckIcon { font-size: 20px; vertical-align: middle; width: 30px; text-align: left; color: lightgray; }
+     
+     
+     /* 비밀번호  */
+     #pwd1_1 { display : inline-block; border: 1px solid lightgray; width : 180px; height : 50px; 
+            background: rgb(251, 251, 251); vertical-align: top; border-top: none; border-bottom: none; }         
+     #pwd1_2 { display : inline-block; border: 1px solid lightgray; width : 520px; height : 50px; 
+            border-left: none; vertical-align: top; border-top: none; border-bottom: none; }
+     #pwdText { width : 430px; height : 50px; border: none; font-size: 13px; color: darkgray;  }
+     #pwd1InfoBox { color: red; font-size: 13px; line-height: 3px; margin-left: 23px; display: none; }
+     #pwd1CheckIcon { font-size: 20px; vertical-align: middle; width: 30px; text-align: left; color: lightgray; }
+     
+     
+     /* 비밀번호 확인  */
+     #pwd2_1 { display : inline-block; border: 1px solid lightgray; width : 180px; height : 50px; 
+            background: rgb(251, 251, 251); vertical-align: top; }         
+     #pwd2_2 { display : inline-block; border: 1px solid lightgray; width : 520px; height : 50px; 
+            border-left: none; vertical-align: top; }
+     #pwdText2 { width : 430px; height : 50px; border: none; font-size: 13px; color: darkgray;  }
+     #pwd2InfoBox { color: red; font-size: 13px; line-height: 3px; margin-left: 23px; display: none; }
+     #pwd2CheckIcon { font-size: 20px; vertical-align: middle; width: 30px; text-align: left; color: lightgray; }
       
      
      /* 이름  */
@@ -59,21 +76,53 @@
              background: rgb(251, 251, 251); vertical-align: top; }         
      #name2 { display : inline-block; border: 1px solid lightgray; width : 520px; height : 50px; 
               border-left: none; vertical-align: top; }
+     #nameText { width : 480px; height : 50px; border: none; font-size: 13px; color: darkgray;  }
+     #nameInfoBox { color: red; font-size: 13px; line-height: 3px; margin-left: 23px; display: none; }
+     
+     
+     /* 닉네임  */
+     #nickname1 { display : inline-block; border: 1px solid lightgray; width : 180px; height : 50px; 
+                 background: rgb(251, 251, 251); vertical-align: top; border-top: none; }         
+     #nickname2 { display : inline-block; border: 1px solid lightgray; width : 520px; height : 50px; 
+                  border-left: none; vertical-align: top; border-top: none; }
+     #nicknameText { width : 480px; height : 50px; border: none; font-size: 13px; color: darkgray;  }
+     #nicknameInfoBox { color: red; font-size: 13px; line-height: 3px; margin-left: 23px; display: none; }
      
               
      /* 이메일  */
+     #email1 { display : inline-block; border: 1px solid lightgray; width : 180px; height : 50px; 
+               background: rgb(251, 251, 251); vertical-align: top; border-top: none; }         
+     #email2 { display : inline-block; border: 1px solid lightgray; width : 520px; height : 50px; 
+               border-left: none; vertical-align: top; border-top: none; }
      #emailText { width : 360px; height : 50px; border: none; font-size: 13px; color: darkgray; }
+     #emailInfoBox { color: red; font-size: 13px; line-height: 3px; margin-left: 23px; display: none; }
      #sendMessage { display : inline-block; width : 100px; height : 30px; background: rgb(226,240,217); font-size: 13px; 
                     color : rgb(119,175,130); border : 1px solid rgb(119,175,130); text-align: center; vertical-align: middle; }
+     #sendMessage:hover { background : rgb(119,175,130); color : rgb(226,240,217); }
      #mailLabel { line-height: 27px; cursor: pointer; }
      
      
      /* 인증번호  */
      #confirmDiv { display : none;  }
+     #confirm1 { display : inline-block; border: 1px solid lightgray; width : 180px; height : 50px; 
+               background: rgb(251, 251, 251); vertical-align: top; border-top: none; }         
+     #confirm2 { display : inline-block; border: 1px solid lightgray; width : 520px; height : 50px; 
+               border-left: none; vertical-align: top; border-top: none; }
      #confirmText { width : 360px; height : 50px; border: none; font-size: 13px; color: darkgray; }
+     #confirmInfoBox { color: red; font-size: 13px; line-height: 3px; margin-left: 23px; display: none; }
      #confirmMessage { display : inline-block; width : 100px; height : 30px; background: rgb(226,240,217); font-size: 13px; 
-                       color : rgb(119,175,130); border : 1px solid rgb(119,175,130); text-align: center; vertical-align: middle; }
-     #confirmLabel { line-height: 28px; cursor: pointer; }
+                    color : rgb(119,175,130); border : 1px solid rgb(119,175,130); text-align: center; vertical-align: middle; }
+     #confirmMessage:hover { background : rgb(119,175,130); color : rgb(226,240,217); }
+     #confirmLabel { line-height: 27px; cursor: pointer; vertical-align : bottom; line-height: 28px; }
+     
+     
+     /* 휴대폰 번호  */
+     #phone1 { display : inline-block; border: 1px solid lightgray; width : 180px; height : 50px; 
+               background: rgb(251, 251, 251); vertical-align: top; border-top: none; }         
+     #phone2 { display : inline-block; border: 1px solid lightgray; width : 520px; height : 50px; 
+               border-left: none; vertical-align: top; border-top: none; }
+     #phoneText { width : 360px; height : 50px; border: none; font-size: 13px; color: darkgray; }
+     #phoneInfoBox { color: red; font-size: 13px; line-height: 3px; margin-left: 23px; display: none; }
      
      
      /* 성별  */

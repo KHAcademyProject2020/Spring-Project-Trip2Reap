@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -102,11 +103,30 @@ public class MemberController {
 	
 	// 아이디 중복 체크
 	@RequestMapping("checkId.me")
-	public void memberCheck(Model model, @RequestParam("userId") String userId) {
-		System.out.println("userId : " + userId);
+	@ResponseBody
+	public String memberCheck(@RequestParam("userId") String userId) {	
 		int result = mService.memberCheck(userId);
-		System.out.println("result : " + result);
-		
+		String check = "";
+		if(result == 0) {
+			check = "Y";
+		} else {
+			check = "N";
+		}		
+		return check;
+	}
+	
+	// 닉네임 중복 체크
+	@RequestMapping("checkNickname.me")
+	@ResponseBody
+	public String nicknameCheck(@RequestParam("nickname") String nickname) {
+		int result = mService.nicknameCheck(nickname);
+		String check = "";
+		if(result == 0) {
+			check = "Y";
+		} else {
+			check = "N";
+		}
+		return check;
 	}
 	
 	
