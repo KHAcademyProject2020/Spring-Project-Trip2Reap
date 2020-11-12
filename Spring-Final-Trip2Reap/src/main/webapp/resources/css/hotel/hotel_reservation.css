@@ -76,10 +76,48 @@ html, body{
 	padding-bottom: 20px;
 }
 
+.subtitle-container > h1{
+	font-size: 28px;
+}
+
+.hotel-reservation-content-container{
+	padding: 25px 100px;
+}
+
 /*  
 ========================================================
 1. 예약 호텔 / 방 정보 
 */
+#reserve_hotel_room_info_container{
+	padding-bottom: 0px;
+}
+
+
+.hotel-name-wrapper,
+.room-name-wrapper{
+	padding-bottom: 10px;
+}
+
+.hotel-name-wrapper{
+	color: var(--dark-green);
+}
+
+.hotel_reservation_common_container:nth-child(1) .subtitle-container:nth-child(1){
+	padding-bottom:0;
+	margin-bottom: 0;
+}
+
+div.hotel_reservation_common_container:nth-child(3){
+	padding-top: 25px;
+}
+
+#hotel_name{
+	font-size: 32px;
+}
+
+#room_name{
+	font-size: 25px;
+}
 
 
 /*  
@@ -93,7 +131,85 @@ html, body{
 3. 객실 및 인원수 선택 
 */
 
+.count_reserve_person_container{
+	position: relative;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
 
+.count_container{
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	
+	width: 85%;
+	margin: 0 25px;
+	
+}
+
+
+.count_container:nth-child(2){
+	border-top: var(--blue-gray) 1px solid;
+
+}
+
+/* 성인/ 어린이 라벨   */
+.count_label{
+	position: relative;
+	flex-basis: 30%;
+	font-size: 1.5em;
+	padding: 15px 25px;
+	
+	text-align: center;
+}
+
+
+/*  */
+.count_wrapper{
+	position: relative;
+	
+	flex-basis: 70%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+
+	padding: 15px 25px;
+}
+
+/* 인원 증감 버튼 */
+.button_wrapper{
+	position: relative;
+}
+
+.button_wrapper button,
+.button_wrapper div{
+	position: relative;
+	display: inline-block;
+	margin: 0 10px;
+	font-size: 1.3em;
+}
+
+.button_wrapper div{
+	width: 100px;
+}
+
+
+.minus_btn, .plus_btn{
+	width: 30px;
+	height: 30px;
+	
+	position: relative;
+	background-color: var(--blue-gray);
+	border-color: transparent;
+	padding: 3px;
+	border-radius: 8px;
+	text-align: center;
+	cursor: pointer;
+}
 
 /*  
 ========================================================
@@ -103,6 +219,7 @@ button#go_payment{
 	width: 60%;
 	font-size: 1.2em;
 	font-weight: bold;
+	margin: 20px;
 	padding: 20px 0;
 	border-color: transparent;
 	border-radius: 5px;
