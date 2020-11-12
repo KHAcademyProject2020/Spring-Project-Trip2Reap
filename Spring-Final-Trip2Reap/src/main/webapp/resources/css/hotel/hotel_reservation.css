@@ -54,6 +54,12 @@ html, body{
 	text-align: left;
 }
 
+input[type="text"]:focus,
+button:focus{
+	outline: none;
+}
+
+
 /*  
 ========================================================
 0.  only for hotel_reservation - 공통  
@@ -191,11 +197,13 @@ div.hotel_reservation_common_container:nth-child(3){
 	display: inline-block;
 	margin: 0 10px;
 	font-size: 1.3em;
+	font-weight: bold;
 }
 
 .button_wrapper div{
 	width: 100px;
 }
+
 
 
 .minus_btn, .plus_btn{

@@ -49,14 +49,22 @@
 		</div>
 		
 		<div class="hotel-reservation-content-container">
+			<%-- check in  --%>
+			<div class="calendar_container">
 			
+			</div>
+			
+			<%-- check out --%>
+			<div class="calendar_container">
+			
+			</div>
 		</div>
 	</div>
 	
 	<!--3. 객실 및 인원수 선택   -->
 	<div class="hotel_reservation_common_container">
 		<div class="subtitle-container">
-			<h1>객실 및 인원 수 선택 </h1>
+			<h1>객실이용 인원 수 선택 </h1>
 		</div>
 		
 		<div class="hotel-reservation-content-container">
@@ -176,7 +184,7 @@
 		</div>
 		
 		<div class="hotel-reservation-content-container">
-		
+			
 		</div>
 		
 		<div class="hotel-reservation-content-container">
