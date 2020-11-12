@@ -93,12 +93,14 @@
 			let $adultCntVal= Number($('#adult_count').text());
 			if($adultCntVal==0){
 				$('#adult_minus_btn').attr('disabled', true);
+				$('#adult_minus_btn').css('cursor', 'none' );
 			}
 			
 
 			let $childCntVal=Number($('#child_count').text());
 			if($childCntVal==0){
 				$('#child_minus_btn').attr('disabled', true);
+				$('#child_minus_btn').css('cursor', 'none');
 			}
 			
 			// 성인 인원수 버튼 선택
@@ -110,6 +112,7 @@
 				$adultCntVal=$nowVal;
 				if($adultCntVal>0){
 					$('#adult_minus_btn').attr('disabled', false);
+					$('#adult_minus_btn').css('cursor', 'pointer');
 				}
 				
 				$('#adult_count').text($nowVal);
@@ -122,9 +125,11 @@
 				$adultCntVal=$nowVal;
 				if($adultCntVal<=0){
 					$('#adult_minus_btn').attr('disabled', true);
+					$('#adult_minus_btn').css('cursor', 'none');
 					$('#adult_count').text(0);
 				}else{
 					$('#adult_count').text($nowVal);
+					$('#adult_minus_btn').css('cursor', 'pointer');
 				}
 			});
 			
@@ -136,6 +141,7 @@
 				$childCntVal=$nowCVal;
 				if($childCntVal>0){
 					$('#child_minus_btn').attr('disabled', false);
+					$('#child_minus_btn').css('cursor', 'pointer');
 				}
 				$('#child_count').text($nowCVal);
 				
@@ -148,9 +154,11 @@
 				$childCntVal=$nowCVal;
 				if($childCntVal<=0){
 					$('#child_minus_btn').attr('disabled', true);
+					$('#child_minus_btn').css('cursor', 'none');
 					$('#child_count').text(0);
 				}else{
 					$('#child_count').text($nowCVal);
+					$('#child_minus_btn').css('cursor', 'pointer');
 				}
 			});
 			
