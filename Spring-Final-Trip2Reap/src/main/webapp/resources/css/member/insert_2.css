@@ -23,9 +23,9 @@
      
      
      /* 정보입력란  */
-     #infoDiv1 { display : inline-block; width: 810px; }
+     #infoDiv1 { display : inline-block; width: 820px; }
      #infoDiv2 { display : inline-block; color: red; }
-     #infoDiv3 { display : inline-block; font-size: 15px; }
+     #infoDiv3 { display : inline-block; font-size: 14px; }
      #space_4 { height : 10px; }
      #infoDiv4 { display : inline-block; width : 288px; height : 30px; }
      
