@@ -60,7 +60,7 @@
                 <ul id="right_btns" class="btn_ul">
                     <li><button class="btn">인기순</button></li>
                     <li><button class="btn">가격순</button></li>
-                    <li><button class="btn">등록순</button></li>
+                    <li><button class="btn">등급순</button></li>
                 </ul>
             </div>
         </div>
@@ -78,6 +78,9 @@
                             <!-- 호텔이름 -->
                             <div class="hotel-name-container">
                                 <h1>호텔 델루나{호텔이름}</h1>
+                                <div class="hotel-rank-wrapper">
+		                    		<small class="hotel-rank">{호텔 등급}</small>등급 
+		                    	</div>
                             </div>
 
                             <!-- 좋아요 버튼 -->
@@ -131,6 +134,9 @@
                             <!-- 호텔이름 -->
                             <div class="hotel-name-container">
                                 <h1>호텔 트럼프</h1>
+                                <div class="hotel-rank-wrapper">
+		                    		<small class="hotel-rank">5</small>등급 
+		                    	</div>
                             </div>
 
                             <!-- 좋아요 버튼 -->
@@ -184,6 +190,9 @@
                             <!-- 호텔이름 -->
                             <div class="hotel-name-container">
                                 <h1>신라호텔</h1>
+                                <div class="hotel-rank-wrapper">
+		                    		<small class="hotel-rank">4</small>등급 
+		                    	</div>
                             </div>
 
                             <!-- 좋아요 버튼 -->
@@ -236,6 +245,9 @@
                             <!-- 호텔이름 -->
                             <div class="hotel-name-container">
                                 <h1>신라호텔</h1>
+                                <div class="hotel-rank-wrapper">
+		                    		<small class="hotel-rank">5</small>등급 
+		                    	</div>
                             </div>
 
                             <!-- 좋아요 버튼 -->
@@ -288,6 +300,9 @@
                             <!-- 호텔이름 -->
                             <div class="hotel-name-container">
                                 <h1>신라호텔</h1>
+                                <div class="hotel-rank-wrapper">
+		                    		<small class="hotel-rank">4</small>등급 
+		                    	</div>
                             </div>
 
                             <!-- 좋아요 버튼 -->
@@ -329,6 +344,8 @@
 					
 					hotel_detail 이 만들어졌는지 확인하기 위한 테스트용 버튼이라서 링크를 걸어놨습니다 ^^
 					just test for web view page if smashed the button of reservation 
+					
+					(실제) 해당 호텔에 해당하는 상세페이지 뷰로 이동한다. (호텔번호 컬럼으로 호텔을 구분 )
 					--%>
                     <button class="hotel-reserve-btn" onclick="location.href='<%= request.getContextPath() %>/hotelDetailView.ho'">예약하기</button>
                 </div>

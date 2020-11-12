@@ -280,8 +280,22 @@ button.btn{
   flex-basis: 90%;
   padding-top: 10px;
   padding-bottom: 10px;
- 
+  
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
 }
+
+.hotel-rank-wrapper{
+	padding: 0 10px;
+	color: var(--mid-green);
+	font-weight: bold;
+	font-size: 0.8em;
+}
+
+
 
 .hotel-name-container>  h1{
 	font-size: 1.3em;
