@@ -153,7 +153,13 @@
 				
 				<div id="btn-wrapper">
 					<!--버튼  -->
-					<button id="go-reservation-btn">최저가 예약하기</button>
+					<%--
+					[caution- i want you to understand this caution ^^]
+					hotel_reservation이 만들어졌는지 확인하기 위한 테스트용 버튼이라서 링크를 걸어놨습니다.
+					
+					(실제) 해당 호텔의 방 에 대한  예약페이지 뷰로 이동한다. (호텔번호/ 방번호  으로 예약하고자하는 호텔과 방을 구분 )
+					 --%>
+					<button id="go-reservation-btn" onclick="location.href='<%= request.getContextPath() %>/hotelReservationView.ho'">최저가 예약하기</button>
 					
 					<!--only administrator (관리자)  -->
 					<%--

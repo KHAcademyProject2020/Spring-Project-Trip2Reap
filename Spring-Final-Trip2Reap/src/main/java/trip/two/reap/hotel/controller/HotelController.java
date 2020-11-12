@@ -32,7 +32,14 @@ public class HotelController {
 	@RequestMapping("hotelDetailView.ho")
 	public String goHotelDetailView() {
 		// caution! it's not final controller
-		// it's just for beta test to see view page
+		// it's just for beta test to see view page(hotel_detail.jsp)
 		return "hotel_detail";
+	}
+	
+	@RequestMapping("hotelReservationView.ho")
+	public String goHotelReservationView() {
+		//caution! it's not final controller
+		//it's just for beta test to see view page(hotel_detail.jsp)
+		return "hotel_reservation";
 	}
 }
