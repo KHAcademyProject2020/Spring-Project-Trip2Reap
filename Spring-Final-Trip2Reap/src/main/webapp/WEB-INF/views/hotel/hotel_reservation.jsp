@@ -9,8 +9,9 @@
 <head>
 <meta charset="UTF-8">
 
-<%-- jquery cdn --%>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<%-- jquery ui (datepicker) --%>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <%--css --%>
 <link rel="stylesheet" type="text/css" href="resources/css/hotel/hotel_reservation.css">
@@ -18,6 +19,7 @@
 </head>
 
 <body>
+
 <c:import url="../common/menubar.jsp" />
 
 
@@ -49,17 +51,79 @@
 		</div>
 		
 		<div class="hotel-reservation-content-container">
-			<%-- check in  --%>
 			<div class="calendar_container">
+				<%-- check in  --%>
+				<div class="calendar_wrapper">
+					<div class="calendar_icon_wrapper">
+						<i class="far fa-calendar-alt calendar_icon"></i>
+					</div>
+					<div class="calendar_content_wrapper">
+						<input type="text" class="date" id="checkInDatePicker" placeholder="체크인 날짜" size="20">
+					</div>
+				</div>
+				
+				
+				<%-- check out --%>
+				<div class="calendar_wrapper">
+					<div class="calendar_icon_wrapper">
+						<i class="far fa-calendar-alt calendar_icon"></i>
+					</div>
+					<div class="calendar_content_wrapper">
+						<input type="text" class="date" id="checkOutDatePicker" placeholder="체크아웃 날짜" size="20">
+					</div>
+				</div><%-- calendar_wrapper --%>
+			</div><%-- calendar_container--%>
 			
-			</div>
 			
-			<%-- check out --%>
-			<div class="calendar_container">
 			
-			</div>
-		</div>
-	</div>
+			<div class="hotel_using_day">
+					<span></span>
+			</div>		
+		
+		
+		</div><%--hotel-reservation-content-container --%>
+		
+		
+		<%--import : jquery ui (datepicker) --%>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script>
+		//datepicker - api
+		$(function(){
+			
+			//체크인 날짜 선택
+			$('#checkInDatePicker').datepicker({
+				changeYear: true,
+				changeMonth: true,
+				dateFormat: 'yy-mm-dd',
+				showMonthAfterYear: true,
+				dayNamesMin: ['일', '월', '화', '수', '목', '금', '토' ],
+				monthNamesShort : ['1월', '2월','3월','4월','5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월' ],
+				yearSuffix: '년',
+				minDate:0,
+				
+			}); 
+			
+			
+			//체크아웃 날짜 선택
+			$('#checkOutDatePicker').datepicker({
+				changeYear: true,
+				changeMonth: true,
+				dateFormat: 'yy-mm-dd',
+				showMonthAfterYear: true,
+				dayNamesMin: ['일', '월', '화', '수', '목', '금', '토' ],
+				monthNamesShort : ['1월', '2월','3월','4월','5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월' ],
+				yearSuffix: '년',
+				minDate:0,
+					
+			}); 
+			
+		});
+			
+		</script>
+		
+	</div><%--hotel_reservation_common_container --%>
 	
 	<!--3. 객실 및 인원수 선택   -->
 	<div class="hotel_reservation_common_container">
@@ -190,9 +254,7 @@
 		<div class="hotel-reservation-content-container">
 			<button id="go_payment">결제하기 </button> <%-- 체크한 부분에서 결제 api로 이동  --%>
 		</div>
-		
 	</div>
-
 </div>
 
 </body>

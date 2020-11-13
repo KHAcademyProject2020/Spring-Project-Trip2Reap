@@ -131,6 +131,72 @@ div.hotel_reservation_common_container:nth-child(3){
 2. 체크인/ 체크아웃 시간 선택. 
 */
 
+.calendar_container{
+	position: relative;
+	
+	display: flex;
+	flex-direction: row;
+	justify-content:flex-start;
+	align-items: center;
+}
+
+.calendar_container{
+	width: 100%;
+	text-align: center;
+	
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.calendar_wrapper{
+	position: relative;
+	display: flex;
+	
+	padding: 0 10px;
+	
+	flex-direction: row;
+	justify-content: flex-start;
+}
+
+
+.calendar_icon_wrapper,
+.calendar_content_wrapper{
+	position: relative;
+	display: inline-block;
+}
+
+.calendar_icon_wrapper{
+	width: 25px;
+	height: 25px;
+	padding: 10px;
+	background-color: var(--bright-green);
+	text-align: center;
+	
+	border-top-left-radius: 3px;
+	border-bottom-left-radius:3px;
+}
+
+.calendar_icon{
+	position: relative;
+	vertical-align: bottom;
+}
+
+
+.calendar_content_wrapper > input{
+	position: relative;
+	height: 25px;
+	padding: 8px 10px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	border: var(--blue-gray) 2px solid;
+	border-left-color: transparent;
+}
+
+
+.hotel_using_day{
+	
+}
 
 /*  
 ========================================================
@@ -211,7 +277,7 @@ div.hotel_reservation_common_container:nth-child(3){
 	height: 30px;
 	
 	position: relative;
-	background-color: var(--blue-gray);
+	background-color: var(--bright-green);
 	border-color: transparent;
 	padding: 3px;
 	border-radius: 8px;
