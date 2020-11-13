@@ -9,12 +9,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- css -->
+<!-- css(호텔 등록과 동일한 css를 사용.) -->
 <link rel="stylesheet" href="resources/css/hotel/hotel_insert.css">
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
-	integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
-	crossorigin="anonymous">
+
 
 <title>전국방방곡곡 :: 호텔 수정페이지</title>
 </head>
@@ -38,7 +35,7 @@
 			<form action="hotelInsert.ho" method="post"
 				enctype="multipart/form-data">
 				<div id="sub-title-container">
-					<h1>호텔 등록</h1>
+					<h1>호텔 수정 </h1>
 				</div>
 
 				<!-- 호텔 이름 입력 1-->
@@ -526,7 +523,7 @@
 
 				<!-- 호텔 등록하기 버튼 -->
 				<div id="btn-container">
-					<input type="submit" id="insert-hotel-btn" value="등록 하기" />
+					<input type="submit" id="insert-hotel-btn" value="수정 하기" />
 				</div>
 			</form>
 		</div>
