@@ -67,7 +67,7 @@ button:focus{
 
 .hotel_reservation_common_container{
 	position: relative;
-	padding: 50px 100px;
+	padding: 25px 100px;
 	text-align: center;
 	
 	display: flex;
@@ -79,7 +79,7 @@ button:focus{
 .subtitle-container{
 	margin-top: 10px;
 	margin-bottom: 10px;
-	padding-bottom: 20px;
+/* 	padding-bottom: 20px; */
 }
 
 .subtitle-container > h1{
@@ -126,6 +126,21 @@ div.hotel_reservation_common_container:nth-child(3){
 }
 
 
+.room-per-day-price-wrapper{
+	padding: 15px 0;
+}
+
+h4.room-per-day-priece-title{
+	font-size: 2em;
+}
+
+span#room_price_per_day{
+	padding: 0 10px;
+	font-size: 1.4em;
+	color: var(--dark-gray);
+	font-weight: bold;
+}
+
 /*  
 ========================================================
 2. 체크인/ 체크아웃 시간 선택. 
@@ -133,20 +148,13 @@ div.hotel_reservation_common_container:nth-child(3){
 
 .calendar_container{
 	position: relative;
-	
-	display: flex;
-	flex-direction: row;
-	justify-content:flex-start;
-	align-items: center;
-}
-
-.calendar_container{
 	width: 100%;
 	text-align: center;
 	
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+	align-items: center;
 }
 
 .calendar_wrapper{
@@ -194,8 +202,32 @@ div.hotel_reservation_common_container:nth-child(3){
 }
 
 
-.hotel_using_day{
+.hotel_using_container{
+	position: relative;
+	width: 100%;
+	text-align: center;
 	
+	/* display: flex; */
+	display: none;
+	
+	
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+#hotel_using_days_container,
+#hotel_using_payment_container{
+	position: relative;
+}
+
+#hotel_using_days_container{
+	padding: 30px 0;
+}
+
+
+.info-span{
+	font-size: 1.3em;
 }
 
 /*  
@@ -224,7 +256,8 @@ div.hotel_reservation_common_container:nth-child(3){
 }
 
 
-.count_container:nth-child(2){
+.count_container:nth-child(2),
+.count_container:nth-child(3){
 	border-top: var(--blue-gray) 1px solid;
 
 }
@@ -289,12 +322,18 @@ div.hotel_reservation_common_container:nth-child(3){
 ========================================================
 4. 결제하기 버튼 컨테이너 
 */
+
+/* 총 이용금액 */
+#hotel_using_payment_container{
+	
+}
+
 button#go_payment{
-	width: 60%;
+	width: 50%;
 	font-size: 1.2em;
 	font-weight: bold;
-	margin: 20px;
-	padding: 20px 0;
+	margin: 15px;
+	padding: 18px 0;
 	border-color: transparent;
 	border-radius: 5px;
 	

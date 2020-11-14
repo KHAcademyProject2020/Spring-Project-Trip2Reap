@@ -112,7 +112,7 @@
                             <!-- 1박 가격 -->
                             <div class="hotel-per-day-price-container info-container">
                                 <p>
-                                    <small>1박 중</small>&nbsp;&nbsp;<b>47,216원</b>
+                                    <small>1박</small>&nbsp;&nbsp;<b>47,216원</b>
                                 </p>
                             </div>
                         </div>
@@ -168,7 +168,7 @@
                             <!-- 1박 가격 -->
                             <div class="hotel-per-day-price-container info-container">
                                 <p>
-                                    <small>1박 중</small>&nbsp;&nbsp;<b>47,216원</b>
+                                    <small>1박</small>&nbsp;&nbsp;<b>47,216원</b>
                                 </p>
                             </div>
                         </div>
@@ -223,7 +223,7 @@
                             <!-- 1박 가격 -->
                             <div class="hotel-per-day-price-container info-container">
                                 <p>
-                                    <small>1박 중</small>&nbsp;&nbsp;<b>47,216원</b>
+                                    <small>1박</small>&nbsp;&nbsp;<b>47,216원</b>
                                 </p>
                             </div>
                         </div>
@@ -278,7 +278,7 @@
                             <!-- 1박 가격 -->
                             <div class="hotel-per-day-price-container info-container">
                                 <p>
-                                    <small>1박 중</small>&nbsp;&nbsp;<b>47,216원</b>
+                                    <small>1박</small>&nbsp;&nbsp;<b>47,216원</b>
                                 </p>
                             </div>
                         </div>
@@ -333,7 +333,7 @@
                             <!-- 1박 가격 -->
                             <div class="hotel-per-day-price-container info-container">
                                 <p>
-                                    <small>1박 중</small>&nbsp;&nbsp;<b>47,216원</b>
+                                    <small>1박</small>&nbsp;&nbsp;<b>47,216원</b>
                                 </p>
                             </div>
                         </div>

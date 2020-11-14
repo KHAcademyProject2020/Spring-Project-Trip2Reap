@@ -41,6 +41,11 @@
 				<h2 id="room_name">더블 디럭스룸 - 산전망 {방이름} </h2>
 				<%--ROOM_NO(방이름) --%>
 			</div>
+			
+			<div class="room-per-day-price-wrapper">
+				<%--1박 이용가격  (span-id:room_price_per_day) 에 넣는다. --%>
+				<h4 class="room-per-day-price-title">1박<span id="room_price_per_day">22145</span>원 </h4>
+			</div>
 		</div>
 	</div>
 	
@@ -75,12 +80,19 @@
 			</div><%-- calendar_container--%>
 			
 			
-			
-			<div class="hotel_using_day">
-					<span></span>
-			</div>		
-		
-		
+			<%--올바르게 체크인/ 체크아웃 날짜가 잡히면 생기는 컨테이너. --%>
+			<div class="hotel_using_container">
+				<div id="hotel_using_days_container">
+					<%--using_accomodate_days : (박) : 숙박 기간  --%>
+					<span class="hotel_using_span" id="using_accomodate_days"></span>
+					<span class="info-span">박</span>
+					
+					<%--using_total_days : (일) : 체크아웃날짜 포함한 총이용기간. --%>
+					<span class="hotel_using_span" id="using_total_days"></span>
+					<span class="info-span">일</span>
+				</div>
+	
+			</div>
 		</div><%--hotel-reservation-content-container --%>
 		
 		
@@ -119,6 +131,37 @@
 					
 			}); 
 			
+			
+			// 1박 이용 방 가격
+			let roomPricePerDay =$('#room_price_per_day');
+			
+			// 체크인 컴포넌트 
+			let checkInDatePicker =$('#checkInDatePicker');
+			
+			// 체크아웃 컴포넌트 
+			let checkOutDatePicker= $('#checkOutDatePicker');
+			
+			// 체크인 날짜 
+			let checkInDate;
+			
+			// 체크아웃 날짜
+			let checkOutDate;
+			
+			
+			
+			checkInDatePicker.on('change', function(){
+				checkInDate=$(this).val();
+				console.log('체크인 날짜: '+checkInDate);
+
+				let checkInDateAddr= checkInDate.split('-');
+				checkInDate= new Date				
+			});
+			
+			checkOutDatePicker.on('change', function(){
+				checkOutDate=$(this).val();
+				console.log('체크아웃 날짜: '+checkOutDate);
+			});
+			
 		});
 			
 		</script>
@@ -133,20 +176,34 @@
 		
 		<div class="hotel-reservation-content-container">
 			<div class="count_reserve_person_container">
+				<%--예약 방 개수 선택 --%>
+				<div class="count_container">
+					<div class="count_label">방 개수</div>
+					<div class="count_wrapper">
+						<div class="button_wrapper">
+							<button class="minus_btn" id="room_minus_btn">-</button>
+							<div id="room_count">1</div>
+							<button class="plus_btn" id="room_plus_btn">+</button>
+						</div>
+					</div>
+				</div>
 			
+				<%--성인인원수 선택  --%>
 				<div class="count_container">
 					<div class="count_label">성인&nbsp;&nbsp;</div>
 					<div class="count_wrapper">
 						<div class="button_wrapper">
 							<button class="minus_btn" id="adult_minus_btn">-</button>
-							<div id="adult_count">0</div>
+							<div id="adult_count">2</div>
 							<button class="plus_btn" id="adult_plus_btn">+</button>
 						</div>
 					</div>
 				</div>
 				
+				
+				<%--어린이 인원수 선택  --%>
 				<div class="count_container">
-					<div class="count_label">어린이</div>
+					<div class="count_label">어린이&nbsp;</div>
 					<div class="count_wrapper">
 						<div class="button_wrapper">
 							<button class="minus_btn" id="child_minus_btn">-</button>
@@ -161,19 +218,59 @@
 		
 		<script>
 		$(function(){
-			//초기에는 0명이므로 -버튼을 누르지 못하게 해야한다.
+			//방개수 
+			//1개이면 - 버튼을 누르지 못하게 해야한다.
+			let $roomCntVal= Number($('#room_count').text());
+			if($roomCntVal==1){
+				$('#room_minus_btn').attr('disabled', true);
+				$('#room_minus_btn').css('cursor', 'none' );	
+			}
+			
+			//성인 
+			//1명이면 -버튼을 누르지 못하게 해야한다. (최소 성인 1명!)
 			let $adultCntVal= Number($('#adult_count').text());
-			if($adultCntVal==0){
+			if($adultCntVal==1){
 				$('#adult_minus_btn').attr('disabled', true);
 				$('#adult_minus_btn').css('cursor', 'none' );
 			}
 			
-
+			//어린이 
 			let $childCntVal=Number($('#child_count').text());
 			if($childCntVal==0){
 				$('#child_minus_btn').attr('disabled', true);
 				$('#child_minus_btn').css('cursor', 'none');
 			}
+			
+			// 방 개수 버튼 선택
+			//방개수 증가 버튼 선택함수 
+			$('#room_plus_btn').click( function(){
+				let $nowVal= Number($('#room_count').text());
+				
+				$nowVal+=1;
+				$roomCntVal=$nowVal;
+				if($roomCntVal>1){
+					$('#room_minus_btn').attr('disabled', false);
+					$('#room_minus_btn').css('cursor', 'pointer');
+				}
+				
+				$('#room_count').text($nowVal);
+			});
+			
+			// 방개수  감소 버튼 선택 함수 
+			$('#room_minus_btn').click(function(){
+				let $nowVal= Number($('#room_count').text());
+				$nowVal-=1;
+				$roomCntVal=$nowVal;
+				if($roomCntVal<=1){
+					$('#room_minus_btn').attr('disabled', true);
+					$('#room_minus_btn').css('cursor', 'none');
+					$('#room_count').text(1);
+				}else{
+					$('#room_count').text($nowVal);
+					$('#room_minus_btn').css('cursor', 'pointer');
+				}
+			});
+			
 			
 			// 성인 인원수 버튼 선택
 			// 성인수 증가 버튼 선택 함수 
@@ -182,7 +279,7 @@
 				
 				$nowVal+=1;
 				$adultCntVal=$nowVal;
-				if($adultCntVal>0){
+				if($adultCntVal>1){
 					$('#adult_minus_btn').attr('disabled', false);
 					$('#adult_minus_btn').css('cursor', 'pointer');
 				}
@@ -195,10 +292,10 @@
 				let $nowVal= Number($('#adult_count').text());
 				$nowVal-=1;
 				$adultCntVal=$nowVal;
-				if($adultCntVal<=0){
+				if($adultCntVal<=1){
 					$('#adult_minus_btn').attr('disabled', true);
 					$('#adult_minus_btn').css('cursor', 'none');
-					$('#adult_count').text(0);
+					$('#adult_count').text(1);
 				}else{
 					$('#adult_count').text($nowVal);
 					$('#adult_minus_btn').css('cursor', 'pointer');
@@ -241,14 +338,50 @@
 	</div> <%--hotel_reservation_common_container --%>
 	
 	
-	<!--4. 결제  -->
+	<!--5. 결제  -->
 	<div class="hotel_reservation_common_container">
 		<div class="subtitle-container">
-			<h1>결제 수단 선택 </h1>
+			<h1>결제 내역 </h1>
 		</div>
 		
 		<div class="hotel-reservation-content-container">
+			<%--예약 방 개수 /호텔 체크인 체크아웃날짜  / 숙박일 / 총 이용일 --%>
+			<div id="hotel_payment_total_info_container">
 			
+				<%-- 예약하려는 호텔/ 방이름/ 방 개수  --%>
+				<div class="hotel-using-room-container">
+				
+				</div>
+				
+				<%--예약 날짜 / 총 이용일  --%>
+				<div class="hotel-using-date-container">
+					<div class="hotel-date-wrapper">
+					</div>
+				</div>
+			</div>
+			
+			<%--호텔 총 이용 가격  --%>
+			<div id="hotel_using_payment_container">
+				<span id="hotel_payment">0</span>
+				<span class="info-span">원</span>
+			</div>
+		</div>
+		
+		
+		
+		<div class="subtitle-container">
+			<h1>결제 수단 선택</h1>
+		</div>
+		
+		<div class="hotel-reservation-content-container">
+			<ul>
+				<li> 결제 api 구현후에 ui만들겠습니다.</li>
+				<li> 신용카드 </li>
+				<li> 휴대폰 </li>
+				<li> 계좌이체 </li>
+				<li> Kakao Pay</li>
+				<li> Toss pay</li>
+			</ul>
 		</div>
 		
 		<div class="hotel-reservation-content-container">
