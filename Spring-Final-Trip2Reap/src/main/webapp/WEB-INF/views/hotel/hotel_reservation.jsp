@@ -148,18 +148,95 @@
 			let checkOutDate;
 			
 			
+			//체크인, 체크아웃 했는지 확인용 맵 
+			let checkStatusMap=new Map();
+		
+			//확인용 맵의 값 초기화 
+			checkStatusMap.set('checkInStatus', false); //아직 체크인 날짜가 정해지지 않음을 의미함.
+			checkStatusMap.set('checkOutStatus', false);//아직 체크아웃 날짜가 정해지지 않음을 의미함.
+			
+			
+			
+			//만일 체크인/ 체크아웃날짜가 정해졌을때 실행하는 함수.
+			var checkStatusFunc= function(){
+				console.log('체크인/ 체크아웃 날짜 확인함.');
+				console.log(checkStatusMap);
+				
+				//체크인 / 체크아웃 날짜가 모두 결졍된다면 
+				var checkedAll= checkStatusMap.get('checkInStatus') && checkStatusMap.get('checkOutStatus');
+				console.log(checkedAll);
+				if(checkedAll){
+					//만약에 체크아웃날짜가 체크인날짜보다 같거나 , 이전날로 설정했다면? => 에러 alert를 띄운다.
+					if(checkInDate>= checkOutDate){
+						if(checkInDate==checkOutDate){
+							alert('최소 1박은 해야합니다!');
+						}else{
+							//checkInDate > checkOutDate
+							alert('체크아웃날짜는 체크인 날짜보다 이후여야합니다!');
+						}
+						
+						checkStatusMap.set('checkOutStatus', false);
+						checkStatusMap.set('checkInStatus', false);
+						checkInDatePicker.val('');
+						checkOutDatePicker.val('');
+						
+						// 체크인날짜 & 체크아웃날짜 (년/월/일) 를 -1로 초기화
+						checkStatusMap.set('checkInYear', -1);
+						checkStatusMap.set('checkInMonth', -1);
+						checkStatusMap.set('checkInDay', -1);
+						
+						checkStatusMap.set('checkOutnYear', -1);
+						checkStatusMap.set('checkOutMonth', -1);
+						checkStatusMap.set('checkOutDay', -1);
+						
+					}else{
+						console.log('체크인 날짜: '+checkInDate);
+						checkStatusMap.set('checkInYear', checkInDate.getFullYear());
+						checkStatusMap.set('checkInMonth', checkInDate.getMonth()+1);
+						checkStatusMap.set('checkInDay', checkInDate.getDate());
+						
+						console.log('체크아웃 날짜: '+ checkOutDate);
+						checkStatusMap.set('checkOutnYear', checkOutDate.getFullYear());
+						checkStatusMap.set('checkOutMonth', checkOutDate.getMonth()+1);
+						checkStatusMap.set('checkOutDay', checkOutDate.getDate());
+						
+						console.log(checkStatusMap);
+					}
+				}
+			};
+			
+			
 			
 			checkInDatePicker.on('change', function(){
 				checkInDate=$(this).val();
 				console.log('체크인 날짜: '+checkInDate);
 
 				let checkInDateAddr= checkInDate.split('-');
-				checkInDate= new Date				
+				console.log('checkInDateAddr: '+ checkInDateAddr);
+				
+				//체크인 날짜
+				checkInDate= new Date(checkInDateAddr[0], checkInDateAddr[1]-1 , checkInDateAddr[2]);			
+				console.log(checkInDate);
+				checkStatusMap.set('checkInStatus', true); //아직 체크인 날짜가 정해지지 않음을 의미함.
+				
+				checkStatusFunc();
+				
 			});
+			
 			
 			checkOutDatePicker.on('change', function(){
 				checkOutDate=$(this).val();
 				console.log('체크아웃 날짜: '+checkOutDate);
+				
+				let checkOutDateAddr= checkOutDate.split('-');
+				
+				//체크아웃 날짜
+				checkOutDate=new Date(checkOutDateAddr[0], checkOutDateAddr[1]-1 , checkOutDateAddr[2]);
+				console.log(checkOutDate);
+				checkStatusMap.set('checkOutStatus', true);//아직 체크아웃 날짜가 정해지지 않음을 의미함.
+				
+				checkStatusFunc();
+				
 			});
 			
 		});
@@ -338,10 +415,10 @@
 	</div> <%--hotel_reservation_common_container --%>
 	
 	
-	<!--5. 결제  -->
+	<!--5. 예약내역   -->
 	<div class="hotel_reservation_common_container">
 		<div class="subtitle-container">
-			<h1>결제 내역 </h1>
+			<h1>예약 내역 </h1>
 		</div>
 		
 		<div class="hotel-reservation-content-container">
@@ -365,10 +442,12 @@
 				<span id="hotel_payment">0</span>
 				<span class="info-span">원</span>
 			</div>
-		</div>
-		
-		
-		
+		</div> <%--hotel-reservation-content-container --%>
+	</div>
+	
+	
+	<!--6. 결제 수단 선택   -->
+	<div class="hotel_reservation_common_container">
 		<div class="subtitle-container">
 			<h1>결제 수단 선택</h1>
 		</div>

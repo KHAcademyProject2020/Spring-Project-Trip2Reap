@@ -101,7 +101,14 @@ input[type="button"]:focus{
 	flex-direction: column;
 	justify-content: space-beween;
 	
+	
+	border-bottom: var(--pink-gray) 1px solid;
 }
+
+.hotel_detail_common_container:last-child{
+	border-bottom-color: transparent;
+}
+
 
 .subtitle-container{
 	margin-top: 10px;
