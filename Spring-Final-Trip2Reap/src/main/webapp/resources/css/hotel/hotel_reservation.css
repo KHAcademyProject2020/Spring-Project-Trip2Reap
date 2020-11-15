@@ -211,7 +211,7 @@ span#room_price_per_day{
 }
 
 
-.hotel_using_container{
+#hotel_using_container{
 	position: relative;
 	width: 100%;
 	text-align: center;
@@ -236,7 +236,13 @@ span#room_price_per_day{
 
 
 .info-span{
-	font-size: 1.3em;
+	font-size: 1.2em;
+}
+
+.hotel_using_span{
+	font-size: 1.6em;
+	color: var(--mid-green);
+	font-weight: 900;
 }
 
 /*  
@@ -337,13 +343,100 @@ span#room_price_per_day{
 
 /*  
 ========================================================
-4. 결제하기 버튼 컨테이너 
+5. 예약 내역
 */
 
-/* 총 이용금액 */
-#hotel_using_payment_container{
+#hotel-reserve-check-total-container{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	
+	width: 100%;
+	margin: 0 25px;
 	
 }
+
+
+.hotel-reserve-check-common-container{
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center; 
+	
+	width: 85%;
+	
+	border-bottom: var(--blue-gray) 1px solid;
+}
+
+.hotel-reserve-check-common-container:last-child{
+	border-bottom-color: transparent;
+}
+
+
+
+.hotel-check-label-wrapper{
+	position: relative;
+	flex-basis: 30%;
+	padding: 20px;
+}
+
+
+
+.hotel-check-content-wrapper{
+	position: relative;
+	
+	flex-basis: 70%;
+	font-weight: bold;
+	padding: 20px;
+	padding-right: 0;
+	
+	text-align: center;
+	
+}
+
+/*sub-container  */
+
+.hotel-sub-check-container{
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: center; 
+	
+	padding: 15px;
+	padding-right: 0;
+	border-bottom: var(--blue-gray) 1px solid;
+}
+
+.hotel-sub-check-container:nth-child(3),
+.hotel-sub-check-container:nth-child(6),
+.hotel-sub-check-container:last-child{
+	border-bottom-color: transparent;
+}
+
+.hotel-sub-check-label-wrapper{
+	position: relative;
+	flex-basis: 40%;
+	font-weight: normal;
+	
+	display:flex;
+	justify-content: flex-start;
+}
+
+.hotel-sub-check-content-wrapper{
+	position: relative;
+	flex-basis: 60%;
+	
+	display: flex;
+	justify-content: flex-end;
+	padding-right: 5px;
+}
+
+/*
+========================================================
+6. 결제 수단 선택 
+*/
 
 button#go_payment{
 	width: 50%;

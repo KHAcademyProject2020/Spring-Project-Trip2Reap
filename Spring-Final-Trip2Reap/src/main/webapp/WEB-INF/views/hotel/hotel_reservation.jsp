@@ -81,7 +81,7 @@
 			
 			
 			<%--올바르게 체크인/ 체크아웃 날짜가 잡히면 생기는 컨테이너. --%>
-			<div class="hotel_using_container">
+			<div id="hotel_using_container">
 				<div id="hotel_using_days_container">
 					<%--using_accomodate_days : (박) : 숙박 기간  --%>
 					<span class="hotel_using_span" id="using_accomodate_days"></span>
@@ -156,15 +156,18 @@
 			checkStatusMap.set('checkOutStatus', false);//아직 체크아웃 날짜가 정해지지 않음을 의미함.
 			
 			
+			//호텔 숙박/이용날짜 알림 컨테이너 
+			let $hotelReserveContainer= $('#hotel_using_container');
+			
 			
 			//만일 체크인/ 체크아웃날짜가 정해졌을때 실행하는 함수.
 			var checkStatusFunc= function(){
-				console.log('체크인/ 체크아웃 날짜 확인함.');
-				console.log(checkStatusMap);
+				//console.log('체크인/ 체크아웃 날짜 확인함.');
+				//console.log(checkStatusMap);
 				
 				//체크인 / 체크아웃 날짜가 모두 결졍된다면 
 				var checkedAll= checkStatusMap.get('checkInStatus') && checkStatusMap.get('checkOutStatus');
-				console.log(checkedAll);
+				//console.log(checkedAll);
 				if(checkedAll){
 					//만약에 체크아웃날짜가 체크인날짜보다 같거나 , 이전날로 설정했다면? => 에러 alert를 띄운다.
 					if(checkInDate>= checkOutDate){
@@ -188,19 +191,34 @@
 						checkStatusMap.set('checkOutnYear', -1);
 						checkStatusMap.set('checkOutMonth', -1);
 						checkStatusMap.set('checkOutDay', -1);
+						$hotelReserveContainer.css('display','none');
 						
 					}else{
-						console.log('체크인 날짜: '+checkInDate);
+						//console.log('체크인 날짜: '+checkInDate);
 						checkStatusMap.set('checkInYear', checkInDate.getFullYear());
 						checkStatusMap.set('checkInMonth', checkInDate.getMonth()+1);
 						checkStatusMap.set('checkInDay', checkInDate.getDate());
 						
-						console.log('체크아웃 날짜: '+ checkOutDate);
+						//console.log('체크아웃 날짜: '+ checkOutDate);
 						checkStatusMap.set('checkOutnYear', checkOutDate.getFullYear());
 						checkStatusMap.set('checkOutMonth', checkOutDate.getMonth()+1);
 						checkStatusMap.set('checkOutDay', checkOutDate.getDate());
 						
-						console.log(checkStatusMap);
+						//console.log(checkStatusMap);
+						
+						
+						$hotelReserveContainer.css('display','flex');
+						
+						// 차이 (단위: 일 ) => hotelAccomodateDays 에 대입 
+						let $diffDays=(checkOutDate-checkInDate)/(24*60*60*1000);
+						//console.log($diffDays);
+						
+						let $hotelAccomodateDays= $('#using_accomodate_days'); //숙박기간(단위: 일 )
+						let $hotelTotalUsingDays= $('#using_total_days'); //전체 이용기간(단위: 일)
+						
+						$hotelAccomodateDays.text($diffDays);
+						$hotelTotalUsingDays.text($diffDays+1);
+						
 					}
 				}
 			};
@@ -209,14 +227,14 @@
 			
 			checkInDatePicker.on('change', function(){
 				checkInDate=$(this).val();
-				console.log('체크인 날짜: '+checkInDate);
+				//console.log('체크인 날짜: '+checkInDate);
 
 				let checkInDateAddr= checkInDate.split('-');
-				console.log('checkInDateAddr: '+ checkInDateAddr);
+				//console.log('checkInDateAddr: '+ checkInDateAddr);
 				
 				//체크인 날짜
 				checkInDate= new Date(checkInDateAddr[0], checkInDateAddr[1]-1 , checkInDateAddr[2]);			
-				console.log(checkInDate);
+				//console.log(checkInDate);
 				checkStatusMap.set('checkInStatus', true); //아직 체크인 날짜가 정해지지 않음을 의미함.
 				
 				checkStatusFunc();
@@ -226,13 +244,13 @@
 			
 			checkOutDatePicker.on('change', function(){
 				checkOutDate=$(this).val();
-				console.log('체크아웃 날짜: '+checkOutDate);
+				//console.log('체크아웃 날짜: '+checkOutDate);
 				
 				let checkOutDateAddr= checkOutDate.split('-');
 				
 				//체크아웃 날짜
 				checkOutDate=new Date(checkOutDateAddr[0], checkOutDateAddr[1]-1 , checkOutDateAddr[2]);
-				console.log(checkOutDate);
+				//console.log(checkOutDate);
 				checkStatusMap.set('checkOutStatus', true);//아직 체크아웃 날짜가 정해지지 않음을 의미함.
 				
 				checkStatusFunc();
@@ -422,26 +440,94 @@
 		</div>
 		
 		<div class="hotel-reservation-content-container">
-			<%--예약 방 개수 /호텔 체크인 체크아웃날짜  / 숙박일 / 총 이용일 --%>
-			<div id="hotel_payment_total_info_container">
 			
-				<%-- 예약하려는 호텔/ 방이름/ 방 개수  --%>
-				<div class="hotel-using-room-container">
-				
+			<div id="hotel-reserve-check-total-container">
+				<%--1. 예약호텔 이름  --%>
+				<div class="hotel-reserve-check-common-container">
+					<div class="hotel-check-label-wrapper">예약 호텔 이름</div>
+					<div class="hotel-check-content-wrapper"> 신라호텔 {호텔이름 }</div>
 				</div>
-				
-				<%--예약 날짜 / 총 이용일  --%>
-				<div class="hotel-using-date-container">
-					<div class="hotel-date-wrapper">
+			
+				<%--2. 예약 객실  이름  / 예약 객실 개수 --%>
+				<div class="hotel-reserve-check-common-container">
+					<div class="hotel-check-label-wrapper">예약 객실</div>
+					
+					<div class="hotel-check-content-wrapper">
+						<%--방종류 --%>
+						<div class="hotel-sub-check-container">
+							<div class="hotel-sub-check-label-wrapper"> 객실 종류</div>
+							<div class="hotel-sub-check-content-wrapper">{객실 종류 }</div>
+						</div>
+						
+						<%--방이름  --%>
+						<div class="hotel-sub-check-container">
+							<div class="hotel-sub-check-label-wrapper">객실 이름</div>
+							<div class="hotel-sub-check-content-wrapper">{객실 이름}</div>
+						</div>
+						
+						<%--방개수 --%>
+						<div class="hotel-sub-check-container">
+							<div class="hotel-sub-check-label-wrapper">예약 객실 수 </div>
+							<div class="hotel-sub-check-content-wrapper">{예약 객실 수 }</div>
+						</div>
 					</div>
 				</div>
-			</div>
+				
+				<%--3. 예약 인원수  --%>
+				<div class="hotel-reserve-check-common-container">
+					<div class="hotel-check-label-wrapper">예약 인원</div>
+					<div class="hotel-check-content-wrapper">
+						<%-- 성인  --%>
+						<div class="hotel-sub-check-container">
+							<div class="hotel-sub-check-label-wrapper">성인 </div>
+							<div class="hotel-sub-check-content-wrapper">{성인 인원수 } </div>
+						</div>
+						
+						<%-- 어린이 --%>
+						<div class="hotel-sub-check-container">
+							<div class="hotel-sub-check-label-wrapper">어린이 </div>
+							<div class="hotel-sub-check-content-wrapper">{어린이 인원수 } </div>
+						</div>
+						
+						<%-- 총 인원수  --%>
+						<div class="hotel-sub-check-container">
+							<div class="hotel-sub-check-label-wrapper">총</div>
+							<div class="hotel-sub-check-content-wrapper">{총 인원수 } </div>
+						</div>
+					</div>
+				</div>
+				
+				
+				<%--4. 예약 날짜   --%>
+				<div class="hotel-reserve-check-common-container">
+					<div class="hotel-check-label-wrapper">예약 인원</div>
+					<div class="hotel-check-content-wrapper">
+						<%--체크인 날짜  --%>
+						<div class="hotel-sub-check-container">
+							<div class="hotel-sub-check-label-wrapper">체크인 날짜 </div>
+							<div class="hotel-sub-check-content-wrapper">{체크인 날짜 } </div>
+						</div>
+						
+						<%--체크아웃 날짜  --%>
+						<div class="hotel-sub-check-container">
+							<div class="hotel-sub-check-label-wrapper">체크아웃 날짜 </div>
+							<div class="hotel-sub-check-content-wrapper">{체크아웃 날짜  } </div>
+						</div>
+						
+						<%--이용 날짜 (박/ 일)  --%>
+						<div class="hotel-sub-check-container">
+							<span>{박 }</span>박 <span>{일 }</span>일 
+						</div>
+					</div>
+				</div>
+				
+				<%--5. 총 금액 --%>
+				<div class="hotel-reserve-check-common-container">
+					<div class="hotel-check-label-wrapper">총 금액</div>
+					<div class="hotel-check-content-wrapper"><span>{총금액 }</span> 원 </div>
+				</div>
 			
-			<%--호텔 총 이용 가격  --%>
-			<div id="hotel_using_payment_container">
-				<span id="hotel_payment">0</span>
-				<span class="info-span">원</span>
-			</div>
+			</div><%--hotel-reserve-check-total-container  --%>
 		</div> <%--hotel-reservation-content-container --%>
 	</div>
 	
