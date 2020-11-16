@@ -7,8 +7,6 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<%-- jquery cdn --%>
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	
 	<%--css --%>
 	<link rel="stylesheet" type="text/css" href="resources/css/hotel/hotel_detail.css">
@@ -163,10 +161,10 @@
 					
 					<!--only administrator (관리자)  -->
 					<%--
-					#edit-hotel-detail-info-page-btn: 호텔수정 페이지로 이동
+					#edit-hotel-detail-info-page-btn: 호텔수정뷰  페이지로 이동
 					#remove-hotel-btn: 호텔게시물 삭제  
 					 --%>
-					<button id="edit-hotel-detail-info-page-btn">수정하기</button>
+					<button id="edit-hotel-detail-info-page-btn" onclick="location.href='<%=request.getContextPath()%>/hotelEditView.ho'">수정하기</button>
 					<button id="remove-hotel-btn">삭제하기 </button>
 				</div>
 			</div>			
