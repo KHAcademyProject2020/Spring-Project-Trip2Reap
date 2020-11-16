@@ -44,6 +44,10 @@
     height: 26px;
 }
 
+#button_search:hover{
+	cursor: pointer;
+}
+
 #menu_right_div button{
 	width: 60px;
 	height: 30px;

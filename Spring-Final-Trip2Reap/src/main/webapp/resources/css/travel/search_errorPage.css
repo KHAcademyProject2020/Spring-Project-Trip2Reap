@@ -1,10 +1,9 @@
 @charset "UTF-8";
 
 /* 전체 div */
-#all_div{
-	margin: 40px auto 0px auto;
-	width: 1000px;
-/* 	background: rgb(255, 225, 230, 0.5); */
+#all_div {
+    margin: 80px auto 0px auto;
+    width: 1000px;
 }
 
 /* img, 메뉴 이름, 검색 div */
@@ -40,12 +39,15 @@
 	top: 10px;
 }
 
-#input_search{
-	width: 200px;
-}
+
 
 #button_div {
     padding: 10px 0px 10px 0px;
+}
+
+#input_search {
+    width: 200px;
+    height: 26px;
 }
 
 #button_search{
@@ -58,12 +60,12 @@
 }
 
 /* 에러 멘트 div */
-#error_div{
-	margin: 100px auto;
-	padding: 50px;
-	width: 900px;
-	background: #efefef;
-	text-align: center;
+#error_div {
+    margin: 100px auto;
+    padding: 80px 0px 80px 0px;
+    width: 900px;
+    background: #efefef;
+    text-align: center;
 }
 
 #x_circle{

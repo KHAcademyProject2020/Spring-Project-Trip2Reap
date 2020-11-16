@@ -20,7 +20,7 @@
 			</div>
 			<div id="menu_right_div">
 				<input type="text" id="input_search" />
-				<button id="button_serarch" onclick="goSearchError()">검색</button>
+				<button id="button_search" onclick="goSearchError()">검색</button>
 			</div>
 		</div>
 		
@@ -28,7 +28,7 @@
 		<div id="hashtag_div">
 			<ul id="hashtag_ul">
 				<li>
-					<a href=" ${pageContext.request.contextPath}/tList.tv">#전체</a>&nbsp;&nbsp;
+					<a href=" ${pageContext.request.contextPath}/tList.tv">#전체</a>&nbsp;&nbsp; <!-- 해당 해쉬태그 검색페이지로 이동하게 수정 -->
 				</li>
 				<li>
 					<a href=" ${pageContext.request.contextPath}/tList.tv">#문화시설</a>&nbsp;&nbsp;
@@ -195,7 +195,7 @@
 		    <hr id="mo_hr">
 		    <div id="contain_div">
 		    	<i class="fas fa-download" ></i><span id="mo_contain">여행지 담기</span>
-		    	<button class="url_btn">추가하기</button>
+		    	<button class="url_btn" onclick="containTravel()">추가하기</button>
 		    	<div id="contain_info">[마이페이지]-[담은 여행지]에서 확인할 수 있습니다.</div>
 		    </div>
 		</div>
@@ -227,6 +227,9 @@
 			});
 		});
 		
+		function containTravel(){
+			swal("여행지를 담았습니다","마이페이지에서 확인하세요","success");//이미 담은 여행지이거나 로그인하지않은경우 담기지 않아야함.(추후수정필요) 
+		}
 		
 		
 		//url복사하기

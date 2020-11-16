@@ -152,6 +152,10 @@
 	border-radius: 5px;
 }
 
+#button_update:hover{
+	cursor: pointer;
+}
+
 #button_delete{
 	width: 67px;
 	height: 30px;
@@ -159,6 +163,10 @@
 	background: #77af82;
 	color: white;
 	border-radius: 5px;
+}
+
+#button_delete:hover{
+	cursor: pointer;
 }
 
 

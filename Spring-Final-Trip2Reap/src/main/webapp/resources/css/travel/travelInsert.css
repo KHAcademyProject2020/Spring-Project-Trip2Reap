@@ -56,10 +56,10 @@
     padding-bottom: 1px;
 }
 
-#travel_table{
-	text-align: left;
-	margin: 15px 0px;
-	padding: 15px;
+#travel_table {
+    text-align: left;
+    margin: 15px 0px 0px 0px;
+    padding: 15px 0px 8px 15px;
 }
 
 #travel_table td{
@@ -118,13 +118,14 @@
 
 
 #travel_content_div{
-	margin: 0px auto;
+	margin: 17px auto;
 	width: 900px;
 	text-align: center;
 }
 
 #travel_content{
 	resize: none; /* textarea 사이즈조절안되게 */
+	padding: 10px;
 }
 
 
@@ -165,13 +166,6 @@
 
 #span_text{
 	font-size: small;
-}
-
-
-/* input이나 button 클릭 시 outline 제거 */
-#travel_name, #select_theme, #select_region, 
-#input_travel_tag, #travel_content, #button_cancel, #button_write:focus{
-	outline: none;
 }
 
 
@@ -243,4 +237,73 @@
 .pictureName{
 	color: black;
 	/* background-color: snow; */
+}
+
+
+/* 해쉬태그 시작 */
+
+#menu_hash{
+	display: inline-flex;
+	margin-left: 32px;
+}
+
+
+#input-hashtag {
+    margin-left: -1px;
+    padding: 5px;
+    width: 200px;
+    position: absolute;
+    height: 12px;
+}
+
+#input-hashtag-btn {
+    font-size: 17px;
+    font-weight: bold;
+    z-index: 1;
+    margin-left: 188px;
+    border: 0;
+    background-color: white;
+    margin-top: 1px;
+}
+  
+#input-hashtag-btn:hover {
+    background-color: snow;
+}
+div.insert-common-container div {
+    margin: 8px;
+}
+
+.insert-hashtag-wrapper, .saved-hashtags-wrapper {
+    margin-left: 15px;
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+ #saved-hashtags {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    text-decoration: underline;
+}
+
+#saved-hashtags li {
+    color: gray;
+    padding: 0px 12px;
+    /* font-style: italic; */
+}
+
+#delete_hash {
+    border: 0;
+    font-size: x-small;
+    vertical-align: super;
+}
+
+#delete_hash:hover{
+	cursor: pointer;
+}
+
+/* input이나 button 클릭 시 outline 제거 */
+#travel_name, #select_theme, #select_region, 
+#input_travel_tag, #travel_content, #button_cancel, #input-hashtag, #input-hashtag-btn, #button_write:focus{
+	outline: none;
 }

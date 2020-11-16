@@ -111,27 +111,25 @@
 							<option value = "대구">축제</option>
 						</select>
 					</td>
-				</tr>
-				<tr>
-					<td>
-						<span class="astro_span">*</span><span>해시태그</span>
-					</td>
-					<td colspan="2">
-						<input type="text" id="input_travel_tag"/>
-						<!-- <i class="fas fa-plus-square" id="button_tag_plus"></i> 이거 어떻게 할지 상의 필요-->
-					</td>
-					<td>
-						<div class="hashtag">#산책하기좋은</div>
-					</td>
-					<td>
-						<span class="hashtag">#드라이브코스</span>
-					</td>
-					<td>
-						<span class="hashtag">#인천공원추천</span>
-					</td>
-				</tr>
-		
+				</tr>	
 			</table>
+			
+			<div id="menu_hash">해쉬태그</div>
+			
+			<!-- 해쉬태그 입력창 -->
+			<div class="insert-hashtag-wrapper">
+				<input type="text" id="input-hashtag"  placeholder="#해시태그를 입력해주세요.">
+				<input type="button" id="input-hashtag-btn"
+					onclick="insertHashTags();" value="✅"></div>
+	
+			<!-- 등록된 해시태그들을 모으는 곳. -->
+			<div class="saved-hashtags-wrapper">
+				<ul id="saved-hashtags">
+					<li><small>#해시태그1<button id="delete_hash">⛔</button></small></li>
+					<li><small>#해시태그2<button id="delete_hash">⛔</button></small></li>
+					<li><small>#해시태그3<button id="delete_hash">⛔</button></small></li>
+				</ul>
+			</div>
 			
 			 <div id="travel_content_div">
 				<textarea rows="20" cols="125" id="travel_content"></textarea>

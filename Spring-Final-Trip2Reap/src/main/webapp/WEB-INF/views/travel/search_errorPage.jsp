@@ -21,11 +21,11 @@
 			</div>
 			<div id="menu_right_div">
 				<input type="text" id="input_search"/>
-				<input type="button" value="검색" id="button_search"/>
+				<button id="button_search" onclick="goSearchError()">검색</button>
 			</div>
 		</div>
 		
-		<hr>
+		
 		
 		<div id="error_div">
 			<i class="far fa-times-circle" id="x_circle"></i>
@@ -63,9 +63,15 @@
 			</div>
 		</div>
 	</div>
+	
+	
 	<script>
 		function goListView(){
 			location.href="<%= request.getContextPath() %>/tList.tv";
+		}
+		
+		function goSearchError(){
+			location.href="<%= request.getContextPath() %>/tSearchError.tv";
 		}
 	</script>
 	</section>
