@@ -272,7 +272,7 @@
 	margin-right: 93px;
 }
 
-#url_btn {
+.url_btn {
     width: 64px;
     height: 25px;
     background-color: #77af82;
@@ -310,6 +310,6 @@
 
 
 /* input이나 button 클릭 시 outline 제거 */
-#input_search, #button_search, #button_write, #paging_div, #url_btn button{
+#input_search, #button_search, #button_write, #paging_div, .url_btn button{
 	outline: none;
 }

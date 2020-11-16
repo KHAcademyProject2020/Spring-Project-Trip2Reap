@@ -183,3 +183,10 @@
 .share_name{
 	font-size: 12px;
 }
+
+
+.share_name:hover{
+	cursor: pointer;
+	text-decoration: underline;
+	
+}

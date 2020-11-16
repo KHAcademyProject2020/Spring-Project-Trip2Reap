@@ -29,11 +29,11 @@
 					<!-- <span>조회 1000</span> 나중에 수정 -->
 						<span id="share_span" onclick="location">
 							<i class="fas fa-share-alt"></i>
-								<span class="share_name">공유하기</span>
+								<span class="share_name" id="sh-link">공유하기</span>
 						</span>
 						<span>
 							<i class="fas fa-download" ></i>
-								<span class="share_name">여행지 담기</span>
+								<span class="share_name" onclick="containTravel()">여행지 담기</span>
 						</span>	
 					</div>
 				</div>	
@@ -88,6 +88,60 @@
 		function deleteView(){ //삭제하기 뷰로 이동
 			location.href=" ${pageContext.request.contextPath}/tList.tv"
 		}
+		
+		
+		function containTravel(){
+			swal("여행지를 담았습니다","마이페이지에서 확인하세요","success");//이미 담은 여행지이거나 로그인하지않은경우 담기지 않아야함.(추후수정필요) 
+		}
+		
+		
+		
+		//url복사하기
+		$(document).on("click", "#sh-link", function(e) { // 링크복사 시 화면 크기 고정 
+			$('html').find('meta[name=viewport]').attr('content', 'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no'); 
+			var html = "<input id='clip_target' type='text' value='' style='position:absolute;top:-9999em;'/>"; 
+			$(this).append(html); 
+			
+			var input_clip = document.getElementById("clip_target"); 
+				//현재 url 가져오기 -> 해당 여행지 url 가져오기로 어떻게 값을 가져올지 고민중
+				var _url = $(location).attr('href'); 
+			$("#clip_target").val(_url); 
+				
+			if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) { 
+				var editable = input_clip.contentEditable; 
+				var readOnly = input_clip.readOnly; 
+				
+				input_clip.contentEditable = true; 
+				input_clip.readOnly = false; 
+				
+				var range = document.createRange(); 
+				range.selectNodeContents(input_clip); 
+				
+				var selection = window.getSelection(); 
+				selection.removeAllRanges(); 
+				selection.addRange(range); 
+				input_clip.setSelectionRange(0, 999999); 
+				
+				input_clip.contentEditable = editable; 
+				input_clip.readOnly = readOnly; 
+			} else { 
+				input_clip.select(); 
+			} 
+			
+			try { 
+				var successful = document.execCommand('copy'); 
+				input_clip.blur(); 
+				if (successful) { 				
+					swal("URL이 복사 되었습니다.", "원하시는 곳에 붙여넣기 해 주세요!", "success");
+					// 링크복사 시 화면 크기 고정 
+					$('html').find('meta[name=viewport]').attr('content', 'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes'); 
+				} else { 				
+					swal("URL이 복사에 실패했습니다.", "이 브라우저는 지원하지 않습니다.", "error");
+					} 
+				} catch (err) { 
+					swal("URL이 복사에 실패했습니다.", "이 브라우저는 지원하지 않습니다.", "error");
+					} 
+				}); //클립보드 복사
 	</script>	
 </section>
 </body>
