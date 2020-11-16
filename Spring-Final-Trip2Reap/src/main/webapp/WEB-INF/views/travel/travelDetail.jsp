@@ -33,7 +33,7 @@
 						</span>
 						<span>
 							<i class="fas fa-download" ></i>
-								<span class="share_name">코스에 담기</span>
+								<span class="share_name">여행지 담기</span>
 						</span>	
 					</div>
 				</div>	

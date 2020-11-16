@@ -110,7 +110,7 @@
 					<div id="travel_writer">인천 송도</div>
 					<div id="travel_tag">#레포츠 #가족과함께 #자연</div>
 				</div>
-				<span id="list_etc">…</span>
+				<span id="list_etc"><a href="#modal">…</a></span>
 			</div>
 			
 			
@@ -125,7 +125,7 @@
 					<div id="travel_writer">인천 송도</div>
 					<div id="travel_tag">#공원 #가족과함께 #자연</div>
 				</div>
-				<span id="list_etc">…</span>
+				<span id="list_etc"><a href="#modal">…</a></span>
 			</div>
 			
 			
@@ -141,7 +141,7 @@
 					<div id="travel_writer">인천 송도</div>
 					<div id="travel_tag">#공원 #가족과함께 #자연</div>
 				</div>
-				<span id="list_etc">…</span>
+				<span id="list_etc"><a href="#modal">…</a></span>
 			</div>
 			
 			
@@ -157,17 +157,19 @@
 					<div id="travel_writer">인천 송도</div>
 					<div id="travel_tag">#관광지 #미세먼지x #식물원</div>
 				</div>
-				<span id="list_etc">…</span>
-			
-				
-			
+				<span id="list_etc"><a href="#modal">…</a></span>
 			</div>
 		</div>
+		
+		
+		
+		
+		<!-- 등록하기 버튼 -->
 				<div id="button_write_div">
 				<button id="button_write" onclick="insertView()">등록하기</button>
 				</div>
 				
-			
+		<!-- 페이징 버튼 -->	
 				<div id="paging_div">
 					<button id="before">&lt;</button>
 					<button id="current">1</button>
@@ -181,6 +183,26 @@
 	</div><!-- 전체 div끝 -->
 	
 	
+	
+	
+	
+	   <!-- modal 시작  -->
+		<div id="modal" class="modal">
+		    <div id="share_div">
+		    	<i class="fas fa-share-alt"></i><span id="mo_share">공유하기</span>
+		    	<button id="url_btn">URL복사</button>
+		    </div>
+		    <hr id="mo_hr">
+		    <div id="contain_div">
+		    	<i class="fas fa-download" ></i><span id="mo_contain">여행지 담기</span>
+		    	<button id="url_btn">추가하기</button>
+		    	<div id="contain_info">[마이페이지]-[담은 여행지]에서 확인할 수 있습니다.</div>
+		    </div>
+		</div>
+   
+   	 <!-- modal끝 -->
+   	 
+   	 
 	<script>
 		function detailView(){
  		   location.href="<%= request.getContextPath() %>/tDetail.tv";
@@ -194,6 +216,22 @@
 		function goSearchError(){
 			location.href="<%= request.getContextPath() %>/tSearchError.tv";
 		}
+		
+		
+		
+		$('a[href="#modal"]').click(function(event) {
+			event.preventDefault();
+
+			$(this).modal({
+				fadeDuration : 250
+			});
+		});
+		
+		
+		
+		
+		
+		
 	</script>
 	
 </section>
