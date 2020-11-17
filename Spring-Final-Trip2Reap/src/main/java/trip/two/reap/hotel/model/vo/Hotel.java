@@ -30,6 +30,8 @@ public class Hotel {
 		this.boTag = boTag;
 		this.boDeleteYN = boDeleteYN;
 	}
+	
+	
 
 
 	public int getBoNo() {
