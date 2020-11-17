@@ -18,9 +18,6 @@ public class Hotel {
 	
 	public Hotel() {}
 	
-	
-	
-	
 	public Hotel(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount, String boTag,
 			String boDeleteYN) {
 		super();
@@ -33,7 +30,88 @@ public class Hotel {
 		this.boTag = boTag;
 		this.boDeleteYN = boDeleteYN;
 	}
-	
-	
+
+
+	public int getBoNo() {
+		return boNo;
+	}
+
+
+	public void setBoNo(int boNo) {
+		this.boNo = boNo;
+	}
+
+
+	public int getCaCode() {
+		return caCode;
+	}
+
+
+	public void setCaCode(int caCode) {
+		this.caCode = caCode;
+	}
+
+
+	public String getBoTitle() {
+		return boTitle;
+	}
+
+
+	public void setBoTitle(String boTitle) {
+		this.boTitle = boTitle;
+	}
+
+
+	public String getBoContent() {
+		return boContent;
+	}
+
+
+	public void setBoContent(String boContent) {
+		this.boContent = boContent;
+	}
+
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+	public int getBoCount() {
+		return boCount;
+	}
+
+	public void setBoCount(int boCount) {
+		this.boCount = boCount;
+	}
+
+	public String getBoTag() {
+		return boTag;
+	}
+
+
+	public void setBoTag(String boTag) {
+		this.boTag = boTag;
+	}
+
+
+	public String getBoDeleteYN() {
+		return boDeleteYN;
+	}
+
+
+	public void setBoDeleteYN(String boDeleteYN) {
+		this.boDeleteYN = boDeleteYN;
+	}
+
+	@Override
+	public String toString() {
+		return "Hotel [boNo=" + boNo + ", caCode=" + caCode + ", boTitle=" + boTitle + ", boContent=" + boContent
+				+ ", memberId=" + memberId + ", boCount=" + boCount + ", boTag=" + boTag + ", boDeleteYN=" + boDeleteYN
+				+ "]";
+	}
 	
 }
