@@ -37,6 +37,7 @@
         <div id="space_4"></div>
         <div id="infoDiv4"></div>
         
+        <!-- <form method="POST"> -->
         <!-- 아이디  -->
         <div id="id1"><label class="infoLabel">아이디</label></div><div id="id2"><label id="commonLabel">*</label>
         <input type="text" id="idText" name="idText" placeholder="5~12자 영문,숫자"
@@ -130,9 +131,8 @@
         <div id="space_7"></div>
         <input type="button" id="applyBtn1" value="취소" onclick="cancel();">
         <div id="space_8"></div>
-        <input type="button" id="applyBtn2" value="회원가입" onclick="ok();">
-	    
-    
+        <input type="button" id="applyBtn2" value="회원가입">
+        <!-- </form> -->
     </div>
     </section>
     <div style="height : 1000px;"></div>
@@ -166,7 +166,7 @@
    		   });
        });
        
-       $("#idText").click(function(){
+       $("#idText").focusin(function(){
     	   $("#idText").css({'color':'black','font-weight':'bold'});
        });
        
@@ -269,6 +269,7 @@
        });
        
        
+       
        $("#pwdText2").blur(function(){  
       	  $("#pwdText2").css('font-weight','normal');
       	  var userPwd = $("#pwdText").val();
@@ -284,9 +285,9 @@
  		     $("#pwd2_2").css('height','50px');
  		     $('#pwd2InfoBox').css('display', 'none');
  		     $('#pwd2CheckIcon').css({'display':'inline-block','color':'rgb(119,175,130)', 'width':'30px' , 'text-align' : 'left'});  
-      	  }
-      	  
+      	  }     	  
        });
+       
        
        
        $("#nameText").focusin(function(){
@@ -331,6 +332,7 @@
       });
        
        
+       
        $("#nicknameText").focusin(function(){
     	   $("#nicknameText").css({'color':'black','font-weight':'bold'});
        });
@@ -338,7 +340,7 @@
        $("#nicknameText").blur(function(){  
     	  $("#nicknameText").css('font-weight','normal');
     	  var nickname = $("#nicknameText").val();
-    	  var regType1 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]+$/;
+    	  var regType1 = /^[가-힣|a-z|A-Z|0-9|\*]+$/;
      	  
     	  if(nickname == ""){
     		  $("#nickname1").css('height','70px');
@@ -380,11 +382,11 @@
        });
        
        
+       
        $("#emailText").focusin(function(){
     	   $("#emailText").css({'color':'black','font-weight':'bold'});
        });
-       
-       
+              
        $("#emailText").blur(function(){  
      	  $("#emailText").css('font-weight','normal');
      	  var email = $("#emailText").val();
@@ -412,16 +414,75 @@
    	  }   	  
       });
        
+       
+       
        $("#sendMessage").click(function(){
-    	   $('#confirmDiv').css("display","inline-block");
+    	   var emailResult = "no";
+    	   var email = $("#emailText").val();
+      	   var check = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    	   
+      	 if(email == ""){
+   		     $("#email1").css('height','70px');
+   		     $("#email2").css('height','70px');
+   		     $('#emailInfoBox').text("필수 입력항목입니다.");
+   		     $('#emailInfoBox').css('display', 'block');
+   		     $('#confirmDiv').css("display","none");
+         } else if(email.search(/\s/) != -1){
+    	     $("#email1").css('height','70px');
+  		     $("#email2").css('height','70px');
+  		     $('#emailInfoBox').text("이메일은 공백 없이 입력해주세요.");
+  		     $('#emailInfoBox').css('display', 'block');
+  		     $('#confirmDiv').css("display","none");
+         } else if(email.match(check) == null){
+   		     $("#email1").css('height','70px');
+   		     $("#email2").css('height','70px');
+   		     $('#emailInfoBox').text("이메일의 형식에 맞게 입력해주세요.");
+   		     $('#emailInfoBox').css('display', 'block');
+   		     $('#confirmDiv').css("display","none");
+   	     } else {  
+   		     $("#email1").css('height','50px');
+  		     $("#email2").css('height','50px');
+  		     $('#emailInfoBox').css('display', 'none');
+  		     $('#confirmDiv').css("display","inline-block");
+  		     
+  		   alert("입력하신 이메일로 메일을 전송합니다.");
+  		   
+  		     // 인증메일 보내기
+  		   $.ajax({
+  			 url : 'sendMail.me',
+  			data : {email:email},
+  			 type : 'post',
+  			 success : function(data){
+  				 console.log("data : " + data);
+  				 if(data == "Y"){
+  					 console.log("메일인증성공");					 
+  				 } else {
+  					 alert("메일 전송에 실패하였습니다.");
+  		    	  } 
+  			 },
+  			 error : function(data){
+  				 console.log("서버 실패");
+  			 }
+  		   });
+  		  }   	   	
+      	});
+    	   
+       
+       
+       $("#confirmText").focusin(function(){
+    	   $("#confirmText").css({'color':'black','font-weight':'bold'});
        });
+       
+       $("#confirmText").blur(function(){  
+      	  $("#confirmText").css('font-weight','normal');
+       });
+      	  
        
        
        $("#phoneText").focusin(function(){
     	   $("#phoneText").css({'color':'black','font-weight':'bold'});
        });
-       
-       
+              
        $("#phoneText").blur(function(){  
      	  $("#phoneText").css('font-weight','normal');
      	  var phone = $("#phoneText").val();
@@ -451,7 +512,97 @@
        
        
        
-       
+       $("#applyBtn2").click(function(){
+    	   var idResult = "no";
+    	   var userId = $("#idText").val();
+    	   if($("#idInfoBox").css("display") == "none"){
+    		   idResult = "ok";
+    	   } else if($("#idInfoBox").css("display") == "block") {
+    		   idResult = "no";
+    	   }
+    	   
+    	   
+    	   var pwd1Result = "no";
+    	   var userPwd1 = $("#pwdText").val();
+    	   if($("#pwd1InfoBox").css("display") == "none"){
+    		   pwd1Result = "ok";
+    	   } else if($("#pwd1InfoBox").css("display") == "block") {
+    		   pwd1Result = "no";
+    	   }
+    	   
+    	   
+    	   var pwd2Result = "no";
+    	   var userPwd2 = $("#pwdText2").val();
+    	   if(userPwd1 == userPwd2){
+    		   pwd2Result = "ok";
+    	   } else {
+    		   pwd2Result = "no";
+    	   }
+    	   
+    	   
+    	   var nameResult = "no";
+    	   var userName = $("#nameText").val();
+    	   if($("#nameInfoBox").css("display") == "none"){
+    		   nameResult = "ok";
+    	   } else if($("#nameInfoBox").css("display") == "block") {
+    		   nameResult = "no";
+    	   }
+    	   
+    	   
+    	   var nicknameResult = "no";
+    	   var nickName = $("#nicknameText").val();
+    	   if($("#nicknameInfoBox").css("display") == "none"){
+    		   nicknameResult = "ok";
+    	   } else if($("#nicknameInfoBox").css("display") == "block") {
+    		   nicknameResult = "no";
+    	   }
+    	   
+    	   
+    	   var emailResult = "no";
+    	   var email = $("#emailText").val();
+    	   if($("#emailInfoBox").css("display") == "none"){
+    		   emailResult = "ok";
+    	   } else if($("#emailInfoBox").css("display") == "block") {
+    		   emailResult = "no";
+    	   }
+    	   
+    	   
+    	   var phoneResult = "no";
+    	   var phone = $("#phoneText").val();
+    	   if($("#phoneInfoBox").css("display") == "none"){
+    		   phoneResult = "ok";
+    	   } else if($("#phoneInfoBox").css("display") == "block") {
+    		   phoneResult = "no";
+    	   }
+    	   
+    	   
+    	   if(userId == "" || idResult == "no"){
+    		   alert("아이디를 확인해주세요.");
+    		   $("#idText").focus();
+    	   } else if(userPwd1 == "" || pwd1Result == "no"){
+    		   alert("비밀번호를 확인해주세요.");
+    		   $("#pwdText").focus();
+    	   } else if(userPwd2 == "" || pwd2Result == "no"){
+    		   alert("재확인 비밀번호가 일치하지 않습니다.");
+    		   $("#pwdText2").focus();
+    	   } else if(userName == "" || nameResult == "no"){
+    		   alert("이름을 확인해주세요.");
+    		   $("#nameText").focus();
+    	   } else if(nickName == "" || nicknameResult == "no"){
+    		   alert("닉네임을 확인해주세요.");
+    		   $("#nicknameText").focus();
+    	   } else if(email == "" || emailResult == "no"){
+    		   alert("이메일인증을 해주세요.");
+    		   $("#emailText").focus();
+    	   } else if(phone == "" || phoneResult == "no"){
+    		   alert("휴대폰 번호를 확인해주세요.");
+    		   $("#phoneText").focus();
+    	   } else {
+    		   // 회원가입
+    		   console.log("회원가입 시도");
+    	   }    	 
+       });
+
        
        function cancel(){
        	location.href="<%= request.getContextPath() %>/home.do";

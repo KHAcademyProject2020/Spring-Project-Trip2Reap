@@ -1,6 +1,7 @@
 package trip.two.reap.member.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,9 @@ public class MemberController {
 	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	
+	@Autowired
+	MailSender sender;
 	
 	// 암호화 후 로그인
 	@RequestMapping("loginCheck.me")
@@ -127,6 +131,20 @@ public class MemberController {
 			check = "N";
 		}
 		return check;
+	}
+	
+	// 인증메일 보내기 - 이메일 인증코드 생성
+	@RequestMapping("sendMail.me")
+	@ResponseBody
+	public String sendMail(@RequestParam("email") String email) {
+		int result = mService.create(email);
+		String checkMail = "";
+		if(result == 0) {
+			checkMail = "N";
+		} else {
+			checkMail = "Y";
+		}
+		return checkMail;
 	}
 	
 	

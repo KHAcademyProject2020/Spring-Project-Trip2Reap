@@ -10,4 +10,6 @@ public interface MemberService {
 
 	int nicknameCheck(String nickname);
 
+	int create(String email);
+
 }

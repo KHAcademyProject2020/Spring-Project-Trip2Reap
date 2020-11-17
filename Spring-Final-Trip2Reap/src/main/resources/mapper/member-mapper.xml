@@ -29,6 +29,10 @@
         from member
         where nickname=#{nickname}
     </select>
-
+    
+    <insert id="ranNumCheck">
+        insert into certification
+        values (#{email},#{randomKey})
+    </insert>
 
 </mapper>

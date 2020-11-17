@@ -1,0 +1,160 @@
+@charset "UTF-8";
+section { margin: 0px auto; width:1300px; } 
+     
+   /* 공통속성  */
+#board_list{ margin : 40px auto 0px auto;}  
+
+
+/* 전체 div */
+
+#searchBar{
+	border-top: 4px solid black;
+	display: flex;
+	
+}
+#board{
+
+	margin-left:150px;
+	width: 1000px;
+	
+    border-bottom: 4px solid #eee;
+	display: flex;
+	
+}
+table{
+
+    width: 300px;
+
+    border-collapse: collapse;
+    
+    margin-top: 10px;
+   
+
+  }
+  
+  
+#table1{
+	margin-left:150px;
+	
+}
+
+.board_list{
+
+    border-bottom: 1px solid #444444;
+
+    padding: 5px;
+
+  }
+ #searchBar{
+	border-top: 4px solid black;
+	display: flex;
+	
+}
+
+#all_div{
+	margin: 80px auto 0px auto;
+	width: 1000px;
+}
+
+/* img, 메뉴 이름, 검색 div */
+#menu_div{
+	padding: 0px 10px;
+    border-bottom: 4px solid #eee;
+	display: flex;
+}
+
+#menu_left_div{
+	margin-bottom: 20px;
+	text-align: left;
+	flex: 1;
+
+}
+
+#menu_img{
+	width: 80px;
+	height: 40px;
+	text-align: left;
+	
+}
+
+#menu{
+	font-size: 30px;
+	font-weight: 700;
+	text-align: left;
+}
+
+#menu_right_div{
+	flex: 3;
+	text-align: right;
+	position: relative;
+	top: 10px;
+}
+
+
+
+
+.bo_btn{
+	width: 60px;
+	height: 30px;
+	border: none;
+	background: #77af82;
+	color: white;
+	border-radius: 5px;
+}
+#bo_btn{
+	padding-left: 800px;
+}
+
+/* 카테고리 테이블 div */
+
+#cate_btn{
+
+	padding-left: 150px;
+}
+.cate_btn{
+	padding-right:5px;
+	width: 60px;
+	height: 30px;
+	border: none;
+	background: #77af82;
+	color: white;
+	border-radius: 5px;
+}
+#bo_btn{
+	padding-left:100px;
+	
+}
+
+.cate_name{
+    font-size: x-large;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+/* 페이징 */
+#paging_div{
+	text-align: center;
+}
+
+#paging_div button{
+	width: 25px;
+	height: 25px;
+	border: none;
+}
+
+#current{
+	background: #77af82;
+	color: white;
+}
+
+/* input이나 button 클릭 시 outline 제거 */
+#input_search, #button_search, #button_write:focus{
+	outline: none;
+}
