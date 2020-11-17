@@ -8,7 +8,7 @@ public class PageInfo {
 	private int startPage;
 	private int endPage;
 	private int boardLimit;
-	
+	//커밋용
 	public PageInfo() { }
 
 	public PageInfo(int currentPage, int listCount, int pageLimit, int maxPage, int startPage, int endPage,

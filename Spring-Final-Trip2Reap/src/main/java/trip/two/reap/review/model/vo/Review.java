@@ -3,7 +3,7 @@ package trip.two.reap.review.model.vo;
 import java.sql.Date;
 
 public class Review {
-	
+	// 커밋용!
 	private int boNo;
 	private int caCode;
 	private String boTitle;
