@@ -19,6 +19,7 @@
   }
 
 input[type=submit]{
+	position: relative;
   color: var(--btn-color);
   background-color: var(--mid-green);
   border-color: transparent;
@@ -78,7 +79,12 @@ input[type=submit]{
     
 } */
 
+label{
+	position: relative;
+}
+
 input[type=url]{
+	position: relaitve;
   padding: 10px;
   border: 1px solid var(--blue-gray);
   border-radius: 3px;
@@ -149,6 +155,11 @@ input:focus{
     padding: 0 7px;
   }
 
+
+.hotel-insert-subtitle-container,
+.hotel-insert-content-container{
+	position: relative;
+}
 
 
   /* 2020.11.05 */
@@ -239,6 +250,7 @@ input:focus{
   }
 
 
+
   /* only #input-hashtag-btn */
   #input-hashtag-btn{
     border-radius: 10px;
@@ -254,8 +266,10 @@ input:focus{
 
 
   #search_hotel_addr_btn{
-    margin-left: 15px;
+    /* margin-left: 15px; */
     font-size: 15px;
+    padding: 8px;
+    margin-left: 6px;
   }
 
 
@@ -458,12 +472,22 @@ input[type="text"].room_name{
 }
 
 /* 호텔 도로명 주소 */
+
+#search_hotel_addr_container{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
 .search_hotel_addr_wrapper{
   position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
+
+
 
 #hotel_address{
     border: var(--blue-gray) solid 1px;

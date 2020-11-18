@@ -40,10 +40,10 @@
 
 				<!-- 호텔 이름 입력 1-->
 				<div class="insert-common-container">
-					<div>
+					<div class="hotel-insert-content-container">
 						<p style="color: #913716;">* 는 필수 입력사항 입니다!</p>
 					</div>
-					<div>
+					<div class="hotel-insert-content-container">
 						<input id="hotel_name" name="hotel_name"
 							placeholder="* 호텔이름을 입력해주세요" type="text">
 					</div>
@@ -51,10 +51,10 @@
 
 				<!--호텔 메인 썸네일 이미지 등록2 -->
 				<div class="insert-common-container">
-					<div>
+					<div class="hotel-insert-subtitle-container">
 						<h3>* 호텔 메인 이미지 등록</h3>
 					</div>
-					<div>
+					<div class="hotel-insert-content-container">
 						<input type="file" name="thumbnail_img" id="thumbnail_img"
 							accept="images/*" /> <label id="thumbnail_img_label"
 							for="thumbnail_img">썸네일 이미지 찾아보기</label> <span
@@ -66,10 +66,10 @@
 
 				<!-- 호텔 디테일 이미지 등록 3-->
 				<div class="insert-common-container">
-					<div>
+					<div class="hotel-insert-subtitle-container">
 						<h3>&nbsp;&nbsp;호텔 디테일 이미지 등록</h3>
 					</div>
-					<div>
+					<div class="hotel-insert-content-container">
 						<input type="file" name="detail_img" id="detail_img"
 							accept="images/*" multiple /> <label id="detail_img_label"
 							for="detail_img">디테일 이미지 찾아보기</label> <span
@@ -85,14 +85,79 @@
 
 				<!--호텔 도로명 주소 4 -->
 				<div class="insert-common-container">
-					<div>
+					<div class="hotel-insert-subtitle-container">
 						<h3>* 호텔 도로명 주소</h3>
 					</div>
-					<div class="search_hotel_addr_wrapper">
-						<input id="search_hotel_addr_btn" type="button" value="주소 찾기">
-						<input type="text" readonly placeholder="호텔 도로명 주소를 입력해주세요!"
+					<div id="search_hotel_addr_container">
+						<div class="search_hotel_addr_wrapper">
+							<input id="search_hotel_addr_btn" type="button" value="주소 찾기" onclick="exeDaumPostcode()">
+							<input type="text" readonly placeholder="호텔 도로명 주소를 입력해주세요!"
 							name="hotel_address" id="hotel_address">
+							
+						</div>
+						
+						<div id="map" style="width:300px;height:300px; margin-top:10px;display:none"></div>
+						<%--도로명 주소 API --%>
+						<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+						<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=38a6847af6f758230564da5fe29aa9fc&libraries=services"></script>
+						<script>
+						
+							var mapContainer= document.getElementById('map');
+							mapOption={
+									center: new daum.maps.LatLng(37.537187, 127.005476),
+									map: map
+							};
+							
+							// 지도를 미리 생성 
+							var map= new daum.maps.Map(mapContainer, mapOption);
+							
+							//주소-좌표 변환 객체를 생성 
+							var geocoder= new daum.maps.services.Geocoder();
+							
+							//마커를 미리 생성
+							var marker= new daum.maps.Marker({
+								position: new daum.maps.LatLng(37.537187, 127.005476),
+								map: map
+							});
+							
+							
+							function exeDaumPostcode(){
+								new daum.Postcode({
+									oncomplete: function(data){
+										var addr= data.address; // 최종 주소 변수
+										
+										// 주소 정보를 해당 필드에 넣는다
+										document.getElementById("hotel_address").value= addr;
+										
+										// 주소로 상세 정보를 검색
+										geocoder.addressSearch(data.address, function(results, status){
+											//정상적으로 검색이 완료되면
+											if(status===daum.maps.services.Status.OK){
+												//첫번째 결과값을 활용.
+												var result=results[0];
+												
+												// 해당 주소에 대한 좌표를 받는다
+												var coords= new daum.maps.LatLng(result.y, result.x);
+												
+												//지도를 보여준다.
+												mapContainer.style.display ="block";
+												map.relayout();
+												
+												//지도의 중심을 변경한다.
+												map.setCenter(coords);
+												
+												//마커의 결과값으로 받은 위치로 옮긴다.
+												marker.setPosition(coords);
+												
+											}
+										});
+									}
+									
+								}).open();	
+							}
+						</script>
 					</div>
+					
 				</div>
 
 				<!-- 호텔 객실 정보 입력 5-->
@@ -101,7 +166,7 @@
 						<h3>* 호텔 객실 정보</h3>
 					</div>
 
-					<div class="insert-hotel-info-wrapper">
+					<div class="insert-hotel-info-wrapper" id="insert_hotel_info_list">
 
 						<!-- 호텔객실 정보 입력창 1 (disable delete)-->
 						<div class="one-room-info-insert">
@@ -113,9 +178,9 @@
 
 								<div>
 									<ul class="room_btn_remote_controller">
-										<li><i class="fas fa-angle-up"></i></li>
-										<li><i class="fas fa-angle-down"></i></li>
-										<!-- <li><i class="fas fa-minus"></i></li> -->
+										<li class="hotel-info-order-up"><i class="fas fa-angle-up"></i></li>
+										<li class="hotel-info-order-down"><i class="fas fa-angle-down"></i></li>
+										<li class="hotel-info-remove"><i class="fas fa-minus"></i></li>
 									</ul>
 								</div>
 							</div>
@@ -157,9 +222,9 @@
 
 								<div>
 									<ul class="room_btn_remote_controller">
-										<li><i class="fas fa-angle-up"></i></li>
-										<li><i class="fas fa-angle-down"></i></li>
-										<li><i class="fas fa-minus"></i></li>
+										<li class="hotel-info-order-up"><i class="fas fa-angle-up"></i></li>
+										<li class="hotel-info-order-down"><i class="fas fa-angle-down"></i></li>
+										<li class="hotel-info-remove"><i class="fas fa-minus"></i></li>
 									</ul>
 								</div>
 							</div>
@@ -186,62 +251,65 @@
 										<option value="이코노미룸">이코노미룸</option>
 									</select>
 								</div>
-
-
 							</div>
 						</div>
 
-
-						<div class="insert-hotel-btn-container">
+					</div> <%-- id="insert_hotel_info_list" --%>
+					<div class="insert-hotel-btn-container">
 							<i class="fas fa-plus" id="add_room_btn"></i>
-						</div>
-						
-						<script>
-						$('#add_room_btn').on('click',function(){
-							let $addOneRoomInfo= "<div class="one-room-info-insert">
-								<div class="room_btn_remote_controller_wrapper">
-							<div class="insert_room_name">
-								<input type="text" class="room_name" placeholder="객실 이름 입력"
-									name="room_name">
-							</div>
-
-							<div>
-								<ul class="room_btn_remote_controller">
-									<li><i class="fas fa-angle-up"></i></li>
-									<li><i class="fas fa-angle-down"></i></li>
-									<li><i class="fas fa-minus"></i></li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="insert_hotel_details">
-								<div class="insert_room_kinds">
-									<span class="room_kind_label">등록 객실 종류</span> 
-									<select>
-										<option value="">객실 종류 선택</option>
-										<option value="싱글룸">싱글룸</option>
-										<option value="더블룸">더블룸</option>
-										<option value="트윈룸">트윈룸</option>
-										<option value="스탠다드룸">스탠다드룸</option>
-										<option value="패밀리 트윈룸">패밀리</option>
-										<option value="디럭스 트윈룸">디럭스</option>
-										<option value="스위트룸">스위트룸</option>
-										<option value="스튜디오룸">스튜디오룸</option>
-										<option value="트리플룸">트리플룸</option>
-										<option value="온돌룸">온돌룸</option>
-										<option value="슈페리어룸">슈페리어룸</option>
-										<option value="이그제큐티브룸">이그제큐티브룸</option>
-										<option value="커넥팅룸">커넥팅룸</option>
-										<option value="프리미어룸">프리미어룸</option>
-										<option value="이코노미룸">이코노미룸</option>
-									</select>
-								</div>
-							</div>
-						</div>"
-						});
-						
-						</script>
+							<script>
+							$(function(){
+								$('#add_room_btn').on('click',function(){
+									let $hotelInfoContainer= $('#insert_hotel_info_list');
+									let $oneHotelInfo='<div class="one-room-info-insert">'
+									$oneHotelInfo+='<div class="room_btn_remote_controller_wrapper">'
+									$oneHotelInfo+='<div class="insert_room_name">'
+									$oneHotelInfo+='<input type="text" class="room_name" placeholder="객실 이름 입력" name="room_name"></div>'
+									$oneHotelInfo+='<div><ul class="room_btn_remote_controller"><li class="hotel-info-order-up"><i class="fas fa-angle-up"></i></li><li class="hotel-info-order-down"><i class="fas fa-angle-down"></i></li><li class="hotel-info-remove"><i class="fas fa-minus"></i></li></ul></div></div>'
+									$oneHotelInfo+='<div class="insert_hotel_details"><div class="insert_room_kinds"><span class="room_kind_label">등록 객실 종류</span> '
+									$oneHotelInfo+='<select><option value="">객실 종류 선택</option><option value="싱글룸">싱글룸</option><option value="더블룸">더블룸</option><option value="트윈룸">트윈룸</option>'
+									$oneHotelInfo+='<option value="스탠다드룸">스탠다드룸</option><option value="패밀리 트윈룸">패밀리</option><option value="디럭스 트윈룸">디럭스</option><option value="스위트룸">스위트룸</option><option value="스튜디오룸">스튜디오룸</option><option value="트리플룸">트리플룸</option>'
+									$oneHotelInfo+='<option value="온돌룸">온돌룸</option><option value="슈페리어룸">슈페리어룸</option><option value="이그제큐티브룸">이그제큐티브룸</option><option value="커넥팅룸">커넥팅룸</option><option value="프리미어룸">프리미어룸</option><option value="이코노미룸">이코노미룸</option></select></div></div></div>';
+									
+									$hotelInfoContainer.append($oneHotelInfo);
+									
+								});
+							});
+							</script>
 					</div>
+					
+					<script>
+						$(document).on('click', '.hotel-info-remove',function(e){
+							//(-)버튼: 호텔 객실정보 삭제 버튼 
+							// 클릭한 (-) 버튼에 해당하는 호텔객실 정보 1개를 지운다.
+							
+							let currentRoomInfo= $(e.currentTarget).closest('.one-room-info-insert');
+							console.log(currentRoomInfo);
+							
+							//삭제 확인창 
+							if(confirm('정말로 삭제하시겠습니까?')){
+								//삭제버튼에 해당하는 호텔정보를 지운다.
+								console.log('삭제됨!');
+								currentRoomInfo.remove();
+							}			
+						});
+						 
+						
+						/* 
+						// 호텔 객실정보가 1개라면 (-) 버튼을 클릭을 못하도록 막는다.
+						$(document).ready(function(){
+							let roomCnt= $('.one-room-info-insert').length;
+							if(roomCnt==1){
+								// (-) 버튼 1개를 없애버린다.
+								$('.hotel-info-remove').css('display', 'none');
+							}else{
+								$('.hotel-info-remove').css('display', 'list-item');
+							}
+						}); 
+						*/
+							
+						
+					</script>
 				</div>
 
 				<!-- 호텔 전화번호 입력 6-->
