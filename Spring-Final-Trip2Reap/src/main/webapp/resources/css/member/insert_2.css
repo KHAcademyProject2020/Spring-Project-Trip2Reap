@@ -99,6 +99,7 @@
      #sendMessage { display : inline-block; width : 100px; height : 30px; background: rgb(226,240,217); font-size: 13px; 
                     color : rgb(119,175,130); border : 1px solid rgb(119,175,130); text-align: center; vertical-align: middle; }
      #sendMessage:hover { background : rgb(119,175,130); color : rgb(226,240,217); }
+     #sendMessage2 { display : inline-block; width : 80px; height : 30px; font-size : 15px; margin-left : 28px; vertical-align: bottom; line-height: 10px; }
      #mailLabel { line-height: 27px; cursor: pointer; }
      
      

@@ -95,6 +95,7 @@
             <input type="text" id="emailText" name="emailText" placeholder="example@naver.com"
 	            onfocus="this.placeholder=''" onblur="this.placeholder='example@naver.com'" autocomplete="off">
 	        <div id="sendMessage"><label id="mailLabel">인증메일 전송</label></div>
+	        <div id="sendMessage2"></div>
 	        <div id="emailInfoBox">필수 입력사항입니다.</div>   
 	    </div>
         <div id="space_5"></div>
@@ -445,8 +446,42 @@
   		     $('#emailInfoBox').css('display', 'none');
   		     $('#confirmDiv').css("display","inline-block");
   		     
-  		   alert("입력하신 이메일로 메일을 전송합니다.");
+  		   alert("입력하신 이메일로 인증메일이 발송되었습니다.\n메일 전송에는 다소 시간이 걸릴 수 있습니다.\n메일함을 확인하여 인증코드를 입력해주세요.");
   		   
+  		   $('#sendMessage').css("display","none");
+  		   $('#sendMessage2').css("display","inline-block");
+  		   $("#emailText").attr("readonly",true);
+			 // 타이머
+			 function countdown(elementName, minutes, seconds){
+				 var elementName, endTime, hours, mins, msLeft, time;
+				 
+				 function twoDigits(n) {
+					 return (n <= 9 ? "0" + n : n);
+				 }
+				 
+				 function updateTimer(){
+					 msLeft = endTime - (+new Date);
+					 if(msLeft < 1000){
+						 alert("인증번호가 만료되었습니다.");  								 
+						 $("" + elementName).remove();
+						 $('#confirmDiv').css("display","none");
+						 $("#emailText").attr("readonly",false);
+						 $('#sendMessage').css("display","inline-block");
+					 } else {
+						 time = new Date(msLeft);
+						 hours = time.getUTCHours();
+						 mins = time.getUTCMinutes();
+						 $(""+elementName).html((hours ? hours + ":" + twoDigits(mins):twoDigits(mins))
+						   + ":" + twoDigits(time.getUTCSeconds()));
+						 setTimeout(updateTimer,time.getUTCMilliseconds() + 500);
+					 }
+				 }
+				 endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
+				 updateTimer();
+			 }
+			 $("<div id='sendMessage2'</div>").insertAfter($("#email"));
+			 countdown("#sendMessage2",10,0);
+			 
   		     // 인증메일 보내기
   		   $.ajax({
   			 url : 'sendMail.me',
@@ -455,7 +490,11 @@
   			 success : function(data){
   				 console.log("data : " + data);
   				 if(data == "Y"){
-  					 console.log("메일인증성공");					 
+  					 console.log("메일인증성공");
+  					 // mapper 수정하기 -> email이 존재하면 update
+  					 //                        존재하지 않으면 insert
+  					 
+  					 // 메일 인증 성공 시 1. email->readOnly로 바꾸고 2. 버튼을 메일인증완료로 바꾸기
   				 } else {
   					 alert("메일 전송에 실패하였습니다.");
   		    	  } 
