@@ -93,11 +93,15 @@
 			<div id="login_space4"></div>
 			<form action="loginCheck.me" method="post">
 			<div id="loginDiv">
+			<div id="idPwdDiv">
+			<i class="fas fa-user-circle" id="idIcon"></i>
 	        <input type="text" id="loginInfo_1" class="loginInfo" name="memberId" placeholder="아이디를 입력해주세요"
-	         onfocus="this.placeholder=''" onblur="this.placeholder='아이디를 입력해주세요'" autocomplete="off" >
+	         onfocus="this.placeholder=''" onblur="this.placeholder='아이디를 입력해주세요'" autocomplete="off" ></div>	         
 	        <div id="login_space1"></div>
+	        <div id="idPwdDiv">
+	        <i class="fas fa-lock" id="pwdIcon"></i>
 	        <input type="password" id="loginInfo_2" name="memberPwd" class="loginInfo" placeholder="비밀번호를 입력해주세요"
-	         onfocus="this.placeholder=''" onblur="this.placeholder='비밀번호를 입력해주세요'" autocomplete="off">
+	         onfocus="this.placeholder=''" onblur="this.placeholder='비밀번호를 입력해주세요'" autocomplete="off"></div>
 	         </div>
 	    <div id="login_space2"></div>
 	    
