@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import trip.two.reap.member.model.service.MemberService;
 import trip.two.reap.member.model.vo.Member;
@@ -149,7 +150,9 @@ public class MemberController {
 	
 	// 회원가입3 뷰로 이동
 	@RequestMapping("insert3.me")
-	public String insertMember(@ModelAttribute Member member) {
+	public ModelAndView insertMember(@ModelAttribute Member member) {
+		ModelAndView mv = new ModelAndView();
+		
 		// 성별
 		String gender = member.getGender();
 		if(gender.equals("")) {
@@ -163,10 +166,13 @@ public class MemberController {
 		int result = mService.insertMember(member);
 		
 		if(result > 0) {
-			return "insert_3";	
+			mv.addObject("memberName", member.getMemberName());
+			mv.addObject("memberId", member.getMemberId());
+			mv.setViewName("insert_3");
 		} else {
-			return "insertFail";
+			mv.setViewName("insertFail");
 		}
+		return mv;
 	}
 	
 	
