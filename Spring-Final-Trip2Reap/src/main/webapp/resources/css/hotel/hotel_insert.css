@@ -130,6 +130,7 @@ input:focus{
 
   /* 해시태그 */
   .insert-hashtag-guide-wrapper ul{
+ 	margin-top: 5px;
     padding-left: 21px;
     list-style: none;
   }
@@ -139,9 +140,17 @@ input:focus{
     color: var(--emerald-green);
   }
 
-  .insert-hashtag-wrapper, .saved-hashtags-wrapper{
+  .insert-hashtag-wrapper, 
+  .saved-hashtags-wrapper,
+  #no-hashtag{
     margin-left: 15px;
   }
+  
+  #no-hashtag{
+  	color: #999;
+  	margin-left: 20px;
+  }
+  
 
   #saved-hashtags{
     display: flex;
@@ -183,6 +192,23 @@ input:focus{
  width: 200px;
 }
 
+
+.remove-hashtag-btn{
+	margin-left: 3px;
+	color: var(--minus-color);
+	cursor: pointer;
+	font-size: 12px;
+}
+
+.remove-hashtag-btn:hover{
+	color: var(--minus-hover-color);
+}
+
+ul#saved-hashtags > li{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
 
 /* 호텔 등록하기 버튼 */
 #btn-container{
@@ -487,6 +513,10 @@ input[type="text"].room_name{
   align-items: center;
 }
 
+.map_wrapper{
+	position: relative;
+	margin: 30px;
+}
 
 
 #hotel_address{

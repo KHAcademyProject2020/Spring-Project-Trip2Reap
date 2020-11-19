@@ -55,12 +55,13 @@
 						<h3>* 호텔 메인 이미지 등록</h3>
 					</div>
 					<div class="hotel-insert-content-container">
-						<input type="file" name="thumbnail_img" id="thumbnail_img"
-							accept="images/*" /> <label id="thumbnail_img_label"
-							for="thumbnail_img">썸네일 이미지 찾아보기</label> <span
-							class="img_upload_status_info" id="thumbnail_img_name">사진을
-							업로드 해주세요!</span>
+						<input type="file" name="thumbnail_img" id="thumbnail_img" accept="images/*" /> 
+						<label id="thumbnail_img_label" for="thumbnail_img">썸네일 이미지 찾아보기</label> 
+						<span class="img_upload_status_info" id="thumbnail_img_name">사진을 업로드 해주세요!</span>
 					</div>
+					<script>
+						
+					</script>
 
 				</div>
 
@@ -81,6 +82,10 @@
 							<li></li>
 						</ul>
 					</div>
+					
+					<script>
+					
+					</script>
 				</div>
 
 				<!--호텔 도로명 주소 4 -->
@@ -96,7 +101,10 @@
 							
 						</div>
 						
-						<div id="map" style="width:300px;height:300px; margin-top:10px;display:none"></div>
+						<div class="map_wrapper">
+							<div id="map" style="width:300px;height:300px; margin-top:10px;display:none"></div>
+						</div>
+						
 						<%--도로명 주소 API --%>
 						<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 						<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=38a6847af6f758230564da5fe29aa9fc&libraries=services"></script>
@@ -289,25 +297,9 @@
 							//삭제 확인창 
 							if(confirm('정말로 삭제하시겠습니까?')){
 								//삭제버튼에 해당하는 호텔정보를 지운다.
-								console.log('삭제됨!');
 								currentRoomInfo.remove();
-							}			
-						});
-						 
-						
-						/* 
-						// 호텔 객실정보가 1개라면 (-) 버튼을 클릭을 못하도록 막는다.
-						$(document).ready(function(){
-							let roomCnt= $('.one-room-info-insert').length;
-							if(roomCnt==1){
-								// (-) 버튼 1개를 없애버린다.
-								$('.hotel-info-remove').css('display', 'none');
-							}else{
-								$('.hotel-info-remove').css('display', 'list-item');
 							}
-						}); 
-						*/
-							
+						});
 						
 					</script>
 				</div>
@@ -605,33 +597,80 @@
 
 					<div class="insert-hashtag-wrapper">
 						<input type="text" id="input-hashtag" placeholder="해시태그를 입력해주세요.">
-						<input type="button" id="input-hashtag-btn"
-							onclick="insertHashTags();" value="해시태그 등록" />
+						<input type="button" id="input-hashtag-btn" value="해시태그 등록"/>
 					</div>
 
 					<!-- 등록된 해시태그들을 모으는 곳. -->
 					<div class="saved-hashtags-wrapper">
+						<%--해시태그가 존재하지 않으면 --%>
+						<p id="no-hashtag"><small>해시태그가 존재하지 않습니다!</small></p>
+						
+						<%-- 해시태그가 존재한다면  --%>
 						<ul id="saved-hashtags">
-							<li><small>해시태그가 없습니다!</small></li>
-							<li><small>해시태그가 없습니다!</small></li>
-							<li><small>해시태그가 없습니다!</small></li>
 						</ul>
 					</div>
 					<script>
-						// insert hashtag function
-						function insertHashTags() {
-
-							//입력받은 해시태그
-							let inputHashTag = $('input-hashtag').val();
-							console.log(inputHashTag);
-
-							//해시태그 저장리스트
-							let hashTags = $('#saved-hashtags');
-
-							hashTags.empty();
-							hashTags.append('<li><small>' + inputHashTag
-									+ '</small>');
-						}
+						$(function(){
+							var checkHashTagsMsg=function(){
+								//해시태그 저장리스트
+								let savedHashTags = $('#saved-hashtags');
+								
+								// 저장된 해시태그들
+								let $hashTags= savedHashTags.children('li');	
+								
+								if($hashTags.length==0){
+									// 저장된 해시태그가 존재하지 않는다면 (0개 )
+									// 해시태그 존재하지 않는다는 문구를 띄운다.
+									$('#no-hashtag').css('display', 'block');
+								}else{
+									//저장된 해시태그가 존재한다면(1개 이상 )
+									// 해시태그가 존재하지 않는다는 문구를 안보이게 한다.
+									$('#no-hashtag').css('display', 'none');
+								}
+							};
+							
+							// 해시태그 등록 버튼 클릭시  발생하는 함수- insert hashtag function
+							$('#input-hashtag-btn').on('click', function(){
+								//해시태그 저장리스트
+								let savedHashTags = $('#saved-hashtags');
+								
+								// 저장된 해시태그들 
+								let $hashTags= savedHashTags.children('li');	
+								
+								//입력받은 해시태그
+								let inputHashTag = $('#input-hashtag').val();
+								
+								if(inputHashTag.length==0){
+									// 입력한 글자수가 0자 
+									alert('해시태그를 입력해주세요!');
+								}else{
+									// 입력한 글자수가 최소 1자 이상
+									
+									if($hashTags.length<3){
+										//저장된 해시태그의 개수가 3개미만 => 추가
+										$hashtag_content='<li><span class="hashtag-content"> #'+inputHashTag+'</span><span><i class="remove-hashtag-btn fas fa-times"></i></span></li>'
+										savedHashTags.append($hashtag_content);
+									}else{
+										//저장된 해시태그의 개수가 3개 이상이라면=> 경고창 
+										alert('이미 최대 3개 해시태그를 등록했습니다!');
+									}
+								}
+								
+								checkHashTagsMsg();
+							});
+							
+						}); 
+						
+						
+						// 해시태그 삭제 버튼을 클릭했을때 실행하는 함수.
+						$(document).on('click', '.remove-hashtag-btn' , function(e){
+							// 가장 가까운 해시태그를 지운다.
+							$(e.currentTarget).closest('#saved-hashtags li').remove();
+							
+							//해시태그 삭제처리후, 해시태그가 없다는 메시지를 띄워야할지 말아야할지 결정
+							checkHashTagMsg();
+						});
+							
 					</script>
 				</div>
 
