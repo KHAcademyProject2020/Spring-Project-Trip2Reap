@@ -647,11 +647,60 @@ input[type="text"].room_name{
   border-radius: 3px;
 }
 
+/*디테일 이미지 체크박스 */
+.upload-img-name-li input[type="checkbox"].upload-image-checkbox{
+	display:none;
+	position: relative;
+}
+
+input[type="checkbox"].upload-image-checkbox + label.upload-image-label:before{
+	position: relative;
+	content: "";
+	display:inline-block;
+	width: 20px;
+	height:20px;
+	
+	border: 2px solid var(--blue-gray);
+	border-radius: 3px;
+	vertical-align: middle;
+	
+	cursor:pointer;
+}
+
+
+input[type="checkbox"].upload-image-checkbox:checked + label.upload-image-label:before{
+	background-color: var(--bright-green);
+	border-color: transparent;
+	cursor:pointer;
+}
+
+
+input[type="checkbox"].upload-image-checkbox + label.upload-image-label:after{
+	cursor:pointer;
+	position: absolute;
+	content: "";
+	background: url(../../images/hotel_checkbox.png) no-repeat center;
+	
+	width: 32px;
+	height: 32px;
+	
+	top:-5px;
+	left: -4px;
+
+	background-size: 0 auto;
+	
+}
+
+
+input[type="checkbox"].upload-image-checkbox:checked + label.upload-image-label:after{
+	background-size: 16px auto;
+}
 
 
 
-
-/* 호텔 도로명 주소 */
+/* 
+========================================================================
+호텔 도로명 주소 */
 
 #search_hotel_addr_container{
 	position: relative;
@@ -754,6 +803,7 @@ input[type="text"].room_name{
   justify-content: flex-start;
   align-items: center;
   margin-left: 10px;
+  position: relative;
 }
 
 
@@ -769,18 +819,26 @@ input[type="text"].room_name{
 
 .hotel_option_table td{
   border-bottom: var(--blue-gray) 1px solid;
-  text-align: center;
+  text-align: left;
   padding: 13px;
+  vertical-align: middle;
+}
+
+
+.hotel_option_table tr:nth-last-child(1) td{
+  border-bottom-color: transparent; 
+}
+
+
+td.table_option_name:last-child{
+	padding-left: 10px;
 }
 
 /* .hotel_option_table td:nth-child(1){
   border-right: var(--blue-gray) 1px solid;
 } */
 
-.hotel_option_table tr:nth-last-child(1) td{
-  border-bottom-color: transparent; 
-}
-
+/* 
 .hotel_option_table input[type="checkbox"]{
   background: var(--blue-gray);
   cursor: pointer;
@@ -790,6 +848,7 @@ input[type="text"].room_name{
   background: var(--mid-green) ;
 }
 
+ */
 .hotel_option_table tr:nth-child(1) td{
   background: var(--mid-green);
   color: #fff;
@@ -800,12 +859,72 @@ input[type="text"].room_name{
   border-right: transparent;
 }
 
+.table_option_name{
+	text-align: center;
+}
+
 .hotel_option_table td:nth-child(1){
   font-weight: bold;
 }
 
+/*-- 호텔 옵션 체크박스   */
 
-/*호텔 객실 정보 입력 수정   */
+ 
+ 
+.hotel_option_table input[type="checkbox"]{
+	display:none;
+	position: relative;
+} 
+
+input[type="checkbox"].option-checkboxes + label.fake-checkbox-label:before{
+	position: relative;
+	content: "";
+	display:inline-block;
+	width: 20px;
+	height:20px;
+	
+	border: 2px solid var(--blue-gray);
+	border-radius: 3px;
+	vertical-align: middle;
+	
+	margin-right: 60px;
+	cursor:pointer;
+	
+	top:0;
+}
+
+
+input[type="checkbox"].option-checkboxes:checked + label.fake-checkbox-label:before{
+	background-color: var(--bright-green);
+	border-color: transparent;
+	cursor:pointer;
+}
+
+
+input[type="checkbox"].option-checkboxes + label.fake-checkbox-label:after{
+	cursor:pointer;
+	position: absolute;
+	content: "";
+	background: url(../../images/hotel_checkbox.png) no-repeat center;
+	
+	width: 32px;
+	height: 32px;
+	
+	top:-5px;
+	left: -4px;
+
+	background-size: 0 auto;
+	
+}
+
+
+input[type="checkbox"].option-checkboxes:checked + label.fake-checkbox-label:after{
+	background-size: 16px auto;
+}
+
+
+/*===============================================================
+호텔 객실 정보 입력 수정   */
 .room_btn_remote_controller_wrapper{
 	margin-top: 2px;
 	margin-bottom: 2px;

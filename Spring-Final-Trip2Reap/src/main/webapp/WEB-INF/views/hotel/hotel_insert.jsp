@@ -104,7 +104,8 @@
 								
 									<li class="upload-img-name-li">
 										<div class="upload-image-checkbox-wrapper">
-											<input class="upload-image-checkbox" type="checkbox" name="select_detail_img"/>
+											<input id="upload_img_1" class="upload-image-checkbox" type="checkbox" name="select_detail_img"/>
+											<label for="upload_img_1" class="upload-image-label"></label>
 										</div>
 										<div class="upload-image-filename-wrapper">
 											파일이름 
@@ -562,67 +563,79 @@
 							<!-- 테이블1 -->
 							<table>
 								<tr>
-									<td>옵션명</td>
 									<td>선택</td>
+									<td class="table_option_name">옵션명</td>
 								</tr>
 
 								<tr>
-									<td>와이파이</td>
-									<td><input type="checkbox" name="hotel_option"
-										value="와이파이" /></td>
-								</tr>
-
-								<tr>
-									<td>조식</td>
-									<td><input type="checkbox" name="hotel_option" value="조식" />
+									<td colspan=2>
+										<input type="checkbox"  class="option-checkboxes" name="hotel_option" value="와이파이" id="option1"/>
+										<label class="fake-checkbox-label" for="option1">와이파이</label>
 									</td>
 								</tr>
 
 								<tr>
-									<td>레스토랑</td>
-									<td><input type="checkbox" name="hotel_option"
-										value="레스토랑" /></td>
-								</tr>
-
-								<tr>
-									<td>세탁</td>
-									<td><input type="checkbox" name="hotel_option" value="세탁" />
+									<td colspan=2>
+										<input type="checkbox"  class="option-checkboxes"  name="hotel_option" value="조식" id="option2"/>
+										<label class="fake-checkbox-label" for="option2">조식</label>
 									</td>
 								</tr>
 
 								<tr>
-									<td>24시간 리셉션</td>
-									<td><input type="checkbox" name="hotel_option"
-										value="24시간 리셉션" /></td>
-								</tr>
-
-								<tr>
-									<td>수하물 보관</td>
-									<td><input type="checkbox" name="hotel_option"
-										value="수하물 보관" /></td>
-								</tr>
-
-								<tr>
-									<td>수영장</td>
-									<td><input type="checkbox" name="hotel_option" value="수영장" />
+									
+									<td colspan=2>
+										<input type="checkbox" class="option-checkboxes" name="hotel_option" value="레스토랑" id="option3"/>
+										<label class="fake-checkbox-label" for="option3">레스토랑</label>
 									</td>
 								</tr>
 
 								<tr>
-									<td>피트니스</td>
-									<td><input type="checkbox" name="hotel_option"
-										value="피트니스" /></td>
-								</tr>
-
-								<tr>
-									<td>스파 &amp; 사우나</td>
-									<td><input type="checkbox" name="hotel_option" value="스파" />
+									<td colspan=2>
+										<input id="option4" type="checkbox" class="option-checkboxes" name="hotel_option" value="세탁"/>
+										<label class="fake-checkbox-label" for="option4">세탁</label>
 									</td>
 								</tr>
 
 								<tr>
-									<td>미용실 </td>
-									<td><input type="checkbox" name="hotel_option" value="미용실" />
+									<td colspan=2>
+										<input id="option5" class="option-checkboxes" type="checkbox" name="hotel_option" value="24시간 리셉션" />
+										<label class="fake-checkbox-label" for="option5">24시간 리셉션</label>
+									</td>
+								</tr>
+
+								<tr>
+									<td colspan=2>
+										<input id="option6" class="option-checkboxes" type="checkbox" name="hotel_option" value="수하물 보관" />
+										<label class="fake-checkbox-label" for="option6">수하물 보관</label>
+									</td>
+								</tr>
+
+								<tr>
+									<td colspan=2>
+										<input id="option7" class="option-checkboxes" type="checkbox" name="hotel_option" value="수영장" />
+										<label class="fake-checkbox-label" for="option7">수영장</label>
+									</td>
+								</tr>
+
+								<tr>
+									<td colspan=2>
+										<input id="option8" class="option-checkboxes" type="checkbox" name="hotel_option" value="피트니스" />
+										<label class="fake-checkbox-label" for="option8">피트니스</label>	
+									</td>
+										
+								</tr>
+
+								<tr>
+									<td colspan=2>
+										<input id="option9" class="option-checkboxes" type="checkbox" name="hotel_option" value="스파 & 사우나" />
+										<label class="fake-checkbox-label" for="option9">스파 &amp; 사우나</label>
+									</td>
+								</tr>
+
+								<tr>
+									<td colspan=2>
+										<input id="option10" class="option-checkboxes" type="checkbox" name="hotel_option" value="미용실" />
+										<label class="fake-checkbox-label" for="option10">미용실</label>
 									</td>
 								</tr>
 							</table>
@@ -631,69 +644,79 @@
 							<!-- 테이블2 -->
 							<table>
 								<tr>
-									<td>옵션명</td>
 									<td>선택</td>
+									<td class="table_option_name">옵션명</td>
 								</tr>
 
 								<tr>
-									<td>카페</td>
-									<td><input type="checkbox" name="hotel_option" value="카페" />
+									<td colspan=2>
+										<input id="option11" type="checkbox" class="option-checkboxes" name="hotel_option" value="카페" />
+										<label class="fake-checkbox-label" for="option11">카페</label>
 									</td>
 								</tr>
 
 								<tr>
-									<td>비즈니스 시설</td>
-									<td><input type="checkbox" name="hotel_option"
-										value="비즈니스 시설" /></td>
-								</tr>
-
-								<tr>
-									<td>주차</td>
-									<td><input type="checkbox" name="hotel_option" value="주차" />
+									<td colspan=2>
+										<input id="option12" type="checkbox" class="option-checkboxes" name="hotel_option" value="비즈니스 시설" />
+										<label class="fake-checkbox-label" for="option12">비즈니스 시설</label>
 									</td>
 								</tr>
 
 								<tr>
-									<td>공항셔틀</td>
-									<td><input type="checkbox" name="hotel_option"
-										value="공항셔틀" /></td>
-								</tr>
-
-								<tr>
-									<td>장애인 편의시설</td>
-									<td><input type="checkbox" name="hotel_option"
-										value="장애인 편의시설" /></td>
-								</tr>
-
-								<tr>
-									<td>바 &amp; 라운지</td>
-									<td><input type="checkbox" name="hotel_option"
-										value="바 라운지" /></td>
-								</tr>
-
-
-								<tr>
-									<td>주방</td>
-									<td><input type="checkbox" name="hotel_option" value="주방" />
+									<td colspan=2>
+										<input id="option13" type="checkbox" class="option-checkboxes" name="hotel_option" value="주차" />
+										<label class="fake-checkbox-label" for="option13">주차</label>
 									</td>
 								</tr>
 
 								<tr>
-									<td>아이돌봄 서비스 </td>
-									<td><input type="checkbox" name="hotel_option"
-										value="아이돌봄 서비스" /></td>
+									<td colspan=2>
+										<input id="option14" type="checkbox" class="option-checkboxes" name="hotel_option" value="공항셔틀" />
+										<label class="fake-checkbox-label" for="option14">공항셔틀</label>
+									</td>
 								</tr>
 
 								<tr>
-									<td>룸서비스</td>
-									<td><input type="checkbox" name="hotel_option"
-										value="룸서비스" /></td>
+									<td colspan=2>
+										<input id="option15" type="checkbox" class="option-checkboxes" name="hotel_option" value="장애인 편의시설" />
+										<label class="fake-checkbox-label" for="option15">장애인 편의시설</label>
+									</td>
 								</tr>
 
 								<tr>
-									<td>애완동물 동반</td>
-									<td><input type="checkbox" name="hotel_option"
-										value="애완동물동반" /></td>
+									<td colspan=2>
+										<input id="option16" type="checkbox" class="option-checkboxes" name="hotel_option" value="바 라운지" />
+										<label class="fake-checkbox-label" for="option16">바 &amp; 라운지</label>	
+									</td>
+								</tr>
+
+
+								<tr>
+									<td colspan=2>
+										<input id="option17" type="checkbox" class="option-checkboxes" name="hotel_option" value="주방" />
+										<label class="fake-checkbox-label" for="option17">주방</label>
+									</td>
+								</tr>
+
+								<tr>
+									<td colspan=2>
+										<input id="option18" type="checkbox" class="option-checkboxes" name="hotel_option" value="아이돌봄 서비스" />
+										<label class="fake-checkbox-label" for="option18">아이돌봄 서비스</label>
+									</td>
+								</tr>
+
+								<tr>
+									<td colspan=2>
+										<input id="option19" type="checkbox" class="option-checkboxes" name="hotel_option" value="룸서비스" />
+										<label class="fake-checkbox-label" for="option19">룸서비스</label>
+									</td>
+								</tr>
+
+								<tr>
+									<td colspan=2>
+										<input id="option20" type="checkbox" class="option-checkboxes" name="hotel_option" value="애완동물 동반" />
+										<label class="fake-checkbox-label" for="option20">애완동물 동반</label>
+									</td>
 								</tr>
 							</table>
 						</div>
