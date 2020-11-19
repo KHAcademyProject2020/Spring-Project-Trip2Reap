@@ -295,10 +295,24 @@
 							console.log(currentRoomInfo);
 							
 							//삭제 확인창 
-							if(confirm('정말로 삭제하시겠습니까?')){
+							swal({
+							  title: "정말로 삭제하시겠습니까?",
+							  text: "작성한 내용은 복구할 수 없습니다. 정말로 삭제하시겠습니까?",
+							  icon: "warning",
+							  buttons: true,
+							  dangerMode: true,
+							})
+							.then((willDelete) => {
+							  if (willDelete) {
 								//삭제버튼에 해당하는 호텔정보를 지운다.
 								currentRoomInfo.remove();
-							}
+							    
+							  } else {
+								    swal({
+								    	text: "삭제를 취소했습니다."
+								    });
+							  }
+							});
 						});
 						
 					</script>
@@ -342,6 +356,7 @@
 							<input class="phone-call" type="tel" name="real_call_number"
 								id="real_call_number">
 						</div>
+						<input type="hidden" name="total_phone_number" id="total_phone_number"></input>
 
 						<%--
 							<div>
@@ -354,27 +369,74 @@
 							// 번호가 아닌 다른 문자를 입력못하게 한다.
 							//^ : 문자열의 앞을 구분 
 							//$ : 문자열의 뒤를 구분 
+							//* : 바로앞의 문자가 0개이상 
 							
 							// keyup: 키보드에서 손을 뗐을 때 발생하는 이벤트
 							// keydown: 키보드를 눌렀을 때 실행. 한개 키를 누를때 실행
 							// keypress: 키보드를 누르고있을 때 계속 실행됨.
-							let regNumber= /^[0-9]|[\b]*$/;
+							
+							// 숫자와 백스페이스만 가능.
+							let regNumber= /^[0-9]*$/;
+							
+							//전체전화번호
+							let totalPhoneNumber='';
+							
+							
+							function numberFormatterFunc(localNumber, realNumber){
+								//console.log('지역번호: '+localNumber);
+								//console.log('실제전화번호: '+ realNumber);
+								
+								totalPhoneNumber= localNumber+realNumber;
+								//console.log('초기 전체전화번호: '+totalPhoneNumber);
+								
+								if(localNumber.length==2){
+									//지역번호가 2자리 (서울 )
+									$('#real_call_number').val(realNumber.replace(/(\d{4})(\d{4})/,'$1-$2'));
+									
+									//전체 전화번호 
+									totalPhoneNumber=totalPhoneNumber.replace( /(\d{2})(\d{4})(\d{4})/ , '$1-$2-$3');
+									
+								}else{ //localNumber.length==3
+									
+									if(localNumber=='010'){
+										// 휴대폰번호 (010)
+										$('#real_call_number').val(realNumber.replace(/(\d{4})(\d{4})/,'$1-$2'));
+										
+										//전체 전화번호 
+										totalPhoneNumber=totalPhoneNumber.replace( /(\d{3})(\d{4})(\d{4})/ , '$1-$2-$3');
+										
+									}else{
+										//서울을 제외한 지역번호
+										$('#real_call_number').val(realNumber.replace(/(\d{3})(\d{4})/,'$1-$2'));
+										
+										//전체 전화번호 
+										totalPhoneNumber=totalPhoneNumber.replace( /(\d{3})(\d{3})(\d{4})/ , '$1-$2-$3');
+									}
+								}
+								
+								console.log('전체전화번호: '+ totalPhoneNumber);
+								$('#total_phone_number').val(totalPhoneNumber);
+							}
 							
 							$('#real_call_number').on({
 								'keyup':function(){
-									let $inputPhoneNumber= $(this).val();
+									// 키보드에서 손을 뗐을 때 
+									// 숫자가 아닌값들은 빈값으로 변경한다.
+									$(this).val($(this).val().replace(/[^0-9]/g,''));
 									
-									if(!regNumber.test($inputPhoneNumber) ){
-										alert('숫자만 입력해주세요!');
-										
-										$(this).val($inputPhoneNumber)
-									}
-									
+									//정규표현식을 이용하여 숫자를 바꾼다.
+									//지역번호를 구한다.
+									let localNumber=$('#local_call_number option:selected').text();
+									numberFormatterFunc(localNumber, $(this).val());
 								},
 								'keydown': function(){
-									if(!regNumber.test($(this).val())){
-										alert('숫자만 입력해주세요!');
-									}
+									// 키를 누를때마다 한번 발생 
+									// 숫자가 아닌값들은 빈값으로 변경한다.
+									$(this).val($(this).val().replace(/[^0-9]/g,''));
+								},
+								'keypress':function(){
+									// 숫자가 아닌값들은 빈값으로 변경한다.
+									$(this).val($(this).val().replace(/[^0-9]/g,''));
 								}
 							});
 						});
@@ -698,17 +760,32 @@
 								
 								if(inputHashTag.length==0){
 									// 입력한 글자수가 0자 
-									//alert('해시태그를 입력해주세요!');
-									swal('해시태그 등록 실패', '해시태그 내용을 입력해주세요!', 'error');
+									swal({
+										  title: "해시태그 등록 실패",
+										  text: '해시태그 내용을 입력해주세요!',
+										  icon: 'error',
+										  button: "확인",
+									});
 								}else{
 									// 입력한 글자수가 최소 1자 이상
 									//입력한 해시태그가 이미 등록한 해시태그와 겹친다면?
 									if(isDuplicateHashTags(inputHashTag)){
-										swal('해시태그 등록 실패', '이미 등록된 해시태그입니다!', 'error');
+										swal({
+											  title: "해시태그 등록 실패",
+											  text: '이미 등록된 해시태그입니다!',
+											  icon: 'error',
+											  button: "확인",
+										});
+										
 									}else{
 										//입력한 해시태그의 글자수가 10자를 넘는지 확인
 										if(inputHashTag.length>10){
-											swal('해시태그 등록 실패','해시태그 등록 가능한 글자수는 최대 10자입니다!','error');
+											swal({
+												  title: "해시태그 등록 실패",
+												  text: '해시태그 등록 가능한 글자수는 최대 10자입니다!',
+												  icon: 'error',
+												  button: "확인",
+											});
 										}else{
 											
 											if($hashTags.length<3){
@@ -717,7 +794,12 @@
 												savedHashTags.append($hashtag_content);
 											}else{
 												//저장된 해시태그의 개수가 3개 이상이라면=> 경고창 
-												swal('해시태그 등록 실패','이미 최대 3개 해시태그를 등록했습니다!', 'error' );
+												swal({
+												  title: "해시태그 등록 실패",
+												  text: '이미 최대 3개 해시태그를 등록했습니다!',
+												  icon: 'error',
+												  button: "확인",
+												});
 											}
 										}
 									}
