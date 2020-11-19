@@ -1,11 +1,14 @@
 package trip.two.reap.travel.model.service;
 
-import org.springframework.stereotype.Service;
+import java.util.ArrayList;
 
+import trip.two.reap.review.model.vo.PageInfo;
+import trip.two.reap.travel.model.vo.Travel;
 
 public interface TravelService {
-	@Service("tService")
-	public class TravelServiceImpl implements TravelService{
-		
-	}
+
+	int getListCount();
+
+	ArrayList<Travel> selectList(PageInfo pi);
+
 }
