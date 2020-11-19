@@ -16,7 +16,7 @@ public class Travel {
 	private String trAddr;		// 여행지 주소
 	private String trTheme;		// 여행지 테마
 	
-	private int fileNo;			// 파일 번호
+	private int fileNo;			// 파일 번호 -> 없애야 할 듯!
 	
 	
 	public Travel() {}

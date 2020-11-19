@@ -20,6 +20,7 @@
 			</div>
 			<div id="menu_right_div">
 				<input type="text" id="input_search" />
+				
 				<button id="button_search" onclick="goSearchError()">검색</button>
 			</div>
 		</div>
@@ -93,82 +94,41 @@
 		
 		
 		
-		
 		<div id="list_all_div">
 			<div id="list_count_div">
 				총<span id="list_count">${ pi.listCount }</span>건
 			</div>
 			
 			<!-- 여행지 div -->
+			<c:forEach var="t" items="${ list }">
 			<div id="list_travel_div">
 				<div id="travel_img_div">
 					<img src="resources/images/송도.JPG" id="travel_img"/>
 				</div>
 				<div id="travel_name_writer_div">
-					<div id="travel_name" onclick="detailView()">송도 센트럴파크</div>
-					<div id="travel_theme">관광지</div>
-					<div id="travel_writer">인천 송도</div>
-					<div id="travel_tag">#레포츠 #가족과함께 #자연</div>
+					<div id="travel_name" onclick="detailView()">${ t.boTitle }</div>
+					<div id="travel_theme">${ t.trTheme }</div>
+					<div id="travel_writer">${ t.trAddr }</div>
+					<div id="travel_tag">${ t.boTag }</div>
 				</div>
-				<span id="list_etc"><a href="#modal">…</a></span>
+				<div id="list_etc"><a href="#modal">…</a></div>
 			</div>
+			</c:forEach>
+		</div>	
 			
 			
-			
-			<div id="list_travel_div">
-				<div id="travel_img_div">
-					<img src="resources/images/송도.JPG" id="travel_img"/>
-				</div>
-				<div id="travel_name_writer_div">
-					<div id="travel_name" onclick="detailView()">송도 센트럴파크</div>
-					<div id="travel_theme">관광지</div>
-					<div id="travel_writer">인천 송도</div>
-					<div id="travel_tag">#공원 #가족과함께 #자연</div>
-				</div>
-				<span id="list_etc"><a href="#modal">…</a></span>
-			</div>
-			
-			
-			
-		
-			<div id="list_travel_div">
-				<div id="travel_img_div">
-					<img src="resources/images/송도.JPG" id="travel_img"/>
-				</div>
-				<div id="travel_name_writer_div">
-					<div id="travel_name" onclick="detailView()">송도 센트럴파크</div>
-					<div id="travel_theme">관광지</div>
-					<div id="travel_writer">인천 송도</div>
-					<div id="travel_tag">#공원 #가족과함께 #자연</div>
-				</div>
-				<span id="list_etc"><a href="#modal">…</a></span>
-			</div>
-			
-			
-			
-				
-			<div id="list_travel_div">
-				<div id="travel_img_div">
-					<img src="resources/images/송도.JPG" id="travel_img"/>
-				</div>
-				<div id="travel_name_writer_div">
-					<div id="travel_name" onclick="detailView()">송도 센트럴파크</div>
-					<div id="travel_theme">관광지</div>
-					<div id="travel_writer">인천 송도</div>
-					<div id="travel_tag">#관광지 #미세먼지x #식물원</div>
-				</div>
-				<span id="list_etc"><a href="#modal">…</a></span>
-			</div>
-		</div>
 		
 		
 		
 		
-		<!-- 등록하기 버튼 -->
+		<!-- 등록하기 버튼 (관리자만 보이게)-->
+			<c:if test="${ loginUser.memberId == 'admin' }"> 
 				<div id="button_write_div">
 				<button id="button_write" onclick="insertView()">등록하기</button>
 				</div>
-				
+			</c:if>	
+			
+			
 		<!-- 페이징 버튼 -->	
 				<div id="paging_div">
 					<button id="before">&lt;</button>
