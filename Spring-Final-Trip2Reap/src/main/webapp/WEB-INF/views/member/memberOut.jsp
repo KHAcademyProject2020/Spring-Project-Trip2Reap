@@ -7,7 +7,6 @@
 <title>회원탈퇴</title>
       <!--  memberOut.css -->
       <link rel="stylesheet" href="resources/css/member/memberOut.css">  
-      <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script> 
 </head>
 <body>
     <header>

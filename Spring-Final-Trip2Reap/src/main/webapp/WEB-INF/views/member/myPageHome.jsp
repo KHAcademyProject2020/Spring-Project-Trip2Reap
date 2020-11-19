@@ -7,7 +7,6 @@
 <title>개인정보 수정</title>
       <!--  updateMember.css -->
       <link rel="stylesheet" href="resources/css/member/updateMember.css">  
-      <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
     <header>

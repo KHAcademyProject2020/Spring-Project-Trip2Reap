@@ -26,7 +26,17 @@ public class MemberDAO {
 		mail.setEmail(email);
 		mail.setRandomKey(randomKey);
 		
-		return sqlSession.insert("memberMapper.ranNumCheck", mail);
+		int result = sqlSession.selectOne("memberMapper.checkEmail",mail);
+		
+		if(result > 0) {
+			return sqlSession.update("memberMapper.ranNumCheckUpdate", mail);
+		} else {
+			return sqlSession.insert("memberMapper.ranNumCheck", mail);
+		}	
+	}
+
+	public int insertMember(SqlSessionTemplate sqlSession, Member member) {
+		return sqlSession.insert("memberMapper.insertMember" , member);
 	}
 
 } // 클래스 종료

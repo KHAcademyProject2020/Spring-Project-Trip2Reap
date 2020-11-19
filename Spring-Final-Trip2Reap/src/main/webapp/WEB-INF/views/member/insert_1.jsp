@@ -7,7 +7,6 @@
 <title>회원가입</title>
    <!--  insert_1.css -->
       <link rel="stylesheet" href="resources/css/member/insert_1.css">  
-      <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script> 
 </head>
 <body>
     <header>

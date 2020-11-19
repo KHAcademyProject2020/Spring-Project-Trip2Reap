@@ -30,9 +30,26 @@
         where nickname=#{nickname}
     </select>
     
+    <select id="checkEmail" resultType="_int">
+        select count(*)
+        from certification
+        where email=#{email}
+    </select>
+    
+    <update id="ranNumCheckUpdate">
+        update certification
+        set randomkey=#{randomKey}
+        where email=#{email}
+    </update>
+    
     <insert id="ranNumCheck">
         insert into certification
         values (#{email},#{randomKey})
+    </insert>
+    
+    <insert id="insertMember">
+        insert into member
+        values (#{memberId},#{memberPwd},#{memberName},#{nickName},#{gender},#{phone},#{email},DEFAULT )
     </insert>
 
 </mapper>

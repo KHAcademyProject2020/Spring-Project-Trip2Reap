@@ -7,7 +7,6 @@
 <title>마이페이지</title>
    <!--  insert_2.css -->
       <link rel="stylesheet" href="resources/css/member/myPage.css">  
-      <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script> 
 </head>
 <body>
     <header>
