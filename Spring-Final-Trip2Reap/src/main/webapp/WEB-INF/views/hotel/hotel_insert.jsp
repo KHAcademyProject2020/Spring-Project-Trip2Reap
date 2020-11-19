@@ -362,11 +362,12 @@
 							
 							$('#real_call_number').on({
 								'keyup':function(){
+									let $inputPhoneNumber= $(this).val();
 									
-									if(!regNumber.test($(this).val())){
+									if(!regNumber.test($inputPhoneNumber) ){
 										alert('숫자만 입력해주세요!');
 										
-										$(this).val()
+										$(this).val($inputPhoneNumber)
 									}
 									
 								},
@@ -518,7 +519,7 @@
 								</tr>
 
 								<tr>
-									<td>스파 & 사우나</td>
+									<td>스파 &amp; 사우나</td>
 									<td><input type="checkbox" name="hotel_option" value="스파" />
 									</td>
 								</tr>
@@ -569,7 +570,7 @@
 								</tr>
 
 								<tr>
-									<td>바 & 라운지</td>
+									<td>바 &amp; 라운지</td>
 									<td><input type="checkbox" name="hotel_option"
 										value="바 라운지" /></td>
 								</tr>
@@ -663,9 +664,21 @@
 								}
 							}
 							
-							
-							function isDuplicateHashTags(var targetHashTag){
+							// 중복된 해시태그를 찾는다.
+							function isDuplicateHashTags(targetHashTag){
+								targetHashTag= '#'+targetHashTag;
+								let $hashTags= $('#saved-hashtags').children('li').children('.hashtag-content');	
+								console.log($hashTags);
 								
+								//이미 등록된 해시태그 들을 콘솔에 출력한다.
+								for(var i=0; i<$hashTags.length; i++){
+									let now= $hashTags[i].innerText;
+									if(targetHashTag==now)
+										return true;
+								}
+								//이미 등록된 해시태그와 중복된다면  => true를 리턴
+								//중복되지 않은 해시태그라면 false를 리턴
+								return false;
 							}
 							
 							
@@ -680,6 +693,9 @@
 								//입력받은 해시태그
 								let inputHashTag = $('#input-hashtag').val();
 								
+								//단순 공백문자를 입력할 수 있기 때문에 공백을 제거한다.
+								inputHashTag= inputHashTag.trim();
+								
 								if(inputHashTag.length==0){
 									// 입력한 글자수가 0자 
 									//alert('해시태그를 입력해주세요!');
@@ -687,8 +703,8 @@
 								}else{
 									// 입력한 글자수가 최소 1자 이상
 									//입력한 해시태그가 이미 등록한 해시태그와 겹친다면?
-									if(){
-										
+									if(isDuplicateHashTags(inputHashTag)){
+										swal('해시태그 등록 실패', '이미 등록된 해시태그입니다!', 'error');
 									}else{
 										//입력한 해시태그의 글자수가 10자를 넘는지 확인
 										if(inputHashTag.length>10){
@@ -706,7 +722,8 @@
 										}
 									}
 								}
-								
+								//등록이 성공/실패 여부 상관없이  해시태그 입력값을 일단 비워둔다.
+								 $('#input-hashtag').val('');
 								isEmptyHashTagsMsg();
 							});
 							
