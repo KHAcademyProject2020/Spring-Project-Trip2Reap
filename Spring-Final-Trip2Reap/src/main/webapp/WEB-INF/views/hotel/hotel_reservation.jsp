@@ -114,6 +114,8 @@
 				monthNamesShort : ['1월', '2월','3월','4월','5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월' ],
 				yearSuffix: '년',
 				minDate:0,
+				prevText: '이전 달',
+				nextText: '다음 달',
 				
 			}); 
 			
@@ -128,6 +130,7 @@
 				monthNamesShort : ['1월', '2월','3월','4월','5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월' ],
 				yearSuffix: '년',
 				minDate:0,
+				
 					
 			}); 
 			
@@ -172,10 +175,13 @@
 					//만약에 체크아웃날짜가 체크인날짜보다 같거나 , 이전날로 설정했다면? => 에러 alert를 띄운다.
 					if(checkInDate>= checkOutDate){
 						if(checkInDate==checkOutDate){
-							alert('최소 1박은 해야합니다!');
+							
+							//alert('최소 1박은 해야합니다!');
+							swal('체크인/체크아웃 날짜 선택 실패','최소 1박은 해야합니다! 체크인/체크아웃 날짜를 다르게 해주세요!','error');
 						}else{
 							//checkInDate > checkOutDate
-							alert('체크아웃날짜는 체크인 날짜보다 이후여야합니다!');
+							//alert('체크아웃날짜는 체크인 날짜보다 이후여야합니다!');
+							swal('체크인/체크아웃 날짜 선택 실패', '체크아웃 날짜는 체크인 날짜 이후일 때만 가능합니다!', 'error');
 						}
 						
 						checkStatusMap.set('checkOutStatus', false);

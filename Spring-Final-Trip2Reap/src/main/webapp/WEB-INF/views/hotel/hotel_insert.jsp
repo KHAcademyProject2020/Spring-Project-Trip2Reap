@@ -343,10 +343,41 @@
 								id="real_call_number">
 						</div>
 
-						<div>
-							<small id="phone-call-alert" style="visibility: hidden;">숫자로
-								입력해주세요!(alert-message)</small>
-						</div>
+						<%--
+							<div>
+								<small id="phone-call-alert" style="visibility: hidden;">숫자로
+									입력해주세요!(alert-message)</small>
+							</div> 
+						--%>
+						<script>
+						$(function(){
+							// 번호가 아닌 다른 문자를 입력못하게 한다.
+							//^ : 문자열의 앞을 구분 
+							//$ : 문자열의 뒤를 구분 
+							
+							// keyup: 키보드에서 손을 뗐을 때 발생하는 이벤트
+							// keydown: 키보드를 눌렀을 때 실행. 한개 키를 누를때 실행
+							// keypress: 키보드를 누르고있을 때 계속 실행됨.
+							let regNumber= /^[0-9]|[\b]*$/;
+							
+							$('#real_call_number').on({
+								'keyup':function(){
+									
+									if(!regNumber.test($(this).val())){
+										alert('숫자만 입력해주세요!');
+										
+										$(this).val()
+									}
+									
+								},
+								'keydown': function(){
+									if(!regNumber.test($(this).val())){
+										alert('숫자만 입력해주세요!');
+									}
+								}
+							});
+						});
+						</script>
 					</div>
 				</div>
 
@@ -589,7 +620,7 @@
 							<li><i class="fas fa-hashtag"></i>해시태그 입력
 								예시&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								: <b>#호텔</b></li>
-							<li><i class="fas fa-hashtag"></i>해시태그 입력 최대글자 수 : <b>6글자</b></li>
+							<li><i class="fas fa-hashtag"></i>해시태그 입력 최대글자 수 : <b>10글자</b></li>
 							<li><i class="fas fa-hashtag"></i>해시태그 최대
 								입력개수&nbsp;&nbsp;&nbsp;&nbsp; : <b>3개</b></li>
 						</ul>
@@ -610,8 +641,11 @@
 						</ul>
 					</div>
 					<script>
+					
 						$(function(){
-							var checkHashTagsMsg=function(){
+							
+							//해시태그가 비어있는지 확인함.
+							function isEmptyHashTagsMsg(){
 								//해시태그 저장리스트
 								let savedHashTags = $('#saved-hashtags');
 								
@@ -627,7 +661,13 @@
 									// 해시태그가 존재하지 않는다는 문구를 안보이게 한다.
 									$('#no-hashtag').css('display', 'none');
 								}
-							};
+							}
+							
+							
+							function isDuplicateHashTags(var targetHashTag){
+								
+							}
+							
 							
 							// 해시태그 등록 버튼 클릭시  발생하는 함수- insert hashtag function
 							$('#input-hashtag-btn').on('click', function(){
@@ -642,35 +682,46 @@
 								
 								if(inputHashTag.length==0){
 									// 입력한 글자수가 0자 
-									alert('해시태그를 입력해주세요!');
+									//alert('해시태그를 입력해주세요!');
+									swal('해시태그 등록 실패', '해시태그 내용을 입력해주세요!', 'error');
 								}else{
 									// 입력한 글자수가 최소 1자 이상
-									
-									if($hashTags.length<3){
-										//저장된 해시태그의 개수가 3개미만 => 추가
-										$hashtag_content='<li><span class="hashtag-content"> #'+inputHashTag+'</span><span><i class="remove-hashtag-btn fas fa-times"></i></span></li>'
-										savedHashTags.append($hashtag_content);
+									//입력한 해시태그가 이미 등록한 해시태그와 겹친다면?
+									if(){
+										
 									}else{
-										//저장된 해시태그의 개수가 3개 이상이라면=> 경고창 
-										alert('이미 최대 3개 해시태그를 등록했습니다!');
+										//입력한 해시태그의 글자수가 10자를 넘는지 확인
+										if(inputHashTag.length>10){
+											swal('해시태그 등록 실패','해시태그 등록 가능한 글자수는 최대 10자입니다!','error');
+										}else{
+											
+											if($hashTags.length<3){
+												//저장된 해시태그의 개수가 3개미만 => 추가
+												$hashtag_content='<li><span class="hashtag-content"> #'+inputHashTag+'</span><span><i class="remove-hashtag-btn fas fa-times"></i></span></li>'
+												savedHashTags.append($hashtag_content);
+											}else{
+												//저장된 해시태그의 개수가 3개 이상이라면=> 경고창 
+												swal('해시태그 등록 실패','이미 최대 3개 해시태그를 등록했습니다!', 'error' );
+											}
+										}
 									}
 								}
 								
-								checkHashTagsMsg();
+								isEmptyHashTagsMsg();
 							});
 							
-						}); 
-						
-						
-						// 해시태그 삭제 버튼을 클릭했을때 실행하는 함수.
-						$(document).on('click', '.remove-hashtag-btn' , function(e){
-							// 가장 가까운 해시태그를 지운다.
-							$(e.currentTarget).closest('#saved-hashtags li').remove();
 							
-							//해시태그 삭제처리후, 해시태그가 없다는 메시지를 띄워야할지 말아야할지 결정
-							checkHashTagMsg();
+							
+							// 해시태그 삭제 버튼을 클릭했을때 실행하는 함수. => 리로드를 함.
+							$(document).on('click', '.remove-hashtag-btn' , function(e){
+								// 가장 가까운 해시태그를 지운다.
+								$(e.currentTarget).closest('#saved-hashtags li').remove();
+								
+								//해시태그 삭제처리후, 해시태그가 없다는 메시지를 띄워야할지 말아야할지 결정
+								isEmptyHashTagsMsg();
+							});
+							
 						});
-							
 					</script>
 				</div>
 
