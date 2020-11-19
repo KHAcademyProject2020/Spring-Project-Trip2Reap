@@ -329,14 +329,151 @@ ul#saved-hashtags > li{
   margin-left: 10px;
 }
 
-ul.uploaded_img_names{
+ul.uploaded-img-names-ul{
   list-style:none;
 }
 
 /*wrapper*/
+/* 
 .insert-common-wrapper *{
   position: relative;
+} 
+*/
+
+/*디테일 이미지  디테일이미지 창 */
+#hotel-detail-images-container{
+	margin-top: 30px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
 }
+
+#hotel-detail-images-head-container,
+#detail-file-name-title,
+#detail-control-btns-container,
+#detail-control-btns-wrapper-ul,
+.detail-control-btn-li,
+.detail-control-btn,
+#hotel-detail-images-body-container,
+.uploaded-img-names-ul,
+.upload-img-name-li,
+.upload-image-checkbox-wrapper,
+.upload-image-checkbox,
+.upload-image-filename-wrapper{
+	position: relative;
+}
+
+
+/*디테일이미지 창 - 헤더컨테이너  */
+#hotel-detail-images-head-container{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 500px;
+	padding: 5px 10px;
+	margin:0;
+	margin-left: 5px;
+	font-size: 0.8em;
+	color: var(--mid-green);
+	font-weight: bold;
+	text-align: center;
+	
+	border: var(--blue-gray) 1px solid;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+
+#checkbox-title{
+	flex-basis: 10%;
+}
+
+#detail-file-name-title{
+	flex-basis: 20%;
+}
+
+#detail-control-btns-container{
+	flex-basis: 70%;
+}
+
+ul#detail-control-btns-wrapper-ul{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+	list-style: none;
+}
+
+li.detail-control-btn-li{
+	padding: 0 5px;	
+}
+
+input[type="button"]:focus{
+	outline: none;
+}
+
+.detail-control-btn{
+	padding: 5px 6px;
+	border-radius: 10px;
+	border: var(--blue-gray) 1px solid;
+	background-color: transparent;
+	color: var(--mid-green);
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.detail-control-btn:hover{
+	border-color: transparent;
+	background-color: var(--mid-green);
+	color: #fff;
+}
+
+
+/*디테일이미지창 - 바디 컨테이너  */
+#hotel-detail-images-body-container{
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+	overflow-x: hidden;
+	width: 500px;
+	padding: 5px 10px;
+	margin: 0;
+	margin-left: 5px;
+	border: var(--blue-gray) 1px solid;
+	border-top-color: transparent;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+	text-align: center; 
+	height: 100px;
+}
+
+ul.uploaded-img-names-ul{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: space-around;
+}
+
+li.upload-img-name-li{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+.upload-image-checkbox-wrapper{
+	flex-basis: 10%;
+}
+
+.upload-image-filename-wrapper{
+	flex-basis: 90%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	padding-left: 25px;
+}
+
 
 
 
@@ -444,13 +581,19 @@ ul.room_btn_remote_controller li{
   color: var(--btn-color);
   border-radius : 3px;
   cursor: pointer;
+  padding: 1px;
+  width: 17px;
+	height: 17px;
 }
 
 .room_btn_remote_controller li{
-	background-color: var(--mid-green);
+	
 	padding: 1px 2px;
-	width: 17px;
-	height: 17px;
+	/*
+	background-color: var(--mid-green);
+	 width: 17px;
+	height: 17px; 
+	*/
 	text-align: center;
 	border-radius: 3px;
 }
@@ -467,6 +610,13 @@ ul.room_btn_remote_controller li{
 #add_room_btn:hover{
   background-color: var(--bright-green);
   color:var(--dark-gray);
+}
+
+.hotel-info-order-up .fa-angle-up:hover,
+.hotel-info-order-down .fa-angle-down:hover,
+.hotel-info-remove .fa-minus:hover{
+	background-color: var(--bright-green);
+	color:var(--dark-gray);
 }
 
 
@@ -496,6 +646,10 @@ input[type="text"].room_name{
   color: var(--dark-gray);
   border-radius: 3px;
 }
+
+
+
+
 
 /* 호텔 도로명 주소 */
 

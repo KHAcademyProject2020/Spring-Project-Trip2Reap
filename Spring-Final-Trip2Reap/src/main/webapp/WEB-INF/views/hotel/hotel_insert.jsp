@@ -57,7 +57,7 @@
 					<div class="hotel-insert-content-container">
 						<input type="file" name="thumbnail_img" id="thumbnail_img" accept="images/*" /> 
 						<label id="thumbnail_img_label" for="thumbnail_img">썸네일 이미지 찾아보기</label> 
-						<span class="img_upload_status_info" id="thumbnail_img_name">사진을 업로드 해주세요!</span>
+						<span class="img_upload_status_info" id="thumbnail_img_name">썸네일 이미지를 업로드 해주세요!</span>
 					</div>
 					<script>
 						
@@ -71,17 +71,51 @@
 						<h3>&nbsp;&nbsp;호텔 디테일 이미지 등록</h3>
 					</div>
 					<div class="hotel-insert-content-container">
-						<input type="file" name="detail_img" id="detail_img"
-							accept="images/*" multiple /> <label id="detail_img_label"
-							for="detail_img">디테일 이미지 찾아보기</label> <span
-							class="img_upload_status_info" id="detail_img_name"> <span
-							id="uploaded_img_cnt">0</span>개의 사진을 업로드 했습니다.
+						<input type="file" name="detail_img" id="detail_img" accept="images/*" multiple /> 
+						<label id="detail_img_label" for="detail_img">디테일 이미지 찾아보기</label> 
+						
+						<span class="img_upload_status_info" id="detail_img_name"> 
+							<span id="uploaded_img_cnt">0</span>개의 사진을 업로드 했습니다.
 						</span>
 
-						<ul class="uploaded_img_names">
-							<li></li>
-						</ul>
-					</div>
+						<div id="hotel-detail-images-container">
+							<div id="hotel-detail-images-head-container">
+								<div id="checkbox-title">선택</div>
+								<div id="detail-file-name-title">파일 명</div>
+								<div id="detail-control-btns-container">
+									<ul id="detail-control-btns-wrapper-ul">
+										<li class="detail-control-btn-li">
+											<input type="button" class="detail-control-btn" id="select-all-detail-img-btn" value="모두선택"/>
+										</li>
+										
+										<li class="detail-control-btn-li">
+											<input type="button" class="detail-control-btn" id="select-all-off-detail-img-btn" value="모두선택 해제"/>
+										</li>
+										
+										<li class="detail-control-btn-li">
+											<input type="button" class="detail-control-btn" id="remove-select-detail-img-btn" value="선택한 이미지 삭제"/>
+										</li>
+									</ul>
+								</div>
+							</div> <%--hotel-detail-images-head-container --%>
+							
+							<div id="hotel-detail-images-body-container">
+								<ul class="uploaded-img-names-ul">
+								
+									<li class="upload-img-name-li">
+										<div class="upload-image-checkbox-wrapper">
+											<input class="upload-image-checkbox" type="checkbox" name="select_detail_img"/>
+										</div>
+										<div class="upload-image-filename-wrapper">
+											파일이름 
+										</div>
+									</li>
+									
+									
+								</ul>
+							</div> <%--hotel-detail-images-body-container --%>
+						</div> <%--hotel-detail-images-container --%>
+					</div><%-- hotel-insert-content-container --%>
 					
 					<script>
 					
@@ -109,7 +143,6 @@
 						<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 						<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=38a6847af6f758230564da5fe29aa9fc&libraries=services"></script>
 						<script>
-						
 							var mapContainer= document.getElementById('map');
 							mapOption={
 									center: new daum.maps.LatLng(37.537187, 127.005476),
@@ -299,7 +332,7 @@
 							  title: "정말로 삭제하시겠습니까?",
 							  text: "작성한 내용은 복구할 수 없습니다. 정말로 삭제하시겠습니까?",
 							  icon: "warning",
-							  buttons: true,
+							  buttons: ['취소','삭제'],
 							  dangerMode: true,
 							})
 							.then((willDelete) => {
@@ -309,7 +342,8 @@
 							    
 							  } else {
 								    swal({
-								    	text: "삭제를 취소했습니다."
+								    	text: "삭제를 취소했습니다.",
+								    	button:'확인'
 								    });
 							  }
 							});
