@@ -399,8 +399,9 @@
        $("#emailText").blur(function(){  
      	  $("#emailText").css('font-weight','normal');
      	  var email = $("#emailText").val();
-     	  var check = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-
+     	  var check = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      	  var test = check.test(email);
+     	  
      	 if(email == ""){
    		     $("#email1").css('height','70px');
    		     $("#email2").css('height','70px');
@@ -411,7 +412,7 @@
   		     $("#email2").css('height','70px');
   		     $('#emailInfoBox').text("이메일은 공백 없이 입력해주세요.");
   		     $('#emailInfoBox').css('display', 'block');
-         } else if(email.match(check) == null){
+         } else if(!test){
    		     $("#email1").css('height','70px');
    		     $("#email2").css('height','70px');
    		     $('#emailInfoBox').text("이메일의 형식에 맞게 입력해주세요.");
@@ -428,8 +429,9 @@
        $("#sendMessage").click(function(){
     	   var emailResult = "no";
     	   var email = $("#emailText").val();
-      	   var check = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-    	   
+      	   var check = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      	   var test = check.test(email);
+      	   
       	 if(email == ""){
    		     $("#email1").css('height','70px');
    		     $("#email2").css('height','70px');
@@ -442,13 +444,15 @@
   		     $('#emailInfoBox').text("이메일은 공백 없이 입력해주세요.");
   		     $('#emailInfoBox').css('display', 'block');
   		     $('#confirmDiv').css("display","none");
-         } else if(email.match(check) == null){
+         } else if(!test){
+        	 console.log("확인해주세요");
    		     $("#email1").css('height','70px');
    		     $("#email2").css('height','70px');
    		     $('#emailInfoBox').text("이메일의 형식에 맞게 입력해주세요.");
    		     $('#emailInfoBox').css('display', 'block');
    		     $('#confirmDiv').css("display","none");
    	     } else {  
+   	    	 console.log("이메일 완료");
    		     $("#email1").css('height','50px');
   		     $("#email2").css('height','50px');
   		     $('#emailInfoBox').css('display', 'none');

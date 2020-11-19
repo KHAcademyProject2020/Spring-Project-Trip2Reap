@@ -91,7 +91,7 @@
 		    <div id="login_spaceStart"></div>
 			<p id="loginLabel">LOGIN</p>
 			<div id="login_space4"></div>
-			<form action="loginCheck.me" method="post">
+			<form action="loginCheck.me" method="post" id="login-form">
 			<div id="loginDiv">
 			<div id="idPwdDiv">
 			<i class="fas fa-user-circle" id="idIcon"></i>
@@ -107,7 +107,7 @@
 	    
 	    <!-- 아이디 저장  -->
 	    <div id="idSave_1">
-	        <input type="checkbox" id="idSave_2">
+	        <input type="checkbox" id="idSave_2" name="remember" value="1">
 	        <label id="idSave_3">아이디 저장</label>
 	    </div>
 	    <div id="idSave_4"></div>
@@ -195,7 +195,68 @@
 		$(this).modal({
 			fadeDuration : 250
 		});
-	});
+		
+		$(document).ready(function(){
+			// 저장된 쿠키값. 쿠키값이 존재하지 않으면 공백이 들어간다.
+			var userId = getCookie("cookieUserId");
+			$("input[name='memberId']").val(userId);
+			
+			// 아이디가 불러와졌으면 체크표시
+			if($("input[name='memberId']").val() != ""){
+				$("input[name='remember']").attr("checked",true);
+			}
+			
+			 $("#loginButton").click(function(){
+				// 아이디저장 체크 시 쿠키에 저장
+				if($("input[name='remember']").is(":checked")){
+					var userId = $("input[name='memberId']").val();
+					//7일동안 쿠키 보관
+					setCookie("cookieUserId",userId,7); 
+				} else {
+					deleteCookie("cookieUserId");
+				}
+			});
+		});
+	    
+		// 쿠키이름, 값, 쿠키유지시간 으로 쿠키 생성.
+		function setCookie(cookieName, value, exdays){
+			var exdate = new Date();
+			// 현재시간에 설정 일수를 더하여 소멸날짜를 지정해준다.
+			exdate.setDate(exdate.getDate()+exdays);
+			//escape : 인코딩. value값이 변형되지 않고 그대로 사용할 수 있다.
+			var cookieValue = escape(value)+((exdays==null)?"":"; expires="+exdate.toGMTString());
+			//document.cookie 객체를 사용하여 쿠키의 이름과 소멸될 날짜를 저장.
+			document.cookie = cookieName + "=" + cookieValue;
+		}
+		
+		// 해당 이름의 쿠키를 삭제
+		function deleteCookie(cookieName){
+			var expireDate = new Date();
+			// 어제 날짜를 쿠키 소멸 날짜로 설정.
+			expireDate.setDate(expireDate.getDate() - 1);
+			document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
+		}
+		
+		// 해당 이름의 쿠키 확인
+		function getCookie(cookieName){
+			cookieName = cookieName + '=';
+			// document.cookie에 쿠키가 들어있는지 확인.
+	        var cookieData = document.cookie;
+	        // 만약 쿠키가 들어있다면, 찾고자하는 쿠키가 저장되있는지 확인.
+	        var start = cookieData.indexOf(cookieName);
+	        var cookieValue = '';
+	        // 쿠키를 찾으면 쿠키의 값 반환. 못찾으면 비어있는 문자열 반환.
+	        if(start != -1){
+	            start += cookieName.length;
+	            var end = cookieData.indexOf(';', start);
+	            if(end == -1){ 
+	            end = cookieData.length;
+	            cookieValue = cookieData.substring(start, end);
+	            }
+	        }
+			return unescape(cookieValue);
+		}
+		});
     
     </script>
 
