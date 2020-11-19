@@ -88,7 +88,7 @@
 
         <!-- 로그인 창  -->
 		<div id="ex7" class="modal">
-		    <br>
+		    <div id="login_spaceStart"></div>
 			<p id="loginLabel">LOGIN</p>
 			<div id="login_space4"></div>
 			<form action="loginCheck.me" method="post">
@@ -135,7 +135,7 @@
 	            <i class="fab fa-neos" id="btn3_1"></i>
 	            <p id="btn3_2">네이버 계정으로 로그인</p></button>
 	        </div> 	    
-	        <div id="login_space2"></div>
+	        <div id="login_spaceFoot"></div>
 		</div>
 		</div>
 	</header>

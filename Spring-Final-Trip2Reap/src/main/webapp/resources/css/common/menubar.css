@@ -59,7 +59,9 @@
      .loginInfo{ width: 300px; height: 35px; font-size: 13px;
                  border: 1px solid lightgray; padding-left: 50px; }
      .loginInfo, #loginButton, #loginButton2, #loginButton3:focus{ outline: none; }
-	 #login_space2{ height : 15px; }	 
+	 #login_space2{ height : 15px; }
+	 #login_spaceStart { height : 50px; }
+	 #login_spaceFoot { height : 60px; }	 
 	 
 	 /* 아이디 저장  */
      #idSave_1{ width:300px; display: inline-block; text-align:left; margin-left: 70px; } 
