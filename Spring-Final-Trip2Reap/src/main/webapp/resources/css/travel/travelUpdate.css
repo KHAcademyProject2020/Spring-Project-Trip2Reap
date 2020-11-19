@@ -1,4 +1,6 @@
 @charset "UTF-8";
+
+
 /* 전체 div */
 #all_div {
     margin: 80px auto 0px auto;
@@ -118,7 +120,7 @@
 
 
 #travel_content_div{
-	margin: 13px auto;
+	margin: 20px auto;
 	width: 900px;
 	text-align: center;
 }
@@ -166,6 +168,7 @@
 
 #span_text{
 	font-size: small;
+	color: gray;
 }
 
 

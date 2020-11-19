@@ -51,8 +51,8 @@
 		
 		<!-- 지역/테마 카테고리 -->
 		<div id="cate_table_div">
-			<span id="cate_name">지역</span>
-				<span id="cate_icon"><i class="fas fa-leaf" style="height:13px;, width:13px; color:#a7e1af;"></i></span>
+			<span id="cate_name">&nbsp;지역</span>
+				<span id="cate_icon"><!-- <i class="fas fa-leaf" style="height:13px;, width:13px; color:#a7e1af;"></i> -->🚕</span>
 				<table id="local_table">
 					<tr>
 						<td>전체</td>
@@ -78,8 +78,8 @@
 					</tr>
 				</table>
 			
-			<span id="cate_name">테마</span>
-				<span id="cate_icon"><i class="fas fa-leaf" style="height:13px;, width:13px; color:#a7e1af;"></i></span>
+			<span id="cate_name">&nbsp;테마</span>
+				<span id="cate_icon"><!-- <i class="fas fa-leaf" style="height:13px;, width:13px; color:#a7e1af;"></i> -->🚗</span>
 				<table id="theme_table">
 					<tr>
 						<td>전체</td>
@@ -96,7 +96,7 @@
 		
 		<div id="list_all_div">
 			<div id="list_count_div">
-				총<span id="list_count">76</span>건
+				총<span id="list_count">${ pi.listCount }</span>건
 			</div>
 			
 			<!-- 여행지 div -->
