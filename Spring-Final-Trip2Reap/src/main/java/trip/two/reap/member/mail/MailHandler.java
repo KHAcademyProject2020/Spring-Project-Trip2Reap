@@ -1,11 +1,14 @@
 package trip.two.reap.member.mail;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-import javax.activation.DataSource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
@@ -52,9 +55,21 @@ public class MailHandler {
 	}
 	
 	
+	// 첨부파일
+	public void setAttach(String displayFileName, String pathToAttachment) throws IOException, MessagingException {
+		File file = new ClassPathResource(pathToAttachment).getFile();
+		FileSystemResource fsr = new FileSystemResource(file);
+		
+		messageHelper.addAttachment(displayFileName, fsr);
+	}
+	
+	
 	// 이미지 삽입
-	public void addInline(String contentId, DataSource dataSource) throws MessagingException {
-		messageHelper.addInline(contentId, dataSource);
+	public void setInline(String contentId, String pathToInline) throws IOException, MessagingException {
+		File file = new ClassPathResource(pathToInline).getFile();
+		FileSystemResource fsr = new FileSystemResource(file);
+		
+		messageHelper.addInline(contentId, fsr);
 	}
 	
 	
@@ -62,5 +77,6 @@ public class MailHandler {
 	public void send() {
 		mailSender.send(message);
 	}
+
 
 } // 클래스 종료

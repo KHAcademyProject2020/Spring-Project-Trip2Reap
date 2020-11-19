@@ -23,24 +23,25 @@
             <div id="info2">회원가입</div>
             <div id="info3"></div>
             <div id="info4"></div>
-            <div id="info7">01. 약관동의 > </div>
+            <div id="info7">01. 약관동의&nbsp;&nbsp;>&nbsp;&nbsp;</div>
             <div id="info5">02</div>
             <div id="info6">정보입력</div>
-            <div id="info7">> 03. 가입완료</div>
+            <div id="info7">&nbsp;&nbsp;>&nbsp;&nbsp;03. 가입완료</div>
         </div>
-        <div id="space_3"></div>
+        <div id="space_3"></div>     
         
         <!-- 정보입력란 -->
         <div id="infoDiv1"></div>
         <div id="infoDiv2">*</div>
         <div id="infoDiv3">는 필수 입력 항목입니다.</div>
         <div id="space_4"></div>
-        <div id="infoDiv4"></div>
         
-        <!-- <form method="POST"> -->
+        <form action="insert3.me" method="post" id="joinForm">
+        <div id="infoDiv4"></div>
+   
         <!-- 아이디  -->
         <div id="id1"><label class="infoLabel">아이디</label></div><div id="id2"><label id="commonLabel">*</label>
-        <input type="text" id="idText" name="idText" placeholder="5~12자 영문,숫자"
+        <input type="text" id="idText" name="memberId" placeholder="5~12자 영문,숫자"
 	         onfocus="this.placeholder=''" onblur="this.placeholder='5~12자 영문,숫자'" autocomplete="off">
 	    <i class="fas fa-check" id="idCheckIcon"></i>
 	    <div id="idInfoBox">필수 입력사항입니다.</div>     
@@ -51,7 +52,7 @@
         <!-- 비밀번호  -->       
         <div id="infoDiv4"></div>
         <div id="pwd1_1"><label class="infoLabel">비밀번호</label></div><div id="pwd1_2" class="infoRight"><label id="commonLabel">*</label>
-        <input type="password" id="pwdText" name="pwdText" placeholder="영문+숫자/특수문자 6~12자 조합"
+        <input type="password" id="pwdText" name="memberPwd" placeholder="영문+숫자/특수문자 6~12자 조합"
 	         onfocus="this.placeholder=''" onblur="this.placeholder='영문+숫자/특수문자 6~12자 조합'" autocomplete="off">
 	    <i class="fas fa-lock" id="pwd1CheckIcon"></i>
 	    <div id="pwd1InfoBox">필수 입력사항입니다.</div>      
@@ -61,7 +62,7 @@
         <!-- 비밀번호 재확인  -->
         <div id="infoDiv4"></div>
         <div id="pwd2_1"><label class="infoLabel">비밀번호</label></div><div id="pwd2_2" class="infoRight"><label id="commonLabel">*</label>
-        <input type="password" id="pwdText2" name="pwdText2" placeholder="비밀번호 재확인"
+        <input type="password" id="pwdText2" name="memberPwd2" placeholder="비밀번호 재확인"
 	         onfocus="this.placeholder=''" onblur="this.placeholder='비밀번호 재확인'" autocomplete="off">
 	    <i class="fas fa-key" id="pwd2CheckIcon"></i>
 	    <div id="pwd2InfoBox">필수 입력사항입니다.</div>     
@@ -73,7 +74,7 @@
 	    <!-- 이름  -->
         <div id="infoDiv4"></div>
         <div id="name"><label class="infoLabel">이름</label></div><div id="name2"><label id="commonLabel">*</label>
-        <input type="text" id="nameText" name="nameText" placeholder="2~10자"
+        <input type="text" id="nameText" name="memberName" placeholder="2~10자"
 	         onfocus="this.placeholder=''" onblur="this.placeholder='2~10자'" autocomplete="off">
 	    <div id="nameInfoBox">필수 입력사항입니다.</div>     
 	    </div>
@@ -83,7 +84,7 @@
 	    <!-- 닉네임  -->
 	    <div id="infoDiv4"></div>
         <div id="nickname1"><label class="infoLabel">닉네임</label></div><div id="nickname2"><label id="commonLabel">*</label>
-        <input type="text" id="nicknameText" class="infoText" name="nicknameText" placeholder="2~10자"
+        <input type="text" id="nicknameText" class="infoText" name="nickName" placeholder="2~10자"
 	         onfocus="this.placeholder=''" onblur="this.placeholder='2~10자'" autocomplete="off">
 	    <div id="nicknameInfoBox">필수 입력사항입니다.</div> 
 	    </div>
@@ -92,10 +93,11 @@
         <!-- 이메일  -->
 	    <div id="infoDiv4"></div>
         <div id="email1"><label class="infoLabel">이메일</label></div><div id="email2"><label id="commonLabel">*</label>
-            <input type="text" id="emailText" name="emailText" placeholder="example@naver.com"
+            <input type="text" id="emailText" name="email" placeholder="example@naver.com"
 	            onfocus="this.placeholder=''" onblur="this.placeholder='example@naver.com'" autocomplete="off">
 	        <div id="sendMessage"><label id="mailLabel">인증메일 전송</label></div>
 	        <div id="sendMessage2"></div>
+	        <div id="certificationOk">인증완료</div>
 	        <div id="emailInfoBox">필수 입력사항입니다.</div>   
 	    </div>
         <div id="space_5"></div>
@@ -104,8 +106,9 @@
         <div id="confirmDiv">
 	    <div id="infoDiv4"></div>
         <div id="confirm1"><label class="infoLabel">인증번호</label></div><div id="confirm2"><label id="commonLabel">*</label>
-            <input type="text" id="confirmText" name="confirmText">
-	        <div id="confirmMessage"><label id="confirmLabel">인증확인</label></div> 
+            <input type="text" id="confirmText" name="confirmText" placeholder="10분안에 인증번호를 입력해주세요."
+	         onfocus="this.placeholder=''" onblur="this.placeholder='10분안에 인증번호를 입력해주세요.'" autocomplete="off">
+	        <div id="confirmMessage"><label id="confirmLabel">인증하기</label></div> 
 	        <div id="confirmInfoBox">필수 입력사항입니다.</div> 
 	    </div>
 	    <div id="space_5"></div>
@@ -114,7 +117,7 @@
         <!-- 휴대전화  -->
 	    <div id="infoDiv4"></div>
         <div id="phone1"><label class="infoLabel">휴대전화</label></div><div id="phone2"><label id="commonLabel">*</label>
-        <input type="text" id="phoneText" class="infoText" name="phoneText" placeholder="-없이 입력"
+        <input type="text" id="phoneText" class="infoText" name="phone" placeholder="-없이 입력"
 	         onfocus="this.placeholder=''" onblur="this.placeholder='-없이 입력'" autocomplete="off">
 	    <div id="phoneInfoBox">필수 입력사항입니다.</div>     
 	    </div>
@@ -123,9 +126,11 @@
         <!-- 성별  -->
 	    <div id="infoDiv4"></div>
         <div class="infoLeft"><label class="infoLabel">성별</label></div><div id="gender" class="infoRight">
-           <input type="button" value="남자" id="man" >
+           <input type="button" value="남자" id="man">
            <input type="button" value="여자" id="woman">
+           <input type="text" value="" id="genderValue" name="gender">
         </div>
+        </form>
 
         <!-- 버튼  -->
         <div id="space_6"></div>
@@ -145,11 +150,13 @@
     		   if(manClick){
     			   $(this).css('background-color','white'); 
     			   manClick = false;
+    			   $("#genderValue").val('');
     		   } else {
     			   $(this).css('background-color','rgb(226,240,217)');
     			   $("#woman").css('background-color','white');
     			   manClick = true;
     			   womanClick = false;
+    			   $("#genderValue").val('남자');
     		   }
     	  });
     	  
@@ -158,11 +165,13 @@
    		   if(womanClick){
    			   $(this).css('background-color','white'); 
    			   womanClick = false;
+   			   $("#genderValue").val('');
    		   } else {
    			   $(this).css('background-color','rgb(226,240,217)');
    			   $("#man").css('background-color','white');
    			   womanClick = true;
    			   manClick = false;
+   			   $("#genderValue").val('여자');
    		   }
    		   });
        });
@@ -445,12 +454,13 @@
   		     $("#email2").css('height','50px');
   		     $('#emailInfoBox').css('display', 'none');
   		     $('#confirmDiv').css("display","inline-block");
-  		     
-  		   alert("입력하신 이메일로 인증메일이 발송되었습니다.\n메일 전송에는 다소 시간이 걸릴 수 있습니다.\n메일함을 확인하여 인증코드를 입력해주세요.");
+  		   
+  		   swal("인증메일이 발송되었습니다!", "입력하신 이메일로 인증메일이 발송되었습니다.\n메일 전송에는 다소 시간이 걸릴 수 있습니다.\n메일함을 확인하여 인증코드를 입력해주세요💌");
   		   
   		   $('#sendMessage').css("display","none");
   		   $('#sendMessage2').css("display","inline-block");
   		   $("#emailText").attr("readonly",true);
+  		   
 			 // 타이머
 			 function countdown(elementName, minutes, seconds){
 				 var elementName, endTime, hours, mins, msLeft, time;
@@ -462,7 +472,7 @@
 				 function updateTimer(){
 					 msLeft = endTime - (+new Date);
 					 if(msLeft < 1000){
-						 alert("인증번호가 만료되었습니다.");  								 
+						 swal("인증번호가 만료되었습니다!", "이메일 인증을 다시 진행해주세요. 감사합니다.");								 
 						 $("" + elementName).remove();
 						 $('#confirmDiv').css("display","none");
 						 $("#emailText").attr("readonly",false);
@@ -482,25 +492,36 @@
 			 $("<div id='sendMessage2'</div>").insertAfter($("#email"));
 			 countdown("#sendMessage2",10,0);
 			 
-  		     // 인증메일 보내기
+  		   // 인증메일 보내기
   		   $.ajax({
   			 url : 'sendMail.me',
   			data : {email:email},
   			 type : 'post',
   			 success : function(data){
-  				 console.log("data : " + data);
-  				 if(data == "Y"){
-  					 console.log("메일인증성공");
-  					 // mapper 수정하기 -> email이 존재하면 update
-  					 //                        존재하지 않으면 insert
-  					 
-  					 // 메일 인증 성공 시 1. email->readOnly로 바꾸고 2. 버튼을 메일인증완료로 바꾸기
-  				 } else {
-  					 alert("메일 전송에 실패하였습니다.");
+  				 if(data == "N"){
+  					swal("메일전송에 실패하였습니다😢");				 			 
+  				 } else {					
+  					var randomKey = data;
+  					
+  					$("#confirmMessage").click(function(){
+  						var cerNum = $("#confirmText").val();
+  						
+  						if(cerNum == randomKey){
+  							swal("메일 인증이 완료되었습니다😊");	
+  							
+  							$('#confirmDiv').css("display","none");
+  							$("#sendMessage2").remove();
+  							$("#certificationOk").css("display","inline-block");
+  							$("#emailText").attr("readonly",true);
+  						} else {
+  							swal("인증번호가 일치하지 않습니다.\n다시 입력해주세요😢");	
+  						}
+  					});
   		    	  } 
   			 },
   			 error : function(data){
   				 console.log("서버 실패");
+  				 swal("메일전송에 실패하였습니다😢");	
   			 }
   		   });
   		  }   	   	
@@ -615,36 +636,46 @@
     	   }
     	   
     	   
+    	   var cerResult = "no";
+    	   var dis = $("#certificationOk").css("display");
+    	   if($("#certificationOk").css("display") == "inline-block"){
+    		   cerResult = "ok";
+    	   } else {
+    		   cerResult = "no";
+    	   }
+    	   
     	   if(userId == "" || idResult == "no"){
-    		   alert("아이디를 확인해주세요.");
+    		   swal("아이디를 확인해주세요🙋");
     		   $("#idText").focus();
     	   } else if(userPwd1 == "" || pwd1Result == "no"){
-    		   alert("비밀번호를 확인해주세요.");
+    		   swal("비밀번호를 확인해주세요🙋");
     		   $("#pwdText").focus();
     	   } else if(userPwd2 == "" || pwd2Result == "no"){
-    		   alert("재확인 비밀번호가 일치하지 않습니다.");
+    		   swal("재확인 비밀번호가 일치하지 않습니다🙅");
     		   $("#pwdText2").focus();
     	   } else if(userName == "" || nameResult == "no"){
-    		   alert("이름을 확인해주세요.");
+    		   swal("이름을 확인해주세요🙋");
     		   $("#nameText").focus();
     	   } else if(nickName == "" || nicknameResult == "no"){
-    		   alert("닉네임을 확인해주세요.");
+    		   swal("닉네임을 확인해주세요🙋");
     		   $("#nicknameText").focus();
     	   } else if(email == "" || emailResult == "no"){
-    		   alert("이메일인증을 해주세요.");
+    		   swal("이메일 인증을 해주세요✉");
     		   $("#emailText").focus();
     	   } else if(phone == "" || phoneResult == "no"){
-    		   alert("휴대폰 번호를 확인해주세요.");
+    		   swal("휴대폰 번호를 확인해주세요🙋");
     		   $("#phoneText").focus();
+    	   } else if(cerResult == "no"){
+    		   swal("이메일 인증을 해주세요✉");
+    		   $("#emailText").focus();
     	   } else {
-    		   // 회원가입
-    		   console.log("회원가입 시도");
+    		   $('#joinForm').submit();
     	   }    	 
        });
 
        
        function cancel(){
-       	location.href="<%= request.getContextPath() %>/home.do";
+    	   location.href="<%= request.getContextPath() %>/home.do";
        }
    
     </script>

@@ -137,14 +137,33 @@ public class MemberController {
 	@RequestMapping("sendMail.me")
 	@ResponseBody
 	public String sendMail(@RequestParam("email") String email) {
-		int result = mService.create(email);
+		String randomKey = mService.create(email);
 		String checkMail = "";
-		if(result == 0) {
+		if(randomKey.equals("errorMail")) {
 			checkMail = "N";
 		} else {
-			checkMail = "Y";
+			checkMail = randomKey;
 		}
 		return checkMail;
+	}
+	
+	// 회원가입3 뷰로 이동
+	@RequestMapping("insert3.me")
+	public String insertMember(@ModelAttribute Member member) {
+		System.out.println("member : " + member);
+		
+		// 비밀번호 암호화 : [bcrypt]
+		String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
+		System.out.println("암호화 된 비번 : " + encPwd);
+		member.setMemberPwd(encPwd);
+		
+		int result = mService.insertMember(member);
+		
+		if(result > 0) {
+			return "insert_3";	
+		} else {
+			return "insertFail";
+		}
 	}
 	
 	

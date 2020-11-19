@@ -44,18 +44,18 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
-	public int create(String email) {
+	public String create(String email) {
 		// 인증키 생성 (내가 원하는 사이즈, lowerCheck)
-		String randomKey = new RandomKey().getKey(20, false);
+		String randomKey = new RandomKey().getKey(10, false);
 		
 		// 인증키 DB에 저장
 		int result = mDAO.createAuthKey(sqlSession, email, randomKey);
 			
 		try {
 			MailHandler mail = new MailHandler(mailSender);
-			mail.setSubject("[TRIP2REAP] 이메일 인증번호 안내 메일입니다.");
-			mail.setText( "안녕하세요. [TRIP2REAP]입니다.<br> 회원님께서 요청하신 인증번호는 [ " + randomKey + " ]입니다.<br>" +
-			              "5분안에 이메일 인증번호를 입력해주세요.<br>이용해주셔서 감사합니다♡♡♡");
+			mail.setSubject("[TRIP2REAP] 이메일 인증번호 안내 메일입니다.");			
+			mail.setText("<div class=\"separator\" style=\"clear: both;\"><a href=\"https://1.bp.blogspot.com/-Om57ZZgk-gE/X7XGWiGUcrI/AAAAAAAAAA4/-8hpMD8TmjokktCPlu2vmzUNbNvyXfyjACLcBGAsYHQ/s622/%25EB%25A9%2594%25EC%259D%25BC%25EC%259A%25A9%2B%25EB%25A1%259C%25EA%25B3%25A0.png\" style=\"clear: left; display: block; float: left; padding: 1em 0px; text-align: center;\"><img alt=\"\" border=\"0\" data-original-height=\"123\" data-original-width=\"622\" src=\"https://1.bp.blogspot.com/-Om57ZZgk-gE/X7XGWiGUcrI/AAAAAAAAAA4/-8hpMD8TmjokktCPlu2vmzUNbNvyXfyjACLcBGAsYHQ/s200/%25EB%25A9%2594%25EC%259D%25BC%25EC%259A%25A9%2B%25EB%25A1%259C%25EA%25B3%25A0.png\" width=\"200\" /></a></div>" 
+					+ "<br><br><br><br>안녕하세요. [TRIP2REAP]입니다.<br> 회원님께서 요청하신 인증번호는 <strong>" + randomKey +"</strong> 입니다.<br>" + "10분안에 이메일 인증번호를 입력해주세요.<br>이용해주셔서 감사합니다♡♡♡");
 			mail.setFrom("trip2reap@gmail.com", "TRIP2REAP");
 			mail.setTo(email);
 			mail.send();
@@ -64,7 +64,19 @@ public class MemberServiceImpl implements MemberService{
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		return result;
+		// mapper 수정
+		// 회원가입 성공시키기
+		
+		if(result == 0) {
+			return "errorMail";
+		} else {
+			return randomKey;
+		}
+	}
+	
+	@Override
+	public int insertMember(Member member) {
+		return 0;
 	}
 	
 
