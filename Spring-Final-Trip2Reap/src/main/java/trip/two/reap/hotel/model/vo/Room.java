@@ -1,11 +1,11 @@
 package trip.two.reap.hotel.model.vo;
 
 public class Room {
-	private int roomNo; //방번호 
-	private int boNo;	//호텔번호
-	private String roomType; //방종류
-	private String roomName; //방이름
-	private int pricePerDay; //1박 이용가격
+	private int roomNo; //방번호 (필수)
+	private int boNo;	//호텔번호(필수)
+	private String roomType; //방종류(필수)
+	private String roomName; //방이름(필수)
+	private int pricePerDay; //1박 이용가격(필수)
 	
 	public Room() {}
 	
