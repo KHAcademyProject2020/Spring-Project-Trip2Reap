@@ -31,7 +31,7 @@ public class Hotel {
 	private String hotelSite; //호텔 사이트 -- 선택
 	private String hotelTel; //호텔 전화번호 --필수
 	private double hotelReviewScore; //호텔 후기평점점수 -필수
-	
+	private int hotelRank; //호텔등급--선택 
 	private int hotelOpenTime; //호텔오픈시각(시: 0시~24시) --필수
 	private int hotelCloseTime; //호텔종료시각(시: 0시~24시)--필수
 	
@@ -95,8 +95,8 @@ public class Hotel {
 	//사진관련요소를 제외한 모든 요소가 들어있는 생성자
 	public Hotel(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount, String boTag,
 			String boDeleteYN, Date regDate, String hotelAddr, String hotelSite, String hotelTel,
-			double hotelReviewScore, int hotelOpenTime, int hotelCloseTime, ArrayList<String> hotelOptions,
-			int hotelCheckInTime, int hotelCheckOutTime) {
+			double hotelReviewScore, int hotelRank, int hotelOpenTime, int hotelCloseTime,
+			ArrayList<String> hotelOptions, int hotelCheckInTime, int hotelCheckOutTime) {
 		super();
 		this.boNo = boNo;
 		this.caCode = caCode;
@@ -111,6 +111,7 @@ public class Hotel {
 		this.hotelSite = hotelSite;
 		this.hotelTel = hotelTel;
 		this.hotelReviewScore = hotelReviewScore;
+		this.hotelRank = hotelRank;
 		this.hotelOpenTime = hotelOpenTime;
 		this.hotelCloseTime = hotelCloseTime;
 		this.hotelOptions = hotelOptions;
@@ -122,8 +123,9 @@ public class Hotel {
 	//모든 요소가 들어있는 생성자
 	public Hotel(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount, String boTag,
 			String boDeleteYN, Date regDate, Attachment hotelThumbnailImg, ArrayList<Attachment> hotelDetailViewImgs,
-			String hotelAddr, String hotelSite, String hotelTel, double hotelReviewScore, int hotelOpenTime,
-			int hotelCloseTime, ArrayList<String> hotelOptions, int hotelCheckInTime, int hotelCheckOutTime) {
+			String hotelAddr, String hotelSite, String hotelTel, double hotelReviewScore, int hotelRank,
+			int hotelOpenTime, int hotelCloseTime, ArrayList<String> hotelOptions, int hotelCheckInTime,
+			int hotelCheckOutTime) {
 		super();
 		this.boNo = boNo;
 		this.caCode = caCode;
@@ -140,6 +142,7 @@ public class Hotel {
 		this.hotelSite = hotelSite;
 		this.hotelTel = hotelTel;
 		this.hotelReviewScore = hotelReviewScore;
+		this.hotelRank = hotelRank;
 		this.hotelOpenTime = hotelOpenTime;
 		this.hotelCloseTime = hotelCloseTime;
 		this.hotelOptions = hotelOptions;
@@ -148,10 +151,10 @@ public class Hotel {
 	}
 
 
+
 	public int getBoNo() {
 		return boNo;
 	}
-
 
 	public void setBoNo(int boNo) {
 		this.boNo = boNo;
@@ -347,18 +350,26 @@ public class Hotel {
 		this.hotelCheckOutTime = hotelCheckOutTime;
 	}
 
-	
-	
+
+	public int getHotelRank() {
+		return hotelRank;
+	}
+
+
+	public void setHotelRank(int hotelRank) {
+		this.hotelRank = hotelRank;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Hotel [boNo=" + boNo + ", caCode=" + caCode + ", boTitle=" + boTitle + ", boContent=" + boContent
 				+ ", memberId=" + memberId + ", boCount=" + boCount + ", boTag=" + boTag + ", boDeleteYN=" + boDeleteYN
 				+ ", regDate=" + regDate + ", hotelThumbnailImg=" + hotelThumbnailImg + ", hotelDetailViewImgs="
 				+ hotelDetailViewImgs + ", hotelAddr=" + hotelAddr + ", hotelSite=" + hotelSite + ", hotelTel="
-				+ hotelTel + ", hotelReviewScore=" + hotelReviewScore + ", hotelOpenTime=" + hotelOpenTime
-				+ ", hotelCloseTime=" + hotelCloseTime + ", hotelOptions=" + hotelOptions + ", hotelCheckInTime="
-				+ hotelCheckInTime + ", hotelCheckOutTime=" + hotelCheckOutTime + "]";
+				+ hotelTel + ", hotelReviewScore=" + hotelReviewScore + ", hotelRank=" + hotelRank + ", hotelOpenTime="
+				+ hotelOpenTime + ", hotelCloseTime=" + hotelCloseTime + ", hotelOptions=" + hotelOptions
+				+ ", hotelCheckInTime=" + hotelCheckInTime + ", hotelCheckOutTime=" + hotelCheckOutTime + "]";
 	}
-	
 	
 }
