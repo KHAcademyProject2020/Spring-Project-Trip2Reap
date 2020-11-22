@@ -9,7 +9,7 @@
      #info1 { display: inline-block; width:585px; }
      #info2 { display: inline-block; height: 50px; font-size: 30px; font-weight:bold; text-align: center; }
      #info3 { display: inline-block; width:200px; }
-     #info4 { display: inline-block; width:490px; }
+     #info4 { display: inline-block; width:480px; }
      #info5 { display: inline-block; font-weight: bold; background: rgb(119,175,130); border-radius: 10px; color: white;
               height : 23px; width: 24px; text-align: center; line-height: 23px; font-size: 14px; }
      #info6 { display: inline-block; font-weight:bold; text-align: right; }
@@ -25,17 +25,18 @@
      .applyRadio { width: 15px; height: 15px; cursor: pointer; vertical-align: bottom; }
      #apply4 { display : inline-block; font-size: 15px; width : 600px; margin-left: 5px; vertical-align: bottom; } 
      #apply5 { display : inline-block; width : 43px; }
-     #apply6 { display : inline-block; height : 20px; width : 600px; border-bottom: 2px solid lightgray; }
+     #apply6 { display : inline-block; height : 15px; width : 600px; border-bottom: 2px solid lightgray; }
      #space_4 { height : 30px; }
      #space_8 { height : 40px; }
      #apply7 { display : inline-block; }
      #apply8 { display : inline-block; font-size: 15px; margin-left: 5px; vertical-align: bottom; }
      #apply9 { display : inline-block; font-size: 15px; color: red; }  
      #space_5 { height : 15px; }  
-     #apply10 { display : inline-block; width : 600px; height : 250px; border: 2px solid lightgray; overflow: scroll; font-size: 13px;}
+     #apply10 { display : inline-block; width : 600px; height : 250px; border: 2px solid lightgray; overflow: scroll; font-size: 13px; }
+     p { margin-left: 15px; margin-right: 10px; }
      
      /* 버튼  */
-     #space_6 { display : inline-block; width : 420px; height : 30px; }
+     #space_6 { display : inline-block; width : 420px; height : 40px; }
      #applyBtn1 { background: lightgray; color:white; width: 200px; height : 50px; 
                   border: none; text-align: center; font-size: 15px; font-weight: bold; cursor: pointer; }
      #space_7 { display: inline-block; width: 10px; }

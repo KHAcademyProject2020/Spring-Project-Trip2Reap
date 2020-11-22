@@ -1,8 +1,8 @@
      div { margin: 0px; padding: 0px; }
      input[type=text]:focus{ outline: none; }
      input[type=password]:focus{ outline: none; }
-     input[type=button]:focus{ outline: none; }
-     
+     input[type=button]:focus{ outline: none; }     
+     .swal-button:focus { box-shadow: none; }     
      
      /* 공통속성  */
      #board_list{ margin : 40px auto 0px auto; width: 1300px;}
@@ -14,7 +14,7 @@
      #info1 { display: inline-block; width:585px; }
      #info2 { display: inline-block; height: 50px; font-size: 30px; font-weight:bold; text-align: center; }
      #info3 { display: inline-block; width:200px; }
-     #info4 { display: inline-block; width:490px; }
+     #info4 { display: inline-block; width:480px; }
      #info5 { display: inline-block; font-weight: bold; background: rgb(119,175,130); border-radius: 10px; color: white;
               height : 23px; width: 24px; text-align: center; line-height: 23px; font-size: 14px; }
      #info6 { display: inline-block; font-weight:bold; text-align: right; }
@@ -99,7 +99,10 @@
      #sendMessage { display : inline-block; width : 100px; height : 30px; background: rgb(226,240,217); font-size: 13px; 
                     color : rgb(119,175,130); border : 1px solid rgb(119,175,130); text-align: center; vertical-align: middle; }
      #sendMessage:hover { background : rgb(119,175,130); color : rgb(226,240,217); }
+     #sendMessage2 { display : none; width : 80px; height : 30px; font-size : 15px; margin-left : 28px; vertical-align: bottom; line-height: 10px; }
      #mailLabel { line-height: 27px; cursor: pointer; }
+     #certificationOk { display : none; width : 100px; height : 30px; background: lightgray; font-size: 13px; 
+                    color : white; text-align: center; vertical-align: middle; line-height: 28px; }
      
      
      /* 인증번호  */
@@ -131,6 +134,7 @@
             border : 1px solid rgb(119,175,130); text-align: center; vertical-align: middle; cursor: pointer; margin-left: 20px; }
      #woman { display : inline-block; width : 70px; height : 30px; background: white; font-size: 13px; color : rgb(119,175,130); 
               border : 1px solid rgb(119,175,130); text-align: center; vertical-align: middle; cursor: pointer; margin-left: 3px; }
+     #genderValue { display: none;}
      
      
      /* 버튼  */
@@ -144,5 +148,12 @@
                   
      #applyBtn1, #applyBtn2:focus{ outline: none; }
      
+     
+     /* swal  */
+     .swal-modal { border: 12px solid lightgray; }
+     .swal-footer { text-align: center; }
+     .swal-button { background-color: rgb(255,234,234); font-size: 12px; text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3); color:gray; }
+     .swal-text { font-size: 15px; text-align: center; line-height: 23px; } 
+     .swal-button:not([disabled]):hover { background-color: rgb(255,216,216); }
      
      
