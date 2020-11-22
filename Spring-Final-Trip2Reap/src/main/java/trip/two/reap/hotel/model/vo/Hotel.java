@@ -28,8 +28,10 @@ public class Hotel {
 	
 	//HOTEL
 	private String hotelAddr; //호텔주소 -- 필수
+	private int hotelLocalCode; //호텔지역코드 --필수
+	
 	private String hotelSite; //호텔 사이트 -- 선택
-	private String hotelTel; //호텔 전화번호 --필수
+	private String hotelTel; //호텔 전화번호 --선택 
 	private double hotelReviewScore; //호텔 후기평점점수 -필수
 	private int hotelRank; //호텔등급--선택 
 	private int hotelOpenTime; //호텔오픈시각(시: 0시~24시) --필수
@@ -40,12 +42,33 @@ public class Hotel {
 	private int hotelCheckOutTime;//호텔 체크아웃 시각대 (0시~24시)--필수
 	
 	//기본생성자	
-	public Hotel() {}
-
+	public Hotel() {}	
 	
+	//사진관련요소를 제외한 필수요소만 들어있는 생성자
+	public Hotel(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount,
+			String boDeleteYN, Date regDate, String hotelAddr, int hotelLocalCode, double hotelReviewScore,
+			int hotelOpenTime, int hotelCloseTime, int hotelCheckInTime, int hotelCheckOutTime) {
+		super();
+		this.boNo = boNo;
+		this.caCode = caCode;
+		this.boTitle = boTitle;
+		this.boContent = boContent;
+		this.memberId = memberId;
+		this.boCount = boCount;
+		this.boDeleteYN = boDeleteYN;
+		this.regDate = regDate;
+		this.hotelAddr = hotelAddr;
+		this.hotelLocalCode = hotelLocalCode;
+		this.hotelReviewScore = hotelReviewScore;
+		this.hotelOpenTime = hotelOpenTime;
+		this.hotelCloseTime = hotelCloseTime;
+		this.hotelCheckInTime = hotelCheckInTime;
+		this.hotelCheckOutTime = hotelCheckOutTime;
+	}
+
 	//필수만 들어있는 생성자(썸네일이미지만 포함)
 	public Hotel(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount,
-			String boDeleteYN, Date regDate, Attachment hotelThumbnailImg, String hotelAddr, String hotelTel,
+			String boDeleteYN, Date regDate, Attachment hotelThumbnailImg, String hotelAddr, int hotelLocalCode,
 			double hotelReviewScore, int hotelOpenTime, int hotelCloseTime, int hotelCheckInTime,
 			int hotelCheckOutTime) {
 		super();
@@ -59,31 +82,7 @@ public class Hotel {
 		this.regDate = regDate;
 		this.hotelThumbnailImg = hotelThumbnailImg;
 		this.hotelAddr = hotelAddr;
-		this.hotelTel = hotelTel;
-		this.hotelReviewScore = hotelReviewScore;
-		this.hotelOpenTime = hotelOpenTime;
-		this.hotelCloseTime = hotelCloseTime;
-		this.hotelCheckInTime = hotelCheckInTime;
-		this.hotelCheckOutTime = hotelCheckOutTime;
-	}
-	
-	
-	//사진관련요소를 제외한 필수요소만 들어있는 생성자
-	public Hotel(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount,
-			String boDeleteYN, Date regDate, String hotelAddr, String hotelTel,
-			double hotelReviewScore, int hotelOpenTime, int hotelCloseTime, int hotelCheckInTime,
-			int hotelCheckOutTime) {
-		super();
-		this.boNo = boNo;
-		this.caCode = caCode;
-		this.boTitle = boTitle;
-		this.boContent = boContent;
-		this.memberId = memberId;
-		this.boCount = boCount;
-		this.boDeleteYN = boDeleteYN;
-		this.regDate = regDate;
-		this.hotelAddr = hotelAddr;
-		this.hotelTel = hotelTel;
+		this.hotelLocalCode = hotelLocalCode;
 		this.hotelReviewScore = hotelReviewScore;
 		this.hotelOpenTime = hotelOpenTime;
 		this.hotelCloseTime = hotelCloseTime;
@@ -94,7 +93,7 @@ public class Hotel {
 
 	//사진관련요소를 제외한 모든 요소가 들어있는 생성자
 	public Hotel(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount, String boTag,
-			String boDeleteYN, Date regDate, String hotelAddr, String hotelSite, String hotelTel,
+			String boDeleteYN, Date regDate, String hotelAddr, int hotelLocalCode, String hotelSite, String hotelTel,
 			double hotelReviewScore, int hotelRank, int hotelOpenTime, int hotelCloseTime,
 			ArrayList<String> hotelOptions, int hotelCheckInTime, int hotelCheckOutTime) {
 		super();
@@ -108,6 +107,7 @@ public class Hotel {
 		this.boDeleteYN = boDeleteYN;
 		this.regDate = regDate;
 		this.hotelAddr = hotelAddr;
+		this.hotelLocalCode = hotelLocalCode;
 		this.hotelSite = hotelSite;
 		this.hotelTel = hotelTel;
 		this.hotelReviewScore = hotelReviewScore;
@@ -118,13 +118,14 @@ public class Hotel {
 		this.hotelCheckInTime = hotelCheckInTime;
 		this.hotelCheckOutTime = hotelCheckOutTime;
 	}
+	
 
 
 	//모든 요소가 들어있는 생성자
 	public Hotel(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount, String boTag,
 			String boDeleteYN, Date regDate, Attachment hotelThumbnailImg, ArrayList<Attachment> hotelDetailViewImgs,
-			String hotelAddr, String hotelSite, String hotelTel, double hotelReviewScore, int hotelRank,
-			int hotelOpenTime, int hotelCloseTime, ArrayList<String> hotelOptions, int hotelCheckInTime,
+			String hotelAddr, int hotelLocalCode, String hotelSite, String hotelTel, double hotelReviewScore,
+			int hotelRank, int hotelOpenTime, int hotelCloseTime, ArrayList<String> hotelOptions, int hotelCheckInTime,
 			int hotelCheckOutTime) {
 		super();
 		this.boNo = boNo;
@@ -139,6 +140,7 @@ public class Hotel {
 		this.hotelThumbnailImg = hotelThumbnailImg;
 		this.hotelDetailViewImgs = hotelDetailViewImgs;
 		this.hotelAddr = hotelAddr;
+		this.hotelLocalCode = hotelLocalCode;
 		this.hotelSite = hotelSite;
 		this.hotelTel = hotelTel;
 		this.hotelReviewScore = hotelReviewScore;
@@ -361,15 +363,26 @@ public class Hotel {
 	}
 
 
+	public int getHotelLocalCode() {
+		return hotelLocalCode;
+	}
+
+
+	public void setHotelLocalCode(int hotelLocalCode) {
+		this.hotelLocalCode = hotelLocalCode;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Hotel [boNo=" + boNo + ", caCode=" + caCode + ", boTitle=" + boTitle + ", boContent=" + boContent
 				+ ", memberId=" + memberId + ", boCount=" + boCount + ", boTag=" + boTag + ", boDeleteYN=" + boDeleteYN
 				+ ", regDate=" + regDate + ", hotelThumbnailImg=" + hotelThumbnailImg + ", hotelDetailViewImgs="
-				+ hotelDetailViewImgs + ", hotelAddr=" + hotelAddr + ", hotelSite=" + hotelSite + ", hotelTel="
-				+ hotelTel + ", hotelReviewScore=" + hotelReviewScore + ", hotelRank=" + hotelRank + ", hotelOpenTime="
-				+ hotelOpenTime + ", hotelCloseTime=" + hotelCloseTime + ", hotelOptions=" + hotelOptions
-				+ ", hotelCheckInTime=" + hotelCheckInTime + ", hotelCheckOutTime=" + hotelCheckOutTime + "]";
+				+ hotelDetailViewImgs + ", hotelAddr=" + hotelAddr + ", hotelLocalCode=" + hotelLocalCode
+				+ ", hotelSite=" + hotelSite + ", hotelTel=" + hotelTel + ", hotelReviewScore=" + hotelReviewScore
+				+ ", hotelRank=" + hotelRank + ", hotelOpenTime=" + hotelOpenTime + ", hotelCloseTime=" + hotelCloseTime
+				+ ", hotelOptions=" + hotelOptions + ", hotelCheckInTime=" + hotelCheckInTime + ", hotelCheckOutTime="
+				+ hotelCheckOutTime + "]";
 	}
 	
 }
