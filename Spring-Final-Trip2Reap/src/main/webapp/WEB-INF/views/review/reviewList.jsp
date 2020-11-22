@@ -135,14 +135,20 @@
 			
 				<td colspan="3">
 					<form id="content" style="text-align: center;">
-					 <select name="search">
+					 <select id="select_search" name="search">
     					 <option value="작성자">작성자</option>
     					 <option value="제목">제목</option>
    						 <option value="내용">내용</option>
    						 <option value="해쉬태그">해쉬태그</option>
 					</select>
-  						<input type="text" name="input" class="input" id="search-input">
-  						<button type="reset" class="search" id="search-btn">검색</button>
+					
+						
+   						   
+    					  <input type="search" id="search" placeholder="Search..." />
+ 					
+  						<button id="search_btn" type="reset" class="search" id="search-btn">
+  							<span class="icon"><i class="fa fa-search"></i></span>
+  						</button>
 					</form>
 				</td>
 			

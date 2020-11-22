@@ -45,28 +45,7 @@ public class ReviewController {
 	   
 	   return mv;
    }
- 
-   // 리뷰 상세보기로 이동
    
-   @RequestMapping("reviewDetail.bo")
-   public ModelAndView boardDetail(@RequestParam("boNo") int boNo, @RequestParam("page") int page, ModelAndView mv) {
-      
-      Review review = rService.selectReview(boNo);
-      
-      if(review != null) {
-    	  mv.addObject("review", review)
-            .addObject("page", page)
-            .setViewName("reviewDetail");
-      } else {
-    	  throw new ReviewException("게시글 상세보기에 실패하였습니다.");
-      }     
-      return mv;
-   }
-   
-   @RequestMapping("reviewInsert.bo")
-   public String ReviewInsert() {
-	   return "reviewInsert";
-   }
    
    @RequestMapping("reviewPhotoList.bo")
    public ModelAndView reviewPhotoList(@RequestParam(value="page",required=false) Integer page, ModelAndView mv) {
@@ -92,6 +71,29 @@ public class ReviewController {
 	   
 	   return mv;
    }
+ 
+   // 리뷰 상세보기로 이동
+   
+   @RequestMapping("reviewDetail.bo")
+   public ModelAndView boardDetail(@RequestParam("boNo") int boNo, @RequestParam("page") int page, ModelAndView mv) {
+      
+      Review review = rService.selectReview(boNo);
+      
+      if(review != null) {
+    	  mv.addObject("review", review)
+            .addObject("page", page)
+            .setViewName("reviewDetail");
+      } else {
+    	  throw new ReviewException("게시글 상세보기에 실패하였습니다.");
+      }     
+      return mv;
+   }
+   
+   @RequestMapping("reviewInsert.bo")
+   public String ReviewInsert() {
+	   return "reviewInsert";
+   }
+  
 
    
 
