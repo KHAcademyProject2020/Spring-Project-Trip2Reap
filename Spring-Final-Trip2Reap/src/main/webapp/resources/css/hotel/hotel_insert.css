@@ -344,7 +344,8 @@ ul.uploaded-img-names-ul{
 #hotel-detail-images-container{
 	margin-top: 30px;
 	position: relative;
-	display: flex;
+	
+	display: none;
 	flex-direction: column;
 }
 

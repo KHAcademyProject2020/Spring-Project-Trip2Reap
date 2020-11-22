@@ -71,7 +71,7 @@
 						<h3>&nbsp;&nbsp;호텔 디테일 이미지 등록</h3>
 					</div>
 					<div class="hotel-insert-content-container">
-						<input type="file" name="detail_img" id="detail_img" accept="images/*" multiple /> 
+						<input type="file" name="detail_img" id="detail_img" accept="image/*" multiple /> 
 						<label id="detail_img_label" for="detail_img">디테일 이미지 찾아보기</label> 
 						
 						<span class="img_upload_status_info" id="detail_img_name"> 
@@ -89,10 +89,6 @@
 										</li>
 										
 										<li class="detail-control-btn-li">
-											<input type="button" class="detail-control-btn" id="select-all-off-detail-img-btn" value="모두선택 해제"/>
-										</li>
-										
-										<li class="detail-control-btn-li">
 											<input type="button" class="detail-control-btn" id="remove-select-detail-img-btn" value="선택한 이미지 삭제"/>
 										</li>
 									</ul>
@@ -100,25 +96,113 @@
 							</div> <%--hotel-detail-images-head-container --%>
 							
 							<div id="hotel-detail-images-body-container">
-								<ul class="uploaded-img-names-ul">
-								
-									<li class="upload-img-name-li">
-										<div class="upload-image-checkbox-wrapper">
-											<input id="upload_img_1" class="upload-image-checkbox" type="checkbox" name="select_detail_img"/>
-											<label for="upload_img_1" class="upload-image-label"></label>
-										</div>
-										<div class="upload-image-filename-wrapper">
-											파일이름 
-										</div>
-									</li>
-									
-									
+								<ul class="uploaded-img-names-ul">						
 								</ul>
 							</div> <%--hotel-detail-images-body-container --%>
 						</div> <%--hotel-detail-images-container --%>
 					</div><%-- hotel-insert-content-container --%>
 					
 					<script>
+					$(function(){
+						//디테일이미지 컨테이너
+						let detailImgContainer= $('#hotel-detail-images-container');
+						
+						//전체 업로드된 이미지 리스트 
+						let totalUploadImgs=[];
+						
+						// 디테일 이미지 찾아보기 버튼 클릭했을 때 수행하는 함수.
+						$('#detail_img').change(function(){
+							console.log('이미지 등록!');
+			
+							let nowUploadImgs= $(this).get(0).files;  //현재 업로드한 이미지 파일
+							let nowUploadImgCnt=nowUploadImgs.length; //현재 업로드한 이미지 개수
+							
+							let alreadyUploadedImgCnt= $('li.upload-img-name-li').length; //이미 등록된 이미지 개수
+							
+							// 등록된 이미지 전체개수 = 등록이미지개수 + 이미 등록된 이미지 개수 
+							totalUploadImgCnt= nowUploadImgCnt + alreadyUploadedImgCnt;
+							
+							//리스트에 등록한 이미지를 넣는다.
+							for(var i=0; i<nowUploadImgCnt; i++){
+								totalUploadImgs.push(nowUploadImgs[i]);
+							}
+							
+							//현재 등록된 이미지개수 글자로 나타내기
+							$('span#uploaded_img_cnt').text(totalUploadImgCnt);
+							
+							
+							// 업로드한 이미지 정보 갱신하기
+							if(totalUploadImgCnt>0){
+								// 전체 업로드한 이미지 개수가 최소 1개이상이면
+								detailImgContainer.css('display', 'flex');
+								
+								//비우고 다시 넣는다.
+								$('ul.uploaded-img-names-ul').empty();
+								
+								// 방금 등록한 이미지 개수만큼 ul에 넣는다.
+								for(var i=0; i<totalUploadImgCnt; i++){
+									let $uploaded_img_info='<li class="upload-img-name-li"><div class="upload-image-checkbox-wrapper">';
+									$uploaded_img_info+='<input id="upload_img_'+i+'" class="upload-image-checkbox" type="checkbox" name="select_detail_img"/>';
+									$uploaded_img_info+='<label for="upload_img_'+i+'" class="upload-image-label"></label></div>';
+									$uploaded_img_info+='<div class="upload-image-filename-wrapper">'+totalUploadImgs[i]['name']+'</div></li>';
+									$('ul.uploaded-img-names-ul').append($uploaded_img_info);
+								}
+							}else{
+								detailImgContainer.css('display','none');
+							}
+						});
+						
+						
+						
+						//모두 선택을 클릭한다.
+						$('#select-all-detail-img-btn').on('click',function(e){
+							let checkBoxes=$('input[name="select_detail_img"].upload-image-checkbox');
+							
+							//모두 체크됨 => isAllSelected=true
+							//일부 체크됨 => isAllSelected=false
+							//모두 체크안됨 => isAllSelected=false
+							let checkedBoxCnt=$('input[name="select_detail_img"].upload-image-checkbox:checked').length;
+							
+							if(checkBoxes.length == checkedBoxCnt){
+								//모두체크됨 => 버튼누른뒤에는 모두 체크해제.
+								checkBoxes.each(function(){
+									this.checked=false;
+								});
+							}else{
+								//모두 체크상태는 아님.
+								checkBoxes.each(function(){
+									if(!this.checked){ //체크상태아닌것들은 체크를 한다.
+										this.checked=true;
+									}
+								});
+							}
+						});
+						
+						
+						//선택된 이미지를 삭제한다.(아직 )
+						$('#remove-select-detail-img-btn').click(function(){
+							
+							//선택된 체크박스들을 구한다.
+							let selectedCheckBoxes= $('input[name="select_detail_img"].upload-image-checkbox:checked');
+							
+							//선택된 체크박스가 totalUploadImgs의 몇번째 인덱스에 위치하고있는지를 구한다.
+							console.log(selectedCheckBoxes);
+						
+							console.log(totalUploadImgs);
+							
+							if(selectedCheckBoxes.length>0){
+								//삭제 대상이 1개이상이라면 ..
+								//total이미지 안에 있는 selectedCheckBoxes를 삭제한다. => splice를 이용하여 삭제한다.
+								selectedCheckBoxes.each(function(){
+									console.log(this);
+								});
+							}
+							
+							
+						});
+						
+						
+					});
 					
 					</script>
 				</div>
