@@ -118,7 +118,7 @@
 
 
 #travel_content_div{
-	margin: 17px auto;
+	margin: 20px auto;
 	width: 900px;
 	text-align: center;
 }
@@ -166,6 +166,7 @@
 
 #span_text{
 	font-size: small;
+	color: gray;
 }
 
 

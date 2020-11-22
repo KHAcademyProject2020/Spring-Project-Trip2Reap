@@ -38,28 +38,18 @@
 	
 	
 	/* 로그인 창 */
-	#loginLabel { font-size: 35px; font-weight: 800; text-align: center; }
+	#loginLabel { font-size: 35px; font-weight: 800; text-align: center; color : rgb(76,76,76); }
 	#loginDiv { text-align: center; }
-	#loginInfo_1 {      
-         background-image: url(../../images/user.JPG);
-         background-size: contain;
-         background-repeat: no-repeat;
-         background-position: 10px center;
-         box-sizing: border-box;
-     } 
      #login_space0{ height : 25px; }
      #login_space1{ height : 10px; }
-     #loginInfo_2 {      
-         background-image: url(../../images/pwd.JPG);
-         background-size: contain;
-         background-repeat: no-repeat;
-         background-position: 10px center;
-         box-sizing: border-box;
-     }
-     .loginInfo{ width: 300px; height: 35px; font-size: 13px;
-                 border: 1px solid lightgray; padding-left: 50px; }
+     .loginInfo{ display : inline-block; width: 230px; height: 35px; font-size: 13px; padding-left: 10px; border: none;  }
+     #idIcon { display : inline-block; font-size: 22px; vertical-align: middle; color : rgb(166,166,166); }
+     #pwdIcon { display : inline-block; font-size: 22px; vertical-align: middle; color : rgb(166,166,166); }
+     #idPwdDiv{ display : inline-block; border: 1px solid rgb(166,166,166); width: 295px; text-align: center; }
      .loginInfo, #loginButton, #loginButton2, #loginButton3:focus{ outline: none; }
-	 #login_space2{ height : 15px; }	 
+	 #login_space2{ height : 15px; }
+	 #login_spaceStart { height : 50px; }
+	 #login_spaceFoot { height : 60px; }	 
 	 
 	 /* 아이디 저장  */
      #idSave_1{ width:300px; display: inline-block; text-align:left; margin-left: 70px; } 
