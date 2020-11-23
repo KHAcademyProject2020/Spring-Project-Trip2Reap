@@ -55,12 +55,16 @@
 						<h3>* 호텔 메인 이미지 등록</h3>
 					</div>
 					<div class="hotel-insert-content-container">
-						<input type="file" name="thumbnail_img" id="thumbnail_img" accept="images/*" /> 
+						<input type="file" name="thumbnail_img" id="thumbnail_img" accept="image/*" /> 
 						<label id="thumbnail_img_label" for="thumbnail_img">썸네일 이미지 찾아보기</label> 
 						<span class="img_upload_status_info" id="thumbnail_img_name">썸네일 이미지를 업로드 해주세요!</span>
 					</div>
 					<script>
-						
+						$('#thumbnail_img').on('change',function(){
+							let $thumbnailName= $(this).get(0).files;
+							$('#thumbnail_img_name').text($thumbnailName[0]['name']);
+							$('#thumbnail_img_name').css('color', '#515357');
+						});
 					</script>
 
 				</div>
@@ -110,17 +114,46 @@
 						//전체 업로드된 이미지 리스트 
 						let totalUploadImgs=[];
 						
+						
+						// 이미지 아이디 정리
+						function reOrderingUploadedImgs(){
+							console.log('reOrdering imgs');
+							console.log(totalUploadImgs);
+							
+							
+							// 업로드한 이미지 정보 갱신하기
+							if(totalUploadImgs.length>0){
+								// 전체 업로드한 이미지 개수가 최소 1개이상이면
+								detailImgContainer.css('display', 'flex');
+								
+								//비우고 다시 넣는다.
+								$('ul.uploaded-img-names-ul').empty();
+								
+								// 방금 등록한 이미지 개수만큼 ul에 넣는다.
+								for(var i=0; i<totalUploadImgs.length; i++){
+									let $uploaded_img_info='<li class="upload-img-name-li"><div class="upload-image-checkbox-wrapper">';
+									$uploaded_img_info+='<input id="upload_img_'+i+'" class="upload-image-checkbox" type="checkbox" name="select_detail_img"/>';
+									$uploaded_img_info+='<label for="upload_img_'+i+'" class="upload-image-label"></label></div>';
+									$uploaded_img_info+='<div class="upload-image-filename-wrapper">'+totalUploadImgs[i]['name']+'</div></li>';
+									$('ul.uploaded-img-names-ul').append($uploaded_img_info);
+								}
+							}else{
+								detailImgContainer.css('display','none');
+							}
+							
+						}
+						
+						
 						// 디테일 이미지 찾아보기 버튼 클릭했을 때 수행하는 함수.
 						$('#detail_img').change(function(){
-							console.log('이미지 등록!');
 			
 							let nowUploadImgs= $(this).get(0).files;  //현재 업로드한 이미지 파일
 							let nowUploadImgCnt=nowUploadImgs.length; //현재 업로드한 이미지 개수
 							
-							let alreadyUploadedImgCnt= $('li.upload-img-name-li').length; //이미 등록된 이미지 개수
+							//let alreadyUploadedImgCnt= $('li.upload-img-name-li').length; //이미 등록된 이미지 개수
 							
 							// 등록된 이미지 전체개수 = 등록이미지개수 + 이미 등록된 이미지 개수 
-							totalUploadImgCnt= nowUploadImgCnt + alreadyUploadedImgCnt;
+							//totalUploadImgCnt= nowUploadImgCnt + alreadyUploadedImgCnt;
 							
 							//리스트에 등록한 이미지를 넣는다.
 							for(var i=0; i<nowUploadImgCnt; i++){
@@ -128,9 +161,11 @@
 							}
 							
 							//현재 등록된 이미지개수 글자로 나타내기
-							$('span#uploaded_img_cnt').text(totalUploadImgCnt);
+							$('span#uploaded_img_cnt').text(totalUploadImgs.length);
+							reOrderingUploadedImgs();
 							
-							
+							console.log($('li.upload-img-name-li'));
+							/* 
 							// 업로드한 이미지 정보 갱신하기
 							if(totalUploadImgCnt>0){
 								// 전체 업로드한 이미지 개수가 최소 1개이상이면
@@ -150,6 +185,7 @@
 							}else{
 								detailImgContainer.css('display','none');
 							}
+							 */
 						});
 						
 						
@@ -181,27 +217,73 @@
 						
 						//선택된 이미지를 삭제한다.(아직 )
 						$('#remove-select-detail-img-btn').click(function(){
-							
+							console.log('삭제버튼 클릭!');
 							//선택된 체크박스들을 구한다.
 							let selectedCheckBoxes= $('input[name="select_detail_img"].upload-image-checkbox:checked');
-							
+
 							//선택된 체크박스가 totalUploadImgs의 몇번째 인덱스에 위치하고있는지를 구한다.
 							console.log(selectedCheckBoxes);
-						
 							console.log(totalUploadImgs);
 							
 							if(selectedCheckBoxes.length>0){
 								//삭제 대상이 1개이상이라면 ..
+								
+								//삭제대상 인덱스를 구한다
+								let removeIdxList= [];
+								
 								//total이미지 안에 있는 selectedCheckBoxes를 삭제한다. => splice를 이용하여 삭제한다.
-								selectedCheckBoxes.each(function(){
-									console.log(this);
+								selectedCheckBoxes.each(function(e){
+									//삭제대상에 해당하는 인덱스번호를 구한다.
+									
+									//this와 가장 가까운 li.(삭제대상) 을 구한다.
+									$removeTargetLi=$(this).closest('li.upload-img-name-li');
+									console.log($removeTargetLi);
+									$removeTargetLi.remove();
+									
+									//this랑 가장가까운 checkbox 인덱스를 구해야한다. -> 마지막 id번호
+									$removeTargetFile= $(this).closest('.upload-image-checkbox').prop('id');
+									$removeTargetFileSplited= $removeTargetFile.split('_');
+									$removeTargetFileIdx= Number($removeTargetFileSplited[2]);
+									
+									//해당파일 인덱스번호는 removeFileIdxList에 추가한다.
+									removeIdxList.push($removeTargetFileIdx);
+									
 								});
+								
+								console.log('removeIdxList');
+								console.log(removeIdxList);
+								
+								// 삭제파일에 해당하는 인덱스번호를 제외한다.
+								let tmp=[];
+								
+								let flag;
+								for(i=0; i<totalUploadImgs.length; i++){
+									flag=false;
+									for(j=0; j<removeIdxList.length; j++){
+										if(i==removeIdxList[j]){
+											flag=true;
+											break;
+										}
+									}
+									if(!flag){
+										tmp.push(totalUploadImgs[i]);
+									}
+								}
+								
+								
+								console.log('tmp');
+								console.log(tmp);
+								totalUploadImgs=tmp;
+								
+								
+								//삭제가 끝나면, 업로드된 이미지 개수도 다시 정리한다.
+								$('#uploaded_img_cnt').text(totalUploadImgs.length);
+								
+								//각각 삭제가끝나면 다시 id를정리를 해야함.
+								reOrderingUploadedImgs();
+								console.log($('li.upload-img-name-li'));
 							}
-							
-							
 						});
-						
-						
 					});
 					
 					</script>
