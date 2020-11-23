@@ -506,7 +506,7 @@ li.upload-img-name-li{
   flex-direction: row;
   justify-content: flex-end;
   align-items: baseline;
-  padding: 8px 17px;
+  padding: 8px 0px;
   margin:0;
 }
 
@@ -574,12 +574,16 @@ ul.room_btn_remote_controller li{
   height: 17px;
 }
  */
+#add_room_btn{
+	background-color: var(--pink-gray);
+}
+
 #add_room_btn,
 .room_btn_remote_controller .fa-angle-up,
 .room_btn_remote_controller .fa-angle-down,
-.room_btn_remote_controller .fa-minus{
-  background-color: var(--mid-green);
-  color: var(--btn-color);
+.room_btn_remote_controller .fa-times{
+  /* background-color: var(--mid-green); */
+  color: var(--mid-green);
   border-radius : 3px;
   cursor: pointer;
   padding: 1px;
@@ -615,8 +619,8 @@ ul.room_btn_remote_controller li{
 
 .hotel-info-order-up .fa-angle-up:hover,
 .hotel-info-order-down .fa-angle-down:hover,
-.hotel-info-remove .fa-minus:hover{
-	background-color: var(--bright-green);
+.hotel-info-remove .fa-times:hover{
+	/* background-color: var(--bright-green); */
 	color:var(--dark-gray);
 }
 

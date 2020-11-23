@@ -117,10 +117,6 @@
 						
 						// 이미지 아이디 정리
 						function reOrderingUploadedImgs(){
-							console.log('reOrdering imgs');
-							console.log(totalUploadImgs);
-							
-							
 							// 업로드한 이미지 정보 갱신하기
 							if(totalUploadImgs.length>0){
 								// 전체 업로드한 이미지 개수가 최소 1개이상이면
@@ -150,11 +146,6 @@
 							let nowUploadImgs= $(this).get(0).files;  //현재 업로드한 이미지 파일
 							let nowUploadImgCnt=nowUploadImgs.length; //현재 업로드한 이미지 개수
 							
-							//let alreadyUploadedImgCnt= $('li.upload-img-name-li').length; //이미 등록된 이미지 개수
-							
-							// 등록된 이미지 전체개수 = 등록이미지개수 + 이미 등록된 이미지 개수 
-							//totalUploadImgCnt= nowUploadImgCnt + alreadyUploadedImgCnt;
-							
 							//리스트에 등록한 이미지를 넣는다.
 							for(var i=0; i<nowUploadImgCnt; i++){
 								totalUploadImgs.push(nowUploadImgs[i]);
@@ -163,29 +154,6 @@
 							//현재 등록된 이미지개수 글자로 나타내기
 							$('span#uploaded_img_cnt').text(totalUploadImgs.length);
 							reOrderingUploadedImgs();
-							
-							console.log($('li.upload-img-name-li'));
-							/* 
-							// 업로드한 이미지 정보 갱신하기
-							if(totalUploadImgCnt>0){
-								// 전체 업로드한 이미지 개수가 최소 1개이상이면
-								detailImgContainer.css('display', 'flex');
-								
-								//비우고 다시 넣는다.
-								$('ul.uploaded-img-names-ul').empty();
-								
-								// 방금 등록한 이미지 개수만큼 ul에 넣는다.
-								for(var i=0; i<totalUploadImgCnt; i++){
-									let $uploaded_img_info='<li class="upload-img-name-li"><div class="upload-image-checkbox-wrapper">';
-									$uploaded_img_info+='<input id="upload_img_'+i+'" class="upload-image-checkbox" type="checkbox" name="select_detail_img"/>';
-									$uploaded_img_info+='<label for="upload_img_'+i+'" class="upload-image-label"></label></div>';
-									$uploaded_img_info+='<div class="upload-image-filename-wrapper">'+totalUploadImgs[i]['name']+'</div></li>';
-									$('ul.uploaded-img-names-ul').append($uploaded_img_info);
-								}
-							}else{
-								detailImgContainer.css('display','none');
-							}
-							 */
 						});
 						
 						
@@ -217,13 +185,10 @@
 						
 						//선택된 이미지를 삭제한다.(아직 )
 						$('#remove-select-detail-img-btn').click(function(){
-							console.log('삭제버튼 클릭!');
 							//선택된 체크박스들을 구한다.
 							let selectedCheckBoxes= $('input[name="select_detail_img"].upload-image-checkbox:checked');
 
 							//선택된 체크박스가 totalUploadImgs의 몇번째 인덱스에 위치하고있는지를 구한다.
-							console.log(selectedCheckBoxes);
-							console.log(totalUploadImgs);
 							
 							if(selectedCheckBoxes.length>0){
 								//삭제 대상이 1개이상이라면 ..
@@ -237,7 +202,6 @@
 									
 									//this와 가장 가까운 li.(삭제대상) 을 구한다.
 									$removeTargetLi=$(this).closest('li.upload-img-name-li');
-									console.log($removeTargetLi);
 									$removeTargetLi.remove();
 									
 									//this랑 가장가까운 checkbox 인덱스를 구해야한다. -> 마지막 id번호
@@ -249,9 +213,6 @@
 									removeIdxList.push($removeTargetFileIdx);
 									
 								});
-								
-								console.log('removeIdxList');
-								console.log(removeIdxList);
 								
 								// 삭제파일에 해당하는 인덱스번호를 제외한다.
 								let tmp=[];
@@ -269,10 +230,7 @@
 										tmp.push(totalUploadImgs[i]);
 									}
 								}
-								
-								
-								console.log('tmp');
-								console.log(tmp);
+																
 								totalUploadImgs=tmp;
 								
 								
@@ -281,7 +239,6 @@
 								
 								//각각 삭제가끝나면 다시 id를정리를 해야함.
 								reOrderingUploadedImgs();
-								console.log($('li.upload-img-name-li'));
 							}
 						});
 					});
@@ -386,9 +343,7 @@
 
 								<div>
 									<ul class="room_btn_remote_controller">
-										<li class="hotel-info-order-up"><i class="fas fa-angle-up"></i></li>
-										<li class="hotel-info-order-down"><i class="fas fa-angle-down"></i></li>
-										<li class="hotel-info-remove"><i class="fas fa-minus"></i></li>
+										<li class="hotel-info-remove"><i class="fas fa-times"></i></li>
 									</ul>
 								</div>
 							</div>
@@ -430,9 +385,11 @@
 
 								<div>
 									<ul class="room_btn_remote_controller">
+										<%--
 										<li class="hotel-info-order-up"><i class="fas fa-angle-up"></i></li>
 										<li class="hotel-info-order-down"><i class="fas fa-angle-down"></i></li>
-										<li class="hotel-info-remove"><i class="fas fa-minus"></i></li>
+										 --%>
+										<li class="hotel-info-remove"><i class="fas fa-times"></i></li>
 									</ul>
 								</div>
 							</div>
@@ -473,7 +430,7 @@
 									$oneHotelInfo+='<div class="room_btn_remote_controller_wrapper">'
 									$oneHotelInfo+='<div class="insert_room_name">'
 									$oneHotelInfo+='<input type="text" class="room_name" placeholder="객실 이름 입력" name="room_name"></div>'
-									$oneHotelInfo+='<div><ul class="room_btn_remote_controller"><li class="hotel-info-order-up"><i class="fas fa-angle-up"></i></li><li class="hotel-info-order-down"><i class="fas fa-angle-down"></i></li><li class="hotel-info-remove"><i class="fas fa-minus"></i></li></ul></div></div>'
+									$oneHotelInfo+='<div><ul class="room_btn_remote_controller"><li class="hotel-info-remove"><i class="fas fa-times"></i></li></ul></div></div>'
 									$oneHotelInfo+='<div class="insert_hotel_details"><div class="insert_room_kinds"><span class="room_kind_label">등록 객실 종류</span> '
 									$oneHotelInfo+='<select><option value="">객실 종류 선택</option><option value="싱글룸">싱글룸</option><option value="더블룸">더블룸</option><option value="트윈룸">트윈룸</option>'
 									$oneHotelInfo+='<option value="스탠다드룸">스탠다드룸</option><option value="패밀리 트윈룸">패밀리</option><option value="디럭스 트윈룸">디럭스</option><option value="스위트룸">스위트룸</option><option value="스튜디오룸">스튜디오룸</option><option value="트리플룸">트리플룸</option>'
@@ -515,6 +472,9 @@
 							  }
 							});
 						});
+						
+						
+						
 						
 					</script>
 				</div>
