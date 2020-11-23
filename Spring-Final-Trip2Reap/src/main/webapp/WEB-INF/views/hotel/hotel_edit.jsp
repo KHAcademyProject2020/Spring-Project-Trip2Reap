@@ -357,8 +357,8 @@
 										<option value="더블룸">더블룸</option>
 										<option value="트윈룸">트윈룸</option>
 										<option value="스탠다드룸">스탠다드룸</option>
-										<option value="패밀리 트윈룸">패밀리</option>
-										<option value="디럭스 트윈룸">디럭스</option>
+										<option value="패밀리 트윈룸">패밀리룸</option>
+										<option value="디럭스 트윈룸">디럭스룸</option>
 										<option value="스위트룸">스위트룸</option>
 										<option value="스튜디오룸">스튜디오룸</option>
 										<option value="트리플룸">트리플룸</option>
@@ -403,8 +403,8 @@
 										<option value="더블룸">더블룸</option>
 										<option value="트윈룸">트윈룸</option>
 										<option value="스탠다드룸">스탠다드룸</option>
-										<option value="패밀리 트윈룸">패밀리</option>
-										<option value="디럭스 트윈룸">디럭스</option>
+										<option value="패밀리 트윈룸">패밀리룸</option>
+										<option value="디럭스 트윈룸">디럭스룸</option>
 										<option value="스위트룸">스위트룸</option>
 										<option value="스튜디오룸">스튜디오룸</option>
 										<option value="트리플룸">트리플룸</option>
@@ -753,7 +753,7 @@
 
 								<tr>
 									<td colspan=2>
-										<input id="option9" class="option-checkboxes" type="checkbox" name="hotel_option" value="스파 & 사우나" />
+										<input id="option9" class="option-checkboxes" type="checkbox" name="hotel_option" value="스파/사우나" />
 										<label class="fake-checkbox-label" for="option9">스파 &amp; 사우나</label>
 									</td>
 								</tr>
@@ -811,7 +811,7 @@
 
 								<tr>
 									<td colspan=2>
-										<input id="option16" type="checkbox" class="option-checkboxes" name="hotel_option" value="바 라운지" />
+										<input id="option16" type="checkbox" class="option-checkboxes" name="hotel_option" value="바/라운지" />
 										<label class="fake-checkbox-label" for="option16">바 &amp; 라운지</label>	
 									</td>
 								</tr>
