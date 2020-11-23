@@ -1,7 +1,6 @@
 package trip.two.reap.member.model.service;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 
 import javax.mail.MessagingException;
 
@@ -72,12 +71,17 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
+	public int phoneCheck(String phone) {
+		return mDAO.phoneCheck(sqlSession, phone);
+	}
+	
+	@Override
 	public int insertMember(Member member) {
 		return mDAO.insertMember(sqlSession, member);
 	}
 	
 	@Override
-	public ArrayList<Member> searchIdPhone(Member member) {
+	public Member searchIdPhone(Member member) {
 		return mDAO.searchIdPhone(sqlSession, member);
 	}
 	

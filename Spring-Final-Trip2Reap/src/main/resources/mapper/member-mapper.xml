@@ -36,6 +36,12 @@
         where email=#{email}
     </select>
     
+    <select id="phoneCheck" resultType="_int">
+        select count(*)
+        from member
+        where phone=#{phone}
+    </select>
+    
     <update id="ranNumCheckUpdate">
         update certification
         set randomkey=#{randomKey}
@@ -53,7 +59,7 @@
     </insert>
     
     <select id="searchIdPhone" resultMap="memberResultSet">
-        select member_id
+        select member_id, member_names
         from member
         where member_names=#{memberName} and phone=#{phone}
     </select>

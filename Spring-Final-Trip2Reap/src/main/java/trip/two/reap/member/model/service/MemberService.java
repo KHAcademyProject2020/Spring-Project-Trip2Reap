@@ -1,6 +1,5 @@
 package trip.two.reap.member.model.service;
 
-import java.util.ArrayList;
 
 import trip.two.reap.member.model.vo.Member;
 
@@ -13,9 +12,13 @@ public interface MemberService {
 	int nicknameCheck(String nickname);
 
 	String create(String email);
+	
+	int phoneCheck(String phone);
 
 	int insertMember(Member member);
 
-	ArrayList<Member> searchIdPhone(Member member);
+	Member searchIdPhone(Member member);
+
+	
 
 }

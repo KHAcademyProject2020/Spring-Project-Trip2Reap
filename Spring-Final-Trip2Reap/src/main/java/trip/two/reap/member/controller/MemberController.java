@@ -1,6 +1,5 @@
 package trip.two.reap.member.controller;
 
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
@@ -150,6 +149,20 @@ public class MemberController {
 		return checkMail;
 	}
 	
+	// 휴대폰번호 중복 체크
+	@RequestMapping("phone.me")
+	@ResponseBody
+	public String phoneCheck(@RequestParam("phone") String phone) {
+		int result = mService.phoneCheck(phone);
+		String check = "";
+		if(result == 0) {
+			check = "Y";
+		} else {
+			check = "N";
+		}
+		return check;
+	}
+	
 	// 회원가입3 뷰로 이동
 	@RequestMapping("insert3.me")
 	public ModelAndView insertMember(@ModelAttribute Member member) {
@@ -185,15 +198,10 @@ public class MemberController {
 		member.setMemberName(name);
 		member.setPhone(phone);	
 		
-		ArrayList<Member> list = mService.searchIdPhone(member);
-		
-		if(list != null) {
-			mv.addObject("list", list);
-			mv.setViewName("searchIdPhone");
-		} else {
-			mv.addObject("message", "일치하는 아이디가 없습니다");
-			mv.setViewName("searchIdPhone");
-		}
+		Member user = mService.searchIdPhone(member);
+
+		mv.addObject("user", user);
+		mv.setViewName("searchIdPhone");
 		return mv;
 	}
 	
