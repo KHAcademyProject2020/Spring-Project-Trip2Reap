@@ -1,5 +1,7 @@
 package trip.two.reap.member.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -37,6 +39,10 @@ public class MemberDAO {
 
 	public int insertMember(SqlSessionTemplate sqlSession, Member member) {
 		return sqlSession.insert("memberMapper.insertMember" , member);
+	}
+
+	public ArrayList<Member> searchIdPhone(SqlSessionTemplate sqlSession, Member member) {
+		return (ArrayList)sqlSession.selectList("memberMapper.searchIdPhone" , member);
 	}
 
 } // 클래스 종료

@@ -1,5 +1,7 @@
 package trip.two.reap.member.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -171,6 +173,26 @@ public class MemberController {
 			mv.setViewName("insert_3");
 		} else {
 			mv.setViewName("insertFail");
+		}
+		return mv;
+	}
+	
+	// 아이디 : 휴대폰 번호로 찾기
+	@RequestMapping("searchIdPhone.me")
+	@ResponseBody
+	public ModelAndView searchIdPhone(@RequestParam("pName") String name, @RequestParam("pPhone") String phone, ModelAndView mv) {
+		Member member = new Member();
+		member.setMemberName(name);
+		member.setPhone(phone);	
+		
+		ArrayList<Member> list = mService.searchIdPhone(member);
+		
+		if(list != null) {
+			mv.addObject("list", list);
+			mv.setViewName("searchIdPhone");
+		} else {
+			mv.addObject("message", "일치하는 아이디가 없습니다");
+			mv.setViewName("searchIdPhone");
 		}
 		return mv;
 	}

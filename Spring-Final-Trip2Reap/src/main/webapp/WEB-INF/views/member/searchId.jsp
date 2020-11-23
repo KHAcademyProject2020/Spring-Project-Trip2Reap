@@ -35,7 +35,7 @@
                 <li id="pwd" class="tab-link">비밀번호 찾기</li>
             </ul>
         
-        <!-- 아이디 찾기  -->  
+        <!-- 아이디 찾기  -->          
         <div id="searchId">
             <div id="searchId_2"></div>
 	        <input type="radio" id="checkPhone_1" name="idPhoneEmail" checked="checked">
@@ -54,19 +54,22 @@
 	    <!-- 아이디 찾기 : 내용  -->
 	    <div id="space_6"></div>
 	    <div id="phone">
-	        <div id="space_7"></div>
-	        <input type="text" id="nameBox" placeholder="이름" 
+	        <form action="searchIdPhone.me" method="post" id="searchIdPhone">
+	        <div id="space_7"></div>        
+	        <input type="text" id="nameBox" name="pName" placeholder="이름" 
 	        onfocus="this.placeholder=''" onblur="this.placeholder='이름'" autocomplete="off">
 	        <div id="space_8"></div>	
 	        <div id="space_7"></div>	        
-	        <input type="text" id="phoneBox" placeholder="휴대전화 -없이 입력"
+	        <input type="text" id="phoneBox" name="pPhone" placeholder="휴대전화 -없이 입력"
 	        onfocus="this.placeholder=''" onblur="this.placeholder='휴대전화 -없이 입력'" autocomplete="off">
+	        </form>
 	        <div id="space_9"></div>
 	        <div id="space_7"></div>
 	        <button id="idBtn">아이디 확인</button>
 	    </div>
 	    <div id="email">
-	    <div id="space_7"></div>
+	    <form action="searchIdEmail.me" method="post" id="searchIdEmail">
+	    <div id="space_7"></div>    
 	        <input type="text" id="idBox" placeholder="아이디" 
 	        onfocus="this.placeholder=''" onblur="this.placeholder='아이디'" autocomplete="off">
 	        <div id="space_8"></div>	
@@ -77,6 +80,7 @@
 	        <div id="space_7"></div>	        
 	        <input type="text" id="numberBox" placeholder="인증번호 10분이내 입력"
 	        onfocus="this.placeholder=''" onblur="this.placeholder='인증번호 10분이내 입력'" autocomplete="off">	        	        
+	        </form>
 	        <div id="space_9"></div>
 	        <div id="space_7"></div>
 	        <button id="idBtn2">아이디 확인</button>
@@ -142,6 +146,15 @@
          		  });
         	   
            });
+           
+           $('#idBtn').on('click',function(){
+        	   $('#searchIdPhone').submit();
+           });
+           
+           $('#idBtn2').on('click',function(){
+        	   $('#searchIdEmail').submit();
+            });
+           
        </script>
        
         </div>

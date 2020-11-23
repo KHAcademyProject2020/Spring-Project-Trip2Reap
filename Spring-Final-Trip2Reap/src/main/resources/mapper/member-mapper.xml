@@ -51,5 +51,11 @@
         insert into member
         values (#{memberId},#{memberPwd},#{memberName},#{nickName},#{gender},#{phone},#{email},DEFAULT )
     </insert>
+    
+    <select id="searchIdPhone" resultMap="memberResultSet">
+        select member_id
+        from member
+        where member_names=#{memberName} and phone=#{phone}
+    </select>
 
 </mapper>
