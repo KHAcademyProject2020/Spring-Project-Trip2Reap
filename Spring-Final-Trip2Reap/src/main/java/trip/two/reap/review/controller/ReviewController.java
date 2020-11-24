@@ -2,15 +2,20 @@ package trip.two.reap.review.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import trip.two.reap.common.PageInfo;
 import trip.two.reap.common.Pagination;
+import trip.two.reap.member.model.vo.Member;
 import trip.two.reap.review.model.service.ReviewService;
-import trip.two.reap.review.model.vo.PageInfo;
+
 import trip.two.reap.review.model.vo.Review;
 
 @Controller // bean에 추가 (객체로 만듦)
@@ -89,12 +94,47 @@ public class ReviewController {
       return mv;
    }
    
-   @RequestMapping("reviewInsert.bo")
-   public String ReviewInsert() {
-	   return "reviewInsert";
-   }
-  
-
    
-
+   @RequestMapping("reviewInsert.bo")
+	public ModelAndView insertReview(@ModelAttribute Review review) {
+		ModelAndView mv = new ModelAndView();
+		
+		
+		int result = rService.insertReview(review);
+		
+		System.out.println(result);
+		
+		if(result > 0) {
+			mv.addObject("memberId", review.getMemberId());
+			mv.setViewName("reviewInsert");
+		} else {
+			mv.setViewName("insertFail");
+		}
+		return mv;
+	}
+   
+  
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

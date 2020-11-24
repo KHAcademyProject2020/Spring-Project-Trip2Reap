@@ -10,23 +10,17 @@
 <link rel="stylesheet" type="text/css"
 	href="resources/css/review/reviewPhotoList.css" />
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-<style type="text/css">
-
-
-
-
-
-
-</style>
 
 <title>Insert title here</title>
 </head>
 <body>
-	<section>
+	
 		
 			<header>
 				<c:import url="../common/menubar.jsp" />
 			</header>
+			
+			<section>
 			<div id="all_div">
 				<div id="menu_div">
 					<div id="menu_left_div">
@@ -56,10 +50,10 @@
 					<div class="divcontent">
 						<table id="board_table"  onclick="location.href='reviewDetail.bo';">
 							<tr>
-								<td id="img_td"><img src="resources/images/송도.JPG">
+								<td id="img_td"><img id="review_img" src="resources/images/송도.JPG">
 								</td>
 									
-								<td>${b.boNo}
+								<td>
 									<c:if test="${ !empty loginUser }">
 									<c:url var="reviewDetail" value="reviewDetail.bo">
 										<c:param name="boNo" value="${ b.boNo }"/>
@@ -81,7 +75,7 @@
 					</c:forEach>
 				</div>
 				
-			</div>
+			
 		
 		
 		
@@ -163,8 +157,7 @@
 	
 		
 
-
-
+	</div>
 		
 	</section>
 

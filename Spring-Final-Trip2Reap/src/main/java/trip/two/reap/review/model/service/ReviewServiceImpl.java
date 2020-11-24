@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import trip.two.reap.common.PageInfo;
 import trip.two.reap.review.model.dao.ReviewDAO;
-import trip.two.reap.review.model.vo.PageInfo;
+
 import trip.two.reap.review.model.vo.Review;
 
 @Service("rService")
@@ -47,5 +48,10 @@ public class ReviewServiceImpl implements ReviewService{
 	public int updateReview(Review r) {
 	
 		return rDAO.updateReview(sqlSession, r);
+	}
+
+	@Override
+	public int insertReview(Review review) {
+		return rDAO.insertReview(sqlSession,review);
 	}
 }
