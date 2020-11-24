@@ -2,11 +2,16 @@ package trip.two.reap.travel.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import trip.two.reap.common.BoardException;
@@ -48,6 +53,8 @@ public class TravelController {
 		
 		return mv;
 	} // 여행지 목록보기 이동.
+	
+	
 		
 	
 	@RequestMapping("tDetail.tv")
@@ -56,10 +63,25 @@ public class TravelController {
 	} // 여행지 상세보기 이동.
 	
 	
-	@RequestMapping("tInsert.tv")
+	@RequestMapping("tInsertView.tv")
 	public String goTravelInsert() {
-		return "travelInsert";
+		return "travelInsertView";
 	} // 여행지 작성하기 이동.
+	
+	
+	@RequestMapping("tInsert.tv")
+	@ResponseBody
+	public String travelInsert(@ModelAttribute Travel t, 
+			@RequestParam("uploadFile1") MultipartFile uploadFile1,
+			@RequestParam("uploadFile2") MultipartFile uploadFile2,
+			@RequestParam("uploadFile3") MultipartFile uploadFile3,
+			HttpServletRequest request) {
+		System.out.println(t);
+		System.out.println(uploadFile1.getOriginalFilename());
+		System.out.println(uploadFile2.getOriginalFilename());
+		System.out.println(uploadFile3.getOriginalFilename());
+		return "redirect:tList.tv";
+	}
 	
 	
 	@RequestMapping("tUpdate.tv")

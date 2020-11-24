@@ -45,6 +45,7 @@
 		<result column="BO_TAG" property="boTag"/>
 		<result column="BO_DELETE_YN" property="boDeleteYN"/>
 		<result column="REGDATE" property="regDate"/>
+		<result column="TR_NO" property="trNo"/>
 		<result column="TR_ADDR" property="trAddr"/>
 		<result column="TR_THEME" property="trTheme"/>
 	</resultMap>

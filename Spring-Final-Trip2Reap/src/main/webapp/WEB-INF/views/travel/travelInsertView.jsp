@@ -15,6 +15,7 @@
 	</header>
 	<!-- 전체 div -->
 	<div id="all_div">
+	<form action="tInsert.tv" method="post" enctype="Multipart/form-data" id="tInsert"><!-- 첨부파일 등록을 위해 Multipart/form-data encType 지정  -->
 		<!-- 메뉴 이름 div -->
 		<div id="menu_div">
 			<div id="menu_left_div">
@@ -23,11 +24,11 @@
 			</div>
 		</div>
 		
-		
 		<!-- 작성하기 div 시작 -->
 		<div id="insert_div">
 			<div id="info_ment_div">
-						<span class="astro_span">*은 필수 입력 사항입니다.</span>
+		
+				<span class="astro_span">*은 필수 입력 사항입니다.</span>
 			</div>
 			
 			
@@ -35,7 +36,7 @@
 			<div id="titleImgArea" class="pictureArea">
 				<img id="titleImg"/>
 			</div>
-			<div id="contentImgArea1" class="pictureArea">
+			 <div id="contentImgArea1" class="pictureArea">
 				<img id="contentImg1"/>
 			</div>
 			<div id="contentImgArea2" class="pictureArea">
@@ -147,18 +148,19 @@
 		
 		
 		<div id="fileArea">	<!-- 파일 업로드 부분 -->
-	   			<input type="file" id="thumbnailImg1" multiple="multiple" name="thumbnailImg1" onchange="LoadImg(this,1)"/>
-	   			<input type="file" id="thumbnailImg2" multiple="multiple" name="thumbnailImg2" onchange="LoadImg(this,2)"/>
-	   			<input type="file" id="thumbnailImg3" multiple="multiple" name="thumbnailImg3" onchange="LoadImg(this,3)"/>
+	   			<input type="file" id="thumbnailImg1" multiple="multiple" name="uploadFile1" onchange="LoadImg(this,1)"/>
+	   			 <input type="file" id="thumbnailImg2" multiple="multiple" name="uploadFile2" onchange="LoadImg(this,2)"/>
+	   			<input type="file" id="thumbnailImg3" multiple="multiple" name="uploadFile3" onchange="LoadImg(this,3)"/>
 	   	</div>		
 		
 		
 		<!-- 버튼 div -->
 		<div id="button_div">
-			<button id="button_cancel">취소</button>
-			<button id="button_write">등록</button>
+			<button id="button_cancel" onclick="location.href='tList.tv'">취소</button>
+			<button id="button_write" onclick="location.href='tInsert.tv'">등록</button>
+			<!-- <button id="button_write">등록</button> -->
 		</div>
-	
+	</form>
 	</div>
 	
 	<script>
@@ -177,7 +179,7 @@
    			});
    		});
    		
-   		// 이미지 업로드 함수
+   		 // 이미지 업로드 함수
    		function LoadImg(value, num){
    			if(value.files && value.files[0]){
    				var reader = new FileReader();
@@ -197,7 +199,13 @@
    				}
    				reader.readAsDataURL(value.files[0]);
    			}	   			
-   		}
+   		} 
+   		 
+/*    		 $("#button_write").click(function(){
+   			 var img = $("#thumbnailImg1").val() ;
+   			$('#tInsert').submit();
+   		 }); */
+   		 
 	</script>
 </section>		
 </body>
