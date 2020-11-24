@@ -44,7 +44,6 @@
     
        <!-- 아이디가 존재하면  -->
        <c:if test="${ !empty user }">     
-           <form action="changePwd.me" method="post" id="changePwdForm">     
            <div id="searchIdSpace1"></div>
            <div id="searchIdInfo">        
               <div id="searchId2">전국방방곡곡 아이디 : </div>
@@ -62,11 +61,10 @@
            <div id="pwdCheck2">비밀번호가 일치하지 않습니다.</div>
            <div id="searchIdSpace4"></div>
            <div id="searchIdDiv">
-               <button id="searchIdPwd">비밀번호 찾기</button>
+               <button id="searchPwdBtn">비밀번호 변경</button>
                <div id="searchIdSpace5"></div>
                <button id="searchIdMain" onclick="main();">메인으로</button>
-           </div>
-           </form>
+           </div>           
        </c:if>
         </div>  
     </div>
@@ -99,6 +97,7 @@
   		 }   	     	
         });
         
+        
         $("#changePwd2").blur(function(){
         	var pwd = $("#changePwd").val();
         	var pwd2 = $("#changePwd2").val();
@@ -111,35 +110,53 @@
         	}
         });
         
-        $("#searchIdPwd").click(function(){
-        	var pwdResult = "no";
-        	var pwd = $("#changePwd").val();
-        	
-     	     if($("#pwdCheck").css("display") == "none"){
-     	    	pwdResult = "ok";
-     	     } else if($("#pwdCheck").css("display") == "inline-block") {
-     	    	pwdResult = "no";
-     	     }
-        	
-     	    var pwdResult2 = "no";
-        	var pwd2 = $("#changePwd2").val();
-        	
-     	     if($("#pwdCheck2").css("display") == "none"){
-     	    	pwdResult2 = "ok";
-     	     } else if($("#pwdCheck2").css("display") == "inline-block") {
-     	    	pwdResult2 = "no";
-     	     }
-     	     
-     	     if(pwd == "" || pwdResult == "no"){
-     	    	 swal("비밀번호를 확인해주세요🙋");
-     	    	 $("#changePwd").focus();
-     	     } else if(pwd2 == "" || pwdResult2 == "no"){
-     	    	 swal("재확인 비밀번호가 일치하지 않습니다🙅");
-     	    	 $("#changePwd2").focus();
-     	     } else {
-     	    	 console.log("비밀번호 변경 완료");
-     	     }  	
-        });
+        
+        $("#searchPwdBtn").click(function(){
+           var userId = $("#searchId").text();
+           
+           var pwd1Result = "no";
+     	   var userPwd1 = $("#changePwd").val();
+     	   
+     	   if($("#pwdCheck").css("display") == "none"){
+     		   pwd1Result = "ok";
+     	   } else if($("#pwdCheck").css("display") == "inline-block") {
+     		   pwd1Result = "no";
+     	   }
+     	     	   
+     	   var pwd2Result = "no";
+    	   var userPwd2 = $("#changePwd2").val();
+    	   
+    	   if($("#pwdCheck2").css("display") == "none"){
+    		   pwd2Result = "ok";
+    	   } else if($("#pwdCheck").css("display") == "inline-block") {
+    		   pwd2Result = "no";
+    	   }
+
+     	   if(userPwd1 == "" || pwd1Result == "no"){
+     		   swal("비밀번호를 확인해주세요🙋");
+     	   } else if(userPwd2 == "" || pwd2Result == "no"){
+     		   swal("재확인 비밀번호가 일치하지 않습니다🙅");
+     	   } else {
+     		  $.ajax({
+        			 url : 'changePwd.me',
+        			 type : 'post',
+        			 data : {userId:userId,userPwd1:userPwd1},
+        			 success : function(data){
+        				 console.log("data : " + data);
+        				 if(data == "Y"){
+        					swal("비밀번호가 변경되었습니다.");
+        					/* 사용자가 확인을 누르면  */
+        					<%-- location.href="<%= request.getContextPath() %>/home.do"; --%>
+        				 } else {
+        					swal("비밀번호 변경이 실패하였습니다.");
+        		    	 } 
+        			 },
+        			 error : function(data){
+        				 swal("비밀번호 변경이 실패하였습니다.");
+        			 }
+        		  });
+       		   }  	
+     	   });
     
     </script>
 </body>

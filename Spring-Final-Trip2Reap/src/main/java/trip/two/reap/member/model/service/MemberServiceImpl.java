@@ -95,6 +95,11 @@ public class MemberServiceImpl implements MemberService{
 		return mDAO.searchPwdEmail(sqlSession, member);
 	}
 	
+	@Override
+	public int changePwd(Member member) {
+		return mDAO.changePwd(sqlSession, member);
+	}
+	
 
 } // 클래스 종료
 

@@ -49,7 +49,6 @@ public class MemberController {
 			// alert창 띄워주기
 			System.out.println("로그인 실패");
 		}
-		  System.out.println("로그인 한 유저" + m);
 		  return "redirect:/";
 		    // 반환되는 view(home)는 data를 참고하여 결과를 출력한다.
 			// JSP에서는 model에 저장된 data의 key값을 통해 값을 불러올 수 있다.
@@ -236,6 +235,31 @@ public class MemberController {
 		mv.setViewName("searchPwdEmail");
 		
 		return mv;
+	}
+	
+	// 비밀번호 변경하기
+	@RequestMapping("changePwd.me")
+	@ResponseBody
+	public String changePwd(@RequestParam("userId") String id, @RequestParam("userPwd1") String pwd, ModelAndView mv) {
+		
+		Member member = new Member();
+		
+		member.setMemberId(id);		
+		String encPwd = bcryptPasswordEncoder.encode(pwd);
+		member.setMemberPwd(encPwd);
+		
+		// searchPwdEmail : 확인 누르면 메인으로 이동
+		// 타이머 나오게 하기 / 다른 곳 클리시 타이머 제거. 타이머 다시 생성. 
+		// 로그인 실패할 경우 alert창 띄워주기
+		int result = mService.changePwd(member);
+		String changeOk = "";
+		
+		if(result == 1) {
+			changeOk = "Y";
+		} else {
+			changeOk = "N";
+		}		
+		return changeOk;
 	}
 	
 	

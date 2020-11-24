@@ -75,5 +75,11 @@
         from member
         where member_id=#{memberId} and member_email=#{email}
     </select>
+    
+    <update id="updatePwd">
+        update member
+        set member_pwd=#{memberPwd}
+        where member_id=#{memberId}
+    </update>
 
 </mapper>

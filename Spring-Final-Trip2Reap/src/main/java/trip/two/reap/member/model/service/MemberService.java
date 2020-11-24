@@ -23,6 +23,8 @@ public interface MemberService {
 
 	Member searchPwdEmail(Member member);
 
+	int changePwd(Member member);
+
 	
 
 }
