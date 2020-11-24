@@ -67,7 +67,65 @@
 
         <div id="hotel-list-container">
 			
-			 <%------------  호텔샘플  ---------%>
+			<c:forEach var="hotel" items="${hotelList}">
+				<div class="one-hotel-info-container">
+					
+	                <img src="resources/images/sample_hotel.jpg" alt="호텔이미지">
+	
+	                <div class="detail-info-container">
+	                    <div>
+	                        <div class="info-container">
+	                            <!-- 호텔이름 -->
+	                            <div class="hotel-name-container">
+	                            	<input type="hidden" value="${hotel.boNo} }"/>
+	                                <h1>${hotel.boTitle }</h1>
+	                                <div class="hotel-rank-wrapper">
+			                    		<small class="hotel-rank">${hotel.hotelRank }</small>등급 
+			                    	</div>
+	                            </div>
+	
+	                            <!-- 좋아요 버튼 -->
+	                            <div class="i-like-btn-container">
+	                                <i class="fas fa-heart unlike"></i>
+	                            </div>
+	                        </div>
+	                       
+	                    </div>
+	
+	
+	                    <div class="detail-info-wrapper">
+	                        <!-- 호텔주소 -->
+	                        <div class="hotel-addr-wrapper">
+	                            <small>${hotel.hotelAddr}</small>
+	                        </div>
+	
+	
+	                        <div class="hotel-info-wrapper">
+	                            <!-- 별점 -->
+	                            <div class="hotel-review-container">
+	                                <span class="star-point">
+	                                    <i class="fas fa-star"></i>
+	                                </span>
+	                                <span> ${hotel.hotelReviewScore}</span>/5.0
+	                            </div>
+	
+	       
+	                            <!-- 1박 가격 -->
+	                            <div class="hotel-per-day-price-container info-container">
+	                                <p>
+	                                    <small>1박</small>&nbsp;&nbsp;<b>47,216원</b>
+	                                </p>
+	                            </div>
+	                        </div>
+	                    </div>
+	
+	                    <button class="hotel-reserve-btn">예약하기</button>
+	                </div>
+	            </div>
+			</c:forEach>
+			
+			
+			<%------------  호텔샘플  ---------%>
             <!-- 호텔 1개(샘플1) -->
             <div class="one-hotel-info-container">
                 <img src="resources/images/sample_hotel.jpg" alt="호텔이미지">
@@ -368,14 +426,46 @@
                     <li><a href="">&lt;</a></li>
 
                     <!-- 페이지번호 -->
+                    <%--
                     <li><a href="">1</a></li>
                     <li><a href="">2</a></li>
                     <li><a href="">3</a></li>
                     <li><a href="">4</a></li>
                     <li><a href="">5</a></li>
+                    --%>
+                    <c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+                    	<%-- p가 현재페이지와 같다면 --%>
+                    	<c:if test="${p eq pi.currentPage }">
+                    		<li><a style="font-weight:bold;">${p}</a></li>
+                    	</c:if>
+                    	
+                    	<%--p가 현재페이지와 다르다면.. --%>
+                    	<c:if test="${p ne pi.currentPage }">
+                    		<c:url var="pagination" value="hotelList.ho">
+                    			<c:param name="page" value="${p }"/>
+                    		</c:url>
+                    		
+                    		<li>
+                    			<a href="${pagination }">${p }</a>
+                    		</li>
+                    	</c:if>
+                    </c:forEach>
+                    
 
                     <!-- 이후페이지 -->
+                    <%--
                     <li><a href="">&gt;</a></li>
+                     --%>
+                    <%--현재페이지가 maxPage보다 더 크면.. --%>
+                    <c:if test="${pi.currentPage>=pi.maxPage }">
+                    	<li><a>&gt;</a></li>
+                    </c:if>
+                    
+                    <%--현재페이지가 maxPage보다 작으면.. --%>
+                    <c:if test="${pi.currentPage< pi.maxPage }">
+                    </c:if>
+                    
+                    
                     <!-- 맨뒤로 이동 -->
                     <li><a href="">&gt;&gt;</a></li>
                 </ul>
