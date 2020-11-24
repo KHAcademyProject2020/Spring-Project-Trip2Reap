@@ -357,8 +357,8 @@
 										<option value="더블룸">더블룸</option>
 										<option value="트윈룸">트윈룸</option>
 										<option value="스탠다드룸">스탠다드룸</option>
-										<option value="패밀리 트윈룸">패밀리룸</option>
-										<option value="디럭스 트윈룸">디럭스룸</option>
+										<option value="패밀리룸">패밀리룸</option>
+										<option value="디럭스룸">디럭스룸</option>
 										<option value="스위트룸">스위트룸</option>
 										<option value="스튜디오룸">스튜디오룸</option>
 										<option value="트리플룸">트리플룸</option>
@@ -413,8 +413,8 @@
 								<option value="더블룸">더블룸</option>
 								<option value="트윈룸">트윈룸</option>
 								<option value="스탠다드룸">스탠다드룸</option>
-								<option value="패밀리 트윈룸">패밀리룸</option>
-								<option value="디럭스 트윈룸">디럭스룸</option>
+								<option value="패밀리룸">패밀리룸</option>
+								<option value="디럭스룸">디럭스룸</option>
 								<option value="스위트룸">스위트룸</option>
 								<option value="스튜디오룸">스튜디오룸</option>
 								<option value="트리플룸">트리플룸</option>

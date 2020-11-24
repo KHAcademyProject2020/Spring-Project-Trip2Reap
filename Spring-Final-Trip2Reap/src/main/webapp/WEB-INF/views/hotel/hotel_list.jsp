@@ -132,16 +132,7 @@
         	<nav>
                 <ul id="pagination-ul">
 					
-                    <!-- 맨앞으로 -->
-                    <%--
-                    <li><a href="">&lt;&lt;</a></li>
-					 --%>
-					 <%--
-                    <!-- 이전페이지 -->
-                    <li><a href="">&lt;</a></li>
-					 --%>
-					 
-					 
+                    
 					<!-- [1] 이전페이지 -->
 					<%--현재페이지가 맨 앞페이지라면 --%>
 					<c:if test="${pi.currentPage<=1 }">
@@ -168,7 +159,7 @@
                     <c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
                     	<%-- p가 현재페이지와 같다면 --%>
                     	<c:if test="${p eq pi.currentPage }">
-                    		<li><a style="font-weight:bold;  background-color: var(--blue-gray);">${p}</a></li>
+                    		<li  style="background-color: var(--blue-gray);"><a style="font-weight:bold; ">${p}</a></li>
                     	</c:if>
                     	
                     	<%--p가 현재페이지와 다르다면.. --%>
