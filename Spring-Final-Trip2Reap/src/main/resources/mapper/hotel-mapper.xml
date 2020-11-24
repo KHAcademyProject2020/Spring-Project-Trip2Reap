@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper>
-  <cache-ref namespace=""/>
+<mapper namespace="hotelMapper">
+	<select id="getHotelListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM BOARD
+		WHERE BO_DELETE_YN='N' AND CA_CODE=5
+	</select>
+	
+	<select id="selectHotelList" resultMap="hotelResultSet">
+		SELECT *
+		FROM HOTEL_VIEW
+		ORDER BY BO_NO DESC
+	</select>
+	<resultMap type="Hotel" id="hotelResultSet">
+		<id property="boNo" column="BO_NO"/>
+		<result property="caCode" column="CA_CODE"/>
+		<result property="boTitle" column="BO_TITLE"/>
+		<result property="boContent" column="BO_CONTENT"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="boCount" column="BO_COUNT"/>
+		<result property="boTag" column="BO_TAG"/>
+		<result property="boDeleteYN" column="BO_DELETE_YN"/>
+		<result property="regDate" column="REGDATE"/>
+		<result property="hotelAddr" column="HOTEL_ADDRESS"/>
+		<result property="hotelLocalCode" column="HOTEL_LOCAL_CODE"/>
+		<result property="hotelSite" column="HOTEL_SITE"/>
+		<result property="hotelTel" column="HOTEL_TEL"/>
+		<result property="hotelReviewScore" column="HOTEL_REVIEW_SCORE"/>
+		<result property="hotelRank" column="HOTEL_RANK"/>
+		<result property="hotelOpenTime" column="HOTEL_OPEN_TIME"/>
+		<result property="hotelCloseTime" column="HOTEL_CLOSE_TIME"/>
+		
+		<result property="hotelOptions" column="HOTEL_OPTION"/>
+	
+		<result property="hotelCheckInTime" column="CHECK_IN"/>
+		<result property="hotelCheckOutTime" column="CHECK_OUT"/>
+	</resultMap>
+	
 </mapper>
