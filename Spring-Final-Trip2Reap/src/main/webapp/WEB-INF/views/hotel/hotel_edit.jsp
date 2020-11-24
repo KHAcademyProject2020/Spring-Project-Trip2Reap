@@ -44,7 +44,7 @@
 						<p style="color: #913716;">* 는 필수 입력사항 입니다!</p>
 					</div>
 					<div class="hotel-insert-content-container">
-						<input id="hotel_name" name="hotel_name"
+						<input id="hotel_name" name="hotel_name"  autocomplete="off"
 							placeholder="* 호텔이름을 입력해주세요" type="text">
 					</div>
 				</div>
@@ -254,7 +254,7 @@
 					<div id="search_hotel_addr_container">
 						<div class="search_hotel_addr_wrapper">
 							<input id="search_hotel_addr_btn" type="button" value="주소 찾기" onclick="exeDaumPostcode()">
-							<input type="text" readonly placeholder="호텔 도로명 주소를 입력해주세요!"
+							<input type="text" readonly placeholder="호텔 도로명 주소를 입력해주세요!" autocomplete="off"
 							name="hotel_address" id="hotel_address">
 							
 						</div>
@@ -337,7 +337,7 @@
 						<div class="one-room-info-insert">
 							<div class="room_btn_remote_controller_wrapper">
 								<div class="insert_room_name">
-									<input type="text" class="room_name" placeholder="객실 이름 입력"
+									<input type="text" class="room_name" placeholder="객실 이름 입력"  autocomplete="off"
 										name="room_name">
 								</div>
 
@@ -373,7 +373,7 @@
 								
 								<div class="insert_room_price_perday">
 									<span class="room_price_label">1박 이용 가격</span>
-									<input type="text" class="price_perday" placeholder="1박 이용 가격 입력" name="price_per_day">
+									<input type="text" class="price_perday" placeholder="1박 이용 가격 입력"  autocomplete="off" name="price_per_day">
 								</div>
 							</div>
 						</div><%--one-room-info-insert --%>
@@ -389,7 +389,7 @@
 									let $oneHotelInfo=`<div class="one-room-info-insert">
 										<div class="room_btn_remote_controller_wrapper">
 											<div class="insert_room_name">
-												<input type="text" class="room_name" placeholder="객실 이름 입력"
+												<input type="text" class="room_name" placeholder="객실 이름 입력"  autocomplete="off"
 													name="room_name">
 											</div>
 
@@ -425,7 +425,7 @@
 											
 											<div class="insert_room_price_perday">
 												<span class="room_price_label">1박 이용 가격</span>
-												<input type="text" class="price_perday" placeholder="1박 이용 가격 입력" name="price_per_day">
+												<input type="text" class="price_perday"  autocomplete="off" placeholder="1박 이용 가격 입력" name="price_per_day">
 											</div>
 										</div>
 									</div>
@@ -518,7 +518,7 @@
 
 						<!-- 나머지 번호 입력 -->
 						<div class="phone-call-wrapper">
-							<input class="phone-call" type="tel" name="real_call_number"
+							<input class="phone-call" type="tel" name="real_call_number"  autocomplete="off"
 								id="real_call_number">
 						</div>
 						<input type="hidden" name="total_phone_number" id="total_phone_number"></input>
@@ -857,7 +857,7 @@
 				<div class="insert-common-container">
 					<div>
 						<h3>&nbsp;&nbsp;호텔 사이트</h3>
-						<input name="hotel_url" id="hotel_url" type="url"
+						<input name="hotel_url" id="hotel_url" type="url" autocomplete="off"
 							placeholder="https://">
 					</div>
 				</div>
@@ -877,7 +877,7 @@
 					</div>
 
 					<div class="insert-hashtag-wrapper">
-						<input type="text" id="input-hashtag" placeholder="해시태그를 입력해주세요.">
+						<input type="text" id="input-hashtag" placeholder="해시태그를 입력해주세요." autocomplete="off">
 						<input type="button" id="input-hashtag-btn" value="해시태그 등록"/>
 					</div>
 

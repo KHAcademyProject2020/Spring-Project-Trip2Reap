@@ -19,6 +19,8 @@ public interface MemberService {
 
 	Member searchIdPhone(Member member);
 
+	Member searchIdEmail(Member member);
+
 	
 
 }

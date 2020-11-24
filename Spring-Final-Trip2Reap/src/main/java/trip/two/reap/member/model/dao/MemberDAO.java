@@ -48,6 +48,10 @@ public class MemberDAO {
 		return (Member)sqlSession.selectOne("memberMapper.searchIdPhone" , member);
 	}
 
+	public Member searchIdEmail(SqlSessionTemplate sqlSession, Member member) {
+		return (Member)sqlSession.selectOne("memberMapper.searchIdEmail" , member);
+	}
+
 
 
 } // 클래스 종료

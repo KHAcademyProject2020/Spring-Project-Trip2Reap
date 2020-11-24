@@ -63,5 +63,11 @@
         from member
         where member_names=#{memberName} and phone=#{phone}
     </select>
+    
+    <select id="searchIdEmail" resultMap="memberResultSet">
+        select member_id, member_names
+        from member
+        where member_names=#{memberName} and member_email=#{email}
+    </select>
 
 </mapper>

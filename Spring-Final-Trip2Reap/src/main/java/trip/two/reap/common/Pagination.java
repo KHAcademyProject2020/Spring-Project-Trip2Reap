@@ -1,7 +1,5 @@
 package trip.two.reap.common;
 
-import trip.two.reap.review.model.vo.PageInfo;
-
 public class Pagination {
 	public static PageInfo getPageInfo(int currentPage, int listCount) {
 		PageInfo pi = null;
@@ -25,7 +23,5 @@ public class Pagination {
 		
 		return pi;
 	}
-
-
 }
 
