@@ -2,6 +2,7 @@ package trip.two.reap.hotel.controller;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +19,7 @@ import trip.two.reap.hotel.model.vo.Hotel;
 @SessionAttributes("loginUser")
 @Controller
 public class HotelController {
-	//@Autowired
+	@Autowired
 	private HotelService hService;
 	
 	// go to hotel main page
@@ -36,6 +37,7 @@ public class HotelController {
 		if(page !=null) {
 			currentPage=page;
 		}
+		System.out.println("1출력");
 		
 		//호텔리스트를 구한다.
 		int hotelListCount= hService.getHotelListCount();

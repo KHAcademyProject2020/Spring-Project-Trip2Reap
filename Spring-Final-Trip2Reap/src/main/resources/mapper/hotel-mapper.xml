@@ -3,8 +3,7 @@
 <mapper namespace="hotelMapper">
 	<select id="getHotelListCount" resultType="_int">
 		SELECT COUNT(*)
-		FROM BOARD
-		WHERE BO_DELETE_YN='N' AND CA_CODE=5
+		FROM HOTEL_VIEW
 	</select>
 	
 	<select id="selectHotelList" resultMap="hotelResultSet">

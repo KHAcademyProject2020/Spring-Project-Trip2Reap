@@ -25,6 +25,7 @@ public class HotelServiceImpl implements HotelService{
 	// 1. 호텔 리스트 불러오기.
 	@Override
 	public int getHotelListCount() {
+		System.out.println("2출력");
 		return hDAO.getHotelListCount(sqlSession);
 	}
 	
