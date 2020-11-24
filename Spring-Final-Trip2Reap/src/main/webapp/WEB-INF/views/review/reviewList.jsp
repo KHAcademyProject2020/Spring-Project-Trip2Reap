@@ -19,10 +19,10 @@
 		
 		<section>
 		<div id="all_div">
-		<div id="menu_div">
-			<div id="menu_left_div">
-			<i class="fas fa-camera-retro" id="menuIcon3"></i>
-				<span id="menu" >여행 후기</span>
+			<div id="menu_div">
+				<div id="menu_left_div">
+					<i class="fas fa-camera-retro" id="menuIcon3"></i>
+					<span id="menu" >여행 후기</span>
 			</div>
 		
 		</div>

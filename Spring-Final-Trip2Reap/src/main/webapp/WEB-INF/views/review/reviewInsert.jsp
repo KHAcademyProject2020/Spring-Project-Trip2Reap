@@ -4,8 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/travel/travelInsert.css"/>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="resources/css/review/reviewInsert.css"/>
+ <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>  
 <title>Insert title here</title>
 </head>
 <body>
@@ -13,6 +14,7 @@
 	<header>
    	 <c:import url="../common/menubar.jsp" />
 	</header>
+	
 	<!-- 전체 div -->
 	<div id="all_div">
 		<!-- 메뉴 이름 div -->
@@ -23,7 +25,7 @@
 			</div>
 		</div>
 		
-		
+		<form action="reviewInsert.bo" method="post" id="writeReview">
 		<!-- 작성하기 div 시작 -->
 		<div id="insert_div">
 			<div id="info_ment_div">
@@ -57,17 +59,22 @@
 			
 			<!-- 작성하기 table 시작 -->	
 			<table id="travel_table">
-				
+				<tr>
+					<td>
+						<span class="astro_span">*</span><span>작성자</span>
+					<td>
+					<td>
+						<input type="text" name="memberId" readonly value="${ loginUser.memberId }" style="background: lightgray;">
+					</td>	
+				</tr>
 				<tr>
 					<td>
 						<span class="astro_span">*</span><span>카테고리</span>
 					</td>
 					<td>
-						여행지 &nbsp; <input type="radio" name="cate" value="여행지">
-						&nbsp;맛집 &nbsp; <input type="radio" name="cate" value="맛집">
-						
+						여행지 &nbsp; <input type="radio" value="여행지">
+						&nbsp;맛집 &nbsp; <input type="radio"  value="맛집">
 					</td>
-					
 				</tr>
 			
 				<tr>
@@ -75,7 +82,7 @@
 						<span class="astro_span">*</span><span>제목</span>
 					</td>
 					<td colspan="5">
-						<input type="text" id="travel_name"/>
+						<input type="text" name="boTitle" id="travel_name"/>
 					</td>
 				</tr>
 				
@@ -85,8 +92,7 @@
 						<span class="astro_span">*</span><span>해시태그</span>
 					</td>
 					<td colspan="2">
-						<input type="text" id="input_travel_tag"/>
-						<!-- <i class="fas fa-plus-square" id="button_tag_plus"></i> 이거 어떻게 할지 상의 필요-->
+						<input type="text" name="boTag" id="input_travel_tag"/>
 					</td>
 					<td>
 						<div class="hashtag">#산책하기좋은</div>
@@ -102,7 +108,7 @@
 			</table>
 			
 			 <div id="travel_content_div">
-				<textarea rows="20" cols="125" id="travel_content"></textarea>
+				<textarea rows="20" cols="125" name="boContent" id="travel_content"></textarea>
 				  <div id="text_count_div">
 					<span>현재 글자 수 </span>
 					<span id="text_count">8</span>
@@ -118,14 +124,17 @@
 	   			<input type="file" id="thumbnailImg1" multiple="multiple" name="thumbnailImg1" onchange="LoadImg(this,1)"/>
 	   			<input type="file" id="thumbnailImg2" multiple="multiple" name="thumbnailImg2" onchange="LoadImg(this,2)"/>
 	   			<input type="file" id="thumbnailImg3" multiple="multiple" name="thumbnailImg3" onchange="LoadImg(this,3)"/>
-	   	</div>		
+	   	</div>	
+
 		
 		
 		<!-- 버튼 div -->
 		<div id="button_div">
 			<button id="button_cancel">취소</button>
 			<button id="button_write">등록</button>
+			<input type="submit" value="등록"/>
 		</div>
+		</form>
 	
 	</div>
 	

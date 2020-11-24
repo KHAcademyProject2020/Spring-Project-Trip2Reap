@@ -5,8 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet"
-	href=" ${pageContext.request.contextPath}/resources/css/travel/travelInsert.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/review/reviewDetail.css"/>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
