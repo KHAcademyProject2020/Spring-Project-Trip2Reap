@@ -202,6 +202,23 @@ public class MemberController {
 
 		mv.addObject("user", user);
 		mv.setViewName("searchIdPhone");
+		
+		return mv;
+	}
+	
+	// 아이디 : 이메일로 찾기
+	@RequestMapping("searchIdEmail.me")
+	@ResponseBody
+	public ModelAndView searchIdEmail(@RequestParam("eName") String name, @RequestParam("eEmail") String email, ModelAndView mv) {
+		Member member = new Member();
+		member.setMemberName(name);
+		member.setEmail(email);
+		
+		Member user = mService.searchIdEmail(member);
+		
+		mv.addObject("user", user);
+		mv.setViewName("searchIdPhone");
+		
 		return mv;
 	}
 	

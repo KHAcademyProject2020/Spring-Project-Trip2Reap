@@ -70,21 +70,24 @@
 	    <div id="email">
 	    <form action="searchIdEmail.me" method="post" id="searchIdEmail">
 	    <div id="space_7"></div>    
-	        <input type="text" id="idBox" placeholder="아이디를 입력하세요" 
-	        onfocus="this.placeholder=''" onblur="this.placeholder='아이디를 입력하세요'" autocomplete="off">
+	        <input type="text" id="nameBox2" name="eName" placeholder="이름을 입력하세요" 
+	        onfocus="this.placeholder=''" onblur="this.placeholder='이름을 입력하세요'" autocomplete="off">
 	        <div id="space_8"></div>	
 	        <div id="space_7"></div>	
 	        <div id="emailBox">        
-	        <input type="text" id="emailText" placeholder="이메일 주소를 입력하세요"
+	        <input type="text" id="emailText" name="eEmail" placeholder="이메일 주소를 입력하세요"
 	        onfocus="this.placeholder=''" onblur="this.placeholder='이메일 주소를 입력하세요'" autocomplete="off">
 	        <div id="sendMessage"><label id="mailLabel">인증메일 전송</label></div>
 	        <div id="sendMessage2"></div>
 	        <div id="certificationOk">인증완료</div>
-	        </div>
-	        <div id="space_8"></div>	
-	        <div id="space_7"></div>	        
+	        </div>	 
+	        <div id="space_8"></div>  
+	        <div id="space_7"></div>    
+	        <div id="emailConfirmBox">   	        	        
 	        <input type="text" id="numberBox" placeholder="인증번호 10분이내 입력"
-	        onfocus="this.placeholder=''" onblur="this.placeholder='인증번호 10분이내 입력'" autocomplete="off">	        	        
+	        onfocus="this.placeholder=''" onblur="this.placeholder='인증번호 10분이내 입력'" autocomplete="off">	        	        	        	        
+	        <div id="confirmMessage"><label id="confirmLabel">인증하기</label></div> 
+	        </div>
 	        </form>
 	        <div id="space_10"></div>
 	        <div id="space_7"></div>
@@ -190,6 +193,7 @@
       		   swal("인증메일이 발송되었습니다!", "입력하신 이메일로 인증메일이 발송되었습니다.\n메일 전송에는 다소 시간이 걸릴 수 있습니다.\n메일함을 확인하여 인증코드를 입력해주세요💌");
       		   
       		   $('#sendMessage').css("display","none");
+      		   $('#emailConfirmBox').css("display","inline-block");
       		   $('#sendMessage2').css("display","inline-block");
       		   $("#emailText").attr("readonly",true);
       		   
@@ -206,7 +210,7 @@
     					 if(msLeft < 1000){
     						 swal("인증번호가 만료되었습니다!", "이메일 인증을 다시 진행해주세요. 감사합니다.");								 
     						 $("" + elementName).remove();
-    						 $('#numberBox').css("display","none");
+    						 $('#emailConfirmBox').css("display","none");
     						 $("#emailText").attr("readonly",false);
     						 $('#sendMessage').css("display","inline-block");
     					 } else {
@@ -225,7 +229,7 @@
     			 countdown("#sendMessage2",10,0);
     			 
       		   // 인증메일 보내기
-      		  /*  $.ajax({
+      		    $.ajax({
       			 url : 'sendMail.me',
       			data : {email:email},
       			 type : 'post',
@@ -236,12 +240,12 @@
       					var randomKey = data;
       					
       					$("#confirmMessage").click(function(){
-      						var cerNum = $("#confirmText").val();
+      						var cerNum = $("#numberBox").val();
       						
       						if(cerNum == randomKey){
       							swal("메일 인증이 완료되었습니다😊");	
       							
-      							$('#confirmDiv').css("display","none");
+      							$('#emailConfirmBox').css("display","none");
       							$("#sendMessage2").remove();
       							$("#certificationOk").css("display","inline-block");
       							$("#emailText").attr("readonly",true);
@@ -255,16 +259,35 @@
       				 console.log("서버 실패");
       				 swal("메일전송에 실패하였습니다😢");	
       			 }
-      		   }); */
+      		   }); 
       		  }   	   	
           	});
            
            
            // 아이디찾기(이메일)
            $('#idBtn2').on('click',function(){
-        	   $('#searchIdEmail').submit();
+        	   var emailResult = "no";
+        	   var email = $("#emailText").val();
+        	   var name = $("#nameBox2").val();
+        	   
+        	   if($("#certificationOk").css("display") == "none"){
+        		   emailResult = "no";
+        	   } else if($("#certificationOk").css("display") == "inline-block") {
+        		   emailResult = "ok";
+        	   }
+        	   
+        	   if(name == ""){
+         		  swal("이름을 입력해주세요.");
+               } else if(name.search(/\s/) != -1){
+              	  swal("이름은 공백없이 입력해주세요.");
+               } else if(emailResult == "no"){
+            	  swal("이메일 인증을 해주세요.");
+               } else {
+            	   $('#searchIdEmail').submit();
+               }
             });
            
+
        </script>
        
         </div>
