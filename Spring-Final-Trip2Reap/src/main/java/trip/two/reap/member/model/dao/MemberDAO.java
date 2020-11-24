@@ -52,6 +52,10 @@ public class MemberDAO {
 		return (Member)sqlSession.selectOne("memberMapper.searchIdEmail" , member);
 	}
 
+	public Member searchPwdEmail(SqlSessionTemplate sqlSession, Member member) {
+		return (Member)sqlSession.selectOne("memberMapper.searchPwdEmail" , member);
+	}
+
 
 
 } // 클래스 종료

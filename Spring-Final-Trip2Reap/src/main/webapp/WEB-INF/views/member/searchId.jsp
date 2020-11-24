@@ -96,18 +96,28 @@
 	    
 	    <!-- 비밀번호 찾기 : 내용  -->
 	    <div id="pwdEmail">
-	    <div id="space_7"></div>
-	        <input type="text" id="idBox2" placeholder="아이디" 
-	        onfocus="this.placeholder=''" onblur="this.placeholder='아이디'" autocomplete="off">
+	    <form action="searchPwdEmail.me" method="post" id="searchPwdEmail">
+	    <div id="space_7"></div>	       
+	        <input type="text" id="idBoxPwd" name="pwdId" placeholder="아이디를 입력하세요" 
+	        onfocus="this.placeholder=''" onblur="this.placeholder='아이디를 입력하세요'" autocomplete="off">
 	        <div id="space_8"></div>	
-	        <div id="space_7"></div>	        
-	        <input type="text" id="emailBox2" placeholder="이메일"
-	        onfocus="this.placeholder=''" onblur="this.placeholder='이메일'" autocomplete="off">
-	        <div id="space_8"></div>	
-	        <div id="space_7"></div>	        
-	        <input type="text" id="numberBox2" placeholder="인증번호 10분이내 입력"
-	        onfocus="this.placeholder=''" onblur="this.placeholder='인증번호 10분이내 입력'" autocomplete="off">	        	        
-	        <div id="space_9"></div>
+	        <div id="space_7"></div>	
+	        <div id="emailBoxPwd">        
+	        <input type="text" id="emailTextPwd" name="pwdEmail" placeholder="이메일 주소를 입력하세요"
+	        onfocus="this.placeholder=''" onblur="this.placeholder='이메일 주소를 입력하세요'" autocomplete="off">
+	        <div id="sendMessagePwd"><label id="mailLabelPwd">인증메일 전송</label></div>
+	        <div id="sendMessagePwd2"></div>
+	        <div id="certificationOkPwd">인증완료</div>
+	        </div>	 
+	        <div id="space_8"></div>  
+	        <div id="space_7"></div>    
+	        <div id="emailConfirmBoxPwd">   	        	        
+	        <input type="text" id="numberBoxPwd" placeholder="인증번호 10분이내 입력"
+	        onfocus="this.placeholder=''" onblur="this.placeholder='인증번호 10분이내 입력'" autocomplete="off">	        	        	        	        
+	        <div id="confirmMessagePwd"><label id="confirmLabelPwd">인증하기</label></div> 
+	        </div>
+	        </form>
+	        <div id="space_10"></div>
 	        <div id="space_7"></div>
 	        <button id="idBtn3">비밀번호 확인</button>
 	    </div>
@@ -124,6 +134,27 @@
           		  $('#phone').show();
   			      $('#email').hide();
   			      $('#pwdEmail').hide();
+  			      
+  			      $('#emailConfirmBox').css("display","none");
+  			      $("#sendMessage2").remove();
+				  $("#sendMessage").css("display","inline-block");
+				  $("#certificationOk").css("display","none");
+				  $("#emailText").attr("readonly",false);
+				  
+				  $('#emailConfirmBoxPwd').css("display","none");
+    			  $("#sendMessagePwd2").remove();
+				  $("#sendMessagePwd").css("display","inline-block");
+				  $("#certificationOkPwd").css("display","none");
+				  $("#emailTextPwd").attr("readonly",false);
+				  
+				  $("#nameBox2").val("");
+				  $("#emailText").val("");
+				  $("#nameBox").val("");
+				  $("#phoneBox").val("");
+				  $("#idBoxPwd").val("");
+				  $("#emailTextPwd").val("");
+				  $("#numberBox").val("");
+				  $("#numberBoxPwd").val("");
         	   });
         	   
         	   $('#pwd').on('click',function(){
@@ -135,6 +166,27 @@
          		  $('#pwdEmail').show();
    			      $('#email').hide();
    			      $('#phone').hide();
+   			      
+   			      $('#emailConfirmBox').css("display","none");
+			      $("#sendMessage2").remove();
+				  $("#sendMessage").css("display","inline-block");
+				  $("#certificationOk").css("display","none");
+				  $("#emailText").attr("readonly",false);
+				  
+   			      $('#emailConfirmBoxPwd').css("display","none");
+ 			      $("#sendMessagePwd2").remove();
+				  $("#sendMessagePwd").css("display","inline-block");
+				  $("#certificationOkPwd").css("display","none");
+				  $("#emailTextPwd").attr("readonly",false);
+			     
+			      $("#nameBox2").val("");
+				  $("#emailText").val("");
+				  $("#nameBox").val("");
+				  $("#phoneBox").val("");
+				  $("#idBoxPwd").val("");
+				  $("#emailTextPwd").val("");
+				  $("#numberBox").val("");
+				  $("#numberBoxPwd").val("");
          	   });
         	   
         	   $('input:radio[name=idPhoneEmail]').click(function(){
@@ -142,14 +194,84 @@
         			  $('#phone').show();
         			  $('#email').hide();
         			  $('#pwdEmail').hide();
+        			  $('#emailConfirmBox').css("display","none");
+        			  $("#sendMessage2").remove();
+					  $("#sendMessage").css("display","inline-block");
+					  
+					  $('#emailConfirmBox').css("display","none");
+	  			      $("#sendMessage2").remove();
+					  $("#sendMessage").css("display","inline-block");
+					  $("#certificationOk").css("display","none");
+					  $("#emailText").attr("readonly",false);
+					  
+					  $('#emailConfirmBoxPwd').css("display","none");
+        			  $("#sendMessagePwd2").remove();
+					  $("#sendMessagePwd").css("display","inline-block");
+					  $("#certificationOkPwd").css("display","none");
+					  $("#emailTextPwd").attr("readonly",false);
+					  
+					  $("#nameBox2").val("");
+					  $("#emailText").val("");
+					  $("#nameBox").val("");
+					  $("#phoneBox").val("");
+					  $("#idBoxPwd").val("");
+					  $("#emailTextPwd").val("");
+					  $("#numberBox").val("");
+					  $("#numberBoxPwd").val("");
         		  } else if($('input:radio[id=checkEmail_1]').is(':checked')) {
         			  $('#email').show();
         			  $('#phone').hide();
         			  $('#pwdEmail').hide();
+        			  
+        			  $('#emailConfirmBox').css("display","none");
+      			      $("#sendMessage2").remove();
+    				  $("#sendMessage").css("display","inline-block");
+    				  $("#certificationOk").css("display","none");
+    				  $("#emailText").attr("readonly",false);
+    				  
+        			  $('#emailConfirmBoxPwd').css("display","none");
+        			  $("#sendMessagePwd2").remove();
+					  $("#sendMessagePwd").css("display","inline-block");
+					  
+					  $('#emailConfirmBoxPwd').css("display","none");
+        			  $("#sendMessagePwd2").remove();
+					  $("#sendMessagePwd").css("display","inline-block");
+					  $("#certificationOkPwd").css("display","none");
+					  $("#emailTextPwd").attr("readonly",false);
+					  
+					  $("#nameBox2").val("");
+					  $("#emailText").val("");
+					  $("#nameBox").val("");
+					  $("#phoneBox").val("");
+					  $("#idBoxPwd").val("");
+					  $("#emailTextPwd").val("");
+					  $("#numberBox").val("");
+					  $("#numberBoxPwd").val("");
         		  } else if($('input:radio[id=checkEmail_3]').is(':checked')){
          			 $('#pwdEmail').show();
        			     $('#email').hide();
        			     $('#phone').hide();
+       			     
+       			     $('#emailConfirmBox').css("display","none");
+  			         $("#sendMessage2").remove();
+				     $("#sendMessage").css("display","inline-block");
+				     $("#certificationOk").css("display","none");
+				     $("#emailText").attr("readonly",false);
+				  
+       			     $('#emailConfirmBoxPwd').css("display","none");
+    			     $("#sendMessagePwd2").remove();
+				     $("#sendMessagePwd").css("display","inline-block");
+				     $("#certificationOkPwd").css("display","none");
+				     $("#emailTextPwd").attr("readonly",false);
+				     
+				     $("#nameBox2").val("");
+					 $("#emailText").val("");
+					 $("#nameBox").val("");
+					 $("#phoneBox").val("");
+					 $("#idBoxPwd").val("");
+					 $("#emailTextPwd").val("");
+					 $("#numberBox").val("");
+					 $("#numberBoxPwd").val("");
          		  }  			  
          		  });
         	   
@@ -284,6 +406,119 @@
             	  swal("이메일 인증을 해주세요.");
                } else {
             	   $('#searchIdEmail').submit();
+               }
+            });
+           
+           
+        // 메일인증
+           $("#sendMessagePwd").click(function(){
+        	   var email = $("#emailTextPwd").val();
+          	   var check = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+          	   var test = check.test(email);
+          	   
+          	 if(email == ""){
+       		     swal("이메일을 입력해주세요.");
+             } else if(email.search(/\s/) != -1){
+            	 swal("이메일은 공백없이 입력해주세요.");
+             } else if(!test){
+            	 swal("이메일의 형식에 맞게 입력해주세요.\n\n ** 예시 : example@naver.com **");
+       	     } else {
+       	       $('#numberBoxPwd').css("display","inline-block");
+       	    	
+      		   swal("인증메일이 발송되었습니다!", "입력하신 이메일로 인증메일이 발송되었습니다.\n메일 전송에는 다소 시간이 걸릴 수 있습니다.\n메일함을 확인하여 인증코드를 입력해주세요💌");
+      		   
+      		   $('#sendMessagePwd').css("display","none");
+      		   $('#emailConfirmBoxPwd').css("display","inline-block");
+      		   $('#sendMessagePwd2').css("display","inline-block");
+      		   $("#emailTextPwd").attr("readonly",true);
+      		   
+    			 // 타이머
+    			 function countdown(elementName, minutes, seconds){
+    				 var elementName, endTime, hours, mins, msLeft, time;
+    				 
+    				 function twoDigits(n) {
+    					 return (n <= 9 ? "0" + n : n);
+    				 }
+    				 
+    				 function updateTimer(){
+    					 msLeft = endTime - (+new Date);
+    					 if(msLeft < 1000){
+    						 swal("인증번호가 만료되었습니다!", "이메일 인증을 다시 진행해주세요. 감사합니다.");								 
+    						 $("" + elementName).remove();
+    						 $('#emailConfirmBoxPwd').css("display","none");
+    						 $("#emailTextPwd").attr("readonly",false);
+    						 $('#sendMessagePwd').css("display","inline-block");
+    					 } else {
+    						 time = new Date(msLeft);
+    						 hours = time.getUTCHours();
+    						 mins = time.getUTCMinutes();
+    						 $(""+elementName).html((hours ? hours + ":" + twoDigits(mins):twoDigits(mins))
+    						   + ":" + twoDigits(time.getUTCSeconds()));
+    						 setTimeout(updateTimer,time.getUTCMilliseconds() + 500);
+    					 }
+    				 }
+    				 endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
+    				 updateTimer();
+    			 }
+    			 $("<div id='sendMessagePwd2'</div>").insertAfter($("#email"));
+    			 countdown("#sendMessagePwd2",10,0);
+    			 
+      		   // 인증메일 보내기
+      		    $.ajax({
+      			 url : 'sendMail.me',
+      			data : {email:email},
+      			 type : 'post',
+      			 success : function(data){
+      				 if(data == "N"){
+      					swal("메일전송에 실패하였습니다😢");				 			 
+      				 } else {					
+      					var randomKey = data;
+      					
+      					$("#confirmMessagePwd").click(function(){
+      						var cerNum = $("#numberBoxPwd").val();
+      						
+      						if(cerNum == randomKey){
+      							swal("메일 인증이 완료되었습니다😊");	
+      							
+      							$('#emailConfirmBoxPwd').css("display","none");
+      							$("#sendMessagePwd2").remove();
+      							$("#certificationOkPwd").css("display","inline-block");
+      							$("#emailTextPwd").attr("readonly",true);
+      						} else {
+      							swal("인증번호가 일치하지 않습니다.\n다시 입력해주세요😢");	
+      						}
+      					});
+      		    	  } 
+      			 },
+      			 error : function(data){
+      				 console.log("서버 실패");
+      				 swal("메일전송에 실패하였습니다😢");	
+      			 }
+      		   }); 
+      		  }   	   	
+          	});
+           
+           
+        // 비밀번호찾기(이메일)
+           $('#idBtn3').on('click',function(){
+        	   var emailResult = "no";
+        	   var email = $("#emailTextPwd").val();
+        	   var id = $("#idBoxPwd").val();
+        	   
+        	   if($("#certificationOkPwd").css("display") == "none"){
+        		   emailResult = "no";
+        	   } else if($("#certificationOkPwd").css("display") == "inline-block") {
+        		   emailResult = "ok";
+        	   }
+        	   
+        	   if(id == ""){
+         		  swal("아이디를 입력해주세요.");
+               } else if(id.search(/\s/) != -1){
+              	  swal("아이디는 공백없이 입력해주세요.");
+               } else if(emailResult == "no"){
+            	  swal("이메일 인증을 해주세요.");
+               } else {
+            	   $('#searchPwdEmail').submit();
                }
             });
            

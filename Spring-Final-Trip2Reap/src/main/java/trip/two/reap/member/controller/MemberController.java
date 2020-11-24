@@ -222,6 +222,22 @@ public class MemberController {
 		return mv;
 	}
 	
+	// 비밀번호 : 이메일로 변경하기
+	@RequestMapping("searchPwdEmail")
+	@ResponseBody
+	public ModelAndView searchPwdEmail(@RequestParam("pwdId") String id, @RequestParam("pwdEmail") String email, ModelAndView mv) {
+		Member member = new Member();
+		member.setMemberId(id);
+		member.setEmail(email);
+		
+		Member user = mService.searchPwdEmail(member);
+		
+		mv.addObject("user", user);
+		mv.setViewName("searchPwdEmail");
+		
+		return mv;
+	}
+	
 	
 
 } // 클래스 종료

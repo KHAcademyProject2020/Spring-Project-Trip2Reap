@@ -21,6 +21,8 @@ public interface MemberService {
 
 	Member searchIdEmail(Member member);
 
+	Member searchPwdEmail(Member member);
+
 	
 
 }
