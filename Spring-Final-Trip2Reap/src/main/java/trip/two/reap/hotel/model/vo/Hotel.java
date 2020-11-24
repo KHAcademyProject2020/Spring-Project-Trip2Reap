@@ -37,7 +37,7 @@ public class Hotel {
 	private int hotelOpenTime; //호텔오픈시각(시: 0시~24시) --필수
 	private int hotelCloseTime; //호텔종료시각(시: 0시~24시)--필수
 	
-	private ArrayList<String> hotelOptions; //호텔 옵션 --선택
+	private String hotelOptions; //호텔 옵션 --선택
 	private int hotelCheckInTime; //호텔 체크인 시각대 (0시~24시) --필수
 	private int hotelCheckOutTime;//호텔 체크아웃 시각대 (0시~24시)--필수
 	
@@ -95,7 +95,7 @@ public class Hotel {
 	public Hotel(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount, String boTag,
 			String boDeleteYN, Date regDate, String hotelAddr, int hotelLocalCode, String hotelSite, String hotelTel,
 			double hotelReviewScore, int hotelRank, int hotelOpenTime, int hotelCloseTime,
-			ArrayList<String> hotelOptions, int hotelCheckInTime, int hotelCheckOutTime) {
+			String hotelOptions, int hotelCheckInTime, int hotelCheckOutTime) {
 		super();
 		this.boNo = boNo;
 		this.caCode = caCode;
@@ -125,7 +125,7 @@ public class Hotel {
 	public Hotel(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount, String boTag,
 			String boDeleteYN, Date regDate, Attachment hotelThumbnailImg, ArrayList<Attachment> hotelDetailViewImgs,
 			String hotelAddr, int hotelLocalCode, String hotelSite, String hotelTel, double hotelReviewScore,
-			int hotelRank, int hotelOpenTime, int hotelCloseTime, ArrayList<String> hotelOptions, int hotelCheckInTime,
+			int hotelRank, int hotelOpenTime, int hotelCloseTime, String hotelOptions, int hotelCheckInTime,
 			int hotelCheckOutTime) {
 		super();
 		this.boNo = boNo;
@@ -323,12 +323,12 @@ public class Hotel {
 	}
 
 
-	public ArrayList<String> getHotelOptions() {
+	public String getHotelOptions() {
 		return hotelOptions;
 	}
 
 
-	public void setHotelOptions(ArrayList<String> hotelOptions) {
+	public void setHotelOptions(String hotelOptions) {
 		this.hotelOptions = hotelOptions;
 	}
 

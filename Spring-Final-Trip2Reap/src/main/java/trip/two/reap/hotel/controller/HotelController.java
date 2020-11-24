@@ -1,23 +1,64 @@
 package trip.two.reap.hotel.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
+import trip.two.reap.common.PageInfo;
+import trip.two.reap.common.Pagination;
+import trip.two.reap.hotel.exception.HotelException;
 import trip.two.reap.hotel.model.service.HotelService;
+import trip.two.reap.hotel.model.vo.Hotel;
+
 
 @SessionAttributes("loginUser")
 @Controller
 public class HotelController {
 	//@Autowired
-	//private HotelService hotelSservice;
+	private HotelService hService;
 	
 	// go to hotel main page
+	/*
 	@RequestMapping("hotelList.ho")
 	public String goHotelListView() {
 		return "hotel_list";
 	}
+	*/
+	
+	@RequestMapping("hotelList.ho")
+	public ModelAndView hotelList(@RequestParam(value="page", required=false) Integer page, ModelAndView mv)throws HotelException{
+		
+		int currentPage =1; //호텔예약페이지에 접속 초기 페이지번호
+		if(page !=null) {
+			currentPage=page;
+		}
+		
+		//호텔리스트를 구한다.
+		int hotelListCount= hService.getHotelListCount();
+		System.out.println(hotelListCount);
+		
+		//페이징
+		PageInfo pi = Pagination.getPageInfo(currentPage, hotelListCount);
+		
+		//페이지에 해당하는 보드값을 구한다.
+		ArrayList<Hotel> hotelList= hService.selectHotelList(pi);
+		
+		if(hotelList!=null) {
+			mv.addObject("hotelList", hotelList);
+			mv.addObject("pi", pi);
+			mv.setViewName("hotel_list");
+		}else {
+			// 호텔데이터가 존재하지 않을때, 에러발생
+			throw new HotelException("호텔페이지 접속에 실패하였습니다.");
+		}
+		
+		return mv;
+	}
+	
 	
 	//go to hotel insert page (only admin)
 	// 호텔 등록페이지뷰로   이동 
