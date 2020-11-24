@@ -438,12 +438,13 @@ button.hotel-reserve-btn{
   border-bottom-right-radius: 5px;
 }
 
+/*
 #pagination-ul li:hover,
 #pagination-ul li:active{
   background-color: var(--blue-gray);
   font-weight: bold;
 }
-
+*/
 
 
 /*pagination end--------  */

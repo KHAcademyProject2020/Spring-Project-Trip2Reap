@@ -37,11 +37,9 @@ public class HotelController {
 		if(page !=null) {
 			currentPage=page;
 		}
-		System.out.println("1출력");
 		
 		//호텔리스트를 구한다.
 		int hotelListCount= hService.getHotelListCount();
-		System.out.println(hotelListCount);
 		
 		//페이징
 		PageInfo pi = Pagination.getPageInfo(currentPage, hotelListCount);

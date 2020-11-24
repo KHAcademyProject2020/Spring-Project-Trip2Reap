@@ -14,8 +14,6 @@ public class HotelDAO {
 
 	public int getHotelListCount(SqlSessionTemplate sqlSession) {
 		//namespace가 hotelMapper인 mapper에서  id가 getHotelListCount 인 쿼리문을 수행한다.
-		System.out.println("출력3");
-		System.out.println("dao : " + sqlSession.selectOne("hotelMapper.getHotelListCount"));
 		return sqlSession.selectOne("hotelMapper.getHotelListCount");
 	}
 
