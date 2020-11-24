@@ -63,7 +63,7 @@
 						<i class="far fa-calendar-alt calendar_icon"></i>
 					</div>
 					<div class="calendar_content_wrapper">
-						<input type="text" class="date" id="checkInDatePicker" placeholder="체크인 날짜" size="20">
+						<input type="text" class="date" id="checkInDatePicker" placeholder="체크인 날짜" size="20" autocomplete="off">
 					</div>
 				</div>
 				
@@ -74,7 +74,7 @@
 						<i class="far fa-calendar-alt calendar_icon"></i>
 					</div>
 					<div class="calendar_content_wrapper">
-						<input type="text" class="date" id="checkOutDatePicker" placeholder="체크아웃 날짜" size="20">
+						<input type="text" class="date" id="checkOutDatePicker" placeholder="체크아웃 날짜" size="20" autocomplete="off">
 					</div>
 				</div><%-- calendar_wrapper --%>
 			</div><%-- calendar_container--%>
@@ -287,7 +287,7 @@
 			<div class="count_reserve_person_container">
 				<%--예약 방 개수 선택 --%>
 				<div class="count_container">
-					<div class="count_label">방 개수</div>
+					<div class="count_label">예약 객실수</div>
 					<div class="count_wrapper">
 						<div class="button_wrapper">
 							<button class="minus_btn" id="room_minus_btn">-</button>
@@ -459,7 +459,7 @@
 				<%--1. 예약호텔 이름  --%>
 				<div class="hotel-reserve-check-common-container">
 					<div class="hotel-check-label-wrapper">예약 호텔 이름</div>
-					<div class="hotel-check-content-wrapper"> 신라호텔 {호텔이름 }</div>
+					<div class="hotel-check-content-wrapper" id="reserve_hotel_name"> 신라호텔 {호텔이름 }</div>
 				</div>
 			
 				<%--2. 예약 객실  이름  / 예약 객실 개수 --%>
@@ -470,19 +470,19 @@
 						<%--방종류 --%>
 						<div class="hotel-sub-check-container">
 							<div class="hotel-sub-check-label-wrapper"> 객실 종류</div>
-							<div class="hotel-sub-check-content-wrapper">{객실 종류 }</div>
+							<div class="hotel-sub-check-content-wrapper" id="reserve_room_kind">{객실 종류 }</div>
 						</div>
 						
 						<%--방이름  --%>
 						<div class="hotel-sub-check-container">
 							<div class="hotel-sub-check-label-wrapper">객실 이름</div>
-							<div class="hotel-sub-check-content-wrapper">{객실 이름}</div>
+							<div class="hotel-sub-check-content-wrapper" id="reserve_room_name">{객실 이름}</div>
 						</div>
 						
 						<%--방개수 --%>
 						<div class="hotel-sub-check-container">
 							<div class="hotel-sub-check-label-wrapper">예약 객실 수 </div>
-							<div class="hotel-sub-check-content-wrapper">{예약 객실 수 }</div>
+							<div class="hotel-sub-check-content-wrapper"><span id="reserve_room_cnt">{예약 객실 수 }</span>개</div>
 						</div>
 					</div>
 				</div>
@@ -494,19 +494,19 @@
 						<%-- 성인  --%>
 						<div class="hotel-sub-check-container">
 							<div class="hotel-sub-check-label-wrapper">성인 </div>
-							<div class="hotel-sub-check-content-wrapper">{성인 인원수 } </div>
+							<div class="hotel-sub-check-content-wrapper"><span id="reserve_adult_cnt">{성인 인원수 }</span>명</div>
 						</div>
 						
 						<%-- 어린이 --%>
 						<div class="hotel-sub-check-container">
 							<div class="hotel-sub-check-label-wrapper">어린이 </div>
-							<div class="hotel-sub-check-content-wrapper">{어린이 인원수 } </div>
+							<div class="hotel-sub-check-content-wrapper"><span id="reserve_child_cnt">{어린이 인원수 }</span>명</div>
 						</div>
 						
 						<%-- 총 인원수  --%>
 						<div class="hotel-sub-check-container">
 							<div class="hotel-sub-check-label-wrapper">총</div>
-							<div class="hotel-sub-check-content-wrapper">{총 인원수 } </div>
+							<div class="hotel-sub-check-content-wrapper"><span id="reserve_total_person_cnt">{총 인원수 }</span>명</div>
 						</div>
 					</div>
 				</div>
@@ -514,23 +514,23 @@
 				
 				<%--4. 예약 날짜   --%>
 				<div class="hotel-reserve-check-common-container">
-					<div class="hotel-check-label-wrapper">예약 인원</div>
+					<div class="hotel-check-label-wrapper">예약 날짜</div>
 					<div class="hotel-check-content-wrapper">
 						<%--체크인 날짜  --%>
 						<div class="hotel-sub-check-container">
 							<div class="hotel-sub-check-label-wrapper">체크인 날짜 </div>
-							<div class="hotel-sub-check-content-wrapper">{체크인 날짜 } </div>
+							<div class="hotel-sub-check-content-wrapper" id="reserve_checkin_date">{체크인 날짜 } </div>
 						</div>
 						
 						<%--체크아웃 날짜  --%>
 						<div class="hotel-sub-check-container">
 							<div class="hotel-sub-check-label-wrapper">체크아웃 날짜 </div>
-							<div class="hotel-sub-check-content-wrapper">{체크아웃 날짜  } </div>
+							<div class="hotel-sub-check-content-wrapper" id="reserve_checkout_date">{체크아웃 날짜  } </div>
 						</div>
 						
 						<%--이용 날짜 (박/ 일)  --%>
 						<div class="hotel-sub-check-container">
-							<span>{박 }</span>박 <span>{일 }</span>일 
+							<span id="reserve_accomodate_day">{박 }</span>박 <span id="reserve_total_day">{일 }</span>일 
 						</div>
 					</div>
 				</div>
@@ -538,12 +538,61 @@
 				<%--5. 총 금액 --%>
 				<div class="hotel-reserve-check-common-container">
 					<div class="hotel-check-label-wrapper">총 금액</div>
-					<div class="hotel-check-content-wrapper"><span>{총금액 }</span> 원 </div>
+					<div class="hotel-check-content-wrapper"><span id="reserve_total_prices">{총금액 }</span> 원 </div>
 				</div>
 			
 			</div><%--hotel-reserve-check-total-container  --%>
 		</div> <%--hotel-reservation-content-container --%>
 	</div>
+	<script>
+	$(function(){
+		//버튼클릭을하면 값이 변하는 부분: 예약객실수/ 성인수/ 어린이수
+		
+			//예약객실수:
+			$('#reserve_room_cnt').text(Number($('#room_count').text()));
+		
+		
+		//예약호텔이름
+		$('#reserve_hotel_name')
+		
+		//객실종류
+		$('#reserve_room_kind')
+		
+		//객실이름
+		$('#reserve_room_name')
+		
+		
+		
+		
+		
+		
+		//예약 성인 인원수
+		$('#reserve_adult_cnt').text(Number($('#adult_count').text()));
+		
+		//예약 어린이 인원수:
+		$('#reserve_child_cnt').text(Number($('#child_count').text()));
+		
+		//총 예약 인원수:
+		$('#reserve_total_person_cnt')
+		
+			
+		//체크인날짜
+		$('#reserve_checkin_date')
+		
+		//체크아웃날짜
+		$('#reserve_checkout_date')
+		
+		//숙박일(박)
+		$('span#reserve_accomodate_day').text();
+		
+		//호텔총 이용일
+		$('span#reserve_total_day').text();
+		
+		//총금액 
+		$('span#reserve_total_prices').text();
+	});
+	
+	</script>
 	
 	
 	<!--6. 결제 수단 선택   -->
