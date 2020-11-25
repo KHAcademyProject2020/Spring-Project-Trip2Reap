@@ -40,8 +40,9 @@
 		
 		<div class="subtitle-container">
 		
-			<!-- 호텔이름  -->
-			<h1 id="hotel-name">신라 호텔 </h1>	
+			<!-- 호텔번호 /호텔이름  -->
+			<input id="hotel-number" type="hidden" value="${hotel.boNo }">
+			<h1 id="hotel-name">${hotel.boTitle} </h1>	
 		</div>
 		
 		<%--(1) hotel-info-container --%>
@@ -53,14 +54,16 @@
 					<img id="thumbnail-img" alt="썸네일 이미지" src="resources/images/sinra.jpeg"/>
 				</div>
 				
-				<div id="hashtag-wrapper">
-					<!--해시태그가 있는 경우에만 보여준다.-->
-					<ul id="hash-tags">
-						<li><i class="fas fa-hashtag"></i><b>일류호텔</b> </li>
-						<li><i class="fas fa-hashtag"></i><b>서울호텔</b> </li>
-						
-					</ul>
-				</div>
+				<!--해시태그가 null이 아닌경우에만 보여준다.-->
+				<c:if test="${!empty hashTagsList}">
+					<div id="hashtag-wrapper">
+						<ul id="hash-tags">
+							<c:forEach var="hashTag" items="${hashTagsList}">
+								<li><i class="fas fa-hashtag"></i><b>${hashTag}</b> </li>
+							</c:forEach>
+						</ul>
+					</div>
+				</c:if>
 			</div>
 			
 			
@@ -72,6 +75,7 @@
 					<ul id="hotel-detail-info-ul">
 						<%--jstl을 사용해서 존재하지 않은 정보는 제외한다. (li단위로 )--%>
 						
+						<%--호텔 도로명 주소 --%>
 						<li>	
 							<span class="info-icon-container">
 								<i class="fas fa-map-marker-alt"></i>
@@ -80,21 +84,25 @@
 							<span>
 								<!--도로명주소   -->
 								<%-- href:https://map.naver.com/v5/search/{호텔이름}  --%>
-								<b> <a target="_blank" href="https://map.naver.com/v5/search/신라호텔">{서울특별시 중구 장충동 동호로 249}</a> </b>	
+								<b> <a target="_blank" href="https://map.naver.com/v5/search/${hotel.hotelAddr }">${hotel.hotelAddr}</a> </b>	
 							</span>
 						</li>
 						
-						<li>
-							<span class="info-icon-container">
-								<i class="fas fa-phone"></i>
-							</span>
-							
-							<span>
-								<!-- 전화번호 -->
-								<b>{02-2233-1111}</b>
-							</span>
-						</li>
+						<%--호텔전화번호  --%>
+						<c:if test="${!empty hotel.hotelTel}">
+							<li>
+								<span class="info-icon-container">
+									<i class="fas fa-phone"></i>
+								</span>
+								
+								<span>
+									<!-- 전화번호 -->
+									<b>${hotel.hotelTel }</b>
+								</span>
+							</li>
+						</c:if>
 						
+						<%--호텔오픈/종료 시각 --%>
 						<li>
 							<span class="info-icon-container">
 								<i class="fas fa-clock"></i>
@@ -102,22 +110,27 @@
 							
 							<span>
 								<!-- 운영시간 : 운영오픈시간 & 운영종료시간  -->
-								<b>{오픈시간 }</b>~<b>{종시간 }</b>
+								<b>${hotel.hotelOpenTime }</b>시&nbsp;~&nbsp;<b>${hotel.hotelCloseTime }</b>시
 							</span> 
 						
 						</li>
 						
-						<li>
-							<span class="info-icon-container">
-								<i class="fas fa-link"></i>
-							</span>
-							
-							<span>
-								<!--링크  -->
-								<b><a target="_blank" href="#">{사이트 링크 주소 }</a></b>
-							</span>
-						</li>
+						<%--호텔사이트 --%>
+						<c:if test="${!empty hotel.hotelSite }">
+							<li>
+								<span class="info-icon-container">
+									<i class="fas fa-link"></i>
+								</span>
+								
+								<span>
+									<!--링크  -->
+									<b><a target="_blank" href="${hotel.hotelSite }">${hotel.boTitle} 홈페이지로 이동</a></b>
+								</span>
+							</li>
+						</c:if>
 						
+						
+						<%--호텔 리뷰평점 --%>
 						<li>
 							<span class="info-icon-container">
 								<i class="far fa-thumbs-up"></i>
@@ -125,18 +138,23 @@
 							<span>
 								<!--리뷰 평점-->
 								<span id="star-score-wrapper">
-									<i class="fas fa-star"></i>
-	                                <i class="fas fa-star"></i>
-	                               	<i class="fas fa-star"></i>
-	                                <i class="far fa-star"></i>
-		                            <i class="far fa-star"></i>
+									<c:forEach var="star" begin="${0}" end="${4}">
+										<c:if test="${star<= hotel.hotelReviewScore-1 }">
+											<i class="fas fa-star"></i>
+										</c:if>
+										<c:if test="${star> hotel.hotelReviewScore-1 }">
+											<i class="far fa-star"></i>
+										</c:if>
+									</c:forEach>
 								</span>
 								
 	                            <!--리뷰 평점(text)-->
-	                        	<span>({3.0})</span>
+	                        	<span>(${hotel.hotelReviewScore})</span>
 							</span>
 						</li>
 						
+						
+						<%--호텔좋아요 개수 --%>
 						<li>
 							<span class="info-icon-container">
 								<i class="fas fa-hand-holding-heart"></i>
@@ -164,8 +182,10 @@
 					#edit-hotel-detail-info-page-btn: 호텔수정뷰  페이지로 이동
 					#remove-hotel-btn: 호텔게시물 삭제  
 					 --%>
-					<button id="edit-hotel-detail-info-page-btn" onclick="location.href='<%=request.getContextPath()%>/hotelEditView.ho'">수정하기</button>
-					<button id="remove-hotel-btn">삭제하기 </button>
+					 <c:if test="${loginUser.memberId=='admin' }">
+						<button id="edit-hotel-detail-info-page-btn" onclick="location.href='<%=request.getContextPath()%>/hotelEditView.ho'">수정하기</button>
+						<button id="remove-hotel-btn">삭제하기 </button>
+					 </c:if>
 				</div>
 			</div>			
 		</div>
@@ -181,9 +201,7 @@
 		<%--(2) --%>
 		<div class="hotel-info-container">
 			<p id="hotel-introduction">
-			이 금연 호텔에는 6 개의 레스토랑 외에 풀서비스 스파 및 실내 수영장도 있습니다. 
-			공용 장소에서의 무료 WiFi, 무료 지역 셔틀 및 무료 쇼핑센터 셔틀도 제공됩니다. 
-			또한, 피트니스 시설, 바/라운지 및 스파 욕조도 이용하실 수 있습니다.
+			${hotel.boContent }
 			</p>
 		</div>
 	</div>
@@ -195,68 +213,40 @@
 		</div>
 		<%--(3) --%>
 		<div class="hotel-info-container">
-		<div class="hotel-image-viewer">
-			<div class="swiper-container gallery-top">
-				<div class="swiper-wrapper">
-					<div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
-		            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
-		            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
-		            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
-		            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
-		            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
-		            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
-		            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
-		            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
-		            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
-				</div>
-				
-				<div class="swiper-button-next swiper-button-white"></div>
-				<div class="swiper-button-prev swiper-button-white"></div>
-			</div> 
+			<div class="hotel-image-viewer">
+				<div class="swiper-container gallery-top">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+					</div>
 					
-			<div class="swiper-container gallery-thumbs">
-				<div class="swiper-wrapper">
-					<div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
-		            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
-		            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
-		            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
-		            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
-		            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
-		            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
-		            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
-		            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
-		            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+					<div class="swiper-button-next swiper-button-white"></div>
+					<div class="swiper-button-prev swiper-button-white"></div>
+				</div> 
+						
+				<div class="swiper-container gallery-thumbs">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+					</div>
 				</div>
-			</div>
-		</div> <%--hotel-image-viewer --%>
-	
-		<%-- 
-		<div class="hotel-image-viewer">
-			<ul id="hotel-detail-view-photos">
-				<li id="first_detail_view_container">
-					<div id="first_detail_view_wrapper" style="background-image:url(resources/images/sinra.jpeg)">
-					</div>
-				</li>
-				
-				<li class="detail_view_under_container">
-					<div class="detail_view_under_wrapper" style="background-image:url(resources/images/trump.jpeg)">
-					</div>
-				</li>
-				
-				<li class="detail_view_under_container">
-					<div class="detail_view_under_wrapper" style="background-image:url(resources/images/sample_hotel.jpg)">
-					</div>
-				</li>
-				
-				<li class="detail_view_under_container" id="more_detail_view">
-					<div class="detail_view_under_wrapper">
-						<!--몇장의 사진이 더 있는지 확인해준다. -->
-						<p id="photo_viewer_modal" class="more_photo_num">+134</p>
-					</div>
-				</li>
-			</ul>
-		</div>
-		 --%>
+			</div> <%--hotel-image-viewer --%>
 		</div> <%-- hotel-info-container --%>
 	</div>
 	
@@ -643,148 +633,193 @@
 		</div><%-- hotel-info-container(4) --%>
 	</div>
 	
-	<!-- 호텔 시설정보  -->
-	<div class="hotel_detail_common_container">
-		<div class="subtitle-container">
-			<h1>호텔 시설정보 </h1>
+	<!-- 호텔 시설정보 : 호텔옵션이 null이 아니라면! -->
+	<c:if test="${!empty hotelOptionsList }">
+		<div class="hotel_detail_common_container">
+			<div class="subtitle-container">
+				<h1>호텔 시설정보 </h1>
+			</div>
+			
+			<%--(5) --%>
+			<div class="hotel-info-container">
+				<ul id="hotel-options-ul">
+					<c:forEach var="option" items="${hotelOptionsList }">
+						<c:if test="${option eq  '와이파이'}">
+							<li>
+								<span>
+									<i class="hotel-option-icon  fas fa-wifi"></i>
+								</span>
+								<span><b>와이파이</b></span>
+							 </li>
+						 </c:if>
+						 
+						<c:if test="${option eq '조식' }">
+							<li>
+								<span>
+									<embed class="hotel-option-icon" src="resources/svgs/breakfast.svg" type="image/svg+xml">
+								</span>
+								<span><b>조식</b></span> 
+							</li>
+						</c:if>
+						
+						<c:if test="${option eq '레스토랑' }">
+							<li>
+								<span>
+									<embed class="hotel-option-icon" src="resources/svgs/restaurant.svg" type="image/svg+xml">
+								</span>
+								<span><b>레스토랑</b></span> 
+							</li>
+						</c:if>
+						
+						
+						<c:if test="${option eq '세탁' }">
+							<li>
+								<span>
+									<embed class="hotel-option-icon" src="resources/svgs/laundry.svg" type="image/svg+xml">
+								</span>
+								<span><b>세탁 </b></span>
+							</li>
+						</c:if>
+						
+						<c:if test="${option eq '24시간 리셉션' }">
+							<li>
+								<span>
+									<embed class="hotel-option-icon" src="resources/svgs/reception.svg" type="image/svg+xml">
+								</span>
+								<span><b>24시간 리셉션 </b></span>
+							</li>
+						</c:if>
+						
+						<c:if test="${option eq '수하물 보관' }">
+							<li>
+								<span>
+									<embed class="hotel-option-icon" src="resources/svgs/luggage.svg" type="image/svg+xml">
+								</span>
+								<span><b>수하물 보관 </b></span>
+							</li>
+						</c:if>
+						
+						<c:if test="${option eq '수영장' }">
+							<li>
+								<span><i class="hotel-option-icon fas fa-swimming-pool"></i></span>
+								<span><b>수영장</b></span> 
+							</li>
+						</c:if>
+						
+						<c:if test="${option eq '피트니스' }">
+							<li>
+								<span><i class="hotel-option-icon  fas fa-dumbbell"></i></span>
+								<span><b>피트니스</b></span> 
+							</li>
+						</c:if>
+						
+						<c:if test="${option eq '스파/사우나' }">
+							<li>
+								<span><i class="hotel-option-icon fas fa-hot-tub"></i></span>
+								<span><b>스파 &amp; 사우나 </b></span>
+							</li>
+						</c:if>
+						
+						<c:if test="${option eq '미용실' }">
+							<li>
+								<span>
+									<embed class="hotel-option-icon" src="resources/svgs/hairdresser.svg" type="image/svg+xml">
+								</span>
+								<span><b>미용실 </b></span> 
+							</li>
+						</c:if>
+						
+						<c:if test="${option eq '카페' }">
+							<li>
+								<span><i class="hotel-option-icon fas fa-coffee"></i></span>
+								<span><b>카페</b></span> 
+							</li>
+						</c:if>
+						
+						<c:if test="${option eq '비즈니스 시설' }">
+							<li>
+								<span>
+									<i class="hotel-option-icon fas fa-user-tie"></i>
+								</span>
+								<span><b>비즈니스 시설</b></span>	
+							</li>
+						</c:if>
+						
+						
+						<c:if test="${option eq '주차' }">
+							<li>
+								<span>
+									<i class="hotel-option-icon fas fa-parking"></i>
+								</span>
+								<span><b>주차</b></span>
+							</li>
+						</c:if>
+						
+						<c:if test="${option eq '공항셔틀' }">
+							<li>
+								<span><i class="hotel-option-icon fas fa-bus-alt"></i></span>
+								<span><b>공항셔틀</b></span>
+							</li>
+						</c:if>
+						
+						<c:if test="${option eq '장애인 편의시설' }">
+							<li>
+								<span>
+									<i class="fas fa-wheelchair hotel-option-icon"></i>
+								</span>
+								<span><b>장애인 편의시설</b></span> 
+							</li>
+						</c:if>
+						
+						<c:if test="${option eq '바/라운지' }">
+							<li>
+								<span>
+									<i class="fas fa-glass-martini-alt hotel-option-icon"></i>
+								</span>
+								<span><b>바 &amp; 라운지</b></span> 
+							</li>
+						</c:if>
+						
+						<c:if test="${option eq '주방' }">
+							<li>
+								<span>
+									<embed class="hotel-option-icon" src="resources/svgs/kitchen.svg" type="image/svg+xml">
+								</span>
+								<span><b>주방</b></span> 
+							</li>
+						</c:if>
+						
+						<c:if test="${option eq '아이돌봄 서비스' }">
+							<li>
+								<span>
+									<embed class="hotel-option-icon" src="resources/svgs/baby1.svg" type="image/svg+xml">
+								</span>
+								<span><b>아이돌봄 서비스 </b></span> 
+							</li>
+						</c:if>
+						
+						<c:if test="${option eq '룸서비스' }">
+							<li>
+								<span>
+									<embed class="hotel-option-icon" src="resources/svgs/roomservice.svg" type="image/svg+xml">
+								</span>
+								<span><b>룸서비스</b></span> 
+							</li>
+						</c:if>
+						
+						<c:if test="${option eq '애완동물 동반' }">
+							<li>
+								<span>
+									<i class="hotel-option-icon fas fa-paw"></i>
+								</span>
+								<span><b>애완동물 동반</b></span> 
+							</li>
+						</c:if>
+					</c:forEach>
+				</ul>
+			</div>	
 		</div>
-		
-		<%--(5) --%>
-		<div class="hotel-info-container">
-			<ul id="hotel-options-ul">
-				<li>
-					<span>
-						<i class="hotel-option-icon  fas fa-wifi"></i>
-					</span>
-					<span><b>와이파이</b></span>
-				 </li>
-				 
-				<li>
-					<span>
-						<embed class="hotel-option-icon" src="resources/svgs/breakfast.svg" type="image/svg+xml">
-					</span>
-					<span><b>조식</b></span> 
-				</li>
-				
-				<li>
-					<span>
-						<embed class="hotel-option-icon" src="resources/svgs/restaurant.svg" type="image/svg+xml">
-					</span>
-					<span><b>레스토랑</b></span> 
-				</li>
-				
-				<li>
-					<span>
-						<embed class="hotel-option-icon" src="resources/svgs/laundry.svg" type="image/svg+xml">
-					</span>
-					<span><b>세탁 </b></span>
-				</li>
-				
-				<li>
-					<span>
-						<embed class="hotel-option-icon" src="resources/svgs/reception.svg" type="image/svg+xml">
-					</span>
-					<span><b>24시간 리셉션 </b></span>
-				</li>
-				
-				<li>
-					<span>
-						<embed class="hotel-option-icon" src="resources/svgs/luggage.svg" type="image/svg+xml">
-					</span>
-					<span><b>수하물 보관 </b></span>
-				</li>
-				
-				<li>
-					<span><i class="hotel-option-icon fas fa-swimming-pool"></i></span>
-					<span><b>수영장</b></span> 
-				</li>
-				
-				<li>
-					<span><i class="hotel-option-icon  fas fa-dumbbell"></i></span>
-					<span><b>피트니스</b></span> 
-				</li>
-				
-				<li>
-					<span><i class="hotel-option-icon fas fa-hot-tub"></i></span>
-					<span><b>스파 &amp; 사우나 </b></span>
-				</li>
-				
-				<li>
-					<span>
-						<embed class="hotel-option-icon" src="resources/svgs/hairdresser.svg" type="image/svg+xml">
-					</span>
-					<span><b>미용실 </b></span> 
-				</li>
-				
-				<li>
-					<span><i class="hotel-option-icon fas fa-coffee"></i></span>
-					<span><b>카페</b></span> 
-				</li>
-				
-				<li>
-					<span>
-						<i class="hotel-option-icon fas fa-user-tie"></i>
-					</span>
-					<span><b>비즈니스 시설</b></span>	
-				</li>
-				
-				<li>
-					<span>
-						<i class="hotel-option-icon fas fa-parking"></i>
-					</span>
-					<span><b>주차</b></span>
-				</li>
-				
-				<li>
-					<span><i class="hotel-option-icon fas fa-bus-alt"></i></span>
-					<span><b>공항셔틀</b></span>
-				</li>
-				
-				<li>
-					<span>
-						<i class="fas fa-wheelchair hotel-option-icon"></i>
-					</span>
-					<span><b>장애인 편의시설</b></span> 
-				</li>
-				
-				<li>
-					<span>
-						<i class="fas fa-glass-martini-alt hotel-option-icon"></i>
-					</span>
-					<span><b>바 &amp; 라운지</b></span> 
-				</li>
-				
-				<li>
-					<span>
-						<embed class="hotel-option-icon" src="resources/svgs/kitchen.svg" type="image/svg+xml">
-					</span>
-					<span><b>주방</b></span> 
-				</li>
-				
-				<li>
-					<span>
-						<embed class="hotel-option-icon" src="resources/svgs/baby1.svg" type="image/svg+xml">
-					</span>
-					<span><b>아이돌봄 서비스 </b></span> 
-				</li>
-				
-				<li>
-					<span>
-						<embed class="hotel-option-icon" src="resources/svgs/roomservice.svg" type="image/svg+xml">
-					</span>
-					<span><b>룸서비스</b></span> 
-				</li>
-				
-				<li>
-					<span>
-						<i class="hotel-option-icon fas fa-paw"></i>
-					</span>
-					<span><b>애완동물 동반</b></span> 
-				</li>
-			</ul>
-		</div>	
-	</div>
-	
+	</c:if>
 	
 	
 	<!--호텔리뷰   -->

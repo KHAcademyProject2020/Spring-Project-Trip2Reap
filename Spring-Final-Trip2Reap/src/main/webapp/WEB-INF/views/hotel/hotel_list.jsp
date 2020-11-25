@@ -30,10 +30,7 @@
    	 	<c:import url="../common/menubar.jsp" />
 	</div>
 	
-    <div id="main-container">
-    
-    	
-    
+    <div id="main-container">    
         <div id="title-container">
             <!-- <img id="hotel-icon" src="resources/images/hotelIcon.png"> -->
             <i class="fas fa-hotel" id="hotel-icon"></i>
@@ -76,7 +73,9 @@
 	                        <div class="info-container">
 	                            <!-- 호텔이름 -->
 	                            <div class="hotel-name-container">
-	                            	<input type="hidden" value="${hotel.boNo} }"/>
+	                            	<%--호텔번호 --%>
+	                            	<input class="hotelNO" type="hidden" value="${hotel.boNo}"/>
+	                            	
 	                                <h1>${hotel.boTitle }</h1>
 	                                <div class="hotel-rank-wrapper">
 			                    		<small class="hotel-rank">${hotel.hotelRank }</small>등급 
@@ -122,10 +121,19 @@
 	                </div>
 	            </div>
 			</c:forEach>
-
         </div>
         <!--호텔리스트 끝  -->
-
+		<script>
+		$(function(){
+			//예약하기 버튼을 누르면=> 디테일뷰로 이동.
+			$('button.hotel-reserve-btn').click(function(){
+				var hId = $(this).closest('.one-hotel-info-container').find('.hotelNO').val();
+				//console.log(bId);
+				//디테일뷰로 들어간다.
+				location.href="hotelDetailView.ho?hId="+hId+ "&page="+${pi.currentPage};
+			});
+		});
+		</script>
 
         <!-- 호텔페이지네이션 시작 -->
         <div id="pagination-container">
@@ -159,7 +167,9 @@
                     <c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
                     	<%-- p가 현재페이지와 같다면 --%>
                     	<c:if test="${p eq pi.currentPage }">
-                    		<li  style="background-color: var(--blue-gray);"><a style="font-weight:bold; ">${p}</a></li>
+                    		<li  style="background-color: var(--blue-gray);">
+                    			<a style="font-weight:bold; ">${p}</a>
+                    		</li>
                     	</c:if>
                     	
                     	<%--p가 현재페이지와 다르다면.. --%>

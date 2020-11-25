@@ -68,14 +68,46 @@ public class HotelController {
 	}
 	
 	
-	
-	
 	// 호텔 디테일뷰 페이지로 이동 (테스트용)
 	@RequestMapping("hotelDetailView.ho")
-	public String goHotelDetailView() {
-		// caution! it's not final controller
-		// it's just for beta test to see view page(hotel_detail.jsp)
-		return "hotel_detail";
+	public ModelAndView goHotelDetailView(@RequestParam("hId") int hId, @RequestParam("page") int page, ModelAndView mv)throws HotelException {
+		//return "hotel_detail";
+		
+		//hId에 해당하는 호텔을 구한다.
+		ArrayList<String>hashTagsList=null;
+		ArrayList<String>hotelOptionsList=null;
+		
+		Hotel hotel=hService.selectOneHotel(hId);
+		
+		if(hotel!=null) {
+			//해시태그 보여주기
+			if(hotel.getBoTag()!=null) {
+				//해시태그가 null이 아니라면
+				hashTagsList=new ArrayList<String>();
+				String [] hashTagSplited= hotel.getBoTag().split(", ");
+				for(String hashTag : hashTagSplited) {
+					hashTagsList.add(hashTag);
+				}
+			}
+			
+			//호텔옵션 보여주기
+			if(hotel.getHotelOptions()!=null) {
+				hotelOptionsList= new ArrayList<String>();
+				String [] hotelOptionSplited= hotel.getHotelOptions().split(", ");
+				for(String option: hotelOptionSplited) {
+					hotelOptionsList.add(option);
+				}
+			}
+			
+			mv.addObject("hotel", hotel)
+			.addObject("page",page)
+			.addObject("hashTagsList", hashTagsList)
+			.addObject("hotelOptionsList", hotelOptionsList)
+			.setViewName("hotel_detail");
+		}else {
+			throw new HotelException("해당 호텔이 존재하지 않습니다!");
+		}
+		return mv;
 	}
 	
 	

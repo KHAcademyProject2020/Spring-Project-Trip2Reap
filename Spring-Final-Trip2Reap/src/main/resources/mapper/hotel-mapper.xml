@@ -36,4 +36,21 @@
 		<result property="hotelCheckOutTime" column="CHECK_OUT"/>
 	</resultMap>
 	
+	
+	<!-- 2020.11.25 - hotel DetailView -->
+	<select id="selectOneHotel" resultMap="hotelResultSet">
+		SELECT *
+		FROM HOTEL_VIEW
+		WHERE BO_NO=#{hId}
+	
+	</select>
+	
+	<update id="addReadCount">
+		UPDATE HOTEL_VIEW
+		SET BO_COUNT=BO_COUNT+1
+		WHERE BO_NO=#{hId}
+	</update>
+	
+	
+	
 </mapper>

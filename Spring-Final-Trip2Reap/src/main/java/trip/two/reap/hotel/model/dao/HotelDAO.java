@@ -23,4 +23,17 @@ public class HotelDAO {
 		return (ArrayList)sqlSession.selectList("hotelMapper.selectHotelList", null, rowBounds);
 	}
 
+	//2020.11.25:디테일뷰 보기.
+	//조회수 증가
+	public int addReadCount(SqlSessionTemplate sqlSession, int hId) {
+		return sqlSession.update("hotelMapper.addReadCount", hId);
+	}
+	
+	//hId에 해당하는 호텔디테일뷰 보기.
+	public Hotel selectOneHotel(SqlSessionTemplate sqlSession, int hId) {
+		
+		return sqlSession.selectOne("hotelMapper.selectOneHotel", hId);
+	}
+	
+
 }

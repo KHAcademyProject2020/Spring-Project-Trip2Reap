@@ -33,6 +33,25 @@ public class HotelServiceImpl implements HotelService{
 		return hDAO.selectHotelList(sqlSession, pi);
 	}
 
+	//2020.11.25
+	@Override
+	public Hotel selectOneHotel(int hId) {
+		Hotel hotel= null;
+		//게시글 조회수 증가 : boNo가 hId인 게시글 카운트 증가
+		int result=hDAO.addReadCount(sqlSession, hId);
+		if(result>0) {
+			//호텔번호가 hId인 호텔에서 등록한 방을 구한다!
+			
+			//게시글(호텔)이 존재
+			hotel=hDAO.selectOneHotel(sqlSession, hId);
+		}
+		return hotel;
+	}
+	
+	
+	
+	
+
 	
 	
 }

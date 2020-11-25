@@ -13,4 +13,9 @@ public interface HotelService {
 	
 	ArrayList<Hotel> selectHotelList(PageInfo pi);
 
+	// 호텔 디테일뷰 불러오기.
+	Hotel selectOneHotel(int hId);
+	
+	
+
 }

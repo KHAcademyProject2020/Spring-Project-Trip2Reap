@@ -52,9 +52,11 @@ button:focus {
 
 /* 버튼 */
 #button-container {
+	position: relative;
   display: flex;
   flex-direction: row;
-/*   justify-content: center; */
+  justify-content: space-around;
+
   box-sizing: content-box;
   padding-top: 30px;
   padding-bottom: 20px;
@@ -87,6 +89,12 @@ ul {
   margin: auto 8px;
 }
 
+#right_btns_container{
+	flex-basis: 20%;
+	display: flex;
+	justify-content: flex-end;
+	text-align: right;
+}
 
 
 
