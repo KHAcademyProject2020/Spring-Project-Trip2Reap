@@ -1,6 +1,8 @@
 package trip.two.reap.hotel.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import trip.two.reap.common.Pagination;
 import trip.two.reap.hotel.exception.HotelException;
 import trip.two.reap.hotel.model.service.HotelService;
 import trip.two.reap.hotel.model.vo.Hotel;
+import trip.two.reap.hotel.model.vo.Room;
 
 
 @SessionAttributes("loginUser")
@@ -77,7 +80,17 @@ public class HotelController {
 		ArrayList<String>hashTagsList=null;
 		ArrayList<String>hotelOptionsList=null;
 		
+		
 		Hotel hotel=hService.selectOneHotel(hId);
+		
+		//hId에 해당하는 방의 개수를 구한다.
+		int roomCnt=hService.getRoomListCount(hId);	//방
+		
+		//hId에 해당하는 방종류리스트를 구한다.
+		ArrayList<String>roomTypeList=null;
+		
+		//방리스트맵 (키값: 방종류: roomType)
+		HashMap<String,ArrayList<Room>> roomMap=null;
 		
 		if(hotel!=null) {
 			//해시태그 보여주기
@@ -99,10 +112,48 @@ public class HotelController {
 				}
 			}
 			
+			//호텔 방종류와 방
+			//방데이터가 존재한다면
+			if(roomCnt >0) {
+				//방종류 리스트를 구한다.
+				roomTypeList=hService.getRoomTypeList(hId); //방종류
+				
+				roomMap=new HashMap<String, ArrayList<Room>>();
+				
+				//방종류이름을 키값으로하고, 해당 방종류의 룸을 구한다.
+				for(String type: roomTypeList) {
+					HashMap<String, Object> roomInfoMap= new HashMap<String, Object>();
+					roomInfoMap.put("hId", hId);//방번호
+					roomInfoMap.put("type", type);//방종류
+					
+					//방종류에 해당하는 방리스트를 구한다.
+					ArrayList<Room> roomList=hService.searchRoomTypeList(hId, roomInfoMap);
+					
+					//방리스트를 맵에넣는다.
+					roomMap.put(type, roomList);
+				}
+				
+				//roomMap 출력확인.
+				/*
+				for(Entry<String, ArrayList<Room>> roomEntry : roomMap.entrySet()) {
+					String roomType=roomEntry.getKey();
+					System.out.println("["+roomType+"]");
+					ArrayList<Room> roomList=roomEntry.getValue();
+					for(Room room: roomList) {
+						System.out.println(room.getRoomNo());
+						System.out.println(room.getRoomName());
+						System.out.println(room.getRoomType());
+						System.out.println();
+					}
+				}
+				*/
+			}
+			
 			mv.addObject("hotel", hotel)
 			.addObject("page",page)
 			.addObject("hashTagsList", hashTagsList)
 			.addObject("hotelOptionsList", hotelOptionsList)
+			.addObject("roomMap", roomMap)
 			.setViewName("hotel_detail");
 		}else {
 			throw new HotelException("해당 호텔이 존재하지 않습니다!");

@@ -1,14 +1,16 @@
 package trip.two.reap.hotel.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import trip.two.reap.common.PageInfo;
 import trip.two.reap.hotel.model.dao.HotelDAO;
 import trip.two.reap.hotel.model.vo.Hotel;
-import trip.two.reap.common.PageInfo;
+import trip.two.reap.hotel.model.vo.Room;
 
 @Service("hService")
 public class HotelServiceImpl implements HotelService{
@@ -47,11 +49,25 @@ public class HotelServiceImpl implements HotelService{
 		}
 		return hotel;
 	}
-	
-	
-	
-	
+
+	//방개수를 구한다.
+	@Override
+	public int getRoomListCount(int hId) {
+		return hDAO.getRoomListCount(sqlSession, hId);
+	}
 
 	
+	//호텔번호가 hId에 해당하는 방들을 구한다.
+	@Override
+	public ArrayList<String> getRoomTypeList(int hId) {
+		return hDAO.getRoomTypeList(sqlSession, hId) ;
+	}
+
+	//호텔번호가 hId이고, 방종류가 type인 방리스트를 구한다.
+	@Override
+	public ArrayList<Room> searchRoomTypeList(int hId, HashMap<String, Object> roomInfoMap) {
+		return hDAO.searchRoomTypeList(sqlSession, roomInfoMap);
+	}
+
 	
 }

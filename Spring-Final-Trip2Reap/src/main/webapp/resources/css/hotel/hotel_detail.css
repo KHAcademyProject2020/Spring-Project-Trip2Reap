@@ -762,6 +762,7 @@ div.detail_view_under_wrapper{
  
 .collapse-open:checked ~ .collapse-btn{
 	background-color: var(--mid-green);
+	color: #eee;
 	opacity: 1;
 } 
  
@@ -804,6 +805,12 @@ div.detail_view_under_wrapper{
 	display: flex;
 	flex-direction: column;
 }
+
+span.room_price_per_day{
+	font-weight: bold;
+	font-color: var(--mid-green);
+}
+
 
 .room-reservation-btn-container{
 	flex-basis: 20%;

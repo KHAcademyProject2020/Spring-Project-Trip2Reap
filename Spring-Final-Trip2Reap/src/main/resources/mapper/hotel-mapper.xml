@@ -52,5 +52,35 @@
 	</update>
 	
 	
+	<!--2020.11.25- hotel DetailView - hId에 등록된 방개수 구하기  -->
+	<select id="getRoomListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM ROOM
+		WHERE BO_NO=#{hId}
+	</select>
+	
+	<!-- 2020.11.25 - hId에 등록된 호텔 방 종류리스트 구하기 -->
+	<select id="getRoomTypeList" resultType="string">
+	SELECT DISTINCT ROOM_TYPE
+	FROM ROOM
+	WHERE BO_NO=#{hId}
+	ORDER BY ROOM_TYPE
+	</select>
+	
+	<!-- 2020.11.25 - hId에 등록된 호텔중 type에해당하는 방리스트를 구하기 -->
+	<select id="searchRoomTypeList" resultMap="roomResultSet">
+	SELECT *
+	FROM ROOM
+	WHERE BO_NO=#{hId} AND ROOM_TYPE=#{type}		
+	</select>
+	
+	<resultMap type="Room" id="roomResultSet">
+		<id property="roomNo" column="ROOM_NO"/>
+		<result property="boNo" column="BO_NO"/>
+		<result property="roomType" column="ROOM_TYPE"/>
+		<result property="roomName" column="ROOM_NAME"/>
+		<result property="pricePerDay" column="PRICE_PER_DAY"/>
+	</resultMap>
+	
 	
 </mapper>
