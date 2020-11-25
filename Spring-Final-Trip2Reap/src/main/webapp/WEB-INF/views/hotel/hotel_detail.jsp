@@ -140,7 +140,7 @@
 								<span id="star-score-wrapper">
 									<c:forEach var="star" begin="${0}" end="${4}">
 										<c:if test="${star<= hotel.hotelReviewScore-1 }">
-											<i class="fas fa-star"></i>
+											<i class="fas fa-star star-point"></i>
 										</c:if>
 										<c:if test="${star> hotel.hotelReviewScore-1 }">
 											<i class="far fa-star"></i>
