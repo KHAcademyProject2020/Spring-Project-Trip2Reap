@@ -121,7 +121,10 @@
 	        <div id="space_7"></div>
 	        <button id="idBtn3">비밀번호 확인</button>
 	    </div>
-	    </div>	          
+	    </div>	  	    
+	    </div>
+	    </section>
+	    <div style="height:500px;"></div>        
        
        <script>
            $(function(){
@@ -522,13 +525,7 @@
                }
             });
            
-       </script>
-       
-        </div>
-    
-    </section>
-    <div style="height:1000px;"></div>
-    
+       </script>                 
     
 </body>
 </html>

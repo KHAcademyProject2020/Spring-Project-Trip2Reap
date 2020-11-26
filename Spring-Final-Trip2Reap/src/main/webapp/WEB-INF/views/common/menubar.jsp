@@ -120,7 +120,7 @@
 	        <div id="login_space3">
 	            <label class="search" onclick="searchId()">아이디 찾기</label>
 	            <label>&nbsp;|&nbsp;</label>
-	            <label class="search" onclick="searchPwd()">비밀번호 찾기</label>
+	            <label class="search" onclick="searchId()">비밀번호 찾기</label>
 	            <label>&nbsp;|&nbsp;</label>
 	            <label class="search" onclick="join();">회원가입</label>
 	        </div>
@@ -163,10 +163,6 @@
     
     function searchId(){
   	   location.href="<%= request.getContextPath() %>/searchId.me";
-     }
-     
-     function searchPwd(){
-  	   location.href="<%= request.getContextPath() %>/searchPwd.me";
      }
      
     $('#loginButton').click(function(){

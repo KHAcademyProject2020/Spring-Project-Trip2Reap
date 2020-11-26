@@ -33,9 +33,7 @@ public class MemberController {
 	// 암호화 후 로그인
 	@RequestMapping("loginCheck.me")
 	@ResponseBody
-	public String login(@RequestParam("userId") String id, @RequestParam("userPwd") String pwd, Model model) {
-		// @ModelAttribute : 넘겨온 값들이 setter를 통해 해당 멤버변수에 바인딩된다.
-		// Model : 전달하고자 하는 데이터가 있을 경우		
+	public String login(@RequestParam("userId") String id, @RequestParam("userPwd") String pwd, Model model) {		
 		Member m = new Member();
 		m.setMemberId(id);
 		m.setMemberPwd(pwd);
@@ -45,11 +43,10 @@ public class MemberController {
 		// System.out.println("암호화 된 비밀번호 : " + pwd);
 		
 		boolean isPwdCorrect= bcryptPasswordEncoder.matches(m.getMemberPwd(),  loginUser.getMemberPwd());
-		// 맞으면 true / 틀리면 false => boolean타입으로 반환
+
 		if(isPwdCorrect) { // true
 			model.addAttribute("loginUser", loginUser);
 			return "Y";
-			// loginUser Data를 model에 저장
 		} else { // false
 			return "N";
 		}		  
@@ -247,7 +244,7 @@ public class MemberController {
 		String encPwd = bcryptPasswordEncoder.encode(pwd);
 		member.setMemberPwd(encPwd);
 		
-		// 타이머 나오게 하기 / 다른 곳 클리시 타이머 제거. 타이머 다시 생성. 
+		// 타이머 나오게 하기 / 다른 곳 클릭시 타이머 제거. 타이머 다시 생성. 
 		int result = mService.changePwd(member);
 		String changeOk = "";
 		
