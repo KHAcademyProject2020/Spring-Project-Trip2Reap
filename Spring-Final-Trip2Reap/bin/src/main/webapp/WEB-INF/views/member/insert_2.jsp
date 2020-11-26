@@ -566,10 +566,28 @@
    		     $("#phone2").css('height','70px');
    		     $('#phoneInfoBox').text("휴대폰 번호의 형식에 맞게 입력해주세요.");
    		     $('#phoneInfoBox').css('display', 'block');
-   	     } else {  
-   		     $("#phone1").css('height','50px');
-  		     $("#phone2").css('height','50px');
-  		     $('#phoneInfoBox').css('display', 'none');
+   	     } else {
+   	    	$.ajax({
+   			 url : 'phone.me',
+   			 type : 'post',
+   			 data : {phone:phone},
+   			 success : function(data){
+   				 console.log("data : " + data);
+   				 if(data == "Y"){
+   					$("#phone1").css('height','50px');
+   	  		        $("#phone2").css('height','50px');
+   	  		        $('#phoneInfoBox').css('display', 'none');
+   				 } else {
+   					$("#phone1").css('height','70px');
+   	   		        $("#phone2").css('height','70px');
+   	   		        $('#phoneInfoBox').text("이미 존재하는 휴대폰 번호입니다.");
+   	   		        $('#phoneInfoBox').css('display', 'block');
+   		    	  } 
+   			 },
+   			 error : function(data){
+   				 console.log("서버 실패");
+   			 }
+   		  });     
    	  }   	  
       });
        

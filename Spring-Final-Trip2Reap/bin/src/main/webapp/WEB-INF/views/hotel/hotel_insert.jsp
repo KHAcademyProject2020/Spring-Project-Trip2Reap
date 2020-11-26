@@ -44,7 +44,7 @@
 						<p style="color: #913716;">* 는 필수 입력사항 입니다!</p>
 					</div>
 					<div class="hotel-insert-content-container">
-						<input id="hotel_name" name="hotel_name"
+						<input id="hotel_name" name="hotel_name"  autocomplete="off"
 							placeholder="* 호텔이름을 입력해주세요" type="text">
 					</div>
 				</div>
@@ -55,12 +55,16 @@
 						<h3>* 호텔 메인 이미지 등록</h3>
 					</div>
 					<div class="hotel-insert-content-container">
-						<input type="file" name="thumbnail_img" id="thumbnail_img" accept="images/*" /> 
+						<input type="file" name="thumbnail_img" id="thumbnail_img" accept="image/*" /> 
 						<label id="thumbnail_img_label" for="thumbnail_img">썸네일 이미지 찾아보기</label> 
 						<span class="img_upload_status_info" id="thumbnail_img_name">썸네일 이미지를 업로드 해주세요!</span>
 					</div>
 					<script>
-						
+						$('#thumbnail_img').on('change',function(){
+							let $thumbnailName= $(this).get(0).files;
+							$('#thumbnail_img_name').text($thumbnailName[0]['name']);
+							$('#thumbnail_img_name').css('color', '#515357');
+						});
 					</script>
 
 				</div>
@@ -71,7 +75,7 @@
 						<h3>&nbsp;&nbsp;호텔 디테일 이미지 등록</h3>
 					</div>
 					<div class="hotel-insert-content-container">
-						<input type="file" name="detail_img" id="detail_img" accept="images/*" multiple /> 
+						<input type="file" name="detail_img" id="detail_img" accept="image/*" multiple /> 
 						<label id="detail_img_label" for="detail_img">디테일 이미지 찾아보기</label> 
 						
 						<span class="img_upload_status_info" id="detail_img_name"> 
@@ -89,10 +93,6 @@
 										</li>
 										
 										<li class="detail-control-btn-li">
-											<input type="button" class="detail-control-btn" id="select-all-off-detail-img-btn" value="모두선택 해제"/>
-										</li>
-										
-										<li class="detail-control-btn-li">
 											<input type="button" class="detail-control-btn" id="remove-select-detail-img-btn" value="선택한 이미지 삭제"/>
 										</li>
 									</ul>
@@ -100,25 +100,148 @@
 							</div> <%--hotel-detail-images-head-container --%>
 							
 							<div id="hotel-detail-images-body-container">
-								<ul class="uploaded-img-names-ul">
-								
-									<li class="upload-img-name-li">
-										<div class="upload-image-checkbox-wrapper">
-											<input id="upload_img_1" class="upload-image-checkbox" type="checkbox" name="select_detail_img"/>
-											<label for="upload_img_1" class="upload-image-label"></label>
-										</div>
-										<div class="upload-image-filename-wrapper">
-											파일이름 
-										</div>
-									</li>
-									
-									
+								<ul class="uploaded-img-names-ul">						
 								</ul>
 							</div> <%--hotel-detail-images-body-container --%>
 						</div> <%--hotel-detail-images-container --%>
 					</div><%-- hotel-insert-content-container --%>
 					
 					<script>
+					$(function(){
+						//디테일이미지 컨테이너
+						let detailImgContainer= $('#hotel-detail-images-container');
+						
+						//전체 업로드된 이미지 리스트 
+						let totalUploadImgs=[];
+						
+						
+						// 이미지 아이디 정리
+						function reOrderingUploadedImgs(){
+							// 업로드한 이미지 정보 갱신하기
+							if(totalUploadImgs.length>0){
+								// 전체 업로드한 이미지 개수가 최소 1개이상이면
+								detailImgContainer.css('display', 'flex');
+								
+								//비우고 다시 넣는다.
+								$('ul.uploaded-img-names-ul').empty();
+								
+								// 방금 등록한 이미지 개수만큼 ul에 넣는다.
+								for(var i=0; i<totalUploadImgs.length; i++){
+									let $uploaded_img_info='<li class="upload-img-name-li"><div class="upload-image-checkbox-wrapper">';
+									$uploaded_img_info+='<input id="upload_img_'+i+'" class="upload-image-checkbox" type="checkbox" name="select_detail_img"/>';
+									$uploaded_img_info+='<label for="upload_img_'+i+'" class="upload-image-label"></label></div>';
+									$uploaded_img_info+='<div class="upload-image-filename-wrapper">'+totalUploadImgs[i]['name']+'</div></li>';
+									$('ul.uploaded-img-names-ul').append($uploaded_img_info);
+								}
+							}else{
+								detailImgContainer.css('display','none');
+							}
+							
+						}
+						
+						
+						// 디테일 이미지 찾아보기 버튼 클릭했을 때 수행하는 함수.
+						$('#detail_img').change(function(){
+			
+							let nowUploadImgs= $(this).get(0).files;  //현재 업로드한 이미지 파일
+							let nowUploadImgCnt=nowUploadImgs.length; //현재 업로드한 이미지 개수
+							
+							//리스트에 등록한 이미지를 넣는다.
+							for(var i=0; i<nowUploadImgCnt; i++){
+								totalUploadImgs.push(nowUploadImgs[i]);
+							}
+							
+							//현재 등록된 이미지개수 글자로 나타내기
+							$('span#uploaded_img_cnt').text(totalUploadImgs.length);
+							reOrderingUploadedImgs();
+						});
+						
+						
+						
+						//모두 선택을 클릭한다.
+						$('#select-all-detail-img-btn').on('click',function(e){
+							let checkBoxes=$('input[name="select_detail_img"].upload-image-checkbox');
+							
+							//모두 체크됨 => isAllSelected=true
+							//일부 체크됨 => isAllSelected=false
+							//모두 체크안됨 => isAllSelected=false
+							let checkedBoxCnt=$('input[name="select_detail_img"].upload-image-checkbox:checked').length;
+							
+							if(checkBoxes.length == checkedBoxCnt){
+								//모두체크됨 => 버튼누른뒤에는 모두 체크해제.
+								checkBoxes.each(function(){
+									this.checked=false;
+								});
+							}else{
+								//모두 체크상태는 아님.
+								checkBoxes.each(function(){
+									if(!this.checked){ //체크상태아닌것들은 체크를 한다.
+										this.checked=true;
+									}
+								});
+							}
+						});
+						
+						
+						//선택된 이미지를 삭제한다.(아직 )
+						$('#remove-select-detail-img-btn').click(function(){
+							//선택된 체크박스들을 구한다.
+							let selectedCheckBoxes= $('input[name="select_detail_img"].upload-image-checkbox:checked');
+
+							//선택된 체크박스가 totalUploadImgs의 몇번째 인덱스에 위치하고있는지를 구한다.
+							
+							if(selectedCheckBoxes.length>0){
+								//삭제 대상이 1개이상이라면 ..
+								
+								//삭제대상 인덱스를 구한다
+								let removeIdxList= [];
+								
+								//total이미지 안에 있는 selectedCheckBoxes를 삭제한다. => splice를 이용하여 삭제한다.
+								selectedCheckBoxes.each(function(e){
+									//삭제대상에 해당하는 인덱스번호를 구한다.
+									
+									//this와 가장 가까운 li.(삭제대상) 을 구한다.
+									$removeTargetLi=$(this).closest('li.upload-img-name-li');
+									$removeTargetLi.remove();
+									
+									//this랑 가장가까운 checkbox 인덱스를 구해야한다. -> 마지막 id번호
+									$removeTargetFile= $(this).closest('.upload-image-checkbox').prop('id');
+									$removeTargetFileSplited= $removeTargetFile.split('_');
+									$removeTargetFileIdx= Number($removeTargetFileSplited[2]);
+									
+									//해당파일 인덱스번호는 removeFileIdxList에 추가한다.
+									removeIdxList.push($removeTargetFileIdx);
+									
+								});
+								
+								// 삭제파일에 해당하는 인덱스번호를 제외한다.
+								let tmp=[];
+								
+								let flag;
+								for(i=0; i<totalUploadImgs.length; i++){
+									flag=false;
+									for(j=0; j<removeIdxList.length; j++){
+										if(i==removeIdxList[j]){
+											flag=true;
+											break;
+										}
+									}
+									if(!flag){
+										tmp.push(totalUploadImgs[i]);
+									}
+								}
+																
+								totalUploadImgs=tmp;
+								
+								
+								//삭제가 끝나면, 업로드된 이미지 개수도 다시 정리한다.
+								$('#uploaded_img_cnt').text(totalUploadImgs.length);
+								
+								//각각 삭제가끝나면 다시 id를정리를 해야함.
+								reOrderingUploadedImgs();
+							}
+						});
+					});
 					
 					</script>
 				</div>
@@ -131,7 +254,7 @@
 					<div id="search_hotel_addr_container">
 						<div class="search_hotel_addr_wrapper">
 							<input id="search_hotel_addr_btn" type="button" value="주소 찾기" onclick="exeDaumPostcode()">
-							<input type="text" readonly placeholder="호텔 도로명 주소를 입력해주세요!"
+							<input type="text" readonly placeholder="호텔 도로명 주소를 입력해주세요!" autocomplete="off"
 							name="hotel_address" id="hotel_address">
 							
 						</div>
@@ -214,15 +337,13 @@
 						<div class="one-room-info-insert">
 							<div class="room_btn_remote_controller_wrapper">
 								<div class="insert_room_name">
-									<input type="text" class="room_name" placeholder="객실 이름 입력"
+									<input type="text" class="room_name" placeholder="객실 이름 입력"  autocomplete="off"
 										name="room_name">
 								</div>
 
 								<div>
 									<ul class="room_btn_remote_controller">
-										<li class="hotel-info-order-up"><i class="fas fa-angle-up"></i></li>
-										<li class="hotel-info-order-down"><i class="fas fa-angle-down"></i></li>
-										<li class="hotel-info-remove"><i class="fas fa-minus"></i></li>
+										<li class="hotel-info-remove"><i class="fas fa-times"></i></li>
 									</ul>
 								</div>
 							</div>
@@ -236,8 +357,8 @@
 										<option value="더블룸">더블룸</option>
 										<option value="트윈룸">트윈룸</option>
 										<option value="스탠다드룸">스탠다드룸</option>
-										<option value="패밀리 트윈룸">패밀리</option>
-										<option value="디럭스 트윈룸">디럭스</option>
+										<option value="패밀리룸">패밀리룸</option>
+										<option value="디럭스룸">디럭스룸</option>
 										<option value="스위트룸">스위트룸</option>
 										<option value="스튜디오룸">스튜디오룸</option>
 										<option value="트리플룸">트리플룸</option>
@@ -249,78 +370,77 @@
 										<option value="이코노미룸">이코노미룸</option>
 									</select>
 								</div>
-
-
-							</div>
-						</div>
-
-						<!-- 호텔객실 정보 입력창 2 (available delete)-->
-						<div class="one-room-info-insert">
-							<div class="room_btn_remote_controller_wrapper">
-								<div class="insert_room_name">
-									<input type="text" class="room_name" placeholder="객실 이름 입력"
-										name="room_name">
-								</div>
-
-								<div>
-									<ul class="room_btn_remote_controller">
-										<li class="hotel-info-order-up"><i class="fas fa-angle-up"></i></li>
-										<li class="hotel-info-order-down"><i class="fas fa-angle-down"></i></li>
-										<li class="hotel-info-remove"><i class="fas fa-minus"></i></li>
-									</ul>
-								</div>
-							</div>
-
-							<div class="insert_hotel_details">
-								<div class="insert_room_kinds">
-									<span class="room_kind_label">등록 객실 종류</span> 
-									<select>
-										<option value="">객실 종류 선택</option>
-										<option value="싱글룸">싱글룸</option>
-										<option value="더블룸">더블룸</option>
-										<option value="트윈룸">트윈룸</option>
-										<option value="스탠다드룸">스탠다드룸</option>
-										<option value="패밀리 트윈룸">패밀리</option>
-										<option value="디럭스 트윈룸">디럭스</option>
-										<option value="스위트룸">스위트룸</option>
-										<option value="스튜디오룸">스튜디오룸</option>
-										<option value="트리플룸">트리플룸</option>
-										<option value="온돌룸">온돌룸</option>
-										<option value="슈페리어룸">슈페리어룸</option>
-										<option value="이그제큐티브룸">이그제큐티브룸</option>
-										<option value="커넥팅룸">커넥팅룸</option>
-										<option value="프리미어룸">프리미어룸</option>
-										<option value="이코노미룸">이코노미룸</option>
-									</select>
+								
+								
+								<div class="insert_room_price_perday">
+									<span class="room_price_label">1박 이용 가격</span>
+									<input type="text" class="price_perday" placeholder="1박 이용가격(숫자)" name="price_per_day"  autocomplete="off">
 								</div>
 							</div>
 						</div>
+
+					
 
 					</div> <%-- id="insert_hotel_info_list" --%>
 					<div class="insert-hotel-btn-container">
 							<i class="fas fa-plus" id="add_room_btn"></i>
-							<script>
-							$(function(){
-								$('#add_room_btn').on('click',function(){
-									let $hotelInfoContainer= $('#insert_hotel_info_list');
-									let $oneHotelInfo='<div class="one-room-info-insert">'
-									$oneHotelInfo+='<div class="room_btn_remote_controller_wrapper">'
-									$oneHotelInfo+='<div class="insert_room_name">'
-									$oneHotelInfo+='<input type="text" class="room_name" placeholder="객실 이름 입력" name="room_name"></div>'
-									$oneHotelInfo+='<div><ul class="room_btn_remote_controller"><li class="hotel-info-order-up"><i class="fas fa-angle-up"></i></li><li class="hotel-info-order-down"><i class="fas fa-angle-down"></i></li><li class="hotel-info-remove"><i class="fas fa-minus"></i></li></ul></div></div>'
-									$oneHotelInfo+='<div class="insert_hotel_details"><div class="insert_room_kinds"><span class="room_kind_label">등록 객실 종류</span> '
-									$oneHotelInfo+='<select><option value="">객실 종류 선택</option><option value="싱글룸">싱글룸</option><option value="더블룸">더블룸</option><option value="트윈룸">트윈룸</option>'
-									$oneHotelInfo+='<option value="스탠다드룸">스탠다드룸</option><option value="패밀리 트윈룸">패밀리</option><option value="디럭스 트윈룸">디럭스</option><option value="스위트룸">스위트룸</option><option value="스튜디오룸">스튜디오룸</option><option value="트리플룸">트리플룸</option>'
-									$oneHotelInfo+='<option value="온돌룸">온돌룸</option><option value="슈페리어룸">슈페리어룸</option><option value="이그제큐티브룸">이그제큐티브룸</option><option value="커넥팅룸">커넥팅룸</option><option value="프리미어룸">프리미어룸</option><option value="이코노미룸">이코노미룸</option></select></div></div></div>';
-									
-									$hotelInfoContainer.append($oneHotelInfo);
-									
-								});
-							});
-							</script>
 					</div>
 					
 					<script>
+					$(function(){
+						$('#add_room_btn').on('click',function(){
+							let $hotelInfoContainer= $('#insert_hotel_info_list');
+							let $oneHotelInfo=`<div class="one-room-info-insert">
+					<div class="room_btn_remote_controller_wrapper">
+						<div class="insert_room_name">
+							<input type="text" class="room_name" placeholder="객실 이름 입력" autocomplete="off"
+								name="room_name">
+						</div>
+
+						<div>
+							<ul class="room_btn_remote_controller">
+								<li class="hotel-info-remove"><i class="fas fa-times"></i></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="insert_hotel_details">
+						<div class="insert_room_kinds">
+							<span class="room_kind_label">등록 객실 종류</span> 
+							<select>
+								<option value="">객실 종류 선택</option>
+								<option value="싱글룸">싱글룸</option>
+								<option value="더블룸">더블룸</option>
+								<option value="트윈룸">트윈룸</option>
+								<option value="스탠다드룸">스탠다드룸</option>
+								<option value="패밀리룸">패밀리룸</option>
+								<option value="디럭스룸">디럭스룸</option>
+								<option value="스위트룸">스위트룸</option>
+								<option value="스튜디오룸">스튜디오룸</option>
+								<option value="트리플룸">트리플룸</option>
+								<option value="온돌룸">온돌룸</option>
+								<option value="슈페리어룸">슈페리어룸</option>
+								<option value="이그제큐티브룸">이그제큐티브룸</option>
+								<option value="커넥팅룸">커넥팅룸</option>
+								<option value="프리미어룸">프리미어룸</option>
+								<option value="이코노미룸">이코노미룸</option>
+							</select>
+						</div>
+						
+						
+						<div class="insert_room_price_perday">
+							<span class="room_price_label">1박 이용 가격</span>
+							<input type="text" class="price_perday" placeholder="1박 이용가격(숫자)" name="price_per_day" autocomplete="off">
+						</div>
+					</div>
+				</div>`;
+								
+							$hotelInfoContainer.append($oneHotelInfo);
+							
+						});
+						
+						
+
 						$(document).on('click', '.hotel-info-remove',function(e){
 							//(-)버튼: 호텔 객실정보 삭제 버튼 
 							// 클릭한 (-) 버튼에 해당하는 호텔객실 정보 1개를 지운다.
@@ -349,6 +469,35 @@
 							  }
 							});
 						});
+						
+						//객실가격입력 자바스크립트
+						/* 
+						$('input.price_perday').on({
+							'keyup': function(){
+								$(this).val($(this).val().replace(/[^0-9]/g,''));
+							},
+							'keydown':function(){
+								$(this).val($(this).val().replace(/[^0-9]/g,''));
+							},
+							'keypress':function(){
+								$(this).val($(this).val().replace(/[^0-9]/g,''));
+							}
+						});
+						 */
+						
+						$(document).on('keypress','input.price_perday',function(e){
+							$(this).val($(this).val().replace(/[^0-9]/g,''));
+						});
+						
+						$(document).on('keyup', 'input.price_perday', function(e){
+							$(this).val($(this).val().replace(/[^0-9]/g,''));
+						});
+						
+						$(document).on('keydown', 'input.price_perday', function(e){
+							$(this).val($(this).val().replace(/[^0-9]/g,''));
+						}); 
+						
+					});
 						
 					</script>
 				</div>
@@ -388,7 +537,7 @@
 
 						<!-- 나머지 번호 입력 -->
 						<div class="phone-call-wrapper">
-							<input class="phone-call" type="tel" name="real_call_number"
+							<input class="phone-call" type="tel" name="real_call_number" autocomplete="off"
 								id="real_call_number">
 						</div>
 						<input type="hidden" name="total_phone_number" id="total_phone_number"></input>
@@ -415,7 +564,6 @@
 							
 							//전체전화번호
 							let totalPhoneNumber='';
-							
 							
 							function numberFormatterFunc(localNumber, realNumber){
 								//console.log('지역번호: '+localNumber);
@@ -627,7 +775,7 @@
 
 								<tr>
 									<td colspan=2>
-										<input id="option9" class="option-checkboxes" type="checkbox" name="hotel_option" value="스파 & 사우나" />
+										<input id="option9" class="option-checkboxes" type="checkbox" name="hotel_option" value="스파/사우나" />
 										<label class="fake-checkbox-label" for="option9">스파 &amp; 사우나</label>
 									</td>
 								</tr>
@@ -685,7 +833,7 @@
 
 								<tr>
 									<td colspan=2>
-										<input id="option16" type="checkbox" class="option-checkboxes" name="hotel_option" value="바 라운지" />
+										<input id="option16" type="checkbox" class="option-checkboxes" name="hotel_option" value="바/라운지" />
 										<label class="fake-checkbox-label" for="option16">바 &amp; 라운지</label>	
 									</td>
 								</tr>
@@ -727,7 +875,7 @@
 				<div class="insert-common-container">
 					<div>
 						<h3>&nbsp;&nbsp;호텔 사이트</h3>
-						<input name="hotel_url" id="hotel_url" type="url"
+						<input name="hotel_url" id="hotel_url" type="url"  autocomplete="off"
 							placeholder="https://">
 					</div>
 				</div>
@@ -747,7 +895,7 @@
 					</div>
 
 					<div class="insert-hashtag-wrapper">
-						<input type="text" id="input-hashtag" placeholder="해시태그를 입력해주세요.">
+						<input type="text" id="input-hashtag" placeholder="해시태그를 입력해주세요." autocomplete="off">
 						<input type="button" id="input-hashtag-btn" value="해시태그 등록"/>
 					</div>
 
