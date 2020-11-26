@@ -143,10 +143,15 @@
         			 data : {userId:userId,userPwd1:userPwd1},
         			 success : function(data){
         				 console.log("data : " + data);
-        				 if(data == "Y"){
+        				 if(data == "Y"){     										
         					swal("비밀번호가 변경되었습니다.");
-        					/* 사용자가 확인을 누르면  */
-        					<%-- location.href="<%= request.getContextPath() %>/home.do"; --%>
+        					$(".swal-button").click(function(){
+        						location.href="<%= request.getContextPath() %>/home.do";
+        					});
+        					
+        					$(".swal-overlay").click(function(){
+        						location.href="<%= request.getContextPath() %>/home.do";
+        					});
         				 } else {
         					swal("비밀번호 변경이 실패하였습니다.");
         		    	 } 

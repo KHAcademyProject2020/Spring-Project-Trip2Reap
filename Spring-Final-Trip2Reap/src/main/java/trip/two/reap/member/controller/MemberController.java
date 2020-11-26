@@ -32,9 +32,13 @@ public class MemberController {
 	
 	// 암호화 후 로그인
 	@RequestMapping("loginCheck.me")
-	  public String login(@ModelAttribute Member m, Model model) {
+	@ResponseBody
+	public String login(@RequestParam("userId") String id, @RequestParam("userPwd") String pwd, Model model) {
 		// @ModelAttribute : 넘겨온 값들이 setter를 통해 해당 멤버변수에 바인딩된다.
-		// Model : 전달하고자 하는 데이터가 있을 경우				
+		// Model : 전달하고자 하는 데이터가 있을 경우		
+		Member m = new Member();
+		m.setMemberId(id);
+		m.setMemberPwd(pwd);
 		
 		Member loginUser = mService.memberLogin(m);
 		// String pwd = bcryptPasswordEncoder.encode(m.getMemberPwd());
@@ -43,17 +47,12 @@ public class MemberController {
 		boolean isPwdCorrect= bcryptPasswordEncoder.matches(m.getMemberPwd(),  loginUser.getMemberPwd());
 		// 맞으면 true / 틀리면 false => boolean타입으로 반환
 		if(isPwdCorrect) { // true
-			model.addAttribute("loginUser", loginUser); 
+			model.addAttribute("loginUser", loginUser);
+			return "Y";
 			// loginUser Data를 model에 저장
 		} else { // false
-			// alert창 띄워주기
-			System.out.println("로그인 실패");
-		}
-		  return "redirect:/";
-		    // 반환되는 view(home)는 data를 참고하여 결과를 출력한다.
-			// JSP에서는 model에 저장된 data의 key값을 통해 값을 불러올 수 있다.
-			// JSP에서는 --> 로그인유저 : ${loginUser.변수이름}
-		  
+			return "N";
+		}		  
 	  } // login() 종료
 
 	
@@ -248,9 +247,7 @@ public class MemberController {
 		String encPwd = bcryptPasswordEncoder.encode(pwd);
 		member.setMemberPwd(encPwd);
 		
-		// searchPwdEmail : 확인 누르면 메인으로 이동
 		// 타이머 나오게 하기 / 다른 곳 클리시 타이머 제거. 타이머 다시 생성. 
-		// 로그인 실패할 경우 alert창 띄워주기
 		int result = mService.changePwd(member);
 		String changeOk = "";
 		

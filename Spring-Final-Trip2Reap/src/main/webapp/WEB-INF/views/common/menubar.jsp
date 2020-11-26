@@ -28,7 +28,7 @@
 	<c:set var="contextPath"
 		value="${ pageContext.servletContext.contextPath }"
 		scope="application" />
-	<header>
+	<header>	
 		<!-- 상단바  -->
 		<div id="rootBar">
 			<c:if test="${ empty sessionScope.loginUser}">
@@ -93,7 +93,6 @@
 		    <div id="login_spaceStart"></div>
 			<p id="loginLabel">LOGIN</p>
 			<div id="login_space4"></div>
-			<form action="loginCheck.me" method="post" id="login-form">
 			<div id="loginDiv">
 			<div id="idPwdDiv">
 			<i class="fas fa-user-circle" id="idIcon"></i>
@@ -116,7 +115,7 @@
 	    
 	    <!-- 버튼  -->
 	    <div id="loginDiv">
-	        <button id="loginButton" onclick="loginBtn()">로그인</button>
+	        <button id="loginButton">로그인</button>
 	        <div id="login_space2"></div>
 	        <div id="login_space3">
 	            <label class="search" onclick="searchId()">아이디 찾기</label>
@@ -126,7 +125,6 @@
 	            <label class="search" onclick="join();">회원가입</label>
 	        </div>
 	    </div>   
-	    </form>
 	    <div>
 	        <div id="otherBtn">
 	            <div id="login_space4"></div>
@@ -171,9 +169,36 @@
   	   location.href="<%= request.getContextPath() %>/searchPwd.me";
      }
      
-     function loginBtn(){
-   	   location.href="<%= request.getContextPath() %>/loginCheck.me";
-      }
+    $('#loginButton').click(function(){
+    	var userId = $('#loginInfo_1').val();
+    	var userPwd = $('#loginInfo_2').val();
+    	
+    	if(userId == ""){
+    		swal("아이디를 입력해주세요🙋");
+  	    } else if(userId.search(/\s/) != -1){
+  		    swal("아이디는 공백없이 입력해주세요🙋");
+  		} else if(userPwd == ""){
+    		swal("비밀번호를 입력해주세요🙋");
+  	    } else if(userPwd.search(/\s/) != -1){
+  		    swal("비밀번호는 공백없이 입력해주세요🙋");
+  		} else {
+  			$.ajax({
+  	   			 url : 'loginCheck.me',
+  	   			 type : 'post',
+  	   			 data : {userId:userId,userPwd:userPwd},
+  	   			 success : function(data){
+  	   				 if(data == "N"){
+  	   				    swal("아이디 또는 비밀번호를 잘못 입력하셨습니다🙋");
+  	   				 } else if(data == "Y") {
+  	   				    location.href="<%= request.getContextPath() %>/home.do";
+  	   				 } 
+  	   			 },
+  	   			 error : function(data){
+  	   				 console.log("서버 실패");
+  	   			 }
+  	   		  });
+  			}
+  		});
     
     $('#menu_travel').click(function(){
     	location.href="<%= request.getContextPath() %>/tList.tv";
@@ -214,11 +239,9 @@
 					var userId = $("input[name='memberId']").val();
 					//7일동안 쿠키 보관
 					setCookie("cookieUserId",userId,7); 
-					console.log("쿠키저장 아이디 : " + userId);
 				} else {
 					deleteCookie("cookieUserId");
 					userId = "";
-					console.log("아이디 : " + userId);
 				}
 			});
 
