@@ -344,8 +344,7 @@ ul.uploaded-img-names-ul{
 #hotel-detail-images-container{
 	margin-top: 30px;
 	position: relative;
-	
-	display: none;
+	display: flex;
 	flex-direction: column;
 }
 
@@ -506,7 +505,7 @@ li.upload-img-name-li{
   flex-direction: row;
   justify-content: flex-end;
   align-items: baseline;
-  padding: 8px 0px;
+  padding: 8px 17px;
   margin:0;
 }
 
@@ -574,16 +573,12 @@ ul.room_btn_remote_controller li{
   height: 17px;
 }
  */
-#add_room_btn{
-	background-color: var(--pink-gray);
-}
-
 #add_room_btn,
 .room_btn_remote_controller .fa-angle-up,
 .room_btn_remote_controller .fa-angle-down,
-.room_btn_remote_controller .fa-times{
-  /* background-color: var(--mid-green); */
-  color: var(--mid-green);
+.room_btn_remote_controller .fa-minus{
+  background-color: var(--mid-green);
+  color: var(--btn-color);
   border-radius : 3px;
   cursor: pointer;
   padding: 1px;
@@ -619,8 +614,8 @@ ul.room_btn_remote_controller li{
 
 .hotel-info-order-up .fa-angle-up:hover,
 .hotel-info-order-down .fa-angle-down:hover,
-.hotel-info-remove .fa-times:hover{
-	/* background-color: var(--bright-green); */
+.hotel-info-remove .fa-minus:hover{
+	background-color: var(--bright-green);
 	color:var(--dark-gray);
 }
 
@@ -636,13 +631,10 @@ input[type="text"].room_name{
   border-radius: 3px;
   border-bottom: var(--blue-gray) 1px solid;
   font-size: 1em;
-  margin-top:1px;
-  margin-bottom: 1px;
 }
 
 
-.room_kind_label,
-.room_price_label{
+.room_kind_label{
   padding-right: 10px;
   padding-left: 10px;
 }
@@ -654,23 +646,6 @@ input[type="text"].room_name{
   color: var(--dark-gray);
   border-radius: 3px;
 }
-
-.room_price_label{
-	margin-right: 5px;
-}
-.insert_room_price_perday{
-	position: relative;
-}
-
-input.price_perday{
-	width: 130px;
-	padding: 11px 9px;
-	border: var(--blue-gray) 1px solid;
-	color: var(--dark-gray);
-	border-radius: 3px;
-	margin-top: 10px;
-}
-
 
 /*디테일 이미지 체크박스 */
 .upload-img-name-li input[type="checkbox"].upload-image-checkbox{

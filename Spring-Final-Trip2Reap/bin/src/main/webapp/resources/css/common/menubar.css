@@ -38,13 +38,13 @@
 	
 	
 	/* 로그인 창 */
-	#loginLabel { font-size: 35px; font-weight: 600; text-align: center; color : rgb(76,76,76); }
+	#loginLabel { font-size: 35px; font-weight: 800; text-align: center; color : rgb(76,76,76); }
 	#loginDiv { text-align: center; }
      #login_space0{ height : 25px; }
      #login_space1{ height : 10px; }
-     .loginInfo{ display : inline-block; width: 230px; height: 35px; font-size: 13px; padding-left: 10px; border: none; font-weight: 500;  }
+     .loginInfo{ display : inline-block; width: 230px; height: 35px; font-size: 13px; padding-left: 10px; border: none;  }
      #idIcon { display : inline-block; font-size: 22px; vertical-align: middle; color : rgb(166,166,166); }
-     #pwdIcon { display : inline-block; font-size: 21px; vertical-align: middle; color : rgb(166,166,166); }
+     #pwdIcon { display : inline-block; font-size: 22px; vertical-align: middle; color : rgb(166,166,166); }
      #idPwdDiv{ display : inline-block; border: 1px solid rgb(166,166,166); width: 295px; text-align: center; }
      .loginInfo, #loginButton, #loginButton2, #loginButton3:focus{ outline: none; }
 	 #login_space2{ height : 15px; }
@@ -53,14 +53,8 @@
 	 
 	 /* 아이디 저장  */
      #idSave_1{ width:300px; display: inline-block; text-align:left; margin-left: 70px; } 
-     label#idSave_3:before { content: "\f058"; font-family: "Font Awesome 5 Free"; color:lightgray; cursor : pointer; 
-                             font-size: 18px; margin-right: 7px; vertical-align : middle; font-weight: 900; }
-     input#idSave_2:checked + label#idSave_3:before 
-     { content:"\f058"; font-family: "Font Awesome 5 Free"; color:pink; font-size: 18px; 
-       margin-right: 7px; vertical-align : middle; cursor : pointer; }
-     input#idSave_2 { display: none; }
-     #idSave_3{ font-size: 12px; vertical-align: middle; margin-left: 4px; }
-     
+     #idSave_2{ width: 20px; vertical-align: middle; }
+     #idSave_3{ font-size: 12px; vertical-align: middle; }
      #idSave_4{ height: 15px; }
      
      /* 버튼 */      

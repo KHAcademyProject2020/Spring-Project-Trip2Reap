@@ -30,7 +30,10 @@
    	 	<c:import url="../common/menubar.jsp" />
 	</div>
 	
-    <div id="main-container">    
+    <div id="main-container">
+    
+    	
+    
         <div id="title-container">
             <!-- <img id="hotel-icon" src="resources/images/hotelIcon.png"> -->
             <i class="fas fa-hotel" id="hotel-icon"></i>
@@ -41,10 +44,11 @@
             <div id="left_btns_container">
                 <ul id="left_btns" class="btn_ul">
                 	<!-- 호텔등록은 관리자 회원만 가능하다! / 관리자인지 확인하는 방법을 모색해보자. -->
-                	
-                    <c:if test="${loginUser.memberId=='admin' }">
+                	<%-- <c:if test="${loginUser }">
                     	<li><button id="insert-hotel" class="btn" onclick="location.href='hotelInsertView.ho'">호텔 등록하기</button></li>
                     </c:if>
+                    --%>
+                    <li><button id="insert-hotel" class="btn" onclick="location.href='hotelInsertView.ho'">호텔 등록하기</button></li>
                     <li><button id="detail-search" class="btn">상세검색</button></li>
                 </ul>
 
@@ -63,154 +67,317 @@
 
         <div id="hotel-list-container">
 			
-			<c:forEach var="hotel" items="${hotelList}">
-				<div class="one-hotel-info-container">
+			 <%------------  호텔샘플  ---------%>
+            <!-- 호텔 1개(샘플1) -->
+            <div class="one-hotel-info-container">
+                <img src="resources/images/sample_hotel.jpg" alt="호텔이미지">
+
+                <div class="detail-info-container">
+                    <div>
+                        <div class="info-container">
+                            <!-- 호텔이름 -->
+                            <div class="hotel-name-container">
+                                <h1>호텔 델루나{호텔이름}</h1>
+                                <div class="hotel-rank-wrapper">
+		                    		<small class="hotel-rank">{호텔 등급}</small>등급 
+		                    	</div>
+                            </div>
+
+                            <!-- 좋아요 버튼 -->
+                            <div class="i-like-btn-container">
+                                <i class="fas fa-heart unlike"></i>
+                            </div>
+                        </div>
+                       
+                    </div>
+
+
+                    <div class="detail-info-wrapper">
+                        <!-- 호텔주소 -->
+                        <div class="hotel-addr-wrapper">
+                            <small>{호텔주소}</small>
+                        </div>
+
+
+                        <div class="hotel-info-wrapper">
+                            <!-- 별점 -->
+                            <div class="hotel-review-container">
+                                <span class="star-point">
+                                    <i class="fas fa-star"></i>
+                                </span>
+                                <span> 2.54 / 5 </span>
+                            </div>
+
+       
+                            <!-- 1박 가격 -->
+                            <div class="hotel-per-day-price-container info-container">
+                                <p>
+                                    <small>1박</small>&nbsp;&nbsp;<b>47,216원</b>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="hotel-reserve-btn">예약하기</button>
+                </div>
+            </div>
+            <!-- 호텔1개(샘플1) 끝-->
+            <%------------  호텔샘플  ---------%>
+
+            <!-- 호텔 1개(샘플2) -->
+            <div class="one-hotel-info-container">
+                <img src="resources/images/trump.jpeg" alt="호텔이미지">
+
+                <div class="detail-info-container">
+                    <div>
+                        <div class="info-container">
+                            <!-- 호텔이름 -->
+                            <div class="hotel-name-container">
+                                <h1>호텔 트럼프</h1>
+                                <div class="hotel-rank-wrapper">
+		                    		<small class="hotel-rank">5</small>등급 
+		                    	</div>
+                            </div>
+
+                            <!-- 좋아요 버튼 -->
+                            <div class="i-like-btn-container">
+                                <i class="fas fa-heart unlike"></i>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+
+                    <div class="detail-info-wrapper">
+                        <!-- 호텔주소 -->
+                        <div class="hotel-addr-wrapper">
+                            <small>미국 라스베가스 trump 거리</small>
+                        </div>
+
+
+                        <div class="hotel-info-wrapper">
+                            <!-- 별점 -->
+                            <div class="hotel-review-container">
+                                <span class="star-point">
+                                    <i class="fas fa-star"></i>
+                                </span>
+                                <span> 3.0 / 5 </span>
+                            </div>
+
+                           
+                            <!-- 1박 가격 -->
+                            <div class="hotel-per-day-price-container info-container">
+                                <p>
+                                    <small>1박</small>&nbsp;&nbsp;<b>47,216원</b>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="hotel-reserve-btn">예약하기</button>
+                </div>
+            </div>
+            <!-- 호텔 1개(샘플2) 끝 -->
+
+
+            <!-- 호텔 1개(샘플3) 시작 -->
+            <div class="one-hotel-info-container">
+                <img src="resources/images/sinra.jpeg" alt="호텔이미지">
+
+                <div class="detail-info-container">
+                    <div>
+                        <div class="info-container">
+                            <!-- 호텔이름 -->
+                            <div class="hotel-name-container">
+                                <h1>신라호텔</h1>
+                                <div class="hotel-rank-wrapper">
+		                    		<small class="hotel-rank">4</small>등급 
+		                    	</div>
+                            </div>
+
+                            <!-- 좋아요 버튼 -->
+                            <div class="i-like-btn-container">
+                                <i class="fas fa-heart unlike"></i>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+
+                    <div class="detail-info-wrapper">
+                        <!-- 호텔주소 -->
+                        <div class="hotel-addr-wrapper">
+                            <small>서울특별시 중구 장충동 동호로249</small>
+                        </div>
+
+
+                        <div class="hotel-info-wrapper">
+                            <!-- 별점 -->
+                            <div class="hotel-review-container">
+                                <span class="star-point">
+                                    <i class="fas fa-star"></i>
+                                </span>
+                                <span> 3.0 / 5 </span>
+                            </div>
+               
+                            <!-- 1박 가격 -->
+                            <div class="hotel-per-day-price-container info-container">
+                                <p>
+                                    <small>1박</small>&nbsp;&nbsp;<b>47,216원</b>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="hotel-reserve-btn">예약하기</button>
+                </div>
+            </div>
+            <!-- 호텔 1개(샘플3) 끝 -->
+
+
+            <!-- 호텔1개 (샘플4) 시작 -->
+            <div class="one-hotel-info-container">
+                <img src="resources/images/sinra.jpeg" alt="호텔이미지">
+
+                <div class="detail-info-container">
+                    <div>
+                        <div class="info-container">
+                            <!-- 호텔이름 -->
+                            <div class="hotel-name-container">
+                                <h1>신라호텔</h1>
+                                <div class="hotel-rank-wrapper">
+		                    		<small class="hotel-rank">5</small>등급 
+		                    	</div>
+                            </div>
+
+                            <!-- 좋아요 버튼 -->
+                            <div class="i-like-btn-container">
+                                <i class="fas fa-heart unlike"></i>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+
+                    <div class="detail-info-wrapper">
+                        <!-- 호텔주소 -->
+                        <div class="hotel-addr-wrapper">
+                            <small>서울특별시 중구 장충동 동호로249</small>
+                        </div>
+
+
+                        <div class="hotel-info-wrapper">
+                            <!-- 별점 -->
+                            <div class="hotel-review-container">
+                                <span class="star-point">
+                                    <i class="fas fa-star"></i>
+                                </span>
+                                <span> 3.0 / 5 </span>
+                            </div>
+
+                            <!-- 1박 가격 -->
+                            <div class="hotel-per-day-price-container info-container">
+                                <p>
+                                    <small>1박</small>&nbsp;&nbsp;<b>47,216원</b>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="hotel-reserve-btn">예약하기</button>
+                </div>
+            </div>
+            <!-- 호텔1개(샘플4) 끝 -->
+
+
+            <!-- 호텔 1개(샘플5) 시작 -->
+            <div class="one-hotel-info-container">
+                <img src="resources/images/sinra.jpeg" alt="호텔이미지">
+
+                <div class="detail-info-container">
+                    <div>
+                        <div class="info-container">
+                            <!-- 호텔이름 -->
+                            <div class="hotel-name-container">
+                                <h1>신라호텔</h1>
+                                <div class="hotel-rank-wrapper">
+		                    		<small class="hotel-rank">4</small>등급 
+		                    	</div>
+                            </div>
+
+                            <!-- 좋아요 버튼 -->
+                            <div class="i-like-btn-container">
+                                <i class="fas fa-heart unlike"></i>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+
+                    <div class="detail-info-wrapper">
+                        <!-- 호텔주소 -->
+                        <div class="hotel-addr-wrapper">
+                            <small>서울특별시 중구 장충동 동호로249</small>
+                        </div>
+
+
+                        <div class="hotel-info-wrapper">
+                            <!-- 별점 -->
+                            <div class="hotel-review-container">
+                                <span class="star-point">
+                                    <i class="fas fa-star"></i>
+                                </span>
+                                <span> 3.0 / 5 </span>
+                            </div>
+                            
+                            <!-- 1박 가격 -->
+                            <div class="hotel-per-day-price-container info-container">
+                                <p>
+                                    <small>1박</small>&nbsp;&nbsp;<b>47,216원</b>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+					<%--
+					[caution - i want you to understand this caution...^^] 
 					
-	                <img src="resources/images/sample_hotel.jpg" alt="호텔이미지">
-	
-	                <div class="detail-info-container">
-	                    <div>
-	                        <div class="info-container">
-	                            <!-- 호텔이름 -->
-	                            <div class="hotel-name-container">
-	                            	<%--호텔번호 --%>
-	                            	<input class="hotelNO" type="hidden" value="${hotel.boNo}"/>
-	                            	
-	                                <h1>${hotel.boTitle }</h1>
-	                                <div class="hotel-rank-wrapper">
-			                    		<small class="hotel-rank">${hotel.hotelRank }</small>등급 
-			                    	</div>
-	                            </div>
-	
-	                            <!-- 좋아요 버튼 -->
-	                            <div class="i-like-btn-container">
-	                                <i class="fas fa-heart unlike"></i>
-	                            </div>
-	                        </div>
-	                       
-	                    </div>
-	
-	
-	                    <div class="detail-info-wrapper">
-	                        <!-- 호텔주소 -->
-	                        <div class="hotel-addr-wrapper">
-	                            <small>${hotel.hotelAddr}</small>
-	                        </div>
-	
-	
-	                        <div class="hotel-info-wrapper">
-	                            <!-- 별점 -->
-	                            <div class="hotel-review-container">
-	                                <span class="star-point">
-	                                    <i class="fas fa-star"></i>
-	                                </span>
-	                                <span> ${hotel.hotelReviewScore}</span>/5.0
-	                            </div>
-	
-	       
-	                            <!-- 1박 가격 -->
-	                            <div class="hotel-per-day-price-container info-container">
-	                                <p>
-	                                    <small>1박</small>&nbsp;&nbsp;<b>47,216원</b>
-	                                </p>
-	                            </div>
-	                        </div>
-	                    </div>
-	
-	                    <button class="hotel-reserve-btn">예약하기</button>
-	                </div>
-	            </div>
-			</c:forEach>
+					hotel_detail 이 만들어졌는지 확인하기 위한 테스트용 버튼이라서 링크를 걸어놨습니다 ^^
+					just test for web view page if smashed the button of reservation 
+					
+					(실제) 해당 호텔에 해당하는 상세페이지 뷰로 이동한다. (호텔번호 컬럼으로 호텔을 구분 )
+					--%>
+                    <button class="hotel-reserve-btn" onclick="location.href='<%= request.getContextPath() %>/hotelDetailView.ho'">예약하기</button>
+                </div>
+            </div>
+            <!-- 호텔1개(샘플5) 끝 -->
+
         </div>
         <!--호텔리스트 끝  -->
-		<script>
-		$(function(){
-			//예약하기 버튼을 누르면=> 디테일뷰로 이동.
-			$('button.hotel-reserve-btn').click(function(){
-				var hId = $(this).closest('.one-hotel-info-container').find('.hotelNO').val();
-				//console.log(bId);
-				//디테일뷰로 들어간다.
-				location.href="hotelDetailView.ho?hId="+hId+ "&page="+${pi.currentPage};
-			});
-		});
-		</script>
+
 
         <!-- 호텔페이지네이션 시작 -->
         <div id="pagination-container">
         	<nav>
                 <ul id="pagination-ul">
-					
-                    
-					<!-- [1] 이전페이지 -->
-					<%--현재페이지가 맨 앞페이지라면 --%>
-					<c:if test="${pi.currentPage<=1 }">
-						<li><a>&lt;&lt;</</a></li>
-						<li><a>&lt;</a>
-					</c:if>
-					
-					<%--현재페이지가 맨앞페이지가 아니라면 --%>
-					<c:if test="${pi.currentPage>1 }">
-						<c:url var="firstPage" value="hotelList.bo">
-							<param name="page" value="${pi.startPage }">
-						</c:url>
-						<li style="cursor:pointer;"><a href="${firstPage }">&lt;&lt;</a></li>
-						
-						<c:url var="before" value="hotelList.bo">
-							<c:param name="page" value="${pi.currentPage-1 }"/>
-						</c:url>
-						<li style="cursor:pointer;"><a href="${before }">&lt;</a></li>
-						
-					</c:if>
 
+                    <!-- 맨앞으로 -->
+                    <li><a href="">&lt;&lt;</a></li>
 
-                    <!-- [2]페이지번호 -->
-                    <c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
-                    	<%-- p가 현재페이지와 같다면 --%>
-                    	<c:if test="${p eq pi.currentPage }">
-                    		<li  style="background-color: var(--blue-gray);">
-                    			<a style="font-weight:bold; ">${p}</a>
-                    		</li>
-                    	</c:if>
-                    	
-                    	<%--p가 현재페이지와 다르다면.. --%>
-                    	<c:if test="${p ne pi.currentPage }">
-                    		<c:url var="pagination" value="hotelList.ho">
-                    			<c:param name="page" value="${p }"/>
-                    		</c:url>
-                    		
-                    		<li style="cursor:pointer;">
-                    			<a href="${pagination }">${p }</a>
-                    		</li>
-                    	</c:if>
-                    </c:forEach>
-                    
+                    <!-- 이전페이지 -->
+                    <li><a href="">&lt;</a></li>
 
-                    <!-- [3]이후페이지 -->
-                    <%--
+                    <!-- 페이지번호 -->
+                    <li><a href="">1</a></li>
+                    <li><a href="">2</a></li>
+                    <li><a href="">3</a></li>
+                    <li><a href="">4</a></li>
+                    <li><a href="">5</a></li>
+
+                    <!-- 이후페이지 -->
                     <li><a href="">&gt;</a></li>
-                     --%>
-                    <%--현재페이지가 maxPage보다 더 크면..(다음페이지가 존재하지 않음) --%>
-                    <c:if test="${pi.currentPage>=pi.maxPage }">
-                    	<li><a>&gt;</a></li>
-                    	<li><a>&gt;&gt;</a>
-                    </c:if>
-                    
-                    <%--현재페이지가 maxPage보다 작으면.. (다음페이지가 존재)--%>
-                    <c:if test="${pi.currentPage< pi.maxPage }">
-                    
-                    	<!-- 다음페이지 -->
-                    	<c:url var="after" value="hotelList.bo">
-                    		<c:param name="page" value="${pi.currentPage+1 }"/>
-                    	</c:url>
-                    	<li style="cursor:pointer;"><a href="${after }">&gt;</a></li>
-                    	
-                    	<!-- 마지막 페이지 -->
-                    	<c:url var="lastPage" value="hotelList.bo">
-	                    	<c:param name="page" value="${pi.endPage }"/>
-	                    </c:url>
-	                    <li style="cursor:pointer;"><a href="${lastPage }">&gt;&gt;</a></li>
-                    </c:if>
-                   
+                    <!-- 맨뒤로 이동 -->
+                    <li><a href="">&gt;&gt;</a></li>
                 </ul>
             </nav>
         </div>
@@ -242,24 +409,24 @@
                             </td>
                             <td>
                                 <select class="detail-search-option" name="place" id="place">
-                                    <option value="0">지역선택</option>
-                                    <option value="1">강원도</option>
-                                    <option value="2">경기도</option>
-                                    <option value="3">경상남도</option>
-                                    <option value="4">경상북도</option>
-                                    <option value="5">광주광역시</option>
-                                    <option value="6">대구광역시</option>
-                                    <option value="7">대전광역시</option>
-                                    <option value="8">부산광역시</option>
-                                    <option value="9">서울특별시</option>
-                                    <option value="10">세종특별자치시</option>
-                                    <option value="11">인천광역시</option>
-                                    <option value="12">울산광역시</option>
-                                    <option value="13">전라남도</option>
-                                    <option value="14">전라북도</option>
-                                    <option value="15">제주특별자치도</option>
-                                    <option value="16">충청남도</option>
-                                    <option value="17">충청북도</option>
+                                    <option value="">지역선택</option>
+                                    <option value="강원도">강원도</option>
+                                    <option value="경기도">경기도</option>
+                                    <option value="경상남도">경상남도</option>
+                                    <option value="경상북도">경상북도</option>
+                                    <option value="광주광역시">광주광역시</option>
+                                    <option value="대구광역시">대구광역시</option>
+                                    <option value="대전광역시">대전광역시</option>
+                                    <option value="부산광역시">부산광역시</option>
+                                    <option value="서울특별시">서울특별시</option>
+                                    <option value="세종특별자치시">세종특별자치시</option>
+                                    <option value="인천광역시">인천광역시</option>
+                                    <option value="울산광역시">울산광역시</option>
+                                    <option value="전라북도">전라북도</option>
+                                    <option value="전라남도">전라남도</option>
+                                    <option value="제주특별자치도">제주특별자치도</option>
+                                    <option value="충청북도">충청북도</option>
+                                    <option value="충청남도">충청남도</option>
                                 </select>
                             </td>
                         </tr>

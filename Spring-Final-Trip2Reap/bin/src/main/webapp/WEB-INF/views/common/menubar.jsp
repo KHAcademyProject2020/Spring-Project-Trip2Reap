@@ -13,8 +13,6 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- <i>태그 사용 코드 -->
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<!-- css -->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
 <!-- jQuery코드 -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <!-- Modal코드  -->
@@ -110,7 +108,7 @@
 	    <!-- 아이디 저장  -->
 	    <div id="idSave_1">
 	        <input type="checkbox" id="idSave_2" name="remember" value="1">
-	        <label for="idSave_2" id="idSave_3">아이디 저장</label>
+	        <label id="idSave_3">아이디 저장</label>
 	    </div>
 	    <div id="idSave_4"></div>
 	    
@@ -214,14 +212,10 @@
 					var userId = $("input[name='memberId']").val();
 					//7일동안 쿠키 보관
 					setCookie("cookieUserId",userId,7); 
-					console.log("쿠키저장 아이디 : " + userId);
 				} else {
 					deleteCookie("cookieUserId");
-					userId = "";
-					console.log("아이디 : " + userId);
 				}
 			});
-
 		});
 	    
 		// 쿠키이름, 값, 쿠키유지시간 으로 쿠키 생성.
@@ -261,7 +255,7 @@
 	            }
 	        }
 			return unescape(cookieValue);
-		}	
+		}
 		});
     
     </script>

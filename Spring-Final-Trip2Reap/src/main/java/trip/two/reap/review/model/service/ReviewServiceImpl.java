@@ -51,7 +51,7 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public int insertReview(Review r) {
-		return rDAO.insertReview(sqlSession,r);
+	public int insertReview(Review review) {
+		return rDAO.insertReview(sqlSession,review);
 	}
 }

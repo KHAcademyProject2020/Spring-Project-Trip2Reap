@@ -5,13 +5,13 @@
   	<select id="getListCount" resultType="_int">
 		select count(*)
     	from board
-  		where BO_DELETE_YN='N' 
+  		where BO_DELETE_YN='N'
   	</select>
   	
   	<select id="selectList" resultMap="reviewResultSet">
   		 select * 
   		 from board 
-   		 where BO_DELETE_YN='N' AND CA_CODE=3
+   		 where BO_DELETE_YN='N'
    		 order by BO_NO desc
   	</select>
 
@@ -39,14 +39,6 @@
        from board
        where BO_NO=#{boNo} and BO_DELETE_YN='N'
    </select> 
-   
-  <insert id="insertReview">
-   		<!-- insert into BOARD
-   		values (SEQ_BO_NO.NEXTVAL,3,#{boTitle},#{boContent},#{memberId},DEFALUT,#{boTag},'N',SYSDATE) -->
-   		insert into BOARD values(SEQ_BO_NO.NEXTVAL,3,'테스트','여행가고싶다','ko1850',0,'#여행#여행','N',DEFAULT)
-   </insert>
-   
-
    
   
 

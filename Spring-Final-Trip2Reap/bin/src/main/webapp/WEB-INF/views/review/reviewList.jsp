@@ -19,28 +19,28 @@
 		
 		<section>
 		<div id="all_div">
-			<div id="menu_div">
-				<div id="menu_left_div">
-					<i class="fas fa-camera-retro" id="menuIcon3"></i>
-					<span id="menu" >여행 후기</span>
+		<div id="menu_div">
+			<div id="menu_left_div">
+				<img src="resources/images/reviewIcon.png" id="menu_img"/>
+				<span id="menu" >여행 후기</span>
 			</div>
 		
 		</div>
 		</div>
 		<!-- text-align뿐만 아니라 대부분 div안에서 작동한다. -->
 		<div id="cate_btn" style="display: inline-block; width: 770px">
-			<button id="cate_btn1" class="cate_btn">전체보기</button>
-			<button id="cate_btn2" class="cate_btn">여행지</button>
-			<button id="cate_btn3" class="cate_btn">맛집</button>
+			<button class="cate_btn">전체보기</button>
+			<button class="cate_btn">여행지</button>
+			<button class="cate_btn">맛집</button>
 			</div>
 			<div id="bo_btn" style="display: inline-block;">
-			<button id="bo_btn1" class="bo_btn"  onclick="location.href='reviewPhotoList.bo';">사진형</button>
-			<button id="bo_btn2" class="bo_btn">게시판형</button>
+			<button class="bo_btn"  onclick="location.href='reviewPhotoList.bo';">사진형</button>
+			<button class="bo_btn">게시판형</button>
 		</div>	
 		
 	
 	    <div id="board">
-		<table id="board_table">
+		<table>
 		<tr class="board_list" align="center" bgcolor="#efefef">
 			<th class="board_list">번호</th>
 			<th class="board_list">제목</th>
@@ -76,85 +76,74 @@
 		</c:forEach>
 		</table>
 		</div>
-		<br>
 		
 		
-		<div id="paging_table_div">
-			<table id="paging_table">
+		<table id="table1">
 		
 		<!-- 페이징 처리 -->
-		<tr align="center" height="20">
-			<td></td>
-			<td >
+		<tr align="center" height="20" id="buttonTab">
+			<td colspan="6" >
 			
 				<!-- [이전] -->
 				<c:if test="${ pi.currentPage <= 1 }">
-					<button class="page_btn"><</button> &nbsp;
+					[이전] &nbsp;
 				</c:if>
 				<c:if test="${ pi.currentPage > 1 }">
 					<c:url var="before" value="reviewList.bo">
 						<c:param name="page" value="${ pi.currentPage - 1 }"/>
 					</c:url>
-					<a href="${ before }"><button class="page_btn"><</button></a>
+					<a href="${ before }">[이전]</a> &nbsp;
 				</c:if>
 				
 				<!-- 페이지 -->
 				
 				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 					<c:if test="${ p eq pi.currentPage }">
-					<button class="page_btn"><b style=background-color:#eee;>${ p }</b></button>
+						<font color="red" size="4"><b>[${ p }]</b></font>
 					</c:if>
 					
 					<c:if test="${ p ne pi.currentPage }">
 						<c:url var="pagination" value="reviewList.bo">
 							<c:param name="page" value="${ p }"/>
 						</c:url>
-						<a href="${ pagination }"><button class="page_btn">${ p }</button></a>
+						<a href="${ pagination }">${ p }</a> &nbsp;
 					</c:if>
 				</c:forEach>
 				
 				<!-- [다음] -->
 				<c:if test="${ pi.currentPage >= pi.maxPage }">
-					<button class="page_btn">></button> &nbsp;
+					[다음]
 				</c:if>
 				<c:if test="${ pi.currentPage < pi.maxPage }">
 					<c:url var="after" value="reviewList.bo">
 						<c:param name="page" value="${ pi.currentPage + 1 }"/>
 					</c:url> 
-					<a href="${ after }"><button class="page_btn">></button></a>
+					<a href="${ after }">[다음]</a>
 				</c:if>
 			</td>
-			<td style="text-align: right;">
+			<td>
 				
-					<button id="write_btn" onclick="location.href='reviewInsert.bo';">글쓰기</button>
+					<button onclick="location.href='reviewInsert.bo';">글쓰기</button>
 			
 			</td>
 		</tr>
-		
 		<tr>
 			
-				<td colspan="3">
-					<form id="content" style="text-align: center;">
-					 <select id="select_search" name="search">
-    					 <option value="작성자">작성자</option>
-    					 <option value="제목">제목</option>
-   						 <option value="내용">내용</option>
-   						 <option value="해쉬태그">해쉬태그</option>
-					</select>
-					
-						
-   						   
-    					  <input type="search" id="search" placeholder="Search..." />
- 					
-  						<button id="search_btn" type="reset" class="search" id="search-btn">
-  							<span class="icon"><i class="fa fa-search"></i></span>
-  						</button>
-					</form>
-				</td>
+			<td colspan="6">
+				<form id="content" style="text-align: center;">
+				 <select name="search">
+    			 <option value="작성자">작성자</option>
+    			 <option value="제목">제목</option>
+   				 <option value="내용">내용</option>
+   				 <option value="해쉬태그">해쉬태그</option>
+				</select>
+  					<input type="text" name="input" class="input" id="search-input">
+  					<button type="reset" class="search" id="search-btn">검색</button>
+				</form>
+			</td>
 			
-			</tr>
-		</table>
-	</div>
+		</tr>
+	</table>
 
 		
 	</section>

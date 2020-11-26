@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import trip.two.reap.common.PageInfo;
@@ -95,25 +94,24 @@ public class ReviewController {
       return mv;
    }
    
+   
    @RequestMapping("reviewInsert.bo")
-   public String reviewInsertView() {
-	   return "reviewInsert";
-	   
-   }
-   
-   
-   @RequestMapping("rInsert.bo")
-   public String reviewInsert(@ModelAttribute Review r, HttpServletRequest request) {
-	   
-	   int result = rService.insertReview(r);
-
-	   if(result > 0) {
-		   return "redirect:reviewList.bo";
-	   } else {
-		   throw new ReviewException("게시글 등록에 실패했습니다.");
-	   }
-   }
-
+	public ModelAndView insertReview(@ModelAttribute Review review) {
+		ModelAndView mv = new ModelAndView();
+		
+		
+		int result = rService.insertReview(review);
+		
+		System.out.println(result);
+		
+		if(result > 0) {
+			mv.addObject("memberId", review.getMemberId());
+			mv.setViewName("reviewInsert");
+		} else {
+			mv.setViewName("insertFail");
+		}
+		return mv;
+	}
    
   
 }

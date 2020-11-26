@@ -5,7 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="resources/css/review/reviewDetail.css"/>
+<link rel="stylesheet"
+	href=" ${pageContext.request.contextPath}/resources/css/travel/travelInsert.css" />
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -35,8 +36,8 @@ table td {
 			<!-- 메뉴 이름 div -->
 			<div id="menu_div">
 				<div id="menu_left_div">
-						<i class="fas fa-camera-retro" id="menuIcon3"></i>
-					 <span id="menu">여행 후기</span>
+					<img src="resources/images/reviewIcon.png" id="menu_img" /> <span
+						id="menu">여행 후기</span>
 				</div>
 			</div>
 			

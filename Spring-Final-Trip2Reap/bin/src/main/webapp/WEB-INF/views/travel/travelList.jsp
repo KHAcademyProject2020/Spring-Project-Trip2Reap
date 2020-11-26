@@ -105,10 +105,8 @@
 				<div id="travel_img_div">
 					<img src="resources/images/송도.JPG" id="travel_img"/>
 				</div>
-				
 				<div id="travel_name_writer_div">
-					<div id="travel_no">${ t.boNo }</div>
-					<div id="travel_name">${ t.boTitle }</div>
+					<div id="travel_name" onclick="detailView()">${ t.boTitle }</div>
 					<div id="travel_theme">${ t.trTheme }</div>
 					<div id="travel_writer">${ t.trAddr }</div>
 					<div id="travel_tag">${ t.boTag }</div>
@@ -126,7 +124,7 @@
 		<!-- 등록하기 버튼 (관리자만 보이게)-->
 			<c:if test="${ loginUser.memberId == 'admin' }"> 
 				<div id="button_write_div">
-				<button id="button_write" onclick="location.href='tInsertView.tv';">등록하기</button>
+				<button id="button_write" onclick="insertView()">등록하기</button>
 				</div>
 			</c:if>	
 			
@@ -171,7 +169,9 @@
  	   }
 		
 		
-		
+		function insertView(){
+			location.href="<%= request.getContextPath() %>/tInsert.tv";
+		}
 		
 		function goSearchError(){
 			location.href="<%= request.getContextPath() %>/tSearchError.tv";
@@ -241,14 +241,7 @@
 					} 
 				}); //클립보드 복사
 
-		
-			/* 	
-			$(function(){
-				&('#travel_name').click(function(){
-					var boNo = $(this).children('div').eq(0).text();
-					location.href="tDetail.tv?boNo=" + boNo + "&page=" + ${pi.currentPage};
-				});
-			}); */
+			
 	</script>
 	
 </section>
