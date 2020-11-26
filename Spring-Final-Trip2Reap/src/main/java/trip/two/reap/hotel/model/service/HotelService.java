@@ -24,7 +24,8 @@ public interface HotelService {
 
 	ArrayList<Room> searchRoomTypeList(int hId, HashMap<String, Object> roomInfoMap);
 
-
+	//예약페이지 이동
+	Room selectOneRoomInfo(int roomId); //방번호에 해당하는 방정보가 존재하는지 확인.
 	
 
 }

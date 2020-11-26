@@ -19,7 +19,7 @@
     <script src="https://kit.fontawesome.com/09697e2134.js" crossorigin="anonymous"></script>
     
     
-    <title>호텔 페이지</title>
+    <title>전국방방곡곡:: 호텔 메인 페이지</title>
 
 </head>
 
@@ -78,7 +78,14 @@
 	                            	
 	                                <h1>${hotel.boTitle }</h1>
 	                                <div class="hotel-rank-wrapper">
-			                    		<small class="hotel-rank">${hotel.hotelRank }</small>등급 
+			                    		<small class="hotel-rank">
+			                    			<c:if test="${hotel.hotelRank eq 0 }">
+			                    				등급 없음
+			                    			</c:if>
+			                    			<c:if test="${hotel.hotelRank ne 0 }">
+			                    				${hotel.hotelRank } 등급 
+			                    			</c:if>
+			                    		</small>
 			                    	</div>
 	                            </div>
 	

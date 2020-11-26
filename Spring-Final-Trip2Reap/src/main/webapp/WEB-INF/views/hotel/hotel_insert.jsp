@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="resources/css/hotel/hotel_insert.css">
 
 
-<title>호텔 등록하기</title>
+<title>전국방방곡곡:: 호텔 등록하기</title>
 </head>
 
 <body>
