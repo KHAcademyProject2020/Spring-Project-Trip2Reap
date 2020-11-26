@@ -9,9 +9,10 @@
   	</select>
   	
   	<select id="selectList" resultMap="reviewResultSet">
-  		 select * 
-  		 from board 
-   		 where BO_DELETE_YN='N' AND CA_CODE=3
+  		select *
+  		 from board
+         JOIN CATEGORY USING(CA_CODE)
+   		 where BO_DELETE_YN='N' AND CA_CODE=3 OR CA_CODE=4
    		 order by BO_NO desc
   	</select>
 
@@ -25,6 +26,7 @@
       <result column="BO_TAG" property="boTag"/>
       <result column="BO_DELETE_YN" property="boDeleteYN"/>
       <result column="REGDATE" property="regDate"/>
+      <result column="CA_NAME" property="caName"/> 
    </resultMap>
    
   	 <update id="addReadCount">
@@ -37,7 +39,8 @@
    <select id="selectReview" resultMap="reviewResultSet">
    	   select *
        from board
-       where BO_NO=#{boNo} and BO_DELETE_YN='N'
+       JOIN CATEGORY USING(CA_CODE)
+       where BO_NO=#{boNo} and BO_DELETE_YN='N' 
    </select> 
    
   <insert id="insertReview">
@@ -46,7 +49,7 @@
 <!--    		insert into BOARD values(SEQ_BO_NO.NEXTVAL,3,'테스트','여행가고싶다','ko1850',0,'#여행#여행','N',DEFAULT)
  -->  
  INSERT INTO BOARD (BO_NO,MEMBER_ID,CA_CODE,BO_TITLE,BO_TAG,BO_CONTENT)
-        VALUES(SEQ_BO_NO.NEXTVAL,#{memberId},3,#{boTitle},#{boTag},#{boContent})
+        VALUES(SEQ_BO_NO.NEXTVAL,#{memberId},#{caCode},#{boTitle},#{boTag},#{boContent})
  
  
   </insert>

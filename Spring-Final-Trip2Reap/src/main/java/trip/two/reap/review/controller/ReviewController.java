@@ -48,7 +48,7 @@ public class ReviewController {
 	         } else {
 	            throw new ReviewException("게시글 전체 조회에 실패 하였습니다.");
 	         }
-	   
+	   System.out.println(list);
 	   return mv;
    }
    
@@ -92,6 +92,8 @@ public class ReviewController {
       } else {
     	  throw new ReviewException("게시글 상세보기에 실패하였습니다.");
       }     
+      
+      System.out.println(review);
       return mv;
    }
    

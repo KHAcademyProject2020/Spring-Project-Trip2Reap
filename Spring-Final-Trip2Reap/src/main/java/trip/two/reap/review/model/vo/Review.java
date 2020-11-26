@@ -13,13 +13,14 @@ public class Review {
 	private String boTag;
 	private String boDeleteYN;
 	private Date regDate;
+	private String caName;
 
 	
 	public Review() {}
 
 
 	public Review(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount, String boTag,
-			String boDeleteYN, Date regDate) {
+			String boDeleteYN, Date regDate,String caName) {
 		super();
 		this.boNo = boNo;
 		this.caCode = caCode;
@@ -30,6 +31,7 @@ public class Review {
 		this.boTag = boTag;
 		this.boDeleteYN = boDeleteYN;
 		this.regDate = regDate;
+		this.caName = caName;
 	}
 
 
@@ -110,14 +112,27 @@ public class Review {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+	
+
+	public String getCaName() {
+		return caName;
+	}
+
+
+	public void setCaName(String caName) {
+		this.caName = caName;
+	}
 
 
 	@Override
 	public String toString() {
 		return "Review [boNo=" + boNo + ", caCode=" + caCode + ", boTitle=" + boTitle + ", boContent=" + boContent
 				+ ", memberId=" + memberId + ", boCount=" + boCount + ", boTag=" + boTag + ", boDeleteYN=" + boDeleteYN
-				+ ", regDate=" + regDate + "]";
+				+ ", regDate=" + regDate + ", caName=" + caName + "]";
 	}
+
+
+	
 
 
 	

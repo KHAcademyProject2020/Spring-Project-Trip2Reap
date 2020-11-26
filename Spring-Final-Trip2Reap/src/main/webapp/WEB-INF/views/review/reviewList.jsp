@@ -42,7 +42,7 @@
 	    <div id="board">
 		<table id="board_table">
 		<tr class="board_list" align="center" bgcolor="#efefef">
-			<th class="board_list">번호</th>
+			<th class="board_list"></th>
 			<th class="board_list">제목</th>
 			<th class="board_list">작성자</th>
 			<th class="board_list">날짜</th>
@@ -53,16 +53,16 @@
 		<c:forEach var="b" items="${list}">
 		<tr align="center" class="board_list">
 			<td class="board_list">${b.boNo}</td>
-			<td class="board_list">
+			<td align="left" class="board_list">
 				<c:if test="${ !empty loginUser }">
 					<c:url var="reviewDetail" value="reviewDetail.bo">
 						<c:param name="boNo" value="${ b.boNo }"/>
 						<c:param name="page" value="${ pi.currentPage }"/>
 					</c:url>
-					<a href="${ reviewDetail}">${ b.boTitle }${b.boTag }</a>
+					<a href="${ reviewDetail}">[${b.caName}]${ b.boTitle }${b.boTag }</a>
 				</c:if>
 				<c:if test="${ empty loginUser }">
-					${ b.boTitle }${b.boTag }		
+					[${b.caName}]${ b.boTitle }${b.boTag }		
 				</c:if>
 			
 			</td>

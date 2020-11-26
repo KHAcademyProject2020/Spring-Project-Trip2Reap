@@ -47,15 +47,15 @@ table td {
 				<!-- 작성하기 table 시작 -->
 				<div id="insertReview">
 					<table id="travel_table">
-
+						
+						
 						<tr>
 							<td colspan="5">
 									
-										[여행지] ${review.boTitle}
-									
-										
+										[${review.caName}] ${review.boTitle}
 							</td>
 						</tr>
+						
 						<tr>
 							<td colspan="5"><span><b>글쓴이 : ${review.memberId }</b></span></td>
 						</tr>

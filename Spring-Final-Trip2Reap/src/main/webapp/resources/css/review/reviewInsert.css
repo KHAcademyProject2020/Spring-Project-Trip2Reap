@@ -33,12 +33,12 @@
 }
 
 .writeForm{
-	border: 1px solid black;
+	
 }
 
 #writer{
 	float:left;
-	border: 1px solid black;
+	
 	
 }
 
@@ -73,10 +73,10 @@
 	text-align:center;
 	border: 1px solid black;
 }
-#wrapperForm{
-	background: #efefef;
+#writerForm{
+	border :none;
+	
 }
-
 
 
 

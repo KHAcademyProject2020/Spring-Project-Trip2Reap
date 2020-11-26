@@ -29,11 +29,19 @@
 		<div id="wrapperForm">
 			<br><br>
 			<div class="writeForm" id="writer">
-			<strong>작성자</strong>
-			<input type="text" name="memberId" readonly value="${loginUser.memberId }" style="background: lightgrey;" >
+			<strong>작성자 ${loginUser.memberId }</strong>
+			<input type="hidden" name="memberId" readonly value="${loginUser.memberId }">
 			</div>
-			<br><br>
 			
+			<div id="cate">
+				<select id="select_search" name="caCode">
+					<option value="2">여행 코스</option>
+					<option value="3">여행지</option>
+					<option value="4">맛집</option>	
+					<option value="5">호텔</option>		
+				</select>
+			
+			</div>
 			<br><br>
 			<div class="writeForm" id="title"> 
 			<textarea name="boTitle" placeholder="제목을 입력해 주세요." class="textarea_input" style="height: 40px;"></textarea>
