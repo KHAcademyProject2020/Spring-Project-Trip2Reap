@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,7 @@
 	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 	
 
-	<title>전국방방곡곡:: 호텔 게시글 상세보기 </title>
+	<title>호텔 게시글 상세보기 </title>
 </head>
 
 
@@ -149,7 +150,9 @@
 								</span>
 								
 	                            <!--리뷰 평점(text)-->
+	                            <%--
 	                        	<span>(${hotel.hotelReviewScore})</span>
+	                        	 --%>
 							</span>
 						</li>
 						
@@ -175,8 +178,10 @@
 					
 					(실제) 해당 호텔의 방 에 대한  예약페이지 뷰로 이동한다. (호텔번호/ 방번호  으로 예약하고자하는 호텔과 방을 구분 )
 					 --%>
-					<button id="go-reservation-btn" onclick="location.href='<%= request.getContextPath() %>/hotelReservationView.ho'">최저가 예약하기</button>
-					
+					<c:if test="${loginUser.memberId!='admin' && roomCnt>0 && minPriceRoomId!=-1}">
+						<button id="go-reservation-btn">최저가 예약하기</button>
+						<input id="min-price-room-id" type="hidden" value="${minPriceRoomId }"/>
+					</c:if>
 					<!--only administrator (관리자)  -->
 					<%--
 					#edit-hotel-detail-info-page-btn: 호텔수정뷰  페이지로 이동
@@ -281,7 +286,10 @@
 						                        		</div>
 						                        		
 						                        		 <div class="price-wrapper">
-						                        		 	<span class="room_price_per_day">${room.pricePerDay } </span>원 
+						                        		 	<span class="room_price_per_day">
+						                        		 	 <fmt:formatNumber type="number"  maxFractionDigits="3" value="${room.pricePerDay}" var="commaPrice"/>
+						                        		 		${commaPrice }
+						                        		 	</span>원 
 						                        		 	
 						                        		 </div>
 						                        	</div>
@@ -289,7 +297,6 @@
 						                        	<%--예약하기 버튼 --%>
 						                        	<div class="room-reservation-btn-container">
 						                        		<button class="room-reservation-btn">예약 하기 </button>
-						                        		
 						                        	</div>
 						                        </div>
 					                         </li>
@@ -305,20 +312,13 @@
 		</div>
 		
 	</c:if>
-	<script>
-	$(function(){
-		//방 가격 3자리수마다 ,(콤마) 표기
-		//let prices=$('span.room_price_per_day');
-	    $('span.room_price_per_day').each(function(){
-	    	let priceTxt=$(this).text();
-	    	$(this).text(priceTxt.replace(/\B(?=(\d{3})+(?!\d))/g,','));
-	    }); 
-	});				                        		 		
-    
- 	</script>
+<<<<<<< HEAD
+<<<<<<< HEAD
+
  	<script>
    		$(function(){
    			let hId=$('#hotel-number').val();
+   			let minPriceRoomId=$('#min-price-room-id').val();
    			
    			//예약페이지로 이동하기
    			$('button.room-reservation-btn').click(function(){
@@ -326,9 +326,32 @@
 	   			let roomId=$targetContainer.find('#room_no').val();
 	   			location.href="hotelReservationView.ho?hId="+hId+"&roomId="+roomId;
    			});
+   			
+   			//최저가 예약페이지로 이동하기
+   			$("#go-reservation-btn").click(function(){
+   				location.href="hotelReservationView.ho?hId="+hId+"&roomId="+minPriceRoomId;
+   			});
+   			
    		});
 	</script>
  	
+=======
+=======
+>>>>>>> ed5d9a8ee33607f613a1ea8a2ff250bb1d1b2b06
+	<script>
+	$(function(){
+		//let prices=$('span.room_price_per_day');
+	    $('span.room_price_per_day').each(function(){
+	    	let priceTxt=$(this).text();
+	    	$(this).text(priceTxt.replace(/\B(?=(\d{3})+(?!\d))/g,','));
+	    });
+	});				                        		 		
+    
+ 	</script>
+<<<<<<< HEAD
+>>>>>>> ed5d9a8ee33607f613a1ea8a2ff250bb1d1b2b06
+=======
+>>>>>>> ed5d9a8ee33607f613a1ea8a2ff250bb1d1b2b06
 
 	<!-- 호텔 시설정보 : 호텔옵션이 null이 아니라면! -->
 	<c:if test="${!empty hotelOptionsList }">

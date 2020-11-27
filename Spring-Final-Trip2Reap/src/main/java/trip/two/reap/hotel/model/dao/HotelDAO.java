@@ -49,12 +49,13 @@ public class HotelDAO {
 		return (ArrayList) sqlSession.selectList("hotelMapper.getRoomTypeList", hId);
 	}
 
-	//hId에 해당하는 호텔이 가지고 있는 방리스트를 구한다.
 	public ArrayList<Room> searchRoomTypeList(SqlSessionTemplate sqlSession, HashMap<String, Object> roomInfoMap) {
 		return (ArrayList) sqlSession.selectList("hotelMapper.searchRoomTypeList", roomInfoMap);
 	}
 
 	
+<<<<<<< HEAD
+<<<<<<< HEAD
 	//호텔 예약페이지 이동
 	//roomId에 해당하는 방정보를 가져온다.
 	public Room selectOneRoomInfo(SqlSessionTemplate sqlSession, int roomId) {
@@ -62,8 +63,45 @@ public class HotelDAO {
 	}
 
 	
-	
+	//2020.11.27
+	// 호텔에 등록한 방중 가장 싼 방가격을 구한다.
+	public int findHotelMinPrice(SqlSessionTemplate sqlSession, int boNo) {
+		return sqlSession.selectOne("hotelMapper.findHotelMinPrice", boNo);
+	}
 
+	public ArrayList<Integer> selectMinPriceRoomList(SqlSessionTemplate sqlSession,
+			HashMap<String, Object> minPriceInfoMap) {
+		return (ArrayList)sqlSession.selectList("hotelMapper.selectMinPriceRoomList", minPriceInfoMap);
+	}
+
+	//해당계정에서  한개 호텔을 좋아요 버튼을  눌렀는지 확인.
+	public int isSmashedLikeBtn(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+		return sqlSession.selectOne("hotelMapper.isSmashedLikeBtn", map);
+	}
+
+	//좋아요 해제
+	public int cancelLikeHotel(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+		return sqlSession.update("hotelMapper.cancelLikeHotel", map);
+	}
+
+	//좋아요 반영 
+	public int isCanceledLikeBtn(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+		return sqlSession.selectOne("hotelMapper.isCanceledLikeBtn", map);
+	}
+
+	public int updateLikeHotel(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+		return sqlSession.update("hotelMapper.updateLikeHotel", map);
+	}
+
+	public int insertLikeHotel(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+		return sqlSession.insert("hotelMapper.insertLikeHotel", map);
+	}
+=======
+>>>>>>> ed5d9a8ee33607f613a1ea8a2ff250bb1d1b2b06
+=======
+>>>>>>> ed5d9a8ee33607f613a1ea8a2ff250bb1d1b2b06
+	
+	//hId에 해당하는 호텔이 가지고 있는 방리스트를 구한다.
 	
 	
 

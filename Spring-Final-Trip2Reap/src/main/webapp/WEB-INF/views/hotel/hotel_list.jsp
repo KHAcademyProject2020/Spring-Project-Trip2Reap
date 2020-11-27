@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -19,13 +22,12 @@
     <script src="https://kit.fontawesome.com/09697e2134.js" crossorigin="anonymous"></script>
     
     
-    <title>전국방방곡곡:: 호텔 메인 페이지</title>
+    <title>호텔 페이지</title>
 
 </head>
 
 
 <body>
-
 	<div>
    	 	<c:import url="../common/menubar.jsp" />
 	</div>
@@ -35,6 +37,7 @@
             <!-- <img id="hotel-icon" src="resources/images/hotelIcon.png"> -->
             <i class="fas fa-hotel" id="hotel-icon"></i>
             <span id="title-name">호텔 예약</span>
+            
         </div>
 
         <div id="button-container">
@@ -63,7 +66,10 @@
 
         <div id="hotel-list-container">
 			
-			<c:forEach var="hotel" items="${hotelList}">
+			
+			<%-- list가 2개이상일때  --%>
+			<%--<c:forEach var="hotel" items="${hotelList}" varStatus="status"> --%>
+			<c:forEach var="i" begin="0" end="${fn:length(hotelList)-1}" varStatus="status">
 				<div class="one-hotel-info-container">
 					
 	                <img src="resources/images/sample_hotel.jpg" alt="호텔이미지">
@@ -74,24 +80,41 @@
 	                            <!-- 호텔이름 -->
 	                            <div class="hotel-name-container">
 	                            	<%--호텔번호 --%>
-	                            	<input class="hotelNO" type="hidden" value="${hotel.boNo}"/>
+	                            	<input class="hotelNO" type="hidden" value="${hotelList.get(status.index).boNo}"/>
 	                            	
-	                                <h1>${hotel.boTitle }</h1>
+	                                <h1>${hotelList.get(status.index).boTitle }</h1>
 	                                <div class="hotel-rank-wrapper">
+<<<<<<< HEAD
+<<<<<<< HEAD
 			                    		<small class="hotel-rank">
-			                    			<c:if test="${hotel.hotelRank eq 0 }">
+			                    			<c:if test="${hotelList.get(status.index).hotelRank eq 0 }">
 			                    				등급 없음
 			                    			</c:if>
-			                    			<c:if test="${hotel.hotelRank ne 0 }">
-			                    				${hotel.hotelRank } 등급 
+			                    			<c:if test="${hotelList.get(status.index).hotelRank ne 0 }">
+			                    				${hotelList.get(status.index).hotelRank } 등급 
 			                    			</c:if>
 			                    		</small>
+=======
+			                    		<small class="hotel-rank">${hotel.hotelRank }</small>등급 
+>>>>>>> ed5d9a8ee33607f613a1ea8a2ff250bb1d1b2b06
+=======
+			                    		<small class="hotel-rank">${hotel.hotelRank }</small>등급 
+>>>>>>> ed5d9a8ee33607f613a1ea8a2ff250bb1d1b2b06
 			                    	</div>
 	                            </div>
 	
 	                            <!-- 좋아요 버튼 -->
 	                            <div class="i-like-btn-container">
-	                                <i class="fas fa-heart unlike"></i>
+	                            	<c:if test="${likeHotelList.get(status.index)==0}">
+	                                	<i class="fas fa-heart unlike"></i>
+	                            	</c:if>
+	                            	
+	                            	<%--이미 좋아요를 눌렀다면? --%>
+	                            	<c:if test="${ likeHotelList.get(status.index)>0}">
+	                                	<i class="fas fa-heart like"></i>
+	                            	</c:if>
+	                            	
+	                            	
 	                            </div>
 	                        </div>
 	                       
@@ -101,7 +124,7 @@
 	                    <div class="detail-info-wrapper">
 	                        <!-- 호텔주소 -->
 	                        <div class="hotel-addr-wrapper">
-	                            <small>${hotel.hotelAddr}</small>
+	                            <small>${hotelList.get(status.index).hotelAddr}</small>
 	                        </div>
 	
 	
@@ -111,14 +134,18 @@
 	                                <span class="star-point">
 	                                    <i class="fas fa-star"></i>
 	                                </span>
-	                                <span> ${hotel.hotelReviewScore}</span>/5.0
+	                                <span> ${hotelList.get(status.index).hotelReviewScore}</span>/5.0
 	                            </div>
 	
 	       
 	                            <!-- 1박 가격 -->
 	                            <div class="hotel-per-day-price-container info-container">
 	                                <p>
-	                                    <small>1박</small>&nbsp;&nbsp;<b>47,216원</b>
+	                                    <small>1박</small>&nbsp;&nbsp;
+	                                    <b class="min_room_price">
+	                                    	<fmt:formatNumber value="${minRoomPricePerDayList.get(status.current)}" type="number"/>
+	                                    </b> 
+	                                    &nbsp;원
 	                                </p>
 	                            </div>
 	                        </div>
@@ -139,6 +166,14 @@
 				//디테일뷰로 들어간다.
 				location.href="hotelDetailView.ho?hId="+hId+ "&page="+${pi.currentPage};
 			});
+			
+			/* 
+			//방가격 나타내기
+			$('b.min_room_price').each(function(){
+		    	let priceTxt=$(this).text();
+		    	$(this).text(priceTxt.replace(/\B(?=(\d{3})+(?!\d))/g,','));
+			}); 
+			*/
 		});
 		</script>
 
@@ -151,7 +186,7 @@
 					<!-- [1] 이전페이지 -->
 					<%--현재페이지가 맨 앞페이지라면 --%>
 					<c:if test="${pi.currentPage<=1 }">
-						<li><a>&lt;&lt;</</a></li>
+						<li><a>&lt;&lt;</a></li>
 						<li><a>&lt;</a>
 					</c:if>
 					
@@ -330,6 +365,89 @@
 <script>
 //heart -btn
 $(function(){
+	$(document).on('click', '.fa-heart' , function(e){
+		let targetHeartBtn= $(this);
+		let loginUserObj='${loginUser}';
+		
+		//좋아요 선택한 호텔번호를 구한다.
+		let likeHotelNo= Number(targetHeartBtn.closest('div.one-hotel-info-container').find('.hotelNO').val());
+		
+		console.log('어머 좋아요를 누르셨군요?');
+			
+		if(loginUserObj){
+			//로그인 상태 
+			
+			let tmp=targetHeartBtn.hasClass('unlike');
+			console.log(tmp);
+			
+			//unlike 라는 이름의 클래스를 가지고있다. : unlike->클릭->like
+			if( targetHeartBtn.hasClass('unlike') ){
+				$(this).removeClass('unlike');
+				$(this).addClass('like');
+				
+				$.ajax({
+					url:'updateLikeHotel.ho',
+					data:{
+						hId:likeHotelNo
+					},
+					type:'post',
+					success:function(){
+						//좋아요누르면, 해당아이디에 좋아요표시를 한다.
+						$(this).removeClass('unlike');
+						$(this).addClass('like');
+						
+						//좋아요 반영되었습니다!
+						swal({
+							  title: "좋아요 반영 성공",
+							  text: "성공적으로 좋아요를 반영했습니다.",
+							  icon: "success",
+							  button: "확인",
+						});
+					}
+				});
+				
+			
+			}else if(targetHeartBtn.hasClass('like')){//like->클릭->unlike
+				$(this).removeClass('like');
+				$(this).addClass('unlike');
+				
+				$.ajax({
+					url:'updateCancelLikeHotel.ho',
+					data:{
+						hId:likeHotelNo
+					},
+					type:'post',
+					success:function(){
+						//좋아요누르면, 해당아이디에 좋아요표시를 한다.
+						$(this).removeClass('unlike');
+						$(this).addClass('like');
+						
+						swal({
+							  title: "좋아요 해제 성공!",
+							  text: "성공적으로 좋아요 해제를 반영했습니다.",
+							  icon: "success",
+							  button: "확인",
+						});
+					}
+				});
+				
+				
+			}
+			
+			
+		}else{
+			//로그아웃상태
+			console.log('로그아웃 상태입니다.');
+			swal({
+				  title: "좋아요 반영 실패",
+				  text: "로그인을 하신 후에 이용해주세요.",
+				  icon: "error",
+				  button: "확인",
+			});
+		}
+		
+	});
+/* 
 	let heart_btns= document.querySelectorAll('.fa-heart');
 	heart_btns.forEach(function(heart_btn){
 		heart_btn.onclick=function(){
@@ -350,6 +468,9 @@ $(function(){
 			}
 		}
 	});
+*/
+
+	
 }); //smash-heart-btn wrapper finised
 
 

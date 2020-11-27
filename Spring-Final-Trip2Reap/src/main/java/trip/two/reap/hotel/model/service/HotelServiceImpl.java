@@ -69,13 +69,73 @@ public class HotelServiceImpl implements HotelService{
 		return hDAO.searchRoomTypeList(sqlSession, roomInfoMap);
 	}
 
-	//
+<<<<<<< HEAD
+<<<<<<< HEAD
+	// roomId에 해당하는 방정보1개를 가져온다.
 	@Override
 	public Room selectOneRoomInfo(int roomId) {
 		return hDAO.selectOneRoomInfo(sqlSession, roomId);
 	}
+	
+	
+	//2020.11.27
+	//방리스트 - 최소가격 나타내기
+	@Override
+	public int findHotelMinPrice(int boNo) {
+		return hDAO.findHotelMinPrice(sqlSession, boNo);
+	}
+
+	//가장 싼 가격의 방리스트를 구한다.
+	@Override
+	public ArrayList<Integer> selectMinPriceRoomList(HashMap<String, Object> minPriceInfoMap) {
+		return hDAO.selectMinPriceRoomList(sqlSession, minPriceInfoMap);
+	}
+
+	
+	//해당계정에서, 좋아요 누른 호텔 구하기(호텔리스트)
+	@Override
+	public int isSmashedLikeBtn(HashMap<String, Object> map) {
+		return hDAO.isSmashedLikeBtn(sqlSession, map);
+	}
+
+	
+	//좋아요 해제
+	@Override
+	public int cancelLikeHotel(HashMap<String, Object> map) {
+		return hDAO.cancelLikeHotel(sqlSession, map);
+	}
+
+	
+	//좋아요 반영
+	// 이미 좋아요를 눌렀는지 확인.(이미좋아요를 눌렀고, 현재는 좋아요 해제로 되어있는게 잇는지 확인)
+	@Override
+	public int isCanceledLikeBtn(HashMap<String, Object> map) {
+		return hDAO.isCanceledLikeBtn(sqlSession, map);
+	}
+
+	@Override
+	public int updateLikeHotel(HashMap<String, Object> map) {
+		return hDAO.updateLikeHotel(sqlSession, map);
+	}
+
+	@Override
+	public int insertLikeHotel(HashMap<String, Object> map) {
+		return hDAO.insertLikeHotel(sqlSession, map);
+	}
+	
+
 
 	
 	
+	
+=======
+>>>>>>> ed5d9a8ee33607f613a1ea8a2ff250bb1d1b2b06
+	
+	
+
+	
+		
+=======
+>>>>>>> ed5d9a8ee33607f613a1ea8a2ff250bb1d1b2b06
 	
 }
