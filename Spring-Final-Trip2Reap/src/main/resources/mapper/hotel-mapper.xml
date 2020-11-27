@@ -82,13 +82,5 @@
 		<result property="pricePerDay" column="PRICE_PER_DAY"/>
 	</resultMap>
 	
-	<!-- 2020.11.26 - 호텔 예약페이지로 이동하기 -->
-	<!--roomId에 해당하는 방종류 데이터 구하기. -->
-	<select id="selectOneRoomInfo" resultMap="roomResultSet">
-	SELECT *
-	FROM ROOM
-	WHERE ROOM_NO=#{roomId}
-	</select>
-	
 	
 </mapper>

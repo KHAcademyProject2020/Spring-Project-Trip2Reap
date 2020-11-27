@@ -69,13 +69,5 @@ public class HotelServiceImpl implements HotelService{
 		return hDAO.searchRoomTypeList(sqlSession, roomInfoMap);
 	}
 
-	//
-	@Override
-	public Room selectOneRoomInfo(int roomId) {
-		return hDAO.selectOneRoomInfo(sqlSession, roomId);
-	}
-
-	
-	
 	
 }

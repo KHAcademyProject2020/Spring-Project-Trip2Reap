@@ -156,36 +156,8 @@ public class HotelController {
 			.addObject("roomMap", roomMap)
 			.setViewName("hotel_detail");
 		}else {
-			throw new HotelException("호텔이 존재하지 않습니다!");
+			throw new HotelException("해당 호텔이 존재하지 않습니다!");
 		}
-		return mv;
-	}
-	
-	
-	//2020.11.26
-	// 호텔 예약페이지로 이동
-	@RequestMapping("hotelReservationView.ho")
-	public ModelAndView goHotelReservationView(@RequestParam("hId") int hId, @RequestParam("roomId") int roomId, ModelAndView mv) throws HotelException {
-		// hId에 해당하는 호텔정보가 존재하는지 확인한다.
-		Hotel hotelInfo=hService.selectOneHotel(hId);
-		
-		Room roomInfo= null;
-		if(hotelInfo !=null) {
-			// roomId에 해당하는 방이 존재하는지 확인한다.
-			roomInfo= hService.selectOneRoomInfo(roomId);
-			if(roomInfo==null) {
-				//방조회 실패
-				throw new HotelException("객실이 존재하지 않습니다");
-			}
-			
-		}else { 
-			//호텔조회 실패
-			throw new HotelException("호텔이 존재하지 않습니다!");
-		}
-		
-		mv.addObject("hotel", hotelInfo)
-		.addObject("room", roomInfo)
-		.setViewName("hotel_reservation");
 		return mv;
 	}
 	
@@ -196,6 +168,14 @@ public class HotelController {
 	public String goEditHotelView(){
 		return "hotel_edit";
 	}
-
+	
+	
+	// 호텔 예약페이지로 이동 (테스트 용) 
+	@RequestMapping("hotelReservationView.ho")
+	public String goHotelReservationView() {
+		//caution! it's not final controller
+		//it's just for beta test to see view page(hotel_detail.jsp)
+		return "hotel_reservation";
+	}
 	
 }

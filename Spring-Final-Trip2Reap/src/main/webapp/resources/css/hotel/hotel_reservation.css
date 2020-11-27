@@ -221,15 +221,8 @@ span#room_price_per_day{
 	
 	
 	flex-direction: row;
-	justify-content: flex-end;
+	justify-content: center;
 	align-items: center;
-}
-
-
-#hotel_using_container > #hotel_using_days_container{
-	padding-right: 80px;
-	flex-basis: 40%;
-	text-align: right;
 }
 
 #hotel_using_days_container,

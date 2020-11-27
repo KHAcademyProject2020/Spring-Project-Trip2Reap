@@ -49,21 +49,13 @@ public class HotelDAO {
 		return (ArrayList) sqlSession.selectList("hotelMapper.getRoomTypeList", hId);
 	}
 
-	//hId에 해당하는 호텔이 가지고 있는 방리스트를 구한다.
 	public ArrayList<Room> searchRoomTypeList(SqlSessionTemplate sqlSession, HashMap<String, Object> roomInfoMap) {
 		return (ArrayList) sqlSession.selectList("hotelMapper.searchRoomTypeList", roomInfoMap);
 	}
 
 	
-	//호텔 예약페이지 이동
-	//roomId에 해당하는 방정보를 가져온다.
-	public Room selectOneRoomInfo(SqlSessionTemplate sqlSession, int roomId) {
-		return sqlSession.selectOne("hotelMapper.selectOneRoomInfo", roomId);
-	}
-
 	
-	
-
+	//hId에 해당하는 호텔이 가지고 있는 방리스트를 구한다.
 	
 	
 
