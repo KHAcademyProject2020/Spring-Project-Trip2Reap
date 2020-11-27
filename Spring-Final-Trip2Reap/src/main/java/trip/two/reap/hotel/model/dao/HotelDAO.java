@@ -19,6 +19,7 @@ public class HotelDAO {
 		return sqlSession.selectOne("hotelMapper.getHotelListCount");
 	}
 
+//hId에 해당하는 호텔이 가지고 있는 방리스트를 구한다.
 	public ArrayList<Hotel> selectHotelList(SqlSessionTemplate sqlSession, PageInfo pi) {
 		int offset=(pi.getCurrentPage()-1)*pi.getBoardLimit();
 		RowBounds rowBounds= new RowBounds(offset, pi.getBoardLimit());
@@ -30,10 +31,10 @@ public class HotelDAO {
 	public int addReadCount(SqlSessionTemplate sqlSession, int hId) {
 		return sqlSession.update("hotelMapper.addReadCount", hId);
 	}
-	
+
 	//hId에 해당하는 호텔디테일뷰 보기.
 	public Hotel selectOneHotel(SqlSessionTemplate sqlSession, int hId) {
-		
+
 		return sqlSession.selectOne("hotelMapper.selectOneHotel", hId);
 	}
 
@@ -42,8 +43,8 @@ public class HotelDAO {
 	public int getRoomListCount(SqlSessionTemplate sqlSession, int hId) {
 		return sqlSession.selectOne("hotelMapper.getRoomListCount", hId);
 	}
-	
-	
+
+
 	//hId에 해당하는 호텔이 가지고있는 방종류를 구한다.
 	public ArrayList<String> getRoomTypeList(SqlSessionTemplate sqlSession, int hId) {
 		return (ArrayList) sqlSession.selectList("hotelMapper.getRoomTypeList", hId);
@@ -53,16 +54,14 @@ public class HotelDAO {
 		return (ArrayList) sqlSession.selectList("hotelMapper.searchRoomTypeList", roomInfoMap);
 	}
 
-	
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 	//호텔 예약페이지 이동
 	//roomId에 해당하는 방정보를 가져온다.
 	public Room selectOneRoomInfo(SqlSessionTemplate sqlSession, int roomId) {
 		return sqlSession.selectOne("hotelMapper.selectOneRoomInfo", roomId);
 	}
 
-	
+
 	//2020.11.27
 	// 호텔에 등록한 방중 가장 싼 방가격을 구한다.
 	public int findHotelMinPrice(SqlSessionTemplate sqlSession, int boNo) {
@@ -84,7 +83,7 @@ public class HotelDAO {
 		return sqlSession.update("hotelMapper.cancelLikeHotel", map);
 	}
 
-	//좋아요 반영 
+	//좋아요 반영
 	public int isCanceledLikeBtn(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
 		return sqlSession.selectOne("hotelMapper.isCanceledLikeBtn", map);
 	}
@@ -96,13 +95,10 @@ public class HotelDAO {
 	public int insertLikeHotel(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
 		return sqlSession.insert("hotelMapper.insertLikeHotel", map);
 	}
-=======
->>>>>>> ed5d9a8ee33607f613a1ea8a2ff250bb1d1b2b06
-=======
->>>>>>> ed5d9a8ee33607f613a1ea8a2ff250bb1d1b2b06
-	
-	//hId에 해당하는 호텔이 가지고 있는 방리스트를 구한다.
-	
-	
+
+
+
+
+
 
 }

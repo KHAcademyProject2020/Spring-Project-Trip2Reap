@@ -9,10 +9,10 @@ import trip.two.reap.hotel.model.vo.Room;
 
 
 public interface HotelService {
-	
+
 	// 호텔 리스트 불러오기
 	int getHotelListCount();
-	
+
 	ArrayList<Hotel> selectHotelList(PageInfo pi);
 
 	// 호텔 디테일뷰 불러오기.
@@ -24,12 +24,10 @@ public interface HotelService {
 
 	ArrayList<Room> searchRoomTypeList(int hId, HashMap<String, Object> roomInfoMap);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	//예약페이지 이동
 	Room selectOneRoomInfo(int roomId); //방번호에 해당하는 방정보가 존재하는지 확인.
 
-	
+
 	// 호텔리스트 - 호텔방 최소가격을 의미함.
 	int findHotelMinPrice(int boNo);
 
@@ -50,15 +48,10 @@ public interface HotelService {
 
 	// like 테이블에 등록하
 	int insertLikeHotel(HashMap<String, Object> map);
-	
 
-	
-=======
 
->>>>>>> ed5d9a8ee33607f613a1ea8a2ff250bb1d1b2b06
-=======
 
->>>>>>> ed5d9a8ee33607f613a1ea8a2ff250bb1d1b2b06
-	
+
+
 
 }

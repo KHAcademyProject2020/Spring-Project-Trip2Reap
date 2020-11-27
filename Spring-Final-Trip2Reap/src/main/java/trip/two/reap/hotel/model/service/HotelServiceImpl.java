@@ -14,11 +14,11 @@ import trip.two.reap.hotel.model.vo.Room;
 
 @Service("hService")
 public class HotelServiceImpl implements HotelService{
-	
+
 	//세션
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
+
 	//HotelDAO
 	@Autowired
 	private HotelDAO hDAO;
@@ -29,7 +29,7 @@ public class HotelServiceImpl implements HotelService{
 	public int getHotelListCount() {
 		return hDAO.getHotelListCount(sqlSession);
 	}
-	
+
 	@Override
 	public ArrayList<Hotel> selectHotelList(PageInfo pi) {
 		return hDAO.selectHotelList(sqlSession, pi);
@@ -43,7 +43,7 @@ public class HotelServiceImpl implements HotelService{
 		int result=hDAO.addReadCount(sqlSession, hId);
 		if(result>0) {
 			//호텔번호가 hId인 호텔에서 등록한 방을 구한다!
-			
+
 			//게시글(호텔)이 존재
 			hotel=hDAO.selectOneHotel(sqlSession, hId);
 		}
@@ -56,7 +56,7 @@ public class HotelServiceImpl implements HotelService{
 		return hDAO.getRoomListCount(sqlSession, hId);
 	}
 
-	
+
 	//호텔번호가 hId에 해당하는 방들을 구한다.
 	@Override
 	public ArrayList<String> getRoomTypeList(int hId) {
@@ -69,15 +69,13 @@ public class HotelServiceImpl implements HotelService{
 		return hDAO.searchRoomTypeList(sqlSession, roomInfoMap);
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	// roomId에 해당하는 방정보1개를 가져온다.
 	@Override
 	public Room selectOneRoomInfo(int roomId) {
 		return hDAO.selectOneRoomInfo(sqlSession, roomId);
 	}
-	
-	
+
+
 	//2020.11.27
 	//방리스트 - 최소가격 나타내기
 	@Override
@@ -91,21 +89,21 @@ public class HotelServiceImpl implements HotelService{
 		return hDAO.selectMinPriceRoomList(sqlSession, minPriceInfoMap);
 	}
 
-	
+
 	//해당계정에서, 좋아요 누른 호텔 구하기(호텔리스트)
 	@Override
 	public int isSmashedLikeBtn(HashMap<String, Object> map) {
 		return hDAO.isSmashedLikeBtn(sqlSession, map);
 	}
 
-	
+
 	//좋아요 해제
 	@Override
 	public int cancelLikeHotel(HashMap<String, Object> map) {
 		return hDAO.cancelLikeHotel(sqlSession, map);
 	}
 
-	
+
 	//좋아요 반영
 	// 이미 좋아요를 눌렀는지 확인.(이미좋아요를 눌렀고, 현재는 좋아요 해제로 되어있는게 잇는지 확인)
 	@Override
@@ -122,20 +120,6 @@ public class HotelServiceImpl implements HotelService{
 	public int insertLikeHotel(HashMap<String, Object> map) {
 		return hDAO.insertLikeHotel(sqlSession, map);
 	}
-	
 
 
-	
-	
-	
-=======
->>>>>>> ed5d9a8ee33607f613a1ea8a2ff250bb1d1b2b06
-	
-	
-
-	
-		
-=======
->>>>>>> ed5d9a8ee33607f613a1ea8a2ff250bb1d1b2b06
-	
 }
