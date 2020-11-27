@@ -29,13 +29,6 @@ public class HotelController {
 	@Autowired
 	private HotelService hService;
 
-	// go to hotel main page
-	/*
-	@RequestMapping("hotelList.ho")
-	public String goHotelListView() {
-		return "hotel_list";
-	}
-	*/
 
 	@RequestMapping("hotelList.ho")
 	public ModelAndView hotelList(@RequestParam(value="page", required=false, defaultValue="1") Integer page , HttpSession session, ModelAndView mv)throws HotelException{
@@ -120,12 +113,6 @@ public class HotelController {
 	}
 
 
-	//go to hotel insert page (only admin)
-	// 호텔 등록페이지뷰로 이동
-	@RequestMapping("hotelInsertView.ho")
-	public String goHotelInsertView() {
-		return "hotel_insert";
-	}
 
 
 	// 호텔 디테일뷰 페이지로 이동
@@ -320,22 +307,21 @@ public class HotelController {
 
 	}
 
+
+	//go to hotel insert page (only admin)
+	// 호텔 등록페이지뷰로 이동
+	@RequestMapping("hotelInsertView.ho")
+	public String goHotelInsertView() {
+		return "hotel_insert";
+	}
+	
+	
 	//only admin(관리자용)
 	// 호텔 수정페이지뷰로 이동
 	@RequestMapping("hotelEditView.ho")
 	public String goEditHotelView(){
 		return "hotel_edit";
 	}
-	
 
-	// 호텔 예약페이지로 이동 (테스트 용)
-	/*
-	@RequestMapping("hotelReservationView.ho")
-	public String goHotelReservationView() {
-		//caution! it's not final controller
-		//it's just for beta test to see view page(hotel_detail.jsp)
-		return "hotel_reservation";
-	}
-	*/
 
 }
