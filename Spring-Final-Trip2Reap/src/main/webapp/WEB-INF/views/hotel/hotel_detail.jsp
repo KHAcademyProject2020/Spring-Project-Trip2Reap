@@ -18,7 +18,7 @@
 	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 	
 
-	<title>호텔 게시글 상세보기 </title>
+	<title>전국방방곡곡:: 호텔 게시글 상세보기 </title>
 </head>
 
 
@@ -289,6 +289,7 @@
 						                        	<%--예약하기 버튼 --%>
 						                        	<div class="room-reservation-btn-container">
 						                        		<button class="room-reservation-btn">예약 하기 </button>
+						                        		
 						                        	</div>
 						                        </div>
 					                         </li>
@@ -306,14 +307,28 @@
 	</c:if>
 	<script>
 	$(function(){
+		//방 가격 3자리수마다 ,(콤마) 표기
 		//let prices=$('span.room_price_per_day');
 	    $('span.room_price_per_day').each(function(){
 	    	let priceTxt=$(this).text();
 	    	$(this).text(priceTxt.replace(/\B(?=(\d{3})+(?!\d))/g,','));
-	    });
+	    }); 
 	});				                        		 		
     
  	</script>
+ 	<script>
+   		$(function(){
+   			let hId=$('#hotel-number').val();
+   			
+   			//예약페이지로 이동하기
+   			$('button.room-reservation-btn').click(function(){
+	   			let $targetContainer=$(this).closest('.one-room-price-info-container');
+	   			let roomId=$targetContainer.find('#room_no').val();
+	   			location.href="hotelReservationView.ho?hId="+hId+"&roomId="+roomId;
+   			});
+   		});
+	</script>
+ 	
 
 	<!-- 호텔 시설정보 : 호텔옵션이 null이 아니라면! -->
 	<c:if test="${!empty hotelOptionsList }">
