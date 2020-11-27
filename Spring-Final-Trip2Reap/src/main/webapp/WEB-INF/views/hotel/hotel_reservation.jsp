@@ -3,8 +3,6 @@
 
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 
 <!DOCTYPE html>
 <html>
@@ -35,23 +33,21 @@
 	<div class="hotel_reservation_common_container" id="reserve_hotel_room_info_container">
 		<div class="subtitle-container">
 			<div class="hotel-name-wrapper">
-				<h1 id="hotel_name">호텔 신라 {호텔이름}</h1>
+				<h1 id="hotel_name">${hotel.boTitle}</h1>
+				<input type="hidden" value="${hotel.boNo }"/>
 				<%--BO_NO (방번호) --%>
 			</div>
 
 			<div class="room-name-wrapper">
-				<h2 id="room_name">더블 디럭스룸 - 산전망 {방이름} </h2>
+				<h2 id="room_name">${room.roomName }</h2>
+				<input type="hidden" value="${room.roomNo }"/>
 				<%--ROOM_NO(방이름) --%>
 			</div>
 
 			<div class="room-per-day-price-wrapper">
 				<%--1박 이용가격  (span-id:room_price_per_day) 에 넣는다. --%>
-				<h4 class="room-per-day-price-title">
-					1박<span id="room_price_per_day">
-						${room.pricePerDay }
-					</span>원 </h4>
+				<h4 class="room-per-day-price-title">1박<span id="room_price_per_day">${room.pricePerDay }</span>원 </h4>
 				<input type="hidden" id="_room_price_per_day" value="${room.pricePerDay }"/>
-
 			</div>
 		</div>
 	</div>
@@ -89,6 +85,7 @@
 
 			<%--올바르게 체크인/ 체크아웃 날짜가 잡히면 생기는 컨테이너. --%>
 			<div id="hotel_using_container">
+				<div></div>
 				<div id="hotel_using_days_container">
 					<%--using_accomodate_days : (박) : 숙박 기간  --%>
 					<span class="hotel_using_span" id="using_accomodate_days"></span>
@@ -101,186 +98,6 @@
 
 			</div>
 		</div><%--hotel-reservation-content-container --%>
-
-
-		<%--import : jquery ui (datepicker) --%>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-		<script>
-		//datepicker - api
-		$(function(){
-
-			//체크인 날짜 선택
-			$('#checkInDatePicker').datepicker({
-				changeYear: true,
-				changeMonth: true,
-				dateFormat: 'yy-mm-dd',
-				showMonthAfterYear: true,
-				dayNamesMin: ['일', '월', '화', '수', '목', '금', '토' ],
-				monthNamesShort : ['1월', '2월','3월','4월','5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월' ],
-				yearSuffix: '년',
-				minDate:0,
-				prevText: '이전 달',
-				nextText: '다음 달',
-
-			});
-
-
-			//체크아웃 날짜 선택
-			$('#checkOutDatePicker').datepicker({
-				changeYear: true,
-				changeMonth: true,
-				dateFormat: 'yy-mm-dd',
-				showMonthAfterYear: true,
-				dayNamesMin: ['일', '월', '화', '수', '목', '금', '토' ],
-				monthNamesShort : ['1월', '2월','3월','4월','5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월' ],
-				yearSuffix: '년',
-				minDate:0,
-
-
-			});
-
-
-			// 1박 이용 방 가격
-			let roomPricePerDay =$('#room_price_per_day');
-
-			// 체크인 컴포넌트
-			let checkInDatePicker =$('#checkInDatePicker');
-
-			// 체크아웃 컴포넌트
-			let checkOutDatePicker= $('#checkOutDatePicker');
-
-			// 체크인 날짜
-			let checkInDate;
-
-			// 체크아웃 날짜
-			let checkOutDate;
-
-
-			//체크인, 체크아웃 했는지 확인용 맵
-			let checkStatusMap=new Map();
-
-			//확인용 맵의 값 초기화
-			checkStatusMap.set('checkInStatus', false); //아직 체크인 날짜가 정해지지 않음을 의미함.
-			checkStatusMap.set('checkOutStatus', false);//아직 체크아웃 날짜가 정해지지 않음을 의미함.
-
-
-			//호텔 숙박/이용날짜 알림 컨테이너
-			let $hotelReserveContainer= $('#hotel_using_container');
-
-
-			//만일 체크인/ 체크아웃날짜가 정해졌을때 실행하는 함수.
-			var checkStatusFunc= function(){
-				//console.log('체크인/ 체크아웃 날짜 확인함.');
-				//console.log(checkStatusMap);
-
-				//체크인 / 체크아웃 날짜가 모두 결졍된다면
-				var checkedAll= checkStatusMap.get('checkInStatus') && checkStatusMap.get('checkOutStatus');
-				//console.log(checkedAll);
-				if(checkedAll){
-					//만약에 체크아웃날짜가 체크인날짜보다 같거나 , 이전날로 설정했다면? => 에러 alert를 띄운다.
-					if(checkInDate>= checkOutDate){
-						if(checkInDate==checkOutDate){
-							swal({
-								  title: '체크인/체크아웃 날짜 선택 실패',
-								  text: '최소 1박은 해야합니다! 체크인/체크아웃 날짜를 다르게 해주세요!',
-								  icon: "error",
-								  button: "확인",
-							});
-
-						}else{
-							//checkInDate > checkOutDate
-							swal({
-								  title: '체크인/체크아웃 날짜 선택 실패',
-								  text: '체크아웃 날짜는 체크인 날짜 이후일 때만 가능합니다!',
-								  icon: "error",
-								  button: "확인",
-							});
-						}
-
-						checkStatusMap.set('checkOutStatus', false);
-						checkStatusMap.set('checkInStatus', false);
-						checkInDatePicker.val('');
-						checkOutDatePicker.val('');
-
-						// 체크인날짜 & 체크아웃날짜 (년/월/일) 를 -1로 초기화
-						checkStatusMap.set('checkInYear', -1);
-						checkStatusMap.set('checkInMonth', -1);
-						checkStatusMap.set('checkInDay', -1);
-
-						checkStatusMap.set('checkOutnYear', -1);
-						checkStatusMap.set('checkOutMonth', -1);
-						checkStatusMap.set('checkOutDay', -1);
-						$hotelReserveContainer.css('display','none');
-
-					}else{
-						//console.log('체크인 날짜: '+checkInDate);
-						checkStatusMap.set('checkInYear', checkInDate.getFullYear());
-						checkStatusMap.set('checkInMonth', checkInDate.getMonth()+1);
-						checkStatusMap.set('checkInDay', checkInDate.getDate());
-
-						//console.log('체크아웃 날짜: '+ checkOutDate);
-						checkStatusMap.set('checkOutnYear', checkOutDate.getFullYear());
-						checkStatusMap.set('checkOutMonth', checkOutDate.getMonth()+1);
-						checkStatusMap.set('checkOutDay', checkOutDate.getDate());
-
-						//console.log(checkStatusMap);
-
-
-						$hotelReserveContainer.css('display','flex');
-
-						// 차이 (단위: 일 ) => hotelAccomodateDays 에 대입
-						let $diffDays=(checkOutDate-checkInDate)/(24*60*60*1000);
-						//console.log($diffDays);
-
-						let $hotelAccomodateDays= $('#using_accomodate_days'); //숙박기간(단위: 일 )
-						let $hotelTotalUsingDays= $('#using_total_days'); //전체 이용기간(단위: 일)
-
-						$hotelAccomodateDays.text($diffDays);
-						$hotelTotalUsingDays.text($diffDays+1);
-
-					}
-				}
-			};
-
-
-
-			checkInDatePicker.on('change', function(){
-				checkInDate=$(this).val();
-				//console.log('체크인 날짜: '+checkInDate);
-
-				let checkInDateAddr= checkInDate.split('-');
-				//console.log('checkInDateAddr: '+ checkInDateAddr);
-
-				//체크인 날짜
-				checkInDate= new Date(checkInDateAddr[0], checkInDateAddr[1]-1 , checkInDateAddr[2]);
-				//console.log(checkInDate);
-				checkStatusMap.set('checkInStatus', true); //아직 체크인 날짜가 정해지지 않음을 의미함.
-
-				checkStatusFunc();
-
-			});
-
-
-			checkOutDatePicker.on('change', function(){
-				checkOutDate=$(this).val();
-				//console.log('체크아웃 날짜: '+checkOutDate);
-
-				let checkOutDateAddr= checkOutDate.split('-');
-
-				//체크아웃 날짜
-				checkOutDate=new Date(checkOutDateAddr[0], checkOutDateAddr[1]-1 , checkOutDateAddr[2]);
-				//console.log(checkOutDate);
-				checkStatusMap.set('checkOutStatus', true);//아직 체크아웃 날짜가 정해지지 않음을 의미함.
-
-				checkStatusFunc();
-
-			});
-
-		});
-
-		</script>
 
 	</div><%--hotel_reservation_common_container --%>
 
@@ -333,121 +150,7 @@
 		</div> <%--hotel-reservation-content-container --%>
 
 		<script>
-		$(function(){
-			//방개수
-			//1개이면 - 버튼을 누르지 못하게 해야한다.
-			let $roomCntVal= Number($('#room_count').text());
-			if($roomCntVal==1){
-				$('#room_minus_btn').attr('disabled', true);
-				$('#room_minus_btn').css('cursor', 'none' );
-			}
 
-			//성인
-			//1명이면 -버튼을 누르지 못하게 해야한다. (최소 성인 1명!)
-			let $adultCntVal= Number($('#adult_count').text());
-			if($adultCntVal==1){
-				$('#adult_minus_btn').attr('disabled', true);
-				$('#adult_minus_btn').css('cursor', 'none' );
-			}
-
-			//어린이
-			let $childCntVal=Number($('#child_count').text());
-			if($childCntVal==0){
-				$('#child_minus_btn').attr('disabled', true);
-				$('#child_minus_btn').css('cursor', 'none');
-			}
-
-			// 방 개수 버튼 선택
-			//방개수 증가 버튼 선택함수
-			$('#room_plus_btn').click( function(){
-				let $nowVal= Number($('#room_count').text());
-
-				$nowVal+=1;
-				$roomCntVal=$nowVal;
-				if($roomCntVal>1){
-					$('#room_minus_btn').attr('disabled', false);
-					$('#room_minus_btn').css('cursor', 'pointer');
-				}
-
-				$('#room_count').text($nowVal);
-			});
-
-			// 방개수  감소 버튼 선택 함수
-			$('#room_minus_btn').click(function(){
-				let $nowVal= Number($('#room_count').text());
-				$nowVal-=1;
-				$roomCntVal=$nowVal;
-				if($roomCntVal<=1){
-					$('#room_minus_btn').attr('disabled', true);
-					$('#room_minus_btn').css('cursor', 'none');
-					$('#room_count').text(1);
-				}else{
-					$('#room_count').text($nowVal);
-					$('#room_minus_btn').css('cursor', 'pointer');
-				}
-			});
-
-
-			// 성인 인원수 버튼 선택
-			// 성인수 증가 버튼 선택 함수
-			$('#adult_plus_btn').click( function(){
-				let $nowVal= Number($('#adult_count').text());
-
-				$nowVal+=1;
-				$adultCntVal=$nowVal;
-				if($adultCntVal>1){
-					$('#adult_minus_btn').attr('disabled', false);
-					$('#adult_minus_btn').css('cursor', 'pointer');
-				}
-
-				$('#adult_count').text($nowVal);
-			});
-
-			// 성인수 감소 버튼 선택 함수
-			$('#adult_minus_btn').click(function(){
-				let $nowVal= Number($('#adult_count').text());
-				$nowVal-=1;
-				$adultCntVal=$nowVal;
-				if($adultCntVal<=1){
-					$('#adult_minus_btn').attr('disabled', true);
-					$('#adult_minus_btn').css('cursor', 'none');
-					$('#adult_count').text(1);
-				}else{
-					$('#adult_count').text($nowVal);
-					$('#adult_minus_btn').css('cursor', 'pointer');
-				}
-			});
-
-			// 어린이 인원수 버튼 선택
-			// 어린이수 증가 버튼 선택함수
-			$('#child_plus_btn').click(function(){
-				let $nowCVal= Number($('#child_count').text());
-				$nowCVal+=1;
-				$childCntVal=$nowCVal;
-				if($childCntVal>0){
-					$('#child_minus_btn').attr('disabled', false);
-					$('#child_minus_btn').css('cursor', 'pointer');
-				}
-				$('#child_count').text($nowCVal);
-
-			});
-
-			// 어린이수 감소 버튼 선택함수
-			$('#child_minus_btn').click(function(){
-				let $nowCVal= Number($('#child_count').text());
-				$nowCVal-=1;
-				$childCntVal=$nowCVal;
-				if($childCntVal<=0){
-					$('#child_minus_btn').attr('disabled', true);
-					$('#child_minus_btn').css('cursor', 'none');
-					$('#child_count').text(0);
-				}else{
-					$('#child_count').text($nowCVal);
-					$('#child_minus_btn').css('cursor', 'pointer');
-				}
-			});
-
-		});
 
 		</script>
 
@@ -466,7 +169,7 @@
 				<%--1. 예약호텔 이름  --%>
 				<div class="hotel-reserve-check-common-container">
 					<div class="hotel-check-label-wrapper">예약 호텔 이름</div>
-					<div class="hotel-check-content-wrapper" id="reserve_hotel_name"> 신라호텔 {호텔이름 }</div>
+					<div class="hotel-check-content-wrapper" id="reserve_hotel_name"> ${hotel.boTitle }</div>
 				</div>
 
 				<%--2. 예약 객실  이름  / 예약 객실 개수 --%>
@@ -477,13 +180,13 @@
 						<%--방종류 --%>
 						<div class="hotel-sub-check-container">
 							<div class="hotel-sub-check-label-wrapper"> 객실 종류</div>
-							<div class="hotel-sub-check-content-wrapper" id="reserve_room_kind">{객실 종류 }</div>
+							<div class="hotel-sub-check-content-wrapper" id="reserve_room_kind">${room.roomType }</div>
 						</div>
 
 						<%--방이름  --%>
 						<div class="hotel-sub-check-container">
 							<div class="hotel-sub-check-label-wrapper">객실 이름</div>
-							<div class="hotel-sub-check-content-wrapper" id="reserve_room_name">{객실 이름}</div>
+							<div class="hotel-sub-check-content-wrapper" id="reserve_room_name">${room.roomName}</div>
 						</div>
 
 						<%--방개수 --%>
@@ -537,7 +240,7 @@
 
 						<%--이용 날짜 (박/ 일)  --%>
 						<div class="hotel-sub-check-container">
-							<span id="reserve_accomodate_day">{박 }</span>박 <span id="reserve_total_day">{일 }</span>일
+							<span id="reserve_accomodate_day">{박 }</span>박 &nbsp;&nbsp;<span id="reserve_total_day">{일 }</span>일
 						</div>
 					</div>
 				</div>
@@ -551,6 +254,411 @@
 			</div><%--hotel-reserve-check-total-container  --%>
 		</div> <%--hotel-reservation-content-container --%>
 	</div>
+
+	<%--import : jquery ui (datepicker) --%>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+	//체크인/체크아웃/ 숙박이용일/ 전체이용일
+	//datepicker - api
+	$(function(){
+		//체크인 날짜 선택
+		$('#checkInDatePicker').datepicker({
+			changeYear: true,
+			changeMonth: true,
+			dateFormat: 'yy-mm-dd',
+			showMonthAfterYear: true,
+			dayNamesMin: ['일', '월', '화', '수', '목', '금', '토' ],
+			monthNamesShort : ['1월', '2월','3월','4월','5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월' ],
+			yearSuffix: '년',
+			minDate:0,
+			prevText: '이전 달',
+			nextText: '다음 달',
+
+		});
+
+
+		//체크아웃 날짜 선택
+		$('#checkOutDatePicker').datepicker({
+			changeYear: true,
+			changeMonth: true,
+			dateFormat: 'yy-mm-dd',
+			showMonthAfterYear: true,
+			dayNamesMin: ['일', '월', '화', '수', '목', '금', '토' ],
+			monthNamesShort : ['1월', '2월','3월','4월','5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월' ],
+			yearSuffix: '년',
+			minDate:0,
+
+
+		});
+
+
+		// 1박 이용 방 가격
+		let roomPricePerDay =$('#room_price_per_day');
+
+		// 체크인 컴포넌트
+		let checkInDatePicker =$('#checkInDatePicker');
+
+		// 체크아웃 컴포넌트
+		let checkOutDatePicker= $('#checkOutDatePicker');
+
+		// 체크인 날짜
+		let checkInDate;
+
+		// 체크아웃 날짜
+		let checkOutDate;
+
+
+		//체크인, 체크아웃 했는지 확인용 맵
+		let checkStatusMap=new Map();
+
+		//확인용 맵의 값 초기화
+		checkStatusMap.set('checkInStatus', false); //아직 체크인 날짜가 정해지지 않음을 의미함.
+		checkStatusMap.set('checkOutStatus', false);//아직 체크아웃 날짜가 정해지지 않음을 의미함.
+
+
+		//호텔 숙박/이용날짜 알림 컨테이너
+		let $hotelReserveContainer= $('#hotel_using_container');
+
+		//예약확인 체크인/체크아웃 날짜
+		$('#reserve_checkin_date').text('');
+		$('#reserve_checkout_date').text('');
+
+		//호텔숙박일, 호텔총 이용일
+		$('span#reserve_accomodate_day').text(''); //호텔숙박일
+		$('span#reserve_total_day').text(''); //호텔총 이용일
+
+		$('span#reserve_total_prices').text(Number($('#_room_price_per_day').val()) * Number($('#room_count').text()));
+
+		//가격 표기- 3자리마다 콤마(,) 찍기
+		let priceRegularExpression=/\B(?=(\d{3})+(?!\d))/g;
+		let oneDayPrice= $('#_room_price_per_day').val();
+		let totalPrice=$('span#reserve_total_prices').text();
+
+		$('#room_price_per_day').text(oneDayPrice.replace(priceRegularExpression, ','));
+		$('span#reserve_total_prices').text(totalPrice.replace(priceRegularExpression,','));
+
+
+
+		//만일 체크인/ 체크아웃날짜가 정해졌을때 실행하는 함수.
+		var checkStatusFunc= function(){
+			//console.log('체크인/ 체크아웃 날짜 확인함.');
+			//console.log(checkStatusMap);
+
+			//체크인 / 체크아웃 날짜가 모두 결졍된다면
+			var checkedAll= checkStatusMap.get('checkInStatus') && checkStatusMap.get('checkOutStatus');
+			//console.log(checkedAll);
+			if(checkedAll){
+				//만약에 체크아웃날짜가 체크인날짜보다 같거나 , 이전날로 설정했다면? => 에러 alert를 띄운다.
+				if(checkInDate>= checkOutDate){
+					if(checkInDate==checkOutDate){
+						swal({
+							  title: '체크인/체크아웃 날짜 선택 실패',
+							  text: '최소 1박은 해야합니다! 체크인/체크아웃 날짜를 다르게 해주세요!',
+							  icon: "error",
+							  button: "확인",
+						});
+
+					}else{
+						//checkInDate > checkOutDate
+						swal({
+							  title: '체크인/체크아웃 날짜 선택 실패',
+							  text: '체크아웃 날짜는 체크인 날짜 이후일 때만 가능합니다!',
+							  icon: "error",
+							  button: "확인",
+						});
+					}
+
+					checkStatusMap.set('checkOutStatus', false);
+					checkStatusMap.set('checkInStatus', false);
+					checkInDatePicker.val('');
+					checkOutDatePicker.val('');
+
+					// 체크인날짜 & 체크아웃날짜 (년/월/일) 를 -1로 초기화
+					checkStatusMap.set('checkInYear', -1);
+					checkStatusMap.set('checkInMonth', -1);
+					checkStatusMap.set('checkInDay', -1);
+
+					checkStatusMap.set('checkOutnYear', -1);
+					checkStatusMap.set('checkOutMonth', -1);
+					checkStatusMap.set('checkOutDay', -1);
+					$hotelReserveContainer.css('display','none');
+
+					//예약확인 체크인/체크아웃날짜 다시 초기화.
+					$('#reserve_checkin_date').text('');
+					$('#reserve_checkout_date').text('');
+
+					$('span#reserve_accomodate_day').text(''); //호텔숙박일
+					$('span#reserve_total_day').text(''); //호텔총 이용일
+
+				}else{
+					//console.log('체크인 날짜: '+checkInDate);
+					checkStatusMap.set('checkInYear', checkInDate.getFullYear());
+					checkStatusMap.set('checkInMonth', checkInDate.getMonth()+1);
+					checkStatusMap.set('checkInDay', checkInDate.getDate());
+
+					let checkInDateStr=checkStatusMap.get('checkInYear')+'년 '+checkStatusMap.get('checkInMonth')+'월'+checkStatusMap.get('checkInDay')+'일';
+					$('#reserve_checkin_date').text(checkInDateStr);
+
+					//console.log('체크아웃 날짜: '+ checkOutDate);
+					checkStatusMap.set('checkOutYear', checkOutDate.getFullYear());
+					checkStatusMap.set('checkOutMonth', checkOutDate.getMonth()+1);
+					checkStatusMap.set('checkOutDay', checkOutDate.getDate());
+
+					//console.log(checkStatusMap);
+					let checkOutDateStr=checkStatusMap.get('checkOutYear')+'년 '+checkStatusMap.get('checkOutMonth')+'월'+checkStatusMap.get('checkOutDay')+'일';
+					$('#reserve_checkout_date').text(checkOutDateStr);
+
+					$hotelReserveContainer.css('display','flex');
+
+					// 차이 (단위: 일 ) => hotelAccomodateDays 에 대입
+					let $diffDays=(checkOutDate-checkInDate)/(24*60*60*1000);
+					//console.log($diffDays);
+
+					let $hotelAccomodateDays= $('#using_accomodate_days'); //숙박기간(단위: 일 )
+					let $hotelTotalUsingDays= $('#using_total_days'); //전체 이용기간(단위: 일)
+
+					$hotelAccomodateDays.text($diffDays);
+					$hotelTotalUsingDays.text($diffDays+1);
+
+					//예약확인 숙박이용일/ 호텔전체이용일
+					$('span#reserve_accomodate_day').text($diffDays);
+					$('span#reserve_total_day').text($diffDays+1);
+
+
+					//총금액
+					$('span#reserve_total_prices').text($diffDays*Number($('#_room_price_per_day').val()) * Number($('#room_count').text()));
+					$('span#reserve_total_prices').text($('span#reserve_total_prices').text().replace(priceRegularExpression,','));
+				}
+			}
+		};
+
+
+
+		checkInDatePicker.on('change', function(){
+			checkInDate=$(this).val();
+			//console.log('체크인 날짜: '+checkInDate);
+
+			let checkInDateAddr= checkInDate.split('-');
+			//console.log('checkInDateAddr: '+ checkInDateAddr);
+
+			//체크인 날짜
+			checkInDate= new Date(checkInDateAddr[0], checkInDateAddr[1]-1 , checkInDateAddr[2]);
+			//console.log(checkInDate);
+			checkStatusMap.set('checkInStatus', true); //아직 체크인 날짜가 정해지지 않음을 의미함.
+
+			checkStatusFunc();
+
+		});
+
+
+		checkOutDatePicker.on('change', function(){
+			checkOutDate=$(this).val();
+			//console.log('체크아웃 날짜: '+checkOutDate);
+
+			let checkOutDateAddr= checkOutDate.split('-');
+
+			//체크아웃 날짜
+			checkOutDate=new Date(checkOutDateAddr[0], checkOutDateAddr[1]-1 , checkOutDateAddr[2]);
+			//console.log(checkOutDate);
+			checkStatusMap.set('checkOutStatus', true);//아직 체크아웃 날짜가 정해지지 않음을 의미함.
+
+			checkStatusFunc();
+
+		});
+
+	});
+
+
+	// 예약방개수/ 성인수/ 어린이수/ 총인원수
+	$(function(){
+		let priceRegularExpression=/\B(?=(\d{3})+(?!\d))/g;
+		//방개수
+		//1개이면 - 버튼을 누르지 못하게 해야한다.
+		let $roomCntVal= Number($('#room_count').text());
+
+		$('#reserve_room_cnt').text($('#room_count').text());//예약방개수 초기화
+		$('#reserve_adult_cnt').text($('#adult_count').text());//예약성인수 초기화
+		$('#reserve_child_cnt').text($('#child_count').text());//예약어린이수 초기화
+		$('#reserve_total_person_cnt').text(Number($('#adult_count').text())+Number($('#child_count').text()))//예약 총인원수 초기화
+
+		if($roomCntVal==1){
+			$('#room_minus_btn').attr('disabled', true);
+			$('#room_minus_btn').css('cursor', 'none' );
+		}
+
+		//성인
+		//1명이면 -버튼을 누르지 못하게 해야한다. (최소 성인 1명!)
+		let $adultCntVal= Number($('#adult_count').text());
+		if($adultCntVal==1){
+			$('#adult_minus_btn').attr('disabled', true);
+			$('#adult_minus_btn').css('cursor', 'none' );
+		}
+
+		//어린이
+		let $childCntVal=Number($('#child_count').text());
+		if($childCntVal==0){
+			$('#child_minus_btn').attr('disabled', true);
+			$('#child_minus_btn').css('cursor', 'none');
+		}
+
+		// 방 개수 버튼 선택
+		//방개수 증가 버튼 선택함수
+		$('#room_plus_btn').click( function(){
+			let $nowVal= Number($('#room_count').text());
+
+			$nowVal+=1;
+			$roomCntVal=$nowVal;
+			if($roomCntVal>1){
+				$('#room_minus_btn').attr('disabled', false);
+				$('#room_minus_btn').css('cursor', 'pointer');
+			}
+
+			$('#room_count').text($nowVal);
+			$('#reserve_room_cnt').text($('#room_count').text());//예약방개수
+
+			//총이용금액
+			if($('span#reserve_accomodate_day').text()==''){
+				$('span#reserve_total_prices').text(Number($('#_room_price_per_day').val()) * Number($('#room_count').text()));
+			}else{
+				$('span#reserve_total_prices').text(Number($('span#reserve_accomodate_day').text())*Number($('#_room_price_per_day').val()) * Number($('#room_count').text()));
+			}
+			$('span#reserve_total_prices').text($('span#reserve_total_prices').text().replace(priceRegularExpression,','));
+		});
+
+		// 방개수  감소 버튼 선택 함수
+		$('#room_minus_btn').click(function(){
+			let $nowVal= Number($('#room_count').text());
+			$nowVal-=1;
+			$roomCntVal=$nowVal;
+			if($roomCntVal<=1){
+				$('#room_minus_btn').attr('disabled', true);
+				$('#room_minus_btn').css('cursor', 'none');
+				$('#room_count').text(1);
+			}else{
+				$('#room_count').text($nowVal);
+				$('#room_minus_btn').css('cursor', 'pointer');
+			}
+			$('#reserve_room_cnt').text($('#room_count').text()); //예약방개수
+
+			//총이용금액
+			if($('span#reserve_accomodate_day').text()==''){
+				$('span#reserve_total_prices').text(Number($('#_room_price_per_day').val()) * Number($('#room_count').text()));
+			}else{
+				$('span#reserve_total_prices').text( Number($('span#reserve_accomodate_day').text())*Number($('#_room_price_per_day').val()) * Number($('#room_count').text()));
+			}
+			$('span#reserve_total_prices').text($('span#reserve_total_prices').text().replace(priceRegularExpression,','));
+
+		});
+
+
+		// 성인 인원수 버튼 선택
+		// 성인수 증가 버튼 선택 함수
+		$('#adult_plus_btn').click( function(){
+			let $nowVal= Number($('#adult_count').text());
+
+			$nowVal+=1;
+			$adultCntVal=$nowVal;
+			if($adultCntVal>1){
+				$('#adult_minus_btn').attr('disabled', false);
+				$('#adult_minus_btn').css('cursor', 'pointer');
+			}
+
+			$('#adult_count').text($nowVal);
+
+			//예약 성인 인원수
+			$('#reserve_adult_cnt').text($('#adult_count').text());
+			$('#reserve_total_person_cnt').text(Number($('#adult_count').text())+Number($('#child_count').text()))//예약 총인원수
+		});
+
+		// 성인수 감소 버튼 선택 함수
+		$('#adult_minus_btn').click(function(){
+			let $nowVal= Number($('#adult_count').text());
+			$nowVal-=1;
+			$adultCntVal=$nowVal;
+			if($adultCntVal<=1){
+				$('#adult_minus_btn').attr('disabled', true);
+				$('#adult_minus_btn').css('cursor', 'none');
+				$('#adult_count').text(1);
+			}else{
+				$('#adult_count').text($nowVal);
+				$('#adult_minus_btn').css('cursor', 'pointer');
+			}
+
+			//예약 성인 인원수
+			$('#reserve_adult_cnt').text($('#adult_count').text());
+			$('#reserve_total_person_cnt').text(Number($('#adult_count').text())+Number($('#child_count').text()))//예약 총인원수
+		});
+
+		// 어린이 인원수 버튼 선택
+		// 어린이수 증가 버튼 선택함수
+		$('#child_plus_btn').click(function(){
+			let $nowCVal= Number($('#child_count').text());
+			$nowCVal+=1;
+			$childCntVal=$nowCVal;
+			if($childCntVal>0){
+				$('#child_minus_btn').attr('disabled', false);
+				$('#child_minus_btn').css('cursor', 'pointer');
+			}
+			$('#child_count').text($nowCVal);
+			$('#reserve_child_cnt').text($('#child_count').text());//예약어린이수
+			$('#reserve_total_person_cnt').text(Number($('#adult_count').text())+Number($('#child_count').text()))//예약 총인원수
+
+		});
+
+		// 어린이수 감소 버튼 선택함수
+		$('#child_minus_btn').click(function(){
+			let $nowCVal= Number($('#child_count').text());
+			$nowCVal-=1;
+			$childCntVal=$nowCVal;
+			if($childCntVal<=0){
+				$('#child_minus_btn').attr('disabled', true);
+				$('#child_minus_btn').css('cursor', 'none');
+				$('#child_count').text(0);
+			}else{
+				$('#child_count').text($nowCVal);
+				$('#child_minus_btn').css('cursor', 'pointer');
+			}
+			$('#reserve_child_cnt').text($('#child_count').text());
+			$('#reserve_total_person_cnt').text(Number($('#adult_count').text())+Number($('#child_count').text()))//예약 총인원수
+		});
+
+	});
+
+
+
+
+	$(function(){
+		//버튼클릭을하면 값이 변하는 부분: 예약객실수/ 성인수/ 어린이수
+
+		//예약 성인 인원수
+		//$('#reserve_adult_cnt').text(Number($('#adult_count').text()));
+
+		//예약 어린이 인원수:
+		//$('#reserve_child_cnt').text(Number($('#child_count').text()));
+
+		//총 예약 인원수:
+		//$('#reserve_total_person_cnt')
+
+
+		//체크인날짜
+
+
+		//체크아웃날짜
+		$('#reserve_checkout_date')
+
+		//숙박일(박)
+		$('span#reserve_accomodate_day').text();
+
+		//호텔총 이용일
+		$('span#reserve_total_day').text();
+
+		//총금액
+		$('span#reserve_total_prices').text();
+	});
+
+	</script>
 
 
 	<!--6. 결제 수단 선택   -->

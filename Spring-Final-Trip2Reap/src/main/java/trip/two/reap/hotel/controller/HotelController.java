@@ -238,7 +238,7 @@ public class HotelController {
 		return mv;
 	}
 
-
+	
 	//2020.11.26
 	// 호텔 예약페이지로 이동
 	@RequestMapping("hotelReservationView.ho")
@@ -265,6 +265,7 @@ public class HotelController {
 		.setViewName("hotel_reservation");
 		return mv;
 	}
+	
 
 	//2020.11.27
 	@RequestMapping("updateLikeHotel.ho")
@@ -328,11 +329,13 @@ public class HotelController {
 	
 
 	// 호텔 예약페이지로 이동 (테스트 용)
+	/*
 	@RequestMapping("hotelReservationView.ho")
 	public String goHotelReservationView() {
 		//caution! it's not final controller
 		//it's just for beta test to see view page(hotel_detail.jsp)
 		return "hotel_reservation";
 	}
+	*/
 
 }
