@@ -193,12 +193,15 @@ input[type="button"]:focus{
 	width: 70%;
 	margin:0;
 	
+	align-items: center;
+	
 	text-align:center;
 }
 
 #hotel-detail-info-ul li{
 	padding: 5px 0;
 	position: relative;
+	width: 80%;
 	display: flex;
 	flex-direction: row;
 	
