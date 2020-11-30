@@ -124,11 +124,11 @@ public class HotelController {
 		ArrayList<String>hashTagsList=null;
 		ArrayList<String>hotelOptionsList=null;
 
-
 		Hotel hotel=hService.selectOneHotel(hId);
 
-		//hId에 해당하는 방의 개수를 구한다.
-		int roomCnt=hService.getRoomListCount(hId);	//방
+		
+		int roomCnt=0; 	// hId 호텔번호에 해당하는 호텔에 등록된 방 개수
+		int likeCnt=0;  // hId 호텔번호의 좋아요 개수 
 
 		//hId중 가장 싼 가격의 방번호를 구한다.
 		//여러개가 있다면 가장 첫번째꺼를 구하면된다.
@@ -142,6 +142,12 @@ public class HotelController {
 		HashMap<String,ArrayList<Room>> roomMap=null;
 
 		if(hotel!=null) {
+			//hId에 해당하는 방의 개수를 구한다.
+			roomCnt= hService.getRoomListCount(hId);
+			
+			//hId에 해당하는 호텔의 좋아요 개수를 구한다.
+			likeCnt= hService.countHotelLike(hId);
+			
 			//해시태그 보여주기
 			if(hotel.getBoTag()!=null) {
 				//해시태그가 null이 아니라면
@@ -218,6 +224,7 @@ public class HotelController {
 			.addObject("hotelOptionsList", hotelOptionsList)
 			.addObject("roomMap", roomMap)
 			.addObject("minPriceRoomId", minPriceRoomId)
+			.addObject("likeCnt", likeCnt)
 			.setViewName("hotel_detail");
 		}else {
 			throw new HotelException("해당 호텔이 존재하지 않습니다!");

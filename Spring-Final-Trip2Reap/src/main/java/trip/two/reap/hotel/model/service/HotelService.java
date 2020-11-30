@@ -46,8 +46,11 @@ public interface HotelService {
 	// 좋아요로 바꾸기
 	int updateLikeHotel(HashMap<String, Object> map);
 
-	// like 테이블에 등록하
+	// like 테이블에 등록하기
 	int insertLikeHotel(HashMap<String, Object> map);
+
+	//호텔 좋아요 개수 표시 
+	int countHotelLike(int hId);
 
 
 

@@ -135,5 +135,13 @@
 	INSERT INTO LIKES VALUES(#{hId},'Y',#{loginUserId})
 	</insert>
 	
+	
+	<!-- 2020.11.30 -->
+	<select id="countHotelLike" resultType="_int">
+	SELECT COUNT(*)
+	FROM LIKES
+	WHERE BO_NO=#{hId} AND LIKE_YN='Y'
+	</select>
+	
 
 </mapper>

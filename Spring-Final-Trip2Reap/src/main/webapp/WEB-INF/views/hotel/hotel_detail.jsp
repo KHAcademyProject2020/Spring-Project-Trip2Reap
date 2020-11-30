@@ -164,7 +164,7 @@
 							</span>
 							<span>
 								<!--좋아요 개수  -->
-								{좋아요 개수 }&nbsp;개
+								${likeCnt }&nbsp;개
 							</span>
 						</li>
 					</ul>

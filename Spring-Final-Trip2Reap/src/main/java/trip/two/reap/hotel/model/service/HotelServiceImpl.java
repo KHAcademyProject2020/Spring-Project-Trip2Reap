@@ -121,5 +121,12 @@ public class HotelServiceImpl implements HotelService{
 		return hDAO.insertLikeHotel(sqlSession, map);
 	}
 
+	//2020.11.30
+	//호텔 좋아요개수 구하기 
+	@Override
+	public int countHotelLike(int hId) {
+		return hDAO.countHotelLike(sqlSession, hId);
+	}
+
 
 }

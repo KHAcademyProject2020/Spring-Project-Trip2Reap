@@ -96,6 +96,10 @@ public class HotelDAO {
 		return sqlSession.insert("hotelMapper.insertLikeHotel", map);
 	}
 
+	public int countHotelLike(SqlSessionTemplate sqlSession, int hId) {
+		return sqlSession.selectOne("hotelMapper.countHotelLike", hId);
+	}
+
 
 
 
