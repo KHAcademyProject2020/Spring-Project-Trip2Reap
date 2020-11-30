@@ -1019,22 +1019,48 @@ button.room-reservation-btn:hover{
 }
 
 
+#emptyReviewMsg{
+	text-align: center;
+}
+
 
 /* 등록된 댓글  */
 /* 리뷰 댓글 컨테이너   */
 #reviews-container{
 	position: relative;	
+	display: flex;
+	flex-direction: column;
+}
+
+ /*리뷰가 존재하지 않을때  */
+#reviews-container.emptyReview{
+	align-items: center;
+	margin: 50px 0;
+}
+
+/*리뷰가 존재할때   */
+#reviews-container.reviewObtained{
+
 	margin-top: 50px;
+	margin-left: 50px;
+
+	align-items: flex-start;
 	width: 100%;
 }
 
-#review_wrappers_ul{
+ul#reviews_wrappers_ul{
 	position: relative;
+	width: 100%;
+	
+	margin-bottom: 10px;
 }
 
 li.one_review_container{
+	width: 100%;
+	position: relative;
 	padding: 10px 0;
-	margin: 10px 0;	
+	margin: 10px 25px;	
+
 }
 
 /*덧글 1개 */
@@ -1043,14 +1069,13 @@ li.one_review_container{
 	flex-direction: row;
 	justify-content: space-around;
 	align-items: flex-start;
-	width: 80%;
 	position: relative;
 
 }
 
 .remove_review_wrapper{
 	position: relative;
-	flex-basis: 20%;
+	flex-basis: 5%;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
@@ -1072,7 +1097,7 @@ li.one_review_container{
 
 .review_writer_control_wrapper{
 	position: relative;
-	flex-basis: 80%;
+	flex-basis: 95%;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
@@ -1089,7 +1114,7 @@ li.one_review_container{
 }
 
 .review_point{
-	padding-bottom: 7px 0;
+	padding: 7px 0;
 }
 
 span.review_stars{
@@ -1098,7 +1123,7 @@ span.review_stars{
 
 .review_content_container{
 	position: relative;
-	width: 100%;
+	width:100%;
 	padding: 10px 0;
 	
 }
@@ -1106,7 +1131,9 @@ span.review_stars{
 /* 리뷰 더보기 버튼   */
 .review_more_btn_container{
 	position: relative;
-	margin: 30px;
+/* 	margin: 30px; */
+	text-align: left;
+	width: 100%;
 }
 
 #review_more_btn{

@@ -691,6 +691,36 @@
 		<%--hotel-review-container에서 발생하는 자바스크립트 함수  --%>
 		<script>
 		$(function(){
+			//리뷰개수
+			let reviewListCnt= $('.one_review_container').length;
+			let reviewContainer= $('#reviews-container');
+			if(reviewListCnt>0){
+				//리뷰가 존재한다면
+				//호텔리뷰 클래스가 없다면
+				if(!reviewContainer.hasClass('.reviewObtained')){
+					reviewContainer.addClass('reviewObtained');
+				}
+				
+				//덧글이 없었다가 새로 등록해서 생기게되면
+				if(reviewContainer.hasClass('.emptyReview')){
+					reviewContainer.removeClass('emptyReview');
+				}
+			}else{
+				//리뷰가 존재하지 않는다면
+				if(!reviewContainer.hasClass('.emptyReview')){
+					reviewContainer.addClass('emptyReview');	
+				}
+				
+				//덧글 삭제후 리뷰가 비어있게된다면
+				if(reviewContainer.hasClass('.reviewObtained')){
+					reviewContainer.removeClass('reviewObtained');
+				}
+			}
+			
+			
+		});
+		
+		$(function(){
 
 			$('#insert-review-btn').click(function(){
 				console.log('어머 리뷰등록버튼을 누르셨군요?');
