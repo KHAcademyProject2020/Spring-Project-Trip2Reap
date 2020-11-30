@@ -346,17 +346,55 @@ public class HotelController {
 		//댓글등록(2) : HOTEL_REVIEW 테이블에 넣는다!
 		int result2=0;
 		
+		//호텔리뷰점수 업데이트
+		int updateHotelReviewScore=0;
+		
 		if(result1>0) {
 			result2= hService.insertHotelReview(hotelReply);
-			if(result2>0)
-				return "success";
+			if(result2>0) {
+				updateHotelReviewScore=hService.updateHotelReviewScore(hotelReply.getBoNo());
+				if(updateHotelReviewScore>0)
+					return "success";
+				else
+					throw new HotelException("호텔 리뷰 등록에 실패하였습니다!");
+			}
 			else {
-				throw new HotelException("호텔 리뷰 등록에 실패하였습니다");
+				throw new HotelException("호텔 리뷰 등록에 실패하였습니다!");
 			}
 		}else {
-			throw new HotelException("호텔 리뷰 등록에 실패하였습니다.");
+			throw new HotelException("호텔 리뷰 등록에 실패하였습니다!");
 		}
 		
+	}
+	
+	//호텔리뷰 댓글 삭제
+	@RequestMapping("deleteHotelReview.ho")
+	@ResponseBody
+	public String deleteHotelReview(Reply hotelReply) throws HotelException{
+		int result=hService.deleteHotelReview(hotelReply);
+		int reviewCnt=0;
+		int updateHotelReviewScore=0;
+		if(result>0) {
+			//삭제후 리뷰개수에 따라 서비스 처리가 다르다.
+			reviewCnt=hService.countHotelReview(hotelReply);
+			
+			if(reviewCnt==0) {
+				//삭제 처리 이후 리뷰개수가 0개라면 => 0점으로 바꾼다.
+				updateHotelReviewScore=hService.updateHotelReviewScoreZero(hotelReply.getBoNo());
+			}else {
+				//삭제 처리 이후, 리뷰개수가 0개가 아니라면 업데이트
+				updateHotelReviewScore= hService.updateHotelReviewScore(hotelReply.getBoNo());
+			}
+			
+			if(updateHotelReviewScore>0) {
+				return "success";
+			}else {
+				throw new HotelException("호텔 리뷰 삭제에 실패하였습니다!");
+			}
+			
+		}else {
+			throw new HotelException("호텔 리뷰 삭제에 실패하였습니다!");
+		}
 	}
 
 

@@ -157,6 +157,34 @@ public class HotelServiceImpl implements HotelService{
 	public ArrayList<String> selectOneHotelReplyNickNameList(int hId) {
 		return hDAO.selectOneHotelReplyNickNameList(sqlSession, hId);
 	}
+
+	//호텔리뷰점수 업데이트
+	@Override
+	public int updateHotelReviewScore(int boNo) {
+		return hDAO.updateHotelReviewScore(sqlSession, boNo);
+	}
+
+	//호텔 리뷰 삭제 
+	@Override
+	public int deleteHotelReview(Reply hotelReply) {
+		return hDAO.deleteHotelReview(sqlSession, hotelReply);
+	}
+
+	//리뷰 삭제 이후, 리뷰개수 카운트
+	@Override
+	public int countHotelReview(Reply hotelReply) {
+		return hDAO.countHotelReview(sqlSession, hotelReply);
+	}
+
+	
+	//리뷰삭제 이후, 리뷰개수가 0개일때, 0점으로 바꾸기
+	@Override
+	public int updateHotelReviewScoreZero(int boNo) {
+		return hDAO.updateHotelReviewScoreZero(sqlSession, boNo);
+	}
+	
+	
+	
 	
 
 }

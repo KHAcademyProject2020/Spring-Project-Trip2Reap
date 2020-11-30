@@ -185,5 +185,39 @@
 	ORDER BY RE_NO DESC
 	</select>
 	
+	<!-- 호텔점수 갱신하기  -->
+	<update id="updateHotelReviewScore">
+	UPDATE HOTEL
+	SET HOTEL_REVIEW_SCORE=(
+							SELECT AVG(REVIEW_SCORE)
+							FROM REPLY JOIN HOTEL_REVIEW USING(RE_NO) 
+							WHERE BO_NO=#{hId} AND RE_DELETE_YN='N')
+	WHERE BO_NO=#{hId}
+	</update>
+	
+	<!-- 호텔점수 갱신하기(호텔리뷰개수가 0개일때) -->
+	<update id="deleteHotelReviewScoreZero">
+	UPDATE HOTEL
+	SET HOTEL_REVIEW_SCORE=0
+	WHERE BO_NO=#{boNo}
+	</update>
+	
+	
+	<!-- 호텔리뷰삭제하기 -->
+	<update id="deleteHotelReview">
+	UPDATE REPLY
+	SET RE_DELETE_YN='Y'
+	WHERE BO_NO=#{boNo} AND RE_NO=#{reNo} AND RE_DELETE_YN='N'
+	</update>
+	
+	<!--호텔리뷰 삭제이후에, 리뷰개수 카운트 -->
+	<select id="countHotelReview" resultType="_int">
+	SELECT COUNT(*)
+	FROM REPLY
+	WHERE BO_NO=#{boNo} AND RE_DELETE_YN='N'
+	</select>
+	
+	
+
 
 </mapper>

@@ -64,11 +64,17 @@ public interface HotelService {
 	//리뷰작성자 닉네임 리스트 
 	ArrayList<String> selectOneHotelReplyNickNameList(int hId);
 
+	//호텔 리뷰점수 업데이트
+	int updateHotelReviewScore(int boNo);
 
+	//호텔 리뷰 삭제
+	int deleteHotelReview(Reply hotelReply);
 
+	// 리뷰 삭제 이후, 리뷰개수 카운트
+	int countHotelReview(Reply hotelReply);
 
-
-
+	//리뷰삭제이후, 리뷰개수가 0개일때 0점으로 바꾸기
+	int updateHotelReviewScoreZero(int boNo);
 
 
 }

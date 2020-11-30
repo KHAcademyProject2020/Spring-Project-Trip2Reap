@@ -121,6 +121,25 @@ public class HotelDAO {
 		return (ArrayList)sqlSession.selectList("hotelMapper.selectOneHotelReplyNickNameList", hId);
 	}
 
+	public int updateHotelReviewScore(SqlSessionTemplate sqlSession, int hId) {
+		return sqlSession.update("hotelMapper.updateHotelReviewScore", hId);
+	}
+
+	//호텔리뷰 삭제
+	public int deleteHotelReview(SqlSessionTemplate sqlSession, Reply hotelReply) {
+		return sqlSession.update("hotelMapper.deleteHotelReview", hotelReply);
+	}
+
+	//호텔리뷰 삭제후, 리뷰개수 카운트
+	public int countHotelReview(SqlSessionTemplate sqlSession, Reply hotelReply) {
+		return sqlSession.selectOne("hotelMapper.countHotelReview", hotelReply);
+	}
+
+	//호텔리뷰 삭제후, 리뷰개수가 0개일 때, 호텔리뷰점수 0점으로 바꾸기
+	public int updateHotelReviewScoreZero(SqlSessionTemplate sqlSession, int boNo) {
+		return sqlSession.update("hotelMapper.deleteHotelReviewScoreZero",boNo);
+	}
+
 	
 
 

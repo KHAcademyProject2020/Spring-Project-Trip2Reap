@@ -634,8 +634,10 @@
 									<div class="one_review_wrapper">
 		
 											<div class="remove_review_wrapper">
+												<input class="reviewNumber" type="hidden" value="${ review.reNo}"/>
 												<%--리뷰삭제버튼은 관리자/ 리뷰작성자 본인 만 보인다. --%>
 												<c:if test="${ loginUser.memberId eq 'admin' || review.memberId eq loginUser.memberId}">
+													
 													<i class="remove_review fas fa-times"></i> <%--리뷰 삭제버튼 --%>
 												</c:if>
 											</div>
@@ -691,6 +693,60 @@
 		<%--hotel-review-container에서 발생하는 자바스크립트 함수  --%>
 		<script>
 		$(function(){
+			//리뷰삭제 버튼 클릭
+			$('.remove_review').click(function(){
+				//호텔번호를 구한다
+				let boNo=Number($('#hotel-number').val());
+				
+				//댓글번호를 구한다
+				let reNo=Number( $(this).closest('.remove_review_wrapper').find('.reviewNumber').val() );
+				
+				swal({
+					title:'호텔리뷰를 삭제하시겠습니까?',
+					text:'삭제버튼을 누르면 리뷰를 되돌릴 수 없습니다!',
+					icon: 'warning',
+					buttons: ['삭제취소', '삭제'],
+					dangerMode: true,
+				})
+				.then((willDelete)=>{
+					if(willDelete){
+						// 리뷰 삭제 처리
+						//re_delete_yn을 => 'Y' 로 바꾼다.
+						$.ajax({
+							url: 'deleteHotelReview.ho',
+							type: 'post',
+							data: {
+									reNo:reNo,
+									boNo:boNo
+								},
+							success:function(response){
+								if(response=='success'){
+									swal({
+										title:'호텔리뷰 삭제 성공!',
+										icon:'success',
+										text: '호텔리뷰 삭제를 성공하였습니다!',
+										buttons: '확인'
+									});
+									
+									//그리고 현재 브라우저 화면을  새로고침 시켜서 다시 랜더링
+									location.reload();
+								}
+							}
+						});
+						
+					}else{
+						// 리뷰 삭제 취소
+						swal({
+							title:'호텔리뷰 삭제를 취소합니다.',
+							button:'확인'
+						});
+					}
+				});
+
+			});
+		});
+		
+		$(function(){
 			//리뷰개수
 			let reviewListCnt= $('.one_review_container').length;
 			let reviewContainer= $('#reviews-container');
@@ -723,7 +779,7 @@
 		$(function(){
 
 			$('#insert-review-btn').click(function(){
-				console.log('어머 리뷰등록버튼을 누르셨군요?');
+				//console.log('어머 리뷰등록버튼을 누르셨군요?');
 
 				let $insertContainer= $('#insert-review-container');
 
@@ -742,7 +798,7 @@
 		
 		$(function(){
 			$('#insert-btn').click(function(){
-				console.log('어머~ 리뷰를 등록해주셨군요! 고마워요~');
+				//console.log('어머~ 리뷰를 등록해주셨군요! 고마워요~');
 				
 				//현재 리뷰등록할 호텔 번호구하기
 				let hId= Number($('#hotel-number').val());
@@ -784,8 +840,6 @@
 									//그리고 현재 브라우저 화면을  새로고침 시켜서 다시 랜더링
 									location.reload();
 								}
-								
-								
 								
 							}
 							
