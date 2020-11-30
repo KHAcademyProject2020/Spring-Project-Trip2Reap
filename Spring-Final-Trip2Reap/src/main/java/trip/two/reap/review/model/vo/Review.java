@@ -14,13 +14,17 @@ public class Review {
 	private String boDeleteYN;
 	private Date regDate;
 	private String caName;
+	private String originName;
+	private String changeName;
 
 	
 	public Review() {}
 
+	
+
 
 	public Review(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount, String boTag,
-			String boDeleteYN, Date regDate,String caName) {
+			String boDeleteYN, Date regDate, String caName, String originName, String changeName) {
 		super();
 		this.boNo = boNo;
 		this.caCode = caCode;
@@ -32,11 +36,9 @@ public class Review {
 		this.boDeleteYN = boDeleteYN;
 		this.regDate = regDate;
 		this.caName = caName;
+		this.originName = originName;
+		this.changeName = changeName;
 	}
-
-
-
-
 
 
 	public int getBoNo() {
@@ -122,15 +124,50 @@ public class Review {
 	public void setCaName(String caName) {
 		this.caName = caName;
 	}
+	
+	
+
+
+	public String getOriginName() {
+		return originName;
+	}
+
+
+
+
+	public void setOriginName(String originName) {
+		this.originName = originName;
+	}
+
+
+
+
+	public String getChangeName() {
+		return changeName;
+	}
+
+
+
+
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
+
+
 
 
 	@Override
 	public String toString() {
 		return "Review [boNo=" + boNo + ", caCode=" + caCode + ", boTitle=" + boTitle + ", boContent=" + boContent
 				+ ", memberId=" + memberId + ", boCount=" + boCount + ", boTag=" + boTag + ", boDeleteYN=" + boDeleteYN
-				+ ", regDate=" + regDate + ", caName=" + caName + "]";
+				+ ", regDate=" + regDate + ", caName=" + caName + ", originName=" + originName + ", changeName="
+				+ changeName + "]";
 	}
 
+
+
+
+	
 
 	
 

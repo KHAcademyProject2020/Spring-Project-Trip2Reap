@@ -41,5 +41,8 @@ public class ReviewDAO {
 	public int insertReview(SqlSessionTemplate sqlSession, Review r) {
 		return sqlSession.insert("reviewMapper.insertReview",r);
 	}
+	public int insertReviewFile(SqlSessionTemplate sqlSession, Review r) {
+		return sqlSession.insert("reviewMapper.insertReviewFile",r);
+	}
 	
 }

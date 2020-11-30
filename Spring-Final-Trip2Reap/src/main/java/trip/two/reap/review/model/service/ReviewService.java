@@ -13,9 +13,10 @@ public interface ReviewService {
 	
 	Review selectReview(int boNO);
 	
-	int insertReview(Review review);
+	int insertReview(Review r);
 	
 	int updateReview(Review r);
 
+	int insertReviewFile(Review r);
 
 }

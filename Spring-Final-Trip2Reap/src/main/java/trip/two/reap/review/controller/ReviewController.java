@@ -1,20 +1,32 @@
 package trip.two.reap.review.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
+
+import trip.two.reap.common.Attachment;
 import trip.two.reap.common.PageInfo;
 import trip.two.reap.common.Pagination;
-import trip.two.reap.member.model.vo.Member;
 import trip.two.reap.review.model.service.ReviewService;
 
 import trip.two.reap.review.model.vo.Review;
@@ -105,16 +117,62 @@ public class ReviewController {
    
    
    @RequestMapping("rInsert.bo")
-   public String reviewInsert(@ModelAttribute Review r, HttpServletRequest request) {
+   public String reviewInsert(@ModelAttribute Review r, @RequestParam("uploadFile") MultipartFile uploadFile,HttpServletRequest request) {
+	   
+	   System.out.println("보드 : " + r);
+	    System.out.println("첨부파일 : " + uploadFile);
+	    System.out.println("파일이름 : " + uploadFile.getOriginalFilename());
+	   // 파일을 집어넣지 않으면 empty값이 반환. 파일을 넣으면 파일이름이 반환됨.	   
+	
+	   //if(!uploadFile.getOriginalFilename().equals("")) {
+	   if(uploadFile != null && !uploadFile.isEmpty()) {
+		   String changeName = saveFile(uploadFile, request);
+		// saveFile() : 파일을 저장할 경로 지정
+		   
+		   if(changeName != null) {
+			  r.setOriginName(uploadFile.getOriginalFilename());
+			   r.setChangeName(changeName);
+		   }
+	   }
 	   
 	   int result = rService.insertReview(r);
-
+	  
+	   
+	   System.out.println(result);
 	   if(result > 0) {
 		   return "redirect:reviewList.bo";
 	   } else {
 		   throw new ReviewException("게시글 등록에 실패했습니다.");
 	   }
    }
+   
+   @RequestMapping("download.do")
+   public String saveFile(MultipartFile file, HttpServletRequest request) {
+	   // saveFile() : 파일을 저장할 경로 지정
+	   String root = request.getSession().getServletContext().getRealPath("resources");
+	   // System.out.println("루트 : " + root);
+	   String savePath = root + "\\buploadFiles";
+	   
+	   File folder = new File(savePath);
+	   if(!folder.exists()) {
+		   folder.mkdirs();
+	   }
+	   
+	   SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+	   String originFileName = file.getOriginalFilename();
+	   String renameFileName = sdf.format(new Date(System.currentTimeMillis())) + "." + originFileName.substring(originFileName.lastIndexOf(".")+1);  
+	   // System.out.println("rename파일 이름 : " + renameFileName);
+	   String renamePath = folder + "\\" + renameFileName;
+	   
+	   try {
+		file.transferTo(new File(renamePath));
+	   } catch (IOException e) {
+		   System.out.println("파일 전송 에러 : " + e.getMessage());
+		e.printStackTrace();
+	}
+	   return renameFileName;
+   }
+   
 
    
   

@@ -32,6 +32,13 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 	
 	@Override
+	public int insertReview(Review r) {
+		return rDAO.insertReview(sqlSession,r);
+	}
+	
+	
+	
+	@Override
 	public Review selectReview(int boNo) {
 		Review r = null;
 	      
@@ -51,7 +58,9 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public int insertReview(Review r) {
-		return rDAO.insertReview(sqlSession,r);
+	public int insertReviewFile(Review r) {
+		return 0;
 	}
+
+	
 }

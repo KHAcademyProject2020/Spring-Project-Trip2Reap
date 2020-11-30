@@ -27,6 +27,8 @@
       <result column="BO_DELETE_YN" property="boDeleteYN"/>
       <result column="REGDATE" property="regDate"/>
       <result column="CA_NAME" property="caName"/> 
+      <result column="ORIGIN_NAME" property="originName"/>
+      <result column="CHANGE_NAME" property="changeName"/>
    </resultMap>
    
   	 <update id="addReadCount">
@@ -44,14 +46,17 @@
    </select> 
    
   <insert id="insertReview">
-   		<!-- insert into BOARD
-   		values (SEQ_BO_NO.NEXTVAL,3,#{boTitle},#{boContent},#{memberId},DEFALUT,#{boTag},'N',SYSDATE) -->
-<!--    		insert into BOARD values(SEQ_BO_NO.NEXTVAL,3,'테스트','여행가고싶다','ko1850',0,'#여행#여행','N',DEFAULT)
- -->  
- INSERT INTO BOARD (BO_NO,MEMBER_ID,CA_CODE,BO_TITLE,BO_TAG,BO_CONTENT)
-        VALUES(SEQ_BO_NO.NEXTVAL,#{memberId},#{caCode},#{boTitle},#{boTag},#{boContent})
- 
- 
+		INSERT
+ 		INTO BOARD (BO_NO,MEMBER_ID,CA_CODE,BO_TITLE,BO_TAG,BO_CONTENT)
+ 		VALUES(SEQ_BO_NO.NEXTVAL,#{memberId},#{caCode},#{boTitle},#{boTag},#{boContent})
+ 		
+  </insert>
+  
+  <insert id="insertReviewFile">
+  		INSERT
+ 		INTO IMGFILE
+ 		VALUES(SEQ_FILE_NO.NEXTVAL,SEQ_BO_NO.NEXTVAL,#{originName},#{changeName},1,'null',DEFAULT)
+  		
   </insert>
    
 
