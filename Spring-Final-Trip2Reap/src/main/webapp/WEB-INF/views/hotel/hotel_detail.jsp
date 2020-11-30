@@ -619,142 +619,71 @@
 				<%-- 등록한 리뷰컨테이너(reviews-container) --%>
 				<div id="reviews-container">
 
-					<ul id="reviews_wrappers_ul">
-						<%--리뷰 1개  --%>
-						<li class="one_review_container">
-							<div class="one_review_wrapper">
-
-								<%--리뷰삭제버튼은 관리자/ 리뷰작성자 본인 만 보인다. --%>
-								<div class="remove_review_wrapper">
-									<i class="remove_review fas fa-times"></i> <%--리뷰 삭제버튼 --%>
-								</div>
-
-								<%--작성자 / 리뷰 내용 관련  --%>
-								<div class="review_writer_control_wrapper">
-									<div class="review_writer_nickname_wrapper">
-											<h3>doubleYY{리뷰작성자 닉네임 }</h3> <%--리뷰작성자 닉네임  --%>
+					<%-- 호텔 리뷰가 존재하지 않을 때, 나타낸다. --%>
+					<c:if test="${empty reviewList }">
+						<span id="emptyReviewMsg">호텔 리뷰가 존재하지 않습니다!</span>
+					</c:if>
+					
+					<%-- 호텔 리뷰가 존재할 때 나타낸다. --%>
+					<c:if test="${!empty reviewList }">
+						
+						<ul id="reviews_wrappers_ul">
+							<%--리뷰 1개  --%>
+							<c:forEach var="review" items="${reviewList }" varStatus="reviewVS">
+								<li class="one_review_container">
+									<div class="one_review_wrapper">
+		
+											<div class="remove_review_wrapper">
+												<%--리뷰삭제버튼은 관리자/ 리뷰작성자 본인 만 보인다. --%>
+												<c:if test="${ loginUser.memberId eq 'admin' || review.memberId eq loginUser.memberId}">
+													<i class="remove_review fas fa-times"></i> <%--리뷰 삭제버튼 --%>
+												</c:if>
+											</div>
+										
+										
+										<%--작성자 / 리뷰 내용 관련  --%>
+										<div class="review_writer_control_wrapper">
+											<div class="review_writer_nickname_wrapper">
+													<h3>${reviewNickNameList.get(reviewVS.index) }</h3> <%--리뷰작성자 닉네임  --%>
+											</div>
+		
+											<div class="review_upload_date">
+												<small>${review.reDate} </small> <%--리뷰 업로드날짜 --%>
+											</div>
+		
+											<div class="review_point">
+												<%-- 리뷰 부여 별점.. --%>
+												<span class="review_stars">
+													<c:forEach var="i" begin="1" end="5" varStatus="starVS">
+															<c:if test="${starVS.index <=review.reviewScore}">
+																<i class="fas fa-star"></i>
+															</c:if>
+															<c:if test="${starVS.index > review.reviewScore }">
+																<i class="far fa-star"></i>
+															</c:if>
+													</c:forEach>
+												</span>
+											</div>
+		
+											<div class="review_content_container">
+												<%--리뷰 내용  --%>
+												<span class="reivewer_review_content">
+												${review.reContent}
+												</span>
+											</div>
+										</div>
 									</div>
-
-									<div class="review_upload_date">
-										<small>2020.06.02 {리뷰작성 날짜 } </small> <%--리뷰 업로드날짜 --%>
-									</div>
-
-									<div class="review_point">
-										<%-- 리뷰 부여 별점.. --%>
-										<span class="review_stars">
-											<i class="fas fa-star"></i>
-											<i class="fas fa-star"></i>
-											<i class="fas fa-star"></i>
-											<i class="far fa-star"></i>
-											<i class="far fa-star"></i>
-										</span>
-									</div>
-
-									<div class="review_content_container">
-										<%--리뷰 내용  --%>
-										<span class="reivewer_review_content">
-										{ 리뷰 내용 }
-										여자친구랑 처음으로 같이 호텔갔는데 뷰전망은 진짜 좋네요.
-										조식이나 레스토랑 음식은 그냥 먹을만했어요.
-										카페나 편의 시설이 많이 부족한게 아쉬워요.
-										</span>
-									</div>
-								</div>
-							</div>
-						</li>
-						<%--리뷰 1개 표본  끝 --%>
-
-
-						<%-- 2번째 샘플덧글  --%>
-						<li class="one_review_container">
-							<div class="one_review_wrapper">
-
-								<%--리뷰삭제버튼은 관리자/ 리뷰작성자 본인 만 보인다. --%>
-								<div class="remove_review_wrapper">
-									<i class="remove_review fas fa-times"></i> <%--리뷰 삭제버튼 --%>
-								</div>
-
-								<%--작성자 / 리뷰 내용 관련  --%>
-								<div class="review_writer_control_wrapper">
-									<div class="review_writer_nickname_wrapper">
-											<h3>werty12123</h3> <%--리뷰작성자 닉네임  --%>
-									</div>
-
-									<div class="review_upload_date">
-										<small>2020.07.17</small> <%--리뷰 업로드날짜 --%>
-									</div>
-
-									<div class="review_point">
-										<%-- 리뷰 부여 별점.. --%>
-										<span class="review_stars">
-											<i class="fas fa-star"></i>
-											<i class="far fa-star"></i>
-											<i class="far fa-star"></i>
-											<i class="far fa-star"></i>
-											<i class="far fa-star"></i>
-										</span>
-									</div>
-
-									<div class="review_content_container">
-										<%--리뷰 내용  --%>
-										<span class="reivewer_review_content">
-										룸서비스에서 만족스럽지 못했어요. 오히려 실망했어요.
-										룸서비스 퀄리티도 별로고, 무엇보다도 호텔직원이 너무 불친절했어요.
-										</span>
-									</div>
-								</div>
-							</div>
-						</li>
-						 <%--리뷰 1개 표본  끝 --%>
-
-						<%-- 3번째 샘플덧글  --%>
-						<li class="one_review_container">
-							<div class="one_review_wrapper">
-
-								<%--리뷰삭제버튼은 관리자/ 리뷰작성자 본인 만 보인다. --%>
-								<div class="remove_review_wrapper">
-									<i class="remove_review fas fa-times"></i> <%--리뷰 삭제버튼 --%>
-								</div>
-
-								<%--작성자 / 리뷰 내용 관련  --%>
-								<div class="review_writer_control_wrapper">
-									<div class="review_writer_nickname_wrapper">
-											<h3>ek12mv2</h3> <%--리뷰작성자 닉네임  --%>
-									</div>
-
-									<div class="review_upload_date">
-										<small>2020.09.28 </small> <%--리뷰 업로드날짜 --%>
-									</div>
-
-									<div class="review_point">
-										<%-- 리뷰 부여 별점.. --%>
-										<span class="review_stars">
-											<i class="fas fa-star"></i>
-											<i class="fas fa-star"></i>
-											<i class="fas fa-star"></i>
-											<i class="far fa-star"></i>
-											<i class="far fa-star"></i>
-										</span>
-									</div>
-
-									<div class="review_content_container">
-										<%--리뷰 내용  --%>
-										<span class="reivewer_review_content">
-										앞에 뷰가 너무 좋아요. 앞에 바다가 있어서 경치보는 재미가있어요!
-										서비스나 조식은 그냥그래도 경치가 좋아서 만족스러워요!
-
-										</span>
-									</div>
-								</div>
-							</div>
-						</li> <%--리뷰 1개 표본  끝 --%>
-
-					</ul>
-
-					<%-- 더보기 버튼  --%>
-					<div class="review_more_btn_container">
-						<button id="review_more_btn">더보기 </button>
-					</div>
+								</li>
+							</c:forEach>
+							<%--리뷰 1개 표본  끝 --%>
+						</ul>
+						
+	
+						<%-- 더보기 버튼  --%>
+						<div class="review_more_btn_container">
+							<button id="review_more_btn">더보기 </button>
+						</div>
+					</c:if>
 
 				</div><%-- 등록한 리뷰 컨테이너 (reviews-container) --%>
 			</div> <%-- 호텔리뷰 컨테이너  --%>
@@ -776,6 +705,80 @@
 					// 리뷰등록창이 원래  열려있는 상태 => 닫는다.
 					$insertContainer.css('display', 'none');
 					$(this).text('리뷰 등록 하기');
+				}
+			});
+		});
+		
+		
+		$(function(){
+			$('#insert-btn').click(function(){
+				console.log('어머~ 리뷰를 등록해주셨군요! 고마워요~');
+				
+				//현재 리뷰등록할 호텔 번호구하기
+				let hId= Number($('#hotel-number').val());
+				
+				//로그인한 회원인지 확인하기
+				let loginUserObj= '${loginUser}';
+				
+				
+				if(loginUserObj){
+					//로그인되어있는 유저라면
+					let loginUserId= '${loginUser.memberId}';
+					console.log(loginUserId);
+					
+					let reviewScore= Number($('#review_score > option:selected').val());
+					let reviewContent=$('#review_content').val();
+					
+					if(reviewContent.length >0){
+						//작성한 리뷰내용이 0자보다 크다면
+						$.ajax({
+							url:'insertHotelReview.ho',
+							type:'post',
+							data:{
+									boNo: hId,
+									reviewScore: reviewScore,
+									reContent: reviewContent 
+								},
+							success:function(response){
+								//호텔등록이 성공적으로 이뤄지면 success 문자열을 반환한다.
+								if(response=="success"){
+									
+									swal({
+										title:'호텔리뷰 등록 성공!',
+										icon:'success',
+										text:'호텔리뷰 등록을 성공했습니다!',
+										button:'확인'
+									});
+									
+									
+									//그리고 현재 브라우저 화면을  새로고침 시켜서 다시 랜더링
+									location.reload();
+								}
+								
+								
+								
+							}
+							
+						});
+						
+					}else{
+						//리뷰내용이 0자
+						swal({
+							title:'호텔리뷰 등록실패',
+							icon: 'error',
+							text: '호텔리뷰 내용을 입력해주세요!',
+							button: '확인'
+						});
+					}
+					
+				}else{
+					//로그아웃 상태라면
+					swal({
+						title:'로그인 해주세요!',
+						icon: 'error',
+						text: '로그인한 계정에서만 호텔리뷰를 등록할 수 있습니다!',
+						button: '확인'
+					});
 				}
 			});
 		});

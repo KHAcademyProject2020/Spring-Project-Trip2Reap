@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import trip.two.reap.common.PageInfo;
 import trip.two.reap.hotel.model.dao.HotelDAO;
 import trip.two.reap.hotel.model.vo.Hotel;
+import trip.two.reap.hotel.model.vo.Reply;
 import trip.two.reap.hotel.model.vo.Room;
 
 @Service("hService")
@@ -128,5 +129,34 @@ public class HotelServiceImpl implements HotelService{
 		return hDAO.countHotelLike(sqlSession, hId);
 	}
 
+	//호텔 리뷰 등록하기 
+	//(1) REPLY테이블에 넣는다.
+	@Override
+	public int insertReview(Reply hotelReply) {
+		// TODO Auto-generated method stub
+		return hDAO.insertReview(sqlSession, hotelReply);
+	}
+	
+	
+	//(2) HOTEL_REVIEW테이블에 넣는다.
+	@Override
+	public int insertHotelReview(Reply hotelReply) {
+		return hDAO.insertHotelReview(sqlSession, hotelReply);
+	}
+
+	
+	// 리뷰 리스트 
+	@Override
+	public ArrayList<Reply> selectOneHotelReplyList(int hId) {
+		return hDAO.selectOneHotelReplyList(sqlSession, hId);
+	}
+
+	
+	//리뷰작성자 닉네임 리스트 
+	@Override
+	public ArrayList<String> selectOneHotelReplyNickNameList(int hId) {
+		return hDAO.selectOneHotelReplyNickNameList(sqlSession, hId);
+	}
+	
 
 }

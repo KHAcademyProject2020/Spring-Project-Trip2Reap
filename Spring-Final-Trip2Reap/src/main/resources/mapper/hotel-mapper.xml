@@ -137,10 +137,52 @@
 	
 	
 	<!-- 2020.11.30 -->
+	<!-- 좋아요 개수 카운트  -->
 	<select id="countHotelLike" resultType="_int">
 	SELECT COUNT(*)
 	FROM LIKES
 	WHERE BO_NO=#{hId} AND LIKE_YN='Y'
+	</select>
+	
+	<!-- 호텔 리뷰 등록  -->
+	<insert id ="insertReview">
+	INSERT INTO REPLY
+	VALUES(SEQ_RE_NO.NEXTVAL, #{boNo}, #{memberId}, SYSDATE, #{reContent}, DEFAULT)
+	
+	</insert>
+	
+	<insert id="insertHotelReview">
+	INSERT INTO HOTEL_REVIEW
+	VALUES(SEQ_RE_NO.CURRVAL, #{reviewScore})
+	</insert>
+	
+	
+	<resultMap  id="replyResultSet" type="HotelReply">
+		<id property="reNo" column="RE_NO"/>
+		<result property="boNo" column="BO_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="reDate" column="RE_DATE"/>	
+		<result property="reContent" column="RE_CONTENT"/>
+		<result property="reDeleteYN" column="RE_DELETE_YN"/>
+		<result property="reviewScore" column="REVIEW_SCORE"/>
+	</resultMap>
+	
+	
+	<!-- 호텔 리뷰 보여주기  -->
+	<select id="selectOneHotelReplyList" resultMap="replyResultSet">
+	SELECT *
+	FROM REPLY JOIN HOTEL_REVIEW USING(RE_NO)
+	WHERE BO_NO=#{hId} AND RE_DELETE_YN='N'
+	ORDER BY RE_NO DESC
+	</select>
+	
+	
+	<!-- 호텔 리뷰 작성자 닉네임  리스트 -->
+	<select id="selectOneHotelReplyNickNameList" resultType="string">
+	SELECT NICKNAME
+	FROM MEMBER JOIN REPLY USING (MEMBER_ID)
+	WHERE RE_DELETE_YN='N' AND BO_NO=#{hId}
+	ORDER BY RE_NO DESC
 	</select>
 	
 

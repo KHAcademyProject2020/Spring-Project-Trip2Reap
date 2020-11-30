@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import trip.two.reap.common.PageInfo;
 import trip.two.reap.hotel.model.vo.Hotel;
+import trip.two.reap.hotel.model.vo.Reply;
 import trip.two.reap.hotel.model.vo.Room;
 
 
@@ -51,6 +52,19 @@ public interface HotelService {
 
 	//호텔 좋아요 개수 표시 
 	int countHotelLike(int hId);
+	
+	//호텔 리뷰등록
+	int insertReview(Reply hotelReply); // REPLY테이블에 넣는다.
+	
+	int insertHotelReview(Reply hotelReply); // HOTEL_REVIW 테이블에 넣는다.
+
+	//리뷰리스트 
+	ArrayList<Reply> selectOneHotelReplyList(int hId);
+
+	//리뷰작성자 닉네임 리스트 
+	ArrayList<String> selectOneHotelReplyNickNameList(int hId);
+
+
 
 
 

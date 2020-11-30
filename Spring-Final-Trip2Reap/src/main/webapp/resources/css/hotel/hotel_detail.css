@@ -1011,10 +1011,13 @@ button.room-reservation-btn:hover{
 
 /* 리뷰점수 selector   */
 #review_score{
-	width: 376px;
-	height: 25px;
+	font-size: 0.8em;
+	width: 150px;
+	height: 40px;
+	padding: 10px;
 	border-color: var(--mid-green);
 }
+
 
 
 /* 등록된 댓글  */

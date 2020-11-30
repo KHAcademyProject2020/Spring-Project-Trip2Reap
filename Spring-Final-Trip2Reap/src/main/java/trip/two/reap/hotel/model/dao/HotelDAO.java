@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import trip.two.reap.common.PageInfo;
 import trip.two.reap.hotel.model.vo.Hotel;
+import trip.two.reap.hotel.model.vo.Reply;
 import trip.two.reap.hotel.model.vo.Room;
 
 @Repository("hDAO")
@@ -99,7 +100,28 @@ public class HotelDAO {
 	public int countHotelLike(SqlSessionTemplate sqlSession, int hId) {
 		return sqlSession.selectOne("hotelMapper.countHotelLike", hId);
 	}
+	
+	
+	//호텔 리뷰 등록
+	public int insertReview(SqlSessionTemplate sqlSession, Reply hotelReply) {
+		return sqlSession.insert("hotelMapper.insertReview",hotelReply);
+	}
 
+
+	public int insertHotelReview(SqlSessionTemplate sqlSession, Reply hotelReply) {
+		return sqlSession.insert("hotelMapper.insertHotelReview", hotelReply);
+	}
+
+	//호텔 리뷰 리스트 보여주기 
+	public ArrayList<Reply> selectOneHotelReplyList(SqlSessionTemplate sqlSession, int hId) {
+		return (ArrayList)sqlSession.selectList("hotelMapper.selectOneHotelReplyList", hId);
+	}
+
+	public ArrayList<String> selectOneHotelReplyNickNameList(SqlSessionTemplate sqlSession, int hId) {
+		return (ArrayList)sqlSession.selectList("hotelMapper.selectOneHotelReplyNickNameList", hId);
+	}
+
+	
 
 
 

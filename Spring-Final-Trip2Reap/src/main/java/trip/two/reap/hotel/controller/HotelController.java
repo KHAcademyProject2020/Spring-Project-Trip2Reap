@@ -19,6 +19,7 @@ import trip.two.reap.common.Pagination;
 import trip.two.reap.hotel.exception.HotelException;
 import trip.two.reap.hotel.model.service.HotelService;
 import trip.two.reap.hotel.model.vo.Hotel;
+import trip.two.reap.hotel.model.vo.Reply;
 import trip.two.reap.hotel.model.vo.Room;
 import trip.two.reap.member.model.vo.Member;
 
@@ -140,6 +141,13 @@ public class HotelController {
 
 		//방리스트맵 (키값: 방종류: roomType)
 		HashMap<String,ArrayList<Room>> roomMap=null;
+		
+		
+		// hId에 해당하는 리뷰댓글을 불러온다.
+		ArrayList<Reply> reviewList=null;
+		
+		// 리뷰작성자의 닉네임 리스트
+		ArrayList<String> reviewNickNameList=null;
 
 		if(hotel!=null) {
 			//hId에 해당하는 방의 개수를 구한다.
@@ -216,6 +224,13 @@ public class HotelController {
 				}
 				*/
 			}
+			
+			
+			//리뷰리스트를 보여준다.
+			reviewList= hService.selectOneHotelReplyList(hId);
+			//리뷰작성자 닉네임 리스트 
+			reviewNickNameList= hService.selectOneHotelReplyNickNameList(hId);
+			
 
 			mv.addObject("hotel", hotel)
 			.addObject("page",page)
@@ -225,6 +240,8 @@ public class HotelController {
 			.addObject("roomMap", roomMap)
 			.addObject("minPriceRoomId", minPriceRoomId)
 			.addObject("likeCnt", likeCnt)
+			.addObject("reviewList", reviewList)
+			.addObject("reviewNickNameList", reviewNickNameList)
 			.setViewName("hotel_detail");
 		}else {
 			throw new HotelException("해당 호텔이 존재하지 않습니다!");
@@ -312,6 +329,34 @@ public class HotelController {
 			}
 		}
 
+	}
+	
+	//2020.11.30
+	//호텔 리뷰 댓글 등록 
+	@RequestMapping("insertHotelReview.ho")
+	@ResponseBody
+	public String insertHotelReview(Reply hotelReply, HttpSession session) throws HotelException {
+		//로그인한 회원 아이디를 얻는다.
+		Member loginUser=(Member) session.getAttribute("loginUser");
+		hotelReply.setMemberId(loginUser.getMemberId());
+		
+		//댓글 등록(1) : Reply테이블에 넣는다.
+		int result1=hService.insertReview(hotelReply);
+		
+		//댓글등록(2) : HOTEL_REVIEW 테이블에 넣는다!
+		int result2=0;
+		
+		if(result1>0) {
+			result2= hService.insertHotelReview(hotelReply);
+			if(result2>0)
+				return "success";
+			else {
+				throw new HotelException("호텔 리뷰 등록에 실패하였습니다");
+			}
+		}else {
+			throw new HotelException("호텔 리뷰 등록에 실패하였습니다.");
+		}
+		
 	}
 
 
