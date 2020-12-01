@@ -129,10 +129,7 @@
 	    </div>   
 	    <div>
 	        <div id="otherBtn">
-	            <div id="login_space4"></div>
-	            <!-- <button id="loginButton2" onclick="kakaoLogin();">
-	            <i class="fas fa-comment" id="btn2_1"></i>
-	            <p id="btn2_2">카카오 계정으로 로그인</p></button> -->
+	            <div id="otherSpace"></div>
  
                 <div id="otherLogin_space"></div>
                 <div id="loginButton2">
