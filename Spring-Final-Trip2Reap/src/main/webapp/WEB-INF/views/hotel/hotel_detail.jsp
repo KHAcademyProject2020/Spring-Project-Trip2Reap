@@ -139,12 +139,18 @@
 							<span>
 								<!--리뷰 평점-->
 								<span id="star-score-wrapper">
-									<c:forEach var="star" begin="${0}" end="${4}">
-										<c:if test="${star<= hotel.hotelReviewScore-1 }">
+									<c:forEach var="star" begin="${1}" end="${5}">
+										<c:if test="${star<=hotel.hotelReviewScore }">
 											<i class="fas fa-star star-point"></i>
 										</c:if>
-										<c:if test="${star> hotel.hotelReviewScore-1 }">
-											<i class="far fa-star"></i>
+										<c:if test="${star>hotel.hotelReviewScore }">
+											<c:if test="${star-0.5<=hotel.hotelReviewScore }">
+												<i class="fas fa-star-half-alt"></i>
+											</c:if>
+											
+											<c:if test="${star-0.5>hotel.hotelReviewScore }">
+												<i class="far fa-star"></i>
+											</c:if>
 										</c:if>
 									</c:forEach>
 								</span>
