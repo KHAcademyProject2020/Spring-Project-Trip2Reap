@@ -77,7 +77,7 @@ public class MemberController {
 		
 		// 유저 정보 저장
 		JsonNode userInfo = kakao.getKakaoUserInfo(access_token);		
-		String id = userInfo.get("id").toString();
+		String id = "k@" + userInfo.get("id").toString();
 		// String email = userInfo.get("kakao_account").get("email").toString();
 		String userNickname = userInfo.get("properties").get("nickname").toString();
 		String nickname = userNickname.replaceAll("\\\"","");

@@ -6,6 +6,7 @@
         from member
         where member_id=#{memberId}
               and m_status='Y'
+              and m_category='member'
     </select>
     <resultMap type="Member" id="memberResultSet">
         <id column="MEMBER_ID" property="memberId" />
@@ -21,13 +22,13 @@
     
     <select id="kakaoMemberCheck" resultType="_int">
         select count(*)
-        from kakaomember
-        where member_id=#{memberId}
+        from member
+        where member_id=#{memberId} AND m_category='kakao'
     </select>
     
     <insert id="kakaoMemberInsert">
-        insert into kakaomember
-        values (#{memberId},#{nickName},DEFAULT,DEFAULT )
+        insert into member
+        values (#{memberId},null,null,#{nickName},null,null,null,'kakao',default )
     </insert>
     
     <select id="memberCheck" resultType="_int">
@@ -67,7 +68,7 @@
     
     <insert id="insertMember">
         insert into member
-        values (#{memberId},#{memberPwd},#{memberName},#{nickName},#{gender},#{phone},#{email},DEFAULT,DEFAULT )
+        values (#{memberId},#{memberPwd},#{memberName},#{nickName},#{gender},#{phone},#{email},'member',DEFAULT )
     </insert>
     
     <select id="searchIdPhone" resultMap="memberResultSet">
@@ -91,7 +92,7 @@
     <update id="updatePwd">
         update member
         set member_pwd=#{memberPwd}
-        where member_id=#{memberId}
+        where member_id=#{memberId} and m_category='member'
     </update>
 
 </mapper>
