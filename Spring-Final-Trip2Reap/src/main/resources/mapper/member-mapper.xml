@@ -74,19 +74,19 @@
     <select id="searchIdPhone" resultMap="memberResultSet">
         select member_id, member_names
         from member
-        where member_names=#{memberName} and phone=#{phone}
+        where member_names=#{memberName} and phone=#{phone} and m_status = 'Y'
     </select>
     
     <select id="searchIdEmail" resultMap="memberResultSet">
         select member_id, member_names
         from member
-        where member_names=#{memberName} and member_email=#{email}
+        where member_names=#{memberName} and member_email=#{email} and m_status = 'Y'
     </select>
     
     <select id="searchPwdEmail" resultMap="memberResultSet">
         select member_id, member_names
         from member
-        where member_id=#{memberId} and member_email=#{email}
+        where member_id=#{memberId} and member_email=#{email} and m_status = 'Y'
     </select>
     
     <update id="updatePwd">

@@ -42,15 +42,18 @@ public class MemberController {
 		Member loginUser = mService.memberLogin(m);
 		// String pwd = bcryptPasswordEncoder.encode(m.getMemberPwd());
 		// System.out.println("암호화 된 비밀번호 : " + pwd);
-		
+		if(loginUser != null) {
 		boolean isPwdCorrect= bcryptPasswordEncoder.matches(m.getMemberPwd(),  loginUser.getMemberPwd());
 
-		if(isPwdCorrect) { // true
-			model.addAttribute("loginUser", loginUser);
-			return "Y";
-		} else { // false
+		    if(isPwdCorrect) { // true
+			    model.addAttribute("loginUser", loginUser);
+			    return "Y";
+		    } else { // false
+			    return "N";
+		    }		  
+		} else {
 			return "N";
-		}		  
+		}
 	  } // login() 종료
 	
 	
