@@ -69,9 +69,10 @@
      #login_space4{ height : 30px; }
      .search{ cursor: pointer; }
      #otherBtn{ text-align: center; }
+     #otherLogin_space{ display: inline-block; width: 300px; }
      #loginButton{ background-color: rgb(119,175,130); color: white; border: none;
                    width: 300px; height: 42px; font-weight: bold; cursor: pointer; }
-     #loginButton2{ width: 300px; height : 42px; cursor: pointer; background: rgb(250,225,0); border: none; }
+     #loginButton2{ display:inline-block; width: 300px; height : 42px; cursor: pointer; background: rgb(250,225,0); border: none; }
      #loginButton3{ width: 300px; height : 42px; cursor: pointer; background: rgb(29,193,0); border: none; }
      #btn2_1 { display: inline-block; margin-right: 5px; font-size: 18px; }
      #btn2_2 { display: inline-block; vertical-align: bottom; line-height: 20px; font-weight: 700; font-size: 12px; }

@@ -1,8 +1,6 @@
 package trip.two.reap.member.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +12,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
+import trip.two.reap.member.kakao.KakaoAPI;
 import trip.two.reap.member.model.service.MemberService;
 import trip.two.reap.member.model.vo.Member;
 
@@ -28,7 +29,7 @@ public class MemberController {
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	@Autowired
-	MailSender sender;
+	private KakaoAPI kakao;
 	
 	// 암호화 후 로그인
 	@RequestMapping("loginCheck.me")
@@ -51,7 +52,7 @@ public class MemberController {
 			return "N";
 		}		  
 	  } // login() 종료
-
+	
 	
 	// 로그아웃
 	@RequestMapping("logout.me")
@@ -62,6 +63,42 @@ public class MemberController {
 		
 		return "redirect:/";
 	} // logout() 종료
+	
+	
+	// 카카오톡 로그인
+	@RequestMapping("kakaoLogin.me")
+	@ResponseBody
+	public ModelAndView kakaoLogin(@RequestParam("code") String code, ModelAndView mv) {
+		// code : 카카오 로그인 과정 중 얻은 인가코드 값
+		// 사용자가 필수 동의 항목에 모두 동의한 뒤 '동의하고 계속하기' 버튼을 누르면, 카카오 인증 서버는 해당 사용자에 대한 인가 코드를 발급해 서비스의 redirect_uri에 전달
+		
+		// 토큰값
+		String access_token = kakao.kakaoLogin(code);
+		
+		// 유저 정보 저장
+		JsonNode userInfo = kakao.getKakaoUserInfo(access_token);		
+		String id = userInfo.get("id").toString();
+		// String email = userInfo.get("kakao_account").get("email").toString();
+		String userNickname = userInfo.get("properties").get("nickname").toString();
+		String nickname = userNickname.replaceAll("\\\"","");
+		
+		Member loginUser = new Member();
+		loginUser.setMemberId(id);
+		loginUser.setNickName(nickname);
+		
+		int result = mService.kakaoMemberCheck(id);
+		if(result == 0) {
+			int insertResult = mService.kakaoMemberInsert(loginUser);
+			if(insertResult == 1) {
+				mv.addObject("loginUser", loginUser);
+				mv.setViewName("redirect:/");
+			}
+		} else {
+			mv.addObject("loginUser", loginUser);
+			mv.setViewName("redirect:/");
+		}
+		return mv;
+	}
 	
 	
 	// 아이디찾기 뷰로 이동
@@ -255,7 +292,6 @@ public class MemberController {
 		}		
 		return changeOk;
 	}
-	
 	
 
 } // 클래스 종료

@@ -6,6 +6,10 @@ import trip.two.reap.member.model.vo.Member;
 public interface MemberService {
 
 	Member memberLogin(Member m);
+	
+	int kakaoMemberCheck(String id);
+	
+	int kakaoMemberInsert(Member loginUser);
 
 	int memberCheck(String userId);
 
@@ -25,6 +29,9 @@ public interface MemberService {
 
 	int changePwd(Member member);
 
+	
+
+		
 	
 
 }

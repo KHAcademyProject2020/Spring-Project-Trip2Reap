@@ -32,6 +32,16 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
+	public int kakaoMemberCheck(String id) {
+		return mDAO.kakaoMemberCheck(sqlSession, id);
+	}
+	
+	@Override
+	public int kakaoMemberInsert(Member loginUser) {
+		return mDAO.kakaoMemberInsert(sqlSession, loginUser);
+	}
+	
+	@Override
 	public int memberCheck(String userId) {
 		return mDAO.memberCheck(sqlSession, userId);
 	}

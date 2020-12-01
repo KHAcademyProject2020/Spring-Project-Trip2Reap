@@ -13,6 +13,14 @@ public class MemberDAO {
 	public Member memberLogin(SqlSessionTemplate sqlSession, Member m) {
 		return (Member)sqlSession.selectOne("memberMapper.memberLogin", m);
 	}
+	
+	public int kakaoMemberCheck(SqlSessionTemplate sqlSession, String id) {
+		return sqlSession.selectOne("memberMapper.kakaoMemberCheck", id);
+	}
+	
+	public int kakaoMemberInsert(SqlSessionTemplate sqlSession, Member loginUser) {
+		return sqlSession.insert("memberMapper.kakaoMemberInsert" , loginUser);
+	}
 
 	public int memberCheck(SqlSessionTemplate sqlSession, String userId) {
 		return sqlSession.selectOne("memberMapper.memberCheck",userId);
@@ -59,7 +67,5 @@ public class MemberDAO {
 	public int changePwd(SqlSessionTemplate sqlSession, Member member) {
 		return sqlSession.update("memberMapper.updatePwd", member);
 	}
-
-
 
 } // 클래스 종료

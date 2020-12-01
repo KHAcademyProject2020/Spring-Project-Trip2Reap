@@ -21,6 +21,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<!-- 카카오코드  -->
+<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 </head>
 <body>
@@ -35,9 +37,9 @@
 				<div class="root">
 					<ul>
 						<!-- 로그아웃 상태 -->
-						<li class="topBar"
-							onMouseOver="this.style.color='#77af82';"
-							onMouseOut="this.style.color=''" class="btn"><a class="btn" href="#ex7">로그인</a></li>
+						<li class="topBar">
+						<a class="btn" href="#ex7" onMouseOver="this.style.color='#77af82';"
+							onMouseOut="this.style.color=''">로그인</a></li>
 						<li class="topBar" onclick="join();"
 							onMouseOver="this.style.color='#77af82';"
 							onMouseOut="this.style.color=''">회원가입</li>
@@ -49,7 +51,7 @@
 					<ul>
 						<!-- 로그인 상태  -->
 						<li class="topBar2_1"><b><c:out
-									value="${ loginUser.memberName }님 환영합니다!" /></b></li>
+									value="${ loginUser.nickName }님 환영합니다!" /></b></li>
 						<li class="topBar2_2" onclick="logout();"
 							onMouseOver="this.style.color='#77af82';"
 							onMouseOut="this.style.color=''">로그아웃</li>
@@ -128,9 +130,17 @@
 	    <div>
 	        <div id="otherBtn">
 	            <div id="login_space4"></div>
-	            <button id="loginButton2">
+	            <!-- <button id="loginButton2" onclick="kakaoLogin();">
 	            <i class="fas fa-comment" id="btn2_1"></i>
-	            <p id="btn2_2">카카오 계정으로 로그인</p></button>
+	            <p id="btn2_2">카카오 계정으로 로그인</p></button> -->
+ 
+                <div id="otherLogin_space"></div>
+                <div id="loginButton2">
+                <i class="fas fa-comment" id="btn2_1"></i>
+	            <!-- get 방식을 통해 uri로 바로 이동  -->
+	            <a href="https://kauth.kakao.com/oauth/authorize?client_id=9d8f7f524c07ea08ff127d7591c2fbd5&redirect_uri=http://localhost:13080/reap/kakaoLogin.me&response_type=code" id="btn2_2">카카오 계정으로 로그인</a>
+	            </div>
+	            
 	        </div>
 	        <div id="login_space1"></div>
 	        <div id="otherBtn">
@@ -148,7 +158,6 @@
     function main(){
   	  location.href="<%= request.getContextPath() %>/home.do";
     }       
-
     function join(){
       location.href="<%= request.getContextPath() %>/join.me";
     }
@@ -163,7 +172,8 @@
     
     function searchId(){
   	   location.href="<%= request.getContextPath() %>/searchId.me";
-     }
+    }
+  
      
     $('#loginButton').click(function(){
     	var userId = $('#loginInfo_1').val();
@@ -214,7 +224,6 @@
     
     $('a[href="#ex7"]').click(function(event) {
 		event.preventDefault();
-
 		$(this).modal({
 			fadeDuration : 250
 		});
@@ -240,7 +249,6 @@
 					userId = "";
 				}
 			});
-
 		});
 	    
 		// 쿠키이름, 값, 쿠키유지시간 으로 쿠키 생성.

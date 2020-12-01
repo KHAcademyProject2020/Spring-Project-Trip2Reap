@@ -15,8 +15,20 @@
         <result column="GENDER" property="gender" />
         <result column="PHONE" property="phone" />
         <result column="MEMBER_EMAIL" property="email" />
+        <result column="M_CATEGORY" property="mCategory" />
         <result column="M_STATUS" property="mStatus" />
     </resultMap>
+    
+    <select id="kakaoMemberCheck" resultType="_int">
+        select count(*)
+        from kakaomember
+        where member_id=#{memberId}
+    </select>
+    
+    <insert id="kakaoMemberInsert">
+        insert into kakaomember
+        values (#{memberId},#{nickName},DEFAULT,DEFAULT )
+    </insert>
     
     <select id="memberCheck" resultType="_int">
         select count(*)
@@ -55,7 +67,7 @@
     
     <insert id="insertMember">
         insert into member
-        values (#{memberId},#{memberPwd},#{memberName},#{nickName},#{gender},#{phone},#{email},DEFAULT )
+        values (#{memberId},#{memberPwd},#{memberName},#{nickName},#{gender},#{phone},#{email},DEFAULT,DEFAULT )
     </insert>
     
     <select id="searchIdPhone" resultMap="memberResultSet">
