@@ -40,7 +40,6 @@ public class HotelController {
 		}
 
 
-
 		//호텔리스트를 구한다.
 		int hotelListCount= hService.getHotelListCount();
 
@@ -66,9 +65,8 @@ public class HotelController {
 		//로그인 계정 아이디확인
 		Member loginUser= (Member)session.getAttribute("loginUser");
 
-		//호텔리스트가 존재하지 않는다면
 		if(hotelList!=null) {
-
+			//호텔리스트가 존재함!
 			//가장 싼 방 가격을 구한다.
 			minRoomPricePerDayList=new  ArrayList<Integer>();
 			int hotelMinPrice;

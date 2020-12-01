@@ -357,6 +357,7 @@
 
 </body>
 <script>
+
 //heart -btn
 $(function(){
 	$(document).on('click', '.fa-heart' , function(e){
@@ -506,8 +507,28 @@ $(function(){
                 $content.addClass('out');
             }
         });
+        
+      //2020.12.01
+      //동적쿼리문을 이용하여 모달의 상세검색 조건을 만족하는 검색결과를 찾아보자
+        $('#detail-hotel-search').click(function(){
+        	console.log('어머나~ 호텔상세검색 버튼을 클릭하셨군요?');
+        	
+        	//검색조건에 맞는 호텔 리스트를 구한다.
+        	
+        	
+    		//모달창을 나간다.
+    		$modalContainer.addClass('out');
+    		$body.removeClass('modal-active');
+    		if($modalContainer.hasClass($btnId)){
+    			$content.addClass('out');
+    		}
+    		
+    		
+    		
+    	});
 
 }); //modal- wrapper finished
+
 
 </script>
 </html>
