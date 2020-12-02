@@ -25,4 +25,9 @@ public class TravelDAO {
 		
 	}
 
+	public int insertBoard(SqlSessionTemplate sqlSession, Travel t) {
+		System.out.println("t : " + t);
+		return sqlSession.insert("travelMapper.insertBoard", t); //등록하기
+	}
+
 }

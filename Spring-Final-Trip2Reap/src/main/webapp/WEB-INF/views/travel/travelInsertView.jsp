@@ -156,8 +156,10 @@
 		
 		<!-- 버튼 div -->
 		<div id="button_div">
-			<button id="button_cancel" onclick="location.href='tList.tv'">취소</button>
-			<button id="button_write" onclick="location.href='tInsert.tv'">등록</button>
+			<!-- <button id="button_cancel" onclick="location.href='tList.tv'">취소</button>
+			<button id="button_write" onclick="location.href='tInsert.tv'">등록</button> -->
+			<button type="button" id="button_cancel" onclick= "location.href='tList.tv'">취소</button>
+			<button type="submit" id="button_write">등록</button>
 			<!-- <button id="button_write">등록</button> -->
 		</div>
 	</form>
@@ -201,10 +203,12 @@
    			}	   			
    		} 
    		 
-/*    		 $("#button_write").click(function(){
-   			 var img = $("#thumbnailImg1").val() ;
+   		 $("#button_write").click(function(){
+   			/*  var img = $("#thumbnailImg1").val(); */
    			$('#tInsert').submit();
-   		 }); */
+   		 }); 
+   		 
+   		 
    		 
 	</script>
 </section>		

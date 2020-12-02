@@ -99,8 +99,12 @@
 				총<span id="list_count">${ pi.listCount }</span>건
 			</div>
 			
+			
+			<!-- <form action="tInsert.tv" method="post" id="tList"> -->
+			
 			<!-- 여행지 div -->
 			<c:forEach var="t" items="${ list }">
+			
 			<div id="list_travel_div">
 				<div id="travel_img_div">
 					<img src="resources/images/송도.JPG" id="travel_img"/>
@@ -115,20 +119,24 @@
 				</div>
 				<div id="list_etc"><a href="#modal">…</a></div>
 			</div>
-			</c:forEach>
-		</div>	
 			
+			</c:forEach>
+			<!-- </form> -->
+		</div>
 			
 		
 		
 		
 		
 		<!-- 등록하기 버튼 (관리자만 보이게)-->
+		
 			<c:if test="${ loginUser.memberId == 'admin' }"> 
 				<div id="button_write_div">
-				<button id="button_write" onclick="location.href='tInsertView.tv';">등록하기</button>
+					<button id="button_write" onclick="location.href='tInsert.tv';">등록하기</button>
 				</div>
-			</c:if>	
+			</c:if>
+	
+			
 			
 			
 		<!-- 페이징 버튼 -->	
@@ -168,15 +176,12 @@
 	<script>
 		function detailView(){
  		   location.href="<%= request.getContextPath() %>/tDetail.tv";
- 	   }
-		
-		
+ 	    }
 		
 		
 		function goSearchError(){
 			location.href="<%= request.getContextPath() %>/tSearchError.tv";
 		}
-		
 		
 		
 		$('a[href="#modal"]').click(function(event) {
@@ -231,7 +236,7 @@
 				/* 	alert("URL이 복사 되었습니다. 원하시는 곳에 붙여넣기 해 주세요.");  */
 					swal("URL이 복사 되었습니다.", "원하시는 곳에 붙여넣기 해 주세요!", "success");
 					// 링크복사 시 화면 크기 고정 
-					$('html').find('meta[name=viewport]').attr('content', 'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes'); 
+					$('html').find('meta[name=viewport]').attr('content', 'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes'); 
 				} else { 
 					/* alert('이 브라우저는 지원하지 않습니다.'); */
 					swal("URL이 복사에 실패했습니다.", "이 브라우저는 지원하지 않습니다.", "error");
@@ -249,6 +254,14 @@
 					location.href="tDetail.tv?boNo=" + boNo + "&page=" + ${pi.currentPage};
 				});
 			}); */
+			
+			
+			
+			$("#button_write").click(function(){
+	   			$('#tList').submit();
+	   		 }); 
+		
+			
 	</script>
 	
 </section>

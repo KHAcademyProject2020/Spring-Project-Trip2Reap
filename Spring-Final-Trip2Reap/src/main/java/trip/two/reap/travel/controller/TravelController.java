@@ -1,5 +1,9 @@
 package trip.two.reap.travel.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -70,20 +75,68 @@ public class TravelController {
 	
 	
 	@RequestMapping("tInsert.tv")
-	@ResponseBody
 	public String travelInsert(@ModelAttribute Travel t, 
 			@RequestParam("uploadFile1") MultipartFile uploadFile1,
 			@RequestParam("uploadFile2") MultipartFile uploadFile2,
 			@RequestParam("uploadFile3") MultipartFile uploadFile3,
 			HttpServletRequest request) {
-		System.out.println(t);
-		System.out.println(uploadFile1.getOriginalFilename());
-		System.out.println(uploadFile2.getOriginalFilename());
-		System.out.println(uploadFile3.getOriginalFilename());
+		
+		 System.out.println("controller t : " + t); 
+			/*
+			 * System.out.println(uploadFile1.getOriginalFilename());
+			 * System.out.println(uploadFile2.getOriginalFilename());
+			 * System.out.println(uploadFile3.getOriginalFilename());
+			 */
+		 
+
+		if(uploadFile1 != null ) {
+			// 파일을 넣지 않음 ==> ""
+			// 파일을 넣음 	  ==> 파일 제목
+			String renameFileName = saveFile(uploadFile1, request);
+			
+			/*
+			 * if(renameFileName != null) {
+			 * b.setOriginalFileName(uploadFile1.getOriginalFilename());
+			 * b.setRenameFileName(renameFileName); }
+			 */		
+		}		
+		
+		int result = tService.insertBoard(t);
+		
 		return "redirect:tList.tv";
 	}
 	
 	
+	public String saveFile(MultipartFile file, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+//		System.out.println(root);
+		String savePath = root + "\\buploadFiles";{
+		
+		File folder = new File(savePath);
+		if(!folder.exists()) {
+			folder.mkdirs();
+		}
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String originFileName = file.getOriginalFilename();
+		String renameFileName = sdf.format(new Date(System.currentTimeMillis())) 
+				+ "." + originFileName.substring(originFileName.lastIndexOf(".") + 1);
+		
+		
+			String renamePath = folder + "\\" + renameFileName;
+			
+			try {
+				file.transferTo(new File(renamePath));
+			} catch (IOException e) {
+				System.out.println("파일 전송 에러 : " + e.getMessage());
+				e.printStackTrace();
+			}
+			
+			
+			
+			return renameFileName;
+		}
+	}
 	@RequestMapping("tUpdate.tv")
 	public String goTravelUpdate() {
 		return "travelUpdate";

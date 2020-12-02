@@ -4,7 +4,7 @@
 	<select id="getListCount" resultType="_int">
 		select count(*)
         from board
-        where ca_code = 2
+        where ca_code = 1
               and bo_delete_yn = 'N'
 	</select>
 	
@@ -31,7 +31,7 @@
 	<select id="selectList" resultMap="travelResultSet">
 		select *
 		from tlist
-		where ca_code = 2
+		where ca_code = 1
 				and bo_delete_yn = 'N'
 		order by bo_no desc
 	</select>
@@ -49,4 +49,14 @@
 		<result column="TR_ADDR" property="trAddr"/>
 		<result column="TR_THEME" property="trTheme"/>
 	</resultMap>
+	
+	
+	<insert id="insertBoard">
+		insert
+ 		into board
+ 		values(SEQ_BO_NO.NEXTVAL,#{caCode},#{boTitle},#{boContent},#{memberId},0,#{boTag},#{boDeleteYN},sysdate);
+	</insert>
+	
+	
+	
 </mapper>
