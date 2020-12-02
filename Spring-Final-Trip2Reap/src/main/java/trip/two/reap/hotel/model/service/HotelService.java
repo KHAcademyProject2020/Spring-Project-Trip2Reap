@@ -76,5 +76,20 @@ public interface HotelService {
 	//리뷰삭제이후, 리뷰개수가 0개일때 0점으로 바꾸기
 	int updateHotelReviewScoreZero(int boNo);
 
+	//2020.12.01 ~ 2020.12.02
+	//호텔 상세검색 - 검색조건에 맞는 호텔구하기
+	ArrayList<Integer> getDetailSearchResultHotelBoNoList(HashMap<String, Object> detailSearchMap);
+
+	//hId에 해당하는 호텔정보한개 구하기
+	Hotel selectDetailSearchResultOneHotel(int hId);
+
+	//검색조건에 만족하는 방번호를 가진 호텔리스트
+	ArrayList<Hotel> selectDetailSearchHotelList(HashMap<String, Object> searchHashMap);
+
+	//검색조건을 만족하는 호텔한개가 가진 방중 가장 싼 가격을 구한다.
+	int selectHotelMinPrice(int hId);
+
+	
+
 
 }

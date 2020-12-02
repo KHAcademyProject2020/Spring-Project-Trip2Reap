@@ -36,7 +36,7 @@ public class HotelServiceImpl implements HotelService{
 		return hDAO.selectHotelList(sqlSession, pi);
 	}
 
-	//2020.11.25
+	//2020.11.25 - 조회수 증가 + hId에 해당하는 호텔 정보만 갖고오기(호텔디테일)
 	@Override
 	public Hotel selectOneHotel(int hId) {
 		Hotel hotel= null;
@@ -182,7 +182,36 @@ public class HotelServiceImpl implements HotelService{
 	public int updateHotelReviewScoreZero(int boNo) {
 		return hDAO.updateHotelReviewScoreZero(sqlSession, boNo);
 	}
+
 	
+	//2020.12.01 ~2020.12.02
+	//호텔 상세검색
+	//1. 조건을 만족하는 호텔번호를 구한다.
+	@Override
+	public ArrayList<Integer> getDetailSearchResultHotelBoNoList(HashMap<String, Object> detailSearchMap) {
+		return hDAO.getDetailSearchResultHotelBoNoList(sqlSession, detailSearchMap);
+	}
+
+
+	//2.(폐기) 방번호에 해당하는 호텔정보를 갖고온다.
+	@Override
+	public Hotel selectDetailSearchResultOneHotel(int hId) {
+		return hDAO.selectDetailSearchResultOneHotel(sqlSession, hId);
+	}
+	
+
+	//2.(최종) 검색조건에 만족하는 호텔번호 리스트에 해당하는 호텔정보를 갖고온다.
+	@Override
+	public ArrayList<Hotel> selectDetailSearchHotelList(HashMap<String, Object> searchHashMap) {
+		return hDAO.selectDetailSearchHotelList(sqlSession, searchHashMap);
+	}
+
+	
+	//3. 검색조건을 만족하는 호텔(호텔번호에 부합된 호텔)이 보유한 방중 가장 싼 방가격을 구한다.
+	@Override
+	public int selectHotelMinPrice(int hId) {
+		return hDAO.selectOneHotelMinPrice(sqlSession, hId);
+	}
 	
 	
 	

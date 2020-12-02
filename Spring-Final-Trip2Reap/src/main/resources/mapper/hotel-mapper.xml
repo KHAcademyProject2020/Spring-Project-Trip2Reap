@@ -189,9 +189,9 @@
 	<update id="updateHotelReviewScore">
 	UPDATE HOTEL
 	SET HOTEL_REVIEW_SCORE=(
-							SELECT AVG(REVIEW_SCORE)
-							FROM REPLY JOIN HOTEL_REVIEW USING(RE_NO) 
-							WHERE BO_NO=#{hId} AND RE_DELETE_YN='N')
+			SELECT AVG(REVIEW_SCORE)
+			FROM REPLY JOIN HOTEL_REVIEW USING(RE_NO) 
+			WHERE BO_NO=#{hId} AND RE_DELETE_YN='N')
 	WHERE BO_NO=#{hId}
 	</update>
 	
@@ -218,6 +218,65 @@
 	</select>
 	
 	
-
+	<!-- 2020.12.01 -->
+	<!-- 상세검색 (modal) - 검색조건에 만족하는 호텔번호를 구한다 -->
+	<select id="getDetailSearchResultHotelBoNoList" resultType="_int">
+	SELECT DISTINCT BO_NO
+	FROM HOTEL_ROOM_INFO_VIEW
+	<where>
+		BO_DELETE_YN='N'
+		<if test="searchLocalCode >0 ">
+			AND HOTEL_LOCAL_CODE=#{searchLocalCode}
+		</if>
+		<if test="searchHotelRank >0 ">
+			AND HOTEL_RANK=#{searchHotelRank}
+		</if>
+		<if test="searchHotelName !=null">
+			AND BO_TITLE=#{searchHotelName}
+		</if>
+		
+		<choose>
+			<when test="searchHotelPricePerDayType==1">
+			AND <![CDATA[PRICE_PER_DAY < 50000 ]]>
+			</when>
+			
+			<when test="searchHotelPricePerDayType==2">
+			AND PRICE_PER_DAY BETWEEN 50000 AND 99999
+			</when>
+			
+			<when test="searchHotelPricePerDayType==3">
+			AND PRICE_PER_DAY BETWEEN 100000 AND 149999
+			</when>
+			
+			<when test="searchHotelPricePerDayType==4">
+			AND PRICE_PER_DAY BETWEEN 150000 AND 199999
+			</when>
+			
+			<when test="searchHotelPricePerDayType==5">
+			AND <![CDATA[ PRICE_PER_DAY >= 200000]]>
+			</when>
+		</choose>
+	</where>
+	</select>
+	
+	<!--검색결과 조건을 만족하는 호텔번호 리스트에 해당하는 호텔정보를 구한다. -->
+	<select id="selectDetailSearchHotelList" resultMap="hotelResultSet">
+	SELECT *
+	FROM HOTEL_VIEW
+	WHERE BO_DELETE_YN='N'
+	<if test="searchBoNoList !=null">
+		AND BO_NO IN
+		<foreach item="boNo" index="index" collection="searchBoNoList" 
+				open="(" separator="," close=")">
+		#{boNo}
+		</foreach>
+	</if>	
+	</select>
+	
+	<select id="selectOneHotelMinPrice" resultType="_int">
+	SELECT MIN(PRICE_PER_DAY)
+	FROM HOTEL_ROOM_INFO_VIEW
+	WHERE BO_NO=#{hId}
+	</select>
 
 </mapper>

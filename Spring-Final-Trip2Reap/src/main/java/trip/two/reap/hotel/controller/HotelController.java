@@ -1,11 +1,14 @@
 package trip.two.reap.hotel.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 
 import trip.two.reap.common.PageInfo;
 import trip.two.reap.common.Pagination;
@@ -40,7 +47,7 @@ public class HotelController {
 		}
 
 
-		//호텔리스트를 구한다.
+		//호텔리스트 개수를 구한다.
 		int hotelListCount= hService.getHotelListCount();
 
 		//페이징
@@ -77,7 +84,6 @@ public class HotelController {
 			}
 
 
-
 			if(loginUser!=null) { //로그인한 계정이라면
 				HashMap<String , Object> checkLikeMap= new HashMap<String, Object>();
 
@@ -111,6 +117,7 @@ public class HotelController {
 		return mv;
 	}
 
+	
 
 
 
@@ -394,8 +401,125 @@ public class HotelController {
 			throw new HotelException("호텔 리뷰 삭제에 실패하였습니다!");
 		}
 	}
+	
+	//2020.12.01~2020.12.02
+	//호텔리스트- modal 상세 검색
+	@RequestMapping("detailSearchResult.ho")
+	public void detailSearchResult(@RequestParam(value="page", required=false, defaultValue="1") Integer page , HttpSession session,
+				int searchLocalCode, int searchHotelRank, int searchPricePerDayType, String searchHotelName, HttpServletResponse response ) throws HotelException, JsonIOException, IOException{
 
+		
+		
+		// 입력받은 호텔이름길이가 0일때 null로 한다.
+		if(searchHotelName.length()==0) {
+			searchHotelName=null;
+		}
+		
+		
+		int currentPage =1; //호텔예약페이지에 접속 초기 페이지번호
+		if(page !=null) {
+			currentPage=page;
+		}
 
+		//검색조건 초기화
+		HashMap<String, Object> detailSearchMap = new HashMap<String, Object>();
+		detailSearchMap.put("searchLocalCode", searchLocalCode);
+		detailSearchMap.put("searchHotelRank", searchHotelRank);
+		detailSearchMap.put("searchHotelName", searchHotelName);
+		detailSearchMap.put("searchHotelPricePerDayType", searchPricePerDayType);
+		
+		
+		//1-1. 검색 조건을 만족하는 호텔방번호(BO_NO)를 구한다.
+		ArrayList<Integer> boNoList= hService.getDetailSearchResultHotelBoNoList(detailSearchMap);
+		
+		//1-2. 검색조건을 만족하는 호텔의 개수를 구한다.
+		int boNoListCount = boNoList.size();
+		
+		//2. 페이지에 해당하는 보드값을 구한다
+		PageInfo pi=Pagination.getPageInfo(currentPage, boNoListCount);
+		
+		
+		//3. 검색조건을 만족하고, 페이지에 해당하는 호텔정보를 구한다.
+		ArrayList<Hotel> hotelList = null;
+		
+		
+		//4. 가장싼 방가격을 나타냄
+		ArrayList<Integer> minRoomPriceDayList= null;
+		
+		
+		//5.해당 로그인 계정에서 좋아요를 눌렀는지 확인해주는 호텔리스트
+		Member loginUser= (Member)session.getAttribute("loginUser");
+		
+		ArrayList<Integer> likeHotelList= new ArrayList<Integer>();
+		for(int i=0; i<boNoListCount; i++) { //초기화
+			likeHotelList.add(0); 
+		}
+		
+		
+		if(boNoListCount>0) { //검색조건을 만족하는 호텔개수가 1개이상이라면
+			//3. 검색조건을 만족하는 호텔 리스트를 구한다.
+			HashMap <String, Object> searchHashMap= new HashMap<String, Object>();
+			searchHashMap.put("pi", pi);
+			searchHashMap.put("searchBoNoList", boNoList); //검색조건에 만족하는 호텔번호(BO_NO) 리스트
+			hotelList= hService.selectDetailSearchHotelList(searchHashMap);//검색조건에 만족하는 호텔정보를 담는리스트
+			
+			//검색결과 만족 호텔리스트 길이
+			//System.out.println("hotelList 길이 : "+ hotelList.size());
+			
+			//4. 검색조건을 만족하는 호텔이 보유한 방(ROOM)중 가장싼가격을 구한다.
+			minRoomPriceDayList=new ArrayList<Integer>();
+			int minPrice=0;
+			for(int hId : boNoList) {
+				minPrice= hService.selectHotelMinPrice(hId);
+				minRoomPriceDayList.add(minPrice);
+			}
+			
+			//5.로그인한 회원이 검색결과 호텔리스트에 좋아요 버튼을 눌렀는지를 확인
+			if(loginUser!=null) {
+				HashMap<String, Object>checkLikeMap=new HashMap<String, Object>();
+				checkLikeMap.put("loginUserId", loginUser.getMemberId());
+				
+				int result=0;
+				for(int hId: boNoList) {
+					//hId 값을변경.
+					checkLikeMap.put("hId", hId);
+					result=hService.isSmashedLikeBtn(checkLikeMap); 
+					
+					//좋아요 표시됐다면 수정하기
+					if(result>0)
+						likeHotelList.set(hId, result);
+				}
+				
+				
+			}
+		
+		}
+		
+		//gson으로 넣기
+		response.setContentType("application/json; charset=UTF-8");
+		Gson gson= new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		HashMap<String, Object> detailSearchResultMap= new HashMap<String, Object>();
+		detailSearchResultMap.put("pi", pi);
+		detailSearchResultMap.put("hotelList",hotelList);
+		detailSearchResultMap.put("likeHotelList", likeHotelList);
+		detailSearchResultMap.put("minRoomPricePerDayList", minRoomPriceDayList);
+		
+		//맵을 gson에 담아서 뷰로 보낸다.
+		gson.toJson(detailSearchResultMap,response.getWriter());
+		/*
+		mv.addObject("hotelList",hotelList)
+		.addObject("pi", pi)
+		.addObject("likeHotelList", likeHotelList)
+		.addObject("minRoomPricePerDayList", minRoomPriceDayList)
+		.setViewName("hotel_list");
+		
+		return mv;
+		*/
+	}
+	
+	
+	
 	//go to hotel insert page (only admin)
 	// 호텔 등록페이지뷰로 이동
 	@RequestMapping("hotelInsertView.ho")

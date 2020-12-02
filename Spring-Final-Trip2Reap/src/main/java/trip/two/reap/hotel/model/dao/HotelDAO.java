@@ -20,7 +20,7 @@ public class HotelDAO {
 		return sqlSession.selectOne("hotelMapper.getHotelListCount");
 	}
 
-//hId에 해당하는 호텔이 가지고 있는 방리스트를 구한다.
+	//hId에 해당하는 호텔이 가지고 있는 방리스트를 구한다.
 	public ArrayList<Hotel> selectHotelList(SqlSessionTemplate sqlSession, PageInfo pi) {
 		int offset=(pi.getCurrentPage()-1)*pi.getBoardLimit();
 		RowBounds rowBounds= new RowBounds(offset, pi.getBoardLimit());
@@ -141,9 +141,31 @@ public class HotelDAO {
 	}
 
 	
+	//2020.12.01 ~ 2020.12.02
+	//(1) 호텔상세 검색 - 검색조건을 만족하는 호텔번호를 구한다.
+	public ArrayList<Integer> getDetailSearchResultHotelBoNoList(SqlSessionTemplate sqlSession,
+			HashMap<String, Object> detailSearchMap) {
+		return (ArrayList)sqlSession.selectList("hotelMapper.getDetailSearchResultHotelBoNoList", detailSearchMap);
+	}
 
+	//(2:폐기) 호텔 번호에 만족하는 호텔을 구한다.
+	public Hotel selectDetailSearchResultOneHotel(SqlSessionTemplate sqlSession, int hId) {
+		return sqlSession.selectOne("hotelMapper.selectOneHotel", hId);
+	}
 
+	//(2:최종) 호텔번호 리스트에 만족하는 호텔을 구한다.
+	public ArrayList<Hotel> selectDetailSearchHotelList(SqlSessionTemplate sqlSession,
+			HashMap<String, Object> searchHashMap) {
+		PageInfo pi= (PageInfo) searchHashMap.get("pi");
+		int offset= (pi.getCurrentPage()-1)*pi.getBoardLimit();
+		RowBounds rowBounds= new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList) sqlSession.selectList("hotelMapper.selectDetailSearchHotelList",searchHashMap ,rowBounds);
+	}
 
+	public int selectOneHotelMinPrice(SqlSessionTemplate sqlSession, int hId) {
+		return sqlSession.selectOne("hotelMapper.selectOneHotelMinPrice", hId);
+	}
+	
 
 
 }
