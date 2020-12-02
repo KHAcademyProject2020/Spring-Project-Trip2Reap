@@ -1,32 +1,37 @@
+     div { margin: 0px; padding: 0px; }         
      
      /* 공통속성  */
      #board_list{ margin : 40px auto 0px auto; width: 1300px;}
-     
-     
-     /* 회원탈퇴 */
+          
+          
+     /* 회원탈퇴 설명란  */
      #infor1 { height: 50px; }
-     #infor2 { display: inline-block; width:250px; height: 10px; }
-     #infor3 { display: inline-block; height: 50px; font-size: 30px; font-weight:bold; text-align: center; } 
-     #infor4 { display: inline-block; height: 50px; font-size: 15px; font-weight:bold; text-align: center; color: gray; }
-     #space1 { height : 30px; }
-     #infor5 { display: inline-block; width:248px; height: 10px; }
+     #infor2 { display: inline-block; width:597px; }
+     #infor3 { display: inline-block; height: 50px; font-size: 30px; font-weight:bold; text-align: center; }
+     #up_space1 { height : 10px; }
+     #infoDiv1 { display : inline-block; width: 488px; }
+     #infoDiv2 { display : inline-block; font-size: 14px; }
+     #up_space2 { height : 40px; }
      
      
-     /* 회원탈퇴 form */
-     #deleteDiv { display : inline-block; height : 200px; width:750px; font-size : 15px; 
-                  border: 2px solid lightgray; overflow: scroll; }
-     #space2 { height : 30px; }
-     #space3 { display: inline-block; width : 420px; height : 10px; }
-     #delCheck { display : inline-block; font-size: 15px; }
-     #space4 { height : 40px; }
-     #space5 { display: inline-block; width : 405px; height : 10px; }
+     /* 회원탈퇴 박스  */
+     #infor4 { display : inline-block; width: 320px; }
+     #deleteDiv { display : inline-block; height : 340px; width:695px; font-size : 13px; 
+                  border: 2px solid lightgray; overflow-y : scroll; line-height: 20px; }
      
      
-     /* 버튼 */
-     #applyBtn1 { background: lightgray; color:white; width: 200px; height : 50px; 
+     /* 버튼  */
+     #up_space3 { height : 25px; } 
+     #up_space4 { display : inline-block; width : 486px; }
+     #up_space5 { height : 35px; }
+     #delCheck { display: inline-block; font-size: 14px;}
+     #up_space6 { display : inline-block; width : 460px; }
+     #outBtn1 { background: lightgray; color:white; width: 200px; height : 50px; 
                   border: none; font-size: 15px; font-weight: bold; cursor: pointer; }
-     #space6 { display: inline-block; width: 10px; }
-     #applyBtn2 { background: rgb(119,175,130); color:white; width: 200px; height : 50px; 
+     #up_space7 { display: inline-block; width: 10px; }
+     #outBtn2 { background: rgb(119,175,130); color:white; width: 200px; height : 50px; 
                   border: none; font-size: 15px; font-weight: bold; cursor: pointer; }
                   
      #applyBtn1, #applyBtn2:focus{ outline: none; }
+
+     

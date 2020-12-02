@@ -96,12 +96,12 @@
 			<div id="login_space4"></div>
 			<div id="loginDiv">
 			<div id="idPwdDiv">
-			<i class="fas fa-user-circle" id="idIcon"></i>
+			<div id="idIconDiv"><i class="fas fa-user-circle" id="idIcon"></i></div>
 	        <input type="text" id="loginInfo_1" class="loginInfo" name="memberId" placeholder="아이디를 입력해주세요"
 	         onfocus="this.placeholder=''" onblur="this.placeholder='아이디를 입력해주세요'" autocomplete="off" ></div>	         
 	        <div id="login_space1"></div>
 	        <div id="idPwdDiv">
-	        <i class="fas fa-lock" id="pwdIcon"></i>
+	        <div id="pwdIconDiv"><i class="fas fa-lock" id="pwdIcon"></i></div>
 	        <input type="password" id="loginInfo_2" name="memberPwd" class="loginInfo" placeholder="비밀번호를 입력해주세요"
 	         onfocus="this.placeholder=''" onblur="this.placeholder='비밀번호를 입력해주세요'" autocomplete="off"></div>
 	         </div>
@@ -119,32 +119,34 @@
 	        <button id="loginButton">로그인</button>
 	        <div id="login_space2"></div>
 	        <div id="login_space3">
-	            <label class="search" onclick="searchId()">아이디 찾기</label>
+	            <label class="search" onclick="searchId()" onMouseOver="this.style.color='#77af82';"
+							onMouseOut="this.style.color=''">아이디 찾기</label>
 	            <label>&nbsp;|&nbsp;</label>
-	            <label class="search" onclick="searchId()">비밀번호 찾기</label>
+	            <label class="search" onclick="searchId()" onMouseOver="this.style.color='#77af82';"
+							onMouseOut="this.style.color=''">비밀번호 찾기</label>
 	            <label>&nbsp;|&nbsp;</label>
-	            <label class="search" onclick="join();">회원가입</label>
+	            <label class="search" onclick="join();" onMouseOver="this.style.color='#77af82';"
+							onMouseOut="this.style.color=''">회원가입</label>
 	        </div>
 	    </div>   
 	    <div>
 	        <div id="otherBtn">
 	            <div id="otherSpace"></div>
- 
                 <div id="otherLogin_space"></div>
                 <div id="loginButton2">
                 <i class="fas fa-comment" id="btn2_1"></i>
 	            <!-- get 방식을 통해 uri로 바로 이동  -->
 	            <a href="https://kauth.kakao.com/oauth/authorize?client_id=9d8f7f524c07ea08ff127d7591c2fbd5&redirect_uri=http://localhost:13080/reap/kakaoLogin.me&response_type=code" id="btn2_2">카카오 계정으로 로그인</a>
-	            </div>
-	            
+	            </div>	            
+	        
+	        <div id="login_space5"></div>
+
+                <div id="loginButton3">
+                <i class="fab fa-neos" id="btn3_1"></i>
+	            <a id="btn3_2">네이버 계정으로 로그인</a>
+	            </div>	            
 	        </div>
-	        <div id="login_space1"></div>
-	        <div id="otherBtn">
-	            <button id="loginButton3">
-	            <!-- <p id="btn3_1">N</p> -->
-	            <i class="fab fa-neos" id="btn3_1"></i>
-	            <p id="btn3_2">네이버 계정으로 로그인</p></button>
-	        </div> 	    
+	            
 	        <div id="login_spaceFoot"></div>
 		</div>
 		</div>
@@ -169,6 +171,23 @@
     function searchId(){
   	   location.href="<%= request.getContextPath() %>/searchId.me";
     }
+    
+    
+    $("#loginInfo_1").focusin(function(){
+    	$("#loginInfo_1").css({'color':'black','font-weight':'bold'});
+    });
+    
+    $("#loginInfo_1").blur(function(){
+    	$("#loginInfo_1").css('font-weight','500');
+    });
+    
+    $("#loginInfo_2").focusin(function(){
+    	$("#loginInfo_2").css({'color':'black','font-weight':'bold'});
+    });
+    
+    $("#loginInfo_2").blur(function(){
+    	$("#loginInfo_2").css('font-weight','500');
+    });
   
      
     $('#loginButton').click(function(){

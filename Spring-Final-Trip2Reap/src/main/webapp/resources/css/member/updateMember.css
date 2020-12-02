@@ -133,8 +133,8 @@
      
      
      /* 버튼  */
-     #space_6 { height : 50px; }
-     #space_7 { display : inline-block; width : 430px; }
+     #space_6 { height : 60px; }
+     #space_7 { display : inline-block; width : 445px; }
      #applyBtn1 { background: lightgray; color:white; width: 200px; height : 50px; 
                   border: none; font-size: 15px; font-weight: bold; cursor: pointer; }
      #space_8 { display: inline-block; width: 10px; }
