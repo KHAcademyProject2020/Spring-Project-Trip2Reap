@@ -278,5 +278,5 @@
 	FROM HOTEL_ROOM_INFO_VIEW
 	WHERE BO_NO=#{hId}
 	</select>
-
+<!-- 은강  -->
 </mapper>

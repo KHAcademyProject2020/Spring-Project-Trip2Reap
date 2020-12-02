@@ -525,6 +525,6 @@ public class HotelController {
 	public String goEditHotelView(){
 		return "hotel_edit";
 	}
-
+// 은강><
 
 }
