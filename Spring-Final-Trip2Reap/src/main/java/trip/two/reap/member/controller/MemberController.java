@@ -194,6 +194,20 @@ public class MemberController {
 	}
 	
 	
+	// 마이페이지 - 내가 담은 여행지
+	@RequestMapping("myPageTravel.me")
+	public String myPageTravel() {
+		return "myPageTravel";
+	}
+	
+	
+	// 마이페이지 - 내가 작성한 글목록
+	@RequestMapping("myPageBoard.me")
+	public String myPageBoard() {
+		return "myPageBoard";
+	}
+	
+	
 	// 회원탈퇴 뷰로 이동
 	@RequestMapping("memberOut.me")
 	public String memberOut() {
