@@ -7,8 +7,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -405,8 +404,9 @@ public class HotelController {
 	//2020.12.01~2020.12.02
 	//호텔리스트- modal 상세 검색
 	@RequestMapping("detailSearchResult.ho")
-	public void detailSearchResult(@RequestParam(value="page", required=false, defaultValue="1") Integer page , HttpSession session,
-				int searchLocalCode, int searchHotelRank, int searchPricePerDayType, String searchHotelName, HttpServletResponse response ) throws HotelException, JsonIOException, IOException{
+	public void detailSearchResult(@RequestParam(value="page", required=false, defaultValue="1") Integer page , 
+			HttpSession session,  HttpServletResponse response, 
+			int searchLocalCode, int searchHotelRank, int searchPricePerDayType, String searchHotelName) throws HotelException, JsonIOException, IOException{
 
 		
 		
@@ -507,15 +507,6 @@ public class HotelController {
 		
 		//맵을 gson에 담아서 뷰로 보낸다.
 		gson.toJson(detailSearchResultMap,response.getWriter());
-		/*
-		mv.addObject("hotelList",hotelList)
-		.addObject("pi", pi)
-		.addObject("likeHotelList", likeHotelList)
-		.addObject("minRoomPricePerDayList", minRoomPriceDayList)
-		.setViewName("hotel_list");
-		
-		return mv;
-		*/
 	}
 	
 	
