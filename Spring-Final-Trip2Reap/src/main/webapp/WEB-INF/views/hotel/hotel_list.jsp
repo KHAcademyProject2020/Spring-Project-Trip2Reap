@@ -65,111 +65,97 @@
         </div>
 
         <div id="hotel-list-container">
-
+			<%--호텔검색결과가 존재하지 않을 때!--%>
+			<c:if test="${empty hotelList }">
+				<p>호텔이 존재하지 않습니다!</p>
+			</c:if>
 
 			<%-- list가 2개이상일때  --%>
 			<%--<c:forEach var="hotel" items="${hotelList}" varStatus="status"> --%>
-			<c:forEach var="i" begin="0" end="${fn:length(hotelList)-1}" varStatus="status">
-				<div class="one-hotel-info-container">
-
-	                <img src="resources/images/sample_hotel.jpg" alt="호텔이미지">
-
-	                <div class="detail-info-container">
-	                    <div>
-	                        <div class="info-container">
-	                            <!-- 호텔이름 -->
-	                            <div class="hotel-name-container">
-	                            	<%--호텔번호 --%>
-	                            	<input class="hotelNO" type="hidden" value="${hotelList.get(status.index).boNo}"/>
-
-	                                <h1>${hotelList.get(status.index).boTitle }</h1>
-	                                <div class="hotel-rank-wrapper">
-
-    			                    		<small class="hotel-rank">
-    			                    			<c:if test="${hotelList.get(status.index).hotelRank eq 0 }">
-    			                    				등급 없음
-    			                    			</c:if>
-    			                    			<c:if test="${hotelList.get(status.index).hotelRank ne 0 }">
-    			                    				${hotelList.get(status.index).hotelRank } 등급
-    			                    			</c:if>
-    			                    		</small>
-
-			                    	</div>
-	                            </div>
-
-	                            <!-- 좋아요 버튼 -->
-	                            <div class="i-like-btn-container">
-	                            	<c:if test="${likeHotelList.get(status.index)==0}">
-	                                	<i class="fas fa-heart unlike"></i>
-	                            	</c:if>
-
-	                            	<%--이미 좋아요를 눌렀다면? --%>
-	                            	<c:if test="${ likeHotelList.get(status.index)>0}">
-	                                	<i class="fas fa-heart like"></i>
-	                            	</c:if>
-
-
-	                            </div>
-	                        </div>
-
-	                    </div>
-
-
-	                    <div class="detail-info-wrapper">
-	                        <!-- 호텔주소 -->
-	                        <div class="hotel-addr-wrapper">
-	                            <small>${hotelList.get(status.index).hotelAddr}</small>
-	                        </div>
-
-
-	                        <div class="hotel-info-wrapper">
-	                            <!-- 별점 -->
-	                            <div class="hotel-review-container">
-	                                <span class="star-point">
-	                                    <i class="fas fa-star"></i>
-	                                </span>
-	                                <span> ${hotelList.get(status.index).hotelReviewScore}</span>/5.0
-	                            </div>
-
-
-	                            <!-- 1박 가격 -->
-	                            <div class="hotel-per-day-price-container info-container">
-	                                <p>
-	                                    <small>1박</small>&nbsp;&nbsp;
-	                                    <b class="min_room_price">
-	                                    	<fmt:formatNumber value="${minRoomPricePerDayList.get(status.current)}" type="number"/>
-	                                    </b>
-	                                    &nbsp;원
-	                                </p>
-	                            </div>
-	                        </div>
-	                    </div>
-
-	                    <button class="hotel-reserve-btn">예약하기</button>
-	                </div>
-	            </div>
-			</c:forEach>
+			<c:if test="${!empty hotelList}">
+				<c:forEach var="i" begin="0" end="${fn:length(hotelList)-1}" varStatus="status">
+					<div class="one-hotel-info-container">
+	
+		                <img src="resources/images/sample_hotel.jpg" alt="호텔이미지">
+	
+		                <div class="detail-info-container">
+		                    <div>
+		                        <div class="info-container">
+		                            <!-- 호텔이름 -->
+		                            <div class="hotel-name-container">
+		                            	<%--호텔번호 --%>
+		                            	<input class="hotelNO" type="hidden" value="${hotelList.get(status.index).boNo}"/>
+	
+		                                <h1>${hotelList.get(status.index).boTitle }</h1>
+		                                <div class="hotel-rank-wrapper">
+	
+	    			                    		<small class="hotel-rank">
+	    			                    			<c:if test="${hotelList.get(status.index).hotelRank eq 0 }">
+	    			                    				등급 없음
+	    			                    			</c:if>
+	    			                    			<c:if test="${hotelList.get(status.index).hotelRank ne 0 }">
+	    			                    				${hotelList.get(status.index).hotelRank } 등급
+	    			                    			</c:if>
+	    			                    		</small>
+	
+				                    	</div>
+		                            </div>
+	
+		                            <!-- 좋아요 버튼 -->
+		                            <div class="i-like-btn-container">
+		                            	<c:if test="${likeHotelList.get(status.index)==0}">
+		                                	<i class="fas fa-heart unlike"></i>
+		                            	</c:if>
+	
+		                            	<%--이미 좋아요를 눌렀다면? --%>
+		                            	<c:if test="${ likeHotelList.get(status.index)>0}">
+		                                	<i class="fas fa-heart like"></i>
+		                            	</c:if>
+	
+	
+		                            </div>
+		                        </div>
+	
+		                    </div>
+	
+	
+		                    <div class="detail-info-wrapper">
+		                        <!-- 호텔주소 -->
+		                        <div class="hotel-addr-wrapper">
+		                            <small>${hotelList.get(status.index).hotelAddr}</small>
+		                        </div>
+	
+	
+		                        <div class="hotel-info-wrapper">
+		                            <!-- 별점 -->
+		                            <div class="hotel-review-container">
+		                                <span class="star-point">
+		                                    <i class="fas fa-star"></i>
+		                                </span>
+		                                <span> ${hotelList.get(status.index).hotelReviewScore}</span>/5.0
+		                            </div>
+	
+	
+		                            <!-- 1박 가격 -->
+		                            <div class="hotel-per-day-price-container info-container">
+		                                <p>
+		                                    <small>1박</small>&nbsp;&nbsp;
+		                                    <b class="min_room_price">
+		                                    	<fmt:formatNumber value="${minRoomPricePerDayList.get(status.current)}" type="number"/>
+		                                    </b>
+		                                    &nbsp;원
+		                                </p>
+		                            </div>
+		                        </div>
+		                    </div>
+	
+		                    <button class="hotel-reserve-btn">예약하기</button>
+		                </div>
+		            </div>
+				</c:forEach>
+			</c:if>
         </div>
         <!--호텔리스트 끝  -->
-		<script>
-		$(function(){
-			//예약하기 버튼을 누르면=> 디테일뷰로 이동.
-			$('button.hotel-reserve-btn').click(function(){
-				var hId = $(this).closest('.one-hotel-info-container').find('.hotelNO').val();
-				//console.log(bId);
-				//디테일뷰로 들어간다.
-				location.href="hotelDetailView.ho?hId="+hId+ "&page="+${pi.currentPage};
-			});
-
-			/*
-			//방가격 나타내기
-			$('b.min_room_price').each(function(){
-		    	let priceTxt=$(this).text();
-		    	$(this).text(priceTxt.replace(/\B(?=(\d{3})+(?!\d))/g,','));
-			});
-			*/
-		});
-		</script>
 
         <!-- 호텔페이지네이션 시작 -->
         <div id="pagination-container">
@@ -278,7 +264,7 @@
                             </td>
                             <td>
                                 <select class="detail-search-option" name="place" id="place">
-                                    <option value="0">지역선택</option>
+                                    <option value="0" selected>지역선택</option>
                                     <option value="1">강원도</option>
                                     <option value="2">경기도</option>
                                     <option value="3">경상남도</option>
@@ -306,7 +292,7 @@
                             </td>
                             <td>
                                 <select class="detail-search-option" name="rank" id="rank">
-                                    <option value="">등급 선택</option>
+                                    <option value="0" selected>등급 선택</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -321,13 +307,13 @@
                                 <h5>가격대 </h5>
                             </td>
                             <td>
-                                <select class="detail-search-option" name="price-per-day" id="price-per-day">
-                                    <option value="">가격 선택</option>
-                                    <option value="5만원 미만">5만원 미만</option>
-                                    <option value="10만원 미만">5만원 이상 ~ 10만원 미만</option>
-                                    <option value="15만원 미만">10만원 이상 ~ 15만원 미만</option>
-                                    <option value="20만원 미만">15만원 이상 ~ 20만원 미만</option>
-                                    <option value="20만원 이상">20만원 이상</option>
+                                <select class="detail-search-option" name="price-per-day" id="price-per-day" >
+                                    <option value="0" selected>가격 선택</option>
+                                    <option value="1">5만원 미만</option>
+                                    <option value="2">5만원 이상 ~ 10만원 미만</option>
+                                    <option value="3">10만원 이상 ~ 15만원 미만</option>
+                                    <option value="4">15만원 이상 ~ 20만원 미만</option>
+                                    <option value="5">20만원 이상</option>
                                 </select>
                             </td>
                         </tr>
@@ -336,7 +322,7 @@
                                 <h5>호텔이름</h5>
                             </td>
                             <td>
-                                <input class="detail-search-option" name="hotel-name" id="hotel-name" type="text">
+                                <input class="detail-search-option" name="hotel-name" id="hotel-name" type="text" autocomplete="off">
                             </td>
                         </tr>
                     </table>
@@ -357,6 +343,25 @@
 
 </body>
 <script>
+
+$(function(){
+	//예약하기 버튼을 누르면=> 디테일뷰로 이동.
+	$('button.hotel-reserve-btn').click(function(){
+		var hId = $(this).closest('.one-hotel-info-container').find('.hotelNO').val();
+		//console.log(bId);
+		//디테일뷰로 들어간다.
+		location.href="hotelDetailView.ho?hId="+hId+ "&page="+${pi.currentPage};
+	});
+
+	/*
+	//방가격 나타내기
+	$('b.min_room_price').each(function(){
+    	let priceTxt=$(this).text();
+    	$(this).text(priceTxt.replace(/\B(?=(\d{3})+(?!\d))/g,','));
+	});
+	*/
+});
+
 
 //heart -btn
 $(function(){
@@ -512,19 +517,68 @@ $(function(){
       //동적쿼리문을 이용하여 모달의 상세검색 조건을 만족하는 검색결과를 찾아보자
         $('#detail-hotel-search').click(function(){
         	console.log('어머나~ 호텔상세검색 버튼을 클릭하셨군요?');
+        	//검색조건 출력하기
+        	//호텔검색 지역코드
+        	let $search_hotel_local_code= Number($('#place > option:selected').val());
+        	
+        	//호텔검색 호텔등급
+        	let $search_hotel_rank= Number($('#rank > option:selected').val());
+        	
+        	//호텔검색 1일 이용가격(종류)
+        	/*
+        		1일가격 번호		가격범위
+        		1				5만원 미만
+        		2				5만원 이상 ~ 10만원 미만
+        		3				10만원 이상 ~ 15만원 미만
+        		4				15만원 이상 ~ 20만원 미만
+        		5				20만원 초과
+        	*/
+        	let $search_hotel_price_per_day_type= Number($('#price-per-day > option:selected').val());
+        	
+        	//호텔검색 호텔이름 (빈공간제거)
+        	let $search_hotel_name= $('#hotel-name').val().trim();
+        	
+        	
+        	console.log('호텔지역코드 => ' + $search_hotel_local_code);
+        	console.log('호텔등급 => ' + $search_hotel_rank);
+        	console.log('호텔 1일 이용가격 => '+ $search_hotel_price_per_day_type);
+        	console.log('호텔이름 => '+ $search_hotel_name);
         	
         	//검색조건에 맞는 호텔 리스트를 구한다.
+        	$.ajax({
+        		url: 'detailSearchResult.ho',
+        		data:{
+        			searchLocalCode: $search_hotel_local_code,	//지역코드번호
+        			searchHotelRank: $search_hotel_rank,		//호텔등급
+        			searchPricePerDayType: $search_hotel_price_per_day_type, //1일이용금액 종류
+        			searchHotelName: $search_hotel_name
+        		},
+        		success: function(data){
+        			
+        			let $hotelListContainer= $('#hotel-list-container'); //호텔 검색결과를 나타내는 호텔컨테이너
+        			let $hotelPaginationContainer=$('#pagination-container'); //페이징을 나타내는 페이징컨테이너
+        			
+        			$hotelListContainer.empty(); //호텔검색결과를 나타내 컨테이너를 비운다.
+        			$hotelPaginationContainer.empty(); //페이징 컨테이너 내부내용을 비운다.
+        			
+        			//출력
+        			console.log(data.pi);
+        			console.log(data.hotelList);
+        			console.log(data.likeHotelList);
+        			console.log(data.minRoomPricePerDayList);
+        			
+        			
+        			
+        		}
+        		
+        	});
         	
-        	
-    		//모달창을 나간다.
+        	//모달창을 나간다.
     		$modalContainer.addClass('out');
     		$body.removeClass('modal-active');
     		if($modalContainer.hasClass($btnId)){
     			$content.addClass('out');
     		}
-    		
-    		
-    		
     	});
 
 }); //modal- wrapper finished

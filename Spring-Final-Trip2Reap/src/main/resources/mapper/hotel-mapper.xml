@@ -232,7 +232,7 @@
 			AND HOTEL_RANK=#{searchHotelRank}
 		</if>
 		<if test="searchHotelName !=null">
-			AND BO_TITLE=#{searchHotelName}
+			AND BO_TITLE LIKE #{searchHotelName}%
 		</if>
 		
 		<choose>
