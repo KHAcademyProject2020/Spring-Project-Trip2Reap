@@ -10,7 +10,15 @@
 </head>
 <body>
     <header>
-    <%@ include file="../member/myPage.jsp" %>
+    <%@ include file="../common/menubar.jsp" %>
+    
+    <c:if test="${ loginUser.mCategory eq 'member' }">    
+    <%@ include file="../member/myPage.jsp" %>    
+    </c:if>
+    
+    <c:if test="${ loginUser.mCategory ne 'member' }">    
+    <%@ include file="../member/myPage_kakao_naver.jsp" %>    
+    </c:if>
     </header>
     
     <section>

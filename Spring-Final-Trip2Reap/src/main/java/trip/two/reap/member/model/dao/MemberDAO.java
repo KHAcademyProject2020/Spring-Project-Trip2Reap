@@ -68,4 +68,8 @@ public class MemberDAO {
 		return sqlSession.update("memberMapper.updatePwd", member);
 	}
 
+	public int updateMember(SqlSessionTemplate sqlSession, Member member) {
+		return sqlSession.update("memberMapper.updateMember", member);
+	}
+
 } // 클래스 종료

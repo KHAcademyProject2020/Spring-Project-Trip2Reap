@@ -4,30 +4,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
-   <!--  insert_2.css -->
-      <link rel="stylesheet" href="resources/css/member/insert_2.css">  
+<title>개인정보 수정</title>
+      <!--  updateMember.css -->
+      <link rel="stylesheet" href="resources/css/member/updateMember.css">  
 </head>
 <body>
     <header>
     <%@ include file="../common/menubar.jsp" %>
+    
+    <c:if test="${ loginUser.mCategory eq 'member' }">    
+    <%@ include file="../member/myPage.jsp" %>    
+    </c:if>
+    
+    <c:if test="${ loginUser.mCategory ne 'member' }">    
+    <%@ include file="../member/myPage_kakao_naver.jsp" %>    
+    </c:if>
     </header>
     
     <section>
     <div id="board_list">
-    <!-- 회원가입 설명란  -->
-        <div id="space_1"></div>
-        <div id="space_2">
-            <div id="info1"></div>
-            <div id="info2">회원가입</div>
-            <div id="info3"></div>
-            <div id="info4"></div>
-            <div id="info7">01. 약관동의&nbsp;&nbsp;>&nbsp;&nbsp;</div>
-            <div id="info5">02</div>
-            <div id="info6">정보입력</div>
-            <div id="info7">&nbsp;&nbsp;>&nbsp;&nbsp;03. 가입완료</div>
+    <!-- 개인정보 수정 설명란  -->
+        <div>
+            <div id="infor1"></div>
+            <div id="infor2"></div>
+            <div id="infor3">개인정보 수정</div>            
         </div>
-        <div id="space_3"></div>     
+        <div id="up_space1"></div>    
         
         <!-- 정보입력란 -->
         <div id="infoDiv1"></div>
@@ -35,15 +37,12 @@
         <div id="infoDiv3">는 필수 입력 항목입니다.</div>
         <div id="space_4"></div>
         
-        <form action="insert3.me" method="post" id="joinForm">
         <div id="infoDiv4"></div>
    
         <!-- 아이디  -->
         <div id="id1"><label class="infoLabel">아이디</label></div><div id="id2"><label id="commonLabel">*</label>
-        <input type="text" id="idText" name="memberId" placeholder="5~12자 영문,숫자"
-	         onfocus="this.placeholder=''" onblur="this.placeholder='5~12자 영문,숫자'" autocomplete="off">
-	    <i class="fas fa-check" id="idCheckIcon"></i>
-	    <div id="idInfoBox">필수 입력사항입니다.</div>     
+        <input type="text" id="idText" name="memberId" value="${ loginUser.memberId }" readonly="readonly" >
+	    <i class="fas fa-check" id="idCheckIcon"></i>    
 	    </div>
         <div id="space_5"></div>
 
@@ -72,7 +71,7 @@
 	    <!-- 이름  -->
         <div id="infoDiv4"></div>
         <div id="name"><label class="infoLabel">이름</label></div><div id="name2"><label id="commonLabel">*</label>
-        <input type="text" id="nameText" name="memberName" placeholder="2~10자"
+        <input type="text" id="nameText" name="memberName" value="${loginUser.memberName }" placeholder="2~10자"
 	         onfocus="this.placeholder=''" onblur="this.placeholder='2~10자'" autocomplete="off">
 	    <div id="nameInfoBox">필수 입력사항입니다.</div>     
 	    </div>
@@ -82,7 +81,7 @@
 	    <!-- 닉네임  -->
 	    <div id="infoDiv4"></div>
         <div id="nickname1"><label class="infoLabel">닉네임</label></div><div id="nickname2"><label id="commonLabel">*</label>
-        <input type="text" id="nicknameText" class="infoText" name="nickName" placeholder="2~10자"
+        <input type="text" id="nicknameText" class="infoText" name="nickName" value="${loginUser.nickName }" placeholder="2~10자"
 	         onfocus="this.placeholder=''" onblur="this.placeholder='2~10자'" autocomplete="off">
 	    <div id="nicknameInfoBox">필수 입력사항입니다.</div> 
 	    </div>
@@ -91,7 +90,7 @@
         <!-- 이메일  -->
 	    <div id="infoDiv4"></div>
         <div id="email1"><label class="infoLabel">이메일</label></div><div id="email2"><label id="commonLabel">*</label>
-            <input type="text" id="emailText" name="email" placeholder="example@naver.com"
+            <input type="text" id="emailText" name="email" placeholder="example@naver.com"  value="${loginUser.email }"
 	            onfocus="this.placeholder=''" onblur="this.placeholder='example@naver.com'" autocomplete="off">
 	        <div id="sendMessage"><label id="mailLabel">인증메일 전송</label></div>
 	        <div id="sendMessage2"></div>
@@ -115,7 +114,7 @@
         <!-- 휴대전화  -->
 	    <div id="infoDiv4"></div>
         <div id="phone1"><label class="infoLabel">휴대전화</label></div><div id="phone2"><label id="commonLabel">*</label>
-        <input type="text" id="phoneText" class="infoText" name="phone" placeholder="-없이 입력"
+        <input type="text" id="phoneText" class="infoText" name="phone"  value="${loginUser.phone }" placeholder="-없이 입력"
 	         onfocus="this.placeholder=''" onblur="this.placeholder='-없이 입력'" autocomplete="off">
 	    <div id="phoneInfoBox">필수 입력사항입니다.</div>     
 	    </div>
@@ -123,19 +122,36 @@
         
         <!-- 성별  -->
 	    <div id="infoDiv4"></div>
-        <div class="infoLeft"><label class="infoLabel">성별</label></div><div id="gender" class="infoRight">
+        <div class="infoLeft"><label class="infoLabel">성별</label></div>
+        <div id="gender" class="infoRight">
+        
+        <c:if test="${ loginUser.gender eq '여자' }">
            <input type="button" value="남자" id="man">
+           <input type="button" value="여자" id="woman" style="background-color : rgb(226,240,217);">
+           <input type="text" value="여자" id="genderValue" name="gender">
+        </c:if>
+        
+        <c:if test="${ loginUser.gender eq '남자' }">
+           <input type="button" value="남자" id="man" style="background-color : rgb(226,240,217);">
+           <input type="button" value="여자" id="woman">
+           <input type="text" value="남자" id="genderValue" name="gender">
+        </c:if>
+        
+        <c:if test="${ empty loginUser.gender }">
+           <input type="button" value="남자" id="man" >
            <input type="button" value="여자" id="woman">
            <input type="text" value="" id="genderValue" name="gender">
+        </c:if>               
         </div>
-        </form>
 
         <!-- 버튼  -->
         <div id="space_6"></div>
         <div id="space_7"></div>
         <input type="button" id="applyBtn1" value="취소" onclick="cancel();">
         <div id="space_8"></div>
-        <input type="button" id="applyBtn2" value="회원가입">
+        <input type="button" id="applyBtn2" value="수정하기">
+        <input type="hidden" value="${ loginUser.nickName }" id="hiddenNickName">
+        <input type="hidden" value="${ loginUser.phone }" id="hiddenPhone">
     </div>
     </section>
     <div style="height : 1000px;"></div>
@@ -171,59 +187,7 @@
    			   $("#genderValue").val('여자');
    		   }
    		   });
-       });
-       
-       $("#idText").focusin(function(){
-    	   $("#idText").css({'color':'black','font-weight':'bold'});
-       });
-       
-       $("#idText").blur(function(){  
-    	  $("#idText").css('font-weight','normal');
-    	  var userId = $("#idText").val();
-    	  var regType1 = /^[a-zA-Z0-9]*$/;
-    	  if(userId == ""){
-    		  $("#id1").css('height','70px');
-    		  $("#id2").css('height','70px');
-    		  $('#idInfoBox').text("필수 입력항목입니다.");
-    		  $('#idInfoBox').css('display', 'block');
-    		  $('#idCheckIcon').css({'display':'inline-block','color':'red', 'width':'30px' , 'text-align' : 'left'});
-    	  } else if(parseInt(userId.length) < 5 || parseInt(userId.length) >12){
-    		  $("#id1").css('height','70px');
-    		  $("#id2").css('height','70px');
-    		  $('#idInfoBox').text("아이디는 5~12자입니다.");
-    		  $('#idInfoBox').css('display', 'block');
-    		  $('#idCheckIcon').css({'display':'inline-block','color':'red', 'width':'30px' , 'text-align' : 'left'});
-    	  } else if(!regType1.test(userId)){
-    		  $("#id1").css('height','70px');
-    		  $("#id2").css('height','70px');
-    		  $('#idInfoBox').text("아이디는 영문 혹은 숫자를 입력해주세요.");
-    		  $('#idInfoBox').css('display', 'block');
-    		  $('#idCheckIcon').css({'display':'inline-block','color':'red', 'width':'30px' , 'text-align' : 'left'});
-    	  } else {    		  
-    		  $.ajax({
-    			 url : 'checkId.me',
-    			 type : 'post',
-    			 data : {userId:userId},
-    			 success : function(data){
-    				 if(data == "Y"){
-    					 $("#id1").css('height','50px');
-    		    		 $("#id2").css('height','50px');
-    		    		 $('#idInfoBox').css('display', 'none');
-    		    		 $('#idCheckIcon').css({'display':'inline-block','color':'rgb(119,175,130)', 'width':'30px' , 'text-align' : 'left'});
-    				 } else {
-    					 $("#id1").css('height','70px');
-    		    		 $("#id2").css('height','70px');
-    		    		 $('#idInfoBox').text("중복된 아이디입니다. 다른 아이디를 입력해주세요.");
-    		    		 $('#idInfoBox').css('display', 'block');
-    		    		 $('#idCheckIcon').css({'display':'inline-block','color':'red', 'width':'30px' , 'text-align' : 'left'});
-    		    	  } 
-    			 },
-    			 error : function(data){
-    				 console.log("서버 실패");
-    			 }
-    		  });   		      		  
-    	  }   	  
-       });
+       });   
        
        
        $("#pwdText").focusin(function(){
@@ -232,7 +196,6 @@
        
        
        $("#pwdText").blur(function(){  
-     	  $("#pwdText").css('font-weight','normal');
      	  var userPwd = $("#pwdText").val();
      	  var check1 = userPwd.search(/[0-9]/g);
      	  var check2 = userPwd.search(/[a-z]/ig);
@@ -278,7 +241,6 @@
        
        
        $("#pwdText2").blur(function(){  
-      	  $("#pwdText2").css('font-weight','normal');
       	  var userPwd = $("#pwdText").val();
       	  var userPwd2 = $("#pwdText2").val();
       	  if(userPwd != userPwd2){
@@ -302,7 +264,6 @@
        });
        
        $("#nameText").blur(function(){  
-     	  $("#nameText").css('font-weight','normal');
      	  var name = $("#nameText").val();
      	  var check1 = /^[가-힣]+$/;
      	  var check2 = /^[a-zA-Z]+$/;     	  
@@ -345,7 +306,7 @@
        });
        
        $("#nicknameText").blur(function(){  
-    	  $("#nicknameText").css('font-weight','normal');
+    	  var nicknameNow = $("#hiddenNickName").val();
     	  var nickname = $("#nicknameText").val();
     	  var regType1 = /^[가-힣|a-z|A-Z|0-9|\*]+$/;
      	  
@@ -370,7 +331,7 @@
     			 type : 'post',
     			 data : {nickname:nickname},
     			 success : function(data){
-    				 if(data == "Y"){
+    				 if(data == "Y" || nickname == nicknameNow){
     					 $("#nickname1").css('height','50px');
     		    		 $("#nickname2").css('height','50px');
     		    		 $('#nicknameInfoBox').css('display', 'none');
@@ -395,7 +356,6 @@
        });
               
        $("#emailText").blur(function(){  
-     	  $("#emailText").css('font-weight','normal');
      	  var email = $("#emailText").val();
      	  var check = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
       	  var test = check.test(email);
@@ -533,11 +493,7 @@
        $("#confirmText").focusin(function(){
     	   $("#confirmText").css({'color':'black','font-weight':'bold'});
        });
-       
-       $("#confirmText").blur(function(){  
-      	  $("#confirmText").css('font-weight','normal');
-       });
-      	  
+      
        
        
        $("#phoneText").focusin(function(){
@@ -545,7 +501,7 @@
        });
               
        $("#phoneText").blur(function(){  
-     	  $("#phoneText").css('font-weight','normal');
+     	  var phoneNow = $("#hiddenPhone").val();
      	  var phone = $("#phoneText").val();
      	  var check = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
 
@@ -570,8 +526,7 @@
    			 type : 'post',
    			 data : {phone:phone},
    			 success : function(data){
-   				 console.log("data : " + data);
-   				 if(data == "Y"){
+   				 if(data == "Y" || phoneNow == phone){
    					$("#phone1").css('height','50px');
    	  		        $("#phone2").css('height','50px');
    	  		        $('#phoneInfoBox').css('display', 'none');
@@ -592,14 +547,7 @@
        
        
        $("#applyBtn2").click(function(){
-    	   var idResult = "no";
     	   var userId = $("#idText").val();
-    	   if($("#idInfoBox").css("display") == "none"){
-    		   idResult = "ok";
-    	   } else if($("#idInfoBox").css("display") == "block") {
-    		   idResult = "no";
-    	   }
-    	   
     	   
     	   var pwd1Result = "no";
     	   var userPwd1 = $("#pwdText").val();
@@ -663,10 +611,9 @@
     		   cerResult = "no";
     	   }
     	   
-    	   if(userId == "" || idResult == "no"){
-    		   swal("아이디를 확인해주세요🙋");
-    		   $("#idText").focus();
-    	   } else if(userPwd1 == "" || pwd1Result == "no"){
+    	   var userGender = $("#genderValue").val();
+    	   
+    	   if(userPwd1 == "" || pwd1Result == "no"){
     		   swal("비밀번호를 확인해주세요🙋");
     		   $("#pwdText").focus();
     	   } else if(userPwd2 == "" || pwd2Result == "no"){
@@ -688,7 +635,17 @@
     		   swal("이메일 인증을 해주세요✉");
     		   $("#emailText").focus();
     	   } else {
-    		   $('#joinForm').submit();
+    		   $.ajax({
+    	   			 url : 'updateMember.me',
+    	   			 type : 'post',
+    	   			 data : {userId:userId,userPwd1:userPwd1,userPwd2:userPwd2,userName:userName,nickName:nickName,email:email,phone:phone,userGender:userGender},
+    	   			 success : function(data){
+    	   			     location.href="<%= request.getContextPath() %>/myPageUpdate.me";
+    	   			 },
+    	   			 error : function(data){
+    	   				 console.log("서버 실패");
+    	   			 }
+    	   		  });
     	   }    	 
        });
 
@@ -698,5 +655,7 @@
        }
    
     </script>
+
+
 </body>
 </html>

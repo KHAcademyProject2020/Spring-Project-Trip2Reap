@@ -29,6 +29,9 @@ public interface MemberService {
 
 	int changePwd(Member member);
 
+	int updateMember(Member member);
+
+
 	
 
 		

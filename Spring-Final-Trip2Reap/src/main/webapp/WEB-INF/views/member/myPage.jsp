@@ -9,9 +9,6 @@
       <link rel="stylesheet" href="resources/css/member/myPage.css">  
 </head>
 <body>
-    <header>
-        <%@ include file="../common/menubar.jsp" %>
-    </header>
     <section>   
         <!-- 마이페이지  -->
         <div id="space_1">
@@ -30,24 +27,31 @@
         <div id="menu">
             <div id="menuSpace1"></div>
             <div id="menuSpace2"></div>
-            <ul>
-                <li class="m1" onclick="memberUpdate();"><i class="fas fa-user-edit" id="me1"></i>개인정보 수정</li>
-                <li class="m1"><i class="fas fa-hotel" id="me1"></i>호텔예약 내역</li>
+            <ul>             
+                <li class="m1" onclick="mypageHotel();"><i class="fas fa-hotel" id="me1"></i>호텔예약 내역</li>
+                <li class="m1" id="updateMember"><i class="fas fa-user-edit" id="me1"></i>개인정보 수정</li>
                 <li class="m1"><i class="fas fa-map-signs" id="me1"></i>나만의 여행코스</li>
                 <li class="m1"><i class="fas fa-camera-retro" id="me1"></i>작성한 여행후기</li>
                 <li class="m1" onclick="memberOut();"><i class="fas fa-user-slash" id="me1"></i>회원탈퇴</li>
             </ul>
-        </div> 
+        </div>
+        <form action="myPageUpdate.me" method="post" id="updateMemberView">
+            <input type="hidden" value="${ loginUser.memberId }" id="hiddenId" name="hiddenId"> 
+        </form>
      </section>
      
      <script>
-     function memberUpdate(){
+     function mypageHotel(){
     	 location.href="<%= request.getContextPath() %>/myPage.me";
      }
      
      function memberOut(){
     	 location.href="<%= request.getContextPath() %>/memberOut.me";
      }
+     
+     $("#updateMember").click(function(){
+    	 $('#updateMemberView').submit(); 	 
+     });
      </script>
 </body>
 </html>

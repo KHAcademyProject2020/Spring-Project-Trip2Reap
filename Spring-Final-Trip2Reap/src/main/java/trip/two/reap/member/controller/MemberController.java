@@ -1,5 +1,12 @@
 package trip.two.reap.member.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -30,6 +37,7 @@ public class MemberController {
 	
 	@Autowired
 	private KakaoAPI kakao;
+	
 	
 	// 암호화 후 로그인
 	@RequestMapping("loginCheck.me")
@@ -91,7 +99,7 @@ public class MemberController {
 		
 		int result = mService.kakaoMemberCheck(id);
 		if(result == 0) {
-			int insertResult = mService.kakaoMemberInsert(loginUser);
+			int insertResult = mService.kakaoMemberInsert(loginUser);			
 			if(insertResult == 1) {
 				mv.addObject("loginUser", loginUser);
 				mv.setViewName("redirect:/");
@@ -124,11 +132,13 @@ public class MemberController {
 		return "insert_1";
 	}
 	
+	
 	// 회원가입2 뷰로 이동
 	@RequestMapping("insert2.me")
 	public String insert2() {
 		return "insert_2";
 	}	
+	
 	
 	// 마이페이지 뷰로 이동
 	@RequestMapping("myPage.me")
@@ -136,11 +146,60 @@ public class MemberController {
 		return "myPageHome";
 	} // myPageView() 종료
 	
+	
+	// 마이페이지 : 정보수정 뷰로 이동
+	@RequestMapping("myPageUpdate.me")
+	public String myPageUpdate() {	
+		return "myPageUpdate";
+	}
+	
+	
+	// 정보수정
+	@RequestMapping("updateMember.me")
+	@ResponseBody
+	public ModelAndView updateMember(@RequestParam("userId") String id, @RequestParam("userPwd1") String pwd1, @RequestParam("userName") String name,
+			                   @RequestParam("nickName") String nickname, @RequestParam("email") String email,
+			                   @RequestParam("phone") String phone, @RequestParam("userGender") String gender, 
+			                   HttpServletResponse response, HttpServletRequest request, ModelAndView mv) {			
+		
+		Member member = new Member();
+		
+		// 성별
+		if(gender.equals("")) {
+			member.setGender(null);
+		} else {
+			member.setGender(gender);
+		}
+				
+		member.setMemberId(id);
+		member.setMemberName(name);
+		member.setNickName(nickname);
+		member.setEmail(email);
+		member.setPhone(phone);		
+		
+		// 비밀번호 암호화 : [bcrypt]
+		String encPwd = bcryptPasswordEncoder.encode(pwd1);
+		member.setMemberPwd(encPwd);	
+		
+		int updateResult = mService.updateMember(member);
+		
+		if(updateResult == 1) {		
+			Member loginUser = mService.memberLogin(member);
+			
+			mv.addObject("loginUser", loginUser);
+			mv.setViewName("myPageUpdate");
+		}
+		
+		return mv;
+	}
+	
+	
 	// 회원탈퇴 뷰로 이동
 	@RequestMapping("memberOut.me")
 	public String memberOut() {
 		return "memberOut";
 	}
+	
 	
 	// 아이디 중복 체크
 	@RequestMapping("checkId.me")
@@ -156,6 +215,7 @@ public class MemberController {
 		return check;
 	}
 	
+	
 	// 닉네임 중복 체크
 	@RequestMapping("checkNickname.me")
 	@ResponseBody
@@ -169,6 +229,7 @@ public class MemberController {
 		}
 		return check;
 	}
+	
 	
 	// 인증메일 보내기 - 이메일 인증코드 생성
 	@RequestMapping("sendMail.me")
@@ -184,6 +245,7 @@ public class MemberController {
 		return checkMail;
 	}
 	
+	
 	// 휴대폰번호 중복 체크
 	@RequestMapping("phone.me")
 	@ResponseBody
@@ -197,6 +259,7 @@ public class MemberController {
 		}
 		return check;
 	}
+	
 	
 	// 회원가입3 뷰로 이동
 	@RequestMapping("insert3.me")
@@ -225,6 +288,7 @@ public class MemberController {
 		return mv;
 	}
 	
+	
 	// 아이디 : 휴대폰 번호로 찾기
 	@RequestMapping("searchIdPhone.me")
 	@ResponseBody
@@ -240,6 +304,7 @@ public class MemberController {
 		
 		return mv;
 	}
+	
 	
 	// 아이디 : 이메일로 찾기
 	@RequestMapping("searchIdEmail.me")
@@ -257,6 +322,7 @@ public class MemberController {
 		return mv;
 	}
 	
+	
 	// 비밀번호 : 이메일로 변경하기
 	@RequestMapping("searchPwdEmail")
 	@ResponseBody
@@ -273,7 +339,8 @@ public class MemberController {
 		return mv;
 	}
 	
-	// 비밀번호 변경하기
+	
+	// 비밀번호 찾기 : 비밀번호 변경하기
 	@RequestMapping("changePwd.me")
 	@ResponseBody
 	public String changePwd(@RequestParam("userId") String id, @RequestParam("userPwd1") String pwd, ModelAndView mv) {
@@ -284,7 +351,6 @@ public class MemberController {
 		String encPwd = bcryptPasswordEncoder.encode(pwd);
 		member.setMemberPwd(encPwd);
 		
-		// 타이머 나오게 하기 / 다른 곳 클릭시 타이머 제거. 타이머 다시 생성. 
 		int result = mService.changePwd(member);
 		String changeOk = "";
 		
@@ -296,5 +362,18 @@ public class MemberController {
 		return changeOk;
 	}
 	
+	
+	
+	/*
+	 * <추가로 넣어야 할 사항들>
+	 * 1. 비밀번호 찾기 -> 타이머 나오게 하기 / 다른 곳 클릭시 타이머 제거. 타이머 다시 생성.
+	 * 2. 정보수정 할 때, 현재 비밀번호 입력받아서 맞으면 수정하기.
+	 * 
+	 * <추가로 넣어야 할 기능들>
+	 * 1. 네이버 아이디 회원가입 / 로그인
+	 * 2. 나의 호텔 예약 내역
+	 * 3. 내가 담은 여행지
+	 * 4. 내가 작성한 글목록
+	*/
 
 } // 클래스 종료

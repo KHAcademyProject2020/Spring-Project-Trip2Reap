@@ -55,14 +55,13 @@
 						<li class="topBar2_2" onclick="logout();"
 							onMouseOver="this.style.color='#77af82';"
 							onMouseOut="this.style.color=''">로그아웃</li>
-						<li class="topBar2_2" onclick="myPage();"
-							onMouseOver="this.style.color='#77af82';"
-							onMouseOut="this.style.color=''">마이페이지</li>
+						<li class="topBar2_2" id="myPageBtn" onMouseOver="this.style.color='#77af82';"
+							onMouseOut="this.style.color=''" onclick="myPage()">마이페이지</li>
 					</ul>
 				</div>
 			</c:if>
 		</div>
-
+		
 		<!-- 메뉴(여행지, 여행코스, 여행후기, 호텔) -->
 		<div id="menu_1">
 		    <div id="menu_4"></div>
@@ -165,7 +164,7 @@
       
     function myPage(){
       location.href="<%= request.getContextPath() %>/myPage.me";
-    }
+    } 
     
     function searchId(){
   	   location.href="<%= request.getContextPath() %>/searchId.me";
@@ -286,7 +285,7 @@
 	        }
 			return unescape(cookieValue);
 		}	
-		});
+		});  
     
     </script>
 

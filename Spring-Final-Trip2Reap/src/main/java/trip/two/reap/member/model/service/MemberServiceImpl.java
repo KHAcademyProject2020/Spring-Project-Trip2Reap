@@ -110,6 +110,11 @@ public class MemberServiceImpl implements MemberService{
 		return mDAO.changePwd(sqlSession, member);
 	}
 	
+	@Override
+	public int updateMember(Member member) {
+		return mDAO.updateMember(sqlSession, member);
+	}
+	
 
 } // 클래스 종료
 
