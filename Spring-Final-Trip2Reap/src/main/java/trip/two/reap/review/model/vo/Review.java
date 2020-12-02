@@ -21,6 +21,7 @@ public class Review {
 	public Review() {}
 
 	
+	
 
 
 	public Review(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount, String boTag,
@@ -39,6 +40,9 @@ public class Review {
 		this.originName = originName;
 		this.changeName = changeName;
 	}
+
+
+
 
 
 	public int getBoNo() {
@@ -128,9 +132,11 @@ public class Review {
 	
 
 
+
 	public String getOriginName() {
 		return originName;
 	}
+
 
 
 
@@ -142,6 +148,7 @@ public class Review {
 
 
 
+
 	public String getChangeName() {
 		return changeName;
 	}
@@ -149,9 +156,11 @@ public class Review {
 
 
 
+
 	public void setChangeName(String changeName) {
 		this.changeName = changeName;
 	}
+
 
 
 
@@ -167,9 +176,11 @@ public class Review {
 
 
 
-	
 
 	
+	
+	
+
 
 
 	

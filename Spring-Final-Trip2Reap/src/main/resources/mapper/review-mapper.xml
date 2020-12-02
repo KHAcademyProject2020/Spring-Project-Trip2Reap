@@ -9,11 +9,21 @@
   	</select>
   	
   	<select id="selectList" resultMap="reviewResultSet">
-  		select *
+  		 select *
   		 from board
          JOIN CATEGORY USING(CA_CODE)
    		 where BO_DELETE_YN='N' AND CA_CODE=3 OR CA_CODE=4
-   		 order by BO_NO desc
+   		 order by BO_NO desc 
+   		<!-- select *
+  		 from board B
+         INNER JOIN CATEGORY C
+             ON B.CA_CODE = C.CA_CODE
+         INNER JOIN IMG_FILE I
+             ON B.BO_NO = I.BO_NO
+   		 where B.BO_DELETE_YN='N' AND B.CA_CODE=3 OR B.CA_CODE=4
+   		 order by B.BO_NO desc -->
+
+   		 
   	</select>
 
   <resultMap type="Review" id="reviewResultSet">
@@ -46,22 +56,25 @@
    </select> 
    
   <insert id="insertReview">
-		INSERT
+		<!-- INSERT
+ 		INTO BOARD (BO_NO,MEMBER_ID,CA_CODE,BO_TITLE,BO_TAG,BO_CONTENT)
+ 		VALUES(SEQ_BO_NO.NEXTVAL,#{memberId},#{caCode},#{boTitle},#{boTag},#{boContent})	-->
+	
+ 		INSERT ALL 
+		INTO BOARD(BO_NO,MEMBER_ID,CA_CODE,BO_TITLE,BO_TAG,BO_CONTENT)
+		VALUES(SEQ_BO_NO.NEXTVAL,#{memberId},#{caCode},#{boTitle},#{boTag},#{boContent})
+		INTO IMG_FILE 
+		VALUES(SEQ_FILE_NO.NEXTVAL,SEQ_BO_NO.NEXTVAL,#{originName},#{changeName},1,'null',DEFAULT)
+		SELECT *
+		FROM DUAL
+  </insert>
+  
+  <insert id="insertBoard">
+  		INSERT
  		INTO BOARD (BO_NO,MEMBER_ID,CA_CODE,BO_TITLE,BO_TAG,BO_CONTENT)
  		VALUES(SEQ_BO_NO.NEXTVAL,#{memberId},#{caCode},#{boTitle},#{boTag},#{boContent})
- 		
   </insert>
-  
-  <insert id="insertReviewFile">
-  		INSERT
- 		INTO IMGFILE
- 		VALUES(SEQ_FILE_NO.NEXTVAL,SEQ_BO_NO.NEXTVAL,#{originName},#{changeName},1,'null',DEFAULT)
-  		
-  </insert>
-   
 
-   
-  
 
 </mapper>
 

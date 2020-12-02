@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import trip.two.reap.common.Attachment;
 import trip.two.reap.common.PageInfo;
 import trip.two.reap.review.model.vo.Review;
 
@@ -41,8 +42,9 @@ public class ReviewDAO {
 	public int insertReview(SqlSessionTemplate sqlSession, Review r) {
 		return sqlSession.insert("reviewMapper.insertReview",r);
 	}
-	public int insertReviewFile(SqlSessionTemplate sqlSession, Review r) {
-		return sqlSession.insert("reviewMapper.insertReviewFile",r);
+	public int insertBoard(SqlSessionTemplate sqlSession, Review r) {
+		return sqlSession.insert("reviewMapper.insertBoard",r);
 	}
-	
+
+
 }

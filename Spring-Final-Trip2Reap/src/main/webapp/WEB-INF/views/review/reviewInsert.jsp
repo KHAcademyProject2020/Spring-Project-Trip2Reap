@@ -30,7 +30,7 @@
 				<div id="wrapperForm">
 					<br> <br>
 					<div class="writeForm" id="writer">
-						<input type="file" name="uploadFile">
+						<input type="file" id="photo_btn" name="uploadFile">
 						<strong>작성자 ${loginUser.memberId }</strong> <input type="hidden"
 							name="memberId" readonly value="${loginUser.memberId }">
 					</div><br><br>
@@ -66,19 +66,31 @@
 					
 					<br>
 
-					<input type="submit" value="제출" style="width:50px; height:30px;">	
-
+					<input type="submit" id="submit" value="제출" style="width:50px; height:30px;">	
+					<button onclick="ddd" id="ddd">제출2</button>
 				</div>
-
 
 
 			</form>
 
-
 		</div>
 		
 		
+	<script>
+		/* $('#submit').on("click",function(e){
+			if($('#photo_btn').get(0).files[0].isEmpty()){
+				
+			} 
+							
+			}); */
+		$('#ddd').click(function(){
+			if($('#photo_btn').get(0).files[0] == 'undefined'){
+				$('#ddd').submit();
+			} 
+		});
 
+	
+	</script>
 
 
 

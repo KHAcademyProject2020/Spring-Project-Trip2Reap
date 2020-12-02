@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import trip.two.reap.common.Attachment;
 import trip.two.reap.common.PageInfo;
 import trip.two.reap.review.model.dao.ReviewDAO;
 
@@ -36,7 +37,10 @@ public class ReviewServiceImpl implements ReviewService{
 		return rDAO.insertReview(sqlSession,r);
 	}
 	
-	
+	@Override
+	public int insertBoard(Review r) {
+		return rDAO.insertBoard(sqlSession,r);
+	}
 	
 	@Override
 	public Review selectReview(int boNo) {
@@ -57,10 +61,6 @@ public class ReviewServiceImpl implements ReviewService{
 		return rDAO.updateReview(sqlSession, r);
 	}
 
-	@Override
-	public int insertReviewFile(Review r) {
-		return 0;
-	}
 
 	
 }

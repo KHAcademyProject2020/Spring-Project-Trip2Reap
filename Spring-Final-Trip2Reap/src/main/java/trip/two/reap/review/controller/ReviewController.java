@@ -117,9 +117,10 @@ public class ReviewController {
    
    
    @RequestMapping("rInsert.bo")
-   public String reviewInsert(@ModelAttribute Review r, @RequestParam("uploadFile") MultipartFile uploadFile,HttpServletRequest request) {
-	   
-	   System.out.println("보드 : " + r);
+   public String reviewInsert(@ModelAttribute Review r, @RequestParam(value="uploadFile" ,required=false) MultipartFile uploadFile,HttpServletRequest request) {
+	   int result;
+	   System.out.println("보드" + r);
+	   System.out.println("첨부파일 : " + r);
 	    System.out.println("첨부파일 : " + uploadFile);
 	    System.out.println("파일이름 : " + uploadFile.getOriginalFilename());
 	   // 파일을 집어넣지 않으면 empty값이 반환. 파일을 넣으면 파일이름이 반환됨.	   
@@ -128,14 +129,17 @@ public class ReviewController {
 	   if(uploadFile != null && !uploadFile.isEmpty()) {
 		   String changeName = saveFile(uploadFile, request);
 		// saveFile() : 파일을 저장할 경로 지정
+		   System.out.println(changeName);
 		   
 		   if(changeName != null) {
 			  r.setOriginName(uploadFile.getOriginalFilename());
 			   r.setChangeName(changeName);
+			   
 		   }
-	   }
-	   
-	   int result = rService.insertReview(r);
+		   result = rService.insertReview(r);
+	   } else {
+		   result = rService.insertBoard(r);
+		   }
 	  
 	   
 	   System.out.println(result);
