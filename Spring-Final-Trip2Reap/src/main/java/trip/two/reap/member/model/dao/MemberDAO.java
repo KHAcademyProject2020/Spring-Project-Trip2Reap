@@ -22,6 +22,14 @@ public class MemberDAO {
 		return sqlSession.insert("memberMapper.kakaoMemberInsert" , loginUser);
 	}
 	
+	public int naverMemberCheck(SqlSessionTemplate sqlSession, String id) {
+		return sqlSession.selectOne("memberMapper.naverMemberCheck", id);
+	}
+
+	public int naverMemberInsert(SqlSessionTemplate sqlSession, Member loginUser) {
+		return sqlSession.insert("memberMapper.naverMemberInsert" , loginUser);
+	}
+	
 	public int deleteMember(SqlSessionTemplate sqlSession, String id) {
 		return sqlSession.update("memberMapper.deleteMember", id);
 	}

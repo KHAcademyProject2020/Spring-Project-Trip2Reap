@@ -42,6 +42,16 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
+	public int naverMemberCheck(String id) {
+		return mDAO.naverMemberCheck(sqlSession, id);
+	}
+	
+	@Override
+	public int naverMemberInsert(Member loginUser) {
+		return mDAO.naverMemberInsert(sqlSession, loginUser);
+	}
+	
+	@Override
 	public int deleteMember(String id) {
 		return mDAO.deleteMember(sqlSession, id);
 	}

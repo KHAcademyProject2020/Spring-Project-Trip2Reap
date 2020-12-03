@@ -11,6 +11,10 @@ public interface MemberService {
 	
 	int kakaoMemberInsert(Member loginUser);
 	
+	int naverMemberCheck(String id);
+
+	int naverMemberInsert(Member loginUser);
+	
 	int deleteMember(String id);
 	
 	int deleteMemberOther(String id);

@@ -1,5 +1,11 @@
 package trip.two.reap.member.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpSession;
+
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -13,10 +19,12 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.github.scribejava.core.model.OAuth2AccessToken;
 
 import trip.two.reap.member.kakao.KakaoAPI;
 import trip.two.reap.member.model.service.MemberService;
 import trip.two.reap.member.model.vo.Member;
+import trip.two.reap.member.naver.NaverLoginBo;
 
 @SessionAttributes("loginUser")
 @Controller
@@ -30,6 +38,15 @@ public class MemberController {
 	
 	@Autowired
 	private KakaoAPI kakao;
+	
+	// 네이버
+	private NaverLoginBo naverLoginBO;	
+	private String apiResult = null;
+	
+	@Autowired
+	private void setNaverLoginBO(NaverLoginBo naverLoginBO) {
+		this.naverLoginBO = naverLoginBO;
+	}
 	
 	
 	// 암호화 후 로그인
@@ -103,6 +120,58 @@ public class MemberController {
 			mv.addObject("loginUser", loginUser);
 			mv.setViewName("redirect:/");
 		}
+		return mv;
+	}
+	
+	
+	// 네이버 로그인
+	@RequestMapping("naverLogin.me")
+	@ResponseBody
+	public ModelAndView naverLogin(@RequestParam("code") String code, ModelAndView mv, @RequestParam String state, HttpSession session) {
+		OAuth2AccessToken oauthToken;
+		try {
+			// 토큰값
+			oauthToken = naverLoginBO.getAccessToken(session, code, state);
+			
+			// 토큰값을 이용하여 사용자 정보 얻기
+			apiResult = naverLoginBO.getUserProfile(oauthToken).toString();
+			
+			// json 형태로 변환
+			JSONParser parsing = new JSONParser();
+			Object obj = parsing.parse(apiResult);
+			org.json.simple.JSONObject jsonObj = (org.json.simple.JSONObject) obj;
+			
+			// 데이터 파싱			
+			org.json.simple.JSONObject response = (org.json.simple.JSONObject)jsonObj.get("response"); // Top 레벨 response
+			
+			String id = "n@" + (String)response.get("id");
+			String nickname = (String)response.get("nickname");
+			String category = "naver";
+			
+			Member loginUser = new Member();
+			loginUser.setMemberId(id);
+			loginUser.setNickName(nickname);
+			loginUser.setmCategory(category);
+			
+			int result = mService.naverMemberCheck(id);
+			if(result == 0) {
+				int insertResult = mService.naverMemberInsert(loginUser);
+				
+				if(insertResult == 1) {
+					mv.addObject("loginUser", loginUser);
+					mv.setViewName("redirect:/");
+				}
+			} else {
+				mv.addObject("loginUser", loginUser);
+				mv.setViewName("redirect:/");
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
 		return mv;
 	}
 	
@@ -429,10 +498,9 @@ public class MemberController {
 	 * 2. 로그인 시 modal창 꺼지면 : 입력값도 사라지게 수정하기.
 	 * 
 	 * <추가로 넣어야 할 기능들>
-	 * 1. 네이버 아이디 회원가입 / 로그인
-	 * 2. 나의 호텔 예약 내역
-	 * 3. 내가 담은 여행지
-	 * 4. 내가 작성한 글목록
+	 * 1. 나의 호텔 예약 내역
+	 * 2. 내가 담은 여행지
+	 * 3. 내가 작성한 글목록
 	*/
 
 } // 클래스 종료

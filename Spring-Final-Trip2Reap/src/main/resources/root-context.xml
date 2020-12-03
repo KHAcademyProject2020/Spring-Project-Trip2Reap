@@ -52,5 +52,8 @@
 	        </props>
 	    </property>
 	</bean>
+	
+	<!-- 네아로  -->
+	<bean id="naverLoginBO" class="trip.two.reap.member.naver.NaverLoginBo"></bean>
 		
 </beans>

@@ -31,6 +31,17 @@
         values (#{memberId},null,null,#{nickName},null,null,null,'kakao',default )
     </insert>
     
+    <select id="naverMemberCheck" resultType="_int">
+        select count(*)
+        from member
+        where member_id=#{memberId} AND m_category='naver'
+    </select>
+    
+    <insert id="naverMemberInsert">
+        insert into member
+        values (#{memberId},null,null,#{nickName},null,null,null,'naver',default )
+    </insert>
+    
     <update id="deleteMember">
         update member
         set m_status = 'N'

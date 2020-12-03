@@ -143,7 +143,7 @@
 
                 <div id="loginButton3">
                 <i class="fab fa-neos" id="btn3_1"></i>
-	            <a id="btn3_2">네이버 계정으로 로그인</a>
+	            <a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=7SqOY7uotfJIREqGVR6P&redirect_uri=http://localhost:13080/reap/naverLogin.me&state=1162353973" id="btn3_2">네이버 계정으로 로그인</a>
 	            </div>	            
 	        </div>
 	            

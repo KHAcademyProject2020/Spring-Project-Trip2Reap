@@ -264,7 +264,12 @@
  	        <version>2.11.3</version>
 	    </dependency>
 		
-		
+		<!-- 6. naver 관련 라이브러리 -->
+		<dependency>
+		    <groupId>com.github.scribejava</groupId>
+		    <artifactId>scribejava-core</artifactId>
+		    <version>2.8.1</version>
+		</dependency>
 		
 		
 		
