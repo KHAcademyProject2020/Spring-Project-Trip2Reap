@@ -77,6 +77,7 @@ ul { margin: 0px; padding: 0px; }
      #space_10 { height: 11px; }
      #idBtn { background-color: rgb(119,175,130); color: white; border: none;
               width: 385px; height: 40px; font-weight: bold; cursor: pointer; }
+     #idBtn:hover{ background-color: rgb(130,185,140); }
      #nameBox2 { width: 350px; height: 45px; border: 2px solid rgb(213,213,213); padding-left: 30px; }
      #emailBox { display: inline-block; width : 380px; height: 45px; border: 2px solid rgb(213,213,213); 
                  border-top: none; vertical-align: middle; line-height: 5px; }
@@ -98,6 +99,7 @@ ul { margin: 0px; padding: 0px; }
      #confirmLabel { line-height: 27px; cursor: pointer; vertical-align : bottom; line-height: 28px; }
      #idBtn2 { background-color: rgb(119,175,130); color: white; border: none;
               width: 385px; height: 40px; font-weight: bold; cursor: pointer; }
+     #idBtn2:hover{ background-color: rgb(130,185,140); }
      
      
      /* 비밀번호 찾기 : 내용  */
@@ -123,6 +125,7 @@ ul { margin: 0px; padding: 0px; }
      #confirmLabelPwd { line-height: 27px; cursor: pointer; vertical-align : bottom; line-height: 28px; }
      #idBtn3 { background-color: rgb(119,175,130); color: white; border: none;
                width: 385px; height: 40px; font-weight: bold; cursor: pointer; }
+     #idBtn3:hover{ background-color: rgb(130,185,140); }
      
      
      

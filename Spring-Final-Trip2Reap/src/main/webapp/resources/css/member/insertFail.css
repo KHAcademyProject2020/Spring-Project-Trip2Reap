@@ -20,7 +20,7 @@
      #space_3 { height : 20px; }
      
      
-     /* 성공 메시지 */
+     /* 실패 메시지 */
      #failDiv1 { display : inline-block; width : 288px; height : 30px; }
      #failDiv2 { display : inline-block; width : 700px; height : 400px; border: 2px solid lightgray; }
      #fail1 { height : 70px; }
@@ -35,5 +35,6 @@
      #fail8 { text-align: center; }
      #failBtn { background: rgb(119,175,130); color:white; width: 150px; height : 40px; 
                   border: none; text-align: center; font-size: 15px; font-weight: bold; cursor: pointer; }
+     #failBtn:hover { background-color: rgb(130,185,140); } 
      
      

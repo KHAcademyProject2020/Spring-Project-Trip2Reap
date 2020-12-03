@@ -28,10 +28,17 @@
             <div id="menuSpace1"></div>
             <div id="menuSpace2"></div>
             <ul>
-                <li class="m1" onclick="mypageHotel();"><i class="fas fa-hotel" id="me1"></i>호텔예약 내역</li>
-                <li class="m1" onclick="mypageTravel();"><i class="fas fa-suitcase-rolling" id="me1"></i>나만의 여행지</li>
-                <li class="m1" onclick="mypageBoard();"><i class="fas fa-camera-retro" id="me1"></i>작성한 여행후기</li>
-                <li class="m1" onclick="memberOut();"><i class="fas fa-user-slash" id="me1"></i>회원탈퇴</li>
+                <li class="m1" onclick="mypageHotel();" onMouseOver="this.style.color='#123478';" onMouseOut="this.style.color=''">
+                <i class="fas fa-hotel" id="me1"></i>호텔예약 내역</li>
+                
+                <li class="m1" onclick="mypageTravel();" onMouseOver="this.style.color='#123478';" onMouseOut="this.style.color=''">
+                <i class="fas fa-suitcase-rolling" id="me1"></i>나만의 여행지</li>
+                
+                <li class="m1" onclick="mypageBoard();" onMouseOver="this.style.color='#123478';" onMouseOut="this.style.color=''">
+                <i class="fas fa-camera-retro" id="me1"></i>작성한 여행후기</li>
+                
+                <li class="m1" onclick="memberOut();" onMouseOver="this.style.color='#123478';" onMouseOut="this.style.color=''">
+                <i class="fas fa-user-slash" id="me1"></i>회원탈퇴</li>
             </ul>
         </div> 
      </section>

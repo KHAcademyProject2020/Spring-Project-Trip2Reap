@@ -1,8 +1,5 @@
 package trip.two.reap.member.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -427,10 +424,9 @@ public class MemberController {
 	
 	/*
 	 * <오늘 해야할 일>
-	 * 1. 회원탈퇴
 	 * <로그인 modal, 회원탈퇴 modal>
-	 * 2. 비밀번호 입력시 CSS값 조정하기
-	 * 3. 로그인 시 modal창 꺼지면 : 비밀번호도 사라지게 수정하기.
+	 * 1. 비밀번호 입력시 CSS값 조정하기
+	 * 2. 로그인 시 modal창 꺼지면 : 비밀번호도 사라지게 수정하기.
 	 * 
 	 * <추가로 넣어야 할 사항들>
 	 * 1. 비밀번호 찾기 -> 타이머 나오게 하기 / 다른 곳 클릭시 타이머 제거. 타이머 다시 생성.

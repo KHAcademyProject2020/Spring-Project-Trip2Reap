@@ -138,7 +138,7 @@
     	if($("#applyRadio1").is(":checked")){
     		location.href="<%= request.getContextPath() %>/insert2.me";
     	} else {
-    		alert("이용약관에 동의해주세요.");
+    		swal("이용약관에 동의해주세요.");
     		$(window).scrollTop($("#applyRadio1").offset().top);
     	}   	
     }

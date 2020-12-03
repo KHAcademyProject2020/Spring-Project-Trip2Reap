@@ -29,7 +29,7 @@
         </div>
         <div id="space_3"></div>
         
-        <!-- 성공 메시지  -->
+        <!-- 실패 메시지  -->
         <div id="failDiv1"></div>
         <div id="failDiv2">
             <div id="fail1"></div>

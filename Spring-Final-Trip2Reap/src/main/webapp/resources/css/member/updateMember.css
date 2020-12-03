@@ -137,10 +137,11 @@
      #space_7 { display : inline-block; width : 445px; }
      #applyBtn1 { background: lightgray; color:white; width: 200px; height : 50px; 
                   border: none; font-size: 15px; font-weight: bold; cursor: pointer; }
+     #applyBtn1:hover { background-color: rgb(200,200,200); }
      #space_8 { display: inline-block; width: 10px; }
      #applyBtn2 { background: rgb(119,175,130); color:white; width: 200px; height : 50px; 
                   border: none; font-size: 15px; font-weight: bold; cursor: pointer; }
-                  
+     #applyBtn2:hover { background-color: rgb(130,185,140); }              
      #applyBtn1, #applyBtn2:focus{ outline: none; }
      
      
