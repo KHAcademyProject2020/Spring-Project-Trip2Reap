@@ -473,6 +473,8 @@ $(function(){
 
 $(function(){
 	
+	
+	
 	//가격순 버튼 클릭
 	$('#price_order_direction_btn').click(function(){
 		let $priceContainer= $('#price_order_direction_container');
@@ -539,7 +541,7 @@ $(function(){
 						$hotelCode+='<div>';
 						$hotelCode+='<div class="info-container">'
 						$hotelCode+='<div class="hotel-name-container">';
-						$hotelCode+='<input class="hotelNo" type="hidden" value="'+hotel.boNo+'"/>' //호텔번호
+						$hotelCode+='<input class="hotelNO" type="hidden" value="'+hotel.boNo+'"/>' //호텔번호
 						$hotelCode+='<h1>'+hotel.boTitle+'</h1>'; //호텔이름
 						$hotelCode+='<div class="hotel-rank-wrapper">';
 						$hotelCode+='<small class="hotel-rank">';
@@ -671,14 +673,7 @@ $(function(){
 	});
 	
 	
-	//예약하기 버튼 클릭
-	//예약하기 버튼을 누르면=> 디테일뷰로 이동.
-	$('button.hotel-reserve-btn').click(function(){
-		var hId = $(this).closest('.one-hotel-info-container').find('.hotelNO').val();
-		//console.log(bId);
-		//디테일뷰로 들어간다.
-		location.href="hotelDetailView.ho?hId="+hId+ "&page="+${pi.currentPage};
-	});
+	
 	
 	
 });
@@ -767,37 +762,21 @@ $(function(){
 			});
 		}
 
+	}); //smash-heart-btn wrapper finised
+
+	
+	//예약하기 버튼 클릭
+	//예약하기 버튼을 누르면=> 디테일뷰로 이동.
+	$(document).on('click','button.hotel-reserve-btn',function(){
+		var hId = $(this).closest('.one-hotel-info-container').find('.hotelNO').val();
+		//console.log(bId);
+		//디테일뷰로 들어간다.
+		location.href="hotelDetailView.ho?hId="+hId+ "&page="+${pi.currentPage};
 	});
-/*
-	let heart_btns= document.querySelectorAll('.fa-heart');
-	heart_btns.forEach(function(heart_btn){
-		heart_btn.onclick=function(){
-			//unlike 라는 이름의 클래스를 가지고있다.
-			if( heart_btn.classList.contains('unlike') ){
-				console.log('좋아요!');
-				this.classList.toggle('like');
-				this.classList.remove('unlike');
 
-				//ajax요청해서 해당 호텔 좋아요 수 +1카운트...^^;
-				//그런데 일단은 로그인을 한 상태에만 가능하다는것 !!
-
-			}else if(heart_btn.classList.contains('like')){
-				console.log('좋아요 해제');
-
-				this.classList.toggle('unlike');
-				//this.classList.remove('like');
-			}
-		}
-	});
-*/
+});
 
 
-}); //smash-heart-btn wrapper finised
-
-
-
-
-//은강><
 
 </script>
 </html>
