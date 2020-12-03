@@ -57,9 +57,17 @@
 
             <div id="right_btns_container">
                 <ul id="right_btns" class="btn_ul">
-                    <li><button class="btn">인기순</button></li>
-                    <li><button class="btn">가격순</button></li>
-                    <li><button class="btn">등급순</button></li>
+                    <li><button id="populuarity" class="btn">인기순</button></li>
+                    <li>
+                    	<button  id="price_order_direction_btn" class="btn">가격순</button>
+                    	<div id="price_order_direction_container" class="closed">
+                    		<ul id="price_order_direction_wrapper">
+                    			<li id="price_high">가격&nbsp;<span style="color:red;">높은순</span></li>
+                    			<li id="price_row">가격&nbsp;<span style="color: blue;">낮은순</span></li>
+                    		</ul>
+                    	</div>
+                    </li>
+                    <li><button id="rank_high" class="btn">등급순</button></li>
                 </ul>
             </div>
         </div>
@@ -167,13 +175,13 @@
 					<%--현재페이지가 맨 앞페이지라면 --%>
 					<c:if test="${pi.currentPage<=1 }">
 						<li><a>&lt;&lt;</a></li>
-						<li><a>&lt;</a>
+						<li><a>&lt;</a></li>
 					</c:if>
 
 					<%--현재페이지가 맨앞페이지가 아니라면 --%>
 					<c:if test="${pi.currentPage>1 }">
 						<c:url var="firstPage" value="hotelList.bo">
-							<param name="page" value="${pi.startPage }">
+							<c:param name="page" value="${pi.startPage }"/>
 						</c:url>
 						<li style="cursor:pointer;"><a href="${firstPage }">&lt;&lt;</a></li>
 
@@ -344,7 +352,326 @@
 </body>
 <script>
 
+//modal
 $(function(){
+        var $detailSearchBtn=$('#detail-search'),
+        $modalContainer = $('#modal-container'),
+        $body = $('body'),
+        $content= $('#main-container'),
+        $closeBtn= $('#close_btn'),
+        $btnId;
+
+        // 상세검색 버튼을 클릭.
+        $detailSearchBtn.on('click', function(){
+            //버튼아이디를 불러옵니다.
+            $btnId= $(this).attr('id'); //detail-search
+
+            //modal-container에 기존 클래스들을 빼놓고, btnId클래스를 적용합니다.
+            $modalContainer
+                .removeAttr('class')
+                .addClass($btnId);
+
+            $content
+                .removeAttr('class')
+                .addClass('content');
+
+            $body.addClass('modal-active'); //body에 modal-active라는 클래스를 적용.
+
+            $content.addClass($btnId);
+        });
+
+        //닫기버튼(x 표시 아이콘) 클릭시
+        $closeBtn.on('click', function(){
+            $modalContainer.addClass('out');
+            $body.removeClass('modal-active'); //modal-active 클래스 해제
+
+            if($modalContainer.hasClass($btnId)){
+                $content.addClass('out');
+            }
+        });
+        
+      //2020.12.01
+      //동적쿼리문을 이용하여 모달의 상세검색 조건을 만족하는 검색결과를 찾아보자
+        $('#detail-hotel-search').click(function(){
+        	console.log('어머나~ 호텔상세검색 버튼을 클릭하셨군요?');
+        	//검색조건 출력하기
+        	//호텔검색 지역코드
+        	let $search_hotel_local_code= Number($('#place > option:selected').val());
+        	
+        	//호텔검색 호텔등급
+        	let $search_hotel_rank= Number($('#rank > option:selected').val());
+        	
+        	//호텔검색 1일 이용가격(종류)
+        	/*
+        		1일가격 번호		가격범위
+        		1				5만원 미만
+        		2				5만원 이상 ~ 10만원 미만
+        		3				10만원 이상 ~ 15만원 미만
+        		4				15만원 이상 ~ 20만원 미만
+        		5				20만원 초과
+        	*/
+        	let $search_hotel_price_per_day_type= Number($('#price-per-day > option:selected').val());
+        	
+        	//호텔검색 호텔이름 (빈공간제거)
+        	let $search_hotel_name= $('#hotel-name').val().trim();
+        	
+        	
+        	console.log('호텔지역코드 => ' + $search_hotel_local_code);
+        	console.log('호텔등급 => ' + $search_hotel_rank);
+        	console.log('호텔 1일 이용가격 => '+ $search_hotel_price_per_day_type);
+        	console.log('호텔이름 => '+ $search_hotel_name);
+        	
+        	//검색조건에 맞는 호텔 리스트를 구한다.
+        	$.ajax({
+        		url: 'detailSearchResult.ho',
+        		data:{
+        			searchLocalCode: $search_hotel_local_code,	//지역코드번호
+        			searchHotelRank: $search_hotel_rank,		//호텔등급
+        			searchPricePerDayType: $search_hotel_price_per_day_type, //1일이용금액 종류
+        			searchHotelName: $search_hotel_name
+        		},
+        		success: function(data){
+        			
+        			let $hotelListContainer= $('#hotel-list-container'); //호텔 검색결과를 나타내는 호텔컨테이너
+        			let $hotelPaginationContainer=$('#pagination-container'); //페이징을 나타내는 페이징컨테이너
+        			
+        			$hotelListContainer.empty(); //호텔검색결과를 나타내 컨테이너를 비운다.
+        			$hotelPaginationContainer.empty(); //페이징 컨테이너 내부내용을 비운다.
+        			
+        			//출력
+        			console.log(data.pi);
+        			console.log(data.hotelList);
+        			console.log(data.likeHotelList);
+        			console.log(data.minRoomPricePerDayList);
+        			
+        			
+        			
+        			
+        			
+        			
+        			
+        		}
+        		
+        	});
+        	
+        	//모달창을 나간다.
+    		$modalContainer.addClass('out');
+    		$body.removeClass('modal-active');
+    		if($modalContainer.hasClass($btnId)){
+    			$content.addClass('out');
+    		}
+    	});
+      
+      
+      // 페이징처리 
+      function page(){
+    	  
+      }
+
+}); //modal- wrapper finished
+
+
+$(function(){
+	
+	//가격순 버튼 클릭
+	$('#price_order_direction_btn').click(function(){
+		let $priceContainer= $('#price_order_direction_container');
+		if($priceContainer.hasClass('closed')){
+			$priceContainer.removeClass('closed');
+			$priceContainer.addClass('opened');
+			$priceContainer.css('display', 'flex');
+		}else if($priceContainer.hasClass('opened')){
+			$priceContainer.removeClass('opened');
+			$priceContainer.addClass('closed');
+			$priceContainer.css('display', 'none');
+		}
+		
+	});
+
+	
+	//가격 높은 순(내림차순) 버튼 클릭시
+	$('#price_high').click(function(){
+		console.log('가격 높은순 버튼 클릭됨');
+	});
+	
+	
+	//가격 낮은 순(오름차순) 버튼 클릭시
+	$('#price_low').click(function(){
+		console.log('가격 낮은순 버튼 클릭됨');
+	});
+	
+	//등급순(내림차순) 버튼 클릭시
+	$(document).on('click','#rank_high', function(){
+		console.log('등급순 버튼 클릭됨');
+		$.ajax({
+			url:'rankSearchHotel.ho',
+			processData:false,
+			success:function(data){
+				let hotelContainer=$('#hotel-list-container');
+				let pageContainer=$('#pagination-container');
+				let priceRegularExpression= /\B(?=(\d{3})+(?!\d))/g;
+				//기존코드를 비운다.
+				hotelContainer.empty();
+				pageContainer.empty();
+				
+				//1. 호텔결과
+				let $hotelCode='';
+				if(data.hotelList ==null){
+					console.log('호텔이 존재하지 않습니다!!');
+					$hotelCode+='<p>호텔이 존재하지 않습니다!</p>'
+						
+				}else{
+					console.log(data.hotelList.length)
+					console.log(data.likeHotelList.length);
+					console.log(data.minRoomPricePerDayList.length);
+					console.log(typeof(data.minRoomPricePerDayList[0])) //number
+					
+					for(var i=0; i<data.hotelList.length; i++){
+						let hotel= data.hotelList[i];
+						let like= data.likeHotelList[i];
+						let minPriceOrigin= data.minRoomPricePerDayList[i]+'';
+						
+						let minPrice=minPriceOrigin.replace(priceRegularExpression,',');
+						
+						$hotelCode+='<div class="one-hotel-info-container">';
+						$hotelCode+='<img src="resources/images/sample_hotel.jpg" alt="호텔이미지">'; //이미지
+						$hotelCode+='<div class="detail-info-container">';
+						$hotelCode+='<div>';
+						$hotelCode+='<div class="info-container">'
+						$hotelCode+='<div class="hotel-name-container">';
+						$hotelCode+='<input class="hotelNo" type="hidden" value="'+hotel.boNo+'"/>' //호텔번호
+						$hotelCode+='<h1>'+hotel.boTitle+'</h1>'; //호텔이름
+						$hotelCode+='<div class="hotel-rank-wrapper">';
+						$hotelCode+='<small class="hotel-rank">';
+						//등급이 존재하지 않는다면
+						if(hotel.hotelRank==0){
+							$hotelCode+='등급없음';
+						}else{
+							$hotelCode+= hotel.hotelRank+' 등급';
+						}
+						$hotelCode+='</small>';
+						$hotelCode+='</div>';
+						$hotelCode+='</div>';
+						
+						
+						$hotelCode+='<div class="i-like-btn-container">';
+						//좋아요버튼클릭여부
+						if(like==0){
+							$hotelCode+='<i class="fas fa-heart unlike"></i>'
+								
+						}else{
+							$hotelCode+='<i class="fas fa-heart like"></i>'
+								
+						}
+						$hotelCode+='</div>'
+						$hotelCode+='</div>'
+						$hotelCode+='</div>'
+							
+						$hotelCode+='<div class="detail-info-wrapper">';
+						$hotelCode+='<div class="hotel-addr-wrapper">'
+						$hotelCode+='<small>'+hotel.hotelAddr+'</small>' //호텔주소
+						$hotelCode+='</div>'
+						
+						$hotelCode+='<div class="hotel-info-wrapper">'
+						$hotelCode+='<div class="hotel-review-container">'
+						$hotelCode+='<span class="star-point">'
+						$hotelCode+='<i class="fas fa-star"></i>';
+						$hotelCode+='</span>';
+						$hotelCode+='<span>'+hotel.hotelReviewScore.toFixed(1)+'</span>/5.0'; //호텔평점
+						$hotelCode+='</div>';
+						
+						$hotelCode+='<div class="hotel-per-day-price-container" info-container>'
+						$hotelCode+='<p>'
+						$hotelCode+='<small>1박</small>&nbsp;&nbsp;'
+						$hotelCode+='<b class="min_room_price">'
+						$hotelCode+=minPrice //호텔방최저가
+						$hotelCode+='</b>&nbsp;원</p></div></div></div>'
+						$hotelCode+='<button class="hotel-reserve-btn">예약하기</button></div></div>'
+						
+					}
+				}
+				
+				
+				let pi= data.pi;
+				let $pageCode='';
+				$pageCode+='<nav>'
+				$pageCode+='<ul id="pagination-ul">'
+				
+				
+				//이전페이징 표시
+				if(pi.currentPage<=1){
+					$pageCode+='<li><a>&lt;&lt;</a></li>';
+					$pageCode+='<li><a>&lt;</a></li>'
+				}else{
+					//pi.currentPage>1
+					$pageCode+='<c:url var="firstPage" value="rankSearchHotel.ho">'
+					$pageCode+='<c:param name="page" value="${'+pi.startPage+'}"/>'
+					$pageCode+='</c:url>'
+					$pageCode+='<li style="cursor:pointer;"><a href="${firstPage}">&lt;&lt;</a></li>'
+					
+					$pageCode+='<c:url var="before" value="rankSearchHotel.ho">'
+					$pageCode+='<c:param name="page" value="${'+pi.currentPage-1+'}"/>'
+					$pageCode+='</c:url>'
+					$pageCode+='<li style="cursor:pointer;"><a href="${before}">&lt;</a></li>';
+				}
+				
+				
+				//페이지 번호 표시
+				for(var i=pi.startPage; i<=pi.endPage; i++){
+					if(i==pi.currentPage ){
+						$pageCode+='<li style="background-color: var(--blue-gray);">';
+						$pageCode+='<a style="font-weight:bold;">'+i+'</a>';
+						$pageCode+='</li>'
+					}else{
+						$pageCode+='<c:url var="pagination" value="rankSearchHotel.ho">'
+						$pageCode+='<c:param name="page" value="${'+i+'}"/>'
+						$pageCode+='</c:url>'
+						$pageCode+='<li style="cursor:pointer;">';
+						$pageCode+='<a href="${pagination}">'+i+'</a></li>'
+					}	
+				}
+				
+				
+				//다음페이징 표시
+				if(pi.currentPage>=pi.maxPage){
+					$pageCode+='<li><a>&gt;</a></li>';
+					$pageCode+='<li><a>&gt;&gt;</a></li>';
+				}else{
+					$pageCode+='<c:url var="after" value="rankSearchHotel.ho">'
+					$pageCode+='<c:param name="page" value="${'+pi.currentPage+1+'}"/>'
+					$pageCode+='</c:url>'
+					$pageCode+='<li style="cursor:pointer;"><a href="${after}">&gt;</a></li>'
+					
+					$pageCode+='<c:url var="lastPage" value="rankSearchHotel.ho">'
+					$pageCode+='<c:param name="page" value="${'+pi.endPage+'}"/>'
+					$pageCode+='</c:url>'
+					$pageCode+='<li style="cursor:pointer;"><a href="${lastPage}">&gt;&gt;</a></li>'
+				}
+				
+				
+				$pageCode+='</ul>'
+				$pageCode+='</nav>'
+				
+				//코드를 넣는다.
+				hotelContainer.html($hotelCode);
+				pageContainer.html($pageCode);
+			}
+		})
+	});
+	
+	//인기순(내림차순) 버튼 클릭시
+	$('#popularity').click(function(){
+		console.log('인기순 버튼 클릭됨');
+		$.ajax({
+			url:'popularSearchHotel.ho',
+			success:function(response){
+				
+			}
+		})
+	});
+	
+	
+	//예약하기 버튼 클릭
 	//예약하기 버튼을 누르면=> 디테일뷰로 이동.
 	$('button.hotel-reserve-btn').click(function(){
 		var hId = $(this).closest('.one-hotel-info-container').find('.hotelNO').val();
@@ -352,14 +679,8 @@ $(function(){
 		//디테일뷰로 들어간다.
 		location.href="hotelDetailView.ho?hId="+hId+ "&page="+${pi.currentPage};
 	});
-
-	/*
-	//방가격 나타내기
-	$('b.min_room_price').each(function(){
-    	let priceTxt=$(this).text();
-    	$(this).text(priceTxt.replace(/\B(?=(\d{3})+(?!\d))/g,','));
-	});
-	*/
+	
+	
 });
 
 
@@ -475,113 +796,7 @@ $(function(){
 
 
 
-// modal
-$(function(){
-        var $detailSearchBtn=$('#detail-search'),
-        $modalContainer = $('#modal-container'),
-        $body = $('body'),
-        $content= $('#main-container'),
-        $closeBtn= $('#close_btn'),
-        $btnId;
 
-        // 상세검색 버튼을 클릭.
-        $detailSearchBtn.on('click', function(){
-            //버튼아이디를 불러옵니다.
-            $btnId= $(this).attr('id'); //detail-search
-
-            //modal-container에 기존 클래스들을 빼놓고, btnId클래스를 적용합니다.
-            $modalContainer
-                .removeAttr('class')
-                .addClass($btnId);
-
-            $content
-                .removeAttr('class')
-                .addClass('content');
-
-            $body.addClass('modal-active'); //body에 modal-active라는 클래스를 적용.
-
-            $content.addClass($btnId);
-        });
-
-        //닫기버튼(x 표시 아이콘) 클릭시
-        $closeBtn.on('click', function(){
-            $modalContainer.addClass('out');
-            $body.removeClass('modal-active'); //modal-active 클래스 해제
-
-            if($modalContainer.hasClass($btnId)){
-                $content.addClass('out');
-            }
-        });
-        
-      //2020.12.01
-      //동적쿼리문을 이용하여 모달의 상세검색 조건을 만족하는 검색결과를 찾아보자
-        $('#detail-hotel-search').click(function(){
-        	console.log('어머나~ 호텔상세검색 버튼을 클릭하셨군요?');
-        	//검색조건 출력하기
-        	//호텔검색 지역코드
-        	let $search_hotel_local_code= Number($('#place > option:selected').val());
-        	
-        	//호텔검색 호텔등급
-        	let $search_hotel_rank= Number($('#rank > option:selected').val());
-        	
-        	//호텔검색 1일 이용가격(종류)
-        	/*
-        		1일가격 번호		가격범위
-        		1				5만원 미만
-        		2				5만원 이상 ~ 10만원 미만
-        		3				10만원 이상 ~ 15만원 미만
-        		4				15만원 이상 ~ 20만원 미만
-        		5				20만원 초과
-        	*/
-        	let $search_hotel_price_per_day_type= Number($('#price-per-day > option:selected').val());
-        	
-        	//호텔검색 호텔이름 (빈공간제거)
-        	let $search_hotel_name= $('#hotel-name').val().trim();
-        	
-        	
-        	console.log('호텔지역코드 => ' + $search_hotel_local_code);
-        	console.log('호텔등급 => ' + $search_hotel_rank);
-        	console.log('호텔 1일 이용가격 => '+ $search_hotel_price_per_day_type);
-        	console.log('호텔이름 => '+ $search_hotel_name);
-        	
-        	//검색조건에 맞는 호텔 리스트를 구한다.
-        	$.ajax({
-        		url: 'detailSearchResult.ho',
-        		data:{
-        			searchLocalCode: $search_hotel_local_code,	//지역코드번호
-        			searchHotelRank: $search_hotel_rank,		//호텔등급
-        			searchPricePerDayType: $search_hotel_price_per_day_type, //1일이용금액 종류
-        			searchHotelName: $search_hotel_name
-        		},
-        		success: function(data){
-        			
-        			let $hotelListContainer= $('#hotel-list-container'); //호텔 검색결과를 나타내는 호텔컨테이너
-        			let $hotelPaginationContainer=$('#pagination-container'); //페이징을 나타내는 페이징컨테이너
-        			
-        			$hotelListContainer.empty(); //호텔검색결과를 나타내 컨테이너를 비운다.
-        			$hotelPaginationContainer.empty(); //페이징 컨테이너 내부내용을 비운다.
-        			
-        			//출력
-        			console.log(data.pi);
-        			console.log(data.hotelList);
-        			console.log(data.likeHotelList);
-        			console.log(data.minRoomPricePerDayList);
-        			
-        			
-        			
-        		}
-        		
-        	});
-        	
-        	//모달창을 나간다.
-    		$modalContainer.addClass('out');
-    		$body.removeClass('modal-active');
-    		if($modalContainer.hasClass($btnId)){
-    			$content.addClass('out');
-    		}
-    	});
-
-}); //modal- wrapper finished
 //은강><
 
 </script>

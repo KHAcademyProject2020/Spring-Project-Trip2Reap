@@ -165,6 +165,12 @@ public class HotelDAO {
 	public int selectOneHotelMinPrice(SqlSessionTemplate sqlSession, int hId) {
 		return sqlSession.selectOne("hotelMapper.selectOneHotelMinPrice", hId);
 	}
+
+	
+	//2020.12.03 - 등급 내림차순 정렬
+	public ArrayList<Hotel> sortRankDescendent(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("hotelMapper.sortRankDescendent");
+	}
 	
 
 

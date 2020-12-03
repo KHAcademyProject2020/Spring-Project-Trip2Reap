@@ -212,6 +212,13 @@ public class HotelServiceImpl implements HotelService{
 	public int selectHotelMinPrice(int hId) {
 		return hDAO.selectOneHotelMinPrice(sqlSession, hId);
 	}
+
+	
+	//2020.12.03 - 등급순 내림차순 정렬
+	@Override
+	public ArrayList<Hotel> sortRankDescendent() {
+		return hDAO.sortRankDescendent(sqlSession);
+	}
 	
 	
 	

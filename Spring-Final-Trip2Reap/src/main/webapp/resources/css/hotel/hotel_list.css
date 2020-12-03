@@ -151,6 +151,49 @@ button.btn{
 }
 
 
+div#price_order_direction_container{
+	display: none;
+	position: absolute;
+	
+	z-index:1;
+}
+
+#price_order_direction_container{
+	background-color: #fff;
+
+	border: var(--blue-gray) 1px solid;
+	/* border-top-color: transparent; */
+	border-radius: 3px;
+/* 	border-bottom-left-radius:3px;
+	border-bottom-right-radius: 3px; */
+	/* padding: 0 10px; */
+	margin-left: 8px;
+}
+
+#price_order_direction_wrapper{
+	
+	position: relative;
+	flex-direction: column;
+	justify-content: space-around;
+	
+}
+
+ul#price_order_direction_wrapper li{
+	position: relative;
+	text-align:center;
+	
+	padding: 10px 12px;
+	font-size: 0.2em;
+}
+
+ul#price_order_direction_wrapper li:hover{
+	background-color: var(--blue-gray);
+	font-weight: bold;
+	cursor:pointer;
+	
+}
+
+
 /* 상세검색 modal */
 #modal-close-container{
   display: flex;

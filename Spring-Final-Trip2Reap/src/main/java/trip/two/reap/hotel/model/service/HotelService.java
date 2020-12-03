@@ -90,6 +90,10 @@ public interface HotelService {
 	int selectHotelMinPrice(int hId);
 
 	
+	//등급순 내림차순 정렬
+	ArrayList<Hotel> sortRankDescendent();
+
+	
 
 
 }

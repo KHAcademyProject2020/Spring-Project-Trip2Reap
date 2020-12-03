@@ -279,4 +279,12 @@
 	WHERE BO_NO=#{hId}
 	</select>
 <!-- 은강  -->
+
+	<!-- 2020.12.03 - 호텔 등급순 내림차순 정렬 -->
+	<select id="sortRankDescendent" resultMap="hotelResultSet">
+	SELECT *
+	FROM HOTEL_VIEW
+	WHERE HOTEL_RANK BETWEEN 1 AND 5
+	ORDER BY HOTEL_RANK DESC, BO_NO
+	</select>
 </mapper>
