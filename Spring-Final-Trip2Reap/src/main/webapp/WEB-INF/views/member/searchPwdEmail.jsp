@@ -51,12 +51,12 @@
               <div id="searchIdSpace4"></div>
            </div>     
            <div id="searchIdSpace3"></div>  
-           <div id="textBox"><input type="text" id="changePwd" name="pwd" placeholder="새 비밀번호를 입력하세요" 
+           <div id="textBox"><input type="password" id="changePwd" name="pwd" placeholder="새 비밀번호를 입력하세요" 
 	        onfocus="this.placeholder=''" onblur="this.placeholder='새 비밀번호를 입력하세요'" autocomplete="off"></div>
 	       <div id="pwdCheck">필수 입력항목입니다.</div>
 	       <div id="searchIdSpace2"></div>
 	       <div id="searchIdSpace3"></div>
-           <div id="textBox2"><input type="text" id="changePwd2" name="pwd2" placeholder="새 비밀번호 확인" 
+           <div id="textBox2"><input type="password" id="changePwd2" name="pwd2" placeholder="새 비밀번호 확인" 
 	        onfocus="this.placeholder=''" onblur="this.placeholder='새 비밀번호 확인'" autocomplete="off"></div>
            <div id="pwdCheck2">비밀번호가 일치하지 않습니다.</div>
            <div id="searchIdSpace4"></div>

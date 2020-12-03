@@ -128,8 +128,14 @@
    	   				 if(data == "N"){
    	   				    swal("현재 비밀번호가 일치하지 않습니다🙋");
    	   				 } else if(data == "Y") {
-   	   					 console.log("회원탈퇴");
-   	   				    location.href="<%= request.getContextPath() %>/logout.me";
+   	   					 swal("회원 탈퇴되었습니다. 또 이용해주세요~!");
+   	   				     $(".swal-button").click(function(){
+   	   				         location.href="<%= request.getContextPath() %>/logout.me";
+					     });
+					
+					     $(".swal-overlay").click(function(){
+					    	 location.href="<%= request.getContextPath() %>/logout.me";
+					     }); 	   				    
    	   				 } else {
    	   					 swal("회원탈퇴에 실패하였습니다🙋");
    	   				 }

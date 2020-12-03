@@ -640,7 +640,14 @@
     	   			 type : 'post',
     	   			 data : {userId:userId,userPwd1:userPwd1,userPwd2:userPwd2,userName:userName,nickName:nickName,email:email,phone:phone,userGender:userGender},
     	   			 success : function(data){
-    	   			     location.href="<%= request.getContextPath() %>/myPageUpdate.me";
+    	   				swal("회원님의 정보가 수정 되었습니다");
+	   				     $(".swal-button").click(function(){
+	   				    	 location.href="<%= request.getContextPath() %>/myPageUpdate.me";
+				         });
+				
+				         $(".swal-overlay").click(function(){
+				        	 location.href="<%= request.getContextPath() %>/myPageUpdate.me";
+				         });    	   			     
     	   			 },
     	   			 error : function(data){
     	   				 console.log("서버 실패");
