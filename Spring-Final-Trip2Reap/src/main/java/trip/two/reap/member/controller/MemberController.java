@@ -88,10 +88,12 @@ public class MemberController {
 		// String email = userInfo.get("kakao_account").get("email").toString();
 		String userNickname = userInfo.get("properties").get("nickname").toString();
 		String nickname = userNickname.replaceAll("\\\"","");
+		String category = "kakao";
 		
 		Member loginUser = new Member();
 		loginUser.setMemberId(id);
 		loginUser.setNickName(nickname);
+		loginUser.setmCategory(category);
 		
 		int result = mService.kakaoMemberCheck(id);
 		if(result == 0) {
@@ -155,8 +157,7 @@ public class MemberController {
 	@ResponseBody
 	public ModelAndView updateMember(@RequestParam("userId") String id, @RequestParam("userPwd1") String pwd1, @RequestParam("userName") String name,
 			                   @RequestParam("nickName") String nickname, @RequestParam("email") String email,
-			                   @RequestParam("phone") String phone, @RequestParam("userGender") String gender, 
-			                   HttpServletResponse response, HttpServletRequest request, ModelAndView mv) {			
+			                   @RequestParam("phone") String phone, @RequestParam("userGender") String gender, ModelAndView mv) {			
 		
 		Member member = new Member();
 		
@@ -208,6 +209,56 @@ public class MemberController {
 	@RequestMapping("memberOut.me")
 	public String memberOut() {
 		return "memberOut";
+	}
+	
+	
+	// 회원탈퇴
+	@RequestMapping("deleteMember.me")
+	@ResponseBody
+	public String deleteMember(@RequestParam("id") String id, @RequestParam("pwd") String pwd, @RequestParam("pwd2") String pwd2) {
+		String result="";
+
+		Member member = new Member();
+		member.setMemberId(id);
+
+		boolean isPwdCorrect= bcryptPasswordEncoder.matches(pwd, pwd2);
+			
+		if(isPwdCorrect) {
+			int updateResult = mService.deleteMember(id);
+			if(updateResult == 1) {
+				result = "Y";
+			} else {
+				result = "U";
+			}
+		} else {
+			result = "N";
+		}
+			
+		return result;
+	}
+	
+	
+	// 카카오, 네이버 회원탈퇴 뷰로 이동
+	@RequestMapping("memberOutOther.me")
+	public String memberOutOther() {
+		return "memberOutOther";
+	}
+	
+	
+	// 카카오, 네이버 계정 회원탈퇴
+	@RequestMapping("deleteMemberOther.me")
+	@ResponseBody
+	public String deleteMemberOther(@RequestParam("id") String id) {
+		String result = "";
+		
+		int delResult = mService.deleteMemberOther(id);
+		
+		if(delResult == 1) {
+			result = "Y";
+		} else {
+			result = "N";
+		}		
+		return result;
 	}
 	
 	
@@ -377,6 +428,7 @@ public class MemberController {
 	/*
 	 * <오늘 해야할 일>
 	 * 1. 회원탈퇴
+	 * <로그인 modal, 회원탈퇴 modal>
 	 * 2. 비밀번호 입력시 CSS값 조정하기
 	 * 3. 로그인 시 modal창 꺼지면 : 비밀번호도 사라지게 수정하기.
 	 * 

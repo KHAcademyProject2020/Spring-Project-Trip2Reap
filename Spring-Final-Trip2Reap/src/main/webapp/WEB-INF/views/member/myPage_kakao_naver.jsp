@@ -50,7 +50,7 @@
      }
      
      function memberOut(){
-    	 location.href="<%= request.getContextPath() %>/memberOut.me";
+    	 location.href="<%= request.getContextPath() %>/memberOutOther.me";
      }
      </script>
 </body>

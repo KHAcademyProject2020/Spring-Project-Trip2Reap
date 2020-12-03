@@ -42,6 +42,16 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
+	public int deleteMember(String id) {
+		return mDAO.deleteMember(sqlSession, id);
+	}
+	
+	@Override
+	public int deleteMemberOther(String id) {
+		return mDAO.deleteMemberOther(sqlSession, id);
+	}
+	
+	@Override
 	public int memberCheck(String userId) {
 		return mDAO.memberCheck(sqlSession, userId);
 	}
@@ -113,10 +123,6 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int updateMember(Member member) {
 		return mDAO.updateMember(sqlSession, member);
-	}
-	
+	}	
 
 } // 클래스 종료
-
-
-

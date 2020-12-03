@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>회원탈퇴</title>
       <!--  updateMember.css -->
-      <link rel="stylesheet" href="resources/css/member/memberOut.css">  
+      <link rel="stylesheet" href="resources/css/member/memberOutOther.css">  
 </head>
 <body>
     <header>
@@ -79,18 +79,16 @@
     <!-- 비밀번호 확인 창  -->
 		<div id="ex1" class="modal">
 		    <div id="login_spaceStart"></div>
-			<div id="delDiv"><p id="delLabel">회원탈퇴 마지막 단계입니다!</p></div>
+			<div id="delDiv"><p id="delLabel">TRIP2REAP에서 이용하신 모든 서비스가 삭제됩니다.<br> 정말 회원탈퇴하시겠습니까?</p></div>
 			<div id="up_space3"></div>
 			<div>
 			    <div id="up_space8"></div>
-			    <input type="password" id="delText" placeholder="현재 비밀번호를 입력해주세요"
-	            onfocus="this.placeholder=''" onblur="this.placeholder='현재 비밀번호를 입력해주세요'" autocomplete="off">
+			    <input type="button" id="delBtn2" value="취소">
 	            <input type="button" id="delBtn" value="탈퇴하기">
 			</div>
 			<div id="up_space9"></div>
 		</div>	
 		<input type="hidden" id="delId" value="${ loginUser.memberId }">
-		<input type="hidden" id="delPwd" value="${ loginUser.memberPwd }">
     </section>
     <div style="height : 300px;"></div>
     
@@ -112,34 +110,29 @@
        
        $("#delBtn").click(function(){
     	   var id = $("#delId").val();
-    	   var pwd = $("#delText").val(); // 입력받은 비밀번호
-    	   var pwd2 = $("#delPwd").val(); // 현재 비밀번호
-    	   
-    	   if(pwd == ""){
-       		swal("비밀번호를 입력해주세요🙋");
-     	    } else if(pwd.search(/\s/) != -1){
-     		    swal("비밀번호는 공백없이 입력해주세요🙋");
-     		} else {     			
+    	      			
      			$.ajax({
-   	   			 url : 'deleteMember.me',
+   	   			 url : 'deleteMemberOther.me',
    	   			 type : 'post',
-   	   			 data : {id:id,pwd:pwd,pwd2:pwd2},
+   	   			 data : {id:id},
    	   			 success : function(data){
    	   				 if(data == "N"){
-   	   				    swal("현재 비밀번호가 일치하지 않습니다🙋");
+   	   				    swal("회원탈퇴에 실패하였습니다🙋");
    	   				 } else if(data == "Y") {
    	   					 console.log("회원탈퇴");
    	   				    location.href="<%= request.getContextPath() %>/logout.me";
-   	   				 } else {
-   	   					 swal("회원탈퇴에 실패하였습니다🙋");
-   	   				 }
+   	   				 } 
    	   			 },
    	   			 error : function(data){
    	   				 console.log("서버 실패");
    	   			 }
-   	   		  });
-     		}    	   
+   	   		  });   	   
     	   
+       });
+       
+       
+       $("#delBtn2").click(function(){
+    	   location.href="<%= request.getContextPath() %>/memberOutOther.me";
        });
    
     </script>

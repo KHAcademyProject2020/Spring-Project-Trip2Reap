@@ -21,6 +21,14 @@ public class MemberDAO {
 	public int kakaoMemberInsert(SqlSessionTemplate sqlSession, Member loginUser) {
 		return sqlSession.insert("memberMapper.kakaoMemberInsert" , loginUser);
 	}
+	
+	public int deleteMember(SqlSessionTemplate sqlSession, String id) {
+		return sqlSession.update("memberMapper.deleteMember", id);
+	}
+	
+	public int deleteMemberOther(SqlSessionTemplate sqlSession, String id) {
+		return sqlSession.delete("memberMapper.deleteMemberOther", id);
+	}
 
 	public int memberCheck(SqlSessionTemplate sqlSession, String userId) {
 		return sqlSession.selectOne("memberMapper.memberCheck",userId);

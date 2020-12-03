@@ -36,14 +36,17 @@
      
                   
      /* 모달  */
-     #delLabel { font-size: 17px; font-weight: 600; text-align: center; color : rgb(76,76,76); }
+     #delLabel { font-size: 17px; font-weight: 600; text-align: center; color : rgb(76,76,76); line-height: 26px; }
      #delText{ display : inline-block; width: 230px; height: 35px; font-size: 12px; padding-left: 10px; 
                border: 2px solid rgb(200,200,200); font-weight: 500;  }
-     #delBtn { display: inline-block; background: rgb(119,175,130); color:white; width: 100px; height : 37px; 
-               border: none; font-size: 13px; font-weight: 500; cursor: pointer; margin-left: 10px; }
+     #delBtn { display: inline-block; background: rgb(119,175,130); color:white; width: 100px; height : 35px; 
+               border: none; font-size: 13px; font-weight: 600; cursor: pointer; margin-left: 10px; }
      #delBtn:hover{ background-color: rgb(130,185,140); }
-     #up_space8 { display: inline-block; width: 50px; }
-     #up_space9 { height: 50px; }
+     #delBtn2 { background: lightgray; color:white; width: 100px; height : 35px; 
+                border: none; font-size: 13px; font-weight: 600; cursor: pointer; }
+     #delBtn2:hover{ background-color: rgb(200,200,200); }
+     #up_space8 { display: inline-block; width: 100px; }
+     #up_space9 { height: 40px; }
      
                   
      #outBtn1, #outBtn2, #delText, #delBtn:focus{ outline: none; }

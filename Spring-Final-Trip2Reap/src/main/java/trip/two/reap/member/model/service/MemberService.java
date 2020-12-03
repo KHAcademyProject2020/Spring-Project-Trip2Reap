@@ -10,6 +10,10 @@ public interface MemberService {
 	int kakaoMemberCheck(String id);
 	
 	int kakaoMemberInsert(Member loginUser);
+	
+	int deleteMember(String id);
+	
+	int deleteMemberOther(String id);
 
 	int memberCheck(String userId);
 
@@ -30,11 +34,5 @@ public interface MemberService {
 	int changePwd(Member member);
 
 	int updateMember(Member member);
-
-
-	
-
-		
-	
 
 }

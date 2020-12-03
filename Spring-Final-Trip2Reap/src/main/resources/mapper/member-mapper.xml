@@ -31,6 +31,17 @@
         values (#{memberId},null,null,#{nickName},null,null,null,'kakao',default )
     </insert>
     
+    <update id="deleteMember">
+        update member
+        set m_status = 'N'
+        where member_id=#{memberId} and m_category='member'
+    </update>
+    
+    <delete id="deleteMemberOther">
+        delete from member
+        where member_id=#{memberId}
+    </delete>
+    
     <select id="memberCheck" resultType="_int">
         select count(*)
         from member
