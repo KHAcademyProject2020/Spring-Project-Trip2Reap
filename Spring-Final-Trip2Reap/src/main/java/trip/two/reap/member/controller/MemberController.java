@@ -489,8 +489,6 @@ public class MemberController {
 		return changeOk;
 	}
 	
-	
-	
 	/*
 	 * <추가로 넣어야 할 사항들>
 	 * <로그인 modal, 회원탈퇴 modal, 정보수정modal>
@@ -499,7 +497,7 @@ public class MemberController {
 	 * <추가로 넣어야 할 기능들>
 	 * 1. 나의 호텔 예약 내역
 	 * 2. 내가 담은 여행지
-	 * 3. 내가 작성한 글목록
+	 * 3. 나만의 여행코스
 	*/
 
 } // 클래스 종료

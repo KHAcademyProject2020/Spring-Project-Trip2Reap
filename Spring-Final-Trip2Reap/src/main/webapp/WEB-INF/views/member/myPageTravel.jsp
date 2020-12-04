@@ -4,7 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지</title>
+<title>내가 담은 여행지</title>
+      <!--  myPageTravel.css -->
+      <link rel="stylesheet" href="resources/css/member/myPageTravel.css"> 
 </head>
 <body>
     <header>
@@ -18,6 +20,19 @@
     <%@ include file="../member/myPage_kakao_naver.jsp" %>    
     </c:if>
     </header>
-내가 담은 여행지 목록
+    
+    <section>
+    <div id="board_list">
+    <!-- 내가 담은 여행지 설명란  -->
+        <div>
+            <div id="infor1"></div>
+            <div id="infor2"></div>
+            <div id="infor3">내가 담은 여행지</div>            
+        </div>
+        <div id="up_space1"></div>
+     </div>
+     </section>
+     
+     <div style="height: 300px;"></div>
 </body>
 </html>
