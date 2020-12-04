@@ -11,7 +11,9 @@ public interface TravelService {
 
 	ArrayList<Travel> selectList(PageInfo pi);
 
-	int insertBoard(Travel t);
+	/* int insertBoard(Travel t); */
+
+	int insertTravel(Travel t);
 	
 	
 }

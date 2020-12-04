@@ -16,53 +16,16 @@ public class Travel {
 	private int trNo;			// 여행지 번호
 	private String trAddr;		// 여행지 주소
 	private String trTheme;		// 여행지 테마
+	private String trReg;		// 여행지 지역
 	
 	private int fileNo;			// 파일 번호 -> 없애야 할 듯!
 	
 	
 	public Travel() {}
 
-	
-	
-	
-	public Travel(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount, String boTag,
-			String boDeleteYN, Date regDate) {
-		super();
-		this.boNo = boNo;
-		this.caCode = caCode;
-		this.boTitle = boTitle;
-		this.boContent = boContent;
-		this.memberId = memberId;
-		this.boCount = boCount;
-		this.boTag = boTag;
-		this.boDeleteYN = boDeleteYN;
-		this.regDate = regDate;
-	}
-
-
-
 
 	public Travel(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount, String boTag,
-			String boDeleteYN, String trAddr, String trTheme, int fileNo) {
-		super();
-		this.boNo = boNo;
-		this.caCode = caCode;
-		this.boTitle = boTitle;
-		this.boContent = boContent;
-		this.memberId = memberId;
-		this.boCount = boCount;
-		this.boTag = boTag;
-		this.boDeleteYN = boDeleteYN;
-		this.trAddr = trAddr;
-		this.trTheme = trTheme;
-		this.fileNo = fileNo;
-	}
-
-
-
-
-	public Travel(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount, String boTag,
-			String boDeleteYN, Date regDate, int trNo, String trAddr, String trTheme, int fileNo) {
+			String boDeleteYN, Date regDate, int trNo, String trAddr, String trTheme, String trReg) {
 		super();
 		this.boNo = boNo;
 		this.caCode = caCode;
@@ -76,10 +39,28 @@ public class Travel {
 		this.trNo = trNo;
 		this.trAddr = trAddr;
 		this.trTheme = trTheme;
-		this.fileNo = fileNo;
+		this.trReg = trReg;
 	}
 
 
+	public Travel(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount, String boTag,
+			String boDeleteYN, Date regDate, int trNo, String trAddr, String trTheme, String trReg, int fileNo) {
+		super();
+		this.boNo = boNo;
+		this.caCode = caCode;
+		this.boTitle = boTitle;
+		this.boContent = boContent;
+		this.memberId = memberId;
+		this.boCount = boCount;
+		this.boTag = boTag;
+		this.boDeleteYN = boDeleteYN;
+		this.regDate = regDate;
+		this.trNo = trNo;
+		this.trAddr = trAddr;
+		this.trTheme = trTheme;
+		this.trReg = trReg;
+		this.fileNo = fileNo;
+	}
 
 
 	public int getBoNo() {
@@ -87,13 +68,9 @@ public class Travel {
 	}
 
 
-
-
 	public void setBoNo(int boNo) {
 		this.boNo = boNo;
 	}
-
-
 
 
 	public int getCaCode() {
@@ -101,13 +78,9 @@ public class Travel {
 	}
 
 
-
-
 	public void setCaCode(int caCode) {
 		this.caCode = caCode;
 	}
-
-
 
 
 	public String getBoTitle() {
@@ -115,13 +88,9 @@ public class Travel {
 	}
 
 
-
-
 	public void setBoTitle(String boTitle) {
 		this.boTitle = boTitle;
 	}
-
-
 
 
 	public String getBoContent() {
@@ -129,13 +98,9 @@ public class Travel {
 	}
 
 
-
-
 	public void setBoContent(String boContent) {
 		this.boContent = boContent;
 	}
-
-
 
 
 	public String getMemberId() {
@@ -143,13 +108,9 @@ public class Travel {
 	}
 
 
-
-
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-
-
 
 
 	public int getBoCount() {
@@ -157,13 +118,9 @@ public class Travel {
 	}
 
 
-
-
 	public void setBoCount(int boCount) {
 		this.boCount = boCount;
 	}
-
-
 
 
 	public String getBoTag() {
@@ -171,13 +128,9 @@ public class Travel {
 	}
 
 
-
-
 	public void setBoTag(String boTag) {
 		this.boTag = boTag;
 	}
-
-
 
 
 	public String getBoDeleteYN() {
@@ -185,13 +138,9 @@ public class Travel {
 	}
 
 
-
-
 	public void setBoDeleteYN(String boDeleteYN) {
 		this.boDeleteYN = boDeleteYN;
 	}
-
-
 
 
 	public Date getRegDate() {
@@ -199,13 +148,9 @@ public class Travel {
 	}
 
 
-
-
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-
-
 
 
 	public int getTrNo() {
@@ -213,13 +158,9 @@ public class Travel {
 	}
 
 
-
-
 	public void setTrNo(int trNo) {
 		this.trNo = trNo;
 	}
-
-
 
 
 	public String getTrAddr() {
@@ -227,13 +168,9 @@ public class Travel {
 	}
 
 
-
-
 	public void setTrAddr(String trAddr) {
 		this.trAddr = trAddr;
 	}
-
-
 
 
 	public String getTrTheme() {
@@ -241,13 +178,19 @@ public class Travel {
 	}
 
 
-
-
 	public void setTrTheme(String trTheme) {
 		this.trTheme = trTheme;
 	}
 
 
+	public String getTrReg() {
+		return trReg;
+	}
+
+
+	public void setTrReg(String trReg) {
+		this.trReg = trReg;
+	}
 
 
 	public int getFileNo() {
@@ -255,26 +198,23 @@ public class Travel {
 	}
 
 
-
-
 	public void setFileNo(int fileNo) {
 		this.fileNo = fileNo;
 	}
-
-
 
 
 	@Override
 	public String toString() {
 		return "Travel [boNo=" + boNo + ", caCode=" + caCode + ", boTitle=" + boTitle + ", boContent=" + boContent
 				+ ", memberId=" + memberId + ", boCount=" + boCount + ", boTag=" + boTag + ", boDeleteYN=" + boDeleteYN
-				+ ", regDate=" + regDate + ", trNo=" + trNo + ", trAddr=" + trAddr + ", trTheme=" + trTheme
-				+ ", fileNo=" + fileNo + "]";
+				+ ", regDate=" + regDate + ", trNo=" + trNo + ", trAddr=" + trAddr + ", trTheme=" + trTheme + ", trReg="
+				+ trReg + ", fileNo=" + fileNo + "]";
 	}
+
+	
 	
 	
 
-	
 
 	
 	

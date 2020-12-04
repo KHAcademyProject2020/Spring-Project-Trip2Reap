@@ -35,6 +35,7 @@
 				and bo_delete_yn = 'N'
 		order by bo_no desc
 	</select>
+	
 	<resultMap type="Travel" id="travelResultSet">
 		<id column="BO_NO" property="boNo"/>
 		<result column="CA_CODE" property="caCode"/>
@@ -48,15 +49,40 @@
 		<result column="TR_NO" property="trNo"/>
 		<result column="TR_ADDR" property="trAddr"/>
 		<result column="TR_THEME" property="trTheme"/>
+		<result column="TR_REG" property="trReg"/>
 	</resultMap>
 	
 	
-	<insert id="insertBoard">
+<!-- 	<insert id="insertBoard">
 		insert
- 		into board
- 		values(SEQ_BO_NO.NEXTVAL,#{caCode},#{boTitle},#{boContent},#{memberId},0,#{boTag},#{boDeleteYN},sysdate);
+ 		into board(BO_NO,CA_CODE,BO_TITLE,BO_CONTENT,MEMBER_ID,BO_TAG)
+ 		values(SEQ_BO_NO.NEXTVAL,1,#{boTitle},#{boContent},#{memberId},#{boTag})
+	</insert> -->
+
+<!-- 	<insert id="insertBoard">
+		insert
+		into board
+		values(seq_bo_no.nextval,1,#{boTitle},#{boContent},#{memberId},#{boCount},#{boTag},default,sysdate)
 	</insert>
 	
 	
+	<insert id="insertTravel">
+		insert
+		into travel
+		values(seq_trno.nextval, seq_bo_no.currval, #{trAddr}, #{trTheme}, #{trReg})
+	</insert> -->
 	
+	<insert id="insertTravel">
+		insert all 
+		into board values(seq_bo_no.nextval,1,#{boTitle},#{boContent},#{memberId},#{boCount},#{boTag},default,sysdate)
+		into travel values(seq_trno.nextval, seq_bo_no.currval, #{trAddr}, #{trTheme}, #{trReg})
+		select * from dual
+	</insert>
+	
+	
+	<insert id="insertFiles">
+		insert
+		into img_file
+		values(seq_file_no.nextval, seq_bo_no.currval, #{originName}, #{changeName}, #{fileLevel}, #{filePath}, default)
+	</insert>
 </mapper>

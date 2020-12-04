@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import trip.two.reap.common.Attachment;
 import trip.two.reap.common.BoardException;
 import trip.two.reap.review.model.vo.PageInfo;
 import trip.two.reap.travel.model.service.TravelService;
@@ -65,43 +66,39 @@ public class TravelController {
 	@RequestMapping("tDetail.tv")
 	public String goTravelDetail() {
 		return "travelDetail";
-	} // 여행지 상세보기 이동.
+	} // 여행지 상세보기뷰 이동.
 	
 	
 	@RequestMapping("tInsertView.tv")
 	public String goTravelInsert() {
 		return "travelInsertView";
-	} // 여행지 작성하기 이동.
+	} // 여행지 작성하기쥬 이동.
 	
 	
 	@RequestMapping("tInsert.tv")
-	public String travelInsert(@ModelAttribute Travel t, 
+	public String travelInsert(@ModelAttribute Travel t, @ModelAttribute Attachment a,
 			@RequestParam("uploadFile1") MultipartFile uploadFile1,
 			@RequestParam("uploadFile2") MultipartFile uploadFile2,
 			@RequestParam("uploadFile3") MultipartFile uploadFile3,
 			HttpServletRequest request) {
 		
-		 System.out.println("controller t : " + t); 
-			/*
-			 * System.out.println(uploadFile1.getOriginalFilename());
-			 * System.out.println(uploadFile2.getOriginalFilename());
-			 * System.out.println(uploadFile3.getOriginalFilename());
-			 */
+			
 		 
 
 		if(uploadFile1 != null ) {
 			// 파일을 넣지 않음 ==> ""
 			// 파일을 넣음 	  ==> 파일 제목
-			String renameFileName = saveFile(uploadFile1, request);
+			String renameFileName = saveFile(uploadFile1, request); // 파일 저장 경로 지정
 			
-			/*
-			 * if(renameFileName != null) {
-			 * b.setOriginalFileName(uploadFile1.getOriginalFilename());
-			 * b.setRenameFileName(renameFileName); }
-			 */		
+		
+			  if(renameFileName != null) {
+			  a.setOriginName(uploadFile1.getOriginalFilename());
+			  }
+			 		
 		}		
 		
-		int result = tService.insertBoard(t);
+		/* int result = tService.insertBoard(t); */
+		int result = tService.insertTravel(t);
 		
 		return "redirect:tList.tv";
 	}

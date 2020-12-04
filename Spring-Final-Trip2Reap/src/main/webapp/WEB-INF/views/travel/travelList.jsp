@@ -100,7 +100,7 @@
 			</div>
 			
 			
-			<!-- <form action="tInsert.tv" method="post" id="tList"> -->
+			 
 			
 			<!-- 여행지 div -->
 			<c:forEach var="t" items="${ list }">
@@ -114,14 +114,14 @@
 					<div id="travel_no">${ t.boNo }</div>
 					<div id="travel_name">${ t.boTitle }</div>
 					<div id="travel_theme">${ t.trTheme }</div>
-					<div id="travel_writer">${ t.trAddr }</div>
+					<div id="travel_writer">${ t.trReg }</div>
 					<div id="travel_tag">${ t.boTag }</div>
 				</div>
 				<div id="list_etc"><a href="#modal">…</a></div>
 			</div>
 			
 			</c:forEach>
-			<!-- </form> -->
+			
 		</div>
 			
 		
@@ -132,7 +132,7 @@
 		
 			<c:if test="${ loginUser.memberId == 'admin' }"> 
 				<div id="button_write_div">
-					<button id="button_write" onclick="location.href='tInsert.tv';">등록하기</button>
+					<button id="button_write" onclick= "location.href='tInsertView.tv'">등록하기</button>
 				</div>
 			</c:if>
 	

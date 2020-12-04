@@ -29,8 +29,15 @@ public class TravelServiceImpl implements TravelService{
 		return tDAO.selectList(sqlSession, pi);
 	}
 
+	/*
+	 * @Override public int insertBoard(Travel t) { return
+	 * tDAO.insertBoard(sqlSession, t); }
+	 */
+	
 	@Override
-		public int insertBoard(Travel t) {
-			return tDAO.insertBoard(sqlSession, t);
-		}
+	public int insertTravel(Travel t) {
+			return tDAO.insertTravel(sqlSession, t);
+	}
+
+	
 }
