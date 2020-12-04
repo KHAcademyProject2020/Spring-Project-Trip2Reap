@@ -878,21 +878,21 @@ $(function(){
 						$hotelCode+='<small>'+hotel.hotelAddr+'</small>' //호텔주소
 						$hotelCode+='</div>'
 						
-						$hotelCode+='<div class="hotel-info-wrapper">'
-						$hotelCode+='<div class="hotel-review-container">'
-						$hotelCode+='<span class="star-point">'
+						$hotelCode+='<div class="hotel-info-wrapper">';
+						$hotelCode+='<div class="hotel-review-container">';
+						$hotelCode+='<span class="star-point">';
 						$hotelCode+='<i class="fas fa-star"></i>';
 						$hotelCode+='</span>';
 						$hotelCode+='<span>'+hotel.hotelReviewScore.toFixed(1)+'</span>/5.0'; //호텔평점
 						$hotelCode+='</div>';
 						
-						$hotelCode+='<div class="hotel-per-day-price-container" info-container>'
-						$hotelCode+='<p>'
-						$hotelCode+='<small>1박</small>&nbsp;&nbsp;'
-						$hotelCode+='<b class="min_room_price">'
-						$hotelCode+=minPrice //호텔방최저가
-						$hotelCode+='</b>&nbsp;원</p></div></div></div>'
-						$hotelCode+='<button class="hotel-reserve-btn">예약하기</button></div></div>'
+						$hotelCode+='<div class="hotel-per-day-price-container" info-container>';
+						$hotelCode+='<p>';
+						$hotelCode+='<small>1박</small>&nbsp;&nbsp;';
+						$hotelCode+='<b class="min_room_price">';
+						$hotelCode+=minPrice; //호텔방최저가
+						$hotelCode+='</b>&nbsp;원</p></div></div></div>';
+						$hotelCode+='<button class="hotel-reserve-btn">예약하기</button></div></div>';
 						
 					}
 				}
@@ -900,24 +900,24 @@ $(function(){
 				
 				let pi= data.pi;
 				let $pageCode='';
-				$pageCode+='<nav>'
-				$pageCode+='<ul id="pagination-ul">'
+				$pageCode+='<nav>';
+				$pageCode+='<ul id="pagination-ul">';
 				
 				
 				//이전페이징 표시
 				if(pi.currentPage<=1){
 					$pageCode+='<li><a>&lt;&lt;</a></li>';
-					$pageCode+='<li><a>&lt;</a></li>'
+					$pageCode+='<li><a>&lt;</a></li>';
 				}else{
 					//pi.currentPage>1
-					$pageCode+='<c:url var="firstPage" value="rankSearchHotel.ho">'
-					$pageCode+='<c:param name="page" value="${'+pi.startPage+'}"/>'
-					$pageCode+='</c:url>'
-					$pageCode+='<li style="cursor:pointer;"><a href="${firstPage}">&lt;&lt;</a></li>'
+					$pageCode+='<c:url var="firstPage" value="rankSearchHotel.ho">';
+					$pageCode+='<c:param name="page" value="${'+pi.startPage+'}"/>';
+					$pageCode+='</c:url>';
+					$pageCode+='<li style="cursor:pointer;"><a href="${firstPage}">&lt;&lt;</a></li>';
 					
-					$pageCode+='<c:url var="before" value="rankSearchHotel.ho">'
-					$pageCode+='<c:param name="page" value="${'+pi.currentPage-1+'}"/>'
-					$pageCode+='</c:url>'
+					$pageCode+='<c:url var="before" value="rankSearchHotel.ho">';
+					$pageCode+='<c:param name="page" value="${'+pi.currentPage-1+'}"/>';
+					$pageCode+='</c:url>';
 					$pageCode+='<li style="cursor:pointer;"><a href="${before}">&lt;</a></li>';
 				}
 				
@@ -927,13 +927,13 @@ $(function(){
 					if(i==pi.currentPage ){
 						$pageCode+='<li style="background-color: var(--blue-gray);">';
 						$pageCode+='<a style="font-weight:bold;">'+i+'</a>';
-						$pageCode+='</li>'
+						$pageCode+='</li>';
 					}else{
-						$pageCode+='<c:url var="pagination" value="rankSearchHotel.ho">'
-						$pageCode+='<c:param name="page" value="${'+i+'}"/>'
-						$pageCode+='</c:url>'
+						$pageCode+='<c:url var="pagination" value="rankSearchHotel.ho">';
+						$pageCode+='<c:param name="page" value="${'+i+'}"/>';
+						$pageCode+='</c:url>';
 						$pageCode+='<li style="cursor:pointer;">';
-						$pageCode+='<a href="${pagination}">'+i+'</a></li>'
+						$pageCode+='<a href="${pagination}">'+i+'</a></li>';
 					}	
 				}
 				
@@ -943,20 +943,20 @@ $(function(){
 					$pageCode+='<li><a>&gt;</a></li>';
 					$pageCode+='<li><a>&gt;&gt;</a></li>';
 				}else{
-					$pageCode+='<c:url var="after" value="rankSearchHotel.ho">'
-					$pageCode+='<c:param name="page" value="${'+pi.currentPage+1+'}"/>'
+					$pageCode+='<c:url var="after" value="rankSearchHotel.ho">';
+					$pageCode+='<c:param name="page" value="${'+pi.currentPage+1+'}"/>';
 					$pageCode+='</c:url>'
-					$pageCode+='<li style="cursor:pointer;"><a href="${after}">&gt;</a></li>'
+					$pageCode+='<li style="cursor:pointer;"><a href="${after}">&gt;</a></li>';
 					
-					$pageCode+='<c:url var="lastPage" value="rankSearchHotel.ho">'
-					$pageCode+='<c:param name="page" value="${'+pi.endPage+'}"/>'
-					$pageCode+='</c:url>'
-					$pageCode+='<li style="cursor:pointer;"><a href="${lastPage}">&gt;&gt;</a></li>'
+					$pageCode+='<c:url var="lastPage" value="rankSearchHotel.ho">';
+					$pageCode+='<c:param name="page" value="${'+pi.endPage+'}"/>';
+					$pageCode+='</c:url>';
+					$pageCode+='<li style="cursor:pointer;"><a href="${lastPage}">&gt;&gt;</a></li>';
 				}
 				
 				
-				$pageCode+='</ul>'
-				$pageCode+='</nav>'
+				$pageCode+='</ul>';
+				$pageCode+='</nav>';
 				
 				//코드를 넣는다.
 				hotelContainer.html($hotelCode);

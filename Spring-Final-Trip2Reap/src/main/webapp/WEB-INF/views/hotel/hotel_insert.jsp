@@ -32,8 +32,7 @@
 		</div>
 
 		<div>
-			<form action="hotelInsert.ho" method="post"
-				enctype="multipart/form-data">
+			<form action="hotelInsert.ho" method="post" enctype="multipart/form-data">
 				<div id="sub-title-container">
 					<h1>호텔 등록</h1>
 				</div>
@@ -44,8 +43,7 @@
 						<p style="color: #913716;">* 는 필수 입력사항 입니다!</p>
 					</div>
 					<div class="hotel-insert-content-container">
-						<input id="hotel_name" name="hotel_name"  autocomplete="off"
-							placeholder="* 호텔이름을 입력해주세요" type="text">
+						<input id="hotel_name" name="boTitle"  autocomplete="off" placeholder="* 호텔이름을 입력해주세요" type="text">
 					</div>
 				</div>
 
@@ -254,8 +252,9 @@
 					<div id="search_hotel_addr_container">
 						<div class="search_hotel_addr_wrapper">
 							<input id="search_hotel_addr_btn" type="button" value="주소 찾기" onclick="exeDaumPostcode()">
-							<input type="text" readonly placeholder="호텔 도로명 주소를 입력해주세요!" autocomplete="off"
-							name="hotel_address" id="hotel_address">
+							
+							<!--호텔 도로명주소  -->
+							<input name="hotelAddr"  type="text" readonly placeholder="호텔 도로명 주소를 입력해주세요!" autocomplete="off" id="hotel_address">
 							
 						</div>
 						
@@ -540,7 +539,7 @@
 							<input class="phone-call" type="tel" name="real_call_number" autocomplete="off"
 								id="real_call_number">
 						</div>
-						<input type="hidden" name="total_phone_number" id="total_phone_number"></input>
+						<input type="hidden" name="hotelTel" id="total_phone_number"></input>
 
 						<%--
 							<div>
@@ -597,7 +596,7 @@
 									}
 								}
 								
-								console.log('전체전화번호: '+ totalPhoneNumber);
+								//console.log('전체전화번호: '+ totalPhoneNumber);
 								$('#total_phone_number').val(totalPhoneNumber);
 							}
 							
@@ -638,7 +637,7 @@
 							<span>운영시작 시간</span>
 
 							<!-- 호텔 오픈 시각 선택 -->
-							<select name="hotel_open_time" id="hotel_open_time">
+							<select name="hotelOpenTime" id="hotel_open_time">
 								<option value="">운영시작 시간선택</option>
 								<option value="0">0</option>
 								<option value="1">1</option>
@@ -671,7 +670,7 @@
 							<span>운영종료 시간</span>
 
 							<!-- 호텔 종료시간 선택 -->
-							<select name="hotel_close_time" id="hotel_close_time">
+							<select name="hotelCloseTime" id="hotel_close_time">
 								<option value="">운영종료 시간선택</option>
 								<option value="0">0</option>
 								<option value="1">1</option>
@@ -717,14 +716,14 @@
 
 								<tr>
 									<td colspan=2>
-										<input type="checkbox"  class="option-checkboxes" name="hotel_option" value="와이파이" id="option1"/>
+										<input type="checkbox"  class="option-checkboxes" value="와이파이" id="option1"/>
 										<label class="fake-checkbox-label" for="option1">와이파이</label>
 									</td>
 								</tr>
 
 								<tr>
 									<td colspan=2>
-										<input type="checkbox"  class="option-checkboxes"  name="hotel_option" value="조식" id="option2"/>
+										<input type="checkbox"  class="option-checkboxes"  value="조식" id="option2"/>
 										<label class="fake-checkbox-label" for="option2">조식</label>
 									</td>
 								</tr>
@@ -732,42 +731,42 @@
 								<tr>
 									
 									<td colspan=2>
-										<input type="checkbox" class="option-checkboxes" name="hotel_option" value="레스토랑" id="option3"/>
+										<input type="checkbox" class="option-checkboxes"  value="레스토랑" id="option3"/>
 										<label class="fake-checkbox-label" for="option3">레스토랑</label>
 									</td>
 								</tr>
 
 								<tr>
 									<td colspan=2>
-										<input id="option4" type="checkbox" class="option-checkboxes" name="hotel_option" value="세탁"/>
+										<input id="option4" type="checkbox" class="option-checkboxes"  value="세탁"/>
 										<label class="fake-checkbox-label" for="option4">세탁</label>
 									</td>
 								</tr>
 
 								<tr>
 									<td colspan=2>
-										<input id="option5" class="option-checkboxes" type="checkbox" name="hotel_option" value="24시간 리셉션" />
+										<input id="option5" class="option-checkboxes" type="checkbox"  value="24시간 리셉션" />
 										<label class="fake-checkbox-label" for="option5">24시간 리셉션</label>
 									</td>
 								</tr>
 
 								<tr>
 									<td colspan=2>
-										<input id="option6" class="option-checkboxes" type="checkbox" name="hotel_option" value="수하물 보관" />
+										<input id="option6" class="option-checkboxes" type="checkbox"  value="수하물 보관" />
 										<label class="fake-checkbox-label" for="option6">수하물 보관</label>
 									</td>
 								</tr>
 
 								<tr>
 									<td colspan=2>
-										<input id="option7" class="option-checkboxes" type="checkbox" name="hotel_option" value="수영장" />
+										<input id="option7" class="option-checkboxes" type="checkbox"  value="수영장" />
 										<label class="fake-checkbox-label" for="option7">수영장</label>
 									</td>
 								</tr>
 
 								<tr>
 									<td colspan=2>
-										<input id="option8" class="option-checkboxes" type="checkbox" name="hotel_option" value="피트니스" />
+										<input id="option8" class="option-checkboxes" type="checkbox"  value="피트니스" />
 										<label class="fake-checkbox-label" for="option8">피트니스</label>	
 									</td>
 										
@@ -775,14 +774,14 @@
 
 								<tr>
 									<td colspan=2>
-										<input id="option9" class="option-checkboxes" type="checkbox" name="hotel_option" value="스파/사우나" />
+										<input id="option9" class="option-checkboxes" type="checkbox"  value="스파/사우나" />
 										<label class="fake-checkbox-label" for="option9">스파 &amp; 사우나</label>
 									</td>
 								</tr>
 
 								<tr>
 									<td colspan=2>
-										<input id="option10" class="option-checkboxes" type="checkbox" name="hotel_option" value="미용실" />
+										<input id="option10" class="option-checkboxes" type="checkbox"  value="미용실" />
 										<label class="fake-checkbox-label" for="option10">미용실</label>
 									</td>
 								</tr>
@@ -798,42 +797,42 @@
 
 								<tr>
 									<td colspan=2>
-										<input id="option11" type="checkbox" class="option-checkboxes" name="hotel_option" value="카페" />
+										<input id="option11" type="checkbox" class="option-checkboxes"  value="카페" />
 										<label class="fake-checkbox-label" for="option11">카페</label>
 									</td>
 								</tr>
 
 								<tr>
 									<td colspan=2>
-										<input id="option12" type="checkbox" class="option-checkboxes" name="hotel_option" value="비즈니스 시설" />
+										<input id="option12" type="checkbox" class="option-checkboxes" value="비즈니스 시설" />
 										<label class="fake-checkbox-label" for="option12">비즈니스 시설</label>
 									</td>
 								</tr>
 
 								<tr>
 									<td colspan=2>
-										<input id="option13" type="checkbox" class="option-checkboxes" name="hotel_option" value="주차" />
+										<input id="option13" type="checkbox" class="option-checkboxes" value="주차" />
 										<label class="fake-checkbox-label" for="option13">주차</label>
 									</td>
 								</tr>
 
 								<tr>
 									<td colspan=2>
-										<input id="option14" type="checkbox" class="option-checkboxes" name="hotel_option" value="공항셔틀" />
+										<input id="option14" type="checkbox" class="option-checkboxes" value="공항셔틀" />
 										<label class="fake-checkbox-label" for="option14">공항셔틀</label>
 									</td>
 								</tr>
 
 								<tr>
 									<td colspan=2>
-										<input id="option15" type="checkbox" class="option-checkboxes" name="hotel_option" value="장애인 편의시설" />
+										<input id="option15" type="checkbox" class="option-checkboxes" value="장애인 편의시설" />
 										<label class="fake-checkbox-label" for="option15">장애인 편의시설</label>
 									</td>
 								</tr>
 
 								<tr>
 									<td colspan=2>
-										<input id="option16" type="checkbox" class="option-checkboxes" name="hotel_option" value="바/라운지" />
+										<input id="option16" type="checkbox" class="option-checkboxes"  value="바/라운지" />
 										<label class="fake-checkbox-label" for="option16">바 &amp; 라운지</label>	
 									</td>
 								</tr>
@@ -841,21 +840,21 @@
 
 								<tr>
 									<td colspan=2>
-										<input id="option17" type="checkbox" class="option-checkboxes" name="hotel_option" value="주방" />
+										<input id="option17" type="checkbox" class="option-checkboxes"  value="주방" />
 										<label class="fake-checkbox-label" for="option17">주방</label>
 									</td>
 								</tr>
 
 								<tr>
 									<td colspan=2>
-										<input id="option18" type="checkbox" class="option-checkboxes" name="hotel_option" value="아이돌봄 서비스" />
+										<input id="option18" type="checkbox" class="option-checkboxes" value="아이돌봄 서비스" />
 										<label class="fake-checkbox-label" for="option18">아이돌봄 서비스</label>
 									</td>
 								</tr>
 
 								<tr>
 									<td colspan=2>
-										<input id="option19" type="checkbox" class="option-checkboxes" name="hotel_option" value="룸서비스" />
+										<input id="option19" type="checkbox" class="option-checkboxes"  value="룸서비스" />
 										<label class="fake-checkbox-label" for="option19">룸서비스</label>
 									</td>
 								</tr>
@@ -869,13 +868,39 @@
 							</table>
 						</div>
 					</div>
+					<%-- 실제 호텔 등록 --%>
+					<input type="hidden" id="selectedHotelOptionsStr" name="hotelOptions">
+					<script>
+					$(function(){
+						$('input[type="checkbox"].option-checkboxes').click(function(){
+							//선택한 옵션을 문자열로 나타내기
+							let selectedHotelOptionsStr= $('#selectedHotelOptionsStr');
+							
+							//선택한 옵션구하기
+							let optionStr='';
+							let selectedOptions= $('input[type="checkbox"].option-checkboxes:checked + label.fake-checkbox-label');
+							for(var i=0; i<selectedOptions.length; i++){
+								let option= selectedOptions[i].textContent;
+								if(i==selectedOptions.length-1){
+									//마지막 선택 옵션
+									optionStr+=option;
+								}else{
+									optionStr+=option+', ';
+								}
+							}
+							selectedHotelOptionsStr.val(optionStr);
+							console.log(selectedHotelOptionsStr.val());
+							
+						});
+					});
+					</script>
 				</div>
 
 				<!-- 호텔 사이트 9-->
 				<div class="insert-common-container">
 					<div>
 						<h3>&nbsp;&nbsp;호텔 사이트</h3>
-						<input name="hotel_url" id="hotel_url" type="url"  autocomplete="off"
+						<input name="hotelSite" id="hotel_url" type="url"  autocomplete="off"
 							placeholder="https://">
 					</div>
 				</div>
@@ -907,6 +932,9 @@
 						<%-- 해시태그가 존재한다면  --%>
 						<ul id="saved-hashtags">
 						</ul>
+						
+						<%--실제해시태그 등록 --%>
+						<input id="savedHashTagStrings" type="hidden" name="boTag"/>
 					</div>
 					<script>
 					
@@ -920,22 +948,41 @@
 								// 저장된 해시태그들
 								let $hashTags= savedHashTags.children('li');	
 								
+								//실제 저장된 해시태그들을 문자열로 나타내서 저장(데이터베이스에 저장시킬 해시태그)
+								let savedHashTagString= $('#savedHashTagStrings');
+								
+								
 								if($hashTags.length==0){
 									// 저장된 해시태그가 존재하지 않는다면 (0개 )
 									// 해시태그 존재하지 않는다는 문구를 띄운다.
 									$('#no-hashtag').css('display', 'block');
+									savedHashTagString.val('');
 								}else{
 									//저장된 해시태그가 존재한다면(1개 이상 )
 									// 해시태그가 존재하지 않는다는 문구를 안보이게 한다.
 									$('#no-hashtag').css('display', 'none');
+									
+									let hashTagStr='';
+									for(var i=0; i<$hashTags.length; i++){
+										let hashtag= $hashTags[i].textContent.trim();
+										hashtag= hashtag.substring(1,);
+										
+										if(i==$hashTags.length-1){
+											hashTagStr+=hashtag;
+										}else{
+											hashTagStr+=hashtag+', ';
+										}
+									}
+									savedHashTagString.val(hashTagStr);
 								}
+								console.log(savedHashTagString.val())
 							}
 							
 							// 중복된 해시태그를 찾는다.
 							function isDuplicateHashTags(targetHashTag){
 								targetHashTag= '#'+targetHashTag;
 								let $hashTags= $('#saved-hashtags').children('li').children('.hashtag-content');	
-								console.log($hashTags);
+								//console.log($hashTags);
 								
 								//이미 등록된 해시태그 들을 콘솔에 출력한다.
 								for(var i=0; i<$hashTags.length; i++){
@@ -997,6 +1044,7 @@
 												//저장된 해시태그의 개수가 3개미만 => 추가
 												$hashtag_content='<li><span class="hashtag-content"> #'+inputHashTag+'</span><span><i class="remove-hashtag-btn fas fa-times"></i></span></li>'
 												savedHashTags.append($hashtag_content);
+												
 											}else{
 												//저장된 해시태그의 개수가 3개 이상이라면=> 경고창 
 												swal({
@@ -1011,7 +1059,7 @@
 								}
 								//등록이 성공/실패 여부 상관없이  해시태그 입력값을 일단 비워둔다.
 								 $('#input-hashtag').val('');
-								isEmptyHashTagsMsg();
+								isEmptyHashTagsMsg(); //해시태그가 비어있는지 확인
 							});
 							
 							
@@ -1022,18 +1070,18 @@
 								$(e.currentTarget).closest('#saved-hashtags li').remove();
 								
 								//해시태그 삭제처리후, 해시태그가 없다는 메시지를 띄워야할지 말아야할지 결정
-								isEmptyHashTagsMsg();
+								isEmptyHashTagsMsg(); //해시태그가 비어있는지 확인
 							});
 							
 						});
 					</script>
 				</div>
-
-				<!-- 호텔 등록하기 버튼 -->
-				<div id="btn-container">
-					<input type="submit" id="insert-hotel-btn" value="등록 하기" />
-				</div>
 			</form>
+			
+			<!-- 호텔 등록하기 버튼 -->
+			<div id="btn-container">
+				<input type="button" id="insert-hotel-btn" value="등록 하기" />
+			</div>
 		</div>
 	</div>
 </body>

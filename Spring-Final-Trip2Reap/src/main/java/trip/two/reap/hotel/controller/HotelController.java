@@ -4,16 +4,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -401,7 +403,7 @@ public class HotelController {
 		}
 	}
 	
-	//2020.12.01~2020.12.02
+	//2020.12.01~2020.12.02  - modal 상세검색 (미완)
 	//호텔리스트- modal 상세 검색(보류)
 	@RequestMapping("detailSearchResult.ho")
 	public void detailSearchResult(@RequestParam(value="page", required=false, defaultValue="1") Integer page , 
@@ -510,7 +512,7 @@ public class HotelController {
 	}
 	
 	
-	// 2020.12.03 가격순(높은순/낮은순), 등급순, 평점순
+	// 2020.12.03 가격순(높은순/낮은순), 등급순, 평점순 (가격순/등급순/ 평점순 정렬 완료 => 페이징처리 아직)
 	//등급순 (내림차순)
 	@RequestMapping("rankSearchHotel.ho")
 	public void searchRankDescendent(@RequestParam(value="page", required=false, defaultValue="1") Integer page,
@@ -840,6 +842,14 @@ public class HotelController {
 	public String goHotelInsertView() {
 		return "hotel_insert";
 	}
+	
+	//호텔등록
+	@RequestMapping("hotelInsert.ho")
+	public void hotelInsert(@ModelAttribute Hotel hotel)throws HotelException {
+		System.out.println(hotel); //전달받은 호텔정보 출력하기.
+		
+	}
+	
 	
 	
 	//only admin(관리자용)

@@ -23,8 +23,8 @@ public class Hotel {
 	private Date regDate; //게시글 등록&수정 날짜 - default sysdate로 필수 
 	
 	
-	private Attachment hotelThumbnailImg;//호텔 썸네일 이미지 -- 필수
-	private ArrayList<Attachment> hotelDetailViewImgs; //호텔 디테일 이미지	-- 선택
+	private String hotelThumbnailImg;//호텔 썸네일 이미지 -- 필수
+	private ArrayList<String> hotelDetailViewImgs; //호텔 디테일 이미지	-- 선택
 	
 	//HOTEL
 	private String hotelAddr; //호텔주소 -- 필수
@@ -68,7 +68,7 @@ public class Hotel {
 
 	//필수만 들어있는 생성자(썸네일이미지만 포함)
 	public Hotel(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount,
-			String boDeleteYN, Date regDate, Attachment hotelThumbnailImg, String hotelAddr, int hotelLocalCode,
+			String boDeleteYN, Date regDate, String hotelThumbnailImg, String hotelAddr, int hotelLocalCode,
 			double hotelReviewScore, int hotelOpenTime, int hotelCloseTime, int hotelCheckInTime,
 			int hotelCheckOutTime) {
 		super();
@@ -123,7 +123,7 @@ public class Hotel {
 
 	//모든 요소가 들어있는 생성자
 	public Hotel(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount, String boTag,
-			String boDeleteYN, Date regDate, Attachment hotelThumbnailImg, ArrayList<Attachment> hotelDetailViewImgs,
+			String boDeleteYN, Date regDate, String hotelThumbnailImg, ArrayList<String> hotelDetailViewImgs,
 			String hotelAddr, int hotelLocalCode, String hotelSite, String hotelTel, double hotelReviewScore,
 			int hotelRank, int hotelOpenTime, int hotelCloseTime, String hotelOptions, int hotelCheckInTime,
 			int hotelCheckOutTime) {
@@ -243,22 +243,22 @@ public class Hotel {
 	}
 
 
-	public Attachment getHotelThumbnailImg() {
+	public String getHotelThumbnailImg() {
 		return hotelThumbnailImg;
 	}
 
 
-	public void setHotelThumbnailImg(Attachment hotelThumbnailImg) {
+	public void setHotelThumbnailImg(String hotelThumbnailImg) {
 		this.hotelThumbnailImg = hotelThumbnailImg;
 	}
 
 
-	public ArrayList<Attachment> getHotelDetailViewImgs() {
+	public ArrayList<String> getHotelDetailViewImgs() {
 		return hotelDetailViewImgs;
 	}
 
 
-	public void setHotelDetailViewImgs(ArrayList<Attachment> hotelDetailViewImgs) {
+	public void setHotelDetailViewImgs(ArrayList<String> hotelDetailViewImgs) {
 		this.hotelDetailViewImgs = hotelDetailViewImgs;
 	}
 
