@@ -6,6 +6,7 @@ public class NaverLoginAPI extends DefaultApi20 {
 	
 	protected NaverLoginAPI() {}
 	
+	// 내부 클래스
 	private static class InstanceHolder{
 		private static final NaverLoginAPI INSTANCE = new NaverLoginAPI();
 	}

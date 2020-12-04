@@ -32,7 +32,6 @@ public class RandomKey {
 		} while(sb.length() < size);
 		
 		if(lowerCheck) {
-			// 소문자 체크를 해줘야 하는 이유는 무엇일까?
 			return sb.toString().toLowerCase();
 		} else {
 			return sb.toString();

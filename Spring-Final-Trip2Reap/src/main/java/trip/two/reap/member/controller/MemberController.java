@@ -264,10 +264,10 @@ public class MemberController {
 	}
 	
 	
-	// 마이페이지 - 내가 작성한 글목록
-	@RequestMapping("myPageBoard.me")
-	public String myPageBoard() {
-		return "myPageBoard";
+	// 마이페이지 - 나만의 여행코스
+	@RequestMapping("myPageCourse.me")
+	public String myPageCouse() {
+		return "myPageCourse";
 	}
 	
 	
@@ -493,9 +493,8 @@ public class MemberController {
 	
 	/*
 	 * <추가로 넣어야 할 사항들>
-	 * 1. 비밀번호 찾기 -> 타이머 나오게 하기 / 다른 곳 클릭시 타이머 제거. 타이머 다시 생성.
 	 * <로그인 modal, 회원탈퇴 modal, 정보수정modal>
-	 * 2. 로그인 시 modal창 꺼지면 : 입력값도 사라지게 수정하기.
+	 * 1. 로그인 시 modal창 꺼지면 : 입력값도 사라지게 수정하기.
 	 * 
 	 * <추가로 넣어야 할 기능들>
 	 * 1. 나의 호텔 예약 내역

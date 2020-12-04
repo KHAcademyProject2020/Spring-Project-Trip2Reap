@@ -1,7 +1,6 @@
 package trip.two.reap.member.naver;
 
 import java.io.IOException;
-import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,7 +17,7 @@ public class NaverLoginBo {
 	private final static String CLIENT_ID = "7SqOY7uotfJIREqGVR6P"; // 네이버 client id
 	private final static String CLIENT_SECRET = "_MPUO5V02K"; // 네이버 secret
 	private final static String REDIRECT_URI = "http://localhost:13080/reap/naverLogin.me"; // 콜백 URI
-	private final static String SESSION_STATE = "oauth_state";
+	// private final static String SESSION_STATE = "oauth_state";
 	
 	// 프로필 조회 API URL
 	private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";	
@@ -26,6 +25,7 @@ public class NaverLoginBo {
 	// 네이버 아이디로 callback 처리 및 AccessToken 획득
 	public OAuth2AccessToken getAccessToken(HttpSession session, String code, String state) throws IOException{
 
+		    // OAuth 라이브러리 : 다양한 소셜 로그인을 가능하게 한다.
             OAuth20Service oauthService = new ServiceBuilder()
                     .apiKey(CLIENT_ID)
                     .apiSecret(CLIENT_SECRET)

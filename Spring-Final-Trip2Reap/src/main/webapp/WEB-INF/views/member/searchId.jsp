@@ -463,8 +463,8 @@
     				 endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
     				 updateTimer();
     			 }
-    			 $("<div id='sendMessagePwd2'</div>").insertAfter($("#email"));
-    			 countdown("#sendMessagePwd2",10,0);
+    			 $("<div id='sendMessage2'</div>").insertAfter($("#email"));
+    			 countdown("#sendMessage2",10,0);
     			 
       		   // 인증메일 보내기
       		    $.ajax({

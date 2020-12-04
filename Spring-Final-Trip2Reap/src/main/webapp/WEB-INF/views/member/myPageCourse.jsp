@@ -18,6 +18,6 @@
     <%@ include file="../member/myPage_kakao_naver.jsp" %>    
     </c:if>
     </header>
-내가 작성한 글 목록
+나만의 여행코스 조회
 </body>
 </html>

@@ -32,10 +32,10 @@
                 <i class="fas fa-hotel" id="me1"></i>호텔예약 내역</li>
                 
                 <li class="m1" onclick="mypageTravel();" onMouseOver="this.style.color='#123478';" onMouseOut="this.style.color=''">
-                <i class="fas fa-suitcase-rolling" id="me1"></i>나만의 여행지</li>
+                <i class="fas fa-suitcase-rolling" id="me1"></i>내가담은여행지</li>
                 
-                <li class="m1" onclick="mypageBoard();" onMouseOver="this.style.color='#123478';" onMouseOut="this.style.color=''">
-                <i class="fas fa-camera-retro" id="me1"></i>작성한 여행후기</li>
+                <li class="m1" onclick="mypageCourse();" onMouseOver="this.style.color='#123478';" onMouseOut="this.style.color=''">
+                <i class="fas fa-camera-retro" id="me1"></i>나만의 여행코스</li>
                 
                 <li class="m1" onclick="memberOut();" onMouseOver="this.style.color='#123478';" onMouseOut="this.style.color=''">
                 <i class="fas fa-user-slash" id="me1"></i>회원탈퇴</li>
@@ -52,8 +52,8 @@
     	 location.href="<%= request.getContextPath() %>/myPageTravel.me";
      }
      
-     function mypageBoard(){
-    	 location.href="<%= request.getContextPath() %>/myPageBoard.me";
+     function mypageCourse(){
+    	 location.href="<%= request.getContextPath() %>/myPageCourse.me";
      }
      
      function memberOut(){

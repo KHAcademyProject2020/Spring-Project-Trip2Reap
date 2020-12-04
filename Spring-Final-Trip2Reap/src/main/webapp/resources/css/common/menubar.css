@@ -90,7 +90,7 @@
      #loginButton3{ display:inline-block; width: 301px; height : 42px; cursor: pointer; background: rgb(29,193,0); border: none; }
      #loginButton3:hover { background-color: rgb(39,203,10); }
      #btn2_1 { display: inline-block; margin-right: 5px; font-size: 18px; margin-bottom: 10px; }
-     #btn2_2 { display: inline-block; vertical-align: bottom; font-weight: 700; font-size: 12px; line-height: 43px; }
+     #btn2_2 { display: inline-block; width: 124px; vertical-align: bottom; font-weight: 700; font-size: 12px; line-height: 43px; }
      #btn3_1 { display: inline-block; margin-right: 6px; color: white; font-weight: 900; font-size: 18px; margin-bottom: 10px; }
      #btn3_2 { display: inline-block; color: white; vertical-align: bottom; line-height: 43px; font-weight: 700; font-size: 12px; }
 	

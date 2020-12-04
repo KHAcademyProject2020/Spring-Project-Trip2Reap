@@ -133,17 +133,16 @@
 	        <div id="otherBtn">
 	            <div id="otherSpace"></div>
                 <div id="otherLogin_space"></div>
-                <div id="loginButton2">
+                <div id="loginButton2" onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=9d8f7f524c07ea08ff127d7591c2fbd5&redirect_uri=http://localhost:13080/reap/kakaoLogin.me&response_type=code'">
                 <i class="fas fa-comment" id="btn2_1"></i>
-	            <!-- get 방식을 통해 uri로 바로 이동  -->
-	            <a href="https://kauth.kakao.com/oauth/authorize?client_id=9d8f7f524c07ea08ff127d7591c2fbd5&redirect_uri=http://localhost:13080/reap/kakaoLogin.me&response_type=code" id="btn2_2">카카오 계정으로 로그인</a>
+	            <a id="btn2_2">카카오 계정으로 로그인</a>
 	            </div>	            
 	        
 	        <div id="login_space5"></div>
 
-                <div id="loginButton3">
+                <div id="loginButton3" onclick="location.href='https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=7SqOY7uotfJIREqGVR6P&redirect_uri=http://localhost:13080/reap/naverLogin.me&state=1162353973'">
                 <i class="fab fa-neos" id="btn3_1"></i>
-	            <a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=7SqOY7uotfJIREqGVR6P&redirect_uri=http://localhost:13080/reap/naverLogin.me&state=1162353973" id="btn3_2">네이버 계정으로 로그인</a>
+	            <a id="btn3_2">네이버 계정으로 로그인</a>
 	            </div>	            
 	        </div>
 	            
