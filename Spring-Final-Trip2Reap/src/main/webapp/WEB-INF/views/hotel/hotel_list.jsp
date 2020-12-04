@@ -57,13 +57,13 @@
 
             <div id="right_btns_container">
                 <ul id="right_btns" class="btn_ul">
-                    <li><button id="populuarity" class="btn">인기순</button></li>
+                    <li><button id="popularity" class="btn">평점순</button></li>
                     <li>
                     	<button  id="price_order_direction_btn" class="btn">가격순</button>
                     	<div id="price_order_direction_container" class="closed">
                     		<ul id="price_order_direction_wrapper">
                     			<li id="price_high">가격&nbsp;<span style="color:red;">높은순</span></li>
-                    			<li id="price_row">가격&nbsp;<span style="color: blue;">낮은순</span></li>
+                    			<li id="price_low">가격&nbsp;<span style="color: blue;">낮은순</span></li>
                     		</ul>
                     	</div>
                     </li>
@@ -492,14 +492,322 @@ $(function(){
 
 	
 	//가격 높은 순(내림차순) 버튼 클릭시
-	$('#price_high').click(function(){
+	$(document).on('click','#price_high',function(){
 		console.log('가격 높은순 버튼 클릭됨');
+		$.ajax({
+			url:'priceHighSearchHotel.ho',
+			success:function(data){
+				let hotelContainer=$('#hotel-list-container');
+				let pageContainer=$('#pagination-container');
+				let priceRegularExpression= /\B(?=(\d{3})+(?!\d))/g;
+				//기존코드를 비운다.
+				hotelContainer.empty();
+				pageContainer.empty();
+				
+				//1. 호텔결과
+				let $hotelCode='';
+				if(data.hotelList ==null){
+					console.log('호텔이 존재하지 않습니다!!');
+					$hotelCode+='<p>호텔이 존재하지 않습니다!</p>'
+						
+				}else{
+					console.log(data.hotelList.length)
+					console.log(data.likeHotelList.length);
+					console.log(data.minRoomPricePerDayList.length);
+					console.log(typeof(data.minRoomPricePerDayList[0])) //number
+					
+					for(var i=0; i<data.hotelList.length; i++){
+						let hotel= data.hotelList[i];
+						let like= data.likeHotelList[i];
+						let minPriceOrigin= data.minRoomPricePerDayList[i]+'';
+						
+						let minPrice=minPriceOrigin.replace(priceRegularExpression,',');
+						
+						$hotelCode+='<div class="one-hotel-info-container">';
+						$hotelCode+='<img src="resources/images/sample_hotel.jpg" alt="호텔이미지">'; //이미지
+						$hotelCode+='<div class="detail-info-container">';
+						$hotelCode+='<div>';
+						$hotelCode+='<div class="info-container">';
+						$hotelCode+='<div class="hotel-name-container">';
+						$hotelCode+='<input class="hotelNO" type="hidden" value="'+hotel.boNo+'"/>'; //호텔번호
+						$hotelCode+='<h1>'+hotel.boTitle+'</h1>'; //호텔이름
+						$hotelCode+='<div class="hotel-rank-wrapper">';
+						$hotelCode+='<small class="hotel-rank">';
+						//등급이 존재하지 않는다면
+						if(hotel.hotelRank==0){
+							$hotelCode+='등급없음';
+						}else{
+							$hotelCode+= hotel.hotelRank+' 등급';
+						}
+						$hotelCode+='</small>';
+						$hotelCode+='</div>';
+						$hotelCode+='</div>';
+						
+						
+						$hotelCode+='<div class="i-like-btn-container">';
+						//좋아요버튼클릭여부
+						if(like==0){
+							$hotelCode+='<i class="fas fa-heart unlike"></i>';
+								
+						}else{
+							$hotelCode+='<i class="fas fa-heart like"></i>';
+								
+						}
+						$hotelCode+='</div>'
+						$hotelCode+='</div>'
+						$hotelCode+='</div>'
+							
+						$hotelCode+='<div class="detail-info-wrapper">';
+						$hotelCode+='<div class="hotel-addr-wrapper">';
+						$hotelCode+='<small>'+hotel.hotelAddr+'</small>'; //호텔주소
+						$hotelCode+='</div>';
+						
+						$hotelCode+='<div class="hotel-info-wrapper">';
+						$hotelCode+='<div class="hotel-review-container">';
+						$hotelCode+='<span class="star-point">';
+						$hotelCode+='<i class="fas fa-star"></i>';
+						$hotelCode+='</span>';
+						$hotelCode+='<span>'+hotel.hotelReviewScore.toFixed(1)+'</span>/5.0'; //호텔평점
+						$hotelCode+='</div>';
+						
+						$hotelCode+='<div class="hotel-per-day-price-container" info-container>';
+						$hotelCode+='<p>';
+						$hotelCode+='<small>1박</small>&nbsp;&nbsp;';
+						$hotelCode+='<b class="min_room_price">';
+						$hotelCode+=minPrice; //호텔방최저가
+						$hotelCode+='</b>&nbsp;원</p></div></div></div>';
+						$hotelCode+='<button class="hotel-reserve-btn">예약하기</button></div></div>';
+						
+					}
+				}
+				
+				
+				let pi= data.pi;
+				let $pageCode='';
+				$pageCode+='<nav>';
+				$pageCode+='<ul id="pagination-ul">';
+				
+				
+				//이전페이징 표시
+				if(pi.currentPage<=1){
+					$pageCode+='<li><a>&lt;&lt;</a></li>';
+					$pageCode+='<li><a>&lt;</a></li>';
+				}else{
+					//pi.currentPage>1
+					$pageCode+='<c:url var="firstPage" value="priceHighSearchHotel.ho">';
+					$pageCode+='<c:param name="page" value="${'+pi.startPage+'}"/>';
+					$pageCode+='</c:url>';
+					$pageCode+='<li style="cursor:pointer;"><a href="${firstPage}">&lt;&lt;</a></li>';
+					
+					$pageCode+='<c:url var="before" value="priceHighSearchHotel.ho">';
+					$pageCode+='<c:param name="page" value="${'+pi.currentPage-1+'}"/>';
+					$pageCode+='</c:url>';
+					$pageCode+='<li style="cursor:pointer;"><a href="${before}">&lt;</a></li>';
+				}
+				
+				
+				//페이지 번호 표시
+				for(var i=pi.startPage; i<=pi.endPage; i++){
+					if(i==pi.currentPage ){
+						$pageCode+='<li style="background-color: var(--blue-gray);">';
+						$pageCode+='<a style="font-weight:bold;">'+i+'</a>';
+						$pageCode+='</li>';
+					}else{
+						$pageCode+='<c:url var="pagination" value="priceHighSearchHotel.ho">';
+						$pageCode+='<c:param name="page" value="${'+i+'}"/>';
+						$pageCode+='</c:url>'
+						$pageCode+='<li style="cursor:pointer;">';
+						$pageCode+='<a href="${pagination}">'+i+'</a></li>';
+					}	
+				}
+				
+				
+				//다음페이징 표시
+				if(pi.currentPage>=pi.maxPage){
+					$pageCode+='<li><a>&gt;</a></li>';
+					$pageCode+='<li><a>&gt;&gt;</a></li>';
+				}else{
+					$pageCode+='<c:url var="after" value="priceHighSearchHotel.ho">';
+					$pageCode+='<c:param name="page" value="${'+pi.currentPage+1+'}"/>';
+					$pageCode+='</c:url>';
+					$pageCode+='<li style="cursor:pointer;"><a href="${after}">&gt;</a></li>';
+					
+					$pageCode+='<c:url var="lastPage" value="priceHighSearchHotel.ho">';
+					$pageCode+='<c:param name="page" value="${'+pi.endPage+'}"/>';
+					$pageCode+='</c:url>';
+					$pageCode+='<li style="cursor:pointer;"><a href="${lastPage}">&gt;&gt;</a></li>';
+				}
+				
+				
+				$pageCode+='</ul>'
+				$pageCode+='</nav>'
+				
+				//코드를 넣는다.
+				hotelContainer.html($hotelCode);
+				pageContainer.html($pageCode);
+				
+			}
+		});
 	});
 	
 	
 	//가격 낮은 순(오름차순) 버튼 클릭시
-	$('#price_low').click(function(){
+	$(document).on('click','#price_low',function(){
 		console.log('가격 낮은순 버튼 클릭됨');
+		$.ajax({
+			url:'priceLowSearchHotel.ho',
+			success:function(data){
+				let hotelContainer=$('#hotel-list-container');
+				let pageContainer=$('#pagination-container');
+				let priceRegularExpression= /\B(?=(\d{3})+(?!\d))/g;
+				//기존코드를 비운다.
+				hotelContainer.empty();
+				pageContainer.empty();
+				
+				//1. 호텔결과
+				let $hotelCode='';
+				if(data.hotelList ==null){
+					console.log('호텔이 존재하지 않습니다!!');
+					$hotelCode+='<p>호텔이 존재하지 않습니다!</p>'
+						
+				}else{
+					console.log(data.hotelList.length)
+					console.log(data.likeHotelList.length);
+					console.log(data.minRoomPricePerDayList.length);
+					console.log(typeof(data.minRoomPricePerDayList[0])) //number
+					
+					for(var i=0; i<data.hotelList.length; i++){
+						let hotel= data.hotelList[i];
+						let like= data.likeHotelList[i];
+						let minPriceOrigin= data.minRoomPricePerDayList[i]+'';
+						
+						let minPrice=minPriceOrigin.replace(priceRegularExpression,',');
+						
+						$hotelCode+='<div class="one-hotel-info-container">';
+						$hotelCode+='<img src="resources/images/sample_hotel.jpg" alt="호텔이미지">'; //이미지
+						$hotelCode+='<div class="detail-info-container">';
+						$hotelCode+='<div>';
+						$hotelCode+='<div class="info-container">';
+						$hotelCode+='<div class="hotel-name-container">';
+						$hotelCode+='<input class="hotelNO" type="hidden" value="'+hotel.boNo+'"/>'; //호텔번호
+						$hotelCode+='<h1>'+hotel.boTitle+'</h1>'; //호텔이름
+						$hotelCode+='<div class="hotel-rank-wrapper">';
+						$hotelCode+='<small class="hotel-rank">';
+						//등급이 존재하지 않는다면
+						if(hotel.hotelRank==0){
+							$hotelCode+='등급없음';
+						}else{
+							$hotelCode+= hotel.hotelRank+' 등급';
+						}
+						$hotelCode+='</small>';
+						$hotelCode+='</div>';
+						$hotelCode+='</div>';
+						
+						
+						$hotelCode+='<div class="i-like-btn-container">';
+						//좋아요버튼클릭여부
+						if(like==0){
+							$hotelCode+='<i class="fas fa-heart unlike"></i>';
+								
+						}else{
+							$hotelCode+='<i class="fas fa-heart like"></i>';
+								
+						}
+						$hotelCode+='</div>'
+						$hotelCode+='</div>'
+						$hotelCode+='</div>'
+							
+						$hotelCode+='<div class="detail-info-wrapper">';
+						$hotelCode+='<div class="hotel-addr-wrapper">';
+						$hotelCode+='<small>'+hotel.hotelAddr+'</small>'; //호텔주소
+						$hotelCode+='</div>';
+						
+						$hotelCode+='<div class="hotel-info-wrapper">';
+						$hotelCode+='<div class="hotel-review-container">';
+						$hotelCode+='<span class="star-point">';
+						$hotelCode+='<i class="fas fa-star"></i>';
+						$hotelCode+='</span>';
+						$hotelCode+='<span>'+hotel.hotelReviewScore.toFixed(1)+'</span>/5.0'; //호텔평점
+						$hotelCode+='</div>';
+						
+						$hotelCode+='<div class="hotel-per-day-price-container" info-container>';
+						$hotelCode+='<p>';
+						$hotelCode+='<small>1박</small>&nbsp;&nbsp;';
+						$hotelCode+='<b class="min_room_price">';
+						$hotelCode+=minPrice; //호텔방최저가
+						$hotelCode+='</b>&nbsp;원</p></div></div></div>';
+						$hotelCode+='<button class="hotel-reserve-btn">예약하기</button></div></div>';
+						
+					}
+				}
+				
+				
+				let pi= data.pi;
+				let $pageCode='';
+				$pageCode+='<nav>';
+				$pageCode+='<ul id="pagination-ul">';
+				
+				
+				//이전페이징 표시
+				if(pi.currentPage<=1){
+					$pageCode+='<li><a>&lt;&lt;</a></li>';
+					$pageCode+='<li><a>&lt;</a></li>';
+				}else{
+					//pi.currentPage>1
+					$pageCode+='<c:url var="firstPage" value="priceLowSearchHotel.ho">';
+					$pageCode+='<c:param name="page" value="${'+pi.startPage+'}"/>';
+					$pageCode+='</c:url>';
+					$pageCode+='<li style="cursor:pointer;"><a href="${firstPage}">&lt;&lt;</a></li>';
+					
+					$pageCode+='<c:url var="before" value="priceLowSearchHotel.ho">';
+					$pageCode+='<c:param name="page" value="${'+pi.currentPage-1+'}"/>';
+					$pageCode+='</c:url>';
+					$pageCode+='<li style="cursor:pointer;"><a href="${before}">&lt;</a></li>';
+				}
+				
+				
+				//페이지 번호 표시
+				for(var i=pi.startPage; i<=pi.endPage; i++){
+					if(i==pi.currentPage ){
+						$pageCode+='<li style="background-color: var(--blue-gray);">';
+						$pageCode+='<a style="font-weight:bold;">'+i+'</a>';
+						$pageCode+='</li>';
+					}else{
+						$pageCode+='<c:url var="pagination" value="priceLowSearchHotel.ho">';
+						$pageCode+='<c:param name="page" value="${'+i+'}"/>';
+						$pageCode+='</c:url>'
+						$pageCode+='<li style="cursor:pointer;">';
+						$pageCode+='<a href="${pagination}">'+i+'</a></li>';
+					}	
+				}
+				
+				
+				//다음페이징 표시
+				if(pi.currentPage>=pi.maxPage){
+					$pageCode+='<li><a>&gt;</a></li>';
+					$pageCode+='<li><a>&gt;&gt;</a></li>';
+				}else{
+					$pageCode+='<c:url var="after" value="priceLowSearchHotel.ho">';
+					$pageCode+='<c:param name="page" value="${'+pi.currentPage+1+'}"/>';
+					$pageCode+='</c:url>';
+					$pageCode+='<li style="cursor:pointer;"><a href="${after}">&gt;</a></li>';
+					
+					$pageCode+='<c:url var="lastPage" value="priceLowSearchHotel.ho">';
+					$pageCode+='<c:param name="page" value="${'+pi.endPage+'}"/>';
+					$pageCode+='</c:url>';
+					$pageCode+='<li style="cursor:pointer;"><a href="${lastPage}">&gt;&gt;</a></li>';
+				}
+				
+				
+				$pageCode+='</ul>'
+				$pageCode+='</nav>'
+				
+				//코드를 넣는다.
+				hotelContainer.html($hotelCode);
+				pageContainer.html($pageCode);
+				
+			}
+		});
 	});
 	
 	//등급순(내림차순) 버튼 클릭시
@@ -523,10 +831,6 @@ $(function(){
 					$hotelCode+='<p>호텔이 존재하지 않습니다!</p>'
 						
 				}else{
-					console.log(data.hotelList.length)
-					console.log(data.likeHotelList.length);
-					console.log(data.minRoomPricePerDayList.length);
-					console.log(typeof(data.minRoomPricePerDayList[0])) //number
 					
 					for(var i=0; i<data.hotelList.length; i++){
 						let hotel= data.hotelList[i];
@@ -661,15 +965,159 @@ $(function(){
 		})
 	});
 	
-	//인기순(내림차순) 버튼 클릭시
-	$('#popularity').click(function(){
-		console.log('인기순 버튼 클릭됨');
+	//평점순(내림차순) 버튼 클릭시
+	$(document).on('click','#popularity',function(){
+		console.log('평점순 버튼 클릭됨');
 		$.ajax({
 			url:'popularSearchHotel.ho',
-			success:function(response){
+			success:function(data){
+				let hotelContainer=$('#hotel-list-container');
+				let pageContainer=$('#pagination-container');
+				let priceRegularExpression= /\B(?=(\d{3})+(?!\d))/g;
+				//기존코드를 비운다.
+				hotelContainer.empty();
+				pageContainer.empty();
+				
+				//1. 호텔결과
+				let $hotelCode='';
+				if(data.hotelList ==null){
+					console.log('호텔이 존재하지 않습니다!!');
+					$hotelCode+='<p>호텔이 존재하지 않습니다!</p>'
+						
+				}else{
+					
+					for(var i=0; i<data.hotelList.length; i++){
+						let hotel= data.hotelList[i];
+						let like= data.likeHotelList[i];
+						let minPriceOrigin= data.minRoomPricePerDayList[i]+'';
+						
+						let minPrice=minPriceOrigin.replace(priceRegularExpression,',');
+						
+						$hotelCode+='<div class="one-hotel-info-container">';
+						$hotelCode+='<img src="resources/images/sample_hotel.jpg" alt="호텔이미지">'; //이미지
+						$hotelCode+='<div class="detail-info-container">';
+						$hotelCode+='<div>';
+						$hotelCode+='<div class="info-container">'
+						$hotelCode+='<div class="hotel-name-container">';
+						$hotelCode+='<input class="hotelNO" type="hidden" value="'+hotel.boNo+'"/>' //호텔번호
+						$hotelCode+='<h1>'+hotel.boTitle+'</h1>'; //호텔이름
+						$hotelCode+='<div class="hotel-rank-wrapper">';
+						$hotelCode+='<small class="hotel-rank">';
+						//등급이 존재하지 않는다면
+						if(hotel.hotelRank==0){
+							$hotelCode+='등급없음';
+						}else{
+							$hotelCode+= hotel.hotelRank+' 등급';
+						}
+						$hotelCode+='</small>';
+						$hotelCode+='</div>';
+						$hotelCode+='</div>';
+						
+						
+						$hotelCode+='<div class="i-like-btn-container">';
+						//좋아요버튼클릭여부
+						if(like==0){
+							$hotelCode+='<i class="fas fa-heart unlike"></i>'
+								
+						}else{
+							$hotelCode+='<i class="fas fa-heart like"></i>'
+								
+						}
+						$hotelCode+='</div>'
+						$hotelCode+='</div>'
+						$hotelCode+='</div>'
+							
+						$hotelCode+='<div class="detail-info-wrapper">';
+						$hotelCode+='<div class="hotel-addr-wrapper">'
+						$hotelCode+='<small>'+hotel.hotelAddr+'</small>' //호텔주소
+						$hotelCode+='</div>'
+						
+						$hotelCode+='<div class="hotel-info-wrapper">'
+						$hotelCode+='<div class="hotel-review-container">'
+						$hotelCode+='<span class="star-point">'
+						$hotelCode+='<i class="fas fa-star"></i>';
+						$hotelCode+='</span>';
+						$hotelCode+='<span>'+hotel.hotelReviewScore.toFixed(1)+'</span>/5.0'; //호텔평점
+						$hotelCode+='</div>';
+						
+						$hotelCode+='<div class="hotel-per-day-price-container" info-container>'
+						$hotelCode+='<p>'
+						$hotelCode+='<small>1박</small>&nbsp;&nbsp;'
+						$hotelCode+='<b class="min_room_price">'
+						$hotelCode+=minPrice //호텔방최저가
+						$hotelCode+='</b>&nbsp;원</p></div></div></div>';
+						$hotelCode+='<button class="hotel-reserve-btn">예약하기</button></div></div>';
+						
+					}
+				}
+				
+				
+				let pi= data.pi;
+				let $pageCode='';
+				$pageCode+='<nav>'
+				$pageCode+='<ul id="pagination-ul">'
+				
+				
+				//이전페이징 표시
+				if(pi.currentPage<=1){
+					$pageCode+='<li><a>&lt;&lt;</a></li>';
+					$pageCode+='<li><a>&lt;</a></li>'
+				}else{
+					//pi.currentPage>1
+					$pageCode+='<c:url var="firstPage" value="popularSearchHotel.ho">'
+					$pageCode+='<c:param name="page" value="${'+pi.startPage+'}"/>'
+					$pageCode+='</c:url>'
+					$pageCode+='<li style="cursor:pointer;"><a href="${firstPage}">&lt;&lt;</a></li>'
+					
+					$pageCode+='<c:url var="before" value="popularSearchHotel.ho">'
+					$pageCode+='<c:param name="page" value="${'+pi.currentPage-1+'}"/>'
+					$pageCode+='</c:url>'
+					$pageCode+='<li style="cursor:pointer;"><a href="${before}">&lt;</a></li>';
+				}
+				
+				
+				//페이지 번호 표시
+				for(var i=pi.startPage; i<=pi.endPage; i++){
+					if(i==pi.currentPage ){
+						$pageCode+='<li style="background-color: var(--blue-gray);">';
+						$pageCode+='<a style="font-weight:bold;">'+i+'</a>';
+						$pageCode+='</li>'
+					}else{
+						$pageCode+='<c:url var="pagination" value="popularSearchHotel.ho">'
+						$pageCode+='<c:param name="page" value="${'+i+'}"/>'
+						$pageCode+='</c:url>'
+						$pageCode+='<li style="cursor:pointer;">';
+						$pageCode+='<a href="${pagination}">'+i+'</a></li>'
+					}	
+				}
+				
+				
+				//다음페이징 표시
+				if(pi.currentPage>=pi.maxPage){
+					$pageCode+='<li><a>&gt;</a></li>';
+					$pageCode+='<li><a>&gt;&gt;</a></li>';
+				}else{
+					$pageCode+='<c:url var="after" value="popularSearchHotel.ho">'
+					$pageCode+='<c:param name="page" value="${'+pi.currentPage+1+'}"/>'
+					$pageCode+='</c:url>'
+					$pageCode+='<li style="cursor:pointer;"><a href="${after}">&gt;</a></li>'
+					
+					$pageCode+='<c:url var="lastPage" value="popularSearchHotel.ho">'
+					$pageCode+='<c:param name="page" value="${'+pi.endPage+'}"/>'
+					$pageCode+='</c:url>'
+					$pageCode+='<li style="cursor:pointer;"><a href="${lastPage}">&gt;&gt;</a></li>'
+				}
+				
+				
+				$pageCode+='</ul>'
+				$pageCode+='</nav>'
+				
+				//코드를 넣는다.
+				hotelContainer.html($hotelCode);
+				pageContainer.html($pageCode);
 				
 			}
-		})
+		});
 	});
 	
 	

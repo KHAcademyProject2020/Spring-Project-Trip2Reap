@@ -219,6 +219,25 @@ public class HotelServiceImpl implements HotelService{
 	public ArrayList<Hotel> sortRankDescendent() {
 		return hDAO.sortRankDescendent(sqlSession);
 	}
+
+	//2020.12.03 - 평점순 내림차순 정렬
+	@Override
+	public ArrayList<Hotel> sortPopularDescendent() {
+		return hDAO.sortPopularDescendent(sqlSession);
+	}
+
+	//2020.12.04 - 가격 높은 순 
+	@Override
+	public ArrayList<Integer> getOrderedHighPriceBoNoList() {
+		return hDAO.getOrderedHighPriceBoNoList(sqlSession);
+	}
+
+	
+	//2020.12.04 - 가격 낮은 순
+	@Override
+	public ArrayList<Integer> getOrderedLowPriceBoNoList() {
+		return hDAO.getOrderedLowPriceBoNoList(sqlSession);
+	}
 	
 	
 	

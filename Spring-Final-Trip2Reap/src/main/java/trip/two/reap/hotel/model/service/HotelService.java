@@ -93,6 +93,15 @@ public interface HotelService {
 	//등급순 내림차순 정렬
 	ArrayList<Hotel> sortRankDescendent();
 
+	//평점순 내림차순 정렬
+	ArrayList<Hotel> sortPopularDescendent();
+
+	//가격이 가장 비싼 방가격 을 가진 호텔번호를 우선으로 정렬
+	ArrayList<Integer> getOrderedHighPriceBoNoList();
+
+	//가격이 가장싼 방가격을 가진 호텔번호를 우선으로 정렬
+	ArrayList<Integer> getOrderedLowPriceBoNoList();
+
 	
 
 

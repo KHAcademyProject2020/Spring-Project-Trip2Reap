@@ -284,7 +284,29 @@
 	<select id="sortRankDescendent" resultMap="hotelResultSet">
 	SELECT *
 	FROM HOTEL_VIEW
-	WHERE HOTEL_RANK BETWEEN 1 AND 5
-	ORDER BY HOTEL_RANK DESC, BO_NO
+	ORDER BY NVL(HOTEL_RANK,0) DESC, BO_NO
+	</select>
+	
+	<!-- 2020.12.03 - 호텔 평점순 내림차순 정렬 -->
+	<select id="sortPopularDescendent" resultMap="hotelResultSet">
+	SELECT *
+	FROM HOTEL_VIEW
+	ORDER BY HOTEL_REVIEW_SCORE DESC, BO_NO
+	</select>
+	
+	
+	<!-- 2020.12.04 -호텔 가격높은순 -->
+	<select id="getOrderedHighPriceBoNoList" resultType="_int">
+	SELECT BO_NO
+	FROM HOTEL_ROOM_INFO_VIEW
+	GROUP BY BO_NO
+	ORDER BY MIN(PRICE_PER_DAY) DESC, BO_NO
+	</select>
+	
+	<select id="getOrderedLowPriceBoNoList" resultType="_int">
+	SELECT BO_NO
+	FROM HOTEL_ROOM_INFO_VIEW
+	GROUP BY BO_NO
+	ORDER BY MIN(PRICE_PER_DAY), BO_NO
 	</select>
 </mapper>

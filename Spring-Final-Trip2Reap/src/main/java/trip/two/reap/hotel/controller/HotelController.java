@@ -510,7 +510,7 @@ public class HotelController {
 	}
 	
 	
-	// 2020.12.03 가격순(높은순/낮은순), 등급순, 인기순
+	// 2020.12.03 가격순(높은순/낮은순), 등급순, 평점순
 	//등급순 (내림차순)
 	@RequestMapping("rankSearchHotel.ho")
 	public void searchRankDescendent(@RequestParam(value="page", required=false, defaultValue="1") Integer page,
@@ -589,15 +589,249 @@ public class HotelController {
 	}
 	
 	
-	// 인기순 (내림차순)
+	// 평점순 (내림차순)
 	@RequestMapping("popularSearchHotel.ho")
 	public void searchPopularDescendent(@RequestParam(value="page", required=false, defaultValue="1") Integer page , 
 			HttpSession session,  HttpServletResponse response) throws HotelException, JsonIOException, IOException
 	{
+		int currentPage=1;
+		if(page!=null) {
+			currentPage=page;
+		}
 		
+		//평점이 높은 순으로 정렬한다.
+		ArrayList<Hotel> hotelList= hService.sortPopularDescendent();
+	
+		//호텔길이
+		int hotelListCount=hotelList.size();
+		
+		//페이징
+		PageInfo pi= Pagination.getPageInfo(currentPage, hotelListCount);
+		
+		// 호텔 최소 방가격 리스트
+		ArrayList<Integer> minRoomPricePerDayList=null; 
+		
+		//로그인계정아이디 확인
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		
+		//좋아요 표시했는지 확인하는 리스트
+		ArrayList<Integer> likeHotelList=new ArrayList<Integer>();
+		for(int i=0; i<hotelListCount; i++) {
+			likeHotelList.add(0);
+		}
+		
+		if(hotelList!=null) {
+			//가장싼 방가격을 구한다.
+			minRoomPricePerDayList= new ArrayList<Integer>();
+			int hotelMinPrice=0;
+			for(Hotel hotel : hotelList) {
+				hotelMinPrice= hService.findHotelMinPrice(hotel.getBoNo());
+				minRoomPricePerDayList.add(hotelMinPrice);
+			}
+			
+			
+			//로그인한 계정이라면, 좋아요 표시를 확인
+			if(loginUser!=null) {
+				HashMap<String, Object> checkLikeMap= new HashMap<String, Object>();
+				checkLikeMap.put("loginUserId", loginUser.getMemberId());
+				int result, hotelIdx;
+				for(Hotel hotel: hotelList) {
+					hotelIdx= hotelList.indexOf(hotel);
+					
+					checkLikeMap.put("hId", hotel.getBoNo());
+					
+					// 현재 계정에서, 현재 호텔번호에 해당하는 호텔에 좋아요 버튼을 눌렀는지 확인한다.
+					result=hService.isSmashedLikeBtn(checkLikeMap);
+					if(result>0) {
+						likeHotelList.set(hotelIdx, result);
+					}
+				}
+			}
+		}
+		
+		//gson으로 보내준다.
+		response.setContentType("application/json; charset=UTF-8");
+		Gson gson=new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		HashMap<String, Object> orderResultMap= new HashMap<String, Object>();
+		orderResultMap.put("pi", pi);
+		orderResultMap.put("hotelList", hotelList);
+		orderResultMap.put("likeHotelList", likeHotelList);
+		orderResultMap.put("minRoomPricePerDayList", minRoomPricePerDayList);
+		
+		gson.toJson(orderResultMap, response.getWriter());
 	}
 	
 	
+	//가격 높은순 - 방최저가가 가장높은 호텔을 우선으로함.
+	@RequestMapping("priceHighSearchHotel.ho")
+	public void searchPriceHighHotel(@RequestParam(value="page", required=false, defaultValue="1") Integer page , 
+			HttpSession session,  HttpServletResponse response) throws HotelException, JsonIOException, IOException
+	{
+		int currentPage=1;
+		if(page!=null) {
+			currentPage=page;
+		}
+		
+		//호텔 방 최저가가 가장비싼것을 우선으로, 호텔 번호를 구한다
+		ArrayList<Integer> orderedHighPriceBoNo= hService.getOrderedHighPriceBoNoList();
+		
+	
+		//호텔길이
+		int hotelListCount=orderedHighPriceBoNo.size();
+		ArrayList<Hotel> hotelList=null;
+		if(hotelListCount>0) {
+			hotelList=new ArrayList<Hotel>();
+			for(int boNo : orderedHighPriceBoNo) {
+				//boNo에 해당하는 호텔을 검색해서 호텔리스트에 삽입
+				Hotel hotel= hService.selectOneHotel(boNo);
+				hotelList.add(hotel);
+			}
+			
+		}
+		
+		//페이징
+		PageInfo pi= Pagination.getPageInfo(currentPage, hotelListCount);
+		
+		// 호텔 최소 방가격 리스트
+		ArrayList<Integer> minRoomPricePerDayList=null; 
+		
+		//로그인계정아이디 확인
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		
+		//좋아요 표시했는지 확인하는 리스트
+		ArrayList<Integer> likeHotelList=new ArrayList<Integer>();
+		for(int i=0; i<hotelListCount; i++) {
+			likeHotelList.add(0);
+		}
+		
+		if(hotelList!=null) {
+			//가장싼 방가격을 구한다.
+			minRoomPricePerDayList= new ArrayList<Integer>();
+			int hotelMinPrice=0;
+			for(Hotel hotel : hotelList) {
+				hotelMinPrice= hService.findHotelMinPrice(hotel.getBoNo());
+				minRoomPricePerDayList.add(hotelMinPrice);
+			}
+			
+			
+			//로그인한 계정이라면, 좋아요 표시를 확인
+			if(loginUser!=null) {
+				HashMap<String, Object> checkLikeMap= new HashMap<String, Object>();
+				checkLikeMap.put("loginUserId", loginUser.getMemberId());
+				int result, hotelIdx;
+				for(Hotel hotel: hotelList) {
+					hotelIdx= hotelList.indexOf(hotel);
+					
+					checkLikeMap.put("hId", hotel.getBoNo());
+					
+					// 현재 계정에서, 현재 호텔번호에 해당하는 호텔에 좋아요 버튼을 눌렀는지 확인한다.
+					result=hService.isSmashedLikeBtn(checkLikeMap);
+					if(result>0) {
+						likeHotelList.set(hotelIdx, result);
+					}
+				}
+			}
+		}
+		
+		//gson으로 보내준다.
+		response.setContentType("application/json; charset=UTF-8");
+		Gson gson=new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		HashMap<String, Object> orderResultMap= new HashMap<String, Object>();
+		orderResultMap.put("pi", pi);
+		orderResultMap.put("hotelList", hotelList);
+		orderResultMap.put("likeHotelList", likeHotelList);
+		orderResultMap.put("minRoomPricePerDayList", minRoomPricePerDayList);
+		
+		gson.toJson(orderResultMap, response.getWriter());
+	}
+	
+	
+	
+	//가격 낮은순 - 방최저가가 가장낮은 호텔을 우선으로함.
+	@RequestMapping("priceLowSearchHotel.ho")
+	public void searchPriceLowHotel(@RequestParam(value="page", required=false, defaultValue="1") Integer page , 
+			HttpSession session,  HttpServletResponse response) throws HotelException, JsonIOException, IOException
+	{
+		int currentPage=1;
+		if(page!=null) {
+			currentPage=page;
+		}
+		
+		//호텔 방 최저가가 가장비싼것을 우선으로, 호텔 번호를 구한다
+		ArrayList<Integer> orderedLowPriceBoNo= hService.getOrderedLowPriceBoNoList();
+		
+	
+		//호텔길이
+		int hotelListCount=orderedLowPriceBoNo.size();
+		ArrayList<Hotel> hotelList=null;
+		if(hotelListCount>0) {
+			hotelList=new ArrayList<Hotel>();
+			for(int boNo : orderedLowPriceBoNo) {
+				//boNo에 해당하는 호텔을 검색해서 호텔리스트에 삽입
+				Hotel hotel= hService.selectOneHotel(boNo);
+				hotelList.add(hotel);
+			}
+			
+		}
+		
+		//페이징
+		PageInfo pi= Pagination.getPageInfo(currentPage, hotelListCount);
+		
+		// 호텔 최소 방가격 리스트
+		ArrayList<Integer> minRoomPricePerDayList=null; 
+		
+		//로그인계정아이디 확인
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		
+		//좋아요 표시했는지 확인하는 리스트
+		ArrayList<Integer> likeHotelList=new ArrayList<Integer>();
+		for(int i=0; i<hotelListCount; i++) {
+			likeHotelList.add(0);
+		}
+		
+		if(hotelList!=null) {
+			//가장싼 방가격을 구한다.
+			minRoomPricePerDayList= new ArrayList<Integer>();
+			int hotelMinPrice=0;
+			for(Hotel hotel : hotelList) {
+				hotelMinPrice= hService.findHotelMinPrice(hotel.getBoNo());
+				minRoomPricePerDayList.add(hotelMinPrice);
+			}
+			
+			
+			//로그인한 계정이라면, 좋아요 표시를 확인
+			if(loginUser!=null) {
+				HashMap<String, Object> checkLikeMap= new HashMap<String, Object>();
+				checkLikeMap.put("loginUserId", loginUser.getMemberId());
+				int result, hotelIdx;
+				for(Hotel hotel: hotelList) {
+					hotelIdx= hotelList.indexOf(hotel);
+					
+					checkLikeMap.put("hId", hotel.getBoNo());
+					
+					// 현재 계정에서, 현재 호텔번호에 해당하는 호텔에 좋아요 버튼을 눌렀는지 확인한다.
+					result=hService.isSmashedLikeBtn(checkLikeMap);
+					if(result>0) {
+						likeHotelList.set(hotelIdx, result);
+					}
+				}
+			}
+		}
+		
+		//gson으로 보내준다.
+		response.setContentType("application/json; charset=UTF-8");
+		Gson gson=new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		HashMap<String, Object> orderResultMap= new HashMap<String, Object>();
+		orderResultMap.put("pi", pi);
+		orderResultMap.put("hotelList", hotelList);
+		orderResultMap.put("likeHotelList", likeHotelList);
+		orderResultMap.put("minRoomPricePerDayList", minRoomPricePerDayList);
+		
+		gson.toJson(orderResultMap, response.getWriter());
+	}
 	
 	
 	//go to hotel insert page (only admin)

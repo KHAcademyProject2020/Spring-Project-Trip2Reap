@@ -171,6 +171,21 @@ public class HotelDAO {
 	public ArrayList<Hotel> sortRankDescendent(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("hotelMapper.sortRankDescendent");
 	}
+
+	//2020.12.03- 평점순 
+	public ArrayList<Hotel> sortPopularDescendent(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("hotelMapper.sortPopularDescendent");
+	}
+
+	//2020.12.04 -가격 높은 순
+	public ArrayList<Integer> getOrderedHighPriceBoNoList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("hotelMapper.getOrderedHighPriceBoNoList");
+	}
+
+	//2020.12.04 -가격 낮은순
+	public ArrayList<Integer> getOrderedLowPriceBoNoList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("hotelMapper.getOrderedLowPriceBoNoList");
+	}
 	
 
 
