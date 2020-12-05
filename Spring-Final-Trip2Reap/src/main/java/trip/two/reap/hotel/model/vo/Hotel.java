@@ -42,7 +42,26 @@ public class Hotel {
 	private int hotelCheckOutTime;//호텔 체크아웃 시각대 (0시~24시)--필수
 	
 	//기본생성자	
-	public Hotel() {}	
+	public Hotel() {}
+	
+	//hotelLocalCode, hotelRank, hotelOpenTime, hotelCloseTime, hotelCheckInTime, hotelCheckOutTime은
+	//숫자형식의 데이터이므로, 뷰(폼)에서 컨트롤러로 전달되는 데이터는 모두 문자열형식이다. 그래서 requestParam을 이용하여 받아야한다.
+	//생성자는 숫자형식데이터를 잠시 제외시킨다.
+	public Hotel(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount,
+			String boDeleteYN, Date regDate, String hotelAddr, double hotelReviewScore) 
+	{
+		super();
+		this.boNo = boNo;
+		this.caCode = caCode;
+		this.boTitle = boTitle;
+		this.boContent = boContent;
+		this.memberId = memberId;
+		this.boCount = boCount;
+		this.boDeleteYN = boDeleteYN;
+		this.regDate = regDate;
+		this.hotelAddr = hotelAddr;
+		this.hotelReviewScore = hotelReviewScore;
+	}
 	
 	//사진관련요소를 제외한 필수요소만 들어있는 생성자
 	public Hotel(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount,
@@ -118,7 +137,7 @@ public class Hotel {
 		this.hotelCheckInTime = hotelCheckInTime;
 		this.hotelCheckOutTime = hotelCheckOutTime;
 	}
-	
+
 
 
 	//모든 요소가 들어있는 생성자

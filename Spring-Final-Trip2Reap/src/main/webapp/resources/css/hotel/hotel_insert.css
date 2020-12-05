@@ -94,6 +94,10 @@ input[type=url]{
 input:focus{
     outline: none;
 }
+
+select:focus{
+	outline:none;
+}
 /* end of common in insert_hotel*/
 
 /*  start only hotel- insert css */
@@ -239,6 +243,10 @@ ul#saved-hashtags > li{
     padding-left: 10px;
     padding-top: 20px;
   }
+  
+  
+
+  
 
   /*input:file - 파일숨기기*/
   input[type="file"]{
@@ -813,11 +821,14 @@ input[type="checkbox"].upload-image-checkbox:checked + label.upload-image-label:
 }
 
 #hotel_open_time,
-#hotel_close_time{
+#hotel_close_time,
+#hotel_checkIn_time,
+#hotel_checkOut_time{
   
   width: 225px;
   
 }
+
 
 
 
@@ -955,3 +966,61 @@ input[type="checkbox"].option-checkboxes:checked + label.fake-checkbox-label:aft
 	margin-bottom: 2px;
 }
 
+
+
+/*호텔 등급*/
+/*호텔등급  */
+#hotelRankContainer{
+	margin-bottom: 5px;
+}
+
+#hotel-rank-container{
+	position: relative;
+	margin-left: 20px;
+	margin-top: 10px;
+}
+ 
+ select#hotelRank{
+ 	position: relative;
+ 	padding: 10px;
+ 	border: 1px solid var(--blue-gray);
+ 	border-radius: 3px;
+ 	width: 169.38px;
+ }
+ 
+ 
+ /*호텔 소개내용(boContent)  */
+ #hotel-introduce-content-container{
+ 	position: relative;
+ 	margin-left: 20px;
+ }
+ 
+ textarea#boContent{
+ 	border-color: transparent;
+ 
+ 	border-top: 2px solid var(--blue-gray) ;
+ 	resize:none;
+ 	padding: 20px 4px;
+ 	font-size: 1.2em;
+ }
+ 
+ textarea:focus{
+ 	outline:none;
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

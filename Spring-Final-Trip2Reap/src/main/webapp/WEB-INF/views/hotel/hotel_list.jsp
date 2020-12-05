@@ -982,7 +982,7 @@ $(function(){
 				let $hotelCode='';
 				if(data.hotelList ==null){
 					console.log('호텔이 존재하지 않습니다!!');
-					$hotelCode+='<p>호텔이 존재하지 않습니다!</p>'
+					$hotelCode+='<p>호텔이 존재하지 않습니다!</p>';
 						
 				}else{
 					
@@ -997,7 +997,7 @@ $(function(){
 						$hotelCode+='<img src="resources/images/sample_hotel.jpg" alt="호텔이미지">'; //이미지
 						$hotelCode+='<div class="detail-info-container">';
 						$hotelCode+='<div>';
-						$hotelCode+='<div class="info-container">'
+						$hotelCode+='<div class="info-container">';
 						$hotelCode+='<div class="hotel-name-container">';
 						$hotelCode+='<input class="hotelNO" type="hidden" value="'+hotel.boNo+'"/>' //호텔번호
 						$hotelCode+='<h1>'+hotel.boTitle+'</h1>'; //호텔이름
@@ -1017,34 +1017,34 @@ $(function(){
 						$hotelCode+='<div class="i-like-btn-container">';
 						//좋아요버튼클릭여부
 						if(like==0){
-							$hotelCode+='<i class="fas fa-heart unlike"></i>'
+							$hotelCode+='<i class="fas fa-heart unlike"></i>';
 								
 						}else{
-							$hotelCode+='<i class="fas fa-heart like"></i>'
+							$hotelCode+='<i class="fas fa-heart like"></i>';
 								
 						}
-						$hotelCode+='</div>'
-						$hotelCode+='</div>'
-						$hotelCode+='</div>'
+						$hotelCode+='</div>';
+						$hotelCode+='</div>';
+						$hotelCode+='</div>';
 							
 						$hotelCode+='<div class="detail-info-wrapper">';
-						$hotelCode+='<div class="hotel-addr-wrapper">'
-						$hotelCode+='<small>'+hotel.hotelAddr+'</small>' //호텔주소
-						$hotelCode+='</div>'
+						$hotelCode+='<div class="hotel-addr-wrapper">';
+						$hotelCode+='<small>'+hotel.hotelAddr+'</small>'; //호텔주소
+						$hotelCode+='</div>';
 						
-						$hotelCode+='<div class="hotel-info-wrapper">'
-						$hotelCode+='<div class="hotel-review-container">'
-						$hotelCode+='<span class="star-point">'
+						$hotelCode+='<div class="hotel-info-wrapper">';
+						$hotelCode+='<div class="hotel-review-container">';
+						$hotelCode+='<span class="star-point">';
 						$hotelCode+='<i class="fas fa-star"></i>';
 						$hotelCode+='</span>';
 						$hotelCode+='<span>'+hotel.hotelReviewScore.toFixed(1)+'</span>/5.0'; //호텔평점
 						$hotelCode+='</div>';
 						
-						$hotelCode+='<div class="hotel-per-day-price-container" info-container>'
-						$hotelCode+='<p>'
-						$hotelCode+='<small>1박</small>&nbsp;&nbsp;'
-						$hotelCode+='<b class="min_room_price">'
-						$hotelCode+=minPrice //호텔방최저가
+						$hotelCode+='<div class="hotel-per-day-price-container" info-container>';
+						$hotelCode+='<p>';
+						$hotelCode+='<small>1박</small>&nbsp;&nbsp;';
+						$hotelCode+='<b class="min_room_price">';
+						$hotelCode+=minPrice ;//호텔방최저가
 						$hotelCode+='</b>&nbsp;원</p></div></div></div>';
 						$hotelCode+='<button class="hotel-reserve-btn">예약하기</button></div></div>';
 						
@@ -1054,24 +1054,24 @@ $(function(){
 				
 				let pi= data.pi;
 				let $pageCode='';
-				$pageCode+='<nav>'
-				$pageCode+='<ul id="pagination-ul">'
+				$pageCode+='<nav>';
+				$pageCode+='<ul id="pagination-ul">';
 				
 				
 				//이전페이징 표시
 				if(pi.currentPage<=1){
 					$pageCode+='<li><a>&lt;&lt;</a></li>';
-					$pageCode+='<li><a>&lt;</a></li>'
+					$pageCode+='<li><a>&lt;</a></li>';
 				}else{
 					//pi.currentPage>1
-					$pageCode+='<c:url var="firstPage" value="popularSearchHotel.ho">'
-					$pageCode+='<c:param name="page" value="${'+pi.startPage+'}"/>'
-					$pageCode+='</c:url>'
-					$pageCode+='<li style="cursor:pointer;"><a href="${firstPage}">&lt;&lt;</a></li>'
+					$pageCode+='<c:url var="firstPage" value="popularSearchHotel.ho">';
+					$pageCode+='<c:param name="page" value="${'+pi.startPage+'}"/>';
+					$pageCode+='</c:url>';
+					$pageCode+='<li style="cursor:pointer;"><a href="${firstPage}">&lt;&lt;</a></li>';
 					
-					$pageCode+='<c:url var="before" value="popularSearchHotel.ho">'
-					$pageCode+='<c:param name="page" value="${'+pi.currentPage-1+'}"/>'
-					$pageCode+='</c:url>'
+					$pageCode+='<c:url var="before" value="popularSearchHotel.ho">';
+					$pageCode+='<c:param name="page" value="${'+pi.currentPage-1+'}"/>';
+					$pageCode+='</c:url>';
 					$pageCode+='<li style="cursor:pointer;"><a href="${before}">&lt;</a></li>';
 				}
 				
@@ -1081,13 +1081,13 @@ $(function(){
 					if(i==pi.currentPage ){
 						$pageCode+='<li style="background-color: var(--blue-gray);">';
 						$pageCode+='<a style="font-weight:bold;">'+i+'</a>';
-						$pageCode+='</li>'
+						$pageCode+='</li>';
 					}else{
-						$pageCode+='<c:url var="pagination" value="popularSearchHotel.ho">'
-						$pageCode+='<c:param name="page" value="${'+i+'}"/>'
-						$pageCode+='</c:url>'
+						$pageCode+='<c:url var="pagination" value="popularSearchHotel.ho">';
+						$pageCode+='<c:param name="page" value="${'+i+'}"/>';
+						$pageCode+='</c:url>';
 						$pageCode+='<li style="cursor:pointer;">';
-						$pageCode+='<a href="${pagination}">'+i+'</a></li>'
+						$pageCode+='<a href="${pagination}">'+i+'</a></li>';
 					}	
 				}
 				
@@ -1097,15 +1097,15 @@ $(function(){
 					$pageCode+='<li><a>&gt;</a></li>';
 					$pageCode+='<li><a>&gt;&gt;</a></li>';
 				}else{
-					$pageCode+='<c:url var="after" value="popularSearchHotel.ho">'
-					$pageCode+='<c:param name="page" value="${'+pi.currentPage+1+'}"/>'
-					$pageCode+='</c:url>'
-					$pageCode+='<li style="cursor:pointer;"><a href="${after}">&gt;</a></li>'
+					$pageCode+='<c:url var="after" value="popularSearchHotel.ho">';
+					$pageCode+='<c:param name="page" value="${'+pi.currentPage+1+'}"/>';
+					$pageCode+='</c:url>';
+					$pageCode+='<li style="cursor:pointer;"><a href="${after}">&gt;</a></li>';
 					
-					$pageCode+='<c:url var="lastPage" value="popularSearchHotel.ho">'
-					$pageCode+='<c:param name="page" value="${'+pi.endPage+'}"/>'
-					$pageCode+='</c:url>'
-					$pageCode+='<li style="cursor:pointer;"><a href="${lastPage}">&gt;&gt;</a></li>'
+					$pageCode+='<c:url var="lastPage" value="popularSearchHotel.ho">';
+					$pageCode+='<c:param name="page" value="${'+pi.endPage+'}"/>';
+					$pageCode+='</c:url>';
+					$pageCode+='<li style="cursor:pointer;"><a href="${lastPage}">&gt;&gt;</a></li>';
 				}
 				
 				

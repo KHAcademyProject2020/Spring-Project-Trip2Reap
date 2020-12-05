@@ -24,4 +24,19 @@
 	</bean>
 	<context:component-scan base-package="trip.two.reap"></context:component-scan>
 
+
+	<!--interceptor 등록하기 : 호텔등록/ 호텔수정 페이지는 관리자만 접근가능하므로, prehandler로 접근을 막는다. -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/hotelInsertView.ho"/>
+			<bean id="hotelInsertViewInterceptor" class="trip.two.reap.common.interceptor.HotelEnterInterceptor"/>
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/hotelEditView.ho"/>
+			<bean id="hotelEditViewInterceptor" class="trip.two.reap.common.interceptor.HotelEnterInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	
 </beans>

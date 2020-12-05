@@ -845,9 +845,36 @@ public class HotelController {
 	
 	//호텔등록
 	@RequestMapping("hotelInsert.ho")
-	public void hotelInsert(@ModelAttribute Hotel hotel)throws HotelException {
+	public String hotelInsert(@ModelAttribute Hotel hotel, 
+	HttpServletRequest request,
+	@RequestParam("rank") int hotelRank,
+	@RequestParam("localCode") int hotelLocalCode,
+	@RequestParam("openTime") int hotelOpenTime,
+	@RequestParam("closeTime") int hotelCloseTime,
+	@RequestParam("checkInTime") int hotelCheckInTime,
+	@RequestParam("checkOutTime") int hotelCheckOutTime,
+	@RequestParam("thumbnailImgFile") MultipartFile hotelThumbnailImgName,
+	@RequestParam("detailImgFiles") ArrayList<MultipartFile> hotelDetailViewImgs)throws HotelException {
+	
+		hotel.setHotelRank(hotelRank);
+		hotel.setHotelLocalCode(hotelLocalCode);
+		hotel.setHotelOpenTime(hotelOpenTime);
+		hotel.setHotelCloseTime(hotelCloseTime);
+		hotel.setHotelCheckInTime(hotelCheckInTime);
+		hotel.setHotelCheckOutTime(hotelCheckOutTime);
+		
 		System.out.println(hotel); //전달받은 호텔정보 출력하기.
 		
+		
+		System.out.println(hotelThumbnailImgName.getOriginalFilename());//썸네일이미지
+		
+		//디테일뷰이미지
+		for(MultipartFile detailViewImg:hotelDetailViewImgs)
+			System.out.println(detailViewImg.getOriginalFilename());
+		
+		
+		
+		return "redirect:hotelList.ho";
 	}
 	
 	

@@ -44,16 +44,38 @@
 					</div>
 					<div class="hotel-insert-content-container">
 						<input id="hotel_name" name="boTitle"  autocomplete="off" placeholder="* 호텔이름을 입력해주세요" type="text">
+						<input type="hidden" name="memberId" value="${loginUser.memberId }"/>
 					</div>
 				</div>
+				
+				<!-- 호텔 등급 등록 -->
+				<div class="insert-common-container" id="hotelRankContainer">
+					<div class="hotel-insert-subtitle-container">
+						<h3>* 호텔 등급 등록</h3>
+					</div>
+					<div id="hotel-rank-container">
+						<select name="rank" id="hotelRank">
+							<option value="">등급선택</option>
+							<option value="0">등급없음</option>
+							<option value="1">1등급</option>
+							<option value="2">2등급</option>
+							<option value="3">3등급</option>
+							<option value="4">4등급</option>
+							<option value="5">5등급</option>
+						</select>
+					</div>
+				</div>
+				
+				
 
 				<!--호텔 메인 썸네일 이미지 등록2 -->
 				<div class="insert-common-container">
+				
 					<div class="hotel-insert-subtitle-container">
 						<h3>* 호텔 메인 이미지 등록</h3>
 					</div>
 					<div class="hotel-insert-content-container">
-						<input type="file" name="thumbnail_img" id="thumbnail_img" accept="image/*" /> 
+						<input type="file" name="thumbnailImgFile" id="thumbnail_img" accept="image/*" /> 
 						<label id="thumbnail_img_label" for="thumbnail_img">썸네일 이미지 찾아보기</label> 
 						<span class="img_upload_status_info" id="thumbnail_img_name">썸네일 이미지를 업로드 해주세요!</span>
 					</div>
@@ -73,7 +95,7 @@
 						<h3>&nbsp;&nbsp;호텔 디테일 이미지 등록</h3>
 					</div>
 					<div class="hotel-insert-content-container">
-						<input type="file" name="detail_img" id="detail_img" accept="image/*" multiple /> 
+						<input name="detailImgFiles" type="file" id="detail_img" accept="image/*" multiple /> 
 						<label id="detail_img_label" for="detail_img">디테일 이미지 찾아보기</label> 
 						
 						<span class="img_upload_status_info" id="detail_img_name"> 
@@ -114,7 +136,7 @@
 						
 						
 						// 이미지 아이디 정리
-						function reOrderingUploadedImgs(){
+						function reOrderingUploadedImgs(e){
 							// 업로드한 이미지 정보 갱신하기
 							if(totalUploadImgs.length>0){
 								// 전체 업로드한 이미지 개수가 최소 1개이상이면
@@ -135,6 +157,27 @@
 								detailImgContainer.css('display','none');
 							}
 							
+							
+							//현재 등록된 이미지개수 글자로 나타내기
+							$('span#uploaded_img_cnt').text(totalUploadImgs.length);
+							
+							
+							//totalUploadImgs를 $('#detail_img')의 파일리스트로 갱신시켜야한다.
+							//FileList는 추가, 삭제, 변경이 불가능하다.
+							//그러나 DataTransfer()를 생성한뒤에 FileList로 변환시켜서 할 수 는있다.
+							//totalUploadImgs로 $('#detail_img')의 파일리스트로 변경한다.
+							$totalUploadImgs=new DataTransfer();
+							for(var i=0; i<totalUploadImgs.length; i++){
+								$totalUploadImgs.items.add(totalUploadImgs[i]);
+							}
+							
+							//FileList로 변환
+							$totalUploadImgs= $totalUploadImgs.files;
+							
+							$('#detail_img').get(0).files= $totalUploadImgs;
+							
+							console.log($('#detail_img').get(0).files);
+							
 						}
 						
 						
@@ -142,15 +185,15 @@
 						$('#detail_img').change(function(){
 			
 							let nowUploadImgs= $(this).get(0).files;  //현재 업로드한 이미지 파일
-							let nowUploadImgCnt=nowUploadImgs.length; //현재 업로드한 이미지 개수
-							
+							//let nowUploadImgCnt=nowUploadImgs.length; //현재 업로드한 이미지 개수
 							//리스트에 등록한 이미지를 넣는다.
+							/*
 							for(var i=0; i<nowUploadImgCnt; i++){
 								totalUploadImgs.push(nowUploadImgs[i]);
 							}
+							*/
+							Array.prototype.push.apply(totalUploadImgs, nowUploadImgs);
 							
-							//현재 등록된 이미지개수 글자로 나타내기
-							$('span#uploaded_img_cnt').text(totalUploadImgs.length);
 							reOrderingUploadedImgs();
 						});
 						
@@ -198,6 +241,7 @@
 								selectedCheckBoxes.each(function(e){
 									//삭제대상에 해당하는 인덱스번호를 구한다.
 									
+									
 									//this와 가장 가까운 li.(삭제대상) 을 구한다.
 									$removeTargetLi=$(this).closest('li.upload-img-name-li');
 									$removeTargetLi.remove();
@@ -213,6 +257,7 @@
 								});
 								
 								// 삭제파일에 해당하는 인덱스번호를 제외한다.
+								
 								let tmp=[];
 								
 								let flag;
@@ -230,8 +275,6 @@
 								}
 																
 								totalUploadImgs=tmp;
-								
-								
 								//삭제가 끝나면, 업로드된 이미지 개수도 다시 정리한다.
 								$('#uploaded_img_cnt').text(totalUploadImgs.length);
 								
@@ -239,6 +282,8 @@
 								reOrderingUploadedImgs();
 							}
 						});
+						
+						
 					});
 					
 					</script>
@@ -255,7 +300,7 @@
 							
 							<!--호텔 도로명주소  -->
 							<input name="hotelAddr"  type="text" readonly placeholder="호텔 도로명 주소를 입력해주세요!" autocomplete="off" id="hotel_address">
-							
+							<input name="localCode" type="hidden" id="hotelLocalCode"/>
 						</div>
 						
 						<div class="map_wrapper">
@@ -293,6 +338,14 @@
 										// 주소 정보를 해당 필드에 넣는다
 										document.getElementById("hotel_address").value= addr;
 										
+										
+										//지역코드를 구한다.
+										locName=['강원', '경기', '경남', '경북', '광주', '대구', '대전', '부산', 
+												'서울', '세종', '인천', '울산', '전남', '전북', '제주', '충남', '충북'];
+										
+										document.getElementById("hotelLocalCode").value=locName.indexOf(addr.split(' ')[0].substring(0,2))+1;
+										
+										
 										// 주소로 상세 정보를 검색
 										geocoder.addressSearch(data.address, function(results, status){
 											//정상적으로 검색이 완료되면
@@ -313,6 +366,8 @@
 												//마커의 결과값으로 받은 위치로 옮긴다.
 												marker.setPosition(coords);
 												
+												
+												
 											}
 										});
 									}
@@ -321,7 +376,7 @@
 							}
 						</script>
 					</div>
-					
+
 				</div>
 
 				<!-- 호텔 객실 정보 입력 5-->
@@ -336,8 +391,7 @@
 						<div class="one-room-info-insert">
 							<div class="room_btn_remote_controller_wrapper">
 								<div class="insert_room_name">
-									<input type="text" class="room_name" placeholder="객실 이름 입력"  autocomplete="off"
-										name="room_name">
+									<input type="text" class="room_name" placeholder="객실 이름 입력"  autocomplete="off">
 								</div>
 
 								<div>
@@ -373,7 +427,7 @@
 								
 								<div class="insert_room_price_perday">
 									<span class="room_price_label">1박 이용 가격</span>
-									<input type="text" class="price_perday" placeholder="1박 이용가격(숫자)" name="price_per_day"  autocomplete="off">
+									<input type="text" class="price_perday" placeholder="1박 이용가격(숫자)"  autocomplete="off">
 								</div>
 							</div>
 						</div>
@@ -392,8 +446,7 @@
 							let $oneHotelInfo=`<div class="one-room-info-insert">
 					<div class="room_btn_remote_controller_wrapper">
 						<div class="insert_room_name">
-							<input type="text" class="room_name" placeholder="객실 이름 입력" autocomplete="off"
-								name="room_name">
+							<input type="text" class="room_name" placeholder="객실 이름 입력" autocomplete="off">
 						</div>
 
 						<div>
@@ -429,7 +482,7 @@
 						
 						<div class="insert_room_price_perday">
 							<span class="room_price_label">1박 이용 가격</span>
-							<input type="text" class="price_perday" placeholder="1박 이용가격(숫자)" name="price_per_day" autocomplete="off">
+							<input type="text" class="price_perday" placeholder="1박 이용가격(숫자)" autocomplete="off">
 						</div>
 					</div>
 				</div>`;
@@ -510,8 +563,7 @@
 
 						<!-- 지역번호 -->
 						<div class="phone-call-wrapper">
-							<select class="phone-call" name="local_call_number"
-								id="local_call_number">
+							<select class="phone-call" id="local_call_number">
 								<option value="">지역번호 선택</option>
 								<option value="02">02</option>
 								<option value="031">031</option>
@@ -536,8 +588,7 @@
 
 						<!-- 나머지 번호 입력 -->
 						<div class="phone-call-wrapper">
-							<input class="phone-call" type="tel" name="real_call_number" autocomplete="off"
-								id="real_call_number">
+							<input class="phone-call" type="tel" autocomplete="off" id="real_call_number">
 						</div>
 						<input type="hidden" name="hotelTel" id="total_phone_number"></input>
 
@@ -637,7 +688,7 @@
 							<span>운영시작 시간</span>
 
 							<!-- 호텔 오픈 시각 선택 -->
-							<select name="hotelOpenTime" id="hotel_open_time">
+							<select name="openTime" id="hotel_open_time">
 								<option value="">운영시작 시간선택</option>
 								<option value="0">0</option>
 								<option value="1">1</option>
@@ -670,7 +721,7 @@
 							<span>운영종료 시간</span>
 
 							<!-- 호텔 종료시간 선택 -->
-							<select name="hotelCloseTime" id="hotel_close_time">
+							<select name="closeTime" id="hotel_close_time">
 								<option value="">운영종료 시간선택</option>
 								<option value="0">0</option>
 								<option value="1">1</option>
@@ -701,6 +752,89 @@
 
 					</div>
 				</div>
+				
+				
+				<!-- 호텔 체크인/ 체크아웃 시간 7-->
+				<div class="insert-common-container">
+					<div>
+						<h3>* 호텔 체크인 / 체크아웃 시간</h3>
+					</div>
+
+					<div class="hotel-operation-time-container">
+						<div class="setting-operation-time">
+							<span>체크인 시간&nbsp;&nbsp;&nbsp;</span>
+
+							<!-- 호텔 오픈 시각 선택 -->
+							<select name="checkInTime" id="hotel_checkIn_time">
+								<option value="">체크인 시간선택</option>
+								<option value="0">0</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+								<option value="13">13</option>
+								<option value="14">14</option>
+								<option value="15">15</option>
+								<option value="16">16</option>
+								<option value="17">17</option>
+								<option value="18">18</option>
+								<option value="19">19</option>
+								<option value="20">20</option>
+								<option value="21">22</option>
+								<option value="23">23</option>
+								<option value="24">24</option>
+							</select>
+						</div>
+
+						<div class="setting-operation-time">
+							<span>체크아웃 시간</span>
+
+							<!-- 호텔 종료시간 선택 -->
+							<select name="checkOutTime" id="hotel_checkOut_time">
+								<option value="">체크아웃 시간선택</option>
+								<option value="0">0</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+								<option value="13">13</option>
+								<option value="14">14</option>
+								<option value="15">15</option>
+								<option value="16">16</option>
+								<option value="17">17</option>
+								<option value="18">18</option>
+								<option value="19">19</option>
+								<option value="20">20</option>
+								<option value="21">22</option>
+								<option value="23">23</option>
+								<option value="24">24</option>
+							</select>
+						</div>
+
+					</div>
+				</div>
+				
+				
+				
+				
+				
+				
 
 				<!-- 호텔 옵션 선택 8-->
 				<div class="insert-common-container">
@@ -878,9 +1012,9 @@
 							
 							//선택한 옵션구하기
 							let optionStr='';
-							let selectedOptions= $('input[type="checkbox"].option-checkboxes:checked + label.fake-checkbox-label');
+							let selectedOptions= $('input[type="checkbox"].option-checkboxes:checked');
 							for(var i=0; i<selectedOptions.length; i++){
-								let option= selectedOptions[i].textContent;
+								let option= selectedOptions[i].value;
 								if(i==selectedOptions.length-1){
 									//마지막 선택 옵션
 									optionStr+=option;
@@ -900,8 +1034,7 @@
 				<div class="insert-common-container">
 					<div>
 						<h3>&nbsp;&nbsp;호텔 사이트</h3>
-						<input name="hotelSite" id="hotel_url" type="url"  autocomplete="off"
-							placeholder="https://">
+						<input name="hotelSite" id="hotel_url" type="url"  autocomplete="off" placeholder="https://">
 					</div>
 				</div>
 
@@ -1076,13 +1209,35 @@
 						});
 					</script>
 				</div>
+				
+				<!--호텔소개 -->
+				<div class="insert-common-container" id="hotelContentContainer">
+					<div class="hotel-insert-subtitle-container">
+						<h3>* 호텔 소개 작성</h3>
+					</div>
+					
+					<div id="hotel-introduce-content-container">
+						<textarea name="boContent" id="boContent" rows="15" cols="45.75" placeholder="호텔소개내용을 입력해주세요." ></textarea>
+					</div>
+				
+				</div>
+				
+				
+				<!-- 호텔 등록하기 버튼 -->
+				<div id="btn-container">
+					<input type="submit" id="insert-hotel-btn" value="등록 하기" />
+				</div>
 			</form>
-			
-			<!-- 호텔 등록하기 버튼 -->
-			<div id="btn-container">
-				<input type="button" id="insert-hotel-btn" value="등록 하기" />
-			</div>
 		</div>
 	</div>
+<script>
+$(function(){
+	$('#insert-hotel-btn').click(function(){
+		//버튼등록 클릭
+		//필수사항들이 다 기재되어있는지 확인
+		location.href="hotelInsert.ho";
+	});
+});
+</script>
 </body>
 </html>
