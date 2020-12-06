@@ -241,7 +241,10 @@ public class HotelController {
 			//리뷰작성자 닉네임 리스트 
 			reviewNickNameList= hService.selectOneHotelReplyNickNameList(hId);
 			
-
+			System.out.println("revieList 길이 : "+ reviewList.size());
+			System.out.println("reviewListCount : "+ reviewListCount);
+			System.out.println("reviewNickNameList 길이: "+ reviewNickNameList.size());
+			
 			mv.addObject("hotel", hotel)
 			.addObject("page",page)
 			.addObject("roomCnt", roomCnt)
