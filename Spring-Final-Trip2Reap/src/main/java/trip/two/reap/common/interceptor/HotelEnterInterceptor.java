@@ -19,15 +19,15 @@ public class HotelEnterInterceptor extends HandlerInterceptorAdapter{
 		HttpSession session= request.getSession();
 		Member loginUser= (Member)session.getAttribute("loginUser");
 		
-		if( loginUser==null || loginUser.getMemberId()!="admin") {
-			//관리자 계정이 아니라면,
-			request.setAttribute("msg", "접근할 수 없는 페이지입니다.");
-			request.getRequestDispatcher("/").forward(request, response);
-			return false;
+		if( loginUser!=null && loginUser.getMemberId().equals("admin")) {
+			return true;
 		}
 		
-		
-		return super.preHandle(request, response, handler);
+		//관리자 계정이 아니라면,
+		request.setAttribute("msg", "접근할 수 없는 페이지입니다.");
+		request.getRequestDispatcher("/").forward(request, response);
+		return false;
+		//return super.preHandle(request, response, handler);
 	}
 
 	
