@@ -801,10 +801,12 @@
 							</c:if>
 							
 						</ul>
-						<%-- 더보기 버튼  --%>
-						<div class="review_more_btn_container">
-							<button id="review_more_btn" class="review_more_closed">더보기 </button>
-						</div>
+						<c:if test="${reviewListCount>5 }">
+							<%-- 더보기 버튼  --%>
+							<div class="review_more_btn_container">
+								<button id="review_more_btn" class="review_more_closed">더보기 </button>
+							</div>
+						</c:if>
 					</c:if> <%--호텔리뷰가 존재할때 --%>
 
 				</div><%-- 등록한 리뷰 컨테이너 (reviews-container) --%>
