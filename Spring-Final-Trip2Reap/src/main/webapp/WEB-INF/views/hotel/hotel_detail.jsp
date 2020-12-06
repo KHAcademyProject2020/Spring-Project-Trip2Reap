@@ -626,7 +626,7 @@
 				<div id="reviews-container">
 
 					<%-- 호텔 리뷰가 존재하지 않을 때, 나타낸다. --%>
-					<c:if test="${empty reviewList }">
+					<c:if test="${empty reviewList || reviewListCount ==0}">
 						<span id="emptyReviewMsg">호텔 리뷰가 존재하지 않습니다!</span>
 					</c:if>
 					
@@ -634,70 +634,187 @@
 					<c:if test="${!empty reviewList }">
 						
 						<ul id="reviews_wrappers_ul">
-							<%--리뷰 1개  --%>
-							<c:forEach var="review" items="${reviewList }" varStatus="reviewVS">
-								<li class="one_review_container">
-									<div class="one_review_wrapper">
-		
-											<div class="remove_review_wrapper">
-												<input class="reviewNumber" type="hidden" value="${ review.reNo}"/>
-												<%--리뷰삭제버튼은 관리자/ 리뷰작성자 본인 만 보인다. --%>
-												<c:if test="${ loginUser.memberId eq 'admin' || review.memberId eq loginUser.memberId}">
-													
-													<i class="remove_review fas fa-times"></i> <%--리뷰 삭제버튼 --%>
-												</c:if>
-											</div>
-										
-										
-										<%--작성자 / 리뷰 내용 관련  --%>
-										<div class="review_writer_control_wrapper">
-											<div class="review_writer_nickname_wrapper">
-													<h3>${reviewNickNameList.get(reviewVS.index) }</h3> <%--리뷰작성자 닉네임  --%>
-											</div>
-		
-											<div class="review_upload_date">
-												<small>${review.reDate} </small> <%--리뷰 업로드날짜 --%>
-											</div>
-		
-											<div class="review_point">
-												<%-- 리뷰 부여 별점.. --%>
-												<span class="review_stars">
-													<c:forEach var="i" begin="1" end="5" varStatus="starVS">
-															<c:if test="${starVS.index <=review.reviewScore}">
-																<i class="fas fa-star"></i>
-															</c:if>
-															<c:if test="${starVS.index > review.reviewScore }">
-																<i class="far fa-star"></i>
-															</c:if>
-													</c:forEach>
-												</span>
-											</div>
-		
-											<div class="review_content_container">
-												<%--리뷰 내용  --%>
-												<span class="reivewer_review_content">
-												${review.reContent}
-												</span>
+							<%--리뷰개수가 5개 미만이라면 => 더보기 없이 리뷰를 나타낸다. --%>
+							<c:if test="${ reviewListCount>0 && reviewListCount <5 }">
+								<c:forEach var="review" items="${reviewList }" varStatus="reviewVS">
+								
+									<li class="one_review_container">
+										<div class="one_review_wrapper">
+			
+												<div class="remove_review_wrapper">
+													<input class="reviewNumber" type="hidden" value="${ review.reNo}"/>
+													<%--리뷰삭제버튼은 관리자/ 리뷰작성자 본인 만 보인다. --%>
+													<c:if test="${ loginUser.memberId eq 'admin' || review.memberId eq loginUser.memberId}">
+														
+														<i class="remove_review fas fa-times"></i> <%--리뷰 삭제버튼 --%>
+													</c:if>
+												</div>
+											
+											
+											<%--작성자 / 리뷰 내용 관련  --%>
+											<div class="review_writer_control_wrapper">
+												<div class="review_writer_nickname_wrapper">
+														<h3>${reviewNickNameList.get(reviewVS.index) }</h3> <%--리뷰작성자 닉네임  --%>
+												</div>
+			
+												<div class="review_upload_date">
+													<small>${review.reDate} </small> <%--리뷰 업로드날짜 --%>
+												</div>
+			
+												<div class="review_point">
+													<%-- 리뷰 부여 별점.. --%>
+													<span class="review_stars">
+														<c:forEach var="i" begin="1" end="5" varStatus="starVS">
+																<c:if test="${starVS.index <=review.reviewScore}">
+																	<i class="fas fa-star"></i>
+																</c:if>
+																<c:if test="${starVS.index > review.reviewScore }">
+																	<i class="far fa-star"></i>
+																</c:if>
+														</c:forEach>
+													</span>
+												</div>
+			
+												<div class="review_content_container">
+													<%--리뷰 내용  --%>
+													<span class="reivewer_review_content">
+													${review.reContent}
+													</span>
+												</div>
 											</div>
 										</div>
-									</div>
-								</li>
-							</c:forEach>
-							<%--리뷰 1개 표본  끝 --%>
+									</li> <%--리뷰 1개 표본  끝 --%>
+									
+								</c:forEach>
+							</c:if>
+							
+							
+							<%--전체댓글개수가 5개이상일경우 --%>
+							<c:if test="${reviewListCount >=5}">
+								<%--최근댓글 5개만 올린다. --%>
+								<c:forEach var="review" items="${reviewList }" varStatus="reviewVS">
+									
+									<c:if test="${reviewVS.index <5 }">
+								
+										<li class="one_review_container">
+											<div class="one_review_wrapper">
+				
+													<div class="remove_review_wrapper">
+														<input class="reviewNumber" type="hidden" value="${ review.reNo}"/>
+														<%--리뷰삭제버튼은 관리자/ 리뷰작성자 본인 만 보인다. --%>
+														<c:if test="${ loginUser.memberId eq 'admin' || review.memberId eq loginUser.memberId}">
+															
+															<i class="remove_review fas fa-times"></i> <%--리뷰 삭제버튼 --%>
+														</c:if>
+													</div>
+												
+												
+												<%--작성자 / 리뷰 내용 관련  --%>
+												<div class="review_writer_control_wrapper">
+													<div class="review_writer_nickname_wrapper">
+															<h3>${reviewNickNameList.get(reviewVS.index) }</h3> <%--리뷰작성자 닉네임  --%>
+													</div>
+				
+													<div class="review_upload_date">
+														<small>${review.reDate} </small> <%--리뷰 업로드날짜 --%>
+													</div>
+				
+													<div class="review_point">
+														<%-- 리뷰 부여 별점.. --%>
+														<span class="review_stars">
+															<c:forEach var="i" begin="1" end="5" varStatus="starVS">
+																	<c:if test="${starVS.index <=review.reviewScore}">
+																		<i class="fas fa-star"></i>
+																	</c:if>
+																	<c:if test="${starVS.index > review.reviewScore }">
+																		<i class="far fa-star"></i>
+																	</c:if>
+															</c:forEach>
+														</span>
+													</div>
+				
+													<div class="review_content_container">
+														<%--리뷰 내용  --%>
+														<span class="reivewer_review_content">
+														${review.reContent}
+														</span>
+													</div>
+												</div>
+											</div>
+										</li> <%--리뷰 1개 표본  끝 --%>
+									</c:if><%--덧글 인덱스5이하 --%>
+									
+									<%--덧글 인덱스 5이상 (6번째 덧글부터~) --%>
+									<c:if test="${reviewVS.index >=5 }">
+										
+										<li class="one_review_container after5_review_closed">
+											<div class="one_review_wrapper">
+				
+													<div class="remove_review_wrapper">
+														<input class="reviewNumber" type="hidden" value="${ review.reNo}"/>
+														<%--리뷰삭제버튼은 관리자/ 리뷰작성자 본인 만 보인다. --%>
+														<c:if test="${ loginUser.memberId eq 'admin' || review.memberId eq loginUser.memberId}">
+															
+															<i class="remove_review fas fa-times"></i> <%--리뷰 삭제버튼 --%>
+														</c:if>
+													</div>
+												
+												
+												<%--작성자 / 리뷰 내용 관련  --%>
+												<div class="review_writer_control_wrapper">
+													<div class="review_writer_nickname_wrapper">
+															<h3>${reviewNickNameList.get(reviewVS.index) }</h3> <%--리뷰작성자 닉네임  --%>
+													</div>
+				
+													<div class="review_upload_date">
+														<small>${review.reDate} </small> <%--리뷰 업로드날짜 --%>
+													</div>
+				
+													<div class="review_point">
+														<%-- 리뷰 부여 별점.. --%>
+														<span class="review_stars">
+															<c:forEach var="i" begin="1" end="5" varStatus="starVS">
+																	<c:if test="${starVS.index <=review.reviewScore}">
+																		<i class="fas fa-star"></i>
+																	</c:if>
+																	<c:if test="${starVS.index > review.reviewScore }">
+																		<i class="far fa-star"></i>
+																	</c:if>
+															</c:forEach>
+														</span>
+													</div>
+				
+													<div class="review_content_container">
+														<%--리뷰 내용  --%>
+														<span class="reivewer_review_content">
+														${review.reContent}
+														</span>
+													</div>
+												</div>
+											</div>
+										</li> <%--리뷰 1개 표본  끝 --%>
+									
+									</c:if><%--6번째덧글 이후--%>
+									
+										
+								</c:forEach>
+							</c:if>
+							
 						</ul>
-						
-	
 						<%-- 더보기 버튼  --%>
 						<div class="review_more_btn_container">
-							<button id="review_more_btn">더보기 </button>
+							<button id="review_more_btn" class="review_more_closed">더보기 </button>
 						</div>
-					</c:if>
+					</c:if> <%--호텔리뷰가 존재할때 --%>
 
 				</div><%-- 등록한 리뷰 컨테이너 (reviews-container) --%>
 			</div> <%-- 호텔리뷰 컨테이너  --%>
 
 		<%--hotel-review-container에서 발생하는 자바스크립트 함수  --%>
 		<script>
+		
+		
+		
 		$(function(){
 			//리뷰삭제 버튼 클릭
 			$('.remove_review').click(function(){
@@ -969,6 +1086,30 @@
 	});
 </script>
 
+<script>
+$(function(){
+	$('#review_more_btn').click(function(){
+		
+		console.log('더보기 버튼을 클릭하였습니다.');
+		//아직 댓글더보기를 수행하기 전
+		if($(this).hasClass('review_more_closed')){
+			$(this).removeClass('review_more_closed');
+			$(this).addClass('review_more_opened'); // 더보기버튼이 보여주지 않게함.
+			
+			
+			$('li.after5_review_closed').each(function(){
+				
+				$(this).addClass('after5_review_opened'); //6번째 이후 덧글들을 보여준다.
+				$(this).removeClass('after5_review_closed');
+			})
+		}
+		
+		
+	});	
+})
+
+
+</script>
 
 <%-- The script for modal... --%>
 <%--
