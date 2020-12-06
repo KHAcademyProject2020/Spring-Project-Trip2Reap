@@ -171,7 +171,7 @@
 	<!-- 호텔 리뷰 보여주기  -->
 	<select id="selectOneHotelReplyList" resultMap="replyResultSet">
 	SELECT *
-	FROM REPLY JOIN HOTEL_REVIEW USING(RE_NO)
+	FROM HOTEL_REVIEW_INFO_VIEW
 	WHERE BO_NO=#{hId} AND RE_DELETE_YN='N'
 	ORDER BY RE_NO DESC
 	</select>

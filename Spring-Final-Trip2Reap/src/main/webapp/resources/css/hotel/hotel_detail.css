@@ -1154,4 +1154,17 @@ span.review_stars{
 }
 
 
+.review_more_opened{
+	display:none;
+}
+
+
+.after5_review_closed{
+	display:none;
+}
+
+.after5_review_opened{
+	display: list-block;
+}
+
  

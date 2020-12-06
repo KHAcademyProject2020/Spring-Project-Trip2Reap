@@ -120,8 +120,6 @@ public class HotelController {
 
 	
 
-
-
 	// 호텔 디테일뷰 페이지로 이동
 	@RequestMapping("hotelDetailView.ho")
 	public ModelAndView goHotelDetailView(@RequestParam("hId") int hId, @RequestParam("page") int page, ModelAndView mv)throws HotelException {
@@ -151,6 +149,7 @@ public class HotelController {
 		
 		// hId에 해당하는 리뷰댓글을 불러온다.
 		ArrayList<Reply> reviewList=null;
+		int reviewListCount =0; //리뷰개수
 		
 		// 리뷰작성자의 닉네임 리스트
 		ArrayList<String> reviewNickNameList=null;
@@ -234,6 +233,11 @@ public class HotelController {
 			
 			//리뷰리스트를 보여준다.
 			reviewList= hService.selectOneHotelReplyList(hId);
+			if(reviewList!=null) {
+				reviewListCount=reviewList.size();
+			}
+			
+			
 			//리뷰작성자 닉네임 리스트 
 			reviewNickNameList= hService.selectOneHotelReplyNickNameList(hId);
 			
@@ -247,6 +251,7 @@ public class HotelController {
 			.addObject("minPriceRoomId", minPriceRoomId)
 			.addObject("likeCnt", likeCnt)
 			.addObject("reviewList", reviewList)
+			.addObject("reviewListCount", reviewListCount)
 			.addObject("reviewNickNameList", reviewNickNameList)
 			.setViewName("hotel_detail");
 		}else {
