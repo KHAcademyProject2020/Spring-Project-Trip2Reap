@@ -25,7 +25,7 @@ public class HotelEnterInterceptor extends HandlerInterceptorAdapter{
 		
 		//관리자 계정이 아니라면,
 		request.setAttribute("msg", "접근할 수 없는 페이지입니다.");
-		request.getRequestDispatcher("/").forward(request, response);
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 		return false;
 		//return super.preHandle(request, response, handler);
 	}

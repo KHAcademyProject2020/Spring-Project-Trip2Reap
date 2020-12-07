@@ -39,6 +39,14 @@
 			<bean id="hotelInsertInterceptor" class="trip.two.reap.common.interceptor.HotelEnterInterceptor"/>
 		</mvc:interceptor>
 		
+		
+		<!-- 호텔 삭제 interceptor -->
+		<mvc:interceptor>
+			<mvc:mapping path="/hotelDelete.ho"/>
+			<bean id="hotelDeleteInterceptor" class="trip.two.reap.common.interceptor.HotelEnterInterceptor"/>
+		</mvc:interceptor>
+		
+		
 		<!-- 호텔 수정 폼페이지 interceptor -->
 		<mvc:interceptor>
 			<mvc:mapping path="/hotelEditView.ho"/>

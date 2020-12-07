@@ -768,7 +768,7 @@ public class HotelController {
 			minRoomPricePerDayList= new ArrayList<Integer>();
 			int hotelMinPrice=0;
 			for(Hotel hotel : hotelList) {
-				hotelMinPrice= hService.findHotelMinPrice(hotel.getBoNo());
+				hotelMinPrice= hService.findHotelMinPrice(hotel.getBoNo()); //에러발생원인 NullPointerException
 				minRoomPricePerDayList.add(hotelMinPrice);
 			}
 			

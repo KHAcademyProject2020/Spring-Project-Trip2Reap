@@ -12,7 +12,22 @@
 <body>
 		<!-- 메뉴바 -->
     	<c:import url="WEB-INF/views/common/menubar.jsp" />
-    	
+    	<script>
+		  	$(function(){
+		  		//interceptor 접근시, 에러메시지 alert창을 띄운다.
+		  		var msg='${msg}';
+		  		if(msg!=''){
+		  			swal({
+		  				text:msg,
+		  				icon:'error',
+		  				button:true
+		  			}).
+		  			then((value)=>{
+		  				window.location='${contextPath}';
+		  			})
+		  		}
+		  	});
+		</script>
     	<section>
     	<div id="slider-wrap">
              <ul id="slider">

@@ -18,5 +18,66 @@
 	
 	<context:component-scan base-package="trip.two.reap" />
 	
+	<mvc:interceptors>
+		
+		
+		<!--  마이페이지뷰 이동 interceptor -->
+		<mvc:interceptor>
+			<mvc:mapping path="/myPage.me"/>
+			<bean id="myPageInterceptor" class="trip.two.reap.common.interceptor.MemberEnterInterceptor"/>
+		</mvc:interceptor>
+		
+		
+		<!-- 마이페이지 정보수정뷰 이동 interceptor -->
+		<mvc:interceptor>
+			<mvc:mapping path="/myPageUpdate.me"/>
+			<bean id="myPageUpdateInterceptor" class="trip.two.reap.common.interceptor.MemberEnterInterceptor"/>
+		</mvc:interceptor>
+		
+		<!-- 정보수정 interceptor -->
+		<mvc:interceptor>
+			<mvc:mapping path="/updateMember.me"/>
+			<bean id="updateMemberInterceptor" class="trip.two.reap.common.interceptor.MemberEnterInterceptor"/>
+		</mvc:interceptor>
+		
+		<!-- 마이페이지-내가담은 여행지 interceptor -->
+		<mvc:interceptor>
+			<mvc:mapping path="/myPageTravel.me"/>
+			<bean id="myPageTravelInterceptor" class="trip.two.reap.common.interceptor.MemberEnterInterceptor"/>
+		</mvc:interceptor>
+	
+		<!--마이페이지- 나만의 여행코스 interceptor  -->
+		<mvc:interceptor>
+			<mvc:mapping path="/myPageCourse.me"/>
+			<bean id="myPageCourseInterceptor" class="trip.two.reap.common.interceptor.MemberEnterInterceptor"/>
+		</mvc:interceptor>
+		
+		
+		<!--회원탈퇴 뷰 이동 interceptor  -->
+		<mvc:interceptor>
+			<mvc:mapping path="/memberOut.me"/>
+			<bean id="memberOutInterceptor" class="trip.two.reap.common.interceptor.MemberEnterInterceptor"/>
+		</mvc:interceptor>
+		
+		
+		<!--회원탈퇴 interceptor  -->
+		<mvc:interceptor>
+			<mvc:mapping path="/deleteMember.me"/>
+			<bean id="deleteMemberInterceptor" class="trip.two.reap.common.interceptor.MemberEnterInterceptor"/>
+		</mvc:interceptor>
+		
+		<!--카카오 네이버 회원탈퇴 뷰 이동 interceptor  -->
+		<mvc:interceptor>
+			<mvc:mapping path="/memberOutOther.me"/>
+			<bean id="memberOutOtherInterceptor" class="trip.two.reap.common.interceptor.MemberEnterInterceptor"/>
+		</mvc:interceptor>
+		
+		
+		<!--카카오, 네이버 회원탈퇴 interceptor  -->
+		<mvc:interceptor>
+			<mvc:mapping path="/deleteMemberOther.me"/>
+			<bean id="deleteMemberOtherInterceptor" class="trip.two.reap.common.interceptor.MemberEnterInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 
 </beans>
