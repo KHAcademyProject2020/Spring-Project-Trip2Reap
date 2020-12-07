@@ -22,10 +22,10 @@
      
      /* 버튼  */
      #up_space3 { height : 25px; } 
-     #up_space4 { display : inline-block; width : 480px; }
+     #up_space4 { display : inline-block; width : 488px; }
      #up_space5 { height : 35px; }
      #delCheck { display: inline-block; font-size: 14px;}
-     #up_space6 { display : inline-block; width : 449px; }
+     #up_space6 { display : inline-block; width : 463px; }
      #outBtn1 { background: lightgray; color:white; width: 200px; height : 50px; 
                   border: none; font-size: 15px; font-weight: bold; cursor: pointer; }
      #outBtn1:hover{ background-color: rgb(200,200,200); }
