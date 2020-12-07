@@ -14,6 +14,7 @@
         <typeAlias type="trip.two.reap.hotel.model.vo.Room" alias="Room"/>
         <typeAlias type="trip.two.reap.hotel.model.vo.Reservation" alias="Reservation"/>
         <typeAlias type="trip.two.reap.hotel.model.vo.Reply" alias="HotelReply"/>
+        <typeAlias type="trip.two.reap.common.Attachment" alias="Attachment"/>
     </typeAliases>
     
     <mappers>
