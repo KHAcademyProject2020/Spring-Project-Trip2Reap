@@ -4,17 +4,25 @@
 	
   	<select id="getListCount" resultType="_int">
 		select count(*)
-    	from board
-  		where BO_DELETE_YN='N' 
+    	from board b
+  		where BO_DELETE_YN='N' AND B.CA_CODE=3 OR B.CA_CODE=4
   	</select>
   	
   	<select id="selectList" resultMap="reviewResultSet">
-  		 select *
+  		select B.BO_NO,B.CA_CODE,B.BO_TITLE,B.BO_CONTENT,B.MEMBER_ID,B.BO_COUNT,B.BO_TAG,B.BO_DELETE_YN,B.REGDATE,C.CA_NAME,I.ORIGIN_NAME,I.CHANGE_NAME
+        from board b
+         left JOIN CATEGORY C 
+            ON B.CA_CODE = C.CA_CODE
+         left JOIN IMG_FILE I
+            ON B.BO_NO = I.BO_NO
+         where BO_DELETE_YN='N' AND B.CA_CODE=3 OR B.CA_CODE=4
+   		 order by BO_NO desc  
+  		 <!-- select *
   		 from board
          JOIN CATEGORY USING(CA_CODE)
    		 where BO_DELETE_YN='N' AND CA_CODE=3 OR CA_CODE=4
-   		 order by BO_NO desc 
-   		<!-- select *
+   		 order by BO_NO desc  -->
+   		 <!-- select *
   		 from board B
          INNER JOIN CATEGORY C
              ON B.CA_CODE = C.CA_CODE
@@ -49,10 +57,18 @@
  
 
    <select id="selectReview" resultMap="reviewResultSet">
-   	   select *
+   	  <!--  select *
        from board
        JOIN CATEGORY USING(CA_CODE)
-       where BO_NO=#{boNo} and BO_DELETE_YN='N' 
+       where BO_NO=#{boNo} and BO_DELETE_YN='N'  -->
+       select B.BO_NO,B.CA_CODE,B.BO_TITLE,B.BO_CONTENT,B.MEMBER_ID,B.BO_COUNT,B.BO_TAG,B.BO_DELETE_YN,B.REGDATE,C.CA_NAME,I.ORIGIN_NAME,I.CHANGE_NAME
+        from board b
+         LEFT JOIN CATEGORY C 
+            ON B.CA_CODE = C.CA_CODE
+         LEFT JOIN IMG_FILE I
+            ON B.BO_NO = I.BO_NO
+         where B.BO_NO = #{boNo} AND BO_DELETE_YN='N' AND (B.CA_CODE=3 OR B.CA_CODE=4)
+   		 order by BO_NO desc 
    </select> 
    
   <insert id="insertReview">

@@ -72,14 +72,23 @@ table td {
 						</tr>
 						<tr>
 						
-							<td colspan="5"><img src="resources/images/reviewIcon.png"
-								width="600px;" height="500px;"></td>
+							<td colspan="5">
+							<c:if test="${review.changeName != null }">
+							
+							<img src="resources/buploadFiles/${review.changeName}
+							 "width="600px;" height="500px;">
+								</c:if>
+								<c:if test="${review.changeName == null }">
+									사진이 없어요
+								</c:if>
+							
+								</td>
 							
 						</tr>
 
 						<tr>
 							<td colspan="5">
-								<div>${review.boContent }</div>
+								<div>${review.boContent }	</div>
 							</td>
 						</tr>
 						<tr>

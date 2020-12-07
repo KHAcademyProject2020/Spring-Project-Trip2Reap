@@ -14,152 +14,162 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
-		
-			<header>
-				<c:import url="../common/menubar.jsp" />
-			</header>
-			
-			<section>
-			<div id="all_div">
-				<div id="menu_div">
-					<div id="menu_left_div">
-							<i class="fas fa-camera-retro" id="menuIcon3"></i>
-						<span id="menu">여행 후기</span>
-					</div>
 
+
+	<header>
+		<c:import url="../common/menubar.jsp" />
+	</header>
+
+	<section>
+		<div id="all_div">
+			<div id="menu_div">
+				<div id="menu_left_div">
+					<i class="fas fa-camera-retro" id="menuIcon3"></i> <span id="menu">여행
+						후기</span>
 				</div>
+
 			</div>
-			<!-- text-align뿐만 아니라 대부분 div안에서 작동한다. -->
-			<div id="cate_btn" style="display: inline-block; width: 770px">
-				<button id="cate_btn1" class="cate_btn">전체보기</button>
-				<button id="cate_btn2" class="cate_btn">여행지</button>
-				<button id="cate_btn3" class="cate_btn">맛집</button>
-			</div>
-			<div id="bo_btn" style="display: inline-block;">
-				<button id="bo_btn2" class="bo_btn">사진형</button>
-				<button id="bo_btn1" class="bo_btn" onclick="location.href='reviewList.bo';">게시판형</button>
-			</div>
+		</div>
+		<!-- text-align뿐만 아니라 대부분 div안에서 작동한다. -->
+		<div id="cate_btn" style="display: inline-block; width: 770px">
+			<button id="cate_btn1" class="cate_btn">전체보기</button>
+			<button id="cate_btn2" class="cate_btn">여행지</button>
+			<button id="cate_btn3" class="cate_btn">맛집</button>
+		</div>
+		<div id="bo_btn" style="display: inline-block;">
+			<button id="bo_btn2" class="bo_btn">사진형</button>
+			<button id="bo_btn1" class="bo_btn"
+				onclick="location.href='reviewList.bo';">게시판형</button>
+		</div>
 
 
-			<div id="board">
+		<div id="board">
 
-				
-				<c:forEach var="b" items="${list}" >			
-					
-					<div class="divcontent">
-						<table id="board_table"  onclick="location.href='reviewDetail.bo';">
-							<tr>
-								<td id="img_td"><img id="review_img" src="resources/images/송도.JPG">
-								</td>
+
+			<c:forEach var="b" items="${list}">
+
+				<div class="divcontent">
+					<table id="board_table">
+						<tr>
+							<td id="img_td"><c:if test="${b.changeName != null }">
+									<img id="review_img" class="center-block"
+										src="resources/buploadFiles/${b.changeName}">
+								</c:if> <c:if test="${b.changeName == null }">
+									<div class="imgBackground">
+									<img id="review_img" class="center-block" src="resources/images/emoticon.png">
+									<p>
+									안녕!
 									
-								<td>
-									<c:if test="${ !empty loginUser }">
+									</p>
+									</div>
+								</c:if></td>
+						</tr>
+						<tr>
+							<td><c:if test="${ !empty loginUser }">
 									<c:url var="reviewDetail" value="reviewDetail.bo">
-										<c:param name="boNo" value="${ b.boNo }"/>
-										<c:param name="page" value="${ pi.currentPage }"/>
+										<c:param name="boNo" value="${ b.boNo }" />
+										<c:param name="page" value="${ pi.currentPage }" />
 									</c:url>
-									<a href="${ reviewDetail}">${ b.boTitle }${b.boTag }</a>
-									</c:if>
-									<c:if test="${ empty loginUser }">
+									<a href="${reviewDetail}">${ b.boTitle }#${b.boTag }</a>
+								   </c:if> <c:if test="${ empty loginUser }">
 									${ b.boTitle }${b.boTag }
 									</c:if>
-							
-								</td>
-								
-							</tr>
-						</table>
+									
+							</td>
 
-					</div>
-					
-					</c:forEach>
+						</tr>
+					</table>
+
 				</div>
-				
-			
-		
-		
-		
+
+			</c:forEach>
+		</div>
+
+
+
+
+
 		<div id="paging_table_div">
 			<table id="paging_table">
-		
-		<!-- 페이징 처리 -->
-		<tr align="center" height="20">
-			<td></td>
-			<td >
-			
-				<!-- [이전] -->
-				<c:if test="${ pi.currentPage <= 1 }">
-					<button class="page_btn"><</button> &nbsp;
-				</c:if>
-				<c:if test="${ pi.currentPage > 1 }">
-					<c:url var="before" value="reviewPhotoList.bo">
-						<c:param name="page" value="${ pi.currentPage - 1 }"/>
-					</c:url>
-					<a href="${ before }"><button class="page_btn"><</button></a>
-				</c:if>
-				
-				<!-- 페이지 -->
-				
-				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-					<c:if test="${ p eq pi.currentPage }">
-					<button class="page_btn"><b style=background-color:#eee;>${ p }</b></button>
-					</c:if>
-					
-					<c:if test="${ p ne pi.currentPage }">
-						<c:url var="pagination" value="reviewPhotoList.bo">
-							<c:param name="page" value="${ p }"/>
-						</c:url>
-						<a href="${ pagination }"><button class="page_btn">${ p }</button></a>
-					</c:if>
-				</c:forEach>
-				
-				<!-- [다음] -->
-				<c:if test="${ pi.currentPage >= pi.maxPage }">
-					<button class="page_btn">></button> &nbsp;
-				</c:if>
-				<c:if test="${ pi.currentPage < pi.maxPage }">
-					<c:url var="after" value="reviewPhotoList.bo">
-						<c:param name="page" value="${ pi.currentPage + 1 }"/>
-					</c:url> 
-					<a href="${ after }"><button class="page_btn">></button></a>
-				</c:if>
-			</td>
-			<td style="text-align: right;">
-				
-					<button id="write_btn" onclick="location.href='reviewInsert.bo';">글쓰기</button>
-			
-			</td>
-		</tr>
-		
-		<tr>
-			
-				<td colspan="3">
-					<form id="content" style="text-align: center;">
-					 <select id="select_search" name="search">
-    					 <option value="작성자">작성자</option>
-    					 <option value="제목">제목</option>
-   						 <option value="내용">내용</option>
-   						 <option value="해쉬태그">해쉬태그</option>
-					</select>
-					
-						
-   						   
-    					  <input type="search" id="search" placeholder="Search..." />
- 					
-  						<button id="search_btn" type="reset" class="search" id="search-btn">
-  							<span class="icon"><i class="fa fa-search"></i></span>
-  						</button>
-					</form>
-				</td>
-			
-			</tr>
-		</table>
-	
-		
 
-	</div>
-		
+				<!-- 페이징 처리 -->
+				<tr align="center" height="20">
+					<td></td>
+					<td>
+						<!-- [이전] --> <c:if test="${ pi.currentPage <= 1 }">
+							<button class="page_btn"><</button> &nbsp;
+				</c:if> <c:if test="${ pi.currentPage > 1 }">
+							<c:url var="before" value="reviewPhotoList.bo">
+								<c:param name="page" value="${ pi.currentPage - 1 }" />
+							</c:url>
+							<a href="${ before }"><button class="page_btn"><</button></a>
+						</c:if> <!-- 페이지 --> <c:forEach var="p" begin="${ pi.startPage }"
+							end="${ pi.endPage }">
+							<c:if test="${ p eq pi.currentPage }">
+								<button class="page_btn">
+									<b style="background-color: #eee;">${ p }</b>
+								</button>
+							</c:if>
+
+							<c:if test="${ p ne pi.currentPage }">
+								<c:url var="pagination" value="reviewPhotoList.bo">
+									<c:param name="page" value="${ p }" />
+								</c:url>
+								<a href="${ pagination }"><button class="page_btn">${ p }</button></a>
+							</c:if>
+						</c:forEach> <!-- [다음] --> <c:if test="${ pi.currentPage >= pi.maxPage }">
+							<button class="page_btn">></button> &nbsp;
+				</c:if> <c:if test="${ pi.currentPage < pi.maxPage }">
+							<c:url var="after" value="reviewPhotoList.bo">
+								<c:param name="page" value="${ pi.currentPage + 1 }" />
+							</c:url>
+							<a href="${ after }"><button class="page_btn">></button></a>
+						</c:if>
+					</td>
+					<td style="text-align: right;">
+
+						<button id="write_btn" onclick="location.href='reviewInsert.bo';">글쓰기</button>
+
+					</td>
+				</tr>
+
+				<tr>
+
+					<td colspan="3">
+						<form id="content" style="text-align: center;">
+							<select id="select_search" name="search">
+								<option value="작성자">작성자</option>
+								<option value="제목">제목</option>
+								<option value="내용">내용</option>
+								<option value="해쉬태그">해쉬태그</option>
+							</select> <input type="search" id="search" placeholder="Search..." />
+
+							<button id="search_btn" type="reset" class="search"
+								id="search-btn">
+								<span class="icon"><i class="fa fa-search"></i></span>
+							</button>
+						</form>
+					</td>
+
+				</tr>
+			</table>
+
+
+
+		</div>
+
 	</section>
+	
+	<script>
+		document.getElementById('review_img').onmouseover = function(){
+			this.style.opacity="0.3";
+			inner.Text="마우스";
+		}
+		document.getElementById('review_img').onmouseout = function(){
+			this.style.opacity="1";
+		}
+		
+	</script>
 
 
 

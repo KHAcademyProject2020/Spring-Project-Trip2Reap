@@ -26,18 +26,20 @@
 				</div>
 			</div>
 
-			<form method="post" action="rInsert.bo" enctype="Multipart/form-data">
+			<form method="post" action="rInsert.bo"  enctype="Multipart/form-data">
 				<div id="wrapperForm">
 					<br> <br>
 					<div class="writeForm" id="writer">
-						<input type="file" id="photo_btn" name="uploadFile">
-						<strong>작성자 ${loginUser.memberId }</strong> <input type="hidden"
-							name="memberId" readonly value="${loginUser.memberId }">
-					</div><br><br>
-					
+						<input type="file" id="photo_btn" name="uploadFile"> <strong>작성자
+							${loginUser.memberId }</strong> <input type="hidden" name="memberId"
+							readonly value="${loginUser.memberId }">
+					</div>
+					<br>
+					<br>
+
 					<div id="cate">
-					
-						<select id="select_search" name="caCode" >
+
+						<select id="select_search" name="caCode">
 							<option>카테고리를 선택해주세요</option>
 							<option value="2">여행 코스</option>
 							<option value="3">여행지</option>
@@ -46,51 +48,59 @@
 						</select>
 
 					</div>
-					<br> 
+					<br>
 					<div class="writeForm" id="title">
 						<textarea name="boTitle" placeholder="제목을 입력해 주세요."
 							class="textarea_input" style="height: 40px;"></textarea>
 					</div>
 					<br> <br>
-					
-					<div class="writeForm" id="content">
 
-						
-						<textarea  placeholder="내용을 입력해주세요" name="boContent" rows="30" cols="100"></textarea>
-						
-						
+					<div id="content">
+
+
+						<textarea style="resize: none;" placeholder="내용을 입력해주세요"
+							name="boContent" rows="30" cols="140"></textarea>
+
+
 						<br>
-							 <input type="text" name="boTag" style="width:650px; height:50px;" placeholder="#태그를 입력해주세요(최대 3개)">
-						
-					</div>
-					
-					<br>
+						<div>
+							<div>
 
-					<input type="submit" id="submit" value="제출" style="width:50px; height:30px;">	
-					<button onclick="ddd" id="ddd">제출2</button>
+								<div class="content">
+										<button type="button" id="hashbtn">태그등록</button>
+								
+									<div id="hashtag">
+										<input type="text" id="tag" size="7" placeholder="태그를 입력해 주세요" /> &nbsp;
+									</div>
+									
+									<div id="field"></div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<br> <input type="submit" id="submit" value="등록"
+						style="width: 50px; height: 30px;">
 				</div>
 
 
 			</form>
 
 		</div>
-		
-		
-	<script>
-		/* $('#submit').on("click",function(e){
-			if($('#photo_btn').get(0).files[0].isEmpty()){
-				
-			} 
-							
-			}); */
-		$('#ddd').click(function(){
-			if($('#photo_btn').get(0).files[0] == 'undefined'){
-				$('#ddd').submit();
-			} 
-		});
 
-	
-	</script>
+		<script>
+			$("#hashbtn").on("click",function(e){
+				var name= document.getElementById('tag').value;
+				var div= "<div>${name}</div>"
+				
+				$(div).clone().appendTo("#hashtag");
+			});
+	    </script>
+			
+
+
+
 
 
 

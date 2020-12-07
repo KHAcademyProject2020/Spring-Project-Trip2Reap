@@ -6,6 +6,10 @@ section { margin: 0px auto; width:1300px; }
 
 
 /* 전체 div */
+div.imgBackground{background:black;}
+img.center-block:hover{opacity:0.3;}
+.center-block:hover .imgBackground{text-align:center;}
+
 
 
 #board{
@@ -32,6 +36,8 @@ border-radius: 10px;
 #img_td img{
 	max-width:90%;
 	max-height:90%;
+	width:400px;
+	height:300px;
 	border-radius: 7px;
 }
 #board_table{
@@ -42,9 +48,12 @@ border-radius: 10px;
 }
 
 #img_td{
-	width:200px;
-	hegiht:200px;
+	
+	width:400px;
+	height:400px;
 }
+
+
 
 
   

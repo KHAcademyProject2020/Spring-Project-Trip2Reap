@@ -69,7 +69,7 @@
 			<td class="board_list">${b.memberId }</td>
 			<td class="board_list">${b.regDate }</td>
 			<td class="board_list">${b.boCount }</td>
-			<td class="board_list">like</td>
+			<td class="board_list">like${ pi.startPage }</td>
 
 		
 		</tr>
@@ -89,40 +89,59 @@
 			
 				<!-- [이전] -->
 				<c:if test="${ pi.currentPage <= 1 }">
-					<button class="page_btn"><</button> &nbsp;
+				
 				</c:if>
+				
 				<c:if test="${ pi.currentPage > 1 }">
-					<c:url var="before" value="reviewList.bo">
-						<c:param name="page" value="${ pi.currentPage - 1 }"/>
+					<c:url var="firstPage" value="reviewList.bo">
+						<c:param name="page" value="${ pi.startPage }"/>
 					</c:url>
-					<a href="${ before }"><button class="page_btn"><</button></a>
+					<a href="${ firstPage }"><button class="page_btn">&lt;&lt;</button></a>
+					
+					<c:url var="before" value="reviewList.bo">
+						<c:param name="page" value="${ pi.currentPage-1 }"/>
+					</c:url>
+					<a href="${ before }"><button class="page_btn">&lt;</button></a>
 				</c:if>
+				
 				
 				<!-- 페이지 -->
 				
 				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+				
 					<c:if test="${ p eq pi.currentPage }">
-					<button class="page_btn"><b style=background-color:#eee;>${ p }</b></button>
+					<button class="page_btn"><b style=background-color:#eee;>${p}</b></button>
 					</c:if>
 					
 					<c:if test="${ p ne pi.currentPage }">
 						<c:url var="pagination" value="reviewList.bo">
 							<c:param name="page" value="${ p }"/>
 						</c:url>
-						<a href="${ pagination }"><button class="page_btn">${ p }</button></a>
+						
+						<a href="${ pagination }">
+						<button class="page_btn">${ p}</button>
+						</a>
+					
 					</c:if>
 				</c:forEach>
 				
 				<!-- [다음] -->
 				<c:if test="${ pi.currentPage >= pi.maxPage }">
-					<button class="page_btn">></button> &nbsp;
+					
 				</c:if>
 				<c:if test="${ pi.currentPage < pi.maxPage }">
 					<c:url var="after" value="reviewList.bo">
 						<c:param name="page" value="${ pi.currentPage + 1 }"/>
 					</c:url> 
-					<a href="${ after }"><button class="page_btn">></button></a>
+					<a href="${ after }"><button class="page_btn">&gt;</button></a>
+					
+					<c:url var="lastPage" value="reviewList.bo">
+						<c:param name="page" value="${ pi.endPage }"/>
+					</c:url>
+					<a href="${ lastPage }"><button class="page_btn">&gt;&gt;</button></a>
 				</c:if>
+				
+				
 			</td>
 			<td style="text-align: right;">
 				
