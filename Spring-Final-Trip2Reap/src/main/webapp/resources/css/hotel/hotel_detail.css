@@ -190,7 +190,7 @@ input[type="button"]:focus{
 	flex-direction:column;
 	justify-content: space-around;
 	position: relative;
-	width: 70%;
+	width: 90%;
 	margin:0;
 	
 	align-items: center;
@@ -201,7 +201,7 @@ input[type="button"]:focus{
 #hotel-detail-info-ul li{
 	padding: 5px 0;
 	position: relative;
-	width: 80%;
+	width: 100%;
 	display: flex;
 	flex-direction: row;
 	
@@ -224,7 +224,8 @@ span.info-icon-container{
 	flex-direction: column;
 	justify-content: space-around;
 	text-align: center;
-	align-items: flex-start;
+	
+	align-items: center;
 	
 	padding-top: 20px;
 	padding-bottom:10px;
@@ -241,7 +242,7 @@ span.info-icon-container{
 	border-color: transparent;
 	
 	cursor:pointer;
-	width: 72%;
+	width: 100%;
 }
 
 /* 예약하기 버튼  */

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import trip.two.reap.common.Attachment;
 import trip.two.reap.common.PageInfo;
 import trip.two.reap.hotel.model.vo.Hotel;
 import trip.two.reap.hotel.model.vo.Reply;
@@ -186,6 +187,56 @@ public class HotelDAO {
 	public ArrayList<Integer> getOrderedLowPriceBoNoList(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("hotelMapper.getOrderedLowPriceBoNoList");
 	}
+
+	
+	//2020.12.07~2020.12.08 - 호텔등록
+	public int insertBoard(SqlSessionTemplate sqlSession, Hotel hotel) {
+		return sqlSession.insert("hotelMapper.insertBoard", hotel);
+	}
+	
+	public int insertHotel(SqlSessionTemplate sqlSession, Hotel hotel) {
+		return sqlSession.insert("hotelMapper.insertHotel", hotel);
+	}
+	
+	//호텔썸네일/디테일 이미지 등록
+	public int insertOneHotelImg(SqlSessionTemplate sqlSession, HashMap<String, Object> imgHashMap) {
+		return sqlSession.insert("hotelMapper.insertOneHotelImg", imgHashMap);
+	}
+	
+
+	//2020.12.07 - 방등록
+	public int insertOneRoom(SqlSessionTemplate sqlSession, Room room) {
+		return sqlSession.insert("hotelMapper.insertRoom", room);
+	}
+
+	
+	//2020.12.07- 호텔삭제(Board삭제)
+	public int deleteBoard(SqlSessionTemplate sqlSession, int hId) {
+		return sqlSession.update("hotelMapper.deleteBoard",hId);
+	}
+
+	//2020.12.08 - 호텔 이미지 구하기(썸네일이미지 + 디테일이미지) 
+	//사용목적: 호텔삭제시 같이 등록된 이미지도 같이 삭제할때 사용.
+	public ArrayList<Attachment> selectHotelImgList(SqlSessionTemplate sqlSession, int hId) {
+		return (ArrayList)sqlSession.selectList("hotelMapper.selectHotelImgList", hId);
+	}
+
+	//2020.12.08 - 호텔 이미지  한개 지우기
+	public int deleteHotelImg(SqlSessionTemplate sqlSession, int fileNo) {
+		return sqlSession.update("hotelMapper.deleteOneHotelImg", fileNo);
+	}
+
+	//2020.12.08 - 호텔 썸네일 이미지 찾기
+	//사용목적: (1) 호텔리스트에 썸네일 이미지 표시.
+	public Attachment selectOneHotelThumbnailImg(SqlSessionTemplate sqlSession, int boNo) {
+		return sqlSession.selectOne("hotelMapper.selectOneHotelThumbnailImg", boNo);
+	}
+
+	//2020.12.08 - 호텔 디테일 이미지 리스트 찾기
+	public ArrayList<Attachment> selectDetailImgList(SqlSessionTemplate sqlSession, int boNo) {
+		return (ArrayList)sqlSession.selectList("hotelMapper.selectDetailImgList", boNo);
+	}
+	
 	
 
 

@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import trip.two.reap.common.Attachment;
 import trip.two.reap.common.PageInfo;
 import trip.two.reap.hotel.model.dao.HotelDAO;
 import trip.two.reap.hotel.model.vo.Hotel;
@@ -238,6 +239,70 @@ public class HotelServiceImpl implements HotelService{
 	public ArrayList<Integer> getOrderedLowPriceBoNoList() {
 		return hDAO.getOrderedLowPriceBoNoList(sqlSession);
 	}
+
+	
+	//2020.12.07~2020.12.08 - 호텔등록
+	@Override
+	public int insertBoard(Hotel hotel) {
+		return hDAO.insertBoard(sqlSession, hotel);
+	}
+	
+	
+	@Override
+	public int insertHotel(Hotel hotel) {
+		return hDAO.insertHotel(sqlSession, hotel);
+	}
+	
+	//2020.12.08
+	//호텔썸네일 이미지 등록
+	@Override
+	public int insertOneHotelImg(HashMap<String, Object> imgHashMap) {
+		return hDAO.insertOneHotelImg(sqlSession, imgHashMap);
+	}
+
+	
+	//2020.12.07 - 방등록
+	@Override
+	public int insertOneRoom(Room room) {
+		return hDAO.insertOneRoom(sqlSession, room);
+	}
+
+	
+	//2020.12.07 - 호텔삭제(board삭제)
+	@Override
+	public int deleteBoard(int hId) {
+		return hDAO.deleteBoard(sqlSession, hId);
+	}
+
+	//2020.12.08 - 호텔관련 이미지 구하기
+	@Override
+	public ArrayList<Attachment> selectHotelImgList(int hId) {
+		return hDAO.selectHotelImgList(sqlSession, hId);
+	}
+
+	//2020.12.08 -호텔이미지 지우기
+	@Override
+	public int deleteHotelImg(int fileNo) {
+		return hDAO.deleteHotelImg(sqlSession, fileNo);
+	}
+
+	//2020.12.08 - 호텔썸네일이미지 한개구하기
+	@Override
+	public Attachment selectOneHotelThumbnailImg(int boNo) {
+		return hDAO.selectOneHotelThumbnailImg(sqlSession, boNo);
+	}
+
+	//2020.12.08 - 호텔 디테일 이미지 뷰 구하기
+	@Override
+	public ArrayList<Attachment> selectDetailImgList(int boNo) {
+		return hDAO.selectDetailImgList(sqlSession, boNo);
+	}
+	
+
+	
+	
+
+	
 	
 	
 	

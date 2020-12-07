@@ -26,6 +26,10 @@ public class Hotel {
 	private String hotelThumbnailImg;//호텔 썸네일 이미지 -- 필수
 	private ArrayList<String> hotelDetailViewImgs; //호텔 디테일 이미지	-- 선택
 	
+	
+	private ArrayList<Room> roomList; //등록된 방리스트(뷰=>컨트롤러 리스트형태로 전달하기위해서 사용)
+	
+	
 	//HOTEL
 	private String hotelAddr; //호텔주소 -- 필수
 	private int hotelLocalCode; //호텔지역코드 --필수
@@ -62,6 +66,10 @@ public class Hotel {
 		this.hotelAddr = hotelAddr;
 		this.hotelReviewScore = hotelReviewScore;
 	}
+	
+	
+	
+	
 	
 	//사진관련요소를 제외한 필수요소만 들어있는 생성자
 	public Hotel(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount,
@@ -172,6 +180,36 @@ public class Hotel {
 	}
 
 
+	public Hotel(int boNo, int caCode, String boTitle, String boContent, String memberId, int boCount, String boTag,
+			String boDeleteYN, Date regDate, String hotelThumbnailImg, ArrayList<String> hotelDetailViewImgs,
+			ArrayList<Room> roomList, String hotelAddr, int hotelLocalCode, String hotelSite, String hotelTel,
+			double hotelReviewScore, int hotelRank, int hotelOpenTime, int hotelCloseTime, String hotelOptions,
+			int hotelCheckInTime, int hotelCheckOutTime) {
+		super();
+		this.boNo = boNo;
+		this.caCode = caCode;
+		this.boTitle = boTitle;
+		this.boContent = boContent;
+		this.memberId = memberId;
+		this.boCount = boCount;
+		this.boTag = boTag;
+		this.boDeleteYN = boDeleteYN;
+		this.regDate = regDate;
+		this.hotelThumbnailImg = hotelThumbnailImg;
+		this.hotelDetailViewImgs = hotelDetailViewImgs;
+		this.roomList = roomList;
+		this.hotelAddr = hotelAddr;
+		this.hotelLocalCode = hotelLocalCode;
+		this.hotelSite = hotelSite;
+		this.hotelTel = hotelTel;
+		this.hotelReviewScore = hotelReviewScore;
+		this.hotelRank = hotelRank;
+		this.hotelOpenTime = hotelOpenTime;
+		this.hotelCloseTime = hotelCloseTime;
+		this.hotelOptions = hotelOptions;
+		this.hotelCheckInTime = hotelCheckInTime;
+		this.hotelCheckOutTime = hotelCheckOutTime;
+	}
 
 	public int getBoNo() {
 		return boNo;
@@ -390,7 +428,16 @@ public class Hotel {
 	public void setHotelLocalCode(int hotelLocalCode) {
 		this.hotelLocalCode = hotelLocalCode;
 	}
+	
+	
+	
+	public ArrayList<Room> getRoomList() {
+		return roomList;
+	}
 
+	public void setRoomList(ArrayList<Room> roomList) {
+		this.roomList = roomList;
+	}
 
 	@Override
 	public String toString() {
@@ -401,7 +448,7 @@ public class Hotel {
 				+ ", hotelSite=" + hotelSite + ", hotelTel=" + hotelTel + ", hotelReviewScore=" + hotelReviewScore
 				+ ", hotelRank=" + hotelRank + ", hotelOpenTime=" + hotelOpenTime + ", hotelCloseTime=" + hotelCloseTime
 				+ ", hotelOptions=" + hotelOptions + ", hotelCheckInTime=" + hotelCheckInTime + ", hotelCheckOutTime="
-				+ hotelCheckOutTime + "]";
+				+ hotelCheckOutTime +", roomList=" +roomList+"]";
 	}
 	
 }

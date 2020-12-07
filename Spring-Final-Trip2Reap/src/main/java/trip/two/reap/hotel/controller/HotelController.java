@@ -1,7 +1,10 @@
 package trip.two.reap.hotel.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +25,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 
+import trip.two.reap.common.Attachment;
 import trip.two.reap.common.PageInfo;
 import trip.two.reap.common.Pagination;
 import trip.two.reap.hotel.exception.HotelException;
@@ -37,6 +41,8 @@ import trip.two.reap.member.model.vo.Member;
 public class HotelController {
 	@Autowired
 	private HotelService hService;
+	
+	private static String OS= System.getProperty("os.name").toLowerCase(); //os구분용도 -파일업로드에서 os마다 경로표기방식이 다르기때문에 사용.
 
 
 	@RequestMapping("hotelList.ho")
@@ -72,16 +78,28 @@ public class HotelController {
 
 		//로그인 계정 아이디확인
 		Member loginUser= (Member)session.getAttribute("loginUser");
+		
+		//썸네일이미지 리스트
+		ArrayList<Attachment> thumbnailImgList=null;
+		
 
 		if(hotelList!=null) {
 			//호텔리스트가 존재함!
 			//가장 싼 방 가격을 구한다.
 			minRoomPricePerDayList=new  ArrayList<Integer>();
+			
+			//호텔썸네일 이미지가 존재하는지 확인한다.
+			thumbnailImgList= new ArrayList<Attachment>();
+			
 			int hotelMinPrice;
 			for(Hotel hotel :hotelList) {
 				//호텔번호에 해당하는 가장싼 방가격을 조회하여 리스트에 추가.
 				hotelMinPrice= hService.findHotelMinPrice(hotel.getBoNo());
 				minRoomPricePerDayList.add(hotelMinPrice);
+				
+				//호텔번호에 해당하는 썸네일이미지 1개를 조회하여 리스트에 추가한다.
+				Attachment hotelThumbnailImg= hService.selectOneHotelThumbnailImg(hotel.getBoNo());
+				thumbnailImgList.add(hotelThumbnailImg);
 			}
 
 
@@ -104,10 +122,24 @@ public class HotelController {
 				}
 			}
 
+			//썸네일이미지 리스트를 출력한다.
+			/*
+			for(Attachment thumbnail : thumbnailImgList) {
+				if(thumbnail!=null) {
+					System.out.print(thumbnail.getFileNo()+" ");
+					System.out.println(thumbnail.getChangeName());
+				}else {
+					System.out.println("썸네일 이미지가 존재하지 않습니다!");
+				}
+				System.out.println();
+			}
+			*/
+			
 			mv.addObject("hotelList", hotelList);
 			mv.addObject("pi", pi);
 			mv.addObject("minRoomPricePerDayList", minRoomPricePerDayList);
 			mv.addObject("likeHotelList",likeHotelList);
+			mv.addObject("thumbnailImgList", thumbnailImgList);
 			mv.setViewName("hotel_list");
 
 		}else {
@@ -153,6 +185,13 @@ public class HotelController {
 		
 		// 리뷰작성자의 닉네임 리스트
 		ArrayList<String> reviewNickNameList=null;
+		
+		
+		//썸네일 이미지
+		Attachment thumbnailImg= null;
+		
+		//디테일이미지 리스트
+		ArrayList<Attachment> detailViewList= null;
 
 		if(hotel!=null) {
 			//hId에 해당하는 방의 개수를 구한다.
@@ -241,9 +280,16 @@ public class HotelController {
 			//리뷰작성자 닉네임 리스트 
 			reviewNickNameList= hService.selectOneHotelReplyNickNameList(hId);
 			
+			/*
 			System.out.println("revieList 길이 : "+ reviewList.size());
 			System.out.println("reviewListCount : "+ reviewListCount);
 			System.out.println("reviewNickNameList 길이: "+ reviewNickNameList.size());
+			*/
+			//썸네일 이미지 보여주기
+			thumbnailImg= hService.selectOneHotelThumbnailImg(hotel.getBoNo());
+			
+			//디테일이미지 리스트보여주기
+			detailViewList=hService.selectDetailImgList(hotel.getBoNo());
 			
 			mv.addObject("hotel", hotel)
 			.addObject("page",page)
@@ -256,6 +302,8 @@ public class HotelController {
 			.addObject("reviewList", reviewList)
 			.addObject("reviewListCount", reviewListCount)
 			.addObject("reviewNickNameList", reviewNickNameList)
+			.addObject("thumbnailImg", thumbnailImg)
+			.addObject("detailViewList",detailViewList)
 			.setViewName("hotel_detail");
 		}else {
 			throw new HotelException("해당 호텔이 존재하지 않습니다!");
@@ -861,7 +909,7 @@ public class HotelController {
 	@RequestParam("closeTime") int hotelCloseTime,
 	@RequestParam("checkInTime") int hotelCheckInTime,
 	@RequestParam("checkOutTime") int hotelCheckOutTime,
-	@RequestParam("thumbnailImgFile") MultipartFile hotelThumbnailImgName,
+	@RequestParam("thumbnailImgFile") MultipartFile hotelThumbnailImg,
 	@RequestParam("detailImgFiles") ArrayList<MultipartFile> hotelDetailViewImgs)throws HotelException {
 	
 		hotel.setHotelRank(hotelRank);
@@ -870,20 +918,201 @@ public class HotelController {
 		hotel.setHotelCloseTime(hotelCloseTime);
 		hotel.setHotelCheckInTime(hotelCheckInTime);
 		hotel.setHotelCheckOutTime(hotelCheckOutTime);
+
+		
+		
+		//1. BOARD테이블에 등록한다
+		int boardInsertResult=hService.insertBoard(hotel);
+		if(boardInsertResult>0) {
+			
+			//2. HOTEL 테이블에 등록한다.
+			int hotelInsertResult= hService.insertHotel(hotel);
+			if(hotelInsertResult>0) {
+				
+				//3. ROOM테이블에 호텔에 같이 등록한 객실들을 등록한다.
+				int roomInsertResult;
+				ArrayList<Room> rooms= hotel.getRoomList();
+				
+				for(Room room:rooms) {
+					roomInsertResult=hService.insertOneRoom(room);
+					if(roomInsertResult==0) {
+						throw new HotelException("객실 등록에 실패하였습니다."); //ROOM테이블 등록실패
+					}
+				}
+				
+			}else {
+				throw new HotelException("호텔 게시판 등록에 실패하였습니다."); //HOTEL테이블 등록 실패
+			}
+		}else {
+			throw new HotelException("호텔 게시판 등록에 실패하였습니다."); //BOARD테이블 등록 실패
+		}
+		
+		
+		// 썸네일이미지
+		HashMap<String, Object>  imgHashMap= null;
+		if(!hotelThumbnailImg.getOriginalFilename().equals("")) {
+			//썸네일 이미지가 존재한다
+			//1. 썸네일 이미지를 buploadFiles에 넣는다.
+			imgHashMap=saveImgFile(hotelThumbnailImg,1,request);
+			
+			//2. IMG_FILE 테이블에 추가한다.
+			if(imgHashMap.get("changeName")!=null) { //변경된 이미지 이름이 null이 아니라면
+				
+				int thumbnailInsertResult=hService.insertOneHotelImg(imgHashMap);
+				
+				if(thumbnailInsertResult<=0) {
+					throw new HotelException("호텔 썸네일 이미지 등록에 실패하였습니다.");
+				}
+			}
+			
+		}
+		
+		
+		
+		
+		// 디테일이미지 등록
+		if(hotelDetailViewImgs!=null) {
+			//디테일이미지가 존재한다.
+			for(MultipartFile detailImgFile : hotelDetailViewImgs) {
+				//1. 한개의 디테일 이미지를 buploadFiles에 넣는다.
+				imgHashMap=saveImgFile(detailImgFile,2, request);
+				
+				if(imgHashMap.get("changeName")!=null) {
+					//2. 한개의 디테일이미지를 IMG_FILE 테이블에 추가한다.
+					int detailInsertResult=hService.insertOneHotelImg(imgHashMap);
+					if(detailInsertResult<=0) {
+						throw new HotelException("호텔 디테일 이미지 등록에 실패하였습니다.");
+					}
+				}
+			}
+		}
+		
 		
 		System.out.println(hotel); //전달받은 호텔정보 출력하기.
-		
-		
-		System.out.println(hotelThumbnailImgName.getOriginalFilename());//썸네일이미지
-		
-		//디테일뷰이미지
-		for(MultipartFile detailViewImg:hotelDetailViewImgs)
-			System.out.println(detailViewImg.getOriginalFilename());
-		
-		
-		
 		return "redirect:hotelList.ho";
 	}
+	
+	
+	//OS구분하기
+	public static boolean isWindows() {
+		return (OS.indexOf("win")>=0);
+	}
+	
+	public static boolean isMac() {
+		return (OS.indexOf("mac")>=0);
+	}
+	
+	//이미지 저장메소드
+	public HashMap<String, Object> saveImgFile(MultipartFile file, int imgCategory, HttpServletRequest request) {
+		// imgCategory
+		// 1: 썸네일 이미지
+		// 2: 디테일이미지
+		HashMap<String, Object> imgInfo= new HashMap<String, Object>();
+		String root= request.getSession().getServletContext().getRealPath("resources");
+		
+		//저장 위치 설정 -OS에 따라 다르게 표기되기때문에 저장위치를 다르게한다.
+		String savePath=root;
+		if(isWindows()) {
+			savePath= root+ "\\buploadFiles"; //windows
+			
+		}else if(isMac()) {
+			savePath= root+"/buploadFiles"; //mac
+		}
+		
+		
+		
+		File folder= new File(savePath);
+		if(!folder.exists()) {
+			folder.mkdirs(); //폴더생성
+		}
+		
+		SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMddHHmmssSSSS");
+		String originImgFileName= file.getOriginalFilename();
+		String renameImgFileName="";
+		if(imgCategory==1) {
+			//썸네일이미지 이름을 변경
+			renameImgFileName= "hotel_thumbnail_"+sdf.format(new Date(System.currentTimeMillis()))+"."
+											+ originImgFileName.substring(originImgFileName.lastIndexOf(".")+1);
+		}else {
+			//디테일이미지 이름을 변경
+			renameImgFileName= "hotel_detail_"+sdf.format(new Date(System.currentTimeMillis()))+"."
+					+ originImgFileName.substring(originImgFileName.lastIndexOf(".")+1);
+		}
+		
+		String renamePath= folder+"";
+		if(isWindows()) {
+			renamePath= folder+"\\"+renameImgFileName; //windows
+			
+		}else if(isMac()) {
+			renamePath= folder+"/"+renameImgFileName; //macos
+		}
+		
+		//업로드한 파일을 저장한다.
+		try {
+			file.transferTo(new File(renamePath));
+			
+		}catch(Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+		imgInfo.put("originName", originImgFileName);//원래파일이름
+		imgInfo.put("changeName", renameImgFileName);//변경파일이름
+		imgInfo.put("fileLevel", imgCategory); //파일레벨
+		imgInfo.put("filePath", renamePath); //파일 저장경로
+		return imgInfo;
+	}
+	
+	
+	
+	//파일 삭제
+	public void deleteFile(String fileName, HttpServletRequest request) {
+		String root= request.getSession().getServletContext().getRealPath("resources");
+		String savePath=root;
+		File file=null;
+		if(isWindows()) {
+			savePath= root+"\\buploadFiles";
+			file= new File(savePath+"\\"+fileName);
+		}else if(isMac()) {
+			savePath= root+"/buploadFiles";
+			file=new File(savePath+"/"+ fileName);
+		}
+		
+		
+		if(file!=null && file.exists()) {
+			file.delete();
+		}
+		
+		
+	}
+	
+	
+	@RequestMapping("hotelDelete.ho")
+	public String deleteHotel(@RequestParam("hId") int hId, HttpServletRequest request) throws HotelException{
+		
+		//hId에 해당하는 이미지를 구한다.
+		ArrayList<Attachment> hotelImgs= hService.selectHotelImgList(hId);
+		if(hotelImgs!=null) {
+			for(Attachment deleteTargetImg: hotelImgs) {
+				//썸네일 이미지를 지운다: FILE_DELETE_YN을 N => Y로 변경.
+				//디테일 이미지를 지운다: FILE_DELETE_YN을 N => Y로 변경.
+				int deleteResult= hService.deleteHotelImg(deleteTargetImg.getFileNo());
+				if(deleteResult<=0) {
+					throw new HotelException("호텔 이미지 삭제에 실패하였습니다!");
+				}
+			}
+		}
+		
+		//호텔을 지운다.
+		int result=hService.deleteBoard(hId);
+		if(result>0) {
+			return "redirect:hotelList.ho";
+		}else {
+			throw new HotelException("호텔 삭제에 실패하였습니다.");
+		}
+	}
+	
 	
 	
 	

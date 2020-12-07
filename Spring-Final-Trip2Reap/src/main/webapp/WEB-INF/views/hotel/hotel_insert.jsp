@@ -391,12 +391,12 @@
 						<div class="one-room-info-insert">
 							<div class="room_btn_remote_controller_wrapper">
 								<div class="insert_room_name">
-									<input type="text" class="room_name" placeholder="객실 이름 입력"  autocomplete="off">
+									<input name="roomList[0].roomName" type="text" class="room_name" placeholder="객실 이름 입력"  autocomplete="off">
 								</div>
 
 								<div>
 									<ul class="room_btn_remote_controller">
-										<li class="hotel-info-remove"><i class="fas fa-times"></i></li>
+										<li class="hotel-info-remove-disable"><i class="fas fa-times"></i></li>
 									</ul>
 								</div>
 							</div>
@@ -404,7 +404,7 @@
 							<div class="insert_hotel_details">
 								<div class="insert_room_kinds">
 									<span class="room_kind_label">등록 객실 종류</span> 
-									<select>
+									<select class="roomKinds" name="roomList[0].roomType">
 										<option value="">객실 종류 선택</option>
 										<option value="싱글룸">싱글룸</option>
 										<option value="더블룸">더블룸</option>
@@ -427,7 +427,7 @@
 								
 								<div class="insert_room_price_perday">
 									<span class="room_price_label">1박 이용 가격</span>
-									<input type="text" class="price_perday" placeholder="1박 이용가격(숫자)"  autocomplete="off">
+									<input type="text" name="roomList[0].pricePerDay" class="price_perday" placeholder="1박 이용가격(숫자)"  autocomplete="off">
 								</div>
 							</div>
 						</div>
@@ -441,53 +441,62 @@
 					
 					<script>
 					$(function(){
+						
+						
 						$('#add_room_btn').on('click',function(){
 							let $hotelInfoContainer= $('#insert_hotel_info_list');
-							let $oneHotelInfo=`<div class="one-room-info-insert">
-					<div class="room_btn_remote_controller_wrapper">
-						<div class="insert_room_name">
-							<input type="text" class="room_name" placeholder="객실 이름 입력" autocomplete="off">
-						</div>
-
-						<div>
-							<ul class="room_btn_remote_controller">
-								<li class="hotel-info-remove"><i class="fas fa-times"></i></li>
-							</ul>
-						</div>
-					</div>
-
-					<div class="insert_hotel_details">
-						<div class="insert_room_kinds">
-							<span class="room_kind_label">등록 객실 종류</span> 
-							<select>
-								<option value="">객실 종류 선택</option>
-								<option value="싱글룸">싱글룸</option>
-								<option value="더블룸">더블룸</option>
-								<option value="트윈룸">트윈룸</option>
-								<option value="스탠다드룸">스탠다드룸</option>
-								<option value="패밀리룸">패밀리룸</option>
-								<option value="디럭스룸">디럭스룸</option>
-								<option value="스위트룸">스위트룸</option>
-								<option value="스튜디오룸">스튜디오룸</option>
-								<option value="트리플룸">트리플룸</option>
-								<option value="온돌룸">온돌룸</option>
-								<option value="슈페리어룸">슈페리어룸</option>
-								<option value="이그제큐티브룸">이그제큐티브룸</option>
-								<option value="커넥팅룸">커넥팅룸</option>
-								<option value="프리미어룸">프리미어룸</option>
-								<option value="이코노미룸">이코노미룸</option>
-							</select>
-						</div>
-						
-						
-						<div class="insert_room_price_perday">
-							<span class="room_price_label">1박 이용 가격</span>
-							<input type="text" class="price_perday" placeholder="1박 이용가격(숫자)" autocomplete="off">
-						</div>
-					</div>
-				</div>`;
+							let $info=''
+							
+							// 등록한 객실정보개수
+							let $insertedRoomCount = $('.one-room-info-insert').length;
+							
+							console.log('==> 등록된 객실정보는 '+$insertedRoomCount+'개 입니다');
+							let $latestIndex= $insertedRoomCount;
+							
+							
+							$info+='<div class="one-room-info-insert">';
+							$info+='<div class="room_btn_remote_controller_wrapper">';
+							$info+='<div class="insert_room_name">'
+							$info+='<input type="text" name="roomList['+$latestIndex+'].roomName" class="room_name" placeholder="객실 이름 입력" autocomplete="off">'
+							$info+='</div>'
+							$info+='<div>'
+							$info+='<ul class="room_btn_remote_controller">';
+							$info+='<li class="hotel-info-remove"><i class="fas fa-times"></i></li>'
+							$info+='</ul>';
+							$info+='</div>';
+							$info+='</div>';
 								
-							$hotelInfoContainer.append($oneHotelInfo);
+							$info+='<div class="insert_hotel_details">';
+							$info+='<div class="insert_room_kinds">';
+							$info+='<span class="room_kind_label">등록 객실 종류</span> ';
+							$info+='<select class="roomKinds" name="roomList['+$latestIndex+'].roomType">';
+							$info+='<option value="">객실 종류 선택</option>';
+							$info+='<option value="싱글룸">싱글룸</option>'
+							
+							$info+='<option value="더블룸">더블룸</option>';
+							$info+='<option value="트윈룸">트윈룸</option>';
+							$info+='<option value="스탠다드룸">스탠다드룸</option>';
+							$info+='<option value="패밀리룸">패밀리룸</option>';
+							$info+='<option value="디럭스룸">디럭스룸</option>';
+							$info+='<option value="스위트룸">스위트룸</option>';
+							$info+='<option value="스튜디오룸">스튜디오룸</option>';
+							$info+='<option value="트리플룸">트리플룸</option>';	
+							$info+='<option value="온돌룸">온돌룸</option>;'
+							$info+='<option value="슈페리어룸">슈페리어룸</option>';
+							$info+='<option value="이그제큐티브룸">이그제큐티브룸</option>';
+							$info+='<option value="커넥팅룸">커넥팅룸</option>';
+							$info+='<option value="프리미어룸">프리미어룸</option>';
+							$info+='<option value="이코노미룸">이코노미룸</option>';
+							$info+='</select>';
+							$info+='</div>';
+							$info+='<div class="insert_room_price_perday">';
+							$info+='<span class="room_price_label">1박 이용 가격</span>';
+							$info+='<input name="roomList['+$latestIndex+'].pricePerDay" type="text" class="price_perday" placeholder="1박 이용가격(숫자)" autocomplete="off">';
+							$info+='</div>'
+							$info+='</div>'
+							$info+='</div>'
+								
+							$hotelInfoContainer.append($info);
 							
 						});
 						
@@ -508,10 +517,34 @@
 							  buttons: ['취소','삭제'],
 							  dangerMode: true,
 							})
-							.then((willDelete) => {
+							.then((willDelete) =>{
 							  if (willDelete) {
-								//삭제버튼에 해당하는 호텔정보를 지운다.
+								//삭제버튼에 해당하는 호텔 객실정보를 지운다.
 								currentRoomInfo.remove();
+								
+								//객실정보를 지운뒤에 나머지의 순서를 다시 정렬시킨다. name정렬
+								
+								
+								let $insertedRooms= $('.one-room-info-insert'); //삭제버튼을 클릭후, 등록한 방의 개수
+								let $insertedRoomCount = $insertedRooms.length; // 등록한 객실정보개수
+								var i=0;
+								$insertedRooms.each(function(){
+									let roomName= $(this).find('.room_name');
+									let roomType= $(this).find('.roomKinds');
+									let roomPricePerDay= $(this).find('.price_perday');
+									
+									//각 객실의 종류, 이름, 1박이용가격을 출력
+									console.log(roomName.val()+'-'+roomType.val()+'-'+roomPricePerDay.val()+'원');
+									
+									//name을 reSorting
+									roomName.attr('name', 'roomList['+i+'].roomName');
+									roomType.attr('name', 'roomList['+i+'].roomType');
+									roomPricePerDay.attr('name', 'roomList['+i+'].pricePerDay');
+									i++;
+									
+								});
+								
+								
 							    
 							  } else {
 								    swal({

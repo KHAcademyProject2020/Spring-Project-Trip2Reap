@@ -3,6 +3,7 @@ package trip.two.reap.hotel.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import trip.two.reap.common.Attachment;
 import trip.two.reap.common.PageInfo;
 import trip.two.reap.hotel.model.vo.Hotel;
 import trip.two.reap.hotel.model.vo.Reply;
@@ -101,6 +102,35 @@ public interface HotelService {
 
 	//가격이 가장싼 방가격을 가진 호텔번호를 우선으로 정렬
 	ArrayList<Integer> getOrderedLowPriceBoNoList();
+
+	
+	//2020.12.07 - 호텔 등록
+	int insertBoard(Hotel hotel);
+	int insertHotel(Hotel hotel);
+	int insertOneHotelImg(HashMap<String, Object> imgHashMap); //호텔썸네일 이미지 등록
+
+	
+	//2020.12.07 - 호텔에 등록한 객실 등록
+	int insertOneRoom(Room room);
+
+	//2020.12.07 - 호텔 삭제
+	int deleteBoard(int hId);
+
+	//2020.12.08 -호텔 이미지 구하기
+	ArrayList<Attachment> selectHotelImgList(int hId);
+	
+	//2020.12.08- FILE_NO를 찾아서 이미지 1개 지우기
+	int deleteHotelImg(int fileNo);
+
+	//2020.12.08 -hotelList.ho/ hotelDetailView.ho - 호텔한개의 썸네일이미지를 찾는다.
+	Attachment selectOneHotelThumbnailImg(int boNo);
+
+	//2020.12.08 -hotelDetailView.ho - 호텔한개의 디테일이미지들(디테일이미지 리스트)을 찾는다.
+	ArrayList<Attachment> selectDetailImgList(int boNo);
+
+	
+
+	
 
 	
 

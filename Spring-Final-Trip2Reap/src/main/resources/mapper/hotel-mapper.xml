@@ -309,4 +309,110 @@
 	GROUP BY BO_NO
 	ORDER BY MIN(PRICE_PER_DAY), BO_NO
 	</select>
+	
+	
+	<!--2020.12.07 - 호텔등록  -->
+	<insert id="insertBoard">
+	INSERT INTO BOARD VALUES(
+		SEQ_BO_NO.NEXTVAL,
+		5,
+		#{boTitle},
+		#{boContent},
+		#{memberId},
+		DEFAULT,
+		#{boTag},
+		DEFAULT,
+		SYSDATE
+	)
+	</insert>
+	
+	<insert id="insertHotel">
+	INSERT INTO HOTEL VALUES(
+		SEQ_BO_NO.CURRVAL,
+		#{hotelAddr},
+		#{hotelLocalCode},
+		#{hotelSite},
+		#{hotelTel},
+		DEFAULT,
+		#{hotelRank},
+		#{hotelOpenTime},
+		#{hotelCloseTime},
+		#{hotelOptions},
+		#{hotelCheckInTime},
+		#{hotelCheckOutTime}
+	)
+	</insert>
+	
+	<!--2020.12.08 - 호텔 썸네일이미지/ 디테일이미지 등록  -->
+	<insert id="insertOneHotelImg">
+	INSERT INTO IMG_FILE
+	VALUES(
+		SEQ_FILE_NO.NEXTVAL,
+		SEQ_BO_NO.CURRVAL,
+		#{originName},
+		#{changeName},
+		#{fileLevel},
+		#{filePath},
+		DEFAULT
+	)
+	</insert>
+	
+	
+	<!--2020.12.07 - 방등록  -->
+	<insert id="insertRoom">
+	INSERT INTO ROOM VALUES(
+		SEQ_ROOM_NO.NEXTVAL,
+		SEQ_BO_NO.CURRVAL,
+		#{roomType},
+		#{roomName},
+		#{pricePerDay}
+	)
+	</insert>
+	
+	
+	<!-- 호텔 삭제  -->
+	<update id="deleteBoard">
+	UPDATE BOARD
+	SET BO_DELETE_YN='Y'
+	WHERE BO_NO=#{hId}
+	</update>
+	
+	
+	<!-- 2020.12.08 : 삭제에 필요-  boNo과 관련된 호텔 이미지를 구한다. -->
+	<select id="selectHotelImgList" resultMap="imgFileResultSet">
+	SELECT *
+	FROM IMG_FILE
+	WHERE BO_NO=#{hId} AND FILE_DELETE_YN='N'
+	</select>
+	
+	<resultMap type="Attachment" id="imgFileResultSet">
+		<id property="fileNo" column="FILE_NO" />
+		<result property="boNo" column="BO_NO"/>
+		<result property="originName" column="ORIGIN_NAME"/>
+		<result property="changeName" column="CHANGE_NAME"/>
+		<result property="fileLevel" column="FILE_LEVEL"/>
+		<result property="filePath" column="FILE_PATH"/>
+		<result property="fileDeleteYN" column="FILE_DELETE_YN"/>
+	</resultMap>
+	
+	<!-- 2020.12.08 - 호텔이미지 1개 삭제하기 -->
+	<update id="deleteOneHotelImg">
+	UPDATE IMG_FILE
+	SET FILE_DELETE_YN='Y'
+	WHERE FILE_NO =#{fileNo}
+	</update>
+	
+	<!-- 2020.12.08 - 호텔썸네일 이미지 구하기 -->
+	<select id="selectOneHotelThumbnailImg" resultMap="imgFileResultSet">
+	SELECT FILE_NO, BO_NO, ORIGIN_NAME, CHANGE_NAME, FILE_LEVEL, FILE_PATH, FILE_DELETE_YN
+	FROM HOTEL_THUMBNAIL_IMG_VIEW
+	WHERE BO_NO=#{boNo}
+	</select>
+	
+	<!--2020.12.08 - 호텔 디테일 이미지 리스트 구하기  -->
+	<select id="selectDetailImgList" resultMap="imgFileResultSet">
+	SELECT FILE_NO, BO_NO, ORIGIN_NAME, CHANGE_NAME, FILE_LEVEL, FILE_PATH, FILE_DELETE_YN
+	FROM HOTEL_DETAIL_IMG_VIEW
+	WHERE BO_NO=#{boNo}
+	</select>
 </mapper>

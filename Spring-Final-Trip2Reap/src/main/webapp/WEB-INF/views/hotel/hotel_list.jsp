@@ -83,9 +83,17 @@
 			<c:if test="${!empty hotelList}">
 				<c:forEach var="i" begin="0" end="${fn:length(hotelList)-1}" varStatus="status">
 					<div class="one-hotel-info-container">
-	
-		                <img src="resources/images/sample_hotel.jpg" alt="호텔이미지">
-	
+						<%--썸네일 이미지 --%>
+						<c:if test="${!empty thumbnailImgList.get(status.index)  }">
+							<%--썸네일 이미지가 존재한다면 --%>
+							<img src="resources/buploadFiles/${thumbnailImgList.get(status.index).changeName}"/>
+						</c:if>
+						
+						<c:if test="${empty thumbnailImgList.get(status.index) }">
+							<%--썸네일 이미지가 존재하지 않는다면 --%>
+		                	<img src="resources/images/sample_hotel.jpg" alt="호텔이미지">
+						</c:if>
+						
 		                <div class="detail-info-container">
 		                    <div>
 		                        <div class="info-container">

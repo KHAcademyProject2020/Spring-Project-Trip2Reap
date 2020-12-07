@@ -549,7 +549,7 @@ ul.room_btn_remote_controller li{
   text-align: center;
   padding: 1px;
   color: var(--dark-gray);
-  cursor: pointer;
+ /*  cursor: pointer; */
 }
 
 .insert_hotel_details{
@@ -586,10 +586,17 @@ ul.room_btn_remote_controller li{
 	background-color: var(--pink-gray);
 }
 
+li.hotel-info-remove-disable .fa-times{
+	color: var(--blue-gray);
+	border-radius: 3px;
+	padding: 1px;
+	width: 17px;
+	height: 17px;
+	cursor: none;
+}
+
 #add_room_btn,
-.room_btn_remote_controller .fa-angle-up,
-.room_btn_remote_controller .fa-angle-down,
-.room_btn_remote_controller .fa-times{
+li.hotel-info-remove .fa-times{
   /* background-color: var(--mid-green); */
   color: var(--mid-green);
   border-radius : 3px;
@@ -602,11 +609,6 @@ ul.room_btn_remote_controller li{
 .room_btn_remote_controller li{
 	
 	padding: 1px 2px;
-	/*
-	background-color: var(--mid-green);
-	 width: 17px;
-	height: 17px; 
-	*/
 	text-align: center;
 	border-radius: 3px;
 }
@@ -625,8 +627,7 @@ ul.room_btn_remote_controller li{
   color:var(--dark-gray);
 }
 
-.hotel-info-order-up .fa-angle-up:hover,
-.hotel-info-order-down .fa-angle-down:hover,
+
 .hotel-info-remove .fa-times:hover{
 	/* background-color: var(--bright-green); */
 	color:var(--dark-gray);

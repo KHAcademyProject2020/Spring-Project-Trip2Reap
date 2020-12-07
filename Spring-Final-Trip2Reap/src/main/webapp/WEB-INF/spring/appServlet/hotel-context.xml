@@ -27,15 +27,25 @@
 
 	<!--interceptor 등록하기 : 호텔등록/ 호텔수정 페이지는 관리자만 접근가능하므로, prehandler로 접근을 막는다. -->
 	<mvc:interceptors>
+		<!-- 호텔 등록폼페이지 Interceptor -->
 		<mvc:interceptor>
 			<mvc:mapping path="/hotelInsertView.ho"/>
 			<bean id="hotelInsertViewInterceptor" class="trip.two.reap.common.interceptor.HotelEnterInterceptor"/>
 		</mvc:interceptor>
 		
+		<!--호텔 등록 interceptor -->
+		<mvc:interceptor>
+			<mvc:mapping path="/hotelInsert.ho"/>
+			<bean id="hotelInsertInterceptor" class="trip.two.reap.common.interceptor.HotelEnterInterceptor"/>
+		</mvc:interceptor>
+		
+		<!-- 호텔 수정 폼페이지 interceptor -->
 		<mvc:interceptor>
 			<mvc:mapping path="/hotelEditView.ho"/>
 			<bean id="hotelEditViewInterceptor" class="trip.two.reap.common.interceptor.HotelEnterInterceptor"/>
 		</mvc:interceptor>
+		
+		
 	</mvc:interceptors>
 	
 	

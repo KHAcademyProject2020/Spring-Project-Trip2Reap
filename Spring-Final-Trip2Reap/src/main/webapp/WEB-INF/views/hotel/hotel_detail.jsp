@@ -43,6 +43,7 @@
 
 			<!-- 호텔번호 /호텔이름  -->
 			<input id="hotel-number" type="hidden" value="${hotel.boNo }">
+			
 			<h1 id="hotel-name">${hotel.boTitle} </h1>
 		</div>
 
@@ -52,7 +53,14 @@
 			<!--호텔썸네일 이미지/ 해시태그 기록   -->
 			<div id="thumbnail-img-hashtag-container">
 				<div id="thumbnail-img-wrapper">
-					<img id="thumbnail-img" alt="썸네일 이미지" src="resources/images/sinra.jpeg"/>
+					<%--썸네일 이미지가 존재하면 --%>
+					<c:if test="${!empty thumbnailImg }">
+						<img id="thumbnail-img" alt="썸네일 이미지" src="resources/buploadFiles/${thumbnailImg.changeName }"/>
+					</c:if>
+					<%--썸네일 이미지가 존재하지 않으면 --%>
+					<c:if test="${empty thumbnailImg }">
+						<img id="thumbnail-img" alt="썸네일 이미지" src="resources/images/sinra.jpeg"/>
+					</c:if>
 				</div>
 
 				<!--해시태그가 null이 아닌경우에만 보여준다.-->
@@ -196,6 +204,7 @@
 					 <c:if test="${loginUser.memberId=='admin' }">
 						<button id="edit-hotel-detail-info-page-btn" onclick="location.href='<%=request.getContextPath()%>/hotelEditView.ho'">수정하기</button>
 						<button id="remove-hotel-btn">삭제하기 </button>
+						
 					 </c:if>
 				</div>
 			</div>
@@ -225,38 +234,64 @@
 		<%--(3) --%>
 		<div class="hotel-info-container">
 			<div class="hotel-image-viewer">
-				<div class="swiper-container gallery-top">
-					<div class="swiper-wrapper">
-						<div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+				<%--디테일뷰가 비어있다면 --%>
+				<c:if test="${empty detailViewList}">
+					<div class="swiper-container gallery-top">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+				            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+				            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+				            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+				            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+				            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+				            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+				            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+				            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+				            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+						</div>
+	
+						<div class="swiper-button-next swiper-button-white"></div>
+						<div class="swiper-button-prev swiper-button-white"></div>
 					</div>
-
-					<div class="swiper-button-next swiper-button-white"></div>
-					<div class="swiper-button-prev swiper-button-white"></div>
-				</div>
-
-				<div class="swiper-container gallery-thumbs">
-					<div class="swiper-wrapper">
-						<div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
-			            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+	
+					<div class="swiper-container gallery-thumbs">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+				            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+				            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+				            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+				            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+				            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+				            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+				            <div class="swiper-slide" style="background-image:url(resources/images/sinra.jpeg)"></div>
+				            <div class="swiper-slide" style="background-image:url(resources/images/trump.jpeg)"></div>
+				            <div class="swiper-slide" style="background-image:url(resources/images/sample_hotel.jpg)"></div>
+						</div>
 					</div>
-				</div>
+				</c:if>
+				
+				
+				<%-- 디테일 이미지 뷰가 비어있지 않는다면 --%>
+				<c:if test="${!empty detailViewList }">
+					<div class="swiper-container gallery-top">
+						<div class="swiper-wrapper">
+							<c:forEach var="detailImg" items="${detailViewList }">
+								<div class="swiper-slide" style="background-image:url(resources/buploadFiles/${detailImg.changeName})"></div>
+							</c:forEach> 
+						</div>
+	
+						<div class="swiper-button-next swiper-button-white"></div>
+						<div class="swiper-button-prev swiper-button-white"></div>
+					</div>
+					<div class="swiper-container gallery-thumbs">
+						<div class="swiper-wrapper">
+							<c:forEach var="detailImg" items="${detailViewList }">
+								<div class="swiper-slide" style="background-image:url(resources/buploadFiles/${detailImg.changeName})"></div>
+				            </c:forEach>
+						</div>
+					</div>
+					
+				</c:if>
 			</div> <%--hotel-image-viewer --%>
 		</div> <%-- hotel-info-container --%>
 	</div>
@@ -1090,6 +1125,42 @@
 
 <script>
 $(function(){
+	//게시글 삭제 => board가 삭제되면 나머지도 다 삭제
+	$('#remove-hotel-btn').click(function(){
+		//삭제 확인 경고창
+		swal({
+			title:"정말로 삭제하시겠습니까?",
+			text: "게시글 삭제하면 관련데이터를 복구를 할 수 없습니다. 정말로 삭제하시겠습니까?",
+			icon: "warning",
+			buttons: ["삭제 취소", "삭제"],
+			dangerMode: true,
+		
+		})
+		.then((willDelete)=>{
+			if(willDelete){
+				swal({
+					title: "호텔 삭제 완료",
+					text: "해당 호텔정보를 삭제합니다.",
+					icon: "success",
+					button: "확인"
+				});
+				
+				//삭제처리
+				let hId= $('#hotel-number').val();
+				location.href='hotelDelete.ho?hId='+hId;
+				
+				
+			}else{
+				swal({
+					text: "삭제를 취소합니다.",
+					button: '확인'
+				});
+				
+			}
+		});
+	});
+	
+	
 	$('#review_more_btn').click(function(){
 		
 		console.log('더보기 버튼을 클릭하였습니다.');
@@ -1108,7 +1179,7 @@ $(function(){
 		
 		
 	});	
-})
+});
 
 
 </script>

@@ -1,7 +1,7 @@
 package trip.two.reap.common;
 
 public class Attachment {
-	private int FileNo;
+	private int fileNo;
 	private int boNo;
 	private String originName;
 	private String changeName;
@@ -14,7 +14,7 @@ public class Attachment {
 	public Attachment(int fileNo, int boNo, String originName, String changeName, int fileLevel, String filePath,
 			String fileDeleteYN) {
 		super();
-		FileNo = fileNo;
+		this.fileNo = fileNo;
 		this.boNo = boNo;
 		this.originName = originName;
 		this.changeName = changeName;
@@ -24,11 +24,11 @@ public class Attachment {
 	}
 
 	public int getFileNo() {
-		return FileNo;
+		return fileNo;
 	}
 
 	public void setFileNo(int fileNo) {
-		FileNo = fileNo;
+		this.fileNo = fileNo;
 	}
 
 	public int getBoNo() {
@@ -81,7 +81,7 @@ public class Attachment {
 
 	@Override
 	public String toString() {
-		return "Attachment [FileNo=" + FileNo + ", boNo=" + boNo + ", originName=" + originName + ", changeName="
+		return "Attachment [fileNo=" + fileNo + ", boNo=" + boNo + ", originName=" + originName + ", changeName="
 				+ changeName + ", fileLevel=" + fileLevel + ", filePath=" + filePath + ", fileDeleteYN=" + fileDeleteYN
 				+ "]";
 	}
