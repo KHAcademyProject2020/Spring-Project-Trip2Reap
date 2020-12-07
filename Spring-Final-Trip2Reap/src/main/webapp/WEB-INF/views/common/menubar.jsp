@@ -38,10 +38,10 @@
 					<ul>
 						<!-- 로그아웃 상태 -->
 						<li class="topBar">
-						<a class="btn" href="#ex7" onMouseOver="this.style.color='#77af82';"
+						<a class="btn" href="#ex7" onMouseOver="this.style.color='#F2CA5E';"
 							onMouseOut="this.style.color=''">로그인</a></li>
 						<li class="topBar" onclick="join();"
-							onMouseOver="this.style.color='#77af82';"
+							onMouseOver="this.style.color='#F2CA5E';"
 							onMouseOut="this.style.color=''">회원가입</li>
 					</ul>
 				</div>
@@ -53,9 +53,9 @@
 						<li class="topBar2_1"><b><c:out
 									value="${ loginUser.nickName }님 환영합니다!" /></b></li>
 						<li class="topBar2_2" onclick="logout();"
-							onMouseOver="this.style.color='#77af82';"
+							onMouseOver="this.style.color='#F2CA5E';"
 							onMouseOut="this.style.color=''">로그아웃</li>
-						<li class="topBar2_2" id="myPageBtn" onMouseOver="this.style.color='#77af82';"
+						<li class="topBar2_2" id="myPageBtn" onMouseOver="this.style.color='#F2CA5E';"
 							onMouseOut="this.style.color=''" onclick="myPage()">마이페이지</li>
 					</ul>
 				</div>
@@ -66,21 +66,24 @@
 		<div id="menu_1">
 		    <div id="menu_4"></div>
 			<div id="menu_2">
-				<img src="resources/images/로고2.png" id="mainLogo" onclick="main();">
+				<img src="resources/images/로고로고.png" id="mainLogo" onclick="main();">
 			</div>
 			<div id="menu_3">
 				<span id="menu_travel" class="menus">
 					<i class="fas fa-suitcase-rolling" id="menuIcon1"></i>
-					<span class="menu_name">여행지</span>
+					<span class="menu_name">여행지</span>					
 				</span>
+				<span id="menu_line">|</span>
 				<span id="menu_course" class="menus">
 					<i class="fas fa-map-signs" id="menuIcon2"></i>
 					<span class="menu_name">여행 코스</span>
 				</span>
+				<span id="menu_line">|</span>
 				<span id="menu_review" class="menus">
 					<i class="fas fa-camera-retro" id="menuIcon3"></i>
 					<span class="menu_name">여행 후기</span>
 				</span>
+				<span id="menu_line">|</span>
 				<span id="menu_hotel" class="menus">
 					<i class="fas fa-hotel" id="menuIcon4"></i>
 					<span class="menu_name">호텔</span>

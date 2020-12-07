@@ -9,7 +9,7 @@
     
     
     /* 상단바   */
-    #rootBar{ background-color: rgb(207,227,225); margin : 0px auto; height: 35px; text-align: center; }
+    #rootBar{ background-color: rgb(243,243,243); margin : 0px auto; height: 35px; text-align: center; }
 	.root{ height: 25px; text-align: right; margin: 0px auto; padding: 10px 200px 0px 0px; }
 
     /* 로그아웃 상태 */
@@ -20,7 +20,7 @@
     
     
     /*  메인로고(전국방방곡곡)  */
-    #mainLogo { width: 280px; cursor: pointer; }
+    #mainLogo { width: 300px; cursor: pointer; }
       
     
     /*  메뉴(여행지, 여행코스, 여행후기, 호텔)  */
@@ -29,13 +29,14 @@
 	#menu_3{ width: 50%; padding: 15px;}
 	#menu_4{ width: 5%;}
 	
-	.menus{ display: inline-block; border-right: 3px solid #efefef; padding: 10px 45px;}
+	.menus{ display: inline-block; padding: 10px 45px;}
 	.menus:hover{ cursor: pointer; }
     #menuIcon1{ font-size: 30px; margin-right: 4px; color : rgb(202,240,170); vertical-center : super; margin-top:10px; }
-    #menuIcon2{ font-size: 30px; margin-right: 4px; color : rgb(242,203,97); vertical-center : super; margin-top:10px; }
-    #menuIcon3{ font-size: 30px; margin-right: 4px; color : rgb(218,219,255); vertical-center : super; margin-top:10px; }
-    #menuIcon4{ font-size: 30px; margin-right: 4px; color : rgb(255,167,167); vertical-center : super; margin-top:10px; }
+    #menuIcon2{ font-size: 28px; margin-right: 4px; color : rgb(242,203,97); vertical-center : super; margin-top:10px; }
+    #menuIcon3{ font-size: 27px; margin-right: 4px; color : rgb(218,219,255); vertical-center : super; margin-top:10px; }
+    #menuIcon4{ font-size: 24px; margin-right: 4px; color : rgb(255,167,167); vertical-center : super; margin-top:10px; }
 	.menu_name{ font-weight: bold; }
+	#menu_line { font-size: 35px; color: rgb(243,243,243); }
 	
 	
 	/* 로그인 창 */
