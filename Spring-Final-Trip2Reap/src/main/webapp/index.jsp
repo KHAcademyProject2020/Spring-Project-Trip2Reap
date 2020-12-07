@@ -44,6 +44,9 @@
          </section>
 
          <script>
+         var height = window.innerHeight;
+         $('#slider-wrap').css('height',height);
+         
          var slideWrapper = document.getElementById('slider-wrap');
          // 현재 슬라이드 번호 
          var slideIndex = 0;
@@ -51,7 +54,7 @@
          // 전체 슬라이드 갯수
          var totalSlides = slides.length;
          // 슬라이드 가로길이
-         var sliderWidth = 1536;
+         var sliderWidth = window.innerWidth;
 
          slides.forEach(function (element) {
              element.style.width = sliderWidth + 'px';
