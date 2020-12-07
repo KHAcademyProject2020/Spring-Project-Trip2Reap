@@ -39,3 +39,7 @@ hs_err_pid*
 # MAC OS
 
 .DS_Store
+
+
+# buploadFiles
+buploadFiles/*
