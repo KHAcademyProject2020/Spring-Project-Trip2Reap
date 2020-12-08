@@ -1,6 +1,6 @@
 package trip.two.reap.travel.model.vo;
 
-import trip.two.reap.review.model.vo.PageInfo;
+import trip.two.reap.common.PageInfo;
 
 public class Pagination { 
 	  public static PageInfo getPageInfo(int currentPage, int listCount) { 

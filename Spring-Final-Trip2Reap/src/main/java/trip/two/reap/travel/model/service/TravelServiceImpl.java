@@ -1,12 +1,14 @@
 package trip.two.reap.travel.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import trip.two.reap.review.model.vo.PageInfo;
+import trip.two.reap.common.Attachment;
+import trip.two.reap.common.PageInfo;
 import trip.two.reap.travel.model.dao.TravelDAO;
 import trip.two.reap.travel.model.vo.Travel;
 
@@ -20,8 +22,8 @@ public class TravelServiceImpl implements TravelService{
 	private TravelDAO tDAO;
 	
 	@Override
-	public int getListCount() {
-		return tDAO.getListCount(sqlSession);
+	public int getAllListCount() {
+		return tDAO.getAllListCount(sqlSession);
 	}
 
 	@Override
@@ -36,8 +38,36 @@ public class TravelServiceImpl implements TravelService{
 	
 	@Override
 	public int insertTravel(Travel t) {
-			return tDAO.insertTravel(sqlSession, t);
+		return tDAO.insertTravel(sqlSession, t);
 	}
+	
+   @Override public int insertFiles(Attachment a) { return
+   tDAO.insertFiles(sqlSession, a); }
+	 
+
+	@Override
+	public Travel selectTravel(int boNo) {
+
+		Travel t = null;
+		
+		int result = tDAO.addReadCount(sqlSession, boNo); //count증가
+		
+		if(result > 0) {
+			t = tDAO.selectTravel(sqlSession, boNo);
+		}
+		
+		return t;
+	}
+	/*
+	 * @Override public int insertOneThumImg(HashMap<String, Object> imgHashMap) {
+	 * return tDAO.insertOneThumImg(sqlSession, imgHashMap); }
+	 */
+
+
+	
+
+	
+
 
 	
 }

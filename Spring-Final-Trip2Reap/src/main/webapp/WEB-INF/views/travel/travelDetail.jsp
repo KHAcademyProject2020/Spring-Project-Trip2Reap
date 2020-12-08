@@ -22,11 +22,11 @@
 				</div>
 			</div>
 			<div id="travel_info">
-				<div id="cate_travel">관광지</div>
-				<div id="name_travel">송도 센트럴파크</div>
-				<div id="add_travel">인천 연수구</div>
+				<div id="cate_travel">${ travel.trTheme }</div>
+				<div id="name_travel">${ travel.boTitle }</div> <!-- 여행지 이름 -->
+				<div id="add_travel">${ travel.trReg }</div>
 				<div id="share">
-					<!-- <span>조회 1000</span> 나중에 수정 -->
+					 <span id="count_span">조회수 : ${ travel.boCount } </span> 
 						<span id="share_span" onclick="location">
 							<i class="fas fa-share-alt"></i>
 								<span class="share_name" id="sh-link">공유하기</span>
@@ -40,8 +40,18 @@
 			
 			<!-- 여행지 내용 부분 시작 -->
 			<div id="travel_content">
-				<img src="resources/images/송도.JPG" id="content_img"/>
-				<img src="resources/images/송도2.JPG" id="content_img2"/>
+		<%-- 		<c:forEach var="imageFileName" items="${ t.fileList }"> --%>
+				<!-- <img src="resources/images/송도.JPG" id="content_img"/> -->
+				
+				<img src="${ contextPath }/resources/buploadFiles/${ travel.changeName }" id="content_img"/>
+					<!-- a태그 안에서 다운로드 받을 것이 있을 때 쓰는 속성 download, 얘는 download="fileName" 이라고 해서 fileName을 지정해줄 수 있다. -->
+				<!-- <img src="resources/images/송도2.JPG" id="content_img2"/> -->
+				<div id="content_img2">👍부담없이 감상하는 백만 불짜리 야경👍</div>
+				<div id="content_img3">외국에서는 야경도 관광 명물 중 하나로 적극 홍보한다. 일본의 경우 2012년 '일반사단법인 야경관광컨벤션뷰로'가 전국의 야경감상사 3,500여 명으로부터
+				'세계 신3대 야경을 추천받아 모나코, 홍콩과 함께 나가사키가 선정되었다고 발표했다. 이후 나가사키시는 자신들의 관광자원을 자랑할 때 야경을 절대 빼놓지 않는다.</div>
+				<%-- </c:forEach> --%>
+				
+				
 					<table id="travel_cate_table">
 						<tr id="th_cate">
 							<th><i class="fas fa-info-circle"></i>  여행정보 </th>
@@ -49,18 +59,15 @@
 						<tr> 
 							<th>&nbsp;</th>
 						</tr>
-						<tr id="tr_cate">
-							<td class="td_cate">인천종합관광안내소(송도 센트럴파크)</td>
-						</tr>
 						<tr>	
-							<td class="td_cate">- 주소 : 인천 연수구 인천타워대로 234</td>
+							<td class="td_cate">- 주소 : ${ travel.trAddr }</td>
 						</tr>
 						<tr>	
 							<td>- 문의 : 032-832-3031</td>
 						</tr>
 					</table>
 					<div id="last_div">
-						<img src="resources/images/송도3.JPG" id="content_img3"/>
+						<div id="map" style="width:58%;height:350px;"></div>
 					</div>
 			
 				 <div id="hashtag_div">
@@ -142,7 +149,50 @@
 					swal("URL이 복사에 실패했습니다.", "이 브라우저는 지원하지 않습니다.", "error");
 					} 
 				}); // 클립보드 복사
-	</script>	
+	</script>
+	
+	
+	
+	<!-- 도로명주소로 지도띄우기 // 카카오api -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b792742c4c4637344dc9db9e5f475bf5&libraries=services"></script>
+	<script>
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	    mapOption = {
+	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+	        level: 3 // 지도의 확대 레벨
+	    };  
+	
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch('${ travel.trAddr }', function(result, status) {
+	
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === kakao.maps.services.Status.OK) {
+	
+	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new kakao.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+	
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new kakao.maps.InfoWindow({
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;">${ travel.boTitle }</div>'
+	        });
+	        infowindow.open(map, marker);
+	
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+	});    
+	</script>
 </section>
 </body>
 </html>

@@ -14,9 +14,12 @@ public class Travel {
 	private Date regDate;		
 	
 	private int trNo;			// 여행지 번호
-	private String trAddr;		// 여행지 주소
+	private String trAddr;		// 여행지 상세주소
 	private String trTheme;		// 여행지 테마
 	private String trReg;		// 여행지 지역
+	private String trTitle;		// 여행지 내용 타이틀
+	private String trPhone;		// 여행지 번호
+	private String changeName;	// 파일 이름
 	
 	private int fileNo;			// 파일 번호 -> 없애야 할 듯!
 	
@@ -203,13 +206,49 @@ public class Travel {
 	}
 
 
+	public String getTrTitle() {
+		return trTitle;
+	}
+
+
+	public void setTrTitle(String trTitle) {
+		this.trTitle = trTitle;
+	}
+
+
+	public String getTrPhone() {
+		return trPhone;
+	}
+
+
+	public void setTrPhone(String trPhone) {
+		this.trPhone = trPhone;
+	}
+
+
+	public String getChangeName() {
+		return changeName;
+	}
+
+
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Travel [boNo=" + boNo + ", caCode=" + caCode + ", boTitle=" + boTitle + ", boContent=" + boContent
 				+ ", memberId=" + memberId + ", boCount=" + boCount + ", boTag=" + boTag + ", boDeleteYN=" + boDeleteYN
 				+ ", regDate=" + regDate + ", trNo=" + trNo + ", trAddr=" + trAddr + ", trTheme=" + trTheme + ", trReg="
-				+ trReg + ", fileNo=" + fileNo + "]";
+				+ trReg + ", trTitle=" + trTitle + ", trPhone=" + trPhone + ", changeName=" + changeName + ", fileNo="
+				+ fileNo + "]";
 	}
+
+
+	
+
+	
 
 	
 	

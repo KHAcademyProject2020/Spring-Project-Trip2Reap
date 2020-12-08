@@ -6,14 +6,15 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import trip.two.reap.review.model.vo.PageInfo;
+import trip.two.reap.common.Attachment;
+import trip.two.reap.common.PageInfo;
 import trip.two.reap.travel.model.vo.Travel;
 
 @Repository("tDAO")
 public class TravelDAO {
 
-	public int getListCount(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("travelMapper.getListCount");
+	public int getAllListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("travelMapper.getAllListCount");
 	}
 
 	public ArrayList<Travel> selectList(SqlSessionTemplate sqlSession, PageInfo pi) { //영속성 프레임워크 MyBatis
@@ -25,14 +26,32 @@ public class TravelDAO {
 		
 	}
 
-	/*
-	 * public int insertBoard(SqlSessionTemplate sqlSession, Travel t) {
-	 * System.out.println("t : " + t); return
-	 * sqlSession.insert("travelMapper.insertBoard", t); //board테이블에 등록하기 }
-	 */
 
 	public int insertTravel(SqlSessionTemplate sqlSession, Travel t) {
 		return sqlSession.insert("travelMapper.insertTravel", t); //travel테이블에 등록하기
 	}
+
+	
+	  public int insertFiles(SqlSessionTemplate sqlSession, Attachment a) { 
+		  return sqlSession.insert("travelMapper.insertFiles", a); //첨부파일 
+	  }
+	  
+	 
+
+	public int addReadCount(SqlSessionTemplate sqlSession, int boNo) {
+		return sqlSession.update("travelMapper.addReadCount", boNo); //travel상세보기 count증가
+	}
+
+	public Travel selectTravel(SqlSessionTemplate sqlSession, int boNo) {
+		return (Travel)sqlSession.selectOne("travelMapper.selectTravel", boNo); //travel상세보기
+	}
+
+
+	/*
+	 * public int insertOneThumImg(SqlSessionTemplate sqlSession, HashMap<String,
+	 * Object> imgHashMap) { return
+	 * sqlSession.insert("travelMapper.insertOneThumImg", imgHashMap); }
+	 */
+
 
 }
