@@ -90,7 +90,45 @@
  		INTO BOARD (BO_NO,MEMBER_ID,CA_CODE,BO_TITLE,BO_TAG,BO_CONTENT)
  		VALUES(SEQ_BO_NO.NEXTVAL,#{memberId},#{caCode},#{boTitle},#{boTag},#{boContent})
   </insert>
-
+  
+  <!-- <update id="updateReview">
+      update board
+      set bTitle=#{bTitle}, bContent=#{bContent}, 
+         <if test="originalFileName != null">
+         ORIGIN_NAME=#{originName},
+         </if>
+         CHANGE_NAME=#{changeName}, REGDATE=sysdate
+      where BO_NO=#{boNo}
+   </update>
+   
+   <update id="deleteReview">
+       update board
+       set BO_DELETE_YN='N'
+       where BO_NO=#{boNo}
+   </update> -->
+   
+   <insert id="insertReply">
+       insert into reply
+       values (SEQ_re_no.NEXTVAL,#{boNo},#{memberId},sysdate,#{reContent},default)
+   </insert>
+   
+   <select id="selectReplyList" resultMap="replyResultSet">
+       select *
+       from reply
+       where BO_NO=#{boNo}
+       order by re_no desc
+   </select> 
+   
+   <resultMap type="Reply" id="replyResultSet">
+   <id property="reNo" column="RE_NO"/>
+		<result column="BO_NO" property="boNo" />
+		<result column="MEMBER_ID" property="memberId"/>
+		<result column="RE_DATE" property="reDate" />	
+		<result column="RE_CONTENT" property="reContent" />
+		<result column="RE_DELETE_YN" property="reDeleteYN" />
+   </resultMap>
+  
+  
 
 </mapper>
 

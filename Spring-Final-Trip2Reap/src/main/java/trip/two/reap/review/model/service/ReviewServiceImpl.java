@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import trip.two.reap.common.Attachment;
 import trip.two.reap.common.PageInfo;
 import trip.two.reap.review.model.dao.ReviewDAO;
-
+import trip.two.reap.review.model.vo.Reply;
 import trip.two.reap.review.model.vo.Review;
 
 @Service("rService")
@@ -59,6 +59,21 @@ public class ReviewServiceImpl implements ReviewService{
 	public int updateReview(Review r) {
 	
 		return rDAO.updateReview(sqlSession, r);
+	}
+
+	@Override
+	public int deleteReview(int boNo) {
+		return rDAO.deleteReview(sqlSession, boNo);
+	}
+
+	@Override
+	public int addReply(Reply re) {
+		return rDAO.addReply(sqlSession, re);
+	}
+
+	@Override
+	public ArrayList<Reply> selectReply(int boNo) {
+		return rDAO.selectReply(sqlSession, boNo);
 	}
 
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import trip.two.reap.common.Attachment;
 import trip.two.reap.common.PageInfo;
+import trip.two.reap.review.model.vo.Reply;
 import trip.two.reap.review.model.vo.Review;
 
 public interface ReviewService {
@@ -19,6 +20,12 @@ public interface ReviewService {
 	int insertBoard(Review r);
 	
 	int updateReview(Review r);
+	
+	int deleteReview(int boNo);
+
+	int addReply(Reply re);
+
+	ArrayList<Reply> selectReply(int boNo);
 
 
 }
