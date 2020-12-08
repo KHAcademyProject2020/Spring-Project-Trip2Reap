@@ -6,71 +6,106 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="resources/css/course/courseList.css"/>
-<style type="text/css">
-    #menuIcon2 { font-size: 40px; margin-right: 4px; color : rgb(242,203,97); }
-</style>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap" rel="stylesheet">
 </head>
-<body>
-	<section>
+<body>	
 	<header>
    	 <c:import url="../common/menubar.jsp" />
 	</header>
-	<div id="all_div">
-		<div id="menu_div">
-			<div id="menu_left_div">
-<!-- 				<img src="resources/images/courseIcon.png" id="menu_img"/> -->
-				<i class="fas fa-map-signs" id="menuIcon2"></i>
-				<span id="menu">여행 코스</span>
-			</div>
-			<div id="menu_right_div">
-				<input type="text" id="input_search"/>
-				<input type="button" value="검색" id="button_search" onclick="errorView();"/>
-			</div>
+	
+	<section>
+	    <div id="coSpace1"></div>
+		<div id="coMain">
+		     <div>
+		         <div id="coSpace2"></div>
+		         <div id="coSpace3"></div>
+		         <label id="coLabel1">여행만렙! 사용자가 직접 만든</label>
+		         <label id="coLabel2">여행코스</label>
+		         <div id="makeCourse" onclick="insertView();">
+		            <label id="makeLabel1">나만의 여행지 만들기</label>
+		            <label id="makeLabel2">></label>
+		         </div>
+		     </div>
+		     
+		     <div>		          
+		          <div id="coSpace4"></div>
+		          <div id="coSpace3"></div>
+		          <div class="coSelect" id="coSelect1">
+		              <div><img src="resources/images/family.png" id="coIcon1"></div>    
+		              <label class="commonLabel">가족 코스</label>
+		          </div>
+		          <div id="coSpace5"></div>
+		          
+		          <div class="coSelect" id="coSelect2">
+		              <div id="coSpace8"></div>
+		              <i class="fas fa-walking" id="coIcon2"></i>
+		              <div id="coSpace8"></div>
+		              <label class="commonLabel">나홀로 코스</label>
+		          </div>
+		          <div id="coSpace5"></div>
+		          
+		          <div class="coSelect" id="coSelect3">
+		              <div id="coSpace6"></div>
+		              <i class="fas fa-heart" id="coIcon3"></i>
+		              <div id="coSpace8"></div>
+		              <label class="commonLabel">커플 코스</label>
+		          </div>
+		          <div id="coSpace5"></div>
+		          
+		          <div class="coSelect" id="coSelect4">
+		              <div id="coSpace6"></div>
+		              <i class="fas fa-child" id="coIcon4"></i>
+		              <i class="fas fa-child" id="coIcon4"></i>
+		              <div id="coSpace7"></div>
+		              <label class="commonLabel">우정 코스</label>
+		          </div>
+		          <div id="coSpace5"></div>
+		          
+		          <div class="coSelect" id="coSelect5">
+		              <div id="coSpace6"></div>
+		              <i class="fas fa-campground" id="coIcon5"></i>
+		              <div id="coSpace7"></div>
+		              <label class="commonLabel">캠핑 코스</label>
+		          </div>
+		          <div id="coSpace5"></div>
+		          
+		          <div class="coSelect" id="coSelect6">
+		              <div id="coSpace6"></div>
+		              <i class="fas fa-biking" id="coIcon6"></i>
+		              <div id="coSpace7"></div>
+		              <label class="commonLabel">액티비티</label>
+		          </div>
+		     </div>
+		
+		</div>
+		<div id="coMenu">
+		    <div id="coSpace8"></div>
+		    <div id="coSpace3"></div>
+		    <span class="coMenuLabel" onMouseOver="this.style.color='#F2CA5E';"
+				  onMouseOut="this.style.color=''">전체</span>
+		    <span class="coMenuLabel2">|</span>
+		    <span class="coMenuLabel" onMouseOver="this.style.color='#F2CA5E';"
+				  onMouseOut="this.style.color=''">당일여행</span>
+		    <span class="coMenuLabel2">|</span>
+		    <span class="coMenuLabel" onMouseOver="this.style.color='#F2CA5E';"
+				  onMouseOut="this.style.color=''">1박2일</span>
+		    <span class="coMenuLabel2">|</span>
+		    <span class="coMenuLabel" onMouseOver="this.style.color='#F2CA5E';"
+				  onMouseOut="this.style.color=''">2박3일</span>
 		</div>
 		
-		<div id="cate_table_div">
-			<span class="cate_name">지역</span>
-			<i class="fas fa-leaf"></i>
-			<table id="local_table">
-				<tr>
-					<td>전체</td>
-					<td>서울</td>
-					<td>인천</td>
-					<td>대전</td>
-					<td>대구</td>
-					<td>광주</td>
-					<td>부산</td>
-					<td>울산</td>
-					<td>세종</td>
-				</tr>
-				<tr>
-					<td>경기</td>
-					<td>강원</td>
-					<td>충북</td>
-					<td>충남</td>
-					<td>경북</td>
-					<td>경남</td>
-					<td>전북</td>
-					<td>전남</td>
-					<td>제주</td>
-				</tr>
-			</table>
-			
-			<span class="cate_name">테마</span>
-			<i class="fas fa-leaf"></i>
-			<table id="theme_table">
-				<tr>
-					<td>전체</td>
+		<div id="all_div">
+		
+					<!-- <!-- <td>전체</td>
 					<td>가족 여행</td>
 					<td>나 홀로 여행</td>
 					<td>커플 여행</td>
 					<td>친구와 함께</td>
 					<td>뚜벅이 코스</td>
-					<td>캠핑</td>
-				</tr>
-			</table>
+					<td>캠핑</td> -->
 			
-			<span class="cate_name">일정</span>
+			<!-- <span class="cate_name">일정</span>
 			<i class="fas fa-leaf"></i>
 			<table id="calendar_table">
 				<tr>
@@ -86,7 +121,7 @@
 			<div id="list_count_div">
 				총<span id="list_count">76</span>건
 			</div>
-			<!-- 코스마다마다의 div -->
+			코스마다마다의 div
 			<div id="list_course_div">
 				<div id="course_img_div">
 					<img src="resources/images/travel_img.PNG" id="travel_img"/>
@@ -168,7 +203,7 @@
 			<button class="num">2</button>
 			<button class="num">3</button>
 			<button id="after">&gt;</button>
-		</div>
+		</div> -->
 	</div>
 	
 	<script>

@@ -28,7 +28,9 @@
 		  		}
 		  	});
 		</script>
+		
     	<section>
+    	<div id="homeSpace"></div>
     	<div id="slider-wrap">
              <ul id="slider">
                  <li>

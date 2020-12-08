@@ -12,7 +12,7 @@
 <!-- swal코드 -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- <i>태그 사용 코드 -->
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.9.0/js/all.js"></script>
 <!-- css -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
 <!-- jQuery코드 -->
@@ -32,6 +32,7 @@
 		scope="application" />
 	<header>	
 		<!-- 상단바  -->
+	<div id="all_rootBar">
 		<div id="rootBar">
 			<c:if test="${ empty sessionScope.loginUser}">
 				<div class="root">
@@ -91,6 +92,7 @@
 			</div>
 			<div id="menu_4"></div>
 		</div>
+	</div>
 
         <!-- 로그인 창  -->
 		<div id="ex7" class="modal">
