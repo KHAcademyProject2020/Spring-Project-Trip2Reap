@@ -235,27 +235,29 @@
 			AND BO_TITLE LIKE #{searchHotelName}
 		</if>
 		
-		<choose>
-			<when test="searchHotelPricePerDayType==1">
-			AND <![CDATA[PRICE_PER_DAY < 50000 ]]>
-			</when>
-			
-			<when test="searchHotelPricePerDayType==2">
-			AND PRICE_PER_DAY BETWEEN 50000 AND 99999
-			</when>
-			
-			<when test="searchHotelPricePerDayType==3">
-			AND PRICE_PER_DAY BETWEEN 100000 AND 149999
-			</when>
-			
-			<when test="searchHotelPricePerDayType==4">
-			AND PRICE_PER_DAY BETWEEN 150000 AND 199999
-			</when>
-			
-			<when test="searchHotelPricePerDayType==5">
-			AND <![CDATA[ PRICE_PER_DAY >= 200000]]>
-			</when>
-		</choose>
+		<if test="searchHotelPricePerDayType>0">
+			<choose>
+				<when test="searchHotelPricePerDayType==1">
+					AND <![CDATA[PRICE_PER_DAY < 50000 ]]>
+				</when>
+				
+				<when test="searchHotelPricePerDayType==2">
+					AND PRICE_PER_DAY BETWEEN 50000 AND 99999
+				</when>
+				
+				<when test="searchHotelPricePerDayType==3">
+					AND PRICE_PER_DAY BETWEEN 100000 AND 149999	
+				</when>
+				
+				<when test="searchHotelPricePerDayType==4">
+					AND PRICE_PER_DAY BETWEEN 150000 AND 199999
+				</when>
+				
+				<otherwise>
+					AND <![CDATA[ PRICE_PER_DAY >= 200000]]>
+				</otherwise>
+			</choose>
+		</if>
 	</where>
 	</select>
 	

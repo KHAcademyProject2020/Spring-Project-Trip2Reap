@@ -141,7 +141,7 @@ public class HotelController {
 				searchHotelName="%"+searchHotelName+"%";
 			
 			detailSearchMap.put("searchHotelName", searchHotelName);
-			detailSearchMap.put("searchPricePerDayType", searchHotelPricePerDayType);
+			detailSearchMap.put("searchHotelPricePerDayType", searchHotelPricePerDayType);
 			
 			//검색조건을 만족하는 호텔번호리스트를 구한다. (조건에 만족하는 호텔번호는 중복허용하지 않는다)
 			boNoList=hService.getDetailSearchResultHotelBoNoList(detailSearchMap);					
