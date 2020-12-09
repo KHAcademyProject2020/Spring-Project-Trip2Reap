@@ -27,8 +27,9 @@ import com.google.gson.JsonIOException;
 import trip.two.reap.common.Attachment;
 import trip.two.reap.common.PageInfo;
 import trip.two.reap.common.Pagination;
+import trip.two.reap.member.model.vo.Member;
 import trip.two.reap.review.model.service.ReviewService;
-
+import trip.two.reap.review.model.vo.Reply;
 import trip.two.reap.review.model.vo.Review;
 
 @Controller // bean에 추가 (객체로 만듦)
@@ -175,6 +176,43 @@ public class ReviewController {
 	}
 	   return renameFileName;
    }
+   
+   @RequestMapping("addReply.bo")
+   @ResponseBody
+   public String addReply(Reply re, HttpSession session) {
+	   Member loginUser = (Member)session.getAttribute("loginUser");
+	   String rWriter = loginUser.getMemberId();
+	   
+	   re.setMemberId(rWriter);
+	   
+	   int result = rService.addReply(re);
+	   
+	   if(result > 0) {
+		   return "success";
+	   }else {
+		   throw new ReviewException("댓글 등록에 실패했습니다.");
+	   }
+   }
+   
+   @RequestMapping("rList.bo")
+   public void getReplyList(int boNo,
+		                    HttpServletResponse response) throws JsonIOException, IOException { 
+	                        //int bId : requestParam 생략
+	   
+	   ArrayList<Reply> list = rService.selectReply(boNo);
+	  
+	   response.setContentType("application/json; charset=UTF-8");
+	   
+	   GsonBuilder gb = new GsonBuilder();
+	   GsonBuilder df = gb.setDateFormat("yyyy-MM-dd");
+	   Gson gson = df.create();
+	   gson.toJson(list, response.getWriter());	   
+  	   
+   }
+   
+   
+   
+   
    
 
    

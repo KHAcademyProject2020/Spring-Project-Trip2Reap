@@ -13,47 +13,48 @@
    	 <c:import url="../common/menubar.jsp" />
 	</header>
 	<div id="all_div">
-		<div id="menu_div">
-			<div id="menu_left_div">
-				<i class="fas fa-suitcase-rolling" id="menu_img"></i>
-				<span id="menu">여행지</span>
+		<div id="menubar_div">
+			<div id="menu_div">
+				<div id="menu_left_div">
+					<i class="fas fa-suitcase-rolling" id="menu_img"></i>
+					<span id="menu">여행지</span>
+				</div>
+				<div id="menu_right_div">
+					<input type="text" id="input_search" />
+					
+					<button id="button_search" onclick="goSearchError()">검색</button>
+				</div>
 			</div>
-			<div id="menu_right_div">
-				<input type="text" id="input_search" />
-				
-				<button id="button_search" onclick="goSearchError()">검색</button>
+			
+			<!-- 해쉬태그 카테고리 -->
+			<div id="hashtag_div">
+				<ul id="hashtag_ul">
+					<li>
+						<a href=" ${pageContext.request.contextPath}/tList.tv">#전체</a>&nbsp;&nbsp; <!-- 해당 해쉬태그 검색페이지로 이동하게 수정. 검색기능12/9까지-->
+					</li>
+					<li>
+						<a href=" ${pageContext.request.contextPath}/tList.tv">#문화시설</a>&nbsp;&nbsp;
+					</li>
+					<li>
+						<a href=" ${pageContext.request.contextPath}/tList.tv">#레포츠</a>&nbsp;&nbsp;
+					</li>
+					<li>
+						<a href=" ${pageContext.request.contextPath}/tList.tv">#쇼핑</a>&nbsp;&nbsp;
+					</li>
+					<li>
+						<a href=" ${pageContext.request.contextPath}/tList.tv">#자연</a>&nbsp;&nbsp;
+					</li>
+					<li>
+						<a href=" ${pageContext.request.contextPath}/tList.tv">#축제</a>&nbsp;&nbsp;
+					</li>
+				</ul>
 			</div>
 		</div>
-		
-		<!-- 해쉬태그 카테고리 -->
-		<div id="hashtag_div">
-			<ul id="hashtag_ul">
-				<li>
-					<a href=" ${pageContext.request.contextPath}/tList.tv">#전체</a>&nbsp;&nbsp; <!-- 해당 해쉬태그 검색페이지로 이동하게 수정 -->
-				</li>
-				<li>
-					<a href=" ${pageContext.request.contextPath}/tList.tv">#문화시설</a>&nbsp;&nbsp;
-				</li>
-				<li>
-					<a href=" ${pageContext.request.contextPath}/tList.tv">#레포츠</a>&nbsp;&nbsp;
-				</li>
-				<li>
-					<a href=" ${pageContext.request.contextPath}/tList.tv">#쇼핑</a>&nbsp;&nbsp;
-				</li>
-				<li>
-					<a href=" ${pageContext.request.contextPath}/tList.tv">#자연</a>&nbsp;&nbsp;
-				</li>
-				<li>
-					<a href=" ${pageContext.request.contextPath}/tList.tv">#축제</a>&nbsp;&nbsp;
-				</li>
-			</ul>
-		</div>
-		
 		
 		<!-- 지역/테마 카테고리 -->
 		<div id="cate_table_div">
 			<span id="cate_name">&nbsp;지역</span>
-				<span id="cate_icon"><!-- <i class="fas fa-leaf" style="height:13px;, width:13px; color:#a7e1af;"></i> -->🚕</span>
+				<span id="cate_icon">🚕</span>
 				<table id="local_table">
 					<tr>
 						<td>전체</td>
@@ -80,7 +81,7 @@
 				</table>
 			
 			<span id="cate_name">&nbsp;테마</span>
-				<span id="cate_icon"><!-- <i class="fas fa-leaf" style="height:13px;, width:13px; color:#a7e1af;"></i> -->🚗</span>
+				<span id="cate_icon">🚗</span>
 				<table id="theme_table">
 					<tr>
 						<td>전체</td>
@@ -103,19 +104,35 @@
 			 
 			
 			<!-- 여행지 div -->
+			<c:if test = "${ list eq null }">
+				<div>조회결과가 없습니다.</div>
+			</c:if>
 			<c:forEach var="t" items="${ list }">
 			
 			<div id="list_travel_div">
 				<div id="travel_img_div">
-					<img src="resources/images/송도.JPG" id="travel_img"/>
+					<c:if test="${t.changeName != null }"> <!-- insert로 등록한 여행지 -->
+					 <img src="resources/buploadFiles/${ t.changeName }" id="travel_img" /> 
+					</c:if>
+					
+					<c:if test="${t.changeName == null }"> <!-- db에 들어가있던 여행지 -->
+					<img src="resources/images/송도" id="travel_img" /> 
+					</c:if>
 				</div>
 				
 				<div id="travel_name_writer_div">
 					<div id="travel_no">${ t.boNo }</div>
-					<div id="travel_name">${ t.boTitle }</div>
+					<c:url var="tdetail" value="tDetail.tv">
+						<c:param name="boNo" value="${ t.boNo }"/>
+						<c:param name="page" value="${ pi.currentPage }"/>
+					</c:url>	
+					<div id="travel_name">
+						<a href="${ tdetail }">${ t.boTitle }</a>
+					
+					</div>
 					<div id="travel_theme">${ t.trTheme }</div>
 					<div id="travel_writer">${ t.trReg }</div>
-					<div id="travel_tag">${ t.boTag }</div>
+					<div id="travel_tag">#${ t.boTag }</div>
 				</div>
 				<div id="list_etc"><a href="#modal">…</a></div>
 			</div>
@@ -128,26 +145,62 @@
 		
 		
 		
-		<!-- 등록하기 버튼 (관리자만 보이게)-->
+		<!--  등록하기 버튼 (관리자만 보이게 ) --> 
 		
-			<c:if test="${ loginUser.memberId == 'admin' }"> 
+			 <c:if test="${ loginUser.memberId == 'admin' }">  
 				<div id="button_write_div">
 					<button id="button_write" onclick= "location.href='tInsertView.tv'">등록하기</button>
 				</div>
+		 	</c:if>
+	 
+			
+			
+			<!-- 페이징 -->
+			<div class="paging">
+			
+				<!-- 이전 페이지 -->
+				<c:if test="${ pi.currentPage <= 1 }">이전페이지
+				</c:if>
+				<c:if test="${ pi.currentPage > 1 }">
+					<c:url var="before" value="tList.tv">
+						<c:param name="page" value="${ pi.currentPage - 1 }"/>
+					</c:url>	
+				<a href="${ before }" class="bt" id="beforeBtn">이전 페이지</a>
 			</c:if>
-	
+				
+
+				<!-- 페이지 -->
 			
+					
+				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+					<c:if test="${ p eq pi.currentPage }">
+						<a href="${ pagination }" class="num on">${ p }</a> &nbsp;
+					</c:if>
+					
+					<c:if test="${ p ne pi.currentPage }">
+						<c:url var="pagination" value="tList.tv">
+							<c:param name="page" value="${ p }"/>
+						</c:url>
+						<a href="${ pagination }" class="num">${ p }</a> &nbsp;
+					</c:if>
+				</c:forEach>
+				
 			
+                
+                <!-- [다음] -->
+				<c:if test="${ pi.currentPage >= pi.maxPage }">
+					다음 페이지
+				</c:if>
+				<c:if test="${ pi.currentPage < pi.maxPage }">
+					<c:url var="after" value="tList.tv">
+						<c:param name="page" value="${ pi.currentPage + 1 }"/>
+					</c:url> 
+					<a href="${ after }" class="bt" id="afterBtn">다음 페이지</a>
+				</c:if>
+                
+			</div><!-- 페이징 div끝 -->
 			
-		<!-- 페이징 버튼 -->	
-				<div id="paging_div">
-					<button id="before">&lt;</button>
-					<button id="current">1</button>
-					<button class="num">2</button>
-					<button class="num">3</button>
-					<button id="after">&gt;</button>
-				</div>
-		
+
 		
 		
 	</div><!-- 전체 div끝 -->
@@ -178,12 +231,12 @@
  		   location.href="<%= request.getContextPath() %>/tDetail.tv";
  	    }
 		
-		
 		function goSearchError(){
 			location.href="<%= request.getContextPath() %>/tSearchError.tv";
 		}
 		
 		
+		//modal창
 		$('a[href="#modal"]').click(function(event) {
 			event.preventDefault();
 
@@ -195,6 +248,7 @@
 		function containTravel(){
 			swal("여행지를 담았습니다","마이페이지에서 확인하세요","success");//이미 담은 여행지이거나 로그인하지않은경우 담기지 않아야함.(추후수정필요) 
 		}
+		
 		
 		
 		//url복사하기
@@ -229,33 +283,22 @@
 				input_clip.select(); 
 			} 
 			
-			try { 
-				var successful = document.execCommand('copy'); 
-				input_clip.blur(); 
-				if (successful) { 
-				/* 	alert("URL이 복사 되었습니다. 원하시는 곳에 붙여넣기 해 주세요.");  */
-					swal("URL이 복사 되었습니다.", "원하시는 곳에 붙여넣기 해 주세요!", "success");
-					// 링크복사 시 화면 크기 고정 
-					$('html').find('meta[name=viewport]').attr('content', 'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes'); 
-				} else { 
-					/* alert('이 브라우저는 지원하지 않습니다.'); */
-					swal("URL이 복사에 실패했습니다.", "이 브라우저는 지원하지 않습니다.", "error");
-					} 
-				} catch (err) { 
-					swal("URL이 복사에 실패했습니다.", "이 브라우저는 지원하지 않습니다.", "error");
-					} 
-				}); //클립보드 복사
+				try { 
+					var successful = document.execCommand('copy'); 
+					input_clip.blur(); 
+					if (successful) { 
+						swal("URL이 복사 되었습니다.", "원하시는 곳에 붙여넣기 해 주세요!", "success");
+						// 링크복사 시 화면 크기 고정 
+						$('html').find('meta[name=viewport]').attr('content', 'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes'); 
+					} else { 
+						swal("URL이 복사에 실패했습니다.", "이 브라우저는 지원하지 않습니다.", "error");
+						} 
+					} catch (err) { 
+						swal("URL이 복사에 실패했습니다.", "이 브라우저는 지원하지 않습니다.", "error");
+						} 
+			}); //클립보드 복사 기능 끝
 
 		
-			/* 	
-			$(function(){
-				&('#travel_name').click(function(){
-					var boNo = $(this).children('div').eq(0).text();
-					location.href="tDetail.tv?boNo=" + boNo + "&page=" + ${pi.currentPage};
-				});
-			}); */
-			
-			
 			
 			$("#button_write").click(function(){
 	   			$('#tList').submit();

@@ -15,7 +15,7 @@
 	</header>
 	<!-- 전체 div -->
 	<div id="all_div">
-	<form action="tInsert.tv" method="post" enctype="Multipart/form-data" id="tInsert"><!-- 첨부파일 등록을 위해 Multipart/form-data encType 지정  -->
+	<form action="tInsert.tv" method="post" enctype="Multipart/form-data" id="tInsert" onsubmit="return validate();"><!-- 첨부파일 등록을 위해 Multipart/form-data encType 지정  -->
 		<!-- 메뉴 이름 div -->
 		<div id="menu_div">
 			<div id="menu_left_div">
@@ -72,7 +72,7 @@
 				</tr>
 				<tr>
 					<td>
-						<span class="astro_span">*</span><span>코스명</span>
+						<span class="astro_span">*</span><span>여행지명</span>
 					</td>
 					<td colspan="5">
 						<input type="text" id="travel_name" name="boTitle"/>
@@ -165,19 +165,17 @@
 		
 		
 		<div id="fileArea">	<!-- 파일 업로드 부분 -->
-	   			<input type="file" id="thumbnailImg1" multiple="multiple" name="uploadFile1" onchange="LoadImg(this,1)"/>
-	   			 <input type="file" id="thumbnailImg2" multiple="multiple" name="uploadFile2" onchange="LoadImg(this,2)"/>
-	   			<input type="file" id="thumbnailImg3" multiple="multiple" name="uploadFile3" onchange="LoadImg(this,3)"/>
+	   			<input type="file" id="thumbnailImg1" multiple="multiple" name="uploadFile" onchange="LoadImg(this,1)"/>
+	   			 <!-- <input type="file" id="thumbnailImg2" multiple="multiple" name="uploadFile" onchange="LoadImg(this,2)"/> -->
+	   <!-- 			<input type="file" id="thumbnailImg3" multiple="multiple" name="uploadFile3" onchange="LoadImg(this,3)"/>  -->
 	   	</div>		
 		
 		
 		<!-- 버튼 div -->
 		<div id="button_div">
-			<!-- <button id="button_cancel" onclick="location.href='tList.tv'">취소</button>
-			<button id="button_write" onclick="location.href='tInsert.tv'">등록</button> -->
 			<button type="button" id="button_cancel" onclick= "location.href='tList.tv'">취소</button>
 			<button type="submit" id="button_write">등록</button>
-			<!-- <button id="button_write">등록</button> -->
+		
 		</div>
 	</form>
 	</div>
@@ -198,7 +196,7 @@
    			});
    		});
    		
-   		 // 이미지 업로드 함수
+   		  // 이미지 업로드 함수
    		function LoadImg(value, num){
    			if(value.files && value.files[0]){
    				var reader = new FileReader();
@@ -218,18 +216,20 @@
    				}
    				reader.readAsDataURL(value.files[0]);
    			}	   			
-   		} 
+   		}  
    		 
-   		 $("#button_write").click(function(){
-   			$('#tInsert').submit();
-   		 });
+   		  
+   		  
+   		
    		 
-   		 
+   		
+   		
+   		
+   		
+   		
    		 
 	</script>
-	
-	
-	<!-- 주소 API -->
+<!-- 주소 API -->
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 	    function sample6_execDaumPostcode() {
@@ -280,6 +280,71 @@
 	        }).open();
 	    }
 	</script>
+   
+    <script type="text/javascript">
+ 
+      function validate(){
+    	  
+    	  $("#button_write").click(function(){
+    	  
+		var title=$('#travel_name');
+		var content=$('#travel_content');
+		var thumbnail = $('#thumbnailImg1');
+		var addr = $('#select_region');
+		var add = $('#sample6_extraAddress');
+		var theme = $('#select_theme');
+	
+		if(!thumbnail.val()){
+			swal("", "대표사진을 첨부해주세요", "info");
+			thumbnail.focus();
+			return false;
+		}
+		if(title.val().trim().length<1){
+			swal("","여행지명을 입력해주세요","info");
+			title.focus();
+			return false;
+		}
+		if(addr.val() == 0){
+   			swal("", "지역을 선택해주세요", "info");
+   			addr.focus();
+   			return false;
+   		}
+		if(theme.val() == 0){
+   			swal("", "테마를 선택해주세요", "info");
+   			theme.focus();
+   			return false;
+   		}
+		if(add.val() == 0){
+   			swal("", "주소를 입력해주세요", "info");
+   			add.focus();
+   			return false;
+   		}
+		if(content.val().trim().length<1){
+			swal("","내용을 입력해주세요","info");
+			content.focus();
+			return false;
+		}
+		
+		 swal({
+			title : "게시글 등록 성공", 
+			text : "목록화면으로 돌아갑니다", 
+			icon : "success",
+		}).then((ok) => {
+				if(ok){
+					//등록하기 버튼시 insert 이동
+			   		$('#tInsert').submit();
+			   		 });
+			   		 
+				}
+			}); 
+			
+		
+		return true;
+	};
+
+   </script>
+	
+	
 
 
 

@@ -1,32 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="travelMapper">
-	<select id="getListCount" resultType="_int">
+	<select id="getAllListCount" resultType="_int">
 		select count(*)
-        from board
+        from tlist
         where ca_code = 1
               and bo_delete_yn = 'N'
 	</select>
 	
 	
-	<!-- <select id="selectList" resultMap="travelResultSet">
-		select *
-		from board
-		where ca_code = 2
-              and bo_delete_yn = 'N'
-		order by bo_no desc
-	</select>
-	<resultMap type="Travel" id="travelResultSet">
-		<id column="BO_NO" property="boNo"/>
-		<result column="CA_CODE" property="caCode"/>
-		<result column="BO_TITLE" property="boTitle"/>
-		<result column="BO_CONTENT" property="boContent"/>
-		<result column="MEMBER_ID" property="memberId"/>
-		<result column="BO_COUNT" property="boCount"/>
-		<result column="BO_TAG" property="boTag"/>
-		<result column="BO_DELETE_YN" property="boDeleteYN"/>
-		<result column="REGDATE" property="regDate"/>
-	</resultMap> -->
 	
 	<select id="selectList" resultMap="travelResultSet">
 		select *
@@ -50,39 +32,64 @@
 		<result column="TR_ADDR" property="trAddr"/>
 		<result column="TR_THEME" property="trTheme"/>
 		<result column="TR_REG" property="trReg"/>
+		<result column="TR_TITLE" property="trTitle"/>
+		<result column="TR_PHONE" property="trPhone"/>
+		<result column="CHANGE_NAME" property="changeName"/>
 	</resultMap>
 	
 	
-<!-- 	<insert id="insertBoard">
-		insert
- 		into board(BO_NO,CA_CODE,BO_TITLE,BO_CONTENT,MEMBER_ID,BO_TAG)
- 		values(SEQ_BO_NO.NEXTVAL,1,#{boTitle},#{boContent},#{memberId},#{boTag})
-	</insert> -->
 
-<!-- 	<insert id="insertBoard">
-		insert
-		into board
-		values(seq_bo_no.nextval,1,#{boTitle},#{boContent},#{memberId},#{boCount},#{boTag},default,sysdate)
-	</insert>
-	
-	
-	<insert id="insertTravel">
-		insert
-		into travel
-		values(seq_trno.nextval, seq_bo_no.currval, #{trAddr}, #{trTheme}, #{trReg})
+	<!-- <insert id="insertTravel">
+		<selectKey keyProperty="boNo" resultType="Integer" order="BEFORE">
+		select seq_bo_no.nextval from dual
+		</selectKey>
+		insert all 
+		into board values(${boNo},1,#{boTitle},#{boContent},#{memberId},#{boCount},#{boTag},default,sysdate)
+		into travel values(seq_trno.nextval, ${boNo}, #{trAddr}, #{trTheme}, #{trReg}, #{trTitle}, #{trPhone})
+		select * from dual
 	</insert> -->
 	
-	<insert id="insertTravel">
+ 	<insert id="insertTravel">
 		insert all 
 		into board values(seq_bo_no.nextval,1,#{boTitle},#{boContent},#{memberId},#{boCount},#{boTag},default,sysdate)
-		into travel values(seq_trno.nextval, seq_bo_no.currval, #{trAddr}, #{trTheme}, #{trReg})
+		into travel values(seq_trno.nextval, seq_bo_no.currval, #{trAddr}, #{trTheme}, #{trReg}, #{trTitle}, #{trPhone})
 		select * from dual
 	</insert>
+	<!-- <insert id="insertFiles">
+		insert
+		into img_file(file_no, bo_no, origin_name, change_name)
+		values(seq_file_no.nextval, seq_bo_no.currval, #{originName}, #{changeName})
+	</insert>  -->
 	
 	
 	<insert id="insertFiles">
 		insert
 		into img_file
+		values(seq_file_no.nextval, seq_bo_no.currval, #{originName}, #{changeName}, 1, 'null', default)
+	</insert> 
+	
+	<!-- <insert id="insertOneThumImg">
+		insert
+		into img_file
 		values(seq_file_no.nextval, seq_bo_no.currval, #{originName}, #{changeName}, #{fileLevel}, #{filePath}, default)
-	</insert>
+	</insert> ORA-08002: sequence SEQ_BO_NO.CURRVAL is not yet defined in this session 이딴에러가 ㅜ
+	 -->
+	
+	
+	
+	
+	<update id="addReadCount">
+		update board
+		set bo_count = bo_count + 1
+		where bo_no = #{boNo}
+	</update>
+	
+	
+	<select id="selectTravel" resultMap="travelResultSet">
+		select *
+		from tdetail
+		where ca_code = 1
+				and bo_no = #{boNo}
+				and bo_delete_yn = 'N'
+	</select>
 </mapper>
