@@ -1,0 +1,15 @@
+/* 전체 div */
+#all_div{ margin: 80px auto 0px auto; width: 1000px; }
+
+/* 메뉴  */
+#menu_div { padding: 0px 10px; display: flex; border-bottom: 4px solid #efefef; }
+#coMenu { flex: 1; text-align: left; padding-bottom: 20px; }
+#coMenuLabel{ font-size: 30px; font-weight: 700; text-align: left; }
+
+/* 표지  */
+#tiSpace1{ height: 30px; }
+#tiSpace2{ display : inline-block; width: 50px; }
+#titleImgDiv{ display : inline-block; }
+#titleImg{ width: 880px; height : 300px; border: 4px solid #efefef; }
+#titleIcon{ color: white; font-size: 100px; position: absolute; top: 52%; left: 45%; }
+#titleLabel{ color: white; font-size: 25px; position: absolute; top: 67%; left: 43%; font-weight: 500; }

@@ -5,89 +5,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>여행 코스 등록하기</title>
+<title>나만의 여행코스</title>
 <link rel="stylesheet" type="text/css" href="resources/css/course/courseInsert.css"/>
 </head>
-<body>
-	<section>
+<body>	
 	<header>
-   	 <c:import url="../common/menubar.jsp" />
-	</header>
+    <%@ include file="../common/menubar.jsp" %>
+    </header>
+    
+    <section>
 	<div id="all_div">
-		<div id="menu_div">
-			<img src="resources/images/courseIcon.png" id="menu_img"/>
-			<span id="menu">여행 코스 등록</span>
-		</div>
-		
-		<div id="insert_ment_div">
-			<table id="course_info_table">
-				<tr id="ment_tr">
-					<td colspan="6">
-						<b style="color: #666666;">코스에 담을 여행지는 여행지 메뉴에서 선택해주세요.</b>
-						<br>
-						<span class="required_fields">*은 필수 입력 사항입니다.</span>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<span class="required_fields">*</span><span>코스명</span>
-					</td>
-					<td colspan="5">
-						<input type="text" id="input_course_name"/>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<span class="required_fields">*</span><span>테마</span>
-					</td>
-					<td>
-						<select id="select_course_theme">
-							<option>가족 여행</option>
-							<option>나 홀로 여행</option>
-							<option>커플 여행</option>
-							<option>친구와 함께</option>
-							<option>뚜벅이 코스</option>
-							<option>캠핑</option>
-						</select>
-					</td>
-					<td>
-						<span class="required_fields">*</span><span>일정</span>
-					</td>
-					<td colspan="3">
-						<select id="select_course_calendar">
-							<option>당일 여행</option>
-							<option>1박 2일</option>
-							<option>2박 3일 이상</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<span class="required_fields">*</span><span>해시태그</span>
-					</td>
-					<td colspan="2">
-						<input type="text" id="input_course_tag"/>
-						<i class="fas fa-plus-square" id="button_tag_plus"></i>
-					</td>
-					<td class="tdtdtd">
-						<div class="hashtag">#인천여행코스</div>
-					</td>
-					<td class="tdtdtd">
-						<span class="hashtag">#드라이브코스</span>
-					</td>
-					<td class="tdtdtd">
-						<span class="hashtag">#여섯글자태그</span>
-					</td>
-				</tr>
-			</table>
 			
-			<div id="course_content_div">
-				<textarea rows="20" cols="125" id="course_content"></textarea>
-				<div id="text_count_div">
-					<span>현재 글자 수 </span>
-					<span id="text_count">8</span>
-					<span>자 / 최대 글자 수 2000자</span>
-				</div>
+			<div style = "width: 100%; height: 1000px;">
+			     <div style="display: inline-block; width: 50px;"></div>
+                 <div id="map" style="display: inline-block; width : 88%; height: 350px; background: white;"></div>
 			</div>
 		</div>
 		
@@ -96,9 +27,47 @@
 			<button id="button_write">등록</button>
 		</div>
 	</div>
-	
-	<script>
-	</script>
 	</section>
+	
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=37dc981b741ae67d53f183d4daf2b8c3"></script>
+	<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+// 선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
+var linePath = [
+    new kakao.maps.LatLng(33.452344169439975, 126.56878163224233),
+    new kakao.maps.LatLng(33.452739313807456, 126.5709308145358),
+    new kakao.maps.LatLng(33.45178067090639, 126.5726886938753) 
+];
+
+// 지도에 표시할 선을 생성합니다
+var polyline = new kakao.maps.Polyline({
+    path: linePath, // 선을 구성하는 좌표배열 입니다
+    strokeWeight: 5, // 선의 두께 입니다
+    strokeColor: '#FFAE00', // 선의 색깔입니다
+    strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+    strokeStyle: 'solid' // 선의 스타일입니다
+});
+
+// 지도에 선을 표시합니다 
+polyline.setMap(map);  
+
+kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+    
+    // 클릭한 위도, 경도 정보를 가져옵니다 
+    var latlng = mouseEvent.latLng; 
+    
+    console.log('클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ' + '경도는 ' + latlng.getLng() + ' 입니다');    
+   
+});
+
+</script>
+	
 </body>
 </html>

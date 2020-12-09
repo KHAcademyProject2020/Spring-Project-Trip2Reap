@@ -10,7 +10,7 @@
 #coLabel1{ font-family: 'East Sea Dokdo', cursive; font-size: 45px; font-weight: bold; color : rgb(63,22,0); margin-right: 10px; }
 #coLabel2{ font-family: 'East Sea Dokdo', cursive; font-size: 75px; vertical-align: bottom; line-height: 60px; font-weight: bold;
            color : rgb(238,97,91); margin-right: 40px; }
-#makeCourse{ display:inline-block; background: rgb(63,22,0); height: 35px; width: 180px; 
+#makeCourse{ display:inline-block; background: rgb(63,22,0); height: 35px; width: 188px; 
              text-align: center; vertical-align: super; line-height: 27px; border-radius: 20px;
             border: none; cursor : pointer; }
 #makeLabel1{ color: white; vertical-align: bottom; line-height: 21px; font-size: 14px; margin-right: 3px; cursor : pointer; }

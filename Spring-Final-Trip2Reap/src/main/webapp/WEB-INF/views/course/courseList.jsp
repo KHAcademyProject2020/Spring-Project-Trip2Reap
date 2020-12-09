@@ -23,7 +23,7 @@
 		         <label id="coLabel1">여행만렙! 사용자가 직접 만든</label>
 		         <label id="coLabel2">여행코스</label>
 		         <div id="makeCourse" onclick="insertView();">
-		            <label id="makeLabel1">나만의 여행지 만들기</label>
+		            <label id="makeLabel1">나만의 여행코스 만들기</label>
 		            <label id="makeLabel2">></label>
 		         </div>
 		     </div>
@@ -209,10 +209,10 @@
 	<script>
 		function detailView(){
 			location.href="<%= request.getContextPath() %>/courseDetail.co";
-		}
+		} 
 		
 		function insertView(){
-			location.href="<%= request.getContextPath() %>/courseInsert.co";
+			location.href="<%= request.getContextPath() %>/courseTitle.co";
 		}
 		
 		function errorView(){
