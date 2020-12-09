@@ -146,13 +146,15 @@ public class HotelDAO {
 	//(1) 호텔상세 검색 - 검색조건을 만족하는 호텔번호를 구한다.
 	public ArrayList<Integer> getDetailSearchResultHotelBoNoList(SqlSessionTemplate sqlSession,
 			HashMap<String, Object> detailSearchMap) {
+		
+		System.out.println("검색 호텔이름: "+ (String)detailSearchMap.get("searchHotelName"));
 		return (ArrayList)sqlSession.selectList("hotelMapper.getDetailSearchResultHotelBoNoList", detailSearchMap);
 	}
 
-	//(2:폐기) 호텔 번호에 만족하는 호텔을 구한다.
-	public Hotel selectDetailSearchResultOneHotel(SqlSessionTemplate sqlSession, int hId) {
-		return sqlSession.selectOne("hotelMapper.selectOneHotel", hId);
-	}
+//	//(2:폐기) 호텔 번호에 만족하는 호텔을 구한다.
+//	public Hotel selectDetailSearchResultOneHotel(SqlSessionTemplate sqlSession, int hId) {
+//		return sqlSession.selectOne("hotelMapper.selectOneHotel", hId);
+//	}
 
 	//(2:최종) 호텔번호 리스트에 만족하는 호텔을 구한다.
 	public ArrayList<Hotel> selectDetailSearchHotelList(SqlSessionTemplate sqlSession,
@@ -168,25 +170,57 @@ public class HotelDAO {
 	}
 
 	
-	//2020.12.03 - 등급 내림차순 정렬
+	//2020.12.03 - 등급 내림차순 정렬(폐기)
 	public ArrayList<Hotel> sortRankDescendent(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("hotelMapper.sortRankDescendent");
 	}
 
-	//2020.12.03- 평점순 
+	//2020.12.09 - 등급순 내림차순 페이징포함
+	public ArrayList<Hotel> selectOrderedRankDescendent(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset= (pi.getCurrentPage()-1)*pi.getBoardLimit();
+		RowBounds rowBounds= new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList) sqlSession.selectList("hotelMapper.sortRankDescendent", null, rowBounds);
+	}
+	
+	
+	//2020.12.03- 평점순 (폐기)
 	public ArrayList<Hotel> sortPopularDescendent(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("hotelMapper.sortPopularDescendent");
 	}
-
-	//2020.12.04 -가격 높은 순
-	public ArrayList<Integer> getOrderedHighPriceBoNoList(SqlSessionTemplate sqlSession) {
-		return (ArrayList)sqlSession.selectList("hotelMapper.getOrderedHighPriceBoNoList");
+	
+	//2020.12.09-평점순 페이지포함.
+	public ArrayList<Hotel> selectOrderedPopularityDescendent(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset= (pi.getCurrentPage()-1)*pi.getBoardLimit();
+		RowBounds rowBounds= new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList) sqlSession.selectList("hotelMapper.sortPopularDescendent", null, rowBounds);
 	}
 
-	//2020.12.04 -가격 낮은순
-	public ArrayList<Integer> getOrderedLowPriceBoNoList(SqlSessionTemplate sqlSession) {
-		return (ArrayList)sqlSession.selectList("hotelMapper.getOrderedLowPriceBoNoList");
+	
+	//2020.12.04 -가격 높은 순(폐기)
+//	public ArrayList<Integer> getOrderedHighPriceBoNoList(SqlSessionTemplate sqlSession) {
+//		return (ArrayList)sqlSession.selectList("hotelMapper.getOrderedHighPriceBoNoList");
+//	}
+	
+	//2020.12.09 - 가격 높은순
+	public ArrayList<Hotel> selectOrderedHighPriceHotelList(SqlSessionTemplate sqlSession,PageInfo pi) {
+		int offset=(pi.getCurrentPage()-1)*pi.getBoardLimit();
+		RowBounds rowBounds= new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList) sqlSession.selectList("hotelMapper.sortHighPrice", null , rowBounds);
 	}
+	
+
+	//2020.12.04 -가격 낮은순(폐기)
+//	public ArrayList<Integer> getOrderedLowPriceBoNoList(SqlSessionTemplate sqlSession) {
+//		return (ArrayList)sqlSession.selectList("hotelMapper.getOrderedLowPriceBoNoList");
+//	}
+
+	//2020.12.09 - 가격낮은순
+	public ArrayList<Hotel> selectOrderedLowPriceHotelList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset=(pi.getCurrentPage()-1)*pi.getBoardLimit();
+		RowBounds rowBounds= new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList) sqlSession.selectList("hotelMapper.sortLowPrice", null, rowBounds);
+	}
+
 
 	
 	//2020.12.07~2020.12.08 - 호텔등록
@@ -236,8 +270,7 @@ public class HotelDAO {
 	public ArrayList<Attachment> selectDetailImgList(SqlSessionTemplate sqlSession, int boNo) {
 		return (ArrayList)sqlSession.selectList("hotelMapper.selectDetailImgList", boNo);
 	}
-	
-	
 
+	
 
 }

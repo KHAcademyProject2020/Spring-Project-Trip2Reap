@@ -1,3 +1,5 @@
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -34,7 +36,6 @@
 
     <div id="main-container">
         <div id="title-container">
-            <!-- <img id="hotel-icon" src="resources/images/hotelIcon.png"> -->
             <i class="fas fa-hotel" id="hotel-icon"></i>
             <span id="title-name">호텔 예약</span>
 
@@ -48,30 +49,59 @@
                     <c:if test="${loginUser.memberId=='admin' }">
                     	<li><button id="insert-hotel" class="btn" onclick="location.href='hotelInsertView.ho'">호텔 등록하기</button></li>
                     </c:if>
-                    <li><button id="detail-search" class="btn">상세검색</button></li>
+                    
+                    
+                    <%--상세검색 modal을 띄운다--%>
+                    <li>
+                    	<button id="detail-search" class="btn">상세검색</button>
+                    </li>
                 </ul>
 
             </div>
 
             <div></div>
-
+			
             <div id="right_btns_container">
                 <ul id="right_btns" class="btn_ul">
-                    <li><button id="popularity" class="btn">평점순</button></li>
+                
+                
+                    <li>	
+               	       	<%--평점순(1)--%>
+                    	<button id="popularity" class="btn">평점순</button>                    	 
+                    </li>
+                
+                    
+                    
+                    
                     <li>
                     	<button  id="price_order_direction_btn" class="btn">가격순</button>
                     	<div id="price_order_direction_container" class="closed">
                     		<ul id="price_order_direction_wrapper">
-                    			<li id="price_high">가격&nbsp;<span style="color:red;">높은순</span></li>
-                    			<li id="price_low">가격&nbsp;<span style="color: blue;">낮은순</span></li>
+                    		
+                    			<%--가격이 높은순(3) --%>
+                   				<li id="price_high">
+                    				가격&nbsp;<span style="color:red;">높은순</span>
+                    			</li>
+                   			
+                    			<%--가격낮은순(4) --%>
+                   				<li id="price_low">
+                    				가격&nbsp;<span style="color: blue;">낮은순</span>
+                    			</li>
+                   			
                     		</ul>
+                    		
                     	</div>
                     </li>
-                    <li><button id="rank_high" class="btn">등급순</button></li>
+                    
+                    <li>
+                    	<%--등급순(2) --%>
+                   		<button id="rank_high" class="btn">등급순</button>
+                    </li>
                 </ul>
             </div>
         </div>
-
+		
+		
         <div id="hotel-list-container">
 			<%--호텔검색결과가 존재하지 않을 때!--%>
 			<c:if test="${empty hotelList }">
@@ -190,11 +220,22 @@
 					<c:if test="${pi.currentPage>1 }">
 						<c:url var="firstPage" value="hotelList.bo">
 							<c:param name="page" value="${pi.startPage }"/>
+							<c:param name="searchTypeDetail" value="${ searchTypeDetail }"/>
+                    		<c:param name="searchHotelRank" value="${ searchHotelRank }"/>
+                    		<c:param name="searchHotelLocalCode" value="${ searchHotelLocalCode}"/>
+                    		<c:param name="searchHotelPricePerDayType" value="${ searchHotelPricePerDayType}"/>
+                    		<c:param name="searchHotelName" value="${searchHotelName }"/>
 						</c:url>
 						<li style="cursor:pointer;"><a href="${firstPage }">&lt;&lt;</a></li>
 
+
 						<c:url var="before" value="hotelList.bo">
 							<c:param name="page" value="${pi.currentPage-1 }"/>
+							<c:param name="searchTypeDetail" value="${ searchTypeDetail }"/>
+                    		<c:param name="searchHotelRank" value="${ searchHotelRank }"/>
+                    		<c:param name="searchHotelLocalCode" value="${ searchHotelLocalCode}"/>
+                    		<c:param name="searchHotelPricePerDayType" value="${ searchHotelPricePerDayType}"/>
+                    		<c:param name="searchHotelName" value="${searchHotelName }"/>
 						</c:url>
 						<li style="cursor:pointer;"><a href="${before }">&lt;</a></li>
 
@@ -214,6 +255,11 @@
                     	<c:if test="${p ne pi.currentPage }">
                     		<c:url var="pagination" value="hotelList.ho">
                     			<c:param name="page" value="${p }"/>
+                    			<c:param name="searchTypeDetail" value="${ searchTypeDetail }"/>
+	                    		<c:param name="searchHotelRank" value="${ searchHotelRank }"/>
+	                    		<c:param name="searchHotelLocalCode" value="${ searchHotelLocalCode}"/>
+	                    		<c:param name="searchHotelPricePerDayType" value="${ searchHotelPricePerDayType}"/>
+	                    		<c:param name="searchHotelName" value="${searchHotelName }"/>
                     		</c:url>
 
                     		<li style="cursor:pointer;">
@@ -237,14 +283,24 @@
                     <c:if test="${pi.currentPage< pi.maxPage }">
 
                     	<!-- 다음페이지 -->
-                    	<c:url var="after" value="hotelList.bo">
+                    	<c:url var="after" value="hotelList.ho">
                     		<c:param name="page" value="${pi.currentPage+1 }"/>
+                    		<c:param name="searchTypeDetail" value="${ searchTypeDetail }"/>
+                    		<c:param name="searchHotelRank" value="${ searchHotelRank }"/>
+                    		<c:param name="searchHotelLocalCode" value="${ searchHotelLocalCode}"/>
+                    		<c:param name="searchHotelPricePerDayType" value="${ searchHotelPricePerDayType}"/>
+                    		<c:param name="searchHotelName" value="${searchHotelName }"/>
                     	</c:url>
                     	<li style="cursor:pointer;"><a href="${after }">&gt;</a></li>
 
                     	<!-- 마지막 페이지 -->
-                    	<c:url var="lastPage" value="hotelList.bo">
+                    	<c:url var="lastPage" value="hotelList.ho">
 	                    	<c:param name="page" value="${pi.endPage }"/>
+	                    	<c:param name="searchTypeDetail" value="${ searchTypeDetail }"/>
+                    		<c:param name="searchHotelRank" value="${ searchHotelRank }"/>
+                    		<c:param name="searchHotelLocalCode" value="${ searchHotelLocalCode}"/>
+                    		<c:param name="searchHotelPricePerDayType" value="${ searchHotelPricePerDayType}"/>
+                    		<c:param name="searchHotelName" value="${searchHotelName }"/>
 	                    </c:url>
 	                    <li style="cursor:pointer;"><a href="${lastPage }">&gt;&gt;</a></li>
                     </c:if>
@@ -400,6 +456,7 @@ $(function(){
         
       //2020.12.01
       //동적쿼리문을 이용하여 모달의 상세검색 조건을 만족하는 검색결과를 찾아보자
+      /*
         $('#detail-hotel-search').click(function(){
         	console.log('어머나~ 호텔상세검색 버튼을 클릭하셨군요?');
         	//검색조건 출력하기
@@ -410,14 +467,14 @@ $(function(){
         	let $search_hotel_rank= Number($('#rank > option:selected').val());
         	
         	//호텔검색 1일 이용가격(종류)
-        	/*
-        		1일가격 번호		가격범위
-        		1				5만원 미만
-        		2				5만원 이상 ~ 10만원 미만
-        		3				10만원 이상 ~ 15만원 미만
-        		4				15만원 이상 ~ 20만원 미만
-        		5				20만원 초과
-        	*/
+        	//
+        	//	1일가격 번호		가격범위
+        	//	1				5만원 미만
+        	//	2				5만원 이상 ~ 10만원 미만
+        	//	3				10만원 이상 ~ 15만원 미만
+        	//	4				15만원 이상 ~ 20만원 미만
+        	//	5				20만원 초과
+        	
         	let $search_hotel_price_per_day_type= Number($('#price-per-day > option:selected').val());
         	
         	//호텔검색 호텔이름 (빈공간제거)
@@ -452,12 +509,6 @@ $(function(){
         			console.log(data.likeHotelList);
         			console.log(data.minRoomPricePerDayList);
         			
-        			
-        			
-        			
-        			
-        			
-        			
         		}
         		
         	});
@@ -469,21 +520,15 @@ $(function(){
     			$content.addClass('out');
     		}
     	});
-      
-      
-      // 페이징처리 
-      function page(){
-    	  
-      }
+      */
 
 }); //modal- wrapper finished
 
 
 $(function(){
 	
-	
-	
 	//가격순 버튼 클릭
+	/*
 	$('#price_order_direction_btn').click(function(){
 		let $priceContainer= $('#price_order_direction_container');
 		if($priceContainer.hasClass('closed')){
@@ -495,10 +540,40 @@ $(function(){
 			$priceContainer.addClass('closed');
 			$priceContainer.css('display', 'none');
 		}
-		
 	});
-
+	*/
 	
+	$('#price_order_direction_btn').mouseenter(function(){
+		let $priceContainer= $('#price_order_direction_container');
+		if($priceContainer.hasClass('closed')){
+			$priceContainer.removeClass('closed');
+			$priceContainer.addClass('opened');
+			$priceContainer.css('display', 'flex');
+		}else if($priceContainer.hasClass('opened')){
+			$priceContainer.removeClass('opened');
+			$priceContainer.addClass('closed');
+			$priceContainer.css('display', 'none');
+		}
+	});
+	
+	
+	$('#price_order_direction_container').mouseout(function(){
+		if($(this).hasClass('closed')){
+			$(this).removeClass('closed');
+			$(this).addClass('opened');
+			$(this).css('display', 'flex');
+		}else if($(this).hasClass('opened')){
+			$(this).removeClass('opened');
+			$(this).addClass('closed');
+			$(this).css('display', 'none');
+		}
+	});
+	
+	
+	
+
+
+	/*
 	//가격 높은 순(내림차순) 버튼 클릭시
 	$(document).on('click','#price_high',function(){
 		console.log('가격 높은순 버튼 클릭됨');
@@ -1127,12 +1202,94 @@ $(function(){
 			}
 		});
 	});
-	
-	
-	
-	
-	
+	*/
 });
+
+
+//정렬
+$(function(){
+	function orderBy(orderNumber){
+		if( orderNumber!=5){
+			// 가격순, 평점순, 등급순
+			location.href='hotelList.ho?searchTypeDetail='+ orderNumber;
+		}else{
+			// 상세검색
+			//검색조건 출력하기
+	       	//호텔검색 지역코드(선택안함: 0)
+	       	let $search_hotel_local_code= Number($('#place > option:selected').val());
+	       	
+	       	//호텔검색 호텔등급(선택안함: 0)
+	       	let $search_hotel_rank= Number($('#rank > option:selected').val());
+	       	
+	       	//호텔검색 1일 이용가격(종류)
+	       	//	1일가격 번호		가격범위
+	       	//  0				(선택안함)
+	       	//	1				5만원 미만
+	       	//	2				5만원 이상 ~ 10만원 미만
+	       	//	3				10만원 이상 ~ 15만원 미만
+	       	//	4				15만원 이상 ~ 20만원 미만
+	       	//	5				20만원 초과
+	       	let $search_hotel_price_per_day_type= Number($('#price-per-day > option:selected').val());
+	       	
+	       	//호텔검색 호텔이름 (빈공간제거)
+	       	let $search_hotel_name= $('#hotel-name').val().trim();
+	       	
+	       	//검색조건 내용 출력해보기.
+	       	console.log('호텔지역코드 => ' + $search_hotel_local_code);
+	       	console.log('호텔등급 => ' + $search_hotel_rank);
+	       	console.log('호텔 1일 이용가격 => '+ $search_hotel_price_per_day_type);
+	       	console.log('호텔이름 => '+ $search_hotel_name);
+	       	
+			if($search_hotel_name!=''){
+				location.href='hotelList.ho?searchTypeDetail='+ orderNumber+'&searchHotelRank='+$search_hotel_rank
+								+'&searchHotelLocalCode='+$search_hotel_local_code
+								+'&searchHotelPricePerDayType='+$search_hotel_price_per_day_type
+								+'&searchHotelName='+$search_hotel_name;
+			}else{
+				location.href='hotelList.ho?searchTypeDetail='+ orderNumber+'&searchHotelRank='+$search_hotel_rank
+				+'&searchHotelLocalCode='+$search_hotel_local_code
+				+'&searchHotelPricePerDayType='+$search_hotel_price_per_day_type;
+			}
+			//모달창을 나간다.
+    		$modalContainer.addClass('out');
+    		$body.removeClass('modal-active');
+    		if($modalContainer.hasClass($btnId)){
+    			$content.addClass('out');
+    		}
+		}
+	}
+	
+	//상세검색결과
+	$(document).on('click','#detail-hotel-search',function(){
+	       	console.log('어머나~ 호텔상세검색 버튼을 클릭하셨군요?');
+	       	
+	      	//검색조건에 맞는 호텔 리스트를 구한다.
+        	orderBy(5);	       	
+	 });
+	
+	
+	//평점순
+	$(document).on('click', '#popularity',function(){
+		orderBy(1);
+	});
+	
+	//가격순
+	//가격높은순(3)
+	$(document).on('click','#price_high',function(){
+		orderBy(3);
+	});
+	
+	//가격낮은순
+	$(document).on('click','#price_low',function(){
+		orderBy(4);
+	});
+	
+	//등급순
+	$(document).on('click', '#rank_high', function(){
+		orderBy(2);
+	})
+});
+
 
 
 //heart -btn

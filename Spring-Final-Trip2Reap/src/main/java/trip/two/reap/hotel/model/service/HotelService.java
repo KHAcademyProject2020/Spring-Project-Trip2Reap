@@ -82,7 +82,7 @@ public interface HotelService {
 	ArrayList<Integer> getDetailSearchResultHotelBoNoList(HashMap<String, Object> detailSearchMap);
 
 	//hId에 해당하는 호텔정보한개 구하기
-	Hotel selectDetailSearchResultOneHotel(int hId);
+	//Hotel selectDetailSearchResultOneHotel(int hId);
 
 	//검색조건에 만족하는 방번호를 가진 호텔리스트
 	ArrayList<Hotel> selectDetailSearchHotelList(HashMap<String, Object> searchHashMap);
@@ -91,17 +91,32 @@ public interface HotelService {
 	int selectHotelMinPrice(int hId);
 
 	
-	//등급순 내림차순 정렬
+	//등급순 내림차순 정렬(폐기)
 	ArrayList<Hotel> sortRankDescendent();
+	//2020.12.09 - 등급순 내림차순 정렬
+	ArrayList<Hotel> selectOrderedRankDescendent(PageInfo pi);
 
-	//평점순 내림차순 정렬
-	ArrayList<Hotel> sortPopularDescendent();
+	
+	
+	//평점순 내림차순 정렬(폐기)
+	ArrayList<Hotel> sortPopularDescendent();	
+	//2020.12.09 - 평점순 내림차순 정렬
+	ArrayList<Hotel> selectOrderedPopularityDescendent(PageInfo pi);
 
-	//가격이 가장 비싼 방가격 을 가진 호텔번호를 우선으로 정렬
-	ArrayList<Integer> getOrderedHighPriceBoNoList();
+	
+	
+	
+	//가격이 가장 비싼 방가격 을 가진 호텔번호를 우선으로 정렬(폐기)
+	//ArrayList<Integer> getOrderedHighPriceBoNoList();
+	//2020.12.09 - 방가격 내림차순 정렬
+	ArrayList<Hotel> selectOrderedHighPriceHotelList(PageInfo pi);
 
-	//가격이 가장싼 방가격을 가진 호텔번호를 우선으로 정렬
-	ArrayList<Integer> getOrderedLowPriceBoNoList();
+
+	//가격이 가장싼 방가격을 가진 호텔번호를 우선으로 정렬(폐기)
+	//ArrayList<Integer> getOrderedLowPriceBoNoList();
+	//2020.12.09- 방가격 오름차순 정렬
+	ArrayList<Hotel> selectOrderedLowPriceHotelList(PageInfo pi);
+
 
 	
 	//2020.12.07 - 호텔 등록
@@ -128,6 +143,9 @@ public interface HotelService {
 	//2020.12.08 -hotelDetailView.ho - 호텔한개의 디테일이미지들(디테일이미지 리스트)을 찾는다.
 	ArrayList<Attachment> selectDetailImgList(int boNo);
 
+
+
+	
 	
 
 	

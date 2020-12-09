@@ -195,10 +195,10 @@ public class HotelServiceImpl implements HotelService{
 
 
 	//2.(폐기) 방번호에 해당하는 호텔정보를 갖고온다.
-	@Override
-	public Hotel selectDetailSearchResultOneHotel(int hId) {
-		return hDAO.selectDetailSearchResultOneHotel(sqlSession, hId);
-	}
+//	@Override
+//	public Hotel selectDetailSearchResultOneHotel(int hId) {
+//		return hDAO.selectDetailSearchResultOneHotel(sqlSession, hId);
+//	}
 	
 
 	//2.(최종) 검색조건에 만족하는 호텔번호 리스트에 해당하는 호텔정보를 갖고온다.
@@ -215,29 +215,57 @@ public class HotelServiceImpl implements HotelService{
 	}
 
 	
-	//2020.12.03 - 등급순 내림차순 정렬
+	//2020.12.03 - 등급순 내림차순 정렬(폐기)
 	@Override
 	public ArrayList<Hotel> sortRankDescendent() {
 		return hDAO.sortRankDescendent(sqlSession);
 	}
+	
+	//2020.12.09 -등급순 내림차순 정렬
+	@Override
+	public ArrayList<Hotel> selectOrderedRankDescendent(PageInfo pi) {
+		return hDAO.selectOrderedRankDescendent(sqlSession, pi);
+	}
+	
+	
 
-	//2020.12.03 - 평점순 내림차순 정렬
+	//2020.12.03 - 평점순 내림차순 정렬(폐기)
 	@Override
 	public ArrayList<Hotel> sortPopularDescendent() {
 		return hDAO.sortPopularDescendent(sqlSession);
 	}
-
-	//2020.12.04 - 가격 높은 순 
+	
+	//2020.12.09 - 평점순 내림차순 정렬
 	@Override
-	public ArrayList<Integer> getOrderedHighPriceBoNoList() {
-		return hDAO.getOrderedHighPriceBoNoList(sqlSession);
+	public ArrayList<Hotel> selectOrderedPopularityDescendent(PageInfo pi) {
+		return hDAO.selectOrderedPopularityDescendent(sqlSession, pi);
+	}
+	
+	
+
+	//2020.12.04 - 가격 높은 순 (폐기)
+//	@Override
+//	public ArrayList<Integer> getOrderedHighPriceBoNoList() {
+//		return hDAO.getOrderedHighPriceBoNoList(sqlSession);
+//	}
+	
+	//2020.12.09- 가격높은순
+	@Override
+	public ArrayList<Hotel> selectOrderedHighPriceHotelList(PageInfo pi) {
+		return hDAO.selectOrderedHighPriceHotelList(sqlSession, pi);
 	}
 
 	
-	//2020.12.04 - 가격 낮은 순
+	//2020.12.04 - 가격 낮은 순(폐기)
+//	@Override
+//	public ArrayList<Integer> getOrderedLowPriceBoNoList() {
+//		return hDAO.getOrderedLowPriceBoNoList(sqlSession);
+//	}
+	
+	//2020.12.09 -방가격 낮은순
 	@Override
-	public ArrayList<Integer> getOrderedLowPriceBoNoList() {
-		return hDAO.getOrderedLowPriceBoNoList(sqlSession);
+	public ArrayList<Hotel> selectOrderedLowPriceHotelList(PageInfo pi) {
+		return hDAO.selectOrderedLowPriceHotelList(sqlSession, pi);
 	}
 
 	
@@ -297,12 +325,9 @@ public class HotelServiceImpl implements HotelService{
 	public ArrayList<Attachment> selectDetailImgList(int boNo) {
 		return hDAO.selectDetailImgList(sqlSession, boNo);
 	}
-	
 
-	
-	
 
-	
+
 	
 	
 	

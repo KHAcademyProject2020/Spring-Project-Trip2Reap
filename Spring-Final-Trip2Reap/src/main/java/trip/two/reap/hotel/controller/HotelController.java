@@ -1,7 +1,6 @@
 package trip.two.reap.hotel.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,10 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonIOException;
 
 import trip.two.reap.common.Attachment;
 import trip.two.reap.common.PageInfo;
@@ -46,24 +41,131 @@ public class HotelController {
 
 
 	@RequestMapping("hotelList.ho")
-	public ModelAndView hotelList(@RequestParam(value="page", required=false, defaultValue="1") Integer page , HttpSession session, ModelAndView mv)throws HotelException{
-
+	public ModelAndView hotelList(@RequestParam(value="page", required=false, defaultValue="1") Integer page ,
+			@RequestParam(value="searchTypeDetail", required=false, defaultValue="0") int searchTypeDetail,
+			@RequestParam(value="searchHotelRank", required=false, defaultValue="0") int searchHotelRank ,
+			@RequestParam(value="searchHotelLocalCode", required=false, defaultValue="0") int searchHotelLocalCode,
+			@RequestParam(value="searchHotelPricePerDayType", required=false, defaultValue="0") int searchHotelPricePerDayType,
+			@RequestParam(value="searchHotelName", required=false) String searchHotelName,
+			HttpSession session, ModelAndView mv)throws HotelException
+	{
+		//httpSession
+		//searchTypeDetail:검색조건
+		//0: BO_NO 순서대로
+		//1: 평점순
+		//2: 등급순
+		//3: 가격순-높은순
+		//4: 가격순-낮은순
+		//5: 상세검색
+		mv.addObject("searchTypeDetail",searchTypeDetail)
+		.addObject("searchHotelRank", searchHotelRank)
+		.addObject("searchHotelLocalCode", searchHotelLocalCode)
+		.addObject("searchHotelPricePerDayType", searchHotelPricePerDayType)
+		.addObject("searchHotelName", searchHotelName);
+		
+		//상세검색조건 가져오기
+		System.out.println("검색종류번호: "+searchTypeDetail);//검색종류
+		if(searchHotelLocalCode>0)
+			System.out.println("검색 호텔 지역코드: "+ searchHotelLocalCode);
+		if(searchHotelRank>0)
+			System.out.println("검색 호텔 등급: "+ searchHotelRank);
+		if(searchHotelPricePerDayType>0)
+			System.out.println("검색 호텔 1일숙박비용 종류(숫자): "+ searchHotelPricePerDayType);
+		if(searchHotelName!=null && searchHotelName!="")
+			System.out.println("검색 호텔 이름: "+ searchHotelName);
+		
+		//검색호텔이름이 존재하지않으면 null로한다.
+		if(searchHotelName=="") {
+			searchHotelName=null;
+		}
+		
 		int currentPage =1; //호텔예약페이지에 접속 초기 페이지번호
 		if(page !=null) {
 			currentPage=page;
 		}
 
-
-		//호텔리스트 개수를 구한다.
-		int hotelListCount= hService.getHotelListCount();
-
-		//페이징
-		PageInfo pi = Pagination.getPageInfo(currentPage, hotelListCount);
-
-		//페이지에 해당하는 보드값을 구한다.
-		ArrayList<Hotel> hotelList= hService.selectHotelList(pi);
-
-
+		//hotelListCount, pi, hotelList초기화
+		int hotelListCount=0;
+		PageInfo pi=null;
+		ArrayList<Hotel> hotelList=null;
+		ArrayList<Integer> boNoList=null; //검색조건만족호텔 번호리스트
+		int boNoListCount=0;
+		
+		if(searchTypeDetail==0){
+			// searchTypeDetail ==0 (검색조건이 없을때)
+			//(1)호텔리스트 개수를 구한다.
+			hotelListCount= hService.getHotelListCount();
+			
+			//(2)페이지인포를 구한다.
+			pi = Pagination.getPageInfo(currentPage, hotelListCount);
+	
+			//(3)페이지에 해당하는 보드값을 구한다.
+			hotelList= hService.selectHotelList(pi);
+			
+		} else if(searchTypeDetail==1) {
+			//평점순검색(전체호텔을 대상)
+			hotelListCount=hService.getHotelListCount();
+			pi = Pagination.getPageInfo(currentPage, hotelListCount);
+			hotelList= hService.selectOrderedPopularityDescendent(pi);
+			
+		}else if(searchTypeDetail==2) {
+			//등급순검색(전체호텔 대상)
+			hotelListCount=hService.getHotelListCount();
+			pi = Pagination.getPageInfo(currentPage, hotelListCount);
+			hotelList=hService.selectOrderedRankDescendent(pi);
+			
+			
+		}else if(searchTypeDetail==3) {
+			//가격순(높은순) 검색 : (전체호텔대상)
+			hotelListCount=hService.getHotelListCount();
+			pi = Pagination.getPageInfo(currentPage, hotelListCount);
+			hotelList=hService.selectOrderedHighPriceHotelList(pi);
+			
+			
+		}else if(searchTypeDetail==4) {
+			//가격순(낮은순) 검색: (전체호텔대상)
+			hotelListCount=hService.getHotelListCount();
+			pi = Pagination.getPageInfo(currentPage, hotelListCount);
+			
+			//호텔 방최저가가 가장싼것을 우선으로해서 호텔을 정렬
+			hotelList=hService.selectOrderedLowPriceHotelList(pi);
+			
+		}else if(searchTypeDetail==5) {
+			//상세검색 결과: (조건에 만족하는 호텔만 해당)
+			//검색조건 해시맵
+			HashMap<String,Object> detailSearchMap=new HashMap<String, Object>();
+			detailSearchMap.put("searchLocalCode", searchHotelLocalCode);
+			detailSearchMap.put("searchHotelRank", searchHotelRank);
+			
+			if(searchHotelName!=null)
+				searchHotelName="%"+searchHotelName+"%";
+			
+			detailSearchMap.put("searchHotelName", searchHotelName);
+			detailSearchMap.put("searchPricePerDayType", searchHotelPricePerDayType);
+			
+			//검색조건을 만족하는 호텔번호리스트를 구한다. (조건에 만족하는 호텔번호는 중복허용하지 않는다)
+			boNoList=hService.getDetailSearchResultHotelBoNoList(detailSearchMap);					
+			boNoListCount=boNoList.size();
+			hotelListCount=boNoList.size();
+			
+			pi=Pagination.getPageInfo(currentPage, boNoListCount);
+			
+			if(boNoListCount>0) {
+				//검색조건에 만족하는 호텔리스트를 구한다.
+				HashMap<String, Object> searchHashMap =new HashMap<String, Object>();
+				searchHashMap.put("pi", pi);
+				searchHashMap.put("searchBoNoList", boNoList);
+				hotelList=hService.selectDetailSearchHotelList(searchHashMap);
+			}
+		
+		}
+		
+		//최종적으로 hotelList에 정렬된/검색조건에 만족하는 호텔들을 담아야한다!
+		
+		
+		
+//////////////////////////////////////////////////////////////////////		
+		
 		// 각 호텔 중 가장싼 방가격을 담은 리스트를 구한다.
 		ArrayList<Integer> minRoomPricePerDayList=null;
 
@@ -135,17 +237,16 @@ public class HotelController {
 			}
 			*/
 			
-			mv.addObject("hotelList", hotelList);
-			mv.addObject("pi", pi);
-			mv.addObject("minRoomPricePerDayList", minRoomPricePerDayList);
-			mv.addObject("likeHotelList",likeHotelList);
-			mv.addObject("thumbnailImgList", thumbnailImgList);
-			mv.setViewName("hotel_list");
+			
 
-		}else {
-			// 호텔데이터가 존재하지 않을때, 에러발생
-			throw new HotelException("호텔페이지 접속에 실패하였습니다.");
 		}
+
+		mv.addObject("hotelList", hotelList);
+		mv.addObject("pi", pi);
+		mv.addObject("minRoomPricePerDayList", minRoomPricePerDayList);
+		mv.addObject("likeHotelList",likeHotelList);
+		mv.addObject("thumbnailImgList", thumbnailImgList);
+		mv.setViewName("hotel_list");
 
 		return mv;
 	}
@@ -459,6 +560,7 @@ public class HotelController {
 		}
 	}
 	
+	/*
 	//2020.12.01~2020.12.02  - modal 상세검색 (미완)
 	//호텔리스트- modal 상세 검색(보류)
 	@RequestMapping("detailSearchResult.ho")
@@ -890,6 +992,7 @@ public class HotelController {
 		
 		gson.toJson(orderResultMap, response.getWriter());
 	}
+	*/
 	
 	
 	//go to hotel insert page (only admin)
