@@ -31,6 +31,7 @@ public class CourseController {
 	@RequestMapping("courseInsertAttachment.co")
 	public String attachment(@RequestParam(value="file" ,required=false) MultipartFile file) {
 		System.out.println("file : " + file);
+		System.out.println("originalfile : " + file.getOriginalFilename());
 		
 		return "courseTitleInsert";
 	}
