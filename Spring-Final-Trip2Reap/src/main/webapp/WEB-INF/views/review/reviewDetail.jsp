@@ -9,22 +9,7 @@
 	href="resources/css/review/reviewDetail.css" />
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-table td {
-	
-}
 
-#insert_div {
-	width: 1000px;
-	text-align: center;
-}
-
-#insertReview {
-	width: 800px;
-	padding-left: 100px;
-	text-align: center;
-}
-</style>
 </head>
 <body>
 	<section>
@@ -40,14 +25,14 @@ table td {
 						후기</span>
 				</div>
 			</div>
+		<br><br><br>
+			
 
-
-			<!-- 작성하기 div 시작 -->
-			<div id="insert_div">
-
-				<!-- 작성하기 table 시작 -->
-				<div id="insertReview">
-					<table id="travel_table">
+				<div id="detaildiv">
+				<br>
+					<div id="detailtable">
+					
+					<table >
 
 
 						<tr>
@@ -55,17 +40,23 @@ table td {
 						</tr>
 
 						<tr>
-							<td colspan="5"><span><b>글쓴이 : ${review.memberId }</b></span></td>
+							<td colspan="5"><span><b>글쓴이 : ${review.nickName}</b></span></td>
 						</tr>
 						<tr>
-							<td>${review.regDate }</td>
+							<td>
+							${review.regDate } &nbsp;
+							<i class="fas fa-eye"></i>&nbsp;${review.boCount}&nbsp;
+							<i class="fas fa-thumbs-up"></i>&nbsp;22&nbsp;
+							<i class="fas fa-comment-dots"></i>&nbsp;<b id="checkCount"></b>
+							</td>
 							<td colspan="3"></td>
-							<td>${review.boTag }</td>
+							<td>#${review.boTag }</td>
 						</tr>
 
 						<tr>
 							<td colspan="5">
-								<hr>
+							
+								<hr><br>
 							</td>
 						</tr>
 						<tr>
@@ -84,16 +75,26 @@ table td {
 						</tr>
 
 						<tr>
-							<td colspan="5">
-								<div>${review.boContent }</div>
+							<td colspan="5"><br><br><br>
+								<div id="content">${review.boContent }</div>
 							</td>
 						</tr>
 						<tr>
-							<td colspan="5">좋아요
+							<td colspan="5">
+							<i class="far fa-thumbs-up fa-3x"></i>좋아요
 								<hr>
 							</td>
 						</tr>
 
+					</table>
+				<div id="replydiv">
+					<table class="replyTable" id="rtb">
+						<thead>
+							<tr>
+								<td colspan="3"><b id="rCount"></b><hr></td>
+							</tr>
+						</thead>
+						<tbody></tbody>
 					</table>
 
 					
@@ -101,41 +102,52 @@ table td {
 						<tr>
 
 							<td>
-							<textarea id="reContent" rows="10" cols="100"
-									placeholder="댓글을 입력해보세요.">
-									</textarea>
+							<textarea id="reContent" rows="3" cols="55" placeholder="댓글을 입력해보세요."></textarea>
 							</td>
-							<td colspan="5">
+							
+							<td>
 							<button id="rSubmit">댓글작성</button>
 							</td>
+							
 						</tr>
+						<c:if test="${ loginUser.nickName eq review.nickName }">
+		
+		
+						<tr>
+							<td colspan="2" align="center">
+					<c:url var="rdelete" value="rdelete.bo">
+						<c:param name="boNo" value="${ b.boNo }"/>
+						<c:param name="page" value="${ pi.currentPage }"/>
+					</c:url>
+							<input type="button" value="수정" onclick="location.href='${bupView}'">
+							<input type="button" value="삭제" onclick="del(${review.boNo})">
+							</td>
+						</tr>
+						</c:if>
 					</table>
-
-					<table class="replyTable" id="rtb">
-						<thead>
-							<tr>
-								<td colspan="2"><b id="rCount"></b></td>
-							</tr>
-						</thead>
-						<tbody></tbody>
-					</table>
+					</div>
+					
+					</div>
 
 
 				</div>
-			</div>
-			<!-- 전체 div 끝 -->
+			</div><br><br><br><br><br><br><br><br>
+		
 
-			<!-- 버튼 div -->
-			<div id="button_div">
-				<button id="button_write">등록</button>
-				<button id="button_write">목록</button>
-				<button id="button_write">Top▲</button>
-			</div>
-
-		</div>
+		
 
 
 	</section>
+	<script>
+	function del(boNo) {
+		var chk = confirm("정말 삭제하시겠습니까?");
+		if (chk) {
+			location.href='rdelete.bo?boNo='+boNo;
+			alert("삭제되었습니다");
+		}
+	}	
+</script>
+	
 
 	<script>
 		$(function() {
@@ -155,10 +167,7 @@ table td {
 
 			$.ajax({
 				url : 'addReply.bo',
-				data : {
-					reContent : reContent,
-					boNo : boNo
-				},
+				data : {reContent : reContent,boNo : boNo},
 				success : function(data) {
 					if (data == 'success') {
 						$('#reContent').val("");
@@ -172,41 +181,44 @@ table td {
 
 		function getReplyList() {
 			var boNo = ${review.boNo};
-			$.ajax({
+			
+				$.ajax({
 						url : "rList.bo",
 						data : {boNo : boNo},
 						success : function(data) {
-							// console.log(data);
-
+							 //console.log(data);					
+							
 							$tableBody = $('#rtb tbody');
 							$tableBody.html('');
 
 							var $tr;
-							var $memberId;
+							var $nickName;
 							var $reContent;
 							var $reDate;
+							
 
 							$('#rCount').text('댓글(' + data.length + ')');
+							$('#checkCount').text(+ data.length);
 
 							if (data.length > 0) {
 								for ( var i in data) {
 									$tr = $('<tr>');
-									$rWriter = $('<td width=100>').text(
-											data[i].rWriter);
-									$reContent = $('<td>')
-											.text(data[i].reContent);
-									$reDate = $('<td width=100>').text(
-											data[i].reDate);
+									$nickName = $('<td width=100>').text(data[i].nickName);
+									$reContent = $('<td>').text(data[i].reContent);
+									$reDate = $('<td width=100>').text(data[i].reDate);
+						
 
-									$tr.append($memberId);
+
+									$tr.append($nickName);
 									$tr.append($reContent);
 									$tr.append($reDate);
+						
 									$tableBody.append($tr);
+									
 								}
 							} else {
 								$tr = $('<tr>');
-								$rContent = $('<td colspan="3">').text(
-										'등록된 댓글이 없습니다.');
+								$rContent = $('<td colspan="3">').text('등록된 댓글이 없습니다.');
 
 								$tr.append($reContent);
 								$tableBody.append($tr);
@@ -215,5 +227,6 @@ table td {
 					});
 		}
 	</script>
+
 </body>
 </html>

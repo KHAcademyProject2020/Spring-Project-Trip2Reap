@@ -66,7 +66,7 @@
 				</c:if>
 			
 			</td>
-			<td class="board_list">${b.memberId }</td>
+			<td class="board_list">${b.nickName }</td>
 			<td class="board_list">${b.regDate }</td>
 			<td class="board_list">${b.boCount }</td>
 			<td class="board_list">like${ pi.startPage }</td>

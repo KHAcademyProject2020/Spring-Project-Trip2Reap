@@ -9,14 +9,16 @@
   	</select>
   	
   	<select id="selectList" resultMap="reviewResultSet">
-  		select B.BO_NO,B.CA_CODE,B.BO_TITLE,B.BO_CONTENT,B.MEMBER_ID,B.BO_COUNT,B.BO_TAG,B.BO_DELETE_YN,B.REGDATE,C.CA_NAME,I.ORIGIN_NAME,I.CHANGE_NAME
+  		select B.BO_NO,B.CA_CODE,B.BO_TITLE,B.BO_CONTENT,B.MEMBER_ID,B.BO_COUNT,B.BO_TAG,B.BO_DELETE_YN,B.REGDATE,C.CA_NAME,I.ORIGIN_NAME,I.CHANGE_NAME,M.NICKNAME
         from board b
          left JOIN CATEGORY C 
             ON B.CA_CODE = C.CA_CODE
          left JOIN IMG_FILE I
             ON B.BO_NO = I.BO_NO
+         LEFT JOIN MEMBER M
+            ON B.MEMBER_ID = M.MEMBER_ID
          where BO_DELETE_YN='N' AND B.CA_CODE=3 OR B.CA_CODE=4
-   		 order by BO_NO desc  
+   		 order by BO_NO desc       
   		 <!-- select *
   		 from board
          JOIN CATEGORY USING(CA_CODE)
@@ -47,6 +49,7 @@
       <result column="CA_NAME" property="caName"/> 
       <result column="ORIGIN_NAME" property="originName"/>
       <result column="CHANGE_NAME" property="changeName"/>
+      <result column="NICKNAME" property="nickName"/>
    </resultMap>
    
   	 <update id="addReadCount">
@@ -61,12 +64,14 @@
        from board
        JOIN CATEGORY USING(CA_CODE)
        where BO_NO=#{boNo} and BO_DELETE_YN='N'  -->
-       select B.BO_NO,B.CA_CODE,B.BO_TITLE,B.BO_CONTENT,B.MEMBER_ID,B.BO_COUNT,B.BO_TAG,B.BO_DELETE_YN,B.REGDATE,C.CA_NAME,I.ORIGIN_NAME,I.CHANGE_NAME
+       select B.BO_NO,B.CA_CODE,B.BO_TITLE,B.BO_CONTENT,B.MEMBER_ID,B.BO_COUNT,B.BO_TAG,B.BO_DELETE_YN,B.REGDATE,C.CA_NAME,I.ORIGIN_NAME,I.CHANGE_NAME,NICKNAME
         from board b
          LEFT JOIN CATEGORY C 
             ON B.CA_CODE = C.CA_CODE
          LEFT JOIN IMG_FILE I
             ON B.BO_NO = I.BO_NO
+         LEFT JOIN MEMBER M
+            ON B.MEMBER_ID = M.MEMBER_ID
          where B.BO_NO = #{boNo} AND BO_DELETE_YN='N' AND (B.CA_CODE=3 OR B.CA_CODE=4)
    		 order by BO_NO desc 
    </select> 
@@ -100,12 +105,12 @@
          CHANGE_NAME=#{changeName}, REGDATE=sysdate
       where BO_NO=#{boNo}
    </update>
-   
+   -->
    <update id="deleteReview">
        update board
-       set BO_DELETE_YN='N'
+       set BO_DELETE_YN='Y'
        where BO_NO=#{boNo}
-   </update> -->
+   </update> 
    
    <insert id="insertReply">
        insert into reply
@@ -114,7 +119,9 @@
    
    <select id="selectReplyList" resultMap="replyResultSet">
        select *
-       from reply
+       from reply r
+       LEFT JOIN MEMBER M
+            ON r.MEMBER_ID = M.MEMBER_ID
        where BO_NO=#{boNo}
        order by re_no desc
    </select> 
@@ -126,6 +133,7 @@
 		<result column="RE_DATE" property="reDate" />	
 		<result column="RE_CONTENT" property="reContent" />
 		<result column="RE_DELETE_YN" property="reDeleteYN" />
+		<result column="NICKNAME" property="nickName"/>
    </resultMap>
   
   
