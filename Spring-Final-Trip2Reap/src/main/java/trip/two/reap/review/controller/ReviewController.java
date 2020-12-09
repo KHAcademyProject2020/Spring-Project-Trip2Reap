@@ -210,6 +210,36 @@ public class ReviewController {
   	   
    }
    
+   public void deleteFile(String fileName, HttpServletRequest request) {
+	   String root = request.getSession().getServletContext().getRealPath("resources");
+	   String savePath = root + "\\buploadFiles";
+	   
+	   File f = new File(savePath + "\\" + fileName);
+	   
+	   if(f.exists()) {
+		   f.delete();
+	   }
+   }
+   
+   @RequestMapping("rdelete.bo")
+   public String deleteReview(@RequestParam("boNo") int boNo,
+		                           HttpServletRequest request) {
+	   
+	   Review r = rService.selectReview(boNo);
+	   
+	   if(r.getOriginName() != null) {
+		   deleteFile(r.getChangeName(), request);
+	   }
+	   
+	   int result = rService.deleteReview(boNo);
+	   
+	   if(result > 0) {
+		   return "redirect:reviewList.bo";
+	   } else {
+		   throw new ReviewException("게시물 삭제에 실패하였습니다.");
+	   }
+   }
+   
    
    
    

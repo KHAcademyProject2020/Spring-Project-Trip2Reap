@@ -9,10 +9,12 @@ public class Reply {
 	private Date reDate; 
 	private String reContent;
 	private String reDeleteYN;
+	private String nickName;
 	
 	public Reply() {}
 
-	public Reply(int reNo, int boNo, String memberId, Date reDate, String reContent, String reDeleteYN) {
+	public Reply(int reNo, int boNo, String memberId, Date reDate, String reContent, String reDeleteYN,
+			String nickName) {
 		super();
 		this.reNo = reNo;
 		this.boNo = boNo;
@@ -20,6 +22,7 @@ public class Reply {
 		this.reDate = reDate;
 		this.reContent = reContent;
 		this.reDeleteYN = reDeleteYN;
+		this.nickName = nickName;
 	}
 
 	public int getReNo() {
@@ -70,11 +73,20 @@ public class Reply {
 		this.reDeleteYN = reDeleteYN;
 	}
 
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
 	@Override
 	public String toString() {
 		return "Reply [reNo=" + reNo + ", boNo=" + boNo + ", memberId=" + memberId + ", reDate=" + reDate
-				+ ", reContent=" + reContent + ", reDeleteYN=" + reDeleteYN + "]";
+				+ ", reContent=" + reContent + ", reDeleteYN=" + reDeleteYN + ", nickName=" + nickName + "]";
 	}
 
+	
 
 }
