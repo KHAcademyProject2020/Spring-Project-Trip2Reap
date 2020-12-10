@@ -100,11 +100,6 @@ public class TravelController {
 	
 	
 	
-	@RequestMapping("tInsertView.tv")
-	public String goTravelInsert() {
-		return "travelInsertView";
-	} // 여행지 작성하기 이동.
-	
 	
 	
 	  
@@ -170,6 +165,11 @@ public class TravelController {
 //	}
 	
 	
+		@RequestMapping("tInsertView.tv")
+		public String goTravelInsert() {
+			return "travelInsertView";
+		} // 여행지 작성하기뷰 이동.
+	
 
 
 	  
@@ -211,7 +211,7 @@ public class TravelController {
 	  String root = request.getSession().getServletContext().getRealPath("resources"); 
 	  System.out.println(root); 
 	  
-	  String savePath = root + "\\buploadFiles";{
+	  String savePath = root + "\\travelFiles";{
 		  File folder = new File(savePath); 
 		  if(!folder.exists()){  //파일이 존재하지 않는다면
 			  folder.mkdirs(); 	//만들어줌
@@ -240,134 +240,77 @@ public class TravelController {
 	 }
 	 
 	  
-//	@RequestMapping("tInsert.tv") 
-//	public String travelInsert(@ModelAttribute Travel t, @ModelAttribute Attachment a, 
-//								@RequestParam("uploadFile") MultipartFile uploadFile, 
-//								@RequestParam("detailImgFile") ArrayList<MultipartFile> tDetailImg,
-//								HttpServletRequest request) throws TravelException {
-//		
-//				
-//				
-//				// 썸네일이미지
-//				HashMap<String, Object>  imgHashMap= null;
-//				if(!uploadFile.getOriginalFilename().equals("")) {
-//					//썸네일 이미지가 존재한다
-//					//1. 썸네일 이미지를 buploadFiles에 넣는다.
-//					imgHashMap=saveImgFile(uploadFile,1,request);
-//					
-//					//2. IMG_FILE 테이블에 추가한다.
-//					if(imgHashMap.get("changeName")!=null) { //변경된 이미지 이름이 null이 아니라면
-//						
-//						int thumbnailInsertResult=tService.insertOneThumImg(imgHashMap);
-//						
-//						if(thumbnailInsertResult<=0) {
-//							throw new TravelException("여행지 썸네일 이미지 등록에 실패하였습니다.");
-//						}
-//					}
-//					
-//				}
-//				
-//				
-//				
-//				
-//				// 디테일이미지 등록
-//				if(tDetailImg!=null) {
-//					//디테일이미지가 존재한다.
-//					for(MultipartFile detailImgFile : tDetailImg) {
-//						//1. 한개의 디테일 이미지를 buploadFiles에 넣는다.
-//						imgHashMap=saveImgFile(detailImgFile,2, request);
-//						
-//						if(imgHashMap.get("changeName")!=null) {
-//							//2. 한개의 디테일이미지를 IMG_FILE 테이블에 추가한다.
-//							int detailInsertResult=tService.insertOneThumImg(imgHashMap);
-//							if(detailInsertResult<=0) {
-//								throw new TravelException("여행지 디테일 이미지 등록에 실패하였습니다.");
-//							}
-//						}
-//					}
-//				}
-//				
-//				
-//				System.out.println(t); //전달받은 호텔정보 출력하기.
-//				return "redirect:hotelList.ho";
-//			}
-//			
-//			
-//			
-//			//이미지 저장메소드
-//			public HashMap<String, Object> saveImgFile(MultipartFile file, int imgCategory, HttpServletRequest request) {
-//				// imgCategory
-//				// 1: 썸네일 이미지
-//				// 2: 디테일이미지
-//				HashMap<String, Object> imgInfo= new HashMap<String, Object>();
-//				String root= request.getSession().getServletContext().getRealPath("resources");
-//				
-//				//저장 위치 설정 -OS에 따라 다르게 표기되기때문에 저장위치를 다르게한다.
-//				String savePath=root;
-//				savePath= root+ "\\buploadFiles"; //windows
-//				
-//				
-//				File folder= new File(savePath);
-//				if(!folder.exists()) {
-//					folder.mkdirs(); //폴더생성
-//				}
-//				
-//				SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMddHHmmssSSSS");
-//				String originImgFileName= file.getOriginalFilename();
-//				String renameImgFileName="";
-//				if(imgCategory==1) {
-//					//썸네일이미지 이름을 변경
-//					renameImgFileName= "tThum"+sdf.format(new Date(System.currentTimeMillis()))+"."
-//													+ originImgFileName.substring(originImgFileName.lastIndexOf(".")+1);
-//				}else {
-//					//디테일이미지 이름을 변경
-//					renameImgFileName= "travel"+sdf.format(new Date(System.currentTimeMillis()))+"."
-//							+ originImgFileName.substring(originImgFileName.lastIndexOf(".")+1);
-//				}
-//				
-//				String renamePath= folder+"";
-//				renamePath= folder+"\\"+renameImgFileName; //windows
-//				
-//				
-//				//업로드한 파일을 저장한다.
-//				try {
-//					file.transferTo(new File(renamePath));
-//					
-//				}catch(Exception e) {
-//					
-//					e.printStackTrace();
-//				}
-//				
-//				
-//				imgInfo.put("originName", originImgFileName);//원래파일이름
-//				imgInfo.put("changeName", renameImgFileName);//변경파일이름
-//				imgInfo.put("fileLevel", imgCategory); //파일레벨
-//				imgInfo.put("filePath", renamePath); //파일 저장경로
-//				return imgInfo;
-//			}
+
 			
-			
-			
-		//파일 삭제
-		public void deleteFile(String fileName, HttpServletRequest request) {
-			String root= request.getSession().getServletContext().getRealPath("resources");
-			String savePath=root;
-			File file=null;
-			savePath= root+"\\buploadFiles";
-			file= new File(savePath+"\\"+fileName);
-			
-			
-			if(file!=null && file.exists()) {
-				file.delete();
+	
+	@RequestMapping("tUpview.tv")
+	public ModelAndView goTravelUpview(@RequestParam("boNo") int boNo, @RequestParam("page") int page, ModelAndView mv) {
+		
+			Travel travel = tService.selectTravel(boNo);
+		  
+		  mv.addObject("travel", travel)
+		  	.addObject("page", page)
+		  	.setViewName("travelUpdateView");
+		  
+		  
+		  return mv;
+	} // 여행지 수정하기 이동
+	  
+	
+	
+	//파일 삭제
+	public void deleteFile(String fileName, HttpServletRequest request) {
+		String root= request.getSession().getServletContext().getRealPath("resources");
+		String savePath=root;
+		
+		File file = null;
+		
+		savePath= root+"\\travelFiles";
+		
+		file= new File(savePath + "\\" + fileName);
+		
+		
+		if(file!=null && file.exists()) {
+			file.delete();
+		}
+		
+		;
+		
+	}
+	  
+	
+	
+	@RequestMapping("tUpdate.tv")
+	public String goTravelUpdate(@ModelAttribute Travel t, @ModelAttribute Attachment a, @RequestParam("page") int page, 
+									@RequestParam("reloadFile") MultipartFile reloadFile, 
+									HttpServletRequest request){
+				
+		
+		
+		if(reloadFile != null && !reloadFile.isEmpty()) {
+			if(a.getChangeName() != null) {
+				deleteFile(a.getChangeName(), request);
 			}
 			
+			String changeName = saveFile(reloadFile, request);
+			
+			if(changeName != null) {
+				a.setOriginName(reloadFile.getOriginalFilename());
+				a.setChangeName(changeName);
+			}
+			
+			int result = tService.updateTravel(t);
 			
 		}
+		
+		return null;
+	}
 	
-	  @RequestMapping("tUpdate.tv")
-	public String goTravelUpdate() {
-		return "travelUpdate";
-	} // 여행지 수정하기 이동
+	
+	 @RequestMapping("tDelete.tv")
+	 public String goTravelDelete() {
+		  return "travelDelete";
+	  }//여행지 삭제하기
 	
 	
 	@RequestMapping("tSearchError.tv")

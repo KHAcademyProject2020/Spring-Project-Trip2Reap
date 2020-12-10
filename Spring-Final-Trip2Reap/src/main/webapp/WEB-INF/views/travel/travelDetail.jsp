@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>여행 코스 상세보기</title>
+<title>여행지 상세보기</title>
 <link rel="stylesheet" type="text/css" href=" ${pageContext.request.contextPath}/resources/css/travel/travelDetail.css"/>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
@@ -43,58 +43,63 @@
 		<%-- 		<c:forEach var="imageFileName" items="${ t.fileList }"> --%>
 				<!-- <img src="resources/images/송도.JPG" id="content_img"/> -->
 				
-				<img src="${ contextPath }/resources/buploadFiles/${ travel.changeName }" id="content_img"/>
+				<img src="${ contextPath }/resources/travelFiles/${ travel.changeName }" id="content_img"/>
 					<!-- a태그 안에서 다운로드 받을 것이 있을 때 쓰는 속성 download, 얘는 download="fileName" 이라고 해서 fileName을 지정해줄 수 있다. -->
 				<!-- <img src="resources/images/송도2.JPG" id="content_img2"/> -->
 				<div id="content_img2">👍부담없이 감상하는 백만 불짜리 야경👍</div>
-				<div id="content_img3">외국에서는 야경도 관광 명물 중 하나로 적극 홍보한다. 일본의 경우 2012년 '일반사단법인 야경관광컨벤션뷰로'가 전국의 야경감상사 3,500여 명으로부터
-				'세계 신3대 야경을 추천받아 모나코, 홍콩과 함께 나가사키가 선정되었다고 발표했다. 이후 나가사키시는 자신들의 관광자원을 자랑할 때 야경을 절대 빼놓지 않는다.</div>
+				<div id="content_img3">${ travel.boContent }</div>
 				<%-- </c:forEach> --%>
 				
 				
-					<table id="travel_cate_table">
-						<tr id="th_cate">
-							<th><i class="fas fa-info-circle"></i>  여행정보 </th>
-						</tr>
-						<tr> 
-							<th>&nbsp;</th>
-						</tr>
-						<tr>	
-							<td class="td_cate">- 주소 : ${ travel.trAddr }</td>
-						</tr>
-						<tr>	
-							<td>- 문의 : 032-832-3031</td>
-						</tr>
-					</table>
 					<div id="last_div">
-						<div id="map" style="width:58%;height:350px;"></div>
+						<div id="map_info"><i class="fas fa-info-circle"></i>  지도보기</div>
+						<div id="map" style="width:100%;height:350px;"></div>
+					</div>
+					<div id="info_div">
+						<div id="info_left"><i class="fas fa-map-marker-alt"></i>  ${ travel.trAddr }</div>
+						<div id="info_right"><i class="fas fa-phone-alt"></i>  032-832-3031</div>
 					</div>
 			
 				 <div id="hashtag_div">
-					<a href=" ${pageContext.request.contextPath}/tList.tv">#인천</a>&nbsp;&nbsp;
-						<a href=" ${pageContext.request.contextPath}/tList.tv">#공원</a>&nbsp;&nbsp;
-						<a href=" ${pageContext.request.contextPath}/tList.tv">#산책하기짱</a>&nbsp;&nbsp;
-						<a href=" ${pageContext.request.contextPath}/tList.tv">#야경</a>&nbsp;&nbsp;
-						<a href=" ${pageContext.request.contextPath}/tList.tv">#레포츠</a>&nbsp;&nbsp;
+					<a href=" ${pageContext.request.contextPath}/tList.tv">#${ travel.boTag } </a>&nbsp;&nbsp;
+						<a href=" ${pageContext.request.contextPath}/tList.tv">#${ travel.boTag }</a>&nbsp;&nbsp;
+						<a href=" ${pageContext.request.contextPath}/tList.tv">#${ travel.boTag }</a>&nbsp;&nbsp;
+						<a href=" ${pageContext.request.contextPath}/tList.tv">#${ travel.boTag }</a>&nbsp;&nbsp;
+						<a href=" ${pageContext.request.contextPath}/tList.tv">#${ travel.boTag }</a>&nbsp;&nbsp;
 				</div> 
 					<br><br>
 				<hr>
 				
-				<div id="button_div">
-					<button id="button_update" onclick="updateView()">수정하기</button>
-					<button id="button_delete" onclick="deleteView()">삭제하기</button>
-				</div>
+				
+				<c:url var="tUpview" value="tUpview.tv">
+							<c:param name="boNo" value="${ travel.boNo }"/>
+							<c:param name="page" value="${ page }"/>
+				</c:url>
+				<c:url var="tDelete" value="tDelete.tv">	
+								<c:param name="boNo" value="${ travel.boNo }"/>
+				</c:url>
+				
+				
+				
+				<c:if test="${loginUser.memberId=='admin' }"> <!-- 관리자만 수정/삭제 할 수 있다. -->
+					<div id="button_div">
+						<button id="button_update" onclick="location.href='${ tUpview }'">수정하기</button>
+								
+						<button id="button_delete" onclick="location.href='${ tDelete }'">삭제하기</button>
+								
+					</div>
+				</c:if>
 			</div>
 		</div>
 		
 	<script>
-		function updateView(){	//수정하기 뷰로 이동
+		/* function updateView(){	//수정하기 뷰로 이동
 			location.href=" ${pageContext.request.contextPath}/tUpdate.tv"
-		}
+		} */
 		
-		function deleteView(){ //삭제하기 뷰로 이동
+		/* function deleteView(){ //삭제하기 뷰로 이동
 			location.href=" ${pageContext.request.contextPath}/tList.tv"
-		}
+		} */
 		
 		
 		function containTravel(){
@@ -110,7 +115,7 @@
 			$(this).append(html); 
 			
 			var input_clip = document.getElementById("clip_target"); 
-				//현재 url 가져오기 -> 해당 여행지 url 가져오기로 어떻게 값을 가져올지 고민중
+				//현재 url 가져오기 
 				var _url = $(location).attr('href'); 
 			$("#clip_target").val(_url); 
 				
@@ -190,6 +195,8 @@
 	
 	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 	        map.setCenter(coords);
+	        
+	        
 	    } 
 	});    
 	</script>

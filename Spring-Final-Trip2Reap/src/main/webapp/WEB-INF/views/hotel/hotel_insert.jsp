@@ -150,7 +150,7 @@
 									let $uploaded_img_info='<li class="upload-img-name-li"><div class="upload-image-checkbox-wrapper">';
 									$uploaded_img_info+='<input id="upload_img_'+i+'" class="upload-image-checkbox" type="checkbox" name="select_detail_img"/>';
 									$uploaded_img_info+='<label for="upload_img_'+i+'" class="upload-image-label"></label></div>';
-									$uploaded_img_info+='<div class="upload-image-filename-wrapper">'+totalUploadImgs[i]['name']+'</div></li>';
+									$uploaded_img_info+='<div class="upload-image-name-wrapper">'+totalUploadImgs[i]['name']+'</div></li>';
 									$('ul.uploaded-img-names-ul').append($uploaded_img_info);
 								}
 							}else{

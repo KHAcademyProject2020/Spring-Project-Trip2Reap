@@ -112,7 +112,7 @@
 			<div id="list_travel_div">
 				<div id="travel_img_div">
 					<c:if test="${t.changeName != null }"> <!-- insert로 등록한 여행지 -->
-					 <img src="resources/buploadFiles/${ t.changeName }" id="travel_img" /> 
+					 <img src="resources/travelFiles/${ t.changeName }" id="travel_img" /> 
 					</c:if>
 					
 					<c:if test="${t.changeName == null }"> <!-- db에 들어가있던 여행지 -->
@@ -259,7 +259,7 @@
 			
 			var input_clip = document.getElementById("clip_target"); 
 				//현재 url 가져오기 -> 해당 여행지 url 가져오기로 어떻게 값을 가져올지 고민중
-				var _url = $(location).attr('href'); 
+				var _url = $(location).attr("location.href='tInsertView.tv?boNo=${t.boNo}&page={pi.currentPage}'"); 
 			$("#clip_target").val(_url); 
 				
 			if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) { 

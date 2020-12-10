@@ -125,9 +125,9 @@
 #travel_cate_table {
     padding: 0px;
     font-size: 18px;
-    float: right;
-    margin-top: 55px;
-        margin-right: 20px;
+    /* float: right; */
+    /* margin-top: 55px; */
+    /* margin-right: 20px; */
 }
 
 
@@ -149,7 +149,7 @@
 }
 
 #last_div{
-	margin-bottom: 50px;
+	margin-bottom: 39px;
 }
 
 #button_div{
@@ -184,7 +184,7 @@
 
 
 #travel_cate_table{
-	    padding: 45px;
+	    padding: 62px;
 }
 
 
@@ -218,3 +218,21 @@
 }
 
 
+#map_info{
+	font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+
+#info_left{
+	display: flex;
+	margin-right: 149px;
+}
+
+#info_div {
+    display: flex;
+    margin-bottom: 87px;
+    margin-left: 100px;
+    font-size: 17px;
+}

@@ -46,6 +46,10 @@ public class TravelDAO {
 		return (Travel)sqlSession.selectOne("travelMapper.selectTravel", boNo); //travel상세보기
 	}
 
+	public int updateTravel(SqlSessionTemplate sqlSession, Travel t) {
+		return sqlSession.update("travelMapper.updateTravel", t);
+	}
+
 
 	/*
 	 * public int insertOneThumImg(SqlSessionTemplate sqlSession, HashMap<String,
