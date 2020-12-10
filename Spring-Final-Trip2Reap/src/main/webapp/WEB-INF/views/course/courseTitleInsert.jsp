@@ -105,7 +105,17 @@
                <label id="dayLabel">D-1</label>
            </div>
            <label id="dayLabel2">여행 1일차</label>
-           <button id="addLocation">장소추가</button>
+           
+           <div id="tiSpace9"></div>
+           <div id="tiSpace8"></div>
+           <div id="course0">
+                <input type="text" id="noCourse" readonly="readonly" value="왼쪽 검색창을 통해 여행코스를 추가해주세요.">
+                <input type="text" id="yesCourse" readonly="readonly">
+           </div>
+           <!-- <div id="course1">
+                <label></label>
+           </div> -->
+
         
 
         
@@ -114,6 +124,7 @@
     </div>
 
     <div style="height: 300px;"></div>
+    <div class=""></div>
     </section>
 
     <script>
@@ -199,6 +210,7 @@
         }
     }
 
+    
     // 검색 결과 목록과 마커를 표출하는 함수입니다
     function displayPlaces(places) {
 
@@ -259,7 +271,7 @@
 
     // 검색결과 항목을 Element로 반환하는 함수입니다
     function getListItem(index, places) {
-
+    	
         var el = document.createElement('li'),
         itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
                     '<div class="info">' +
@@ -273,7 +285,10 @@
         }
                      
           itemStr += '  <span class="tel">' + places.phone  + '</span>' +
-                    '</div>';           
+                     '  <button id="courseOkBtn">여행코스 추가</button>  ' +
+                     '  <input type="hidden" id="courseX" value=' + places.x +' > ' +
+                     '  <input type="hidden" id="courseY" value=' + places.y +' > '
+                     '</div>';           
 
         el.innerHTML = itemStr;
         el.className = 'item';
@@ -294,7 +309,7 @@
                 marker = new kakao.maps.Marker({
                 position: position, // 마커의 위치
                 image: markerImage 
-            });
+            });       
 
         marker.setMap(map); // 지도 위에 마커를 표출합니다
         markers.push(marker);  // 배열에 생성된 마커를 추가합니다
@@ -388,6 +403,26 @@
     	var selectLocation = document.getElementById("coLocation").value;
     	console.log("지역 : " + selectLocation);
     }
+    
+    $(document).on("click","#courseOkBtn",function(){    
+    	var searchName = $(this).parent().find('h5').html();
+    	var searchX = $(this).parent().find($('#courseX')).val();
+    	var searchY = $(this).parent().find($('#courseY')).val();
+    	
+    	// noCourse가 있으면 지우고 div 만들기
+    	if(document.getElementById("noCourse")){
+            $("#noCourse").remove();
+            $("#yesCourse").val(searchName);
+    		$("#yesCourse").css('display', 'block');
+        } else{
+        // DIV 만들기
+            
+        }
+    	
+    	// noCourse가 없으면 div 만들기
+    	
+    	// 검색창 지우기  -> 여행지에 이름 나타내기 -> 지도에 마커표시하기 
+    });    	
 </script>
 
 </body>
