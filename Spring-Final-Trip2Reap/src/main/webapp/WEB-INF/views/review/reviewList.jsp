@@ -28,14 +28,18 @@
 		</div>
 		</div>
 		<!-- text-align뿐만 아니라 대부분 div안에서 작동한다. -->
-		<div id="cate_btn" style="display: inline-block; width: 770px">
-			<button id="cate_btn1" class="cate_btn">전체보기</button>
-			<button id="cate_btn2" class="cate_btn">여행지</button>
-			<button id="cate_btn3" class="cate_btn">맛집</button>
+			<div id="cate_btn" style="display: inline-block; width: 770px">
+				<button id="cate_btn1" class="cate_btn">전체보기</button>
+				<button id="cate_btn2" class="cate_btn">여행지</button>
+				<button id="cate_btn3" class="cate_btn">맛집</button>
 			</div>
 			<div id="bo_btn" style="display: inline-block;">
-			<button id="bo_btn1" class="bo_btn"  onclick="location.href='reviewPhotoList.bo';">사진형</button>
-			<button id="bo_btn2" class="bo_btn">게시판형</button>
+				<button id="bo_btn1" class="bo_btn"  onclick="location.href='reviewPhotoList.bo';">
+					<i class="fas fa-th-large"></i>
+				</button>
+				<button id="bo_btn2" class="bo_btn">
+					<i class="fas fa-grip-lines"></i>
+				</button>
 		</div>	
 		
 	

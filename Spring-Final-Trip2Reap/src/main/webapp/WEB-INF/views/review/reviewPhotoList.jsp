@@ -11,16 +11,18 @@
 	href="resources/css/review/reviewPhotoList.css" />
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 
+
+
 <title>Insert title here</title>
 </head>
 <body>
 
-
 	<header>
 		<c:import url="../common/menubar.jsp" />
 	</header>
-
+	
 	<section>
+	
 		<div id="all_div">
 			<div id="menu_div">
 				<div id="menu_left_div">
@@ -37,13 +39,17 @@
 			<button id="cate_btn3" class="cate_btn">맛집</button>
 		</div>
 		<div id="bo_btn" style="display: inline-block;">
-			<button id="bo_btn2" class="bo_btn">사진형</button>
-			<button id="bo_btn1" class="bo_btn"
-				onclick="location.href='reviewList.bo';">게시판형</button>
+			<button id="bo_btn2" class="bo_btn">
+				<i class="fas fa-th-large"></i>
+			</button>
+			<button id="bo_btn1" class="bo_btn" onclick="location.href='reviewList.bo';">
+				<i class="fas fa-grip-lines"></i>
+			</button>
 		</div>
 
-
+		
 		<div id="board">
+						
 
 
 			<c:forEach var="b" items="${list}">
@@ -51,35 +57,74 @@
 				<div class="divcontent">
 					<table id="board_table">
 						<tr>
-							<td id="img_td"><c:if test="${b.changeName != null }">
-									<img id="review_img" class="center-block"
-										src="resources/buploadFiles/${b.changeName}">
-								</c:if> <c:if test="${b.changeName == null }">
-									<div class="imgBackground">
-									<img id="review_img" class="center-block" src="resources/images/emoticon.png">
-									<p>
-									안녕!
-									
-									</p>
-									</div>
-								</c:if></td>
-						</tr>
-						<tr>
-							<td><c:if test="${ !empty loginUser }">
+							
+							<td id="img_td">
+							
+							<div class="gallerylist">
+										
+								<ul>
+								
+									<li>
 									<c:url var="reviewDetail" value="reviewDetail.bo">
-										<c:param name="boNo" value="${ b.boNo }" />
-										<c:param name="page" value="${ pi.currentPage }" />
+											<c:param name="boNo" value="${ b.boNo }" />
+											<c:param name="page" value="${ pi.currentPage }" />
 									</c:url>
-									<a href="${reviewDetail}">${ b.boTitle }#${b.boTag }</a>
-								   </c:if> <c:if test="${ empty loginUser }">
-									${ b.boTitle }${b.boTag }
+									
+									<a id ="detailGo" href="${reviewDetail}">
+									
+									<div class="screen">
+									
+									<div class="top">
+									
+									<c:if test="${ !empty loginUser }">
+										
+										${ b.boTitle }${ b.boTag }
+										
+						    		</c:if> 
+						       
+						       		<c:if test="${ empty loginUser }">
+											${ b.boTitle }
 									</c:if>
 									
-							</td>
+									</div>
+									
+									<div class="bottom">
+										
+										
+										# ${b.boTag }
+										
+						    		
+										
+									</div>
+									
+									<c:if test="${b.changeName != null }">
+										<img id="review_img" class="center-block" src="resources/buploadFiles/${b.changeName}">
+										
+									</c:if> 
+								
+									<c:if test="${b.changeName == null }">
+										
+										
+										<img id="Not_img" class="center-block" src="resources/images/emoticon.png">
+										
+										
+									</c:if>
+									
+									</div>
+									</a>
+						
+  							
+								</li>
+								
+								</ul>	
+								</div>
 
+  							
+								</td>
 						</tr>
+						
 					</table>
-
+								
 				</div>
 
 			</c:forEach>
@@ -157,20 +202,10 @@
 
 
 		</div>
+		
+		
 
 	</section>
-	
-	<script>
-		document.getElementById('review_img').onmouseover = function(){
-			this.style.opacity="0.3";
-			inner.Text="마우스";
-		}
-		document.getElementById('review_img').onmouseout = function(){
-			this.style.opacity="1";
-		}
-		
-	</script>
-
 
 
 </body>
