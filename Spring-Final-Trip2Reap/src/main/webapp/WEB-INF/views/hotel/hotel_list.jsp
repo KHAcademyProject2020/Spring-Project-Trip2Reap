@@ -116,12 +116,12 @@
 						<%--썸네일 이미지 --%>
 						<c:if test="${!empty thumbnailImgList.get(status.index)  }">
 							<%--썸네일 이미지가 존재한다면 --%>
-							<img src="resources/buploadFiles/${thumbnailImgList.get(status.index).changeName}"/>
+							<img class="hotel_thumbnail_img" src="resources/buploadFiles/${thumbnailImgList.get(status.index).changeName}"/>
 						</c:if>
 						
 						<c:if test="${empty thumbnailImgList.get(status.index) }">
 							<%--썸네일 이미지가 존재하지 않는다면 --%>
-		                	<img src="resources/images/sample_hotel.jpg" alt="호텔이미지">
+		                	<img class="hotel_thumbnail_img" src="resources/images/sample_hotel.jpg" alt="호텔이미지">
 						</c:if>
 						
 		                <div class="detail-info-container">
@@ -218,7 +218,7 @@
 
 					<%--현재페이지가 맨앞페이지가 아니라면 --%>
 					<c:if test="${pi.currentPage>1 }">
-						<c:url var="firstPage" value="hotelList.bo">
+						<c:url var="firstPage" value="hotelList.ho">
 							<c:param name="page" value="${pi.startPage }"/>
 							<c:param name="searchTypeDetail" value="${ searchTypeDetail }"/>
                     		<c:param name="searchHotelRank" value="${ searchHotelRank }"/>
@@ -229,7 +229,7 @@
 						<li style="cursor:pointer;"><a href="${firstPage }">&lt;&lt;</a></li>
 
 
-						<c:url var="before" value="hotelList.bo">
+						<c:url var="before" value="hotelList.ho">
 							<c:param name="page" value="${pi.currentPage-1 }"/>
 							<c:param name="searchTypeDetail" value="${ searchTypeDetail }"/>
                     		<c:param name="searchHotelRank" value="${ searchHotelRank }"/>

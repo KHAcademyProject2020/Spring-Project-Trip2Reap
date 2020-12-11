@@ -301,6 +301,7 @@ ul#price_order_direction_wrapper li:hover{
 
 .one-hotel-info-container img{
   width: 300px;
+  height: 300px;
 }
 
 
@@ -350,7 +351,7 @@ ul#price_order_direction_wrapper li:hover{
 
 
 .hotel-name-container>  h1{
-	font-size: 1.3em;
+	font-size: 1.15em;
 }
 
 

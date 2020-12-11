@@ -26,8 +26,10 @@
 
 		<!-- (common all pages related with hotel) title-container -->
 		<div id="title-container">
-
+			<%--
 			<img id="hotel-icon" src="resources/images/hotelIcon.png"> 
+			 --%>
+			<i class="fas fa-hotel" id="hotel-icon"></i>
 			<span id="title-name">호텔 예약</span>
 		</div>
 
@@ -43,7 +45,7 @@
 						<p style="color: #913716;">* 는 필수 입력사항 입니다!</p>
 					</div>
 					<div class="hotel-insert-content-container">
-						<input id="hotel_name" name="boTitle"  autocomplete="off" placeholder="* 호텔이름을 입력해주세요" type="text">
+						<input id="hotel_name" name="boTitle" autocomplete="off" placeholder="* 호텔이름을 입력해주세요" type="text">
 						<input type="hidden" name="memberId" value="${loginUser.memberId }"/>
 					</div>
 				</div>
@@ -55,7 +57,7 @@
 					</div>
 					<div id="hotel-rank-container">
 						<select name="rank" id="hotelRank">
-							<option value="">등급선택</option>
+							<option value="0">등급선택</option>
 							<option value="0">등급없음</option>
 							<option value="1">1등급</option>
 							<option value="2">2등급</option>
@@ -744,9 +746,9 @@
 								<option value="18">18</option>
 								<option value="19">19</option>
 								<option value="20">20</option>
-								<option value="21">22</option>
+								<option value="21">21</option>
+								<option value="22">22</option>
 								<option value="23">23</option>
-								<option value="24">24</option>
 							</select>
 						</div>
 
@@ -777,9 +779,9 @@
 								<option value="18">18</option>
 								<option value="19">19</option>
 								<option value="20">20</option>
-								<option value="21">22</option>
+								<option value="21">21</option>
+								<option value="22">22</option>
 								<option value="23">23</option>
-								<option value="24">24</option>
 							</select>
 						</div>
 
@@ -821,9 +823,9 @@
 								<option value="18">18</option>
 								<option value="19">19</option>
 								<option value="20">20</option>
-								<option value="21">22</option>
+								<option value="21">21</option>
+								<option value="22">22</option>
 								<option value="23">23</option>
-								<option value="24">24</option>
 							</select>
 						</div>
 
@@ -854,19 +856,14 @@
 								<option value="18">18</option>
 								<option value="19">19</option>
 								<option value="20">20</option>
-								<option value="21">22</option>
+								<option value="21">21</option>
+								<option value="22">22</option>
 								<option value="23">23</option>
-								<option value="24">24</option>
 							</select>
 						</div>
 
 					</div>
 				</div>
-				
-				
-				
-				
-				
 				
 
 				<!-- 호텔 옵션 선택 8-->
@@ -876,11 +873,13 @@
 						<div class="hotel_option_table">
 							<!-- 테이블1 -->
 							<table>
+								
 								<tr>
 									<td>선택</td>
 									<td class="table_option_name">옵션명</td>
 								</tr>
-
+								
+								
 								<tr>
 									<td colspan=2>
 										<input type="checkbox"  class="option-checkboxes" value="와이파이" id="option1"/>
@@ -952,6 +951,7 @@
 										<label class="fake-checkbox-label" for="option10">미용실</label>
 									</td>
 								</tr>
+								
 							</table>
 
 

@@ -1222,8 +1222,13 @@ public class HotelController {
 	//only admin(관리자용)
 	// 호텔 수정페이지뷰로 이동
 	@RequestMapping("hotelEditView.ho")
-	public String goEditHotelView(){
-		return "hotel_edit";
+	public ModelAndView goEditHotelView(@RequestParam("hId") int hId, ModelAndView mv){
+		Hotel hotel= hService.selectOneHotel(hId); //호텔정보를 불러온다.
+		
+		
+		mv.addObject("hotel", hotel)
+		.setViewName("hotel_edit");
+		return mv;
 	}
 // 은강><
 

@@ -173,7 +173,7 @@ input[type="button"]:focus{
 	padding-top: 10px;
 	padding-bottom: 10px;
 	
-	padding-right: 30px;
+	/* padding-right: 30px; */
 	flex-basis: 40%;
 	
 }
@@ -190,7 +190,7 @@ input[type="button"]:focus{
 	flex-direction:column;
 	justify-content: space-around;
 	position: relative;
-	width: 90%;
+	width: 100%;
 	margin:0;
 	
 	align-items: center;
