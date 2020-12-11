@@ -70,7 +70,7 @@
 										<button type="button" id="hashbtn">태그등록</button>
 								
 									<div id="hashtag">
-										<input type="text" id="tag" size="7" placeholder="태그를 입력해 주세요" /> &nbsp;
+										<input type="text" name="boTag"id="tag" size="7" placeholder="태그를 입력해 주세요" /> &nbsp;
 									</div>
 									
 									<div id="field"></div>
@@ -89,20 +89,7 @@
 
 		</div>
 
-		<script>
-			$("#hashbtn").on("click",function(e){
-				var name= document.getElementById('tag').value;
-				var div= "<div>${name}</div>"
-				
-				$(div).clone().appendTo("#hashtag");
-			});
-	    </script>
 			
-
-
-
-
-
 
 
 

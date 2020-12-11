@@ -32,16 +32,28 @@
 				<br>
 					<div id="detailtable">
 					
-					<table >
+					<table id="detailView" >
 
 
 						<tr>
-							<td colspan="5">[${review.caName}] ${review.boTitle}</td>
+							<td colspan="5">
+							<p style="color: green; font-size:30px;">
+							<b>&nbsp;&nbsp;${review.caName}</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="5"> 
+							<p style=" font-size:40px;">
+							<b>&nbsp;&nbsp;${review.boTitle}<b></b></B></p>
+							</td>
 						</tr>
 
 						<tr>
-							<td colspan="5"><span><b>글쓴이 : ${review.nickName}</b></span></td>
+							<td colspan="5">
+							<b>글쓴이 : ${review.nickName}</b>
+							</td>
 						</tr>
+						
 						<tr>
 							<td>
 							${review.regDate } &nbsp;
@@ -63,10 +75,7 @@
 
 							<td colspan="5"><c:if test="${review.changeName != null }">
 
-									<img
-										src="resources/buploadFiles/${review.changeName}
-							 "
-										width="600px;" height="500px;">
+									<img src="resources/buploadFiles/${review.changeName}" width="600px;" height="500px;">
 								</c:if> <c:if test="${review.changeName == null }">
 									<img id="review_img" class="center-block"
 										src="resources/images/emoticon.png">
@@ -87,6 +96,7 @@
 						</tr>
 
 					</table>
+					
 				<div id="replydiv">
 					<table class="replyTable" id="rtb">
 						<thead>
@@ -110,7 +120,16 @@
 							</td>
 							
 						</tr>
-						<c:if test="${ loginUser.nickName eq review.nickName }">
+						
+					</table>
+					</div>
+					
+					</div>
+
+
+				</div>
+				<table>
+				<c:if test="${ loginUser.nickName eq review.nickName }">
 		
 		
 						<tr>
@@ -124,13 +143,7 @@
 							</td>
 						</tr>
 						</c:if>
-					</table>
-					</div>
-					
-					</div>
-
-
-				</div>
+						</table>
 			</div><br><br><br><br><br><br><br><br>
 		
 

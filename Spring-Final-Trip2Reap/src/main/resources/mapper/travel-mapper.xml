@@ -92,4 +92,13 @@
 				and bo_no = #{boNo}
 				and bo_delete_yn = 'N'
 	</select>
+	
+	<update id="updateTravel">
+		update board as b, update img_file as f
+		set b.bo_title = #{boTitle}, b.bo_content = #{boContent}, b.bo_delete_yn = sysdate, 
+			origin_name = #{originName}, change_name=#{changeName}
+		where b.bo_no = #{boNo}
+	</update>
+	
+
 </mapper>

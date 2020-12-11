@@ -63,6 +63,11 @@ public class TravelServiceImpl implements TravelService{
 	 * return tDAO.insertOneThumImg(sqlSession, imgHashMap); }
 	 */
 
+	@Override
+	public int updateTravel(Travel t) {
+		return tDAO.updateTravel(sqlSession, t);
+	}
+
 
 	
 

@@ -20,6 +20,8 @@ public interface TravelService {
 
 	int insertFiles(Attachment a);
 
+	int updateTravel(Travel t);
+
 	
 
 	/*

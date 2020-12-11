@@ -19,14 +19,17 @@
 }
 
 #detaildiv{
+	border:1px solid black;
 	background-color:#e9e7e9;
 
 }	
 #detailtable{
-	margin-left:200px;
+	border:1px solid black;
+	
 }
 #replydiv{
-	margin-left:100px;
+	border:1px solid black;
+	
 }	
 #content{
 	margin-right:100px;
