@@ -24,7 +24,17 @@
 	        <id>Datanucleus</id>
 	        <url>http://www.datanucleus.org/downloads/maven2/</url>
 	    </repository>
+	    
+	    <!-- (HOTEL) 에약 관련 api - JitPack추가 -->
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	
+	    
 	</repositories>
+	
+	
 	
 	
 	<dependencies>
@@ -277,6 +287,14 @@
 		    <artifactId>scribejava-core</artifactId>
 		    <version>2.8.1</version>
 		</dependency>
+		
+		<!-- (HOTEL-예약) 7. IMPORT 결제관련 라이브러리 -->
+		<dependency>
+			<groupId>com.github.iamport</groupId>
+			<artifactId>iamport-rest-client-java</artifactId>
+			<version>0.2.12</version>
+		</dependency>
+		
 		
 	     	       
 	</dependencies>

@@ -54,6 +54,12 @@
 		</mvc:interceptor>
 		
 		
+		<!-- 호텔예약페이지 interceptor -->
+		<mvc:interceptor>
+			<mvc:mapping path="/hotelReservationView.ho"/>
+			<bean id="hotelReservationViewInterceptor" class="trip.two.reap.common.interceptor.HotelOnlyLoginEnterAcceptInterceptor"/>
+		</mvc:interceptor>
+		
 	</mvc:interceptors>
 	
 	

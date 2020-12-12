@@ -18,6 +18,7 @@
 		  		var msg='${msg}';
 		  		if(msg!=''){
 		  			swal({
+		  				title: '접근실패',
 		  				text:msg,
 		  				icon:'error',
 		  				button:true
