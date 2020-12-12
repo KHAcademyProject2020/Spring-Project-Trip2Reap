@@ -17,7 +17,23 @@
             ON B.BO_NO = I.BO_NO
          LEFT JOIN MEMBER M
             ON B.MEMBER_ID = M.MEMBER_ID
-         where BO_DELETE_YN='N' AND (B.CA_CODE=3 OR B.CA_CODE=4)
+         where BO_DELETE_YN='N' 
+         <choose>
+         <when test="cate.equals('all')">
+          AND (B.CA_CODE=3 OR B.CA_CODE=4) 
+         </when>
+         <when test="cate.equals('code3')">
+		 AND  B.CA_CODE=3     
+         
+         </when>
+         <when test="cate.equals('code4')">
+		  AND B.CA_CODE=4    
+         
+         </when>
+         <otherwise>
+         </otherwise>
+         
+         </choose>
          
          <choose>
 	         <when test="search.equals('all')">
@@ -115,7 +131,7 @@
   </insert>
   
    <update id="updateReview">
-   		
+   		<!-- 
    		UPDATE BOARD 
    		
    		SET BO_TITLE=#{boTitle}, 
@@ -124,11 +140,10 @@
    	  		BO_TAG=#{boTag}
    	  		REGDATE=SYSDATE
         
-   		WHERE BO_NO= #{boNo}
+   		WHERE BO_NO= #{boNo} 
    		
-   		
-   
-   	  <!-- update (
+   	
+   	  update (
    	  		select b.ca_code,b.bo_title,b.bo_content,b.bo_tag,b.regdate,i.origin_name,i.change_name
    	  		from board b
    	  			,img_file i
@@ -140,9 +155,16 @@
          ORIGIN_NAME=#{originName},
          </if>
          CHANGE_NAME=#{changeName}, REGDATE=sysdate
-         where bo_no=#{boNo}
-          -->
- 
+         where bo_no=#{boNo}-->
+         
+         UPDATE BOARD B 
+			SET B.CA_CODE=#{caCode}, 
+			B.BO_TITLE=#{boTitle}, 
+			B.BO_CONTENT=#{boContent},
+   	        B.BO_TAG= #{boTag},  
+   	        B.REGDATE= sysdate
+         where B.bo_no = #{boNo}
+         
      <!--  update BOARD(BO_NO,MEMBER_ID,CA_CODE,BO_TITLE,BO_TAG,BO_CONTENT)
       set BO_TITLE=#{boTitle},BO_CONTENT=#{boContent},CA_CODE=#{caCode},BO_TAG=#{boTag}
          <if test="originName != null">
@@ -153,9 +175,19 @@
 
    </update>
    
+   <update id="updateReviewPhoto">
+   			UPDATE IMG_FILE I
+         	SET 
+         	<if test="originName != null">
+         		ORIGIN_NAME=#{originName},
+         	</if>
+         		CHANGE_NAME=#{changeName}
+         	where I.bo_no=#{boNo}	
+   </update>
+   
    <update id="deleteReview">
-       update board B, REPLY R
-       set BO_DELETE_YN='Y' , RE_DELETE_YN='Y'
+       update board 
+       set BO_DELETE_YN='Y'
        where BO_NO=#{boNo} 
    </update> 
    
@@ -163,6 +195,12 @@
        insert into reply
        values (SEQ_re_no.NEXTVAL,#{boNo},#{memberId},sysdate,#{reContent},default)
    </insert>
+   
+    <update id="deleteReply">
+       update reply 
+       set RE_DELETE_YN='Y'
+       where BO_NO=#{boNo} 
+   </update> 
    
    <select id="selectReplyList" resultMap="replyResultSet">
        select *

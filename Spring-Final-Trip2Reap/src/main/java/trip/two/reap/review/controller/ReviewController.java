@@ -39,17 +39,22 @@ public class ReviewController {
 
 	// 리뷰 목록으로 이동
 	@RequestMapping("reviewList.bo")
-	public ModelAndView reviewList(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv, String hashTag, String title, String content, String writer) {
+	public ModelAndView reviewList(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv, String hashTag, String title, String content, String writer, String cate) {
 		HashMap<String, Object> searchList = new HashMap<String, Object>();
 
 		String search = "all";
 		searchList.put("searchInput", "all");
+		searchList.put("searchLoc", "page");
+		searchList.put("cate", "all");
+		searchList.put("chkNo", 0);
 
 		if(writer == null) {
 			writer = "all";
 		} else {
 			search = "writer";
 			searchList.put("searchInput", writer);
+			searchList.put("chkNo", 1);
+			searchList.put("searchLoc", "wrtier%3D"+writer+"%26page");
 		}
 		
 		if(title == null) {
@@ -57,6 +62,7 @@ public class ReviewController {
 		} else {
 			search = "title";
 			searchList.put("searchInput", title);
+			searchList.put("chkNo", 2);
 		}
 		
 		if(content == null) {
@@ -64,6 +70,7 @@ public class ReviewController {
 		} else {
 			search = "content";
 			searchList.put("searchInput", content);
+//			searchList.put("chkNo", 3);
 		}
 		
 		if(hashTag == null) {
@@ -73,7 +80,14 @@ public class ReviewController {
 			search = "hashTag";
 			System.out.println(hashTag);
 			searchList.put("searchInput", hashTag);
+			searchList.put("chkNo", 3);
 	
+		}
+		if(cate == null) {
+			cate = "all";
+		} else {
+			searchList.put("cate", cate);
+			searchList.put("chkNo", 4);
 		}
 		
 		System.out.println("난작성자"+writer);
@@ -99,6 +113,7 @@ public class ReviewController {
 		if (list != null) {
 			mv.addObject("list", list);
 			mv.addObject("pi", pi);
+			mv.addObject("searchList", searchList);
 			mv.setViewName("reviewList");
 		} else {
 			throw new ReviewException("게시글 전체 조회에 실패 하였습니다.");
@@ -311,14 +326,15 @@ public class ReviewController {
 	public String deleteReview(@RequestParam("boNo") int boNo, HttpServletRequest request) {
 
 		Review r = rService.selectReview(boNo);
+		
 
 		if (r.getOriginName() != null) {
 			deleteFile(r.getChangeName(), request);
 		}
 
 		int result = rService.deleteReview(boNo);
-
-		if (result > 0) {
+		int result2 = rService.deleteReply(boNo);
+		if (result > 0 || result2 > 0) {
 			return "redirect:reviewList.bo";
 		} else {
 			throw new ReviewException("게시물 삭제에 실패하였습니다.");
@@ -355,8 +371,9 @@ public class ReviewController {
 		}
 
 		int result = rService.updateReview(r);
+		int result2 = rService.updateReviewPhoto(r);
 
-		if (result > 0) {
+		if (result > 0 || result2 > 0) {
 			mv.addObject("page", page).setViewName("redirect:reviewDetail.bo?boNo=" + r.getBoNo());
 		} else {
 			throw new ReviewException("게시글 수정에 실패하였습니다.");

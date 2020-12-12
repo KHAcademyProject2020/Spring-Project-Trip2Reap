@@ -61,6 +61,11 @@ public class ReviewServiceImpl implements ReviewService{
 	
 		return rDAO.updateReview(sqlSession, r);
 	}
+	@Override
+	public int updateReviewPhoto(Review r) {
+		
+		return rDAO.updateReviewPhoto(sqlSession, r);
+	}
 
 	@Override
 	public int deleteReview(int boNo) {
@@ -70,6 +75,11 @@ public class ReviewServiceImpl implements ReviewService{
 	@Override
 	public int addReply(Reply re) {
 		return rDAO.addReply(sqlSession, re);
+	}
+	
+	@Override
+	public int deleteReply(int boNo) {
+		return rDAO.deleteReview(sqlSession, boNo);
 	}
 
 	@Override

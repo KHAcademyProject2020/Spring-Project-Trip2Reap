@@ -52,6 +52,10 @@ public class ReviewDAO {
 	
 		return sqlSession.update("reviewMapper.updateReview",r);
 	}
+	public int updateReviewPhoto(SqlSessionTemplate sqlSession, Review r) {
+		
+		return sqlSession.update("reviewMapper.updateReviewPhoto",r);
+	}
 	
 	public int deleteReview(SqlSessionTemplate sqlSession, int boNo) {
 		return sqlSession.update("reviewMapper.deleteReview",boNo);
@@ -60,6 +64,10 @@ public class ReviewDAO {
 
 	public int addReply(SqlSessionTemplate sqlSession, Reply re) {
 		return sqlSession.update("reviewMapper.insertReply",re);
+	}
+	
+	public int deleteReply(SqlSessionTemplate sqlSession, int boNo) {
+		return sqlSession.update("reviewMapper.deleteReply",boNo);
 	}
 
 	public ArrayList<Reply> selectReply(SqlSessionTemplate sqlSession, int boNo) {

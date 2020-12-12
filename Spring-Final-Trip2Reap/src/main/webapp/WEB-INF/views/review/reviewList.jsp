@@ -35,6 +35,25 @@
 	 }
 	$(".hashTag").css("display", "");
 	
+	$(".cate_btn").click(function(){
+		var cate = $(this).attr('id')
+		
+		if(cate == "cate_btn1") {
+			cate = ""
+		}
+		if(cate == "cate_btn2") {
+			cate = "cate=code3"
+			
+		}
+		if(cate == "cate_btn3") {
+			cate = "cate=code4"
+			
+		}
+		
+		location.href = "reviewList.bo?"+cate;
+		
+	})
+	
 	$(".hashTagSpan").click(function(){
 		var hashParam = document.getElementById($(this).attr('id')).innerHTML
 		hashParam = hashParam.split("#")
@@ -48,6 +67,10 @@
 		
 		var search = $("select[name=search]").val()
 // 		alert(search)
+		if($('#search').val()== ""){
+			search = ""
+		} else{
+			
 		if(search == "작성자") {
 			search = "writer=" + $('#search').val()
 		}
@@ -64,6 +87,7 @@
 			
 		}
 
+		}
 // 		alert(search)
 		
 		location.href = "reviewList.bo?"+search;
@@ -84,6 +108,18 @@
  </script>
  
  <style type="text/css">
+ 
+ .cate_btn {
+ 
+ 	position: relative;
+ }
+ .cate_btn:hover {
+ 
+ 	text-decoration: underline;
+ 	font-weight: bolder;
+ 	cursor: pointer;
+ 
+ }
  
  .hashTagSpan:hover {
  
@@ -206,6 +242,20 @@
 			<td></td>
 			<td >
 			
+			<c:set var="loc" value="page" />
+			
+			<c:if test='${searchList.writer ne "all" && searchList.chkNo eq 1  }'>
+			<c:set var="loc" value="${searchList.searchLoc }" />
+			</c:if>
+			<c:if test='${searchList.title ne "all" && searchList.chkNo eq 2 }'>
+			<c:set var="loc" value="title=${searchList.title }&page=${p }" />
+			</c:if>
+			<c:if test='${searchList.hashTag ne "all" && searchList.chkNo eq 3  }'>
+			<c:set var="loc" value="hashTag=${searchList.hashTag }`&`page" />
+			</c:if>
+			<c:if test='${searchList.cate ne "all" && searchList.chkNo eq 4 }'>
+			<c:set var="loc" value="cate=${searchList.cate }`&`page" />
+			</c:if>
 				<!-- [이전] -->
 				<c:if test="${ pi.currentPage <= 1 }">
 				

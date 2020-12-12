@@ -10,7 +10,80 @@
 <link rel="stylesheet" type="text/css"
 	href="resources/css/review/reviewPhotoList.css" />
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+ $(document).ready(function(){
+	 
+// 	 alert(document.getElementById("hashTag57").innerHTML)
+// 	 alert($(".hashTag").length)
+// 	 alert("hashTag"+$('#hashTagVal0').val())
+	 var size = $(".hashTag").length
+// 	 alert(size)
+	 
+	 for(var i=0; i<size; i++){
+		 var hashTagName = document.getElementById(("hashTag"+$('#hashTagVal'+i).val())).innerHTML
+		, hashTagNameSplit = hashTagName.split("#")
+		 $("#hashTag"+$('#hashTagVal'+i).val()).html("")
+			$(hashTagNameSplit).each (function(index, item){
+				if(index == 0){
+					
+				}else {
+					var SpanId = ($('#hashTagVal'+i).val()+index)
+					
+					 $("#hashTag"+$('#hashTagVal'+i).val()).append("<span class='hashTagSpan' id="+SpanId+">#"+item+"</span>&nbsp;&nbsp;")
+				}
+				})
 
+		 
+	 }
+	$(".hashTag").css("display", "");
+	
+	$(".hashTagSpan").click(function(){
+		var hashParam = document.getElementById($(this).attr('id')).innerHTML
+		hashParam = hashParam.split("#")
+		hashParam = hashParam[1]
+		
+		location.href = "reviewList.bo?hashTag="+hashParam;
+		
+	})
+	
+	$(".search").click(function(){
+		
+		var search = $("select[name=search]").val()
+// 		alert(search)
+		if(search == "작성자") {
+			search = "writer=" + $('#search').val()
+		}
+		if(search == "제목") {
+			search = "title=" + $('#search').val()
+			
+		}
+		if(search == "내용") {
+			search = "content=" + $('#search').val()
+			
+		}
+		if(search == "해쉬태그") {
+			search = "hashTag=" + $('#search').val()
+			
+		}
+
+// 		alert(search)
+		
+		location.href = "reviewList.bo?"+search;
+		
+	})
+	
+      $("#search").bind('keydown', function(key) {
+               if (key.keyCode == 13) {
+            		$(".search").trigger('click')
+            		$("#search").unbind()
+
+             }
+      })
+
+             
+ });
+
+ </script>
 
 
 <title>Insert title here</title>
@@ -77,9 +150,15 @@
 									<div class="top">
 									
 									<c:if test="${ !empty loginUser }">
+									
+									<c:url var="reviewDetail" value="reviewDetail.bo">
+									<c:param name="boNo" value="${ b.boNo }"/>
+									<c:param name="page" value="${ pi.currentPage }"/>
+									</c:url>
 										
 										${ b.boTitle }<br>
-										${ b.boTag }
+										<p class="hashTag" id="hashTag${b.boNo }" style="display:none">${b.boTag }</p><br>
+										<input type="hidden" value=${b.boNo } id="hashTagVal${tag.index }" />
 										
 						    		</c:if> 
 						       
@@ -95,6 +174,8 @@
 									<i class="fas fa-eye"></i>&nbsp;${b.boCount}&nbsp;
 									<i class="fas fa-thumbs-up"></i>&nbsp;22&nbsp;
 									<i class="fas fa-comment-dots"></i>&nbsp;<b id="checkCount"></b>
+									<p class="hashTag" id="hashTag${b.boNo }" style="display:none">${b.boTag }</p><br>
+										<input type="hidden" value=${b.boNo } id="hashTagVal${tag.index }" />
 									</div>
 									
 									<c:if test="${b.changeName != null }">
@@ -179,24 +260,25 @@
 				</tr>
 
 				<tr>
-
-					<td colspan="3">
-						<form id="content" style="text-align: center;">
-							<select id="select_search" name="search">
-								<option value="작성자">작성자</option>
-								<option value="제목">제목</option>
-								<option value="내용">내용</option>
-								<option value="해쉬태그">해쉬태그</option>
-							</select> <input type="search" id="search" placeholder="Search..." />
-
-							<button id="search_btn" type="reset" class="search"
-								id="search-btn">
-								<span class="icon"><i class="fa fa-search"></i></span>
-							</button>
-						</form>
-					</td>
-
-				</tr>
+			
+				<td colspan="3" style="text-align:center;">
+					 <select id="select_search" name="search">
+    					 <option value="작성자">작성자</option>
+    					 <option value="제목">제목</option>
+   						 <option value="내용">내용</option>
+   						 <option value="해쉬태그">해쉬태그</option>
+					</select>
+					
+						
+   						   
+    					  <input type="search" id="search" placeholder="Search..." />
+ 					
+  						<button id="search_btn" type="reset" class="search" id="search-btn">
+  							<span class="icon"><i class="fa fa-search"></i></span>
+  						</button>
+				</td>
+			
+			</tr>
 			</table>
 
 

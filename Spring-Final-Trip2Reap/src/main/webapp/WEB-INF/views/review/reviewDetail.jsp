@@ -225,6 +225,7 @@
 							var $nickName;
 							var $reContent;
 							var $reDate;
+							var $delete
 							
 
 							$('#rCount').text('댓글(' + data.length + ')');
@@ -236,6 +237,7 @@
 									$nickName = $('<td width=100>').text(data[i].nickName);
 									$reContent = $('<td>').text(data[i].reContent);
 									$reDate = $('<td width=100>').text(data[i].reDate);
+									$delete = $('<td>'+'<button onclick="del(${review.boNo})"></button>'+'</td>');
 						
 
 

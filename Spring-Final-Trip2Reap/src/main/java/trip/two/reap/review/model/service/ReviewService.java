@@ -21,10 +21,12 @@ public interface ReviewService {
 	int insertBoard(Review r);
 	
 	int updateReview(Review r);
+	int updateReviewPhoto(Review r);
 	
 	int deleteReview(int boNo);
 
 	int addReply(Reply re);
+	int deleteReply(int boNo);
 
 	ArrayList<Reply> selectReply(int boNo);
 
