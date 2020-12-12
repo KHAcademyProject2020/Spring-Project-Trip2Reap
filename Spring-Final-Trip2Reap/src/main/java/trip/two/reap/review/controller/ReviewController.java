@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,7 +24,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 
-import trip.two.reap.common.Attachment;
 import trip.two.reap.common.PageInfo;
 import trip.two.reap.common.Pagination;
 import trip.two.reap.member.model.vo.Member;
@@ -40,8 +39,52 @@ public class ReviewController {
 
 	// 리뷰 목록으로 이동
 	@RequestMapping("reviewList.bo")
-	public ModelAndView reviewList(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv) {
+	public ModelAndView reviewList(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv, String hashTag, String title, String content, String writer) {
+		HashMap<String, Object> searchList = new HashMap<String, Object>();
 
+		String search = "all";
+		searchList.put("searchInput", "all");
+
+		if(writer == null) {
+			writer = "all";
+		} else {
+			search = "writer";
+			searchList.put("searchInput", writer);
+		}
+		
+		if(title == null) {
+			title = "all";
+		} else {
+			search = "title";
+			searchList.put("searchInput", title);
+		}
+		
+		if(content == null) {
+			content = "all";
+		} else {
+			search = "content";
+			searchList.put("searchInput", content);
+		}
+		
+		if(hashTag == null) {
+			hashTag = "all";
+		} else {
+			hashTag = "#" + hashTag;
+			search = "hashTag";
+			System.out.println(hashTag);
+			searchList.put("searchInput", hashTag);
+	
+		}
+		
+		System.out.println("난작성자"+writer);
+		System.out.println("난제목"+title);
+		System.out.println("난내용"+content);
+		
+		System.out.println("값없나요"+hashTag);
+		
+		
+		searchList.put("search", search);
+		
 		int currentPage = 1;
 		if (page != null) {
 			currentPage = page;
@@ -51,7 +94,7 @@ public class ReviewController {
 
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 
-		ArrayList<Review> list = rService.selectList(pi);
+		ArrayList<Review> list = rService.selectList(pi, searchList);
 
 		if (list != null) {
 			mv.addObject("list", list);
@@ -65,8 +108,52 @@ public class ReviewController {
 	}
 
 	@RequestMapping("reviewPhotoList.bo")
-	public ModelAndView reviewPhotoList(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv) {
+	public ModelAndView reviewPhotoList(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv, String hashTag, String title, String content, String writer) {
+		HashMap<String, Object> searchList = new HashMap<String, Object>();
 
+		String search = "all";
+		searchList.put("searchInput", "all");
+
+		if(writer == null) {
+			writer = "all";
+		} else {
+			search = "writer";
+			searchList.put("searchInput", writer);
+		}
+		
+		if(title == null) {
+			title = "all";
+		} else {
+			search = "title";
+			searchList.put("searchInput", title);
+		}
+		
+		if(content == null) {
+			content = "all";
+		} else {
+			search = "content";
+			searchList.put("searchInput", content);
+		}
+		
+		if(hashTag == null) {
+			hashTag = "all";
+		} else {
+			hashTag = "#" + hashTag;
+			search = "hashTag";
+			System.out.println(hashTag);
+			searchList.put("searchInput", hashTag);
+	
+		}
+		
+		System.out.println("난작성자"+writer);
+		System.out.println("난제목"+title);
+		System.out.println("난내용"+content);
+		
+		System.out.println("값없나요"+hashTag);
+		
+		
+		searchList.put("search", search);
+		
 		int currentPage = 1;
 		if (page != null) {
 			currentPage = page;
@@ -76,10 +163,11 @@ public class ReviewController {
 
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 
-		ArrayList<Review> list = rService.selectList(pi);
-
+		ArrayList<Review> list = rService.selectList(pi, searchList);
+	
 		if (list != null) {
 			mv.addObject("list", list);
+			mv.addObject("listSize", list.size());
 			mv.addObject("pi", pi);
 			mv.setViewName("reviewPhotoList");
 		} else {
@@ -107,6 +195,8 @@ public class ReviewController {
 
 	@RequestMapping("reviewInsert.bo")
 	public String reviewInsertView() {
+
+		
 		return "reviewInsert";
 
 	}

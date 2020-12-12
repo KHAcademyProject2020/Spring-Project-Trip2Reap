@@ -1,6 +1,7 @@
 package trip.two.reap.review.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import trip.two.reap.common.Attachment;
 import trip.two.reap.common.PageInfo;
@@ -11,7 +12,7 @@ public interface ReviewService {
 	
 	int getListCount();
 	
-	ArrayList<Review> selectList(PageInfo pi);
+	ArrayList<Review> selectList(PageInfo pi, HashMap<String, Object> searchList);
 	
 	Review selectReview(int boNO);
 	
@@ -26,6 +27,7 @@ public interface ReviewService {
 	int addReply(Reply re);
 
 	ArrayList<Reply> selectReply(int boNo);
+
 
 
 }

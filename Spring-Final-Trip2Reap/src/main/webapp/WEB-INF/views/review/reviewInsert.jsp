@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css"
 	href="resources/css/review/reviewInsert.css" />
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -31,7 +32,7 @@
 					<br> <br>
 					<div id="cate">
 
-						<select id="select_search" name="caCode">
+						<select id="select_search" name="caCode" required="required">
 							<option>카테고리를 선택해주세요</option>
 							<option value="2">여행 코스</option>
 							<option value="3">여행지</option>
@@ -54,14 +55,14 @@
 					
 					<div class="writeForm" id="title">
 						<textarea name="boTitle" placeholder="제목을 입력해 주세요."
-							class="textarea_input" style="height: 40px;"></textarea>
+							class="textarea_input" style="height: 40px;" required="required"></textarea>
 					</div>
 					<br> <br>
 
 					<div id="content">
 								<br>
 
-						<textarea id="contentForm" placeholder="내용을 입력해주세요" name="boContent" rows="40" cols="130"></textarea>
+						<textarea id="contentForm" placeholder="내용을 입력해주세요" name="boContent" rows="40" cols="130" required="required"></textarea>
 							
 							<div class="hashTag">
 								
@@ -69,7 +70,9 @@
 								<div  id="hashtag">
 						
 								<input type="text" 
-								name="boTag" id="tag" placeholder="태그를 입력해 주세요" />
+								id="tag" placeholder="태그를 입력해 주세요" />
+								<input type="hidden" 
+								name="boTag" id="hashtagInput" />
 								
 							</div>
 									
@@ -95,13 +98,30 @@
 	<script>
      //모든 페이지가 요청이 되었을 때
      $(document).ready(function() {
+//     	 var hashTagNo = 0
          // ID를 alpreah_input로 가지는 곳에서 키를 누를 경우
          $("#tag").keydown(function(key) {
              //키의 코드가 13번일 경우 (13번은 엔터키)
-             var $tag = $("#tag").val();
+             var tag = $("#tag").val();
              if (key.keyCode == 13) {
-            	 $('#hashtag').prepend("<div class='hashtag'>" + "#" + $tag +"</div>" + " ");
-             }
+            	 $('#hashtag').append("<div class='hashtag'>" + "#" + tag +"</div>" + "&nbsp;&nbsp;");
+//             	 alert("작동")
+// 				alert(hashTagNo)
+//             	 alert($('#hashtagInput'+hashTagNo).val())
+//             	 hashTagNo++
+//          		alert(hashTagNo)
+				alert($('#hashtagInput').val())
+            	 $('#tag').val("")
+            	 $('#hashtagInput').val($('#hashtagInput').val()+"#"+tag)
+            	 
+//          		var nanum = $('#hashtagInput').val().split("#")
+//         		$(nanum).each (function(index, item){
+//         			alert(item)
+        			
+//         		})
+
+
+             } 
          });
      });
 
@@ -117,17 +137,11 @@
 		//클릭시 배경 색 변환
 		$(function(){	
 			$('#tag').click(function(){$(this).css("background","#eff0f2")})
-			
-			
+
 			
 		})
 		
-		$('#tag').keydown(function(key){
-			if (key.keyCode == 13) {
-
-				$(this).css("background","#eff0f2")
-				}
-		}
+	
 		
 	</script>
 

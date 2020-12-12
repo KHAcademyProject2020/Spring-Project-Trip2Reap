@@ -8,7 +8,7 @@
   		where BO_DELETE_YN='N' AND B.CA_CODE=3 OR B.CA_CODE=4
   	</select>
   	
-  	<select id="selectList" resultMap="reviewResultSet">
+  	<select id="selectList" parameterType="hashmap" resultMap="reviewResultSet">
   		select B.BO_NO,B.CA_CODE,B.BO_TITLE,B.BO_CONTENT,B.MEMBER_ID,B.BO_COUNT,B.BO_TAG,B.BO_DELETE_YN,B.REGDATE,C.CA_NAME,I.ORIGIN_NAME,I.CHANGE_NAME,M.NICKNAME
         from board b
          left JOIN CATEGORY C 
@@ -17,7 +17,25 @@
             ON B.BO_NO = I.BO_NO
          LEFT JOIN MEMBER M
             ON B.MEMBER_ID = M.MEMBER_ID
-         where BO_DELETE_YN='N' AND B.CA_CODE=3 OR B.CA_CODE=4
+         where BO_DELETE_YN='N' AND (B.CA_CODE=3 OR B.CA_CODE=4)
+         
+         <choose>
+	         <when test="search.equals('all')">
+         	</when>
+         	<when test="search.equals('writer')">
+         	AND NICKNAME like '%' || #{searchInput} || '%'
+         	</when>
+         	<when test="search.equals('title')">
+         	AND BO_TITLE like '%' || #{searchInput} || '%'
+         	</when>
+         	<when test="search.equals('content')">
+         	AND BO_CONTENT like '%' || #{searchInput} || '%'
+         	</when>
+         	<when test="search.equals('hashTag')">
+         	AND BO_TAG like '%' || #{searchInput} || '%'
+         	</when>
+         </choose>
+         
    		 order by BO_NO desc       
   		 <!-- select *
   		 from board

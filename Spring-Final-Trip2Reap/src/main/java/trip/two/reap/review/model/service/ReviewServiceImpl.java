@@ -1,6 +1,7 @@
 package trip.two.reap.review.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,8 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 	
 	@Override
-	public ArrayList<Review> selectList(PageInfo pi) {
-		return rDAO.selectList(sqlSession, pi);
+	public ArrayList<Review> selectList(PageInfo pi, HashMap<String, Object> searchList) {
+		return rDAO.selectList(sqlSession, pi, searchList);
 	}
 	
 	@Override

@@ -1,6 +1,8 @@
 package trip.two.reap.review.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -19,13 +21,16 @@ public class ReviewDAO {
 		return sqlSession.selectOne("reviewMapper.getListCount");
 	}
 	
-	public ArrayList<Review> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
+	public ArrayList<Review> selectList(SqlSessionTemplate sqlSession, PageInfo pi, HashMap<String, Object> searchList){
 		
 		int offset=(pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("reviewMapper.selectList", null,rowBounds);
+		
+		return (ArrayList)sqlSession.selectList("reviewMapper.selectList", searchList, rowBounds);
 	}
+	
+
 	
 	public Review selectReview(SqlSessionTemplate sqlSession, int boNo) {
 		return (Review)sqlSession.selectOne("reviewMapper.selectReview",boNo);
