@@ -3,7 +3,7 @@
 
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +15,9 @@
 
 <%--css --%>
 <link rel="stylesheet" type="text/css" href="resources/css/hotel/hotel_reservation.css">
-<title>전국방방곡곡:: 호텔 예약페이지 </title>
+
+
+<title>전국방방곡곡:: 호텔</title>
 </head>
 
 <body>
@@ -34,13 +36,14 @@
 		<div class="subtitle-container">
 			<div class="hotel-name-wrapper">
 				<h1 id="hotel_name">${hotel.boTitle}</h1>
-				<input type="hidden" value="${hotel.boNo }"/>
+				<input id="hotel_boNo" type="hidden" value="${hotel.boNo }"/>
+				<input id="hotel_reserve_memberId" type="hidden" value="${loginUser.memberId }"/>
 				<%--BO_NO (방번호) --%>
 			</div>
 
 			<div class="room-name-wrapper">
 				<h2 id="room_name">${room.roomName }</h2>
-				<input type="hidden" value="${room.roomNo }"/>
+				<input id="hotel_roomNo" type="hidden" value="${room.roomNo }"/>
 				<%--ROOM_NO(방이름) --%>
 			</div>
 
@@ -62,9 +65,10 @@
 			<div class="calendar_container">
 				<%-- check in  --%>
 				<div class="calendar_wrapper">
-					<div class="calendar_icon_wrapper">
+					<label for="checkInDatePicker" class="calendar_icon_wrapper">
 						<i class="far fa-calendar-alt calendar_icon"></i>
-					</div>
+					</label>
+					
 					<div class="calendar_content_wrapper">
 						<input type="text" class="date" id="checkInDatePicker" placeholder="체크인 날짜" size="20" autocomplete="off">
 					</div>
@@ -73,9 +77,11 @@
 
 				<%-- check out --%>
 				<div class="calendar_wrapper">
-					<div class="calendar_icon_wrapper">
+					
+					<label for="checkOutDatePicker" class="calendar_icon_wrapper">
 						<i class="far fa-calendar-alt calendar_icon"></i>
-					</div>
+					</label>
+					
 					<div class="calendar_content_wrapper">
 						<input type="text" class="date" id="checkOutDatePicker" placeholder="체크아웃 날짜" size="20" autocomplete="off">
 					</div>
@@ -192,7 +198,7 @@
 						<%--방개수 --%>
 						<div class="hotel-sub-check-container">
 							<div class="hotel-sub-check-label-wrapper">예약 객실 수 </div>
-							<div class="hotel-sub-check-content-wrapper"><span id="reserve_room_cnt">{예약 객실 수 }</span>개</div>
+							<div class="hotel-sub-check-content-wrapper"><span id="reserve_room_cnt"></span>개</div>
 						</div>
 					</div>
 				</div>
@@ -204,19 +210,19 @@
 						<%-- 성인  --%>
 						<div class="hotel-sub-check-container">
 							<div class="hotel-sub-check-label-wrapper">성인 </div>
-							<div class="hotel-sub-check-content-wrapper"><span id="reserve_adult_cnt">{성인 인원수 }</span>명</div>
+							<div class="hotel-sub-check-content-wrapper"><span id="reserve_adult_cnt"></span>명</div>
 						</div>
 
 						<%-- 어린이 --%>
 						<div class="hotel-sub-check-container">
 							<div class="hotel-sub-check-label-wrapper">어린이 </div>
-							<div class="hotel-sub-check-content-wrapper"><span id="reserve_child_cnt">{어린이 인원수 }</span>명</div>
+							<div class="hotel-sub-check-content-wrapper"><span id="reserve_child_cnt"></span>명</div>
 						</div>
 
 						<%-- 총 인원수  --%>
 						<div class="hotel-sub-check-container">
 							<div class="hotel-sub-check-label-wrapper">총</div>
-							<div class="hotel-sub-check-content-wrapper"><span id="reserve_total_person_cnt">{총 인원수 }</span>명</div>
+							<div class="hotel-sub-check-content-wrapper"><span id="reserve_total_person_cnt"></span>명</div>
 						</div>
 					</div>
 				</div>
@@ -229,18 +235,18 @@
 						<%--체크인 날짜  --%>
 						<div class="hotel-sub-check-container">
 							<div class="hotel-sub-check-label-wrapper">체크인 날짜 </div>
-							<div class="hotel-sub-check-content-wrapper" id="reserve_checkin_date">{체크인 날짜 } </div>
+							<div class="hotel-sub-check-content-wrapper" id="reserve_checkin_date"></div>
 						</div>
 
 						<%--체크아웃 날짜  --%>
 						<div class="hotel-sub-check-container">
 							<div class="hotel-sub-check-label-wrapper">체크아웃 날짜 </div>
-							<div class="hotel-sub-check-content-wrapper" id="reserve_checkout_date">{체크아웃 날짜  } </div>
+							<div class="hotel-sub-check-content-wrapper" id="reserve_checkout_date"></div>
 						</div>
 
 						<%--이용 날짜 (박/ 일)  --%>
 						<div class="hotel-sub-check-container">
-							<span id="reserve_accomodate_day">{박 }</span>박 &nbsp;&nbsp;<span id="reserve_total_day">{일 }</span>일
+							<span id="reserve_accomodate_day">{박 }</span>박 &nbsp;&nbsp;<span id="reserve_total_day"></span>일
 						</div>
 					</div>
 				</div>
@@ -249,6 +255,7 @@
 				<div class="hotel-reserve-check-common-container">
 					<div class="hotel-check-label-wrapper">총 금액</div>
 					<div class="hotel-check-content-wrapper"><span id="reserve_total_prices">{총금액 }</span> 원 </div>
+					<input type="hidden" id="_total_price">
 				</div>
 
 			</div><%--hotel-reserve-check-total-container  --%>
@@ -265,16 +272,16 @@
 	$(function(){
 		//체크인 날짜 선택
 		$('#checkInDatePicker').datepicker({
-			changeYear: true,
-			changeMonth: true,
-			dateFormat: 'yy-mm-dd',
-			showMonthAfterYear: true,
-			dayNamesMin: ['일', '월', '화', '수', '목', '금', '토' ],
-			monthNamesShort : ['1월', '2월','3월','4월','5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월' ],
-			yearSuffix: '년',
-			minDate:0,
-			prevText: '이전 달',
-			nextText: '다음 달',
+				changeYear: true,
+				changeMonth: true,
+				dateFormat: 'yy-mm-dd',
+				showMonthAfterYear: true,
+				dayNamesMin: ['일', '월', '화', '수', '목', '금', '토' ],
+				monthNamesShort : ['1월', '2월','3월','4월','5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월' ],
+				yearSuffix: '년',
+				minDate:0,
+				prevText: '이전 달',
+				nextText: '다음 달',
 
 		});
 
@@ -415,6 +422,8 @@
 					// 차이 (단위: 일 ) => hotelAccomodateDays 에 대입
 					let $diffDays=(checkOutDate-checkInDate)/(24*60*60*1000);
 					//console.log($diffDays);
+					
+					$('#_total_price').val( Number($('#_room_price_per_day').val())*$diffDays );
 
 					let $hotelAccomodateDays= $('#using_accomodate_days'); //숙박기간(단위: 일 )
 					let $hotelTotalUsingDays= $('#using_total_days'); //전체 이용기간(단위: 일)
@@ -626,55 +635,120 @@
 
 	});
 
-
-
-
-	$(function(){
-		//버튼클릭을하면 값이 변하는 부분: 예약객실수/ 성인수/ 어린이수
-
-		//예약 성인 인원수
-		//$('#reserve_adult_cnt').text(Number($('#adult_count').text()));
-
-		//예약 어린이 인원수:
-		//$('#reserve_child_cnt').text(Number($('#child_count').text()));
-
-		//총 예약 인원수:
-		//$('#reserve_total_person_cnt')
-
-
-		//체크인날짜
-
-
-		//체크아웃날짜
-		$('#reserve_checkout_date')
-
-		//숙박일(박)
-		$('span#reserve_accomodate_day').text();
-
-		//호텔총 이용일
-		$('span#reserve_total_day').text();
-
-		//총금액
-		$('span#reserve_total_prices').text();
-	});
-
 	</script>
+	
+	<!-- 6. 예약자 정보 입력 -->
+	<div class="hotel_reservation_common_container">
+		<div class="subtitle-container">
+			<h1>예약자 정보 입력</h1>
+		</div>
+		
+		<div class="hotel-reservation-content-container">
+		
+		
+			<%--hotel-reserve-check-total-container 을 참고하였습니다. --%>
+			<div id="hotel-reserve-insert-container">
+				<%--1. 예약자 이름 --%>
+				<div class="hotel-reserve-check-common-container">
+					<div class="hotel-check-label-wrapper">예약자 이름</div>
+					<div class="hotel-check-content-wrapper reserve_input">
+						<c:if test="${loginUser.memberName ==null}">
+							<input id="reservation_name" type="text" placeholder="예약자 이름 입력" >
+						</c:if>
+						<c:if test="${loginUser.memberName !=null}">
+							<input id="reservation_name" type="text" placeholder="예약자 이름 입력" value="${loginUser.memberName }">
+						</c:if>
+					</div>
+				</div>
+				
+				<%--2. 예약자 전화번호 --%>
+				<div class="hotel-reserve-check-common-container">
+					<div class="hotel-check-label-wrapper">예약자 전화번호</div>
+					<div class="hotel-check-content-wrapper reserve_input">
+						<c:if test="${loginUser.phone ==null}">
+							<input id="reservation_phone" type="tel"  placeholder="예약자 전화번호 입력(-제외)">
+						</c:if>
+						
+						<c:if test="${loginUser.phone !=null }">
+							<input id="reservation_phone" type="tel"  placeholder="예약자 전화번호 입력" value="${loginUser.phone }">
+						</c:if>
+					</div>
+					<script>
+					$(function(){
+						
+						
+						$('#reservation_phone').on({
+							'keyup': function(){
+								var key=event.witch|| event.keyCode;
+								if(key && (key<=47 || key>=58) && key!=8){
+									event.preventDefault();
+								}
+								
+							},
+							'keydown':function(){
+								var key=event.witch|| event.keyCode;
+								if(key && (key<=47 || key>=58) && key!=8){
+									event.preventDefault();
+								}
+								
+							},
+							'keypress': function(){
+								var key=event.witch|| event.keyCode;
+								if(key && (key<=47 || key>=58) && key!=8){
+									event.preventDefault();
+								}
+								
+							}
+						});
+					});
+					</script>
+				</div>
+				
+				<%--3. 예약자 이메일주소 --%>
+				<div class="hotel-reserve-check-common-container">
+					<div class="hotel-check-label-wrapper">예약자 이메일</div>
+					<div class="hotel-check-content-wrapper reserve_input">
+						<c:if test="${loginUser.email ==null}">
+							<input id="reservation_email" type="text"  placeholder="예약자 이메일 입력">
+						</c:if>
+						
+						<c:if test="${loginUser.email !=null }">
+							<input id="reservation_email" type="email"  placeholder="예약자 이메일 입력" value="${loginUser.email }">
+						</c:if>
+					</div>
+				</div>
 
+			</div><%-- hotel-reserve-insert-container--%>
+			
+		
+		</div>
+	</div>
 
-	<!--6. 결제 수단 선택   -->
+	<!-- 7. 결제 수단 선택   -->
 	<div class="hotel_reservation_common_container">
 		<div class="subtitle-container">
 			<h1>결제 수단 선택</h1>
 		</div>
 
 		<div class="hotel-reservation-content-container">
-			<ul>
-				<li> 결제 api 구현후에 ui만들겠습니다.</li>
-				<li> 신용카드 </li>
-				<li> 휴대폰 </li>
-				<li> 계좌이체 </li>
-				<li> Kakao Pay</li>
-				<li> Toss pay</li>
+			<ul class="payment-select-ul">
+				<li>
+					<input id="payment_credit_danal" type="radio" name="payment_type" class="payment_type" value="신용카드" checked>
+					<label for="payment_credit_danal" class="payment_type_label">신용카드</label>
+				</li>
+				
+				
+				<li>
+					<input id="payment_kakaopay" type="radio"  name="payment_type" class="payment_type" value="카카오페이">
+					<label for="payment_kakaopay" class="payment_type_label">카카오페이</label>
+				</li>
+				
+				
+				<li>
+					<input id="payment_payco" type="radio"  name="payment_type" class="payment_type" value="페이코">
+					<label for="payment_payco" class="payment_type_label">페이코</label>
+				</li>
+				
 			</ul>
 		</div>
 
@@ -683,6 +757,224 @@
 		</div>
 	</div>
 </div>
+
+
+<%--아임포트 라이브러리 --%>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script>
+
+$(function(){
+	$('#go_payment').click(function(){
+		console.log('결제하기 버튼을 눌렀습니다!');
+		
+		//예약관련 해시맵
+		let reserveMap= new Map();
+		
+		//초기화 - 자동입력되어있는 항목
+		reserveMap.set('boNo', Number($('hotel_boNo').val()) )//호텔번호
+		reserveMap.set('hotel_name', $('#reserve_hotel_name').text().trim() ) //호텔이름
+		reserveMap.set('roomNo', Number($('hotel_roomNo').val()) )//객실번호		
+		reserveMap.set('room_name', $('#room_name').text().trim() )//객실이름
+		reserveMap.set('reserveRoomCnt', Number($('#reserve_room_cnt').text().trim()) )//예약 객실수
+		reserveMap.set('reserveAdultCnt', Number($('#reserve_adult_cnt').text().trim()) )//예약 성인수
+		reserveMap.set('reserveChildCnt', Number($('#reserve_child_cnt').text().trim()) )//예약 어린이수
+		reserveMap.set('reserveTotalPersonCnt', Number($('#reserve_total_person_cnt').text().trim()) )//예약 총인원수
+		reserveMap.set('oneDayPrice', Number($('#_room_price_per_day').val()) ); // 1일 이용가격
+		
+		//초기화 - 입력이 필요한 부분
+		
+		if($('#checkInDatePicker').val()!=''){
+			//체크인 날짜가 존재한다면
+			reserveMap.set('checkInDate', $('#checkInDatePicker').val()) //체크인날짜
+		}else{
+			//체크인 날짜가 존재하지 않는다면
+			reserveMap.set('checkInDate', '') //체크인날짜
+			
+		}
+		
+		
+		if($('#checkOutDatePicker').val()!=''){
+			//체크아웃 날짜가 존재한다면
+			reserveMap.set('checkOutDate', $('#checkOutDatePicker').val()) //체크아웃날짜
+		}else{
+			//체크아웃 날짜가 존재하지 않는다면
+			reserveMap.set('checkOutDate', '') //체크아웃날짜
+			
+		}
+		
+		console.log('체크인 날짜: '+reserveMap.get('checkInDate'));
+		console.log('체크아웃 날짜: '+reserveMap.get('checkOutDate'));
+		
+		//실제가격
+		//reserveMap.set('reserveTotalPrice', Number($('#_total_price').val())* reserveMap.get('reserveRoomCnt') );
+		reserveMap.set('reserveTotalPrice', 0); //가격0원으로 함.
+		
+		
+		
+		reserveMap.set('memberId', $('#hotel_reserve_memberId').val().trim() ); //예약자 아이디
+		reserveMap.set('name',  $('#reservation_name').val() )//예약자이름 
+		reserveMap.set('phone', $('#reservation_phone').val() )//예약자 전화번호
+		reserveMap.set('email', $('#reservation_email').val() )//예약자 이메일
+		
+		//체크인날짜, 체크아웃 날짜
+		//예약자이름, 전화번호, 이메일이 공백이 아닌지 확인.
+		let keyList=[ 'checkInDate', 'checkOutDate','name', 'phone', 'email'];
+		let keyMap=new Map([
+			['name', '이름'],
+			['phone', '전화번호'],
+			['email', '이메일'],
+			['checkInDate', '체크인 날짜'],
+			['checkOutDate', '체크아웃 날짜']
+		]);
+		
+		let isAllWrite=true; //모두 작성됐는지 확인
+		let errorKey='';
+		for(var i=0; i<keyList.length; i++){
+			let key=keyList[i];
+			if(reserveMap.get(key)==''){
+				isAllWrite=false;
+				errorKey=key;
+				break;
+			}
+		}
+		
+		
+		if(!isAllWrite){
+			if(errorKey=='checkOutDate'|| errorKey=='checkInDate'){
+				swal({
+					title: '예약 실패',
+					icon: 'error',
+					button: '확인',
+					text:keyMap.get(errorKey)+'를 선택해주세요!'
+				});
+				
+			}else{
+				swal({
+					title: '예약 실패',
+					icon: 'error',
+					button: '확인',
+					text:keyMap.get(errorKey)+'을(를) 입력해주세요!'
+				});
+			}
+		
+		}else{
+		
+			//선택수단을 가져온다.
+			let select_payment_type=$('.payment_type:checked').val();
+			console.log('결제수단 :'+select_payment_type);
+			let customerUid=reserveMap.get('memberId')+'_'+new Date().getTime()+'_'+reserveMap.get('boNo')+'_'+reserveMap.get('roomNo')
+			
+			
+			
+			if(select_payment_type=='신용카드'){
+				//신용카드를 선택했을 때
+				var IMP=window.IMP;	
+				IMP.init('imp35513917'); //가맹점키
+				IMP.request_pay({
+					pg: 'html5_inicis', //pg구분자
+					pay_method: 'card', //결제수단- 신용카드
+					merchant_uid: 'trip2reap_credit_'+new Date().getTime(), //주문번호
+					customer_uid: customerUid, //주문자아이디 - 0원허용(정기결제)
+					name: 'TRIP2REAP 호텔예약', //주문명
+					amount: reserveMap.get('reserveTotalPrice'), //판매가격
+					buyer_name: reserveMap.get('name'), //구매자 이름
+					buyer_email: reserveMap.get('email'), //구매자 email
+					buyer_tel: reserveMap.get('phone') //구매자 전화번호
+					
+				},function(rsp){
+					if(rsp.success){
+						//결제를 성공하면
+						var msg='결제가 완료되었습니다!';
+						msg+='고유id: '+ rsp.imp_uid;
+						msg+='예약호텔 id'+ rsp.merchant_uid;
+						msg+='결제금액: '+ rsp.paid_amound;
+						msg+='카드 승인번호: '+ rsp.apply_num;
+						
+						
+						//예약을 요청한다.
+						$.ajax({
+							url:'',
+							data:{},
+							success:function(){
+								swal({
+									icon:'success',
+									title:'호텔 예약 성공',
+									text: '호텔 예약을 성공하였습니다!',
+									button:'확인'
+									
+								});
+							}
+						});
+					}else{
+						var msg='결제에 실패하였습니다!';
+						msg+='에러내용: '+rsp.error_msg;
+					}
+					
+					alert(msg);
+				});
+				
+				
+			}else if(select_payment_type=='카카오페이'){
+				//카카오페이선택
+				var IMP=window.IMP;	
+				IMP.init('imp35513917'); //가맹점키
+				IMP.request_pay({
+					pg: 'kakaopay', //pg구분자
+					pay_method: 'card', //결제수단- 신용카드
+					merchant_uid: 'trip2reap_kakao_'+new Date().getTime(), //주문번호
+					name: 'TRIP2REAP 호텔예약', //주문명
+					amount: reserveMap.get('reserveTotalPrice'), //판매가격
+					buyer_name: reserveMap.get('name'), //구매자 이름
+					buyer_email: reserveMap.get('email'), //구매자 email
+					buyer_tel: reserveMap.get('phone') //구매자 전화번호
+					
+				},function(rsp){
+					if(rsp.success){
+						//결제를 성공하면
+						var msg='결제가 완료되었습니다!';
+						msg+='고유id: '+ rsp.imp_uid;
+						msg+='예약호텔 id'+ rsp.merchant_uid;
+						msg+='결제금액: '+ rsp.paid_amound;
+						msg+='카드 승인번호: '+ rsp.apply_num;
+						
+						
+						//예약을 요청한다.
+						/* $.ajax({
+							url:'',
+							data:{},
+							success:function(){
+								swal({
+									icon:'success',
+									title:'호텔 예약 성공',
+									text: '호텔 예약을 성공하였습니다!',
+									button:'확인'
+									
+								});
+							}
+						}); */
+					}else{
+						var msg='결제에 실패하였습니다!';
+						msg+='에러내용: '+rsp.error_msg;
+					}
+					
+					alert(msg);
+				});
+			}else if(select_payment_type=='페이코'){
+				//페이코선택
+				
+			}
+			
+		}
+	});
+	
+	
+	
+	
+});
+
+</script>
+
+
 
 </body>
 </html>

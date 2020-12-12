@@ -23,8 +23,7 @@
     <!-- font-awesome -->
     <script src="https://kit.fontawesome.com/09697e2134.js" crossorigin="anonymous"></script>
 
-
-    <title>호텔 페이지</title>
+    <title>전국방방곡곡:: 호텔</title>
 
 </head>
 

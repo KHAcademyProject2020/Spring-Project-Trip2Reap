@@ -245,6 +245,12 @@ span#room_price_per_day{
 	font-weight: 900;
 }
 
+#checkInDatePicker,
+#checkOutDatePicker,
+.calendar_icon_wrapper{
+	cursor: pointer;
+}
+
 /*  
 ========================================================
 3. 객실 및 인원수 선택 
@@ -346,7 +352,8 @@ span#room_price_per_day{
 5. 예약 내역
 */
 
-#hotel-reserve-check-total-container{
+#hotel-reserve-check-total-container,
+#hotel-reserve-insert-container{
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -435,15 +442,64 @@ span#room_price_per_day{
 
 /*
 ========================================================
-6. 결제 수단 선택 
+7-1. 예약자 정보 입력
 */
+
+
+#reservation_name,
+#reservation_phone,
+#reservation_email{
+	border-color: transparent;
+	font-size: 1em;
+}
+
+.hotel-check-label-wrapper{
+	font-size: 1.2em;
+}
+
+.reserve_input{
+	position: relative;
+	justify-content: center;
+/* 	text-align: right; */
+	width: 100%;
+	
+}
+
+.reserve_input> input{
+	width: 100%;
+	font-weight: bold;
+}
+
+input:focus{
+	outline: none;
+}
+
+
+
+/*
+========================================================
+7-2. 결제 수단 선택 
+*/
+
+ul.payment-select-ul{
+	list-style: none;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	margin: 0 25px;
+}
+
+
+
 
 button#go_payment{
 	width: 50%;
 	font-size: 1.2em;
 	font-weight: bold;
 	margin: 15px;
-	padding: 18px 0;
+	padding: 12px 0;
 	border-color: transparent;
 	border-radius: 5px;
 	
