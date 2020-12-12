@@ -82,11 +82,12 @@
            <div id="mapDiv1">                     
                  <div class="map_wrap">
                      <div id="map"></div>
+                     <div id="map2"></div>
                      <div id="menu_wrap" class="bg_white">
                            <div class="option">
                                 <div>
                                     <form onsubmit="searchPlaces(); return false;">
-                                                                                           키워드 : <input type="text" value="제주도 맛집" id="keyword" size="15"> 
+                                                                                           키워드 : <input type="text" value="제주 애월카페" id="keyword" size="15"> 
                                         <button type="submit">검색하기</button> 
                                     </form>
                                </div>
@@ -108,13 +109,13 @@
            
            <div id="tiSpace9"></div>
            <div id="tiSpace8"></div>
-           <div id="course0">
-                <input type="text" id="noCourse" readonly="readonly" value="왼쪽 검색창을 통해 여행코스를 추가해주세요.">
-                <input type="text" id="yesCourse" readonly="readonly">
+           <div id="courseAll">
+               <div id="course0">
+                    <input type="text" id="noCourse" readonly="readonly" value="왼쪽 검색창을 통해 여행코스를 추가해주세요.">
+                    <input type="text" id="yesCourse" readonly="readonly">
+               </div>
            </div>
-           <!-- <div id="course1">
-                <label></label>
-           </div> -->
+           <input type="hidden" id="allDistance" value="">
 
         
 
@@ -154,16 +155,25 @@
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=37dc981b741ae67d53f183d4daf2b8c3&libraries=services,clusterer,drawing"></script>
 	<script>
 	var markers = [];
+	var markers2 = [];
 	
-    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	var mapContainer1 = document.getElementById('map'); // 지도를 표시할 div
+    var mapContainer = document.getElementById('map2'); // 지도를 표시할 div 
+    
     mapOption = { 
         center: new kakao.maps.LatLng(33.507089803070606, 126.49277539839063), // 지도의 중심좌표
-        level: 6 // 지도의 확대 레벨
+        level: 9 // 지도의 확대 레벨
     };  
+	
+	mapOption1 = { 
+	        center: new kakao.maps.LatLng(33.507089803070606, 126.49277539839063), // 지도의 중심좌표
+	        level: 9 // 지도의 확대 레벨
+	};
 
-    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+    var map = new kakao.maps.Map(mapContainer1, mapOption1); // 지도를 생성합니다
+    var map2 = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
     
- // 장소 검색 객체를 생성합니다
+    // 장소 검색 객체를 생성합니다
     var ps = new kakao.maps.services.Places();  
 
     // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
@@ -229,9 +239,9 @@
         for ( var i=0; i<places.length; i++ ) {
 
             // 마커를 생성하고 지도에 표시합니다
-            var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
-                marker = addMarker(placePosition, i), 
-                itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
+            var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x);
+            var marker = addMarker(placePosition, i);
+            var itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
 
             // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
             // LatLngBounds 객체에 좌표를 추가합니다
@@ -266,7 +276,7 @@
         menuEl.scrollTop = 0;
 
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-        map.setBounds(bounds);
+        map2.setBounds(bounds);
     }
 
     // 검색결과 항목을 Element로 반환하는 함수입니다
@@ -286,8 +296,8 @@
                      
           itemStr += '  <span class="tel">' + places.phone  + '</span>' +
                      '  <button id="courseOkBtn">여행코스 추가</button>  ' +
-                     '  <input type="hidden" id="courseX" value=' + places.x +' > ' +
-                     '  <input type="hidden" id="courseY" value=' + places.y +' > '
+                     '  <input type="hidden" class="courseX" value=' + places.x +' > ' +
+                     '  <input type="hidden" class="courseY" value=' + places.y +' > '
                      '</div>';           
 
         el.innerHTML = itemStr;
@@ -311,7 +321,7 @@
                 image: markerImage 
             });       
 
-        marker.setMap(map); // 지도 위에 마커를 표출합니다
+        marker.setMap(map2); // 지도 위에 마커를 표출합니다
         markers.push(marker);  // 배열에 생성된 마커를 추가합니다
 
         return marker;
@@ -362,7 +372,7 @@
         var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
 
         infowindow.setContent(content);
-        infowindow.open(map, marker);
+        infowindow.open(map2, marker);
     }
 
      // 검색결과 목록의 자식 Element를 제거하는 함수입니다
@@ -371,57 +381,115 @@
             el.removeChild (el.lastChild);
         }
     }
-    
-    
-    kakao.maps.event.addListener(map, 'click', function(mouseEvent) {           
-        // 클릭한 위도, 경도 정보를 가져옵니다 
-        var latlng = mouseEvent.latLng; 
-    
-        console.log('클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ' + '경도는 ' + latlng.getLng() + ' 입니다');      
-    });
-
-    // 선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
-    var linePath = [
-        new kakao.maps.LatLng(33.49424018249533, 126.48141164084879),
-        new kakao.maps.LatLng(33.49799646250557, 126.48276668243118),
-        new kakao.maps.LatLng(33.499710074548354, 126.51409384166868) 
-    ];
-
-    // 지도에 표시할 선을 생성합니다
-    var polyline = new kakao.maps.Polyline({
-        path: linePath, // 선을 구성하는 좌표배열 입니다
-        strokeWeight: 5, // 선의 두께 입니다
-        strokeColor: '#FFAE00', // 선의 색깔입니다
-        strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-        strokeStyle: 'solid' // 선의 스타일입니다
-    });
-
-    // 지도에 선을 표시합니다 
-    polyline.setMap(map);  
+      
     
     function changeLocation(){
     	var selectLocation = document.getElementById("coLocation").value;
-    	console.log("지역 : " + selectLocation);
     }
     
-    $(document).on("click","#courseOkBtn",function(){    
+    var linePath = [];
+    var distancePath = [];
+    var count = 1;
+    var beforeX;
+    var beforeY;
+    var allDistance = 0;
+    
+    $(document).on("click","#courseOkBtn",function(){   
+    	
     	var searchName = $(this).parent().find('h5').html();
-    	var searchX = $(this).parent().find($('#courseX')).val();
-    	var searchY = $(this).parent().find($('#courseY')).val();
+    	var searchX = $(this).parent().find($('.courseX')).val();
+    	var searchY = $(this).parent().find($('.courseY')).val();
     	
     	// noCourse가 있으면 지우고 div 만들기
     	if(document.getElementById("noCourse")){
             $("#noCourse").remove();
-            $("#yesCourse").val(searchName);
-    		$("#yesCourse").css('display', 'block');
-        } else{
-        // DIV 만들기
+            $("#yesCourse").val('1. ' + searchName);
+    		$("#yesCourse").css('display', 'inline-block'); 
+    		
+    		var moveLating = new kakao.maps.LatLng(searchY, searchX);
+    		
+    		var content = '<div class ="label"><span class="left"></span><span class="center">' 
+    		               + '1' + '</span><span class="right"></span></div>';
             
-        }
-    	
-    	// noCourse가 없으면 div 만들기
-    	
-    	// 검색창 지우기  -> 여행지에 이름 나타내기 -> 지도에 마커표시하기 
+    		var customOverlay = new kakao.maps.CustomOverlay({
+    			position : moveLating,
+    			content : content
+    		});    		
+    		
+    		customOverlay.setMap(map); // 오버레이 표시
+ 		    map.panTo(moveLating);     // 중심위치 옮기기
+    		
+        } else{        	   
+    	    	distancePath = [];
+    	        
+    	    	var distanceLating = new kakao.maps.LatLng(searchY,searchX);
+    	    	distancePath.push(distanceLating);
+    	    	distanceLating = new kakao.maps.LatLng(beforeY,beforeX);
+    	    	distancePath.push(distanceLating);
+    	    	
+    	    	var distance = new kakao.maps.Polyline({
+    	    		path : distancePath,
+    	    		strokeWeight : 2,
+    	    		strokeColor : '#FF00FF',
+    	    		strokeOpacity: 0.8,
+    	    		strokeStyle: 'dashed'
+    	    	});
+    	    
+    	    var courseDistanceNum = (parseFloat(distance.getLength())/1000).toFixed(1);
+    	    courseDistanceNum = Number(courseDistanceNum);
+    	    
+    	    var courseDistanceInfo = (parseFloat(distance.getLength())/1000).toFixed(1) + "km";   
+    	    allDistance += courseDistanceNum;
+    	    // 총거리   
+    	    console.log("allDistance : " + allDistance);
+    	    $('#allDistance').val(allDistance);
+    	    var aa = $('#allDistance').val();
+    	    console.log("총거리 : " + aa );
+        	
+            // 새로운 div 만들기
+            var newDiv = '<div id="courseSpace1"></div><div id="courseSpace2"></div>'
+                         + '<input type="text" class="courseDistance" id="courseDistance" value="' 
+                         + courseDistanceInfo + '" readonly="readonly"><div id="courseSpace1"></div>'
+                         + '<div id="course0"><input type="text" class="yesCourses" readonly="readonly" value="' 
+                         + (count+1) + '. ' + searchName +'"><input type="hidden" class="courseX" value="' + searchX 
+                         + '"><input type="hidden" class="courseY" value="' + searchY + '">';
+            $('#courseAll').append(newDiv);  
+            count++;
+            
+            moveLating = new kakao.maps.LatLng(searchY, searchX);
+            var content = '<div class ="label"><span class="left"></span><span class="center">' 
+	               + count + '</span><span class="right"></span></div>';
+ 
+	        var customOverlay = new kakao.maps.CustomOverlay({
+		        position : moveLating,
+		        content : content
+	        });    		
+	
+	        customOverlay.setMap(map); // 오버레이 표시
+            map.panTo(moveLating);     // 중심위치 옮기기
+        }   	   
+         
+    	    // 선표시하기
+    	    var lating = new kakao.maps.LatLng(searchY, searchX);
+            linePath.push(lating);
+
+    	    // 지도에 표시할 선을 생성합니다
+    	    var polyline = new kakao.maps.Polyline({
+    	        path: linePath, // 선을 구성하는 좌표배열 입니다
+    	        strokeWeight: 5, // 선의 두께 입니다
+    	        strokeColor: '#FFAE00', // 선의 색깔입니다
+    	        strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+    	        strokeStyle: 'solid' // 선의 스타일입니다
+    	    });    	    
+    	       	      	    
+
+    	    // 지도에 선을 표시합니다 
+    	    polyline.setMap(map);
+    	    
+    	    beforeX = searchX;
+    	    beforeY = searchY;
+
+    	// 1. 삭제 시 배열지우기, div 지우기 
     });    	
 </script>
 

@@ -24,13 +24,14 @@
             font-size: 17px; font-style: italic;}
 #tiSpace3{ height: 10px; }
 #coTheme, #coSchedule{ width : 150px; height: 30px; }
-#mainCourse0{ display : inline-block; border: 2px dashed rgb(242,203,97); height: 1000px; width: 888px; }
+#mainCourse0{ display : inline-block; border: 2px dashed rgb(242,203,97); 
+              height: 1000px; width: 888px; overflow: auto; }
 #tiSpace4{ display : inline-block; width: 30px; }
 #tiSpace5{ display : inline-block; width: 20px; }
 
 /* 카카오 지도 */
 #mapDiv1{ width: 815px; height: 300px; display: inline-block; }
-#map{ position:relative; overflow:hidden; width : 100%; height: 300px; border: 4px solid lightgray; }
+#map{ position:relative; overflow:hidden; width : 100%; height: 300px; border: 4px solid lightgray; /* display: none; */ }
 .map_wrap, .map_wrap * { margin:0; padding:0; font-family:'Malgun Gothic',dotum,'돋움',sans-serif; font-size:12px; }
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{ color:#000; text-decoration: none; }
 .map_wrap { position:relative; width:100%; height:304px; }
@@ -72,6 +73,12 @@
 #courseOkBtn{ background: white; border: 1px solid lightgray; width: 100px; height : 25px; color : rgb(76,76,76); 
               vertical-align: middle; border-radius: 5px; line-height: 5px; font-weight: bold; margin-top: 5px; }
 #courseOkBtn:hover{ background: rgb(234,234,234); }
+.courseMarker {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
+.courseDistance { display: inline-block; width: 50px; margin-left: 10px; border: none; 
+                  vertical-align: top; line-height: 34px; font-size: 12px; }
+.label { border: none; border-radius: 20px; width: 20px; height: 20px; background: rgb(238,185,56); color: white; 
+         text-align: center; }
+.center { font-size: 13px; font-weight: bold; vertical-align: middle; line-height: 15px; }
 
 /* 코스 1일차  */
 #tiSpace6{ height: 30px; }
@@ -80,6 +87,7 @@
        text-align: center; }
 #dayLabel{ color: white; font-size: 12px; font-weight: bold; vertical-align: middle; line-height: 25px; }
 #dayLabel2{ font-size: 14px; font-weight: bold; margin-left: 5px; margin-right: 10px; }
+#courseAll{ display:inline-block; width: 343px; }
 #course0{ display:inline-block; width: 340px; height: 40px; border: 1px dashed rgb(242,203,97); 
           text-align: center; }
 #course1{ display:inline-block; width: 340px; height: 40px; border: 1px dashed rgb(242,203,97); 
@@ -88,9 +96,12 @@
 /* 코스 상세 선택  */
 #tiSpace8{ display : inline-block; width: 480px; }
 #tiSpace9{ height: 15px; }
-#noCourse{ font-size: 12px; vertical-align: middle; line-height: 39px; border: none; width: 300px; }
+#noCourse{ display : inline-block; font-size: 12px; vertical-align: middle; line-height: 39px; border: none; width: 300px; text-align: center; }
 #yesCourse{ display : none; font-size: 12px; vertical-align: middle; line-height: 39px; border: none; width: 300px; 
-            margin-left: 20px; }
+            text-align: center; }
+.yesCourses{ display : inline-block; font-size: 12px; vertical-align: middle; line-height: 39px; border: none; width: 300px; text-align: center; }
+#courseSpace1{ height: 5px; }
+#courseSpace2{ display: inline-block; width: 170px; height: 30px; border-right: 2px dashed rgb(242,203,97); }
 
 
 /* 테두리  */

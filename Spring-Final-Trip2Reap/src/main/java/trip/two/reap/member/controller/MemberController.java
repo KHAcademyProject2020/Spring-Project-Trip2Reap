@@ -489,6 +489,7 @@ public class MemberController {
 		return changeOk;
 	}
 	
+
 	/*
 	 * <잘 안되는 것들>
 	 * <로그인 modal, 회원탈퇴 modal, 정보수정modal>
