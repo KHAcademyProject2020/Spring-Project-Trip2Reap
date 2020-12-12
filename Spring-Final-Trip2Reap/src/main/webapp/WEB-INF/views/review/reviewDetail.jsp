@@ -37,20 +37,22 @@
 
 						<tr>
 							<td colspan="5">
-							<p style="color: green; font-size:30px;">
+							<p style="color: lightgreen; font-size:20px;">
 							<b>&nbsp;&nbsp;${review.caName}</b></p>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="5"> 
+							<br>
 							<p style=" font-size:40px;">
-							<b>&nbsp;&nbsp;${review.boTitle}<b></b></B></p>
+							<b>&nbsp;&nbsp;${review.boTitle}</b></p>
 							</td>
 						</tr>
 
 						<tr>
 							<td colspan="5">
-							<b>글쓴이 : ${review.nickName}</b>
+							<br>
+							&nbsp;&nbsp; 글쓴이 : ${review.nickName}
 							</td>
 						</tr>
 						
@@ -101,7 +103,8 @@
 					<table class="replyTable" id="rtb">
 						<thead>
 							<tr>
-								<td colspan="3"><b id="rCount"></b><hr></td>
+								<td colspan="3"><b id="rCount"></b>
+									<hr></td>
 							</tr>
 						</thead>
 						<tbody></tbody>
@@ -128,18 +131,31 @@
 
 
 				</div>
+				
+				<c:url var="rupView" value="rupView.bo">
+						<c:param name="boNo" value="${ review.boNo }"/>
+						<c:param name="page" value="${ page }"/>
+					</c:url>	
+					
+					<c:url var="rdelete" value="rdelete.bo">
+						<c:param name="boNo" value="${ review.boNo }"/>
+					</c:url>
+					
+					
 				<table>
 				<c:if test="${ loginUser.nickName eq review.nickName }">
 		
 		
 						<tr>
 							<td colspan="2" align="center">
-					<c:url var="rdelete" value="rdelete.bo">
-						<c:param name="boNo" value="${ b.boNo }"/>
-						<c:param name="page" value="${ pi.currentPage }"/>
-					</c:url>
-							<input type="button" value="수정" onclick="location.href='${bupView}'">
-							<input type="button" value="삭제" onclick="del(${review.boNo})">
+					
+							<button onclick="location.href='${ rupView }'">수정하기</button>
+							
+						
+							<button onclick="del(${review.boNo})">게시글삭제</button>
+							
+						
+
 							</td>
 						</tr>
 						</c:if>
@@ -158,7 +174,8 @@
 			location.href='rdelete.bo?boNo='+boNo;
 			alert("삭제되었습니다");
 		}
-	}	
+	}
+
 </script>
 	
 

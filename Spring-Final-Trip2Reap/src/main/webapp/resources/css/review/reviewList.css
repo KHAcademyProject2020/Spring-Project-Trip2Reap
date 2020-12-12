@@ -33,7 +33,11 @@ section { margin: 0px auto; width:1300px; }
 #paging_table{
 	width:1000px
 }
-
+.center-block{
+	height:100px;
+	width:100px;
+	border-radius: 5px;
+}
 
 .board_list{
 

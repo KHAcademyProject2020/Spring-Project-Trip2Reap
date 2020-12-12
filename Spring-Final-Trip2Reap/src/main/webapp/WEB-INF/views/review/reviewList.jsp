@@ -46,7 +46,7 @@
 	    <div id="board">
 		<table id="board_table">
 		<tr class="board_list" align="center" bgcolor="#efefef">
-			<th class="board_list"></th>
+			<th colspan="2" class="board_list"></th>
 			<th class="board_list">제목</th>
 			<th class="board_list">작성자</th>
 			<th class="board_list">날짜</th>
@@ -57,16 +57,42 @@
 		<c:forEach var="b" items="${list}">
 		<tr align="center" class="board_list">
 			<td class="board_list">${b.boNo}</td>
+				<td class="board_list">
+				<c:if test="${b.changeName != null }">
+										<img id="review_img" class="center-block" src="resources/buploadFiles/${b.changeName}">
+										
+									</c:if> 
+								
+									<c:if test="${b.changeName == null }">
+										
+										
+										<img id="Not_img" class="center-block" src="resources/images/emoticon.png">
+										
+										
+									</c:if>
+			</td>
+			
+			
+			
+			
 			<td align="left" class="board_list">
 				<c:if test="${ !empty loginUser }">
 					<c:url var="reviewDetail" value="reviewDetail.bo">
 						<c:param name="boNo" value="${ b.boNo }"/>
 						<c:param name="page" value="${ pi.currentPage }"/>
 					</c:url>
-					<a href="${ reviewDetail}">[${b.caName}]${ b.boTitle }${b.boTag }</a>
+					<a href="${ reviewDetail}">[${b.caName}]</a><br><br>
+					<a href="${ reviewDetail}">${ b.boTitle }</a><br><br>
+					<a href="${ reviewDetail}">${ b.boContent }</a><br><br>
+					<a href="${ reviewDetail}">${b.boTag }</a><br>
 				</c:if>
+				
 				<c:if test="${ empty loginUser }">
-					[${b.caName}]${ b.boTitle }${b.boTag }		
+					[${b.caName}]<br><br>
+					${ b.boTitle }<br><br>
+					${b.boContent }<br><br>
+					${b.boTag }	<br><br>
+					
 				</c:if>
 			
 			</td>

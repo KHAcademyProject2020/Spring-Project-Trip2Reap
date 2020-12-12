@@ -96,20 +96,49 @@
  		VALUES(SEQ_BO_NO.NEXTVAL,#{memberId},#{caCode},#{boTitle},#{boTag},#{boContent})
   </insert>
   
-  <!-- <update id="updateReview">
-      update board
-      set bTitle=#{bTitle}, bContent=#{bContent}, 
-         <if test="originalFileName != null">
+   <update id="updateReview">
+   		
+   		UPDATE BOARD 
+   		
+   		SET BO_TITLE=#{boTitle}, 
+   			BO_CONTENT=#{boContent},
+   	  		CA_CODE=#{caCode}, 
+   	  		BO_TAG=#{boTag}
+   	  		REGDATE=SYSDATE
+        
+   		WHERE BO_NO= #{boNo}
+   		
+   		
+   
+   	  <!-- update (
+   	  		select b.ca_code,b.bo_title,b.bo_content,b.bo_tag,b.regdate,i.origin_name,i.change_name
+   	  		from board b
+   	  			,img_file i
+   	  		where b.bo_no=i.bo_no	
+   	  	)
+   	  	set BO_TITLE=#{boTitle}, BO_CONTENT=#{boContent},
+   	  	CA_CODE=#{caCode}, BO_TAG=#{boTag},
+   	  	<if test="originName != null">
          ORIGIN_NAME=#{originName},
          </if>
          CHANGE_NAME=#{changeName}, REGDATE=sysdate
-      where BO_NO=#{boNo}
+         where bo_no=#{boNo}
+          -->
+ 
+     <!--  update BOARD(BO_NO,MEMBER_ID,CA_CODE,BO_TITLE,BO_TAG,BO_CONTENT)
+      set BO_TITLE=#{boTitle},BO_CONTENT=#{boContent},CA_CODE=#{caCode},BO_TAG=#{boTag}
+         <if test="originName != null">
+         ORIGIN_NAME=#{originName},
+         </if>
+         CHANGE_NAME=#{changeName}, REGDATE=sysdate
+      where b.BO_NO=#{boNo} -->
+
    </update>
-   -->
+   
    <update id="deleteReview">
-       update board
-       set BO_DELETE_YN='Y'
-       where BO_NO=#{boNo}
+       update board B, REPLY R
+       set BO_DELETE_YN='Y' , RE_DELETE_YN='Y'
+       where BO_NO=#{boNo} 
    </update> 
    
    <insert id="insertReply">

@@ -34,241 +34,245 @@ import trip.two.reap.review.model.vo.Review;
 
 @Controller // bean에 추가 (객체로 만듦)
 public class ReviewController {
-   
-	
+
 	@Autowired
 	private ReviewService rService;
-	
-   //리뷰 목록으로 이동
-   @RequestMapping("reviewList.bo")
-   public ModelAndView reviewList(@RequestParam(value="page",required=false) Integer page, ModelAndView mv) {
-   
-	   int currentPage=1;
-	   if(page != null) {
-		   currentPage = page;
-	   }
-	   
-	   int listCount = rService.getListCount();
-	   
-	   PageInfo pi = Pagination.getPageInfo(currentPage,listCount);
-	   
-	   ArrayList<Review> list = rService.selectList(pi);
-	   
-	   if(list !=null) {
-		   mv.addObject("list",list);
-		   mv.addObject("pi",pi);
-	       mv.setViewName("reviewList");
-	         } else {
-	            throw new ReviewException("게시글 전체 조회에 실패 하였습니다.");
-	         }
-	   System.out.println(list);
-	   return mv;
-   }
-   
-   
-   @RequestMapping("reviewPhotoList.bo")
-   public ModelAndView reviewPhotoList(@RequestParam(value="page",required=false) Integer page, ModelAndView mv) {
-	   
-	   int currentPage=1;
-	   if(page != null) {
-		   currentPage = page;
-	   }
-	   
-	   int listCount = rService.getListCount();
-	   
-	   PageInfo pi = Pagination.getPageInfo(currentPage,listCount);
-	   
-	   ArrayList<Review> list = rService.selectList(pi);
 
-	   if(list !=null) {
-		   mv.addObject("list",list);
-		   mv.addObject("pi",pi);
-	       mv.setViewName("reviewPhotoList");
-	         } else {
-	            throw new ReviewException("게시글 전체 조회에 실패 하였습니다.");
-	         }
-	   System.out.println(list);
-	   return mv;
-   }
- 
-   // 리뷰 상세보기로 이동
-   
-   @RequestMapping("reviewDetail.bo")
-   public ModelAndView boardDetail(@RequestParam("boNo") int boNo, @RequestParam("page") int page, ModelAndView mv) {
-      
-      Review review = rService.selectReview(boNo);
-      
-      if(review != null) {
-    	  mv.addObject("review", review)
-            .addObject("page", page)
-            .setViewName("reviewDetail");
-      } else {
-    	  throw new ReviewException("게시글 상세보기에 실패하였습니다.");
-      }     
-      
-      return mv;
-   }
-   
-   @RequestMapping("reviewInsert.bo")
-   public String reviewInsertView() {
-	   return "reviewInsert";
-	   
-   }
-   
-   
-   @RequestMapping("rInsert.bo")
-   public String reviewInsert(@ModelAttribute Review r, @RequestParam(value="uploadFile" ,required=false) MultipartFile uploadFile,HttpServletRequest request) {
-	   int result;
-	   System.out.println("보드" + r);
-	   System.out.println("첨부파일 : " + r);
-	    System.out.println("첨부파일 : " + uploadFile);
-	    System.out.println("파일이름 : " + uploadFile.getOriginalFilename());
-	   // 파일을 집어넣지 않으면 empty값이 반환. 파일을 넣으면 파일이름이 반환됨.	   
-	
-	   //if(!uploadFile.getOriginalFilename().equals("")) {
-	   if(uploadFile != null && !uploadFile.isEmpty()) {
-		   String changeName = saveFile(uploadFile, request);
-		// saveFile() : 파일을 저장할 경로 지정
-		   System.out.println(changeName);
-		   
-		   if(changeName != null) {
-			  r.setOriginName(uploadFile.getOriginalFilename());
-			   r.setChangeName(changeName);
-			   
-		   }
-		   result = rService.insertReview(r);
-	   } else {
-		   result = rService.insertBoard(r);
-		   }
-	  
-	   
-	   System.out.println(result);
-	   if(result > 0) {
-		   return "redirect:reviewList.bo";
-	   } else {
-		   throw new ReviewException("게시글 등록에 실패했습니다.");
-	   }
-   }
-   
-   @RequestMapping("download.do")
-   public String saveFile(MultipartFile file, HttpServletRequest request) {
-	   // saveFile() : 파일을 저장할 경로 지정
-	   String root = request.getSession().getServletContext().getRealPath("resources");
-	   // System.out.println("루트 : " + root);
-	   String savePath = root + "\\buploadFiles";
-	   
-	   File folder = new File(savePath);
-	   if(!folder.exists()) {
-		   folder.mkdirs();
-	   }
-	   
-	   SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-	   String originFileName = file.getOriginalFilename();
-	   String renameFileName = sdf.format(new Date(System.currentTimeMillis())) + "." + originFileName.substring(originFileName.lastIndexOf(".")+1);  
-	   // System.out.println("rename파일 이름 : " + renameFileName);
-	   String renamePath = folder + "\\" + renameFileName;
-	   
-	   try {
-		file.transferTo(new File(renamePath));
-	   } catch (IOException e) {
-		   System.out.println("파일 전송 에러 : " + e.getMessage());
-		e.printStackTrace();
+	// 리뷰 목록으로 이동
+	@RequestMapping("reviewList.bo")
+	public ModelAndView reviewList(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv) {
+
+		int currentPage = 1;
+		if (page != null) {
+			currentPage = page;
+		}
+
+		int listCount = rService.getListCount();
+
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+
+		ArrayList<Review> list = rService.selectList(pi);
+
+		if (list != null) {
+			mv.addObject("list", list);
+			mv.addObject("pi", pi);
+			mv.setViewName("reviewList");
+		} else {
+			throw new ReviewException("게시글 전체 조회에 실패 하였습니다.");
+		}
+		System.out.println(list);
+		return mv;
 	}
-	   return renameFileName;
-   }
-   
-   @RequestMapping("addReply.bo")
-   @ResponseBody
-   public String addReply(Reply re, HttpSession session) {
-	   Member loginUser = (Member)session.getAttribute("loginUser");
-	   String rWriter = loginUser.getMemberId();
-	   
-	   re.setMemberId(rWriter);
-	   
-	   int result = rService.addReply(re);
-	   
-	   if(result > 0) {
-		   return "success";
-	   }else {
-		   throw new ReviewException("댓글 등록에 실패했습니다.");
-	   }
-   }
-   
-   @RequestMapping("rList.bo")
-   public void getReplyList(int boNo,
-		                    HttpServletResponse response) throws JsonIOException, IOException { 
-	                        //int bId : requestParam 생략
-	   
-	   ArrayList<Reply> list = rService.selectReply(boNo);
-	  
-	   response.setContentType("application/json; charset=UTF-8");
-	   
-	   GsonBuilder gb = new GsonBuilder();
-	   GsonBuilder df = gb.setDateFormat("yyyy-MM-dd");
-	   Gson gson = df.create();
-	   gson.toJson(list, response.getWriter());	   
-  	   
-   }
-   
-   public void deleteFile(String fileName, HttpServletRequest request) {
-	   String root = request.getSession().getServletContext().getRealPath("resources");
-	   String savePath = root + "\\buploadFiles";
-	   
-	   File f = new File(savePath + "\\" + fileName);
-	   
-	   if(f.exists()) {
-		   f.delete();
-	   }
-   }
-   
-   @RequestMapping("rdelete.bo")
-   public String deleteReview(@RequestParam("boNo") int boNo,
-		                           HttpServletRequest request) {
-	   
-	   Review r = rService.selectReview(boNo);
-	   
-	   if(r.getOriginName() != null) {
-		   deleteFile(r.getChangeName(), request);
-	   }
-	   
-	   int result = rService.deleteReview(boNo);
-	   
-	   if(result > 0) {
-		   return "redirect:reviewList.bo";
-	   } else {
-		   throw new ReviewException("게시물 삭제에 실패하였습니다.");
-	   }
-   }
-   
-   
 
+	@RequestMapping("reviewPhotoList.bo")
+	public ModelAndView reviewPhotoList(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv) {
 
-   
-   
+		int currentPage = 1;
+		if (page != null) {
+			currentPage = page;
+		}
 
-   
-  
+		int listCount = rService.getListCount();
+
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+
+		ArrayList<Review> list = rService.selectList(pi);
+
+		if (list != null) {
+			mv.addObject("list", list);
+			mv.addObject("pi", pi);
+			mv.setViewName("reviewPhotoList");
+		} else {
+			throw new ReviewException("게시글 전체 조회에 실패 하였습니다.");
+		}
+		System.out.println(list);
+		return mv;
+	}
+
+	// 리뷰 상세보기로 이동
+
+	@RequestMapping("reviewDetail.bo")
+	public ModelAndView boardDetail(@RequestParam("boNo") int boNo, @RequestParam("page") int page, ModelAndView mv) {
+
+		Review review = rService.selectReview(boNo);
+
+		if (review != null) {
+			mv.addObject("review", review).addObject("page", page).setViewName("reviewDetail");
+		} else {
+			throw new ReviewException("게시글 상세보기에 실패하였습니다.");
+		}
+
+		return mv;
+	}
+
+	@RequestMapping("reviewInsert.bo")
+	public String reviewInsertView() {
+		return "reviewInsert";
+
+	}
+
+	@RequestMapping("rInsert.bo")
+	public String reviewInsert(@ModelAttribute Review r,
+			@RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile,
+			HttpServletRequest request) {
+		int result;
+		System.out.println("보드" + r);
+		System.out.println("첨부파일 : " + r);
+		System.out.println("첨부파일 : " + uploadFile);
+		System.out.println("파일이름 : " + uploadFile.getOriginalFilename());
+		// 파일을 집어넣지 않으면 empty값이 반환. 파일을 넣으면 파일이름이 반환됨.
+
+		// if(!uploadFile.getOriginalFilename().equals("")) {
+		if (uploadFile != null && !uploadFile.isEmpty()) {
+			String changeName = saveFile(uploadFile, request);
+			// saveFile() : 파일을 저장할 경로 지정
+			System.out.println(changeName);
+
+			if (changeName != null) {
+				r.setOriginName(uploadFile.getOriginalFilename());
+				r.setChangeName(changeName);
+
+			}
+			result = rService.insertReview(r);
+		} else {
+			result = rService.insertBoard(r);
+		}
+
+		System.out.println(result);
+		if (result > 0) {
+			return "redirect:reviewList.bo";
+		} else {
+			throw new ReviewException("게시글 등록에 실패했습니다.");
+		}
+	}
+
+	@RequestMapping("download.do")
+	public String saveFile(MultipartFile file, HttpServletRequest request) {
+		// saveFile() : 파일을 저장할 경로 지정
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		// System.out.println("루트 : " + root);
+		String savePath = root + "\\buploadFiles";
+
+		File folder = new File(savePath);
+		if (!folder.exists()) {
+			folder.mkdirs();
+		}
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String originFileName = file.getOriginalFilename();
+		String changeName = sdf.format(new Date(System.currentTimeMillis())) + "."
+				+ originFileName.substring(originFileName.lastIndexOf(".") + 1);
+		// System.out.println("rename파일 이름 : " + changeName);
+		String renamePath = folder + "\\" + changeName;
+
+		try {
+			file.transferTo(new File(renamePath));
+		} catch (IOException e) {
+			System.out.println("파일 전송 에러 : " + e.getMessage());
+			e.printStackTrace();
+		}
+		return changeName;
+	}
+
+	@RequestMapping("addReply.bo")
+	@ResponseBody
+	public String addReply(Reply re, HttpSession session) {
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		String rWriter = loginUser.getMemberId();
+
+		re.setMemberId(rWriter);
+
+		int result = rService.addReply(re);
+
+		if (result > 0) {
+			return "success";
+		} else {
+			throw new ReviewException("댓글 등록에 실패했습니다.");
+		}
+	}
+
+	@RequestMapping("rList.bo")
+	public void getReplyList(int boNo, HttpServletResponse response) throws JsonIOException, IOException {
+		// int bId : requestParam 생략
+
+		ArrayList<Reply> list = rService.selectReply(boNo);
+
+		response.setContentType("application/json; charset=UTF-8");
+
+		GsonBuilder gb = new GsonBuilder();
+		GsonBuilder df = gb.setDateFormat("yyyy-MM-dd");
+		Gson gson = df.create();
+		gson.toJson(list, response.getWriter());
+
+	}
+
+	public void deleteFile(String fileName, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\buploadFiles";
+
+		File f = new File(savePath + "\\" + fileName);
+
+		if (f.exists()) {
+			f.delete();
+		}
+	}
+
+	@RequestMapping("rdelete.bo")
+	public String deleteReview(@RequestParam("boNo") int boNo, HttpServletRequest request) {
+
+		Review r = rService.selectReview(boNo);
+
+		if (r.getOriginName() != null) {
+			deleteFile(r.getChangeName(), request);
+		}
+
+		int result = rService.deleteReview(boNo);
+
+		if (result > 0) {
+			return "redirect:reviewList.bo";
+		} else {
+			throw new ReviewException("게시물 삭제에 실패하였습니다.");
+		}
+	}
+
+	@RequestMapping("rupView.bo")
+	public ModelAndView boardUpdateView(@RequestParam("boNo") int boNo, @RequestParam("page") int page,
+			ModelAndView mv) {
+		Review review = rService.selectReview(boNo);
+
+		mv.addObject("review", review).addObject("page", page).setViewName("reviewUpdate");
+
+		return mv;
+	}
+
+	@RequestMapping("rupdate.bo")
+	public ModelAndView reviewUpdate(@ModelAttribute Review r, @RequestParam("page") int page,
+			@RequestParam("reloadFile") MultipartFile reloadFile, HttpServletRequest request, ModelAndView mv) {
+
+		String changeName = saveFile(reloadFile, request);
+
+		System.out.println("리네임 파일 : " + changeName);
+
+		if (reloadFile != null && !reloadFile.isEmpty()) {
+			if (r.getChangeName() != null) {
+				deleteFile(r.getChangeName(), request);
+			}
+
+			if (changeName != null) {
+				r.setOriginName(reloadFile.getOriginalFilename());
+				r.setChangeName(changeName);
+			}
+		}
+
+		int result = rService.updateReview(r);
+
+		if (result > 0) {
+			mv.addObject("page", page).setViewName("redirect:reviewDetail.bo?boNo=" + r.getBoNo());
+		} else {
+			throw new ReviewException("게시글 수정에 실패하였습니다.");
+		}
+
+		return mv;
+	}
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -68,7 +68,7 @@ ul > li > #detailGo .screen .top{
 	
 	position:absolute;
 	bottom:150%;
-	left:30px;
+	left:110px;
 	z-index:2;
 	color:#fff;
 	font-size:26px;
@@ -79,7 +79,8 @@ ul > li > #detailGo .screen .bottom{
 
 	position:absolute;
 	top:150%;
-	left:30px;
+	left:130px;
+	align-content:center;
 	z-index:2;
 	color:#fff;
 	font-size:12px;

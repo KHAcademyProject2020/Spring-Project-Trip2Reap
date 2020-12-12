@@ -78,23 +78,23 @@
 									
 									<c:if test="${ !empty loginUser }">
 										
-										${ b.boTitle }${ b.boTag }
+										${ b.boTitle }<br>
+										${ b.boTag }
 										
 						    		</c:if> 
 						       
 						       		<c:if test="${ empty loginUser }">
-											${ b.boTitle }
+											${ b.boTitle }<br>
+											${ b.boTag }
 									</c:if>
 									
 									</div>
 									
 									<div class="bottom">
 										
-										
-										# ${b.boTag }
-										
-						    		
-										
+									<i class="fas fa-eye"></i>&nbsp;${b.boCount}&nbsp;
+									<i class="fas fa-thumbs-up"></i>&nbsp;22&nbsp;
+									<i class="fas fa-comment-dots"></i>&nbsp;<b id="checkCount"></b>
 									</div>
 									
 									<c:if test="${b.changeName != null }">

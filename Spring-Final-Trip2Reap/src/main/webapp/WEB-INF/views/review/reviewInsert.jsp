@@ -26,17 +26,9 @@
 				</div>
 			</div>
 
-			<form method="post" action="rInsert.bo"  enctype="Multipart/form-data">
+			<form method="post" onsubmit="false;" action="rInsert.bo"  enctype="Multipart/form-data">
 				<div id="wrapperForm">
 					<br> <br>
-					<div class="writeForm" id="writer">
-						<input type="file" id="photo_btn" name="uploadFile"> <strong>작성자
-							${loginUser.memberId }</strong> <input type="hidden" name="memberId"
-							readonly value="${loginUser.memberId }">
-					</div>
-					<br>
-					<br>
-
 					<div id="cate">
 
 						<select id="select_search" name="caCode">
@@ -48,7 +40,18 @@
 						</select>
 
 					</div>
+					
 					<br>
+					<br>
+
+					<div class="writeForm" id="writer">
+						<input type="file" id="photo_btn" name="uploadFile"> 
+
+						<input type="hidden" name="memberId" value="${loginUser.memberId }">
+					</div>
+					
+					<br>
+					
 					<div class="writeForm" id="title">
 						<textarea name="boTitle" placeholder="제목을 입력해 주세요."
 							class="textarea_input" style="height: 40px;"></textarea>
@@ -56,28 +59,26 @@
 					<br> <br>
 
 					<div id="content">
+								<br>
 
-
-						<textarea style="resize: none;" placeholder="내용을 입력해주세요"
-							name="boContent" rows="30" cols="140"></textarea>
+						<textarea id="contentForm" placeholder="내용을 입력해주세요" name="boContent" rows="40" cols="130"></textarea>
+							
+							<div class="hashTag">
+								
+								
+								<div  id="hashtag">
+						
+								<input type="text" 
+								name="boTag" id="tag" placeholder="태그를 입력해 주세요" />
+								
+							</div>
+									
+						
+						</div>
 
 
 						<br>
-						<div>
-							<div>
-
-								<div class="content">
-										<button type="button" id="hashbtn">태그등록</button>
-								
-									<div id="hashtag">
-										<input type="text" name="boTag"id="tag" size="7" placeholder="태그를 입력해 주세요" /> &nbsp;
-									</div>
-									
-									<div id="field"></div>
-
-								</div>
-							</div>
-						</div>
+						
 					</div>
 
 					<br> <input type="submit" id="submit" value="등록"
@@ -88,11 +89,49 @@
 			</form>
 
 		</div>
+		
+		<br><br><br><br><br><br><br><br>
+		
+	<script>
+     //모든 페이지가 요청이 되었을 때
+     $(document).ready(function() {
+         // ID를 alpreah_input로 가지는 곳에서 키를 누를 경우
+         $("#tag").keydown(function(key) {
+             //키의 코드가 13번일 경우 (13번은 엔터키)
+             var $tag = $("#tag").val();
+             if (key.keyCode == 13) {
+            	 $('#hashtag').prepend("<div class='hashtag'>" + "#" + $tag +"</div>" + " ");
+             }
+         });
+     });
 
+
+		// 엔터시 전송되는거 막는 코드
+		document.addEventListener('keydown', function(event) {
+			  if (event.keyCode === 13) {
+			    event.preventDefault();
+			  };
+			}, true);
+		
+		
+		//클릭시 배경 색 변환
+		$(function(){	
+			$('#tag').click(function(){$(this).css("background","#eff0f2")})
 			
+			
+			
+		})
+		
+		$('#tag').keydown(function(key){
+			if (key.keyCode == 13) {
+
+				$(this).css("background","#eff0f2")
+				}
+		}
+		
+	</script>
 
 
-
-	</section>
+</section>
 </body>
 </html>
