@@ -104,6 +104,18 @@
 #courseSpace2{ display: inline-block; width: 170px; height: 30px; border-right: 2px dashed rgb(242,203,97); }
 
 
+/* 버튼  */
+#courseSpace3 { height : 50px; }
+#courseSpace4 { display : inline-block; width : 305px; }
+#courseBtn1 { background: lightgray; color:white; width: 200px; height : 50px; 
+                  border: none; font-size: 15px; font-weight: bold; cursor: pointer; }
+#courseBtn1:hover { background-color: rgb(200,200,200); }
+#courseSpace5 { display: inline-block; width: 10px; }
+#courseBtn2 { background: rgb(119,175,130); color:white; width: 200px; height : 50px; 
+             border: none; font-size: 15px; font-weight: bold; cursor: pointer; }
+#courseBtn2:hover { background-color: rgb(130,185,140); }             
+#courseBtn1, #courseBtn2:focus{ outline: none; }
+
 /* 테두리  */
 #titleText,#coTheme,#coSchedule,#addLocation,#courseOkBtn:focus { outline: none; }
 

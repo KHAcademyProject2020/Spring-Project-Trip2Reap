@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+  <mapper namespace="courseMapper">
+  
+  <insert id="insertBoard">
+        insert all
+        into board values (seq_bo_no.nextval,2,#{courseTitle},null,#{courseWriter},0,null,default,sysdate)
+        into course values (seq_co_no.nextval,seq_bo_no.currval,#{theme},#{schedule},#{courseDay},#{courseName},#{courseX},#{courseY})
+        into img_file values (seq_file_no.nextval,seq_bo_no.currval,#{originName},#{changeName},1,null,default)
+        select * from dual
+  </insert>
+  
+  
+  
+  </mapper>

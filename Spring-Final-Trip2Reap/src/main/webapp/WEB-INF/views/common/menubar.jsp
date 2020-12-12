@@ -159,7 +159,8 @@
 	<script>
     function main(){
   	  location.href="<%= request.getContextPath() %>/home.do";
-    }       
+    }  
+    
     function join(){
       location.href="<%= request.getContextPath() %>/join.me";
     }

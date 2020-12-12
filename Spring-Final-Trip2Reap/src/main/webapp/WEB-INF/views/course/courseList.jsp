@@ -96,117 +96,17 @@
 		</div>
 		
 		<div id="all_div">
-		
-					<!-- <!-- <td>전체</td>
-					<td>가족 여행</td>
-					<td>나 홀로 여행</td>
-					<td>커플 여행</td>
-					<td>친구와 함께</td>
-					<td>뚜벅이 코스</td>
-					<td>캠핑</td> -->
-			
-			<!-- <span class="cate_name">일정</span>
-			<i class="fas fa-leaf"></i>
-			<table id="calendar_table">
-				<tr>
-					<td>전체</td>
-					<td>당일 여행</td>
-					<td>1박2일</td>
-					<td>2박3일 이상</td>
-				</tr>
-			</table>
-		</div>
-		
-		<div id="list_all_div">
-			<div id="list_count_div">
-				총<span id="list_count">76</span>건
-			</div>
-			코스마다마다의 div
-			<div id="list_course_div">
-				<div id="course_img_div">
-					<img src="resources/images/travel_img.PNG" id="travel_img"/>
-				</div>
-				<div id="course_name_writer_div">
-					<div id="course_name" onclick="detailView();">코스 이름</div>
-					<div id="course_writer">뿌슝빠슝</div>
-				</div>
-				<div id="course_cate_tag_div">
-					<div id="course_cate">
-						<span id="course_local">대구 중구</span>
-						<span> | </span>
-						<span id="course_theme">가족 여행</span>
-						<span> | </span>
-						<span id="course_calendar">1박2일</span>
-					</div>
-					<div id="course_tag">
-						#공예품라라라<br>
-						#가족들과함께<br>
-						#룰루사천여행
-					</div>
-				</div>
-			</div>
-			<div id="list_course_div">
-				<div id="course_img_div">
-					<img src="resources/images/travel_img.PNG" id="travel_img"/>
-				</div>
-				<div id="course_name_writer_div">
-					<div id="course_name" onclick="detailView();">코스 이름</div>
-					<div id="course_writer">뿌슝빠슝</div>
-				</div>
-				<div id="course_cate_tag_div">
-					<div id="course_cate">
-						<span id="course_local">대구 중구</span>
-						<span> | </span>
-						<span id="course_theme">가족 여행</span>
-						<span> | </span>
-						<span id="course_calendar">1박2일</span>
-					</div>
-					<div id="course_tag">
-						#공예품라라라<br>
-						#가족들과함께<br>
-						#룰루사천여행
-					</div>
-				</div>
-			</div>
-			<div id="list_course_div">
-				<div id="course_img_div">
-					<img src="resources/images/travel_img.PNG" id="travel_img"/>
-				</div>
-				<div id="course_name_writer_div">
-					<div id="course_name" onclick="detailView();">코스 이름</div>
-					<div id="course_writer">뿌슝빠슝</div>
-				</div>
-				<div id="course_cate_tag_div">
-					<div id="course_cate">
-						<span id="course_local">대구 중구</span>
-						<span> | </span>
-						<span id="course_theme">가족 여행</span>
-						<span> | </span>
-						<span id="course_calendar">1박2일</span>
-					</div>
-					<div id="course_tag">
-						#공예품라라라<br>
-						#가족들과함께<br>
-						#룰루사천여행
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div id="button_write_div">
-			<button id="button_write" onclick="insertView();">등록하기</button>
-		</div>
-		
-		<div id="paging_div">
-			<button id="before">&lt;</button>
-			<button id="current">1</button>
-			<button class="num">2</button>
-			<button class="num">3</button>
-			<button id="after">&gt;</button>
-		</div> -->
+	
+	
+	
 	</div>
 	
 	<script>
+	   var message = '${msg}'; 
+	   if(message!=""){
+		   swal(message);
+	   }
+	
 		function detailView(){
 			location.href="<%= request.getContextPath() %>/courseDetail.co";
 		} 

@@ -10,6 +10,7 @@
         <typeAlias type="trip.two.reap.review.model.vo.Review" alias="Review"/>
         <typeAlias type="trip.two.reap.travel.model.vo.Travel" alias="Travel"/>
         <typeAlias type="trip.two.reap.review.model.vo.Reply" alias="Reply"/>
+        <typeAlias type="trip.two.reap.course.model.vo.Course" alias="Course"/>
 
         <typeAlias type="trip.two.reap.hotel.model.vo.Hotel" alias="Hotel"/>
         <typeAlias type="trip.two.reap.hotel.model.vo.Room" alias="Room"/>
@@ -23,6 +24,7 @@
         <mapper resource="mapper/review-mapper.xml"/>
         <mapper resource="mapper/travel-mapper.xml"/>
         <mapper resource="mapper/hotel-mapper.xml"/>
+        <mapper resource="mapper/course-mapper.xml"/>
     </mappers>
 </configuration>
 

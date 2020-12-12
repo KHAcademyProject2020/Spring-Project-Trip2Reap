@@ -30,11 +30,7 @@
 		    <i class="far fa-images" id="titleIcon"></i>		    
 		    <label id="titleLabel">표지 이미지 변경</label>		    
 		</div>
-		
-		<form name="signform" method="POST" ENCTYPE="multipart/form-data" action="courseInsertAttachment.co">
-           <input type="file" id="file" name="file" accept="image/*">
-            <input type="hidden" name = "target_url">
-        </form>
+         
     
         <!-- 코스정보  -->
         <div id="tiSpace1"></div>
@@ -71,7 +67,7 @@
                 <option value = "1박2일">1박2일</option>
 				<option value = "2박3일">2박3일</option>
             </select>
-        </div>
+        </div>                      
         
         <!-- 카카오 지도  -->
         <div id="tiSpace1"></div>
@@ -98,6 +94,16 @@
                      </div>
                 </div>
 		   </div>          
+		   
+		   <!-- 받아야 할 정보  -->
+		   <form name="signform" id="courseInsertForm" method="POST" ENCTYPE="multipart/form-data" action="userCourseInsert.co">
+            <input type="file" id="file" name="file" accept="image/*">
+            <input type="hidden" name = "target_url">
+            
+            <input type="hidden" name="courseTitle" class="courseTitle" value="">
+            <input type="hidden" id="courseWriter" name="courseWriter" value="${ loginUser.memberId }"> 
+            <input type="hidden" name="courseTheme" class="courseTheme" value="">
+            <input type="hidden" name="courseSchedule" class="courseSchedule" value="">
            
            <!-- 코스1일차  -->
            <div id="tiSpace6"></div>
@@ -112,17 +118,24 @@
            <div id="courseAll">
                <div id="course0">
                     <input type="text" id="noCourse" readonly="readonly" value="왼쪽 검색창을 통해 여행코스를 추가해주세요.">
-                    <input type="text" id="yesCourse" readonly="readonly">
+                    <input type="text" id="yesCourse" name="placeNameList[0]" readonly="readonly">
+                    <input type="hidden" class="hiddenCoX" name="placeXList[0]" value="">
+                    <input type="hidden" class="hiddenCoY" name="placeYList[0]" value="">
+                    <input type="hidden" class="hiddenCoDay" name="dayList[0]" value="0">
                </div>
            </div>
            <input type="hidden" id="allDistance" value="">
-
-        
-
-        
-        
+           </form>
         </div>
-    </div>
+        
+        
+        <!-- 버튼  -->
+        <div id="courseSpace3"></div>
+        <div id="courseSpace4"></div>
+        <input type="button" id="courseBtn1" value="취소" onclick="courseCancel();">
+        <div id="courseSpace5"></div>
+        <input type="button" id="courseBtn2" value="등록하기">
+    </div>   
 
     <div style="height: 300px;"></div>
     <div class=""></div>
@@ -149,7 +162,27 @@
     	reader.onload = function(){
     		document.querySelector('#titleImg').src = reader.result;
     	}
-    }   
+    }
+    
+    function courseCancel(){
+        location.href="<%= request.getContextPath() %>/courseList.co";
+    }
+    
+    $('#courseBtn2').click(function(){
+    	// 빈값 확인
+    	
+    	var title = $('#titleText').val();
+    	var writer = $('#courseWriter').val();
+    	var theme = $("select[name=theme]").val();
+    	var schedule = $("select[name=schedule]").val();
+    	
+    	$('.courseTitle').val(title);
+    	$('.courseTheme').val(theme);
+    	$('.courseSchedule').val(schedule);
+    	
+    	$('#courseInsertForm').submit();
+    });  
+    
     </script>
     
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=37dc981b741ae67d53f183d4daf2b8c3&libraries=services,clusterer,drawing"></script>
@@ -404,7 +437,10 @@
     	if(document.getElementById("noCourse")){
             $("#noCourse").remove();
             $("#yesCourse").val('1. ' + searchName);
-    		$("#yesCourse").css('display', 'inline-block'); 
+    		$("#yesCourse").css('display', 'inline-block');
+    		
+    		$(".hiddenCoX").val(searchX);
+    		$(".hiddenCoY").val(searchY);
     		
     		var moveLating = new kakao.maps.LatLng(searchY, searchX);
     		
@@ -441,18 +477,17 @@
     	    var courseDistanceInfo = (parseFloat(distance.getLength())/1000).toFixed(1) + "km";   
     	    allDistance += courseDistanceNum;
     	    // 총거리   
-    	    console.log("allDistance : " + allDistance);
     	    $('#allDistance').val(allDistance);
     	    var aa = $('#allDistance').val();
-    	    console.log("총거리 : " + aa );
         	
             // 새로운 div 만들기
             var newDiv = '<div id="courseSpace1"></div><div id="courseSpace2"></div>'
                          + '<input type="text" class="courseDistance" id="courseDistance" value="' 
                          + courseDistanceInfo + '" readonly="readonly"><div id="courseSpace1"></div>'
-                         + '<div id="course0"><input type="text" class="yesCourses" readonly="readonly" value="' 
-                         + (count+1) + '. ' + searchName +'"><input type="hidden" class="courseX" value="' + searchX 
-                         + '"><input type="hidden" class="courseY" value="' + searchY + '">';
+                         + '<div id="course0"><input type="text" class="yesCourses" name="placeNameList['+count+']" readonly="readonly" value="' 
+                         + (count+1) + '. ' + searchName +'"><input type="hidden" class="courseX" name="placeXList['+count+']" value="' + searchX 
+                         + '"><input type="hidden" class="courseY" name="placeYList['+count+']" value="' + searchY 
+                         + '"><input type="hidden" class="courseDay" name="dayList['+count+']" value="0">';
             $('#courseAll').append(newDiv);  
             count++;
             

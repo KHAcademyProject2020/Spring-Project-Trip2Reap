@@ -18,5 +18,18 @@
 	
 	<context:component-scan base-package="trip.two.reap" />
 	
+	<mvc:interceptors>
+	    <mvc:interceptor>
+	        <mvc:mapping path="/courseInsert.co"/>
+	        <bean id="insertCourseInterceptor" class="trip.two.reap.common.interceptor.CourseEnterInterceptor"/>  
+	    </mvc:interceptor>
+	    
+	    <mvc:interceptor>
+	        <mvc:mapping path="/courseUpdate.co"/>
+	        <bean id="updateCourseInterceptor" class="trip.two.reap.common.interceptor.CourseEnterInterceptor"/>  
+	    </mvc:interceptor>	    
+	    
+	</mvc:interceptors>
+	
 
 </beans>
