@@ -807,7 +807,7 @@ $(function(){
 		
 		//실제가격
 		//reserveMap.set('reserveTotalPrice', Number($('#_total_price').val())* reserveMap.get('reserveRoomCnt') );
-		reserveMap.set('reserveTotalPrice', 0); //가격0원으로 함.
+		reserveMap.set('reserveTotalPrice', 1); //가격0원으로 함. - 임시가격
 		
 		
 		
@@ -865,7 +865,6 @@ $(function(){
 			let customerUid=reserveMap.get('memberId')+'_'+new Date().getTime()+'_'+reserveMap.get('boNo')+'_'+reserveMap.get('roomNo')
 			
 			
-			
 			if(select_payment_type=='신용카드'){
 				//신용카드를 선택했을 때
 				var IMP=window.IMP;	
@@ -884,33 +883,67 @@ $(function(){
 				},function(rsp){
 					if(rsp.success){
 						//결제를 성공하면
+						/*
 						var msg='결제가 완료되었습니다!';
-						msg+='고유id: '+ rsp.imp_uid;
-						msg+='예약호텔 id'+ rsp.merchant_uid;
-						msg+='결제금액: '+ rsp.paid_amound;
-						msg+='카드 승인번호: '+ rsp.apply_num;
 						
+						msg+='고유id: '+ rsp.imp_uid; //아임포트 거래 고유번호
+						msg+='예약호텔 id'+ rsp.merchant_uid;//가맹점 생성/관리 고유주문번호
+						msg+='결제수단 : '+rsp.pay_method;//결제수단
+						msg+='결제금액: '+ rsp.paid_amount;//결제금액
+						msg+='카드 승인번호: '+ rsp.apply_num; //카드사 승인번호(신용카드결제에 한하여 제공한다.)
+						msg+='가상계좌 입금계좌번호: '+ rsp.vbank_num; //가상계좌 입금계좌번호
+						msg+='가상계좌 은행명: '+rsp.vbank_name; //가상계좌 은행명
+						msg+='가상계좌 예금주: '+rsp.vbank_holder; //가상계좌 예금주
+						msg+='가상계좌 입금기한: '+rsp.vbank_date; //가상계좌 입금기한
+						*/
+						
+						reserveMap.set('imp_uid', rsp.mip_uid);
+						reserveMap.set('merchant_uid', rsp.merchant_uid);
+						reserveMap.set('paid_amount', apid_amount);
+						reserveMap.set('apply_num', rsp.apply_num);
+						reserveMap.set('vbank_num', vbank_num);
+						reserveMap.set('vbank_name', vbank_name);
+						reserveMap.set('vbank_holder',vbank_holder);
+						reserveMap.set('vbank_date', vbank_date);
 						
 						//예약을 요청한다.
 						$.ajax({
-							url:'',
-							data:{},
-							success:function(){
-								swal({
-									icon:'success',
-									title:'호텔 예약 성공',
-									text: '호텔 예약을 성공하였습니다!',
-									button:'확인'
-									
-								});
+							url:'/hotelReservation.ho',
+							contentType: 'json',
+							data:JSON.stringify(reserveMap), // map형태로 데이터를 전달한다.
+							type: post,
+							success:function(response){
+								if(response=='success'){
+									swal({
+										icon:'success',
+										title:'호텔 예약 성공',
+										text: '호텔 예약을 성공하였습니다!',
+										button:'확인'
+										
+									});
+								}else{
+									swal({
+										icon:'error',
+										title: '호텔 결제 실패',
+										text:'결제를 실패하였습니다.',
+										button: '확인'
+									});
+								}
 							}
 						});
+						
 					}else{
-						var msg='결제에 실패하였습니다!';
-						msg+='에러내용: '+rsp.error_msg;
+						//var msg='결제에 실패하였습니다!';
+						//msg+='에러내용: '+rsp.error_msg;
+						swal({
+							icon:'error',
+							title: '호텔 결제 실패',
+							text: rsp.error_msg,
+							button: '확인'
+						});
 					}
 					
-					alert(msg);
+					
 				});
 				
 				

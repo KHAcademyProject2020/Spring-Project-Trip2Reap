@@ -1201,6 +1201,8 @@ public class HotelController {
 				//썸네일 이미지를 지운다: FILE_DELETE_YN을 N => Y로 변경.
 				//디테일 이미지를 지운다: FILE_DELETE_YN을 N => Y로 변경.
 				int deleteResult= hService.deleteHotelImg(deleteTargetImg.getFileNo());
+				deleteFile(deleteTargetImg.getChangeName(),request); //buploadFiles에 있는 이미지 삭제.
+				
 				if(deleteResult<=0) {
 					throw new HotelException("호텔 이미지 삭제에 실패하였습니다!");
 				}
@@ -1217,6 +1219,14 @@ public class HotelController {
 	}
 	
 	
+	//2020.12.13 ~ 2020.12.14 -호텔 예약
+	@RequestMapping("hotelResrvation.ho")
+	@ResponseBody
+	public String goHotelReservation() {
+		return "success";
+	}
+	
+	
 	
 	
 	//only admin(관리자용)
@@ -1230,6 +1240,11 @@ public class HotelController {
 		.setViewName("hotel_edit");
 		return mv;
 	}
+	
+	
+	
+	
+	
 // 은강><
 
 }
