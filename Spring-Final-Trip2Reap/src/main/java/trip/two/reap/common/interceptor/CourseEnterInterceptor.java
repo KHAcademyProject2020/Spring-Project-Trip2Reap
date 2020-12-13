@@ -18,7 +18,7 @@ public class CourseEnterInterceptor extends HandlerInterceptorAdapter{
 		//로그인한 유저일때만 접근가능.
 		if(loginUser==null) {
 			request.setAttribute("msg", "로그인후에 이용해주세요!");
-			request.getRequestDispatcher("courseList.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/views/course/courseList.jsp").forward(request, response);
 			return false;
 		}
 				
