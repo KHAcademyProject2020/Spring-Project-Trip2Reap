@@ -20,7 +20,7 @@
 	
 	<mvc:interceptors>
 	    <mvc:interceptor>
-	        <mvc:mapping path="/courseInsert.co"/>
+	        <mvc:mapping path="/courseTitle.co"/>
 	        <bean id="insertCourseInterceptor" class="trip.two.reap.common.interceptor.CourseEnterInterceptor"/>  
 	    </mvc:interceptor>
 	    

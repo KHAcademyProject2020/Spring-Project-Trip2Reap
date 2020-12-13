@@ -37,7 +37,7 @@ public class CourseController {
 		return "courseDetail";
 	}
 	
-	// 여행코스 타이틀 만들기
+	// 여행코스 등록하기 뷰
 	@RequestMapping("courseTitle.co")
 	public String titleView(){
 		return "courseTitleInsert";
@@ -50,12 +50,6 @@ public class CourseController {
 		System.out.println("originalfile : " + file.getOriginalFilename());
 		
 		return "courseTitleInsert";
-	}
-	
-	// 여행 코스 등록하기 뷰
-	@RequestMapping("courseInsert.co")
-	public String insertView(){
-		return "courseInsert";
 	}
 	
 	// 여행 코스 등록하기
