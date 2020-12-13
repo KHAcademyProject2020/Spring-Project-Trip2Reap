@@ -326,6 +326,13 @@ public class HotelServiceImpl implements HotelService{
 		return hDAO.selectDetailImgList(sqlSession, boNo);
 	}
 
+	
+	//2020.12.13 - (한개 호텔)가장비싼 객실가격을 구한다.
+	@Override
+	public int findHotelMaxPrice(int boNo) {
+		return hDAO.findHotelMaxPrice(sqlSession, boNo);
+	}
+
 
 
 	

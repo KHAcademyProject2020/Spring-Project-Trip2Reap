@@ -160,6 +160,19 @@
 	
 		                            </div>
 		                        </div>
+		                        
+		                        <div class="hashtag_container">
+		                        	<%--해시태그 리스트가 존재한다면 --%>
+		                        	<c:if test="${!empty hashTagList.get(status.index) }">
+			        					<c:forEach var="hashTag" items="${hashTagList.get(status.index)}">
+			        						<span>
+			        							<i class="fas fa-hashtag hashtag_icon"></i>
+			        							<small class="hashtag_content">${hashTag }</small>
+			        						</span>
+			        					</c:forEach>
+		        					</c:if>
+		        					
+		                        </div>
 	
 		                    </div>
 	
@@ -167,17 +180,33 @@
 		                    <div class="detail-info-wrapper">
 		                        <!-- 호텔주소 -->
 		                        <div class="hotel-addr-wrapper">
-		                            <small>${hotelList.get(status.index).hotelAddr}</small>
+		                            <small class="hotel_addr">${hotelList.get(status.index).hotelAddr}</small>
 		                        </div>
 	
 	
 		                        <div class="hotel-info-wrapper">
 		                            <!-- 별점 -->
 		                            <div class="hotel-review-container">
+		                            
 		                                <span class="star-point">
-		                                    <i class="fas fa-star"></i>
+		                                	<c:forEach var="star" begin="${1}" end="${5}">
+												<c:if test="${star<=hotelList.get(status.index).hotelReviewScore }">
+													<i class="fas fa-star"></i>
+												</c:if>
+												<c:if test="${star>hotelList.get(status.index).hotelReviewScore }">
+													<c:if test="${star-0.5<=hotelList.get(status.index).hotelReviewScore }">
+														<i class="fas fa-star-half-alt"></i>
+													</c:if>
+													
+													<c:if test="${star-0.5>hotelList.get(status.index).hotelReviewScore }">
+														<i class="far fa-star"></i>
+													</c:if>
+												</c:if>
+											</c:forEach>
+		                                
+		                                    <%-- <i class="fas fa-star"></i> --%>
 		                                </span>
-		                                <span> ${hotelList.get(status.index).hotelReviewScore}</span>/5.0
+		                                <%-- <span> ${hotelList.get(status.index).hotelReviewScore}</span>/5.0 --%>
 		                            </div>
 	
 	
@@ -188,13 +217,17 @@
 		                                    <b class="min_room_price">
 		                                    	<fmt:formatNumber value="${minRoomPricePerDayList.get(status.current)}" type="number"/>
 		                                    </b>
-		                                    &nbsp;원
+		                                    원&nbsp;~&nbsp;
+		                                    <b class="max_room_price">
+		                                    	<fmt:formatNumber value="${maxRoomPricePerDayList.get(status.current) }" type="number"/>
+		                                    </b>원
 		                                </p>
 		                            </div>
 		                        </div>
 		                    </div>
-	
-		                    <button class="hotel-reserve-btn">예약하기</button>
+							<div class="hotel_reserve_button_wrapper">
+		                    	<button class="hotel-reserve-btn">예약하기</button>
+		                    </div>
 		                </div>
 		            </div>
 				</c:forEach>

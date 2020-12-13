@@ -286,10 +286,12 @@ ul#price_order_direction_wrapper li:hover{
   justify-content: flex-start;
   border: 1px solid var(--dark-gray);
   margin: 10px auto;
+  padding: 15px;
 }
 
 .one-hotel-info-container:hover{
 	border: 1px solid var(--dark-green);
+
 }
 
 .photo-container{
@@ -309,8 +311,9 @@ ul#price_order_direction_wrapper li:hover{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  flex-basis: 50%;
-  padding: 10px 50px;
+  flex-basis: 100%;
+  padding: 10px 35px;
+  padding-right: 0;
 }
 
 
@@ -351,7 +354,7 @@ ul#price_order_direction_wrapper li:hover{
 
 
 .hotel-name-container>  h1{
-	font-size: 1.15em;
+	font-size: 1.4em;
 }
 
 
@@ -381,17 +384,33 @@ ul#price_order_direction_wrapper li:hover{
   color: var(--heart-pink);
 }
 
+/*해시태그 리스트*/
+.hashtag_container{
+	padding-top: 10px;
+}
 
+.hashtag_icon{
+	color: var(--mid-green);
+	font-size: 0.8em;
+}
 
+.hashtag_content{
+	margin-left: -3px;
+	padding-right: 8px;
+	font-size: 0.8em;
+}
 
 
 /* 호텔 상세정보 컨테이너 */
 .detail-info-wrapper{
   display: flex;
   flex-direction: column;
+ 
+  /*
   padding-top: 10px;
-  padding-bottom: 10px;
-
+  padding-bottom: 10px; 
+  */
+	
 }
 
 .hotel-addr-wrapper{
@@ -405,6 +424,11 @@ ul#price_order_direction_wrapper li:hover{
 .hotel-addr-wrapper{
 	border-top: var(--blue-gray) 5px solid;
 }
+
+.hotel_addr{
+	font-size: 1em;
+}
+
 
 .hotel-info-wrapper{
   display: flex;
@@ -425,9 +449,10 @@ ul#price_order_direction_wrapper li:hover{
   color: var(--mid-green);
 }
 
-.hotel-reserve-btn{
+button.hotel-reserve-btn{
   margin-top: 5px;
   margin-bottom: 10px;
+  width: 80%;
 }
 
 button.hotel-reserve-btn:hover{
@@ -437,6 +462,13 @@ button.hotel-reserve-btn:hover{
 .hotel-per-day-price-container{
   padding: 10px 0;
 }
+
+.hotel_reserve_button_wrapper{
+	width: 100%;
+	position: relative;
+	text-align: center;
+}
+
 
 button.hotel-reserve-btn{
   padding-top: 10px;

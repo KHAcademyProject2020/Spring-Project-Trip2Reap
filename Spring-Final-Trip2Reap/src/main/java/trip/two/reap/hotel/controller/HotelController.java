@@ -3,6 +3,7 @@ package trip.two.reap.hotel.controller;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -168,6 +169,16 @@ public class HotelController {
 		
 		// 각 호텔 중 가장싼 방가격을 담은 리스트를 구한다.
 		ArrayList<Integer> minRoomPricePerDayList=null;
+		
+		
+		//2020.12.13
+		// 각 호텔 중 가장비싼 방가격을 담은 리스트를 구한다.
+		ArrayList<Integer> maxRoomPricePerDayList= null;
+		
+		//2020.12.13
+		//해시태그리스트의 리스트를 구한다.
+		// 리스트안에 구분자(,)로 split된 리스트를 저장.
+		ArrayList<ArrayList<String>> hashTagList= null;
 
 
 		//해당 계정에서 좋아요를 눌렀는지 확인 (1: 좋아요를 누름/ 0: 좋아요를 누르지 않음)
@@ -190,14 +201,43 @@ public class HotelController {
 			//가장 싼 방 가격을 구한다.
 			minRoomPricePerDayList=new  ArrayList<Integer>();
 			
+			
+			//가장비싼 방가격을 구한다.
+			maxRoomPricePerDayList=new ArrayList<Integer>();
+			
+			//해시태그리스트
+			hashTagList= new ArrayList< ArrayList<String> >();
+			
 			//호텔썸네일 이미지가 존재하는지 확인한다.
 			thumbnailImgList= new ArrayList<Attachment>();
 			
-			int hotelMinPrice;
+			int hotelMinPrice, hotelMaxPrice;
 			for(Hotel hotel :hotelList) {
 				//호텔번호에 해당하는 가장싼 방가격을 조회하여 리스트에 추가.
 				hotelMinPrice= hService.findHotelMinPrice(hotel.getBoNo());
 				minRoomPricePerDayList.add(hotelMinPrice);
+				
+				//2020.12.13
+				//호텔번호에 해당하는 가장비싼 방가격을 조회하여 리스트에 추가
+				hotelMaxPrice= hService.findHotelMaxPrice(hotel.getBoNo());
+				maxRoomPricePerDayList.add(hotelMaxPrice);
+				
+				
+				if(hotel.getBoTag()!=null) {
+					//boTag 컬럼이 null이 아니라면
+					//해시태그문자열을 구하여 -> split을하고 -> split한 리스트를 hashTagList에 넣는다.
+					ArrayList<String> oneHotelHashTagList= new ArrayList<String>();
+					String [] splitedHashTagStr= hotel.getBoTag().split(", "); //해시태그 문자열을 ', ' 을 기준으로 split시켜서 문자열로 나타냄.
+					for(String hashTag: splitedHashTagStr) {
+						oneHotelHashTagList.add(hashTag);
+					}
+					hashTagList.add(oneHotelHashTagList);
+				}else {
+					//해시태그가 존재하지 않는다면 -> 일단 리스트에 널을 넣는다.
+					hashTagList.add(null);
+				}
+				
+				
 				
 				//호텔번호에 해당하는 썸네일이미지 1개를 조회하여 리스트에 추가한다.
 				Attachment hotelThumbnailImg= hService.selectOneHotelThumbnailImg(hotel.getBoNo());
@@ -244,8 +284,10 @@ public class HotelController {
 		mv.addObject("hotelList", hotelList);
 		mv.addObject("pi", pi);
 		mv.addObject("minRoomPricePerDayList", minRoomPricePerDayList);
+		mv.addObject("maxRoomPricePerDayList", maxRoomPricePerDayList); //12.13- 최대가격
 		mv.addObject("likeHotelList",likeHotelList);
 		mv.addObject("thumbnailImgList", thumbnailImgList);
+		mv.addObject("hashTagList", hashTagList);
 		mv.setViewName("hotel_list");
 
 		return mv;

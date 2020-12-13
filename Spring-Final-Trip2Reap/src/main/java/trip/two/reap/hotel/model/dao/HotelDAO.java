@@ -272,5 +272,12 @@ public class HotelDAO {
 	}
 
 	
+	//2020.12.13- 호텔리스트 수정
+	//(1) 1개의 호텔이 보유한 객실중 가장 비싼 객실가격을 구한다.
+	public int findHotelMaxPrice(SqlSessionTemplate sqlSession, int boNo) {
+		return  sqlSession.selectOne("hotelMapper.findHotelMaxPrice", boNo);
+	}
+
+	
 
 }

@@ -143,6 +143,11 @@ public interface HotelService {
 	//2020.12.08 -hotelDetailView.ho - 호텔한개의 디테일이미지들(디테일이미지 리스트)을 찾는다.
 	ArrayList<Attachment> selectDetailImgList(int boNo);
 
+	
+	//호텔리스트 수정피드백 반영
+	//2020.12.13 - 호텔리스트 - 가장비싼 객실가격을 구한다.
+	int findHotelMaxPrice(int boNo);
+
 
 
 	

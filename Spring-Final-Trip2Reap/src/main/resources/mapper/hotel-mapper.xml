@@ -91,9 +91,16 @@
 	WHERE ROOM_NO=#{roomId}
 	</select>
 
-	<!-- 2020.11.27- 호텔리스트에 방최소가격 나타내기 -->
+	<!-- 2020.11.27- 호텔1개가 보유하는 방 가격중 가장싼 방가격-->
 	<select id="findHotelMinPrice" resultType="_int">
 	SELECT DISTINCT MIN(PRICE_PER_DAY)
+	FROM ROOM
+	WHERE BO_NO=#{boNo}
+	</select>
+	
+	<!-- 2020.12.13 -호텔1개가 보유하는 방 가격중 가장비싼 방가격 -->
+	<select id="findHotelMaxPrice" resultType="_int">
+	SELECT DISTINCT MAX(PRICE_PER_DAY)
 	FROM ROOM
 	WHERE BO_NO=#{boNo}
 	</select>
