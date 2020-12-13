@@ -302,7 +302,7 @@ ul#saved-hashtags > li{
   #search_hotel_addr_btn{
     /* margin-left: 15px; */
     font-size: 15px;
-    padding: 8px;
+    padding: 9px 10px;
     margin-left: 6px;
   }
 
@@ -453,20 +453,20 @@ input[type="button"]:focus{
 	border-bottom-left-radius: 3px;
 	border-bottom-right-radius: 3px;
 	text-align: center; 
-	height: 100px;
+	height: 200px;
 }
 
 ul.uploaded-img-names-ul{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: space-around;
+	align-items: flex-start;
 }
 
 li.upload-img-name-li{
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+/* 	justify-content: center; */
 	align-items: center;
 	width: 100%;
 }
@@ -759,6 +759,8 @@ input[type="checkbox"].upload-image-checkbox:checked + label.upload-image-label:
 #hotel_address{
     border: var(--blue-gray) solid 1px;
     padding: 12px;
+    padding-top: 11px;
+    padding-bottom: 11px;
     margin-left: 8px;
     width: 400px;
     border-radius: 3px;

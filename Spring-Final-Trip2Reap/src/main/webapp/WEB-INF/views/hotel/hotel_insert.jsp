@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="resources/css/hotel/hotel_insert.css">
 
 
-<title>전국방방곡곡:: 호텔</title>
+<title>전국방방곡곡 | 호텔</title>
 </head>
 
 <body>
@@ -34,7 +34,7 @@
 		</div>
 
 		<div>
-			<form action="hotelInsert.ho" method="post" enctype="multipart/form-data">
+			<form id="hotel-insert-form" action="hotelInsert.ho" method="post" enctype="multipart/form-data">
 				<div id="sub-title-container">
 					<h1>호텔 등록</h1>
 				</div>
@@ -57,7 +57,7 @@
 					</div>
 					<div id="hotel-rank-container">
 						<select name="rank" id="hotelRank">
-							<option value="0">등급선택</option>
+							<option value="-1">등급선택</option>
 							<option value="0">등급없음</option>
 							<option value="1">1등급</option>
 							<option value="2">2등급</option>
@@ -94,7 +94,7 @@
 				<!-- 호텔 디테일 이미지 등록 3-->
 				<div class="insert-common-container">
 					<div class="hotel-insert-subtitle-container">
-						<h3>&nbsp;&nbsp;호텔 디테일 이미지 등록</h3>
+						<h3>* 호텔 디테일 이미지 등록</h3>
 					</div>
 					<div class="hotel-insert-content-container">
 						<input name="detailImgFiles" type="file" id="detail_img" accept="image/*" multiple /> 
@@ -618,12 +618,14 @@
 								<option value="063">063</option>
 								<option value="064">064</option>
 								<option value="010">010</option>
+								<option value="070">070</option>
+								<option value="기타">기타</option>
 							</select>
 						</div>
 
 						<!-- 나머지 번호 입력 -->
 						<div class="phone-call-wrapper">
-							<input class="phone-call" type="tel" autocomplete="off" id="real_call_number">
+							<input class="phone-call" type="tel" autocomplete="off" id="real_call_number" placeholder="(-)제외 숫자만 입력">
 						</div>
 						<input type="hidden" name="hotelTel" id="total_phone_number"></input>
 
@@ -645,7 +647,8 @@
 							// keypress: 키보드를 누르고있을 때 계속 실행됨.
 							
 							// 숫자와 백스페이스만 가능.
-							let regNumber= /^[0-9]*$/;
+							//let regNumber= /^[0-9]*$/;
+							
 							
 							//전체전화번호
 							let totalPhoneNumber='';
@@ -653,10 +656,28 @@
 							function numberFormatterFunc(localNumber, realNumber){
 								//console.log('지역번호: '+localNumber);
 								//console.log('실제전화번호: '+ realNumber);
-								
+								let regNumber=/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/;
 								totalPhoneNumber= localNumber+realNumber;
+								if(localNumber!=""){
+									if(localNumber!='기타'){
+										
+									 	totalPhoneNumber= totalPhoneNumber.replace( regNumber  , '$1-$2-$3');
+									}else{
+										//기타
+										
+										regNumber=/([0-9]{4})([0-9]{4})/;
+										totalPhoneNumber= realNumber.replace(regNumber, '$1-$2')
+									}
+								}else{
+									swal({
+										icon: 'warning',
+										title:'전화 번호입력 실패',
+										text: '지역번호를 선택해주세요!',
+										button: '확인'
+									});
+								}
 								//console.log('초기 전체전화번호: '+totalPhoneNumber);
-								
+								/*
 								if(localNumber.length==2){
 									//지역번호가 2자리 (서울 )
 									$('#real_call_number').val(realNumber.replace(/(\d{4})(\d{4})/,'$1-$2'));
@@ -681,9 +702,10 @@
 										totalPhoneNumber=totalPhoneNumber.replace( /(\d{3})(\d{3})(\d{4})/ , '$1-$2-$3');
 									}
 								}
-								
+								*/
 								//console.log('전체전화번호: '+ totalPhoneNumber);
 								$('#total_phone_number').val(totalPhoneNumber);
+								console.log(totalPhoneNumber);
 							}
 							
 							$('#real_call_number').on({
@@ -694,7 +716,7 @@
 									
 									//정규표현식을 이용하여 숫자를 바꾼다.
 									//지역번호를 구한다.
-									let localNumber=$('#local_call_number option:selected').text();
+									let localNumber=$('#local_call_number option:selected').val();
 									numberFormatterFunc(localNumber, $(this).val());
 								},
 								'keydown': function(){
@@ -724,7 +746,7 @@
 
 							<!-- 호텔 오픈 시각 선택 -->
 							<select name="openTime" id="hotel_open_time">
-								<option value="">운영시작 시간선택</option>
+								<option value="-1">운영시작 시간선택</option>
 								<option value="0">0</option>
 								<option value="1">1</option>
 								<option value="2">2</option>
@@ -757,7 +779,7 @@
 
 							<!-- 호텔 종료시간 선택 -->
 							<select name="closeTime" id="hotel_close_time">
-								<option value="">운영종료 시간선택</option>
+								<option value="-1">운영종료 시간선택</option>
 								<option value="0">0</option>
 								<option value="1">1</option>
 								<option value="2">2</option>
@@ -801,7 +823,7 @@
 
 							<!-- 호텔 오픈 시각 선택 -->
 							<select name="checkInTime" id="hotel_checkIn_time">
-								<option value="">체크인 시간선택</option>
+								<option value="-1">체크인 시간선택</option>
 								<option value="0">0</option>
 								<option value="1">1</option>
 								<option value="2">2</option>
@@ -834,7 +856,7 @@
 
 							<!-- 호텔 종료시간 선택 -->
 							<select name="checkOutTime" id="hotel_checkOut_time">
-								<option value="">체크아웃 시간선택</option>
+								<option value="-1">체크아웃 시간선택</option>
 								<option value="0">0</option>
 								<option value="1">1</option>
 								<option value="2">2</option>
@@ -1255,20 +1277,152 @@
 				
 				</div>
 				
-				
-				<!-- 호텔 등록하기 버튼 -->
-				<div id="btn-container">
-					<input type="submit" id="insert-hotel-btn" value="등록 하기" />
-				</div>
 			</form>
+			<!-- 호텔 등록하기 버튼 -->
+			<div id="btn-container">
+				<input type="button" id="insert-hotel-btn" value="등록 하기" />
+			</div>
 		</div>
 	</div>
 <script>
 $(function(){
 	$('#insert-hotel-btn').click(function(){
 		//버튼등록 클릭
+		console.log('등록버튼 클릭');
+		//2020.12.13 - 피드백 반영
 		//필수사항들이 다 기재되어있는지 확인
-		location.href="hotelInsert.ho";
+		let mustInputInfo=new Map();
+		
+		
+		//호텔이름
+		mustInputInfo.set('hotel_name' ,$('#hotel_name').val() );
+		
+		//호텔등급
+		mustInputInfo.set('hotel_rank', Number($('#hotelRank').val()) );
+		
+		
+		//호텔 썸네일이미지
+		let thumbnail= $('#thumbnail_img').get(0).files;
+		if(thumbnail.length==0){
+			mustInputInfo.set('thumbnail_img',''); //썸네일 이미지가 존재하지 않는다면
+		}else{
+			//thumbnail= thumbnail[0]['name'];
+			//console.log(thumbnail);
+			mustInputInfo.set('thumbnail_img', thumbnail);
+		}
+		
+		//호텔 디테일 이미지 등록
+		let detailImgs= $('#detail_img').get(0).files;
+		if(detailImgs.length==0){
+			mustInputInfo.set('detail_img', ''); //디테일이미지가 존재하지 않는다면
+		}else{
+			mustInputInfo.set('detail_img', detailImgs);
+		}
+		
+		
+		//호텔 도로명주소
+		mustInputInfo.set('hotel_addr', $('#hotel_address').val() );
+		
+		
+		//호텔전화번호
+		mustInputInfo.set('hotel_tel', $('#total_phone_number').val() );
+		
+		//호텔운영시작시간
+		mustInputInfo.set('hotel_open_time', $('#hotel_open_time').val() );
+		
+		//호텔운영종료시간
+		mustInputInfo.set('hotel_close_time', $('#hotel_close_time').val() );
+		
+		//호텔운영시작시간
+		mustInputInfo.set('hotel_open_time', $('#hotel_open_time').val() );
+		
+		//호텔운영종료시간
+		mustInputInfo.set('hotel_close_time', $('#hotel_close_time').val() );
+		
+		//호텔체크인시간
+		mustInputInfo.set('hotel_checkIn_time',$('#hotel_checkIn_time').val() );
+		
+		//호텔체크아웃시간
+		mustInputInfo.set('hotel_checkOut_time',$('#hotel_checkOut_time').val() );
+		
+		
+		//호텔 옵션
+		mustInputInfo.set('hotel_option_str', $('#selectedHotelOptionsStr').val());
+		
+		//호텔소개작성
+		mustInputInfo.set('hotel_content', $('#boContent').val() );
+		
+		
+		let isAllInput= true;
+		let checkInputInfo=new Map([
+			['hotel_name', '호텔 이름'],
+			['hotel_rank', '호텔 등급'],
+			['thumbnail_img', '호텔 썸네일 이미지'],
+			['detail_img','호텔 디테일 이미지'],
+			['hotel_addr', '호텔주소'],
+			['hotel_tel', '호텔 전화번호'],
+			['hotel_open_time', '호텔운영 시작시각'],
+			['hotel_close_time', '호텔운영 종료 시각'],
+			['hotel_checkIn_time', '호텔 체크인 시각'],
+			['hotel_checkOut_time', '호텔 체크아웃 시각'],
+			['hotel_option_str', '호텔옵션'],
+			['hotel_content', '호텔 소개글']
+		]);
+		
+		
+		//빠짐없이 입력되었는가?
+		let error='';
+		for(var key of checkInputInfo.keys()){
+			console.log(key)
+			if(mustInputInfo.get(key)=="" || mustInputInfo.get(key)=="-1"  ){ //하나라도 입력이 안되어있다면
+				isAllInput=false;
+				error=checkInputInfo.get(key);
+				break;
+			}
+		}
+		
+		if(isAllInput==false){
+			swal({
+				icon: 'error',
+				title: '필수정보 입력 누락',
+				text : error+'정보 입력이 누락되었습니다.',
+				button: '확인'
+			});
+		}else{
+			//모두가 입력이 되어있는 상태라면...
+			
+			// 호텔객실정보가 모두 입력되어있는지 확인
+			//호텔객실정보
+			let room_error='';
+			let rooms= $('.one-room-info-insert');
+			rooms.each(function(){
+				let name = $(this).find('.room_name').val();
+				let kind= $(this).find('.roomKinds').val();
+				let price=$(this).find('.price_perday').val();
+				
+				if(name=='' || kind=='' || price==''){
+					isAllInput=false;
+					return false; //break;
+				}
+			});
+			
+			if(!isAllInput){
+				swal({
+					icon: 'error',
+					title: '객실 정보 입력 누락',
+					text : '객실 정보 입력이 누락되었습니다. 다시 입력해주세요!',
+					button: '확인'
+				});
+			}
+		
+		}
+		
+		//유효성을 모두 검사후에 submit한다.
+		//입력사항이 모두 입력되면 등록url을 호출한다.
+		if(isAllInput){
+			//location.href="hotelInsert.ho";
+			$('#hotel-insert-form').submit();
+		}
 	});
 });
 </script>

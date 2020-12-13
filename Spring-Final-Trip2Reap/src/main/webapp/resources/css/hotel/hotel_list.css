@@ -10,6 +10,10 @@
   --menu-icon:  rgb(255,167,167); 
 }
 
+*{
+	cursor: default;
+}
+
 /* focus 검은색 라운드 처리 해제하기 */
 input:focus,
 button:focus {
@@ -363,6 +367,7 @@ ul#price_order_direction_wrapper li:hover{
   flex-basis: 10%;
   padding-top: 10px;
   padding-bottom: 10px;
+  cursor: pointer;
 }
 
 .fa-heart{
@@ -372,7 +377,12 @@ ul#price_order_direction_wrapper li:hover{
 }
 
 .fa-heart:hover{
-	color: palevioletred; 
+	cursor: pointer;
+	color: palevioletred;
+}
+
+.unlike, .like{
+	cursor: pointer;
 }
 
 
