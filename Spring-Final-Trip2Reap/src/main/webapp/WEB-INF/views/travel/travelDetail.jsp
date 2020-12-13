@@ -23,12 +23,10 @@
 			</div>
 			<div id="travel_info">
 				<div id="cate_travel">${ travel.trTheme }</div>
-				<div id="name_travel">${ travel.boTitle }
-					<c:choose>
-							<c:when test="${ travel.boCount > 20 } "> <!-- 조회수가 20이상인 게시글은 아이콘표시 왜 안되는거지 -->
-								<img src="resources/images/new.png" width="15px" height="15px">
-							</c:when>
-						</c:choose>
+				<div id="name_travel">${ travel.boTitle }			
+							<c:if test="${ travel.boCount > 20 }"> <!-- 조회수가 20이상인 게시글은 아이콘표시 왜 안되는거지 -->
+								<img src="resources/images/promotional.png" width="30px" height="30px"> 
+							</c:if>
 				</div> <!-- 여행지 이름 -->
 				<div id="add_travel">${ travel.trReg }</div>
 				<div id="share">

@@ -128,17 +128,11 @@
 					</c:url>	
 					<div id="travel_name">
 						<a href="${ tdetail }">${ t.boTitle }</a>
-						<c:choose>
-							<c:when test="${ t.boCount > 20 } "> <!-- 조회수가 20이상인 게시글은 아이콘표시 왜 안되는거지 -->
-								<img src="resources/images/promotional.png" width="15px" height="15px">
-							</c:when>
-						</c:choose>
-							<%-- <c:when test="${ t.boNo < 6 }">
-								<img src="resources/images/new.png" width="10px" height="10px">
-							</c:when> --%>
-							<%-- <c:otherwise>
-								*
-							</c:otherwise> --%>
+						<c:if test="${ travel.boCount > 20 }"> <!-- 조회수가 20이상인 게시글은 아이콘표시 왜 안되는거지 -->
+								
+								<img src="resources/images/promotional.png" width="30px" height="30px"> 
+							
+						</c:if>
 					</div>
 					<div id="travel_theme">${ t.trTheme }</div>
 					<div id="travel_writer">${ t.trReg }</div>
