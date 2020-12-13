@@ -205,13 +205,13 @@
 					 
 					 	<div id="only_admin_btns">
 					 
-					 	<%--호텔 수정페이지 와 연결하기: hotelEditView.ho url호출을 hotelEditView로 하겟다. --%>
-					 	<c:url var="hotelEditView" value="hotelEditView.ho">
-					 		<c:param name="hId" value="${hotel.boNo }"/>
-					 	</c:url>
-					 	
-						<button id="edit-hotel-detail-info-page-btn" onclick="location.href='${hotelEditView}'">수정하기</button>
-						<button id="remove-hotel-btn">삭제하기 </button>
+						 	<%--호텔 수정페이지 와 연결하기: hotelEditView.ho url호출을 hotelEditView로 하겟다. --%>
+						 	<c:url var="hotelEditView" value="hotelEditView.ho">
+						 		<c:param name="hId" value="${hotel.boNo }"/>
+						 	</c:url>
+						 	
+							<button id="edit-hotel-detail-info-page-btn" onclick="location.href='${hotelEditView}'">수정하기</button>
+							<button id="remove-hotel-btn">삭제하기 </button>
 						
 						</div>
 						
