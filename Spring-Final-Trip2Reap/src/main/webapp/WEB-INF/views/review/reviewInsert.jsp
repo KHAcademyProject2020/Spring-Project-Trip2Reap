@@ -110,7 +110,7 @@
 //             	 alert($('#hashtagInput'+hashTagNo).val())
 //             	 hashTagNo++
 //          		alert(hashTagNo)
-				alert($('#hashtagInput').val())
+			//	alert($('#hashtagInput').val())
             	 $('#tag').val("")
             	 $('#hashtagInput').val($('#hashtagInput').val()+"#"+tag)
             	 
@@ -136,7 +136,7 @@
 		
 		//클릭시 배경 색 변환
 		$(function(){	
-			$('#tag').click(function(){$(this).css("background","#eff0f2")})
+			$('#tag').click(function(){$(this).css("background","#80ff80")})
 
 			
 		})

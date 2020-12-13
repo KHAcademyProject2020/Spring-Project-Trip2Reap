@@ -123,17 +123,22 @@ public class ReviewController {
 	}
 
 	@RequestMapping("reviewPhotoList.bo")
-	public ModelAndView reviewPhotoList(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv, String hashTag, String title, String content, String writer) {
+	public ModelAndView reviewPhotoList(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv, String hashTag, String title, String content, String writer , String cate) {
 		HashMap<String, Object> searchList = new HashMap<String, Object>();
 
 		String search = "all";
 		searchList.put("searchInput", "all");
+		searchList.put("searchLoc", "page");
+		searchList.put("cate", "all");
+		searchList.put("chkNo", 0);
 
 		if(writer == null) {
 			writer = "all";
 		} else {
 			search = "writer";
 			searchList.put("searchInput", writer);
+			searchList.put("chkNo", 1);
+			searchList.put("searchLoc", "wrtier%3D"+writer+"%26page");
 		}
 		
 		if(title == null) {
@@ -141,6 +146,7 @@ public class ReviewController {
 		} else {
 			search = "title";
 			searchList.put("searchInput", title);
+			searchList.put("chkNo", 2);
 		}
 		
 		if(content == null) {
@@ -148,6 +154,7 @@ public class ReviewController {
 		} else {
 			search = "content";
 			searchList.put("searchInput", content);
+//			searchList.put("chkNo", 3);
 		}
 		
 		if(hashTag == null) {
@@ -157,14 +164,21 @@ public class ReviewController {
 			search = "hashTag";
 			System.out.println(hashTag);
 			searchList.put("searchInput", hashTag);
+			searchList.put("chkNo", 3);
 	
 		}
+		if(cate == null) {
+			cate = "all";
+		} else {
+			searchList.put("cate", cate);
+			searchList.put("chkNo", 4);
+		}
 		
-		System.out.println("난작성자"+writer);
-		System.out.println("난제목"+title);
-		System.out.println("난내용"+content);
-		
-		System.out.println("값없나요"+hashTag);
+//		System.out.println("난작성자"+writer);
+//		System.out.println("난제목"+title);
+//		System.out.println("난내용"+content);
+//		
+//		System.out.println("값없나요"+hashTag);
 		
 		
 		searchList.put("search", search);
@@ -180,6 +194,7 @@ public class ReviewController {
 
 		ArrayList<Review> list = rService.selectList(pi, searchList);
 	
+		
 		if (list != null) {
 			mv.addObject("list", list);
 			mv.addObject("listSize", list.size());
