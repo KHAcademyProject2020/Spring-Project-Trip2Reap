@@ -23,6 +23,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <!-- 카카오코드  -->
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<!-- 파비콘  -->
+<link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
+
 
 </head>
 <body>

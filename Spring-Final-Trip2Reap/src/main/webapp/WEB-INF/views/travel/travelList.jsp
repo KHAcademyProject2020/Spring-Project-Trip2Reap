@@ -128,7 +128,17 @@
 					</c:url>	
 					<div id="travel_name">
 						<a href="${ tdetail }">${ t.boTitle }</a>
-					
+						<c:choose>
+							<c:when test="${ t.boCount > 20 } "> <!-- 조회수가 20이상인 게시글은 아이콘표시 왜 안되는거지 -->
+								<img src="resources/images/promotional.png" width="15px" height="15px">
+							</c:when>
+						</c:choose>
+							<%-- <c:when test="${ t.boNo < 6 }">
+								<img src="resources/images/new.png" width="10px" height="10px">
+							</c:when> --%>
+							<%-- <c:otherwise>
+								*
+							</c:otherwise> --%>
 					</div>
 					<div id="travel_theme">${ t.trTheme }</div>
 					<div id="travel_writer">${ t.trReg }</div>
@@ -258,8 +268,8 @@
 			$(this).append(html); 
 			
 			var input_clip = document.getElementById("clip_target"); 
-				//현재 url 가져오기 -> 해당 여행지 url 가져오기로 어떻게 값을 가져올지 고민중
-				var _url = $(location).attr("location.href='tInsertView.tv?boNo=${t.boNo}&page={pi.currentPage}'"); 
+				//현재 url 가져오기 -> 해당 여행지 url 가져오기로 수정완 (12/12)
+				var _url = $(location).attr("location.href='tDetail.tv?boNo=${t.boNo}&page={pi.currentPage}'"); 
 			$("#clip_target").val(_url); 
 				
 			if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) { 

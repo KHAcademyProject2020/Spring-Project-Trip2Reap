@@ -23,7 +23,13 @@
 			</div>
 			<div id="travel_info">
 				<div id="cate_travel">${ travel.trTheme }</div>
-				<div id="name_travel">${ travel.boTitle }</div> <!-- 여행지 이름 -->
+				<div id="name_travel">${ travel.boTitle }
+					<c:choose>
+							<c:when test="${ travel.boCount > 20 } "> <!-- 조회수가 20이상인 게시글은 아이콘표시 왜 안되는거지 -->
+								<img src="resources/images/new.png" width="15px" height="15px">
+							</c:when>
+						</c:choose>
+				</div> <!-- 여행지 이름 -->
 				<div id="add_travel">${ travel.trReg }</div>
 				<div id="share">
 					 <span id="count_span">조회수 : ${ travel.boCount } </span> 
@@ -62,10 +68,10 @@
 			
 				 <div id="hashtag_div">
 					<a href=" ${pageContext.request.contextPath}/tList.tv">#${ travel.boTag } </a>&nbsp;&nbsp;
+<%--						<a href=" ${pageContext.request.contextPath}/tList.tv">#${ travel.boTag }</a>&nbsp;&nbsp;
+ 						<a href=" ${pageContext.request.contextPath}/tList.tv">#${ travel.boTag }</a>&nbsp;&nbsp;
 						<a href=" ${pageContext.request.contextPath}/tList.tv">#${ travel.boTag }</a>&nbsp;&nbsp;
-						<a href=" ${pageContext.request.contextPath}/tList.tv">#${ travel.boTag }</a>&nbsp;&nbsp;
-						<a href=" ${pageContext.request.contextPath}/tList.tv">#${ travel.boTag }</a>&nbsp;&nbsp;
-						<a href=" ${pageContext.request.contextPath}/tList.tv">#${ travel.boTag }</a>&nbsp;&nbsp;
+						<a href=" ${pageContext.request.contextPath}/tList.tv">#${ travel.boTag }</a>&nbsp;&nbsp; --%>
 				</div> 
 					<br><br>
 				<hr>
@@ -80,15 +86,22 @@
 				</c:url>
 				
 				
-				
-				<c:if test="${loginUser.memberId=='admin' }"> <!-- 관리자만 수정/삭제 할 수 있다. -->
+			<c:choose>	
+				<c:when test="${loginUser.memberId=='admin' }"> <!-- 관리자만 수정/삭제 할 수 있다. -->
 					<div id="button_div">
 						<button id="button_update" onclick="location.href='${ tUpview }'">수정하기</button>
 								
 						<button id="button_delete" onclick="location.href='${ tDelete }'">삭제하기</button>
 								
 					</div>
-				</c:if>
+				</c:when>
+				<c:otherwise>
+					<div id="button_div2">
+						<img src="resources/images/btn_return_to_list.jpg" onclick="location.href='${pageContext.request.contextPath}/tList.tv'">
+					</div>
+				</c:otherwise>
+			</c:choose>	
+			
 			</div>
 		</div>
 		
@@ -100,6 +113,10 @@
 		/* function deleteView(){ //삭제하기 뷰로 이동
 			location.href=" ${pageContext.request.contextPath}/tList.tv"
 		} */
+		
+		function listView(){
+			location.href=" ${pageContext.request.contextPath}/tList.tv"
+		}
 		
 		
 		function containTravel(){

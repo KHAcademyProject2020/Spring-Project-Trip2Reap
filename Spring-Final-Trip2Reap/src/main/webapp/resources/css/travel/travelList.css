@@ -213,9 +213,16 @@
 }
 
 #travel_tag{
-	font-size: 15px;
-	font-family: fantasy;
-	color: lightslategray;
+
+	display: inline-block;
+    overflow: hidden;
+    background: #fff;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    color: #777;
+    border: 1px solid #d8d7d7;
+    border-radius: 5px;
 }
 
 

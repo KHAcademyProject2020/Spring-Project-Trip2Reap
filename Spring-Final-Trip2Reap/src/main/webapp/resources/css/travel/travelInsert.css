@@ -123,10 +123,14 @@
 	text-align: center;
 }
 
-#travel_content{
-	resize: none; /* textarea 사이즈조절안되게 */
-	padding: 10px;
-	width: 828px;
+#travel_content {
+    resize: none;
+    padding: 10px;
+    width: 828px;
+    color: #333;
+    font-size: 15px;
+    line-height: 1.7;
+    letter-spacing: -1px;
 }
 
 

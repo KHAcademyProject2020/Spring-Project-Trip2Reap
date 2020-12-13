@@ -44,7 +44,7 @@ public class TravelController {
 																	//page는 있을 수도 없을 수도 있는 변수임을 선언.
 		
 		
-	
+	   
 		
 		
 		int currentPage = 1;
@@ -53,6 +53,9 @@ public class TravelController {
 		}
 		
 		int listCount = tService.getAllListCount(); //전체 게시글 갯수 가져오기.
+		
+		
+		
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); // 페이징 관련 끝
 		

@@ -8,6 +8,8 @@
 	<title>전국방방곡곡</title>	
 	<!--  home.css -->
     <link rel="stylesheet" href="resources/css/common/home.css">
+    <!-- 파비콘 -->
+	<link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
 		<!-- 메뉴바 -->
