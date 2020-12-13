@@ -282,65 +282,62 @@
 	</script>
    
     <script type="text/javascript">
- 
-      function validate(){
+ // 칸 미입력 시 뜨는 창 ------------------------------------------------------------------	
+   
     	  
-    	  $("#button_write").click(function(){
+    	$("#button_write").click(function(){
     	  
-		var title=$('#travel_name');
-		var content=$('#travel_content');
-		var thumbnail = $('#thumbnailImg1');
-		var addr = $('#select_region');
-		var add = $('#sample6_extraAddress');
-		var theme = $('#select_theme');
-	
-		if(!thumbnail.val()){
-			swal("", "대표사진을 첨부해주세요", "info");
-			thumbnail.focus();
-			return false;
-		}
-		if(title.val().trim().length<1){
-			swal("","여행지명을 입력해주세요","info");
-			title.focus();
-			return false;
-		}
-		if(addr.val() == 0){
-   			swal("", "지역을 선택해주세요", "info");
-   			addr.focus();
-   			return false;
-   		}
-		if(theme.val() == 0){
-   			swal("", "테마를 선택해주세요", "info");
-   			theme.focus();
-   			return false;
-   		}
-		if(add.val() == 0){
-   			swal("", "주소를 입력해주세요", "info");
-   			add.focus();
-   			return false;
-   		}
-		if(content.val().trim().length<1){
-			swal("","내용을 입력해주세요","info");
-			content.focus();
-			return false;
-		}
+			var title=$('#travel_name');
+			var content=$('#travel_content');
+			var thumbnail = $('#thumbnailImg1');
+			var addr = $('#select_region');
+			var add = $('#sample6_extraAddress');
+			var theme = $('#select_theme');
 		
-		 swal({
-			title : "게시글 등록 성공", 
-			text : "목록화면으로 돌아갑니다", 
-			icon : "success",
-		}).then((ok) => {
-				if(ok){
-					//등록하기 버튼시 insert 이동
-			   		$('#tInsert').submit();
-			   		 });
-			   		 
-				}
-			}); 
+			if(!thumbnail.val()){
+				swal("", "대표사진을 첨부해주세요", "info");
+				thumbnail.focus();
+				return false;
+			}
+			if(title.val().trim().length<1){
+				swal("","여행지명을 입력해주세요","info");
+				title.focus();
+				return false;
+			}
+			if(addr.val() == 0){
+	   			swal("", "지역을 선택해주세요", "info");
+	   			addr.focus();
+	   			return false;
+	   		}
+			if(theme.val() == 0){
+	   			swal("", "테마를 선택해주세요", "info");
+	   			theme.focus();
+	   			return false;
+	   		}
+			if(add.val() == 0){
+	   			swal("", "주소를 입력해주세요", "info");
+	   			add.focus();
+	   			return false;
+	   		}
+			if(content.val().trim().length<1){
+				swal("","내용을 입력해주세요","info");
+				content.focus();
+				return false;
+			}
+		
+			 swal({
+				title : "게시글 등록 성공", 
+				text : "목록화면으로 돌아갑니다", 
+				icon : "success",
+			}).then((ok) => {
+					if(ok){
+						//등록하기 버튼시 insert 이동
+				   		$('#tInsert').submit();
+				   		 }
+					});
+					return true;
+				}); 
 			
-		
-		return true;
-	};
 
    </script>
 	
