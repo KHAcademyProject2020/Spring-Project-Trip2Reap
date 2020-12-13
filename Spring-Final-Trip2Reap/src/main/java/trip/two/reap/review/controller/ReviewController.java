@@ -90,11 +90,11 @@ public class ReviewController {
 			searchList.put("chkNo", 4);
 		}
 		
-		System.out.println("난작성자"+writer);
-		System.out.println("난제목"+title);
-		System.out.println("난내용"+content);
+//		System.out.println("난작성자"+writer);
+//		System.out.println("난제목"+title);
+//		System.out.println("난내용"+content);
 		
-		System.out.println("값없나요"+hashTag);
+//		System.out.println("값없나요"+hashTag);
 		
 		
 		searchList.put("search", search);
