@@ -15,9 +15,9 @@
 
 <%--css --%>
 <link rel="stylesheet" type="text/css" href="resources/css/hotel/hotel_reservation.css">
+<link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
 
-
-<title>전국방방곡곡:: 호텔</title>
+<title>전국방방곡곡 | 호텔</title>
 </head>
 
 <body>

@@ -111,6 +111,7 @@ input[type="button"]:focus{
 
 
 .subtitle-container{
+	position: relative;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	padding-bottom: 20px;
@@ -119,7 +120,8 @@ input[type="button"]:focus{
 .hotel-info-container{
 	display:flex;
 	flex-direction: row;
-	justify-content: space-around;
+	justify-content: center;
+	/* justify-content: space-around; */
 	align-items: center;
 	
 	padding:0 50px;
@@ -137,19 +139,25 @@ input[type="button"]:focus{
 	flex-direction: column;
 	padding-left: 30px;
 	
-	flex-basis: 60%;
+/* 	flex-basis: 50%; */
 	justify-content: center;
 }
 
 /* 썸네일이미지  */
 #thumbnail-img{
 	position: relative;
-	width: 400px;
-	height: 400px;
+	width: 325px;
+	height: 325px;
 }
 
 
 /* 해시태그   */
+
+#hashtag-wrapper{
+	position: relative;
+	margin-top: 10px;
+}
+
 #hash-tags{
 	position: relative;
 	display: flex;
@@ -173,8 +181,9 @@ input[type="button"]:focus{
 	padding-top: 10px;
 	padding-bottom: 10px;
 	
+	margin-left: 30px;
 	/* padding-right: 30px; */
-	flex-basis: 40%;
+	/* flex-basis: 40%; */
 	
 }
 
@@ -195,25 +204,31 @@ input[type="button"]:focus{
 	
 	align-items: center;
 	
-	text-align:center;
+	/* text-align:center; */
 }
 
 #hotel-detail-info-ul li{
-	padding: 5px 0;
+	padding: 8px 0;
 	position: relative;
 	width: 100%;
 	display: flex;
 	flex-direction: row;
 	
-	justify-content: space-between;
+	/* justify-content: space-between; */
 	align-items: center;
 }
 
 
-span.info-icon-container{
+.info-icon-container{
+	width: 30px;
+	height: 30px;
 	font-size: 30px;
 	color: var(--mid-green);
-	padding-right: 10px;
+	padding-right: 30px;
+}
+
+#hotel-detail-info-ul span{
+	font-size: 1em;
 }
 
 
@@ -226,12 +241,12 @@ span.info-icon-container{
 	text-align: center;
 	
 	align-items: center;
-	
-	padding-top: 20px;
-	padding-bottom:10px;
+	padding-top:10px;
+/* 	padding-top: 20px;
+	padding-bottom:10px; */
 }
 
-#btn-wrapper > button{
+#go-reservation-btn{
 	padding: 10px 0;
 	margin: 3px 0;
 	
@@ -242,7 +257,7 @@ span.info-icon-container{
 	border-color: transparent;
 	
 	cursor:pointer;
-	width: 100%;
+	width: 90%;
 }
 
 /* 예약하기 버튼  */
@@ -256,9 +271,37 @@ span.info-icon-container{
 }
 
 
+/*수정하기 삭제하기 버튼 공통 */
+#only_admin_btns{
+	position: relative;
+	display:flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+#edit-hotel-detail-info-page-btn,
+#remove-hotel-btn{
+	position: releative;
+	flex-basis: 50%;
+	
+	padding: 10px 0;
+	margin: 3px 5px;
+	
+	position: relative;
+	color: var(--btn-color);
+	font-weight: bold;
+	border-radius: 3px;
+	border-color: transparent;
+	
+	cursor:pointer;
+	width: 100%;
+}
+
 /* 수정하기 버튼  */
 #edit-hotel-detail-info-page-btn{
-	background-color: var(--edit-red);
+	background-color: var(--mid-green);
 }
 
 /*삭제하기 버튼 */
@@ -268,7 +311,7 @@ span.info-icon-container{
 
 /* 수정하기 버튼 hover효과 */
 #edit-hotel-detail-info-page-btn:hover{
-	background-color: var(--edit-red-hover);
+	background-color: var(--dark-green);
 }
 
 

@@ -11,9 +11,9 @@
 
 <!-- css -->
 <link rel="stylesheet" href="resources/css/hotel/hotel_insert.css">
+<link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
 
-
-<title>전국방방곡곡:: 호텔</title>
+<title>전국방방곡곡 | 호텔</title>
 </head>
 
 <body>

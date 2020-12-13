@@ -17,9 +17,9 @@
 	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 	<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
 	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+	<link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
 
-
-	<title>호텔 게시글 상세보기 </title>
+	<title>전국방방곡곡 | 호텔</title>
 </head>
 
 
@@ -45,6 +45,17 @@
 			<input id="hotel-number" type="hidden" value="${hotel.boNo }">
 			
 			<h1 id="hotel-name">${hotel.boTitle} </h1>
+			<!--해시태그가 null이 아닌경우에만 보여준다.-->
+			<c:if test="${!empty hashTagsList}">
+				<div id="hashtag-wrapper">
+					<ul id="hash-tags">
+						<c:forEach var="hashTag" items="${hashTagsList}">
+							<li><i class="fas fa-hashtag"></i><b>${hashTag}</b> </li>
+						</c:forEach>
+					</ul>
+				</div>
+			</c:if>
+			
 		</div>
 
 		<%--(1) hotel-info-container --%>
@@ -62,17 +73,6 @@
 						<img id="thumbnail-img" alt="썸네일 이미지" src="resources/images/sinra.jpeg"/>
 					</c:if>
 				</div>
-
-				<!--해시태그가 null이 아닌경우에만 보여준다.-->
-				<c:if test="${!empty hashTagsList}">
-					<div id="hashtag-wrapper">
-						<ul id="hash-tags">
-							<c:forEach var="hashTag" items="${hashTagsList}">
-								<li><i class="fas fa-hashtag"></i><b>${hashTag}</b> </li>
-							</c:forEach>
-						</ul>
-					</div>
-				</c:if>
 			</div>
 
 
@@ -86,9 +86,9 @@
 
 						<%--호텔 도로명 주소 --%>
 						<li>
-							<span class="info-icon-container">
+							<div class="info-icon-container">
 								<i class="fas fa-map-marker-alt"></i>
-							</span>
+							</div>
 
 							<span>
 								<!--도로명주소   -->
@@ -100,9 +100,9 @@
 						<%--호텔전화번호  --%>
 						<c:if test="${!empty hotel.hotelTel}">
 							<li>
-								<span class="info-icon-container">
+								<div  class="info-icon-container">
 									<i class="fas fa-phone"></i>
-								</span>
+								</div>
 
 								<span>
 									<!-- 전화번호 -->
@@ -113,9 +113,9 @@
 
 						<%--호텔오픈/종료 시각 --%>
 						<li>
-							<span class="info-icon-container">
+							<div  class="info-icon-container">
 								<i class="fas fa-clock"></i>
-							</span>
+							</div>
 
 							<span>
 								<!-- 운영시간 : 운영오픈시간 & 운영종료시간  -->
@@ -127,9 +127,9 @@
 						<%--호텔사이트 --%>
 						<c:if test="${!empty hotel.hotelSite }">
 							<li>
-								<span class="info-icon-container">
+								<div class="info-icon-container">
 									<i class="fas fa-link"></i>
-								</span>
+								</div>
 
 								<span>
 									<!--링크  -->
@@ -141,9 +141,9 @@
 
 						<%--호텔 리뷰평점 --%>
 						<li>
-							<span class="info-icon-container">
+							<div class="info-icon-container">
 								<i class="far fa-thumbs-up"></i>
-							</span>
+							</div>
 							<span>
 								<!--리뷰 평점-->
 								<span id="star-score-wrapper">
@@ -173,9 +173,9 @@
 
 						<%--호텔좋아요 개수 --%>
 						<li>
-							<span class="info-icon-container">
+							<div class="info-icon-container">
 								<i class="fas fa-hand-holding-heart"></i>
-							</span>
+							</div>
 							<span>
 								<!--좋아요 개수  -->
 								${likeCnt }&nbsp;개
@@ -202,6 +202,9 @@
 					#remove-hotel-btn: 호텔게시물 삭제
 					 --%>
 					 <c:if test="${loginUser.memberId=='admin' }">
+					 
+					 	<div id="only_admin_btns">
+					 
 					 	<%--호텔 수정페이지 와 연결하기: hotelEditView.ho url호출을 hotelEditView로 하겟다. --%>
 					 	<c:url var="hotelEditView" value="hotelEditView.ho">
 					 		<c:param name="hId" value="${hotel.boNo }"/>
@@ -209,6 +212,8 @@
 					 	
 						<button id="edit-hotel-detail-info-page-btn" onclick="location.href='${hotelEditView}'">수정하기</button>
 						<button id="remove-hotel-btn">삭제하기 </button>
+						
+						</div>
 						
 					 </c:if>
 				</div>
