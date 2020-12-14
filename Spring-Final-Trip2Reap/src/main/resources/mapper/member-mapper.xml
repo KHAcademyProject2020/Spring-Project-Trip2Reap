@@ -135,7 +135,7 @@
     </insert>
     
     <select id="selectTravelList" resultMap="travelResultSet">
-        select bo_no, b.bo_title, b.bo_Tag, t.tr_theme, i.change_name
+        select bo_no, b.bo_title, b.bo_Tag, t.tr_theme, i.change_name, b.bo_count
         from mytravel m
              join board b using(bo_no)
              join travel t using(bo_no)
@@ -149,6 +149,7 @@
         <result column="bo_Tag" property="bo_Tag"/>
         <result column="tr_theme" property="tr_theme"/>
         <result column="change_name" property="change_name"/>
+        <result column="bo_count" property="boCount"/>
     </resultMap>
 
 </mapper>

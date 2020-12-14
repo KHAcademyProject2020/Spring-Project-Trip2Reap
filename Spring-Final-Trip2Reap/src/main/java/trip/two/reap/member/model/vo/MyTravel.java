@@ -8,6 +8,7 @@ public class MyTravel {
 	private String bo_Tag;
 	private String tr_theme;
 	private String change_name;	
+	private String boCount;
 	
 	public MyTravel() { }
 	
@@ -15,15 +16,16 @@ public class MyTravel {
 		super();
 		this.boNo = boNo;
 		this.memberId = memberId;
-	}		
-	
-	public MyTravel(int boNo, String bo_title, String bo_Tag, String tr_theme, String change_name) {
+	}
+
+	public MyTravel(int boNo, String bo_title, String bo_Tag, String tr_theme, String change_name, String boCount) {
 		super();
 		this.boNo = boNo;
 		this.bo_title = bo_title;
 		this.bo_Tag = bo_Tag;
 		this.tr_theme = tr_theme;
 		this.change_name = change_name;
+		this.boCount = boCount;
 	}
 
 	public int getBoNo() {
@@ -74,10 +76,18 @@ public class MyTravel {
 		this.change_name = change_name;
 	}
 
+	public String getBoCount() {
+		return boCount;
+	}
+
+	public void setBoCount(String boCount) {
+		this.boCount = boCount;
+	}
+
 	@Override
 	public String toString() {
 		return "MyTravel [boNo=" + boNo + ", memberId=" + memberId + ", bo_title=" + bo_title + ", bo_Tag=" + bo_Tag
-				+ ", tr_theme=" + tr_theme + ", change_name=" + change_name + "]";
-	}
+				+ ", tr_theme=" + tr_theme + ", change_name=" + change_name + ", boCount=" + boCount + "]";
+	}		
 
 }
