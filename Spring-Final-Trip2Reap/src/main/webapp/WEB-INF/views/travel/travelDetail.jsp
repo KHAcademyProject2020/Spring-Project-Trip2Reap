@@ -8,7 +8,7 @@
 <title>여행지 상세보기</title>
 <link rel="stylesheet" type="text/css" href=" ${pageContext.request.contextPath}/resources/css/travel/travelDetail.css"/>
 <!-- 파비콘 -->
-   <link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
 <body>
@@ -66,8 +66,14 @@
 						<div id="info_right"><i class="fas fa-phone-alt"></i>  032-832-3031</div>
 					</div>
 			
-				 <div id="hashtag_div">
-					<a href=" ${pageContext.request.contextPath}/tList.tv">#${ travel.boTag } </a>&nbsp;&nbsp;
+				<%--  <div id="hashtag_div">
+					<a href=" ${pageContext.request.contextPath}/tList.tv">${ travel.boTag } </a>&nbsp;&nbsp; --%>
+					<!-- 해시태그 -->
+		                        <c:if test="${travel.boTag !=null }">
+			                        <div id="hashtag_container" class="container">
+			                           	${travel.boTag }
+			                        </div>
+		                        </c:if>
 <%--						<a href=" ${pageContext.request.contextPath}/tList.tv">#${ travel.boTag }</a>&nbsp;&nbsp;
  						<a href=" ${pageContext.request.contextPath}/tList.tv">#${ travel.boTag }</a>&nbsp;&nbsp;
 						<a href=" ${pageContext.request.contextPath}/tList.tv">#${ travel.boTag }</a>&nbsp;&nbsp;
@@ -93,6 +99,7 @@
 								
 					<%-- 	<button id="button_delete" onclick="location.href='${ tDelete }'">삭제하기</button> --%>
 								<button id="button_delete" onclick="del(${ travel.boNo })">삭제하기</button>
+					</div>			
 				</c:when>
 				<c:otherwise>
 					<div id="button_div2">

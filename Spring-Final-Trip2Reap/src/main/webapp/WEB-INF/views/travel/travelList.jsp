@@ -4,12 +4,113 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<meta charset="UTF-8">
+<title>전국방방곡곡 | 여행지</title>
+<link rel="stylesheet" type="text/css" href=" ${pageContext.request.contextPath}/resources/css/travel/travelList.css"/>
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/travel/travelList.css"/>
-<meta charset="UTF-8">
-<body>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<!-- <script>
+ $(document).ready(function(){
+	 
+// 	 alert(document.getElementById("hashTag57").innerHTML)
+// 	 alert($(".hashTag").length)
+// 	 alert("hashTag"+$('#hashTagVal0').val())
+	 var size = $(".hashTag").length
+// 	 alert(size)
+	 
+	 for(var i=0; i<size; i++){
+		 var hashTagName = document.getElementById(("hashTag"+$('#hashTagVal'+i).val())).innerHTML
+		, hashTagNameSplit = hashTagName.split("#")
+		 $("#hashTag"+$('#hashTagVal'+i).val()).html("")
+			$(hashTagNameSplit).each (function(index, item){
+				if(index == 0){
+					
+				}else {
+					var SpanId = ($('#hashTagVal'+i).val()+index)
+					
+					 $("#hashTag"+$('#hashTagVal'+i).val()).append("<span class='hashTagSpan' id="+SpanId+">#"+item+"</span>&nbsp;&nbsp;")
+				}
+				})
+
+		 
+	 }
+	$(".hashTag").css("display", "");
 	
+	$(".cate_btn").click(function(){
+		var cate = $(this).attr('id')
+		
+		if(cate == "cate_btn1") {
+			cate = ""
+		}
+		if(cate == "cate_btn2") {
+			cate = "cate=code3"
+			
+		}
+		if(cate == "cate_btn3") {
+			cate = "cate=code4"
+			
+		}
+		
+		
+		location.href = "reviewList.bo?"+cate;
+		
+	})
+	
+	$(".hashTagSpan").click(function(){
+		var hashParam = document.getElementById($(this).attr('id')).innerHTML
+		hashParam = hashParam.split("#")
+		hashParam = hashParam[1]
+		
+		location.href = "reviewList.bo?hashTag="+hashParam;
+		
+	})
+	
+	$(".search").click(function(){
+		
+		var search = $("select[name=search]").val()
+// 		alert(search)
+		if($('#search').val()== ""){
+			search = ""
+		} else{
+			
+		if(search == "작성자") {
+			search = "writer=" + $('#search').val()
+		}
+		if(search == "제목") {
+			search = "title=" + $('#search').val()
+			
+		}
+		if(search == "내용") {
+			search = "content=" + $('#search').val()
+			
+		}
+		if(search == "해쉬태그") {
+			search = "hashTag=" + $('#search').val()
+			
+		}
+
+		}
+// 		alert(search)
+		
+		location.href = "reviewList.bo?"+search;
+		
+	})
+	
+      $("#search").bind('keydown', function(key) {
+               if (key.keyCode == 13) {
+            		$(".search").trigger('click')
+            		$("#search").unbind()
+
+             }
+      })
+
+             
+ });
+
+ </script> -->
+</head>
+<body>
 <section>
 	<header>
    	 <c:import url="../common/menubar.jsp" />
@@ -109,7 +210,7 @@
 			<c:if test = "${ list eq null }">
 				<div>조회결과가 없습니다.</div>
 			</c:if>
-			<c:forEach var="t" items="${ list }">
+			<c:forEach var="t" items="${ list }" varStatus="s" >
 			
 			<div id="list_travel_div">
 				<div id="travel_img_div">
@@ -139,28 +240,29 @@
 					
 					<div id="travel_theme">${ t.trTheme }</div>
 					<div id="travel_writer">${ t.trReg }</div>
-					<!-- <div id="travel_tag">#${ t.boTag }</div> -->
-				
-						  <div id="travel_tag">
-		                        	<%--해시태그 리스트가 존재한다면 --%>
-		                        	<c:if test="${!empty hashTagList.get(status.index) }">
-			        					<c:forEach var="hashTag" items="${hashTagList.get(status.index)}">
-			        						<span>
-			        							<i class="fas fa-hashtag hashtag_icon"></i>
-			        							<small class="hashtag_content">${hashTag }</small>
-			        						</span>
-			        					</c:forEach>
-		        					</c:if>
-		        					
-		                        </div>
+					<div id="travel_tag">
+					
+						<p class="hashTag" id="hashTag${ t.boNo }" style="display:none"></p><br>
+						<input type="hidden" value=${ t.boNo } id="hashTagVal" />
+						<script>
+						var hashTag = "${ t.boTag }";
+						var hash = hashTag.split('#');
+						var size = hash.length;
+						for(var i=1; i < size; i++){
+							console.log(hash[i]);
+							$('.hashTag').eq(${s.index}).append("<span class='hashTagSpan'>#"+hash[i]+"</span>&nbsp;&nbsp;")
+						}
+						$(".hashTag").css("display", "");
+					</script>
+					</div>
 				</div>
 				<div id="list_etc" class="dotClass"><a href="#modal" id="list_etc_modal">…</a></div>
 			</div>
 			
 			</c:forEach>
 			
-		</div>
-			
+	
+			</div>
 		
 		
 		
@@ -172,7 +274,7 @@
 					<button id="button_write" onclick= "location.href='tInsertView.tv'">등록하기</button>
 				</div>
 		 	</c:if>
-	 
+	 	
 			
 			
 			<!-- 페이징 -->
@@ -186,7 +288,7 @@
 						<c:param name="page" value="${ pi.currentPage - 1 }"/>
 					</c:url>	
 				<a href="${ before }" class="bt" id="beforeBtn">이전 페이지</a>
-			</c:if>
+				</c:if>
 				
 
 				<!-- 페이지 -->
@@ -218,7 +320,7 @@
 					<a href="${ after }" class="bt" id="afterBtn">다음 페이지</a>
 				</c:if>
                 
-			</div><!-- 페이징 div끝 -->
+		</div><!-- 페이징 div끝 -->
 			
 				<input type="hidden" id="travelUserInfo" value="${ loginUser.memberId }">
 	            <input type="hidden" id="travelBoInfo" value="">
@@ -246,7 +348,7 @@
    
    	 <!-- modal끝 -->
    	 
-   	 
+
 	<script>
 	
 		var dotNo;	
@@ -259,11 +361,7 @@
 			location.href="<%= request.getContextPath() %>/tSearchError.tv";
 		}
 		
-		/* 
-		$('.dotClass').click(function(){
-			dotNo = $(this).find("#dotNo").val();
-			console.log(dotNo);
-		}) */
+	
 		
 		
 		//modal창

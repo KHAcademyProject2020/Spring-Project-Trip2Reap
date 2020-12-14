@@ -58,7 +58,7 @@
 
 #travel_table {
     text-align: left;
-    margin: 15px 0px 0px 0px;
+    margin: 2px 0px 0px 13px;
     padding: 15px 0px 8px 15px;
 }
 
@@ -110,10 +110,17 @@
 
 .hashtag {
     padding: 5px;
-    border-radius: 10px;
-    background: rgb(119, 175, 130);
-    color: white;
+    /* border-radius: 10px; */
+    /* background: gray; */
+    /* color: white; */
+    height: 14px;
+    border-bottom-style: solid;
+    border-bottom-color: mediumseagreen;
     font-size: small;
+    /* border-left-style: groove; */
+    /* border-right-style: groove; */
+    display: -webkit-inline-box;
+    margin-left: 10px;
 }
 
 
@@ -126,7 +133,7 @@
 #travel_content {
     resize: none;
     padding: 10px;
-    width: 828px;
+    width: 800px;
     color: #333;
     font-size: 15px;
     line-height: 1.7;
@@ -183,18 +190,25 @@
 /* 첨부파일 테두리 */
 .pictureArea{
 	/* border: 2px dashed darkgray; */
-	width: 207px;
-	height: 150px;
+	width: 813px;
+	height: 180px;
 	/* margin: 0px; */
 	display: inline-flex;
-	margin: 10px 20px 10px 60px;
+	margin: 10px 20px 10px 42px;
 	background: url("../../../resources/images/noImage.png");
 	background-size: 30px;
 	background-repeat-x: no-repeat;
 	background-repeat-y: no-repeat;
 	background-position: center;
+	/* text-align: center; */
 	/* background-color: snow; */
 }
+
+.pictureArea:hover{
+
+     background-color: snow; 
+}
+
 
 /* 첨부파일 위에서 마우스 커서 바꾸기 */
 #titleImgArea:hover, 
@@ -218,8 +232,8 @@
 }
 
 #titleImg{
-	width: 207px;
-	height: 150px;
+	width: 903px;
+	height: 180px;
 }
 
 #contentImg1, #contentImg2, #contentImg3{
@@ -229,9 +243,9 @@
 	
 	
 #titleImgTxt{
-	display: inline-flex;
+	/* display: inline-flex; */
 	margin: 10px 23px 10px 122px;
-	width: 180px;
+	width: 192px;
 }	
 
 #contentImgTxt{
@@ -242,6 +256,7 @@
 
 .pictureName{
 	color: black;
+	width: 200px;
 	/* background-color: snow; */
 }
 
@@ -250,7 +265,7 @@
 
 #menu_hash{
 	display: inline-flex;
-	margin-left: 32px;
+	margin-left: 45px;
 }
 
 
@@ -309,6 +324,30 @@ div.insert-common-container div {
 	cursor: pointer;
 }
 
+.hashTag{
+	display: inline-flex;
+
+}
+
+input#sample6_address {
+    height: 19px;
+}
+input[type="button"] {
+    height: 24px;
+    width: 93px;
+}
+input#sample6_postcode {
+    height: 19px;
+}
+input#sample6_extraAddress {
+    height: 19px;
+}
+#tag{
+		margin-left: 14px;
+		height:19px;
+		padding-left: 1px;
+		width: 166px;
+}
 
 
 #member_id{

@@ -6,7 +6,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,7 +27,6 @@ import org.springframework.web.servlet.ModelAndView;
 import trip.two.reap.common.Attachment;
 import trip.two.reap.common.BoardException;
 import trip.two.reap.common.PageInfo;
-import trip.two.reap.travel.exception.TravelException;
 import trip.two.reap.travel.model.service.TravelService;
 import trip.two.reap.travel.model.vo.Pagination;
 import trip.two.reap.travel.model.vo.Travel;
@@ -42,9 +41,52 @@ public class TravelController {
 	
 	@RequestMapping("tList.tv")
 	public ModelAndView goTravelList(@RequestParam(value="page", required=false) Integer page, @RequestParam(value="addr", required=false) Integer addr, 
-									@RequestParam(value="theme", required=false) Integer theme ,HttpSession session, ModelAndView mv) { //파라미터는 url을 get방식으로 가져옴, 
+									@RequestParam(value="theme", required=false) Integer theme ,HttpSession session, ModelAndView mv,String hashTag, String title, String content, String cate) { //파라미터는 url을 get방식으로 가져옴, 
 																	//page는 있을 수도 없을 수도 있는 변수임을 선언.
+		HashMap<String, Object> searchList = new HashMap<String, Object>();
+
+		String search = "all";
+		searchList.put("searchInput", "all");
+		searchList.put("searchLoc", "page");
+		searchList.put("cate", "all");
+		searchList.put("chkNo", 0);
+
 		
+		
+		if(title == null) {
+			title = "all";
+		} else {
+			search = "title";
+			searchList.put("searchInput", title);
+			searchList.put("chkNo", 1);
+		}
+		
+		if(content == null) {
+			content = "all";
+		} else {
+			search = "content";
+			searchList.put("searchInput", content);
+//			searchList.put("chkNo", 3);
+		}
+		
+		if(hashTag == null) {
+			hashTag = "all";
+		} else {
+			hashTag = "#" + hashTag;
+			search = "hashTag";
+			System.out.println(hashTag);
+			searchList.put("searchInput", hashTag);
+			searchList.put("chkNo", 3);
+	
+		}
+		if(cate == null) {
+			cate = "all";
+		} else {
+			searchList.put("cate", cate);
+			searchList.put("chkNo", 4);
+		}
+	
+		searchList.put("search", search);
 		
 	   
 		
@@ -69,36 +111,18 @@ public class TravelController {
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); // 페이징 관련 끝
 		
-		//2020.12.13
-				//해시태그리스트의 리스트를 구한다.
-				// 리스트안에 구분자(,)로 split된 리스트를 저장.
-		ArrayList<ArrayList<String>> hashTagList= null;
+
 		
 		ArrayList<Travel> list = tService.selectList(pi);
 		
 		if(list != null) {
 			mv.addObject("list", list);
 			mv.addObject("pi", pi);
-			mv.addObject("hashTagList", hashTagList);
 			mv.setViewName("travelList");
 			
-			hashTagList= new ArrayList< ArrayList<String> >();
 			
-			for(Travel travel : list) {
-				if(travel.getBoTag()!=null) {
-					//boTag 컬럼이 null이 아니라면
-					//해시태그문자열을 구하여 -> split을하고 -> split한 리스트를 hashTagList에 넣는다.
-					ArrayList<String> oneTravelHashTagList= new ArrayList<String>();
-					String [] splitedHashTagStr= travel.getBoTag().split(", "); //해시태그 문자열을 ', ' 을 기준으로 split시켜서 문자열로 나타냄.
-					for(String hashTag: splitedHashTagStr) {
-						oneTravelHashTagList.add(hashTag);
-					}
-					hashTagList.add(oneTravelHashTagList);
-				}else {
-					//해시태그가 존재하지 않는다면 -> 일단 리스트에 널을 넣는다.
-					hashTagList.add(null);
-				}
-			}
+			
+		
 		} else {
 			throw new BoardException("여행지 전체 조회에 실패하였습니다.");
 		}

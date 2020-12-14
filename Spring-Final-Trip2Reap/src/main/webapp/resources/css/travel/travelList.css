@@ -224,17 +224,21 @@
     border: 1px solid #d8d7d7;
     border-radius: 5px;
 }
-
-
+.hashTagSpan:hover {
+ 
+ 	text-decoration: underline;
+ 	font-weight: bolder;
+ 	cursor: pointer;
+}
 #travel_theme{
 
-color: #497f55;
-
-font-weight: 700;
-
-margin-bottom: 22px;
-
-font-size: 17px;
+	color: #497f55;
+	
+	font-weight: 700;
+	
+	margin-bottom: 22px;
+	
+	font-size: 17px;
 }
 
 #travel_writer{
@@ -274,22 +278,7 @@ font-size: 17px;
 	cursor: pointer;
 }
 
-/* /* 페이징 
-#paging_div {
-    text-align: center;
-    margin: 50px 0px;
-}
 
-#paging_div button{
-	width: 25px;
-	height: 25px;
-	border: none;
-}
-
-#current{
-	background: #77af82;
-	color: white;
-} */
    
     /* 이전, 다음 페이지 영역 */
 	.paging{

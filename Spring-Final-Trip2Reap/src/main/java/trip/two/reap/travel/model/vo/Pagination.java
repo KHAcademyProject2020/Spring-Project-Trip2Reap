@@ -6,7 +6,7 @@ public class Pagination {
 	  public static PageInfo getPageInfo(int currentPage, int listCount) { 
 		  PageInfo pi = null;
 
-		  int pageLimit = 10; 
+		  int pageLimit = 5; 
 		  int maxPage; 
 		  int startPage; 
 		  int endPage; 

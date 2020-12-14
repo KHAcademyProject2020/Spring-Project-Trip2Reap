@@ -38,24 +38,24 @@
 			<div id="titleImgArea" class="pictureArea">
 				<img id="titleImg"/>
 			</div>
-			 <div id="contentImgArea1" class="pictureArea">
+			<!--  <div id="contentImgArea1" class="pictureArea">
 				<img id="contentImg1"/>
 			</div>
 			<div id="contentImgArea2" class="pictureArea">
 				<img id="contentImg2"/>
-			</div>
+			</div> -->
 			
-			<div id="titleImgTxt">
+			<!-- <div id="titleImgTxt">
 				<div class="pictureName">
-					<span class="astro_span">*</span>대표이미지
+					<span class="astro_span">*</span>대표이미지를 첨부해주세요.
 				</div>
-			</div>
-			<div id="contentImgTxt">
+			</div> -->
+			<!-- <div id="contentImgTxt">
 				<div class="pictureName">내용이미지1</div>
 			</div>
 			<div id="contentImgTxt">
 				<div class="pictureName">내용이미지2</div>
-			</div>
+			</div> -->
 			
 			
 			<input type="text" id="member_id" name="memberId" value="${ loginUser.memberId }"/>
@@ -125,7 +125,7 @@
 					</td>
 					<td colspan="6"> <!-- 카카오 주소 API -->
 						<input type="text" id="sample6_postcode" placeholder="우측 버튼을 눌러주세요" readonly="readonly">
-						<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+						<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br><br>
 						<input type="text" id="sample6_address" placeholder="주소" name="trAddr" readonly="readonly">
 						<input type="hidden" id="sample6_detailAddress" placeholder="상세주소"> 
 						<input type="text" id="sample6_extraAddress" placeholder="상세주소">
@@ -147,19 +147,11 @@
 				</div>	
 			</div> -->
 			<div class="hashTag">
-								
-								
-								<div  id="hashtag">
-						
-								<input type="text" 
-								id="tag" placeholder="태그를 입력해 주세요" />
-								<input type="hidden" 
-								name="boTag" id="hashtagInput" />
-								
-							</div>
-									
-						
-						</div>
+				<div  id="hashtag">
+					<input type="text" id="tag" placeholder="#태그입력 후 enter로 추가" />
+					<input type="hidden" name="boTag" id="hashtagInput" />
+				</div>
+			</div>
 			<!-- 등록된 해시태그들을 모으는 곳. -->
 			<!-- <div class="saved-hashtags-wrapper"> -->
 				<!-- 해시태그가 존재하지 않으면 -->
@@ -175,12 +167,12 @@
 				실제해시태그 등록
 				<input id="savedHashTagStrings" type="hidden" name="boTag"/>
 			</div> --%>
-	>
+	
 			 <div id="travel_content_div">
-				<textarea rows="20" cols="125" id="travel_content" name="boContent"></textarea>
+				<textarea rows="20" cols="125" id="travel_content" name="boContent" maxlength="2000"></textarea>
 				  <div id="text_count_div">
 					<span>현재 글자 수 </span>
-					<span id="text_count">8</span>
+					<span id="text_count">0</span>
 					<span>자 / 최대 글자 수 2000자</span>
 				 </div>
 			</div>
@@ -244,8 +236,23 @@
    		}  
    		 
    		  
-   		  
- 
+   	// 하고 싶은 말 글자 수 카운트 및 글자 수 제한
+   		/* $(document).ready(function(){
+			$('#travel_content').keyup(function(e){
+				$('#text-count').text($(this).val().length);
+				$('#text-count').css('color', 'black');
+			})
+   		}); */
+   		/* $(function() {
+   	      $('#travel_content').keyup(function (e){
+   	          var content = $(this).val();
+   	          
+   	       $(this).height(((content.split('\n').length + 1) * 1.5) + 'em');
+           $('#text-count').html(content.length + "/최대 글자수 2000제한");
+       });
+       
+   	   $('#travel_content').keyup();
+ }); */
    		
    		 
 	</script>
@@ -260,20 +267,9 @@
             var tag = $("#tag").val();
             if (key.keyCode == 13) {
            	 $('#hashtag').append("<div class='hashtag'>" + "#" + tag +"</div>" + "&nbsp;&nbsp;");
-//            	 alert("작동")
-//				alert(hashTagNo)
-//            	 alert($('#hashtagInput'+hashTagNo).val())
-//            	 hashTagNo++
-//         		alert(hashTagNo)
-			//	alert($('#hashtagInput').val())
            	 $('#tag').val("")
            	 $('#hashtagInput').val($('#hashtagInput').val()+"#"+tag)
-           	 
-//         		var nanum = $('#hashtagInput').val().split("#")
-//        		$(nanum).each (function(index, item){
-//        			alert(item)
-       			
-//        		})
+
 
 
             } 
@@ -291,7 +287,7 @@
 		
 		//클릭시 배경 색 변환
 		$(function(){	
-			$('#tag').click(function(){$(this).css("background","#80ff80")})
+			$('#tag').click(function(){$(this).css("background","#efefef")})
 
 			
 		})
