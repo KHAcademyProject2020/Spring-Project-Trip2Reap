@@ -2,8 +2,11 @@ package trip.two.reap.course.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,8 +18,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import trip.two.reap.common.PageInfo;
 import trip.two.reap.course.model.service.CourseService;
 import trip.two.reap.course.model.vo.Course;
+import trip.two.reap.course.model.vo.CoursePagination;
 
 
 @SessionAttributes("loginUser")
@@ -28,8 +33,92 @@ public class CourseController {
 	
 	// 여행코스 리스트
 	@RequestMapping("courseList.co")
-	public String goCourseList(){
-		return "courseList";
+	public ModelAndView goCourseList(@RequestParam(value="page", required=false) Integer page, @RequestParam(value="addr", required=false) Integer addr, 
+			                         @RequestParam(value="theme", required=false) Integer theme ,HttpSession session, ModelAndView mv){
+		
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = page;
+		}
+		
+		if(addr != null) {
+			currentPage = addr;
+		}
+		
+		if(theme != null) {
+			currentPage = theme;
+		}
+		
+		int listCount = cService.countList();
+		
+		PageInfo pi = CoursePagination.getPageInfo(currentPage, listCount);
+		
+		ArrayList<Course> list = cService.selectCourseList(pi);		
+		
+		System.out.println("pi : " + pi);
+		
+		ArrayList<String[]> day = new ArrayList<String[]>();
+		ArrayList<String> dayList = new ArrayList<String>();
+		
+		for(int i=0; i<list.size(); i++) {
+			String[] dayArr = list.get(i).getCourseDay().split(",");			
+			day.add(dayArr);
+		}
+		
+		for(int i=0; i<day.size(); i++) {
+			dayList.add(Arrays.toString(day.get(i)));
+		}
+		
+		ArrayList<String[]> name = new ArrayList<String[]>();
+		ArrayList<String> nameList = new ArrayList<String>();
+		
+		for(int i=0; i<list.size(); i++) {
+			String[] nameArr = list.get(i).getCourseName().split(",");			
+			name.add(nameArr);
+		}
+		
+		for(int i=0; i<name.size(); i++) {
+			nameList.add(Arrays.toString(name.get(i)));
+		}
+		
+		/*
+		ArrayList<String[]> x = new ArrayList<String[]>();
+		ArrayList<String> xList = new ArrayList<String>();
+		
+		for(int i=0; i<listCount; i++) {
+			String[] xArr = list.get(i).getCourseX().split(",");			
+			x.add(xArr);
+		}
+		
+		for(int i=0; i<x.size(); i++) {
+			xList.add(Arrays.toString(x.get(i)));
+		}
+		
+		ArrayList<String[]> y = new ArrayList<String[]>();
+		ArrayList<String> yList = new ArrayList<String>();
+		
+		for(int i=0; i<listCount; i++) {
+			String[] yArr = list.get(i).getCourseY().split(",");			
+			y.add(yArr);
+		}
+		
+		for(int i=0; i<y.size(); i++) {
+			yList.add(Arrays.toString(y.get(i)));
+		}	*/	
+		
+		
+		System.out.println("list : " + list);
+		if(list != null) {
+			mv.addObject("list", list);
+			mv.addObject("daysList", dayList);
+			mv.addObject("nameList", nameList);
+			// mv.addObject("xList", xList);
+			// mv.addObject("yList", yList);
+			mv.addObject("pi", pi);
+			mv.setViewName("courseList");
+		}
+	    
+		return mv;
 	}
 	
 	@RequestMapping("courseDetail.co")
@@ -46,8 +135,6 @@ public class CourseController {
 	// 표지 이미지 변경
 	@RequestMapping("courseInsertAttachment.co")
 	public String attachment(@RequestParam(value="file" ,required=false) MultipartFile file) {
-		System.out.println("file : " + file);
-		System.out.println("originalfile : " + file.getOriginalFilename());
 		
 		return "courseTitleInsert";
 	}
@@ -60,8 +147,8 @@ public class CourseController {
 			                        @RequestParam("courseTheme") String theme, @RequestParam("courseSchedule") String schedule,
 			                        @RequestParam("distance") String distance, @RequestParam("file") MultipartFile file, 
 			                        @ModelAttribute Course course, ModelAndView mv ) {		
-		System.out.println("총거리 : " + distance);
-        String root = request.getSession().getServletContext().getRealPath("resources"); 		  
+
+		String root = request.getSession().getServletContext().getRealPath("resources"); 		  
         
         String originFileName = file.getOriginalFilename(); // 원본 파일 명 
         // 원본파일 없을 경우 기존의 사진으로 대체
@@ -69,7 +156,12 @@ public class CourseController {
         	originFileName = "메인배너1.png";
         }
         
-        String safeFile = root + "\\courseFiles\\" + System.currentTimeMillis() + originFileName; // 저장 파일 명                
+        String safeFile = root + "\\courseFiles\\" + System.currentTimeMillis() + originFileName; // 저장 파일 명
+        String safeFile2 = System.currentTimeMillis() + originFileName; // 저장 파일 명 
+        
+        if(originFileName.equals("메인배너1.png")) {
+        	safeFile2 = "메인배너1.png";
+        }
         
         try {
             file.transferTo(new File(safeFile));
@@ -83,10 +175,16 @@ public class CourseController {
         course.setTheme(theme);
         course.setSchedule(schedule);     
         
-        String courseName = course.getPlaceNameList().get(0);
-        course.setCourseName(courseName);
-        
         int size = course.getPlaceXList().size();
+        
+        String courseName = "";
+        for(int i=0; i<size; i++) {
+        	if(i == size-1) {
+        		courseName += course.getPlaceNameList().get(i);
+        	} else {
+        		courseName += course.getPlaceNameList().get(i) + ",";
+        	}        	
+        }
         
         String courseX = "";
         for(int i=0; i<size; i++) {
@@ -113,8 +211,10 @@ public class CourseController {
         	} else {
         		courseDay += course.getDayList().get(i) + ",";
         	}        	
-        }
+        }        
+        
 
+        course.setCourseName(courseName);
         course.setCourseX(courseX);
         course.setCourseY(courseY);
         course.setCourseDay(courseDay);
@@ -122,17 +222,17 @@ public class CourseController {
         
         // 첨부파일 저장
         course.setOriginName(originFileName);
-        course.setChangeName(safeFile);
+        course.setChangeName(safeFile2);
         
         
         int result = cService.insertBoard(course);
         
         if(result == 3) {
         	mv.addObject("msg", "여행코스 등록에 성공하였습니다.");
-			mv.setViewName("courseList");
+			mv.setViewName("redirect:courseList.co");
         } else {
         	mv.addObject("msg", "여행코스 등록에 실패하였습니다.");
-			mv.setViewName("courseList");
+			mv.setViewName("redirect:courseList.co");
         }
       return mv;
 	}
@@ -160,8 +260,7 @@ public class CourseController {
  * 7. 검색처리
  * 
  * 1. 나의 호텔 예약 내역
- * 2. 내가 담은 여행지
- * 3. 나만의 여행코스
+ * 2. 나만의 여행코스
  * 
  * <이번주 할 것>
  * 1. alert창 수정

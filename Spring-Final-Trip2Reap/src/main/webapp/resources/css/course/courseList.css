@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /* 전체 div */
-#all_div{ margin : 40px auto 0px auto; width: 1300px; }
+#all_div{ margin : 80px auto 0px auto; width: 1000px; }
 
 #coSpace1{ height: 5px; }
 #coMain{ height : 300px; background : rgb(250,236,197); }
@@ -41,255 +41,36 @@
 #coSpace8{ height: 14px; }
 
 
+/* 리스트 */
+#listDiv{ display: inline-block; width: 280px; height: 400px; border: 1px solid lightgray; 
+          margin-left: 40px; margin-bottom: 70px; position: relative; overflow: hidden; }
+#listDiv2 { text-align: center; }
+#listImg{ width: 280px; height : 150px; filter: brightness(75%); }
+#listTitle{ position: absolute; color: white; top: 16%; left: 50%; font-size: 18px; font-weight: bold; 
+            transform: translate( -50%, 0% ); width: 200px; }
+#listId{ position: absolute;  top : 30%; right: 3%; color: white; font-weight: bold; font-size: 14px; }
+#listDistance{ position: absolute; top : 30%; left : 3%; color: white; font-weight: bold; font-size: 13px; }
+#day1{ display: inline-block; width: 22px; height: 22px; border-radius: 15px; background: rgb(242,203,97); 
+       text-align: center; margin-top: 10px; margin-left: 10px; margin-bottom: 5px; }
+#dayLabel{ color: white; font-size: 19px; font-weight: bold; vertical-align: middle; line-height: 21px; }
+#dayLabel2{ font-size: 13px; font-weight: bold; margin-left: 4px; margin-top: 10px; }
+#nameLabel{ display: inline-block; width: 17px; height: 17px; border-radius: 15px; background: lightgray; 
+            text-align: center; margin-top: 10px; margin-left: 10px; }
+#nameLabel2{ display : inline-block; font-size: 13px; font-weight: bold; margin-left: 4px; margin-top: 10px; }
+#dayLabel3{ color: white; font-size: 12px; font-weight: bold; vertical-align: top; line-height: 16px; }
+#nameDiv{ position: relative; height: 142px; }
+#detailBtn{ background: black; width : 285px; height: 40px; opacity: 0.4; position: absolute; top: 120%; 
+            text-align: center; cursor: pointer; }
+#detailBtn:hover{ opacity: 0.5; }
+#detailLabel{ color: white; vertical-align: middle; font-size: 13px; line-height: 40px; opacity: 1; }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* img, 메뉴 이름, 검색 div */
-#menu_div{
-	padding: 0px 10px;
-    border-bottom: 4px solid #efefef;
-	display: flex;
-}
-
-#menu_left_div{
-	margin-bottom: 20px;
-	text-align: left;
-	flex: 1;
-}
-
-#menu_img{
-	width: 40px;
-	height: 40px;
-	text-align: left;
-	vertical-align: bottom;
-}
-
-#menu{
-	font-size: 30px;
-	font-weight: 700;
-	text-align: left;
-}
-
-#menu_right_div{
-	flex: 3;
-	text-align: right;
-	position: relative;
-	top: 10px;
-}
-
-#input_search{
-	width: 200px;
-	height: 26px;
-}
-
-#button_search{
-	width: 60px;
-	height: 30px;
-	border: none;
-	background: #77af82;
-	color: white;
-	border-radius: 5px;
-}
-
-/* 카테고리 테이블 div */
-#cate_table_div{
-	width: 900px;
-	margin: 0px auto;
-	padding: 60px 0px 30px 0px;
-}
-
-.cate_name{
-    font-size: x-large;
-    font-weight: bold;
-}
-
-.fa-leaf{
-	height:13px;
-	width:13px;
-	color:#a7e1af;
-}
-
-#local_table{
-	border: 1px solid black;
-	border-collapse: collapse;
-	text-align: center;
-	margin: 16px 0px 30px 0px;
-	width: 900px;
-}
-
-#local_table td{
-	border: 1px solid black;
-	width: 100px;
-	height: 30px;
-}
-
-#local_table td:hover {
-    border: 1px solid black;
-    width: 100px;
-    height: 30px;
-    background-color: #77af82;
-    color: white;
-    cursor: pointer;
-}
-
-#theme_table{
-	border: 1px solid black;
-	border-collapse: collapse;
-	text-align: center;
-	margin: 16px 0px 30px 0px;
-	width: 900px;
-}
-
-#theme_table td{
-	border: 1px solid black;
-	width: 129px;
-	height: 30px;
-}
-
-#theme_table td:hover{
-	border: 1px solid black;
-	width: 129px;
-	height: 30px;
-	background-color: #77af82;
-    color: white;
-    cursor: pointer;
-}
-
-#calendar_table{
-	border: 1px solid black;
-	border-collapse: collapse;
-	text-align: center;
-	margin: 16px 0px 30px 0px;
-	width: 900px;
-}
-
-#calendar_table td{
-	border: 1px solid black;
-	width: 129px;
-	height: 30px;
-}
-
-#calendar_table td:hover{
-	border: 1px solid black;
-	width: 129px;
-	height: 30px;
-	background-color: #77af82;
-    color: white;
-    cursor: pointer;
-}
-
-/* 목록 전체 div */
-#list_all_div{
-	margin: 20px auto 0px auto;
-	padding: 10px 30px 1px 30px;
-	width: 840px;
-	background: #efefef;
-}
-
-#list_count_div {
-    font-weight: 600;
-    margin: 10px 0px 30px 0px;
-}
-
-#list_count{
-	color: #497f55;
-	margin: 0px 10px;
-}
-
-/* 각 코스마다 div */
-#list_course_div{
-	padding: 10px;
-	/* ↓ 수진언니는 <br><br> 사용했음 */
-	margin-bottom: 35px;
-	width: 820px;
-	background: white;
-	display: flex;
-}
-
-#course_img_div{
-	flex: 1;
-}
-
-#travel_img{
-	width: 250px;
-	height: 170px;
-}
-
-#course_name_writer_div{
-	padding: 30px 20px;
-	flex: 1;
-}
-
-#course_name{
-	font-size: 30px;
-	font-weight: 900;
-	margin-bottom: 20px;
-}
-
-#course_name:hover{
-	cursor: pointer;
-	text-decoration: underline;
-}
-
-#course_cate_tag_div{
-	padding: 20px 20px;
-	flex: 1.5;
-}
-
-#course_cate{
-	margin: 29px 0px 20px 0px;
-}
-
-/* 등록하기 버튼 div */
-#button_write_div{
-	width: 900px;
-	margin: 30px auto;
-	text-align: right;
-}
-
-#button_write{
-	width: 70px;
-	height: 30px;
-	border: none;
-	background: #77af82;
-	color: white;
-	border-radius: 5px;
-}
 
 /* 페이징 */
-#paging_div{
-	margin: 50px 0px;
-	text-align: center;
-}
-
-#paging_div button{
-	width: 25px;
-	height: 25px;
-	border: none;
-}
-
-#current{
-	background: #77af82;
-	color: white;
-}
-
-/* button hover 시 cursor 변경 */
-#button_search, #button_write:hover{
-	cursor: pointer;
-}
-
-/* input이나 button 클릭 시 outline 제거 */
-#input_search, #button_search, #button_write, #before, #current, .num, #after:focus{
-	outline: none;
-}
+.paging{ text-align: center; }
+#pagination{ clear: both; text-align: center; }	
+.paging a{ display: inline-block; border-radius: 5px; font-size: 12px; width: 28px; height: 28px; 
+           vertical-align: middle; line-height: 27px; }	
+a{ text-decoration: none; }
+.paging a.bt{ border: 1px solid darkslategrey; margin-left: 2px; margin-right: 2px; }
+.paging a.num{ border: 1px solid darkslategrey; font-weight: 600; margin-left: 2px; margin-right: 2px; }
+.paging a.num.on{ background: lightslategray; color: white; border: 1px solid lightslategray; margin-left: 2px; margin-right: 2px; }

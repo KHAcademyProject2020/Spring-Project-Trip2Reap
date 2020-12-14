@@ -439,7 +439,7 @@
     	// noCourse가 있으면 지우고 div 만들기
     	if(document.getElementById("noCourse")){
             $("#noCourse").remove();
-            $("#yesCourse").val('1. ' + searchName);
+            $("#yesCourse").val(searchName);
     		$("#yesCourse").css('display', 'inline-block');
     		
     		$(".hiddenCoX").val(searchX);
@@ -489,7 +489,7 @@
                          + '<input type="text" class="courseDistance" id="courseDistance" value="' 
                          + courseDistanceInfo + '" readonly="readonly"><div id="courseSpace1"></div>'
                          + '<div id="course0"><input type="text" class="yesCourses" name="placeNameList['+count+']" readonly="readonly" value="' 
-                         + (count+1) + '. ' + searchName +'"><input type="hidden" class="courseX" name="placeXList['+count+']" value="' + searchX 
+                         + searchName +'"><input type="hidden" class="courseX" name="placeXList['+count+']" value="' + searchX 
                          + '"><input type="hidden" class="courseY" name="placeYList['+count+']" value="' + searchY 
                          + '"><input type="hidden" class="courseDay" name="dayList['+count+']" value="0">';
             $('#courseAll').append(newDiv);  

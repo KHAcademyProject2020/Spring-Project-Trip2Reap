@@ -10,6 +10,46 @@
         select * from dual
   </insert>
   
+  <select id="countList" resultType="_int">
+        select count(*)
+        from course
+  </select>
+  
+  <select id="selectCourseList" resultMap="courseResultSet">
+        select c.course_no, bo_no, b.member_id, b.bo_title, c.course_name, c.course_day,i.change_name,c.course_distance  
+        from course c
+        join board b using(bo_no)
+        join img_file i using(bo_no)
+        order by bo_no asc
+  </select>
+  
+  <resultMap type="Course" id="courseResultSet">
+        <id column="course_no" property="courseNo" />
+        <result column="bo_no" property="boardNo"/>
+        <result column="member_id" property="courseWriter"/>
+        <result column="bo_title" property="courseTitle"/>
+        <result column="course_name" property="courseName"/>
+        <result column="course_day" property="courseDay"/>
+        <result column="change_name" property="changeName"/>
+        <result column="course_distance" property="distance"/>
+  </resultMap>
+  
+  
+  
+  
+  <!--
+  <resultMap type="Course" id="courseResultSet2">
+        <id column="COURSE_NO" property="courseNo" />
+        <result column="BO_NO" property="boardNo"/>
+        <result column="THEME" property="theme"/>
+        <result column="SCHEDULE" property="schedule"/>
+        <result column="COURSE_DAY" property="courseDay"/>
+        <result column="COURSE_NAME" property="courseName"/>
+        <result column="COURSE_X" property="courseX"/>
+        <result column="COURSE_Y" property="courseY"/>
+        <result column="COURSE_DISTANCE" property="distance"/>
+  </resultMap>
+  -->
   
   
   </mapper>
