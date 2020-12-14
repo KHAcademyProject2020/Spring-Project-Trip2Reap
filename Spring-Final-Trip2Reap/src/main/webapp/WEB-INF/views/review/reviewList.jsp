@@ -79,10 +79,7 @@
 			search = "title=" + $('#search').val()
 			
 		}
-		if(search == "내용") {
-			search = "content=" + $('#search').val()
-			
-		}
+
 		if(search == "해쉬태그") {
 			search = "hashTag=" + $('#search').val()
 			

@@ -35,6 +35,28 @@
 
 		 
 // 	 }
+
+	$(".cate_btn").click(function(){
+		var cate = $(this).attr('id')
+		
+		if(cate == "cate_btn1") {
+			cate = ""
+		}
+		if(cate == "cate_btn2") {
+			cate = "cate=code3"
+			
+		}
+		if(cate == "cate_btn3") {
+			cate = "cate=code4"
+			
+		}
+		
+		
+		location.href = "reviewPhotoList.bo?"+cate;
+		
+	})
+
+
 	$(".hashTag").css("display", "");
 	
 	$(".hashTagSpan").click(function(){
