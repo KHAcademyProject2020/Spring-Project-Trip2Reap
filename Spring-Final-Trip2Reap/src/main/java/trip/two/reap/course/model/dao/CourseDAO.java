@@ -6,8 +6,8 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import trip.two.reap.common.PageInfo;
 import trip.two.reap.course.model.vo.Course;
+import trip.two.reap.course.model.vo.CoursePageInfo;
 
 @Repository("cDAO")
 public class CourseDAO {
@@ -20,7 +20,7 @@ public class CourseDAO {
 		return sqlSession.selectOne("courseMapper.countList");
 	}
 
-	public ArrayList<Course> selectCourseList(SqlSessionTemplate sqlSession, PageInfo pi) {
+	public ArrayList<Course> selectCourseList(SqlSessionTemplate sqlSession, CoursePageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		

@@ -1,10 +1,9 @@
 package trip.two.reap.course.model.vo;
 
-import trip.two.reap.common.PageInfo;
 
 public class CoursePagination {
-	public static PageInfo getPageInfo(int currentPage, int listCount) { 
-		  PageInfo pi = null;
+	public static CoursePageInfo getPageInfo(int currentPage, int listCount) { 
+		  CoursePageInfo pi = null;
 
 		  int pageLimit = 5; 
 		  int maxPage; 
@@ -21,7 +20,7 @@ public class CoursePagination {
 		  		endPage = maxPage; 
 			 }
 		  
-		  pi = new PageInfo(currentPage, listCount, pageLimit, maxPage, startPage, endPage, boardLimit);
+		  pi = new CoursePageInfo(currentPage, listCount, pageLimit, maxPage, startPage, endPage, boardLimit);
 		  
 		  return pi; 
 		  }

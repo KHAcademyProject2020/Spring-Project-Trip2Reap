@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,9 +17,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import trip.two.reap.common.PageInfo;
 import trip.two.reap.course.model.service.CourseService;
 import trip.two.reap.course.model.vo.Course;
+import trip.two.reap.course.model.vo.CoursePageInfo;
 import trip.two.reap.course.model.vo.CoursePagination;
 
 
@@ -34,7 +33,7 @@ public class CourseController {
 	// 여행코스 리스트
 	@RequestMapping("courseList.co")
 	public ModelAndView goCourseList(@RequestParam(value="page", required=false) Integer page, @RequestParam(value="addr", required=false) Integer addr, 
-			                         @RequestParam(value="theme", required=false) Integer theme ,HttpSession session, ModelAndView mv){
+			                         @RequestParam(value="theme", required=false) Integer theme , ModelAndView mv){
 		
 		int currentPage = 1;
 		if(page != null) {
@@ -51,11 +50,9 @@ public class CourseController {
 		
 		int listCount = cService.countList();
 		
-		PageInfo pi = CoursePagination.getPageInfo(currentPage, listCount);
+		CoursePageInfo pi = CoursePagination.getPageInfo(currentPage, listCount);
 		
 		ArrayList<Course> list = cService.selectCourseList(pi);		
-		
-		System.out.println("pi : " + pi);
 		
 		ArrayList<String[]> day = new ArrayList<String[]>();
 		ArrayList<String> dayList = new ArrayList<String>();
@@ -107,7 +104,6 @@ public class CourseController {
 		}	*/	
 		
 		
-		System.out.println("list : " + list);
 		if(list != null) {
 			mv.addObject("list", list);
 			mv.addObject("daysList", dayList);
@@ -251,16 +247,13 @@ public class CourseController {
 /*
  * 
  * <남은 기능들>
- * 1. 여행코스 리스트 불러오기
- * 2. 여행코스 디테일뷰
- * 3. 본인만 수정, 삭제 가능
- * 4. 여행코스 삭제, 이동시키기
- * 5. 여행코스 1박2일, 2박3일
- * 6. 페이징 처리
- * 7. 검색처리
+ * 1. 여행코스 디테일뷰
+ * 2. 본인만 수정, 삭제 가능
+ * 3. 여행코스 삭제, 이동시키기
+ * 4. 여행코스 1박2일, 2박3일
+ * 5. 검색처리
  * 
  * 1. 나의 호텔 예약 내역
- * 2. 나만의 여행코스
  * 
  * <이번주 할 것>
  * 1. alert창 수정

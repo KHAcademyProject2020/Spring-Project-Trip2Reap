@@ -3,9 +3,12 @@ package trip.two.reap.member.model.dao;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import trip.two.reap.course.model.vo.Course;
+import trip.two.reap.course.model.vo.CoursePageInfo;
 import trip.two.reap.member.model.vo.Mail;
 import trip.two.reap.member.model.vo.Member;
 import trip.two.reap.member.model.vo.MyTravel;
@@ -107,5 +110,16 @@ public class MemberDAO {
 	public int deleteMyTravel(SqlSessionTemplate sqlSession, MyTravel myTravel) {
 		return sqlSession.delete("memberMapper.deleteMyTravel", myTravel);
 	}
+
+	public int countList(SqlSessionTemplate sqlSession, String memberId) {
+		return sqlSession.selectOne("memberMapper.countList",memberId);
+	}
+
+	public ArrayList<Course> selectCourseList(SqlSessionTemplate sqlSession, CoursePageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("memberMapper.selectCourseList", pi, rowBounds);
+	}
+
 
 } // 클래스 종료

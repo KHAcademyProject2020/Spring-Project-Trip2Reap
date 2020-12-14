@@ -3,8 +3,8 @@ package trip.two.reap.course.model.service;
 
 import java.util.ArrayList;
 
-import trip.two.reap.common.PageInfo;
 import trip.two.reap.course.model.vo.Course;
+import trip.two.reap.course.model.vo.CoursePageInfo;
 
 public interface CourseService {
 
@@ -12,7 +12,7 @@ public interface CourseService {
 
 	int countList();
 
-	ArrayList<Course> selectCourseList(PageInfo pi);
+	ArrayList<Course> selectCourseList(CoursePageInfo pi);
 
 
 

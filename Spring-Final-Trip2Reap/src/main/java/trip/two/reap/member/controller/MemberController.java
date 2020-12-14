@@ -2,6 +2,7 @@ package trip.two.reap.member.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.servlet.http.HttpSession;
 
@@ -22,6 +23,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
+import trip.two.reap.course.model.vo.Course;
+import trip.two.reap.course.model.vo.CoursePageInfo;
+import trip.two.reap.course.model.vo.CoursePagination;
 import trip.two.reap.member.kakao.KakaoAPI;
 import trip.two.reap.member.model.service.MemberService;
 import trip.two.reap.member.model.vo.Member;
@@ -276,8 +280,62 @@ public class MemberController {
 	
 	// 마이페이지 - 나만의 여행코스
 	@RequestMapping("myPageCourse.me")
-	public String myPageCouse() {
-		return "myPageCourse";
+	public ModelAndView myPageCouse(@RequestParam(value="page", required=false) Integer page, @RequestParam(value="addr", required=false) Integer addr, 
+                                    @RequestParam(value="theme", required=false) Integer theme , ModelAndView mv, @RequestParam("hiddenId3") String memberId) {
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = page;
+		}
+		
+		if(addr != null) {
+			currentPage = addr;
+		}
+		
+		if(theme != null) {
+			currentPage = theme;
+		}
+		
+		int listCount = mService.countList(memberId);
+		
+		CoursePageInfo pi = CoursePagination.getPageInfo(currentPage, listCount);
+		pi.setMemberId(memberId);
+		
+		ArrayList<Course> list = mService.selectCourseList(pi);		
+		
+		ArrayList<String[]> day = new ArrayList<String[]>();
+		ArrayList<String> dayList = new ArrayList<String>();
+		
+		for(int i=0; i<list.size(); i++) {
+			String[] dayArr = list.get(i).getCourseDay().split(",");			
+			day.add(dayArr);
+		}
+		
+		for(int i=0; i<day.size(); i++) {
+			dayList.add(Arrays.toString(day.get(i)));
+		}
+		
+		ArrayList<String[]> name = new ArrayList<String[]>();
+		ArrayList<String> nameList = new ArrayList<String>();
+		
+		for(int i=0; i<list.size(); i++) {
+			String[] nameArr = list.get(i).getCourseName().split(",");			
+			name.add(nameArr);
+		}
+		
+		for(int i=0; i<name.size(); i++) {
+			nameList.add(Arrays.toString(name.get(i)));
+		}		
+		
+		
+		if(list != null) {
+			mv.addObject("list", list);
+			mv.addObject("daysList", dayList);
+			mv.addObject("nameList", nameList);
+			mv.addObject("pi", pi);
+			mv.setViewName("myPageCourse");
+		}
+	    
+		return mv;
 	}
 	
 	

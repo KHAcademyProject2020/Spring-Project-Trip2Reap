@@ -38,7 +38,7 @@
                 <li class="m1" id="myTravel" onclick="mypageTravel();" onMouseOver="this.style.color='#123478';" onMouseOut="this.style.color=''">
                 <i class="fas fa-suitcase-rolling" id="me1"></i>내가 담은 여행지</li>
                 
-                <li class="m1" onclick="mypageCourse();" onMouseOver="this.style.color='#123478';" onMouseOut="this.style.color=''">
+                <li class="m1" id="myCourse" onclick="mypageCourse();" onMouseOver="this.style.color='#123478';" onMouseOut="this.style.color=''">
                 <i class="fas fa-map-signs" id="me1"></i>나만의 여행코스</li>
                 
                 <li class="m1" onclick="memberOut();" onMouseOver="this.style.color='#123478';" onMouseOut="this.style.color=''">
@@ -50,6 +50,9 @@
         </form>
         <form action="myPageTravel.me" method="post" id="myTravelList">
             <input type="hidden" value="${ loginUser.memberId }" id="hiddenId2" name="hiddenId2"> 
+        </form>
+        <form action="myPageCourse.me" method="post" id="myCourseList">
+            <input type="hidden" value="${ loginUser.memberId }" id="hiddenId3" name="hiddenId3"> 
         </form>
      </section>
      
@@ -65,6 +68,16 @@
     		 swal("로그인 후 이용가능합니다🙋");
     	 } else {
     		 $('#myTravelList').submit();
+    	 }    	  	 
+     });
+     
+     $("#myCourse").click(function(){
+    	 var memberId = $('#hiddenId3').val();
+    	 
+    	 if(memberId==""){
+    		 swal("로그인 후 이용가능합니다🙋");
+    	 } else {
+    		 $('#myCourseList').submit();
     	 }    	  	 
      });
      

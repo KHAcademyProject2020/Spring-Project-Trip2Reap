@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import trip.two.reap.course.model.vo.Course;
+import trip.two.reap.course.model.vo.CoursePageInfo;
 import trip.two.reap.member.mail.MailHandler;
 import trip.two.reap.member.mail.RandomKey;
 import trip.two.reap.member.model.dao.MemberDAO;
@@ -156,6 +158,16 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int deleteMyTravel(MyTravel myTravel) {
 		return mDAO.deleteMyTravel(sqlSession, myTravel);
+	}
+	
+	@Override
+	public int countList(String memberId) {
+		return mDAO.countList(sqlSession,memberId);
+	}	
+	
+	@Override
+	public ArrayList<Course> selectCourseList(CoursePageInfo pi) {
+		return mDAO.selectCourseList(sqlSession, pi);
 	}
 
 } // 클래스 종료

@@ -6,9 +6,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import trip.two.reap.common.PageInfo;
 import trip.two.reap.course.model.dao.CourseDAO;
 import trip.two.reap.course.model.vo.Course;
+import trip.two.reap.course.model.vo.CoursePageInfo;
 
 @Service("cService")
 public class CourseServiceImpl implements CourseService{
@@ -30,7 +30,7 @@ public class CourseServiceImpl implements CourseService{
 	}
 	
 	@Override
-	public ArrayList<Course> selectCourseList(PageInfo pi) {
+	public ArrayList<Course> selectCourseList(CoursePageInfo pi) {
 		return cDAO.selectCourseList(sqlSession, pi);
 	}
 	
