@@ -10,7 +10,7 @@ import trip.two.reap.review.model.vo.Review;
 
 public interface ReviewService {
 	
-	int getListCount();
+	int getListCount(HashMap<String, Object> searchList);
 	
 	ArrayList<Review> selectList(PageInfo pi, HashMap<String, Object> searchList);
 	

@@ -17,8 +17,9 @@ import trip.two.reap.review.model.vo.Review;
 @Repository("rDAO")
 public class ReviewDAO {
 	
-	public int getListCount(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("reviewMapper.getListCount");
+	public int getListCount(SqlSessionTemplate sqlSession, HashMap<String, Object> searchList) {
+		System.out.println(sqlSession.selectOne("reviewMapper.getListCount", searchList));
+		return sqlSession.selectOne("reviewMapper.getListCount", searchList);
 	}
 	
 	public ArrayList<Review> selectList(SqlSessionTemplate sqlSession, PageInfo pi, HashMap<String, Object> searchList){
@@ -28,7 +29,7 @@ public class ReviewDAO {
 		
 		
 		return (ArrayList)sqlSession.selectList("reviewMapper.selectList", searchList, rowBounds);
-	}
+	} 
 	
 
 	

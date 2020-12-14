@@ -15,15 +15,16 @@ section {
 
 
 #board{
-	margin-left:0px;
+	
 	width: 1000px;
 	border-bottom: 4px solid #eee;
 	padding-bottom:30px;
-	margin-left:150px;
-	margin-top:0px;
+	margin-left:140px;
+	margin-top:30px;
 }
 
 .divcontent {
+	margin-top:20px;
 	margin-left:10px;
 	/* background-color:#eee; */
 	width:480px;
@@ -36,19 +37,18 @@ section {
 	width:100%;
 
 }
-ul{
+.gallerylist > ul{
 	
 	font-size:0;
 }
-ul > li{
+.gallerylist > ul > li{
 	
 	display:inline-block;
 	vertical-align:top;
 	width:100%;
 }
 
-ul > li > #detailGo{
-	
+.gallerylist > ul > li > #detailGo{
 	display:block;
 	min-width:400px;
 	min-height:400px;
@@ -56,26 +56,26 @@ ul > li > #detailGo{
 	margin:5px;
 }
 
-ul > li > #detailGo .screen{
-	
+.gallerylist >ul > li > #detailGo .screen{
+
+    text-align: center;
 	
 	position:relative;
 	overflow:hidden;
 }
 
-ul > li > #detailGo .screen .top{
+.gallerylist > ul > li > #detailGo .screen .top{
 		
-	
 	position:absolute;
 	bottom:150%;
-	left:110px;
+	display: inline-block;
 	z-index:2;
 	color:#fff;
 	font-size:26px;
 	font-weight:900;
 	transition:all .35s;
 }
-ul > li > #detailGo .screen .bottom{
+.gallerylist > ul > li > #detailGo .screen .bottom{
 
 	position:absolute;
 	top:150%;
@@ -86,27 +86,27 @@ ul > li > #detailGo .screen .bottom{
 	font-size:12px;
 	transition:all .35s;
 }
-ul > li > #detailGo .screen img{
+.gallerylist >ul > li > #detailGo .screen img{
 	height:380px;
 	width:480px;
 	border-radius: 5px;
 }
-ul > li >#detailGoa h3{
+.gallerylist > ul > li >#detailGoa h3{
 	
 	font-size:14px;
 	text-align:center;
 	padding:20px;
 	color:#666;
 }
-ul > li > #detailGo:hover .top{
+.gallerylist > ul > li > #detailGo:hover .top{
 	
 	bottom:52%;
 }
-ul > li > #detailGo:hover .bottom{
+.gallerylist > ul > li > #detailGo:hover .bottom{
 	top:52%;
 }
 
-ul > li > #detailGo .screen:after{
+.gallerylist > ul > li > #detailGo .screen:after{
 	content:'';
 	display:block;
 	position:absolute;
@@ -119,7 +119,7 @@ ul > li > #detailGo .screen:after{
 	opacity:0;
 	transition:all .35s;
 }
-ul > li > #detailGo:hover .screen::after{
+.gallerylist > ul > li > #detailGo:hover .screen::after{
 	opacity:1;
 }
 
@@ -181,7 +181,7 @@ ul > li > #detailGo:hover .screen::after{
 
 }
 #bo_btn{
-	padding-left:106px;
+	padding-left:690px;
 }
 
 #bo_btn1{
@@ -196,19 +196,6 @@ ul > li > #detailGo:hover .screen::after{
 	background: #77af82; 
 }
 
-#cate_btn{
-	padding-left:150px;
-}
-.cate_btn{
-	padding-right:5px;
-	width: 60px;
-	height: 30px;
-	border: none;
-	background: #77af82;
-	color: white;
-	border-radius: 3px;
-	margin-right:-7px;
-}
 button:hover{
 	font-weight:bold;
 	background: #77af82;
@@ -238,17 +225,28 @@ button:hover{
 }
 
 #select_search{
-	width:100px;
-	height:30px;
+	width:75px;
+	height:25px;
 	border-radius:50px;
-	
+	align-items:center;
 	
 }
 #search{
 	height:25px;
 }
 #search_btn{
+	border:none;
+	background-color:white;
+	margin-left:-30px;
 	margin-right:65px;
-	width:50px;
-	height:25px;
+	height:20px;
 }
+
+.searchbar{
+
+	margin-left:770px;
+	padding-left:150px;
+	margin-bottom:-23px;
+	display:inline-block;
+}
+

@@ -24,8 +24,8 @@ public class ReviewServiceImpl implements ReviewService{
 	private ReviewDAO rDAO;
 	
 	@Override
-	public int getListCount() {
-		return rDAO.getListCount(sqlSession);
+	public int getListCount(HashMap<String, Object> searchList) {
+		return rDAO.getListCount(sqlSession, searchList);
 	}
 	
 	@Override

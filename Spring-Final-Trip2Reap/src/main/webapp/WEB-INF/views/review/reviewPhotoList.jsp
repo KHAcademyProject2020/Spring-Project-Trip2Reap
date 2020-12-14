@@ -16,25 +16,25 @@
 // 	 alert(document.getElementById("hashTag57").innerHTML)
 // 	 alert($(".hashTag").length)
 // 	 alert("hashTag"+$('#hashTagVal0').val())
-	 var size = $(".hashTag").length
+// 	 var size = $(".hashTag").length
 // 	 alert(size)
 	 
-	 for(var i=0; i<size; i++){
-		 var hashTagName = document.getElementById(("hashTag"+$('#hashTagVal'+i).val())).innerHTML
-		, hashTagNameSplit = hashTagName.split("#")
-		 $("#hashTag"+$('#hashTagVal'+i).val()).html("")
-			$(hashTagNameSplit).each (function(index, item){
-				if(index == 0){
+// 	 for(var i=0; i<size; i++){
+// 		 var hashTagName = document.getElementById(("hashTag"+$('#hashTagVal'+i).val())).innerHTML
+// 		, hashTagNameSplit = hashTagName.split("#")
+// 		 $("#hashTag"+$('#hashTagVal'+i).val()).html("")
+// 			$(hashTagNameSplit).each (function(index, item){
+// 				if(index == 0){
 					
-				}else {
-					var SpanId = ($('#hashTagVal'+i).val()+index)
+// 				}else {
+// 					var SpanId = ($('#hashTagVal'+i).val()+index)
 					
-					 $("#hashTag"+$('#hashTagVal'+i).val()).append("<span class='hashTagSpan' id="+SpanId+">#"+item+"</span>&nbsp;&nbsp;")
-				}
-				})
+// 					 $("#hashTag"+$('#hashTagVal'+i).val()).append("<span class='hashTagSpan' id="+SpanId+">#"+item+"</span>&nbsp;&nbsp;")
+// 				}
+// 				})
 
 		 
-	 }
+// 	 }
 	$(".hashTag").css("display", "");
 	
 	$(".hashTagSpan").click(function(){
@@ -42,7 +42,7 @@
 		hashParam = hashParam.split("#")
 		hashParam = hashParam[1]
 		
-		location.href = "reviewList.bo?hashTag="+hashParam;
+		location.href = "reviewPhotoList.bo?hashTag="+hashParam;
 		
 	})
 	
@@ -57,10 +57,7 @@
 			search = "title=" + $('#search').val()
 			
 		}
-		if(search == "내용") {
-			search = "content=" + $('#search').val()
-			
-		}
+
 		if(search == "해쉬태그") {
 			search = "hashTag=" + $('#search').val()
 			
@@ -68,7 +65,7 @@
 
 // 		alert(search)
 		
-		location.href = "reviewList.bo?"+search;
+		location.href = "reviewPhotoList.bo?"+search;
 		
 	})
 	
@@ -84,6 +81,33 @@
  });
 
  </script>
+ 
+  <style type="text/css">
+ 
+ 
+ .cate_btn {
+ 	padding-right:15px;
+ 	border-radius:5px;
+    text-align:center;
+ 	position: relative;
+ }
+ .cate_btn:hover {
+ 	background-color:#eee;
+ 	text-decoration: underline;
+ 	font-weight: bolder;
+ 	cursor: pointer;
+ 
+ }
+ 
+ .hashTagSpan:hover {
+ 
+ 	text-decoration: underline;
+ 	font-weight: bolder;
+ 	cursor: pointer;
+ 
+ }
+ 
+ </style>
 
 
 <title>Insert title here</title>
@@ -99,26 +123,50 @@
 		<div id="all_div">
 			<div id="menu_div">
 				<div id="menu_left_div">
-					<i class="fas fa-camera-retro" id="menuIcon3"></i> <span id="menu">여행
-						후기</span>
+					<i class="fas fa-camera-retro" id="menuIcon3"></i> <span id="menu">여행후기</span>
+				</div>
+				<div id="cate_btn" style="display: inline-block;">
+					<span id="cate_btn1" class="cate_btn"><b>전체보기</b></span> 
+					<span id="cate_btn2" class="cate_btn"> <b>여행지</b></span> 
+					<span id="cate_btn3" class="cate_btn"><b>맛집</b></span>
+				</div>
+	
+
+				<div id="bo_btn" style="display: inline-block;">
+					<button id="bo_btn2" class="bo_btn">
+						<i class="fas fa-th-large"></i>
+					</button>
+					<button id="bo_btn1" class="bo_btn" onclick="location.href='reviewList.bo';">
+						<i class="fas fa-grip-lines"></i>
+					</button>
 				</div>
 
 			</div>
 		</div>
 		<!-- text-align뿐만 아니라 대부분 div안에서 작동한다. -->
-		<div id="cate_btn" style="display: inline-block; width: 770px">
-			<button id="cate_btn1" class="cate_btn">전체보기</button>
-			<button id="cate_btn2" class="cate_btn">여행지</button>
-			<button id="cate_btn3" class="cate_btn">맛집</button>
-		</div>
-		<div id="bo_btn" style="display: inline-block;">
-			<button id="bo_btn2" class="bo_btn">
-				<i class="fas fa-th-large"></i>
-			</button>
-			<button id="bo_btn1" class="bo_btn" onclick="location.href='reviewList.bo';">
-				<i class="fas fa-grip-lines"></i>
-			</button>
-		</div>
+		
+		
+		<div class="searchbar">
+					<table>
+						<tr>
+
+							<td colspan="3" style="text-align: center;"><select
+								id="select_search" name="search">
+									<option value="작성자">작성자</option>
+									<option value="제목">제목</option>
+									<option value="해쉬태그">해쉬태그</option>
+							</select> <input type="search" id="search" placeholder="Search..." />
+
+								<button id="search_btn" type="reset" class="search"
+									id="search-btn">
+									<span class="icon"><i class="fa fa-search"></i></span>
+								</button></td>
+
+							
+
+						</tr>
+					</table>
+				</div>
 
 		
 		<div id="board">
@@ -222,36 +270,76 @@
 				<tr align="center" height="20">
 					<td></td>
 					<td>
-						<!-- [이전] --> <c:if test="${ pi.currentPage <= 1 }">
-							<button class="page_btn"><</button> &nbsp;
-				</c:if> <c:if test="${ pi.currentPage > 1 }">
-							<c:url var="before" value="reviewPhotoList.bo">
-								<c:param name="page" value="${ pi.currentPage - 1 }" />
-							</c:url>
-							<a href="${ before }"><button class="page_btn"><</button></a>
-						</c:if> <!-- 페이지 --> <c:forEach var="p" begin="${ pi.startPage }"
-							end="${ pi.endPage }">
-							<c:if test="${ p eq pi.currentPage }">
-								<button class="page_btn">
-									<b style="background-color: #eee;">${ p }</b>
-								</button>
-							</c:if>
-
-							<c:if test="${ p ne pi.currentPage }">
-								<c:url var="pagination" value="reviewPhotoList.bo">
-									<c:param name="page" value="${ p }" />
-								</c:url>
-								<a href="${ pagination }"><button class="page_btn">${ p }</button></a>
-							</c:if>
-						</c:forEach> <!-- [다음] --> <c:if test="${ pi.currentPage >= pi.maxPage }">
-							<button class="page_btn">></button> &nbsp;
-				</c:if> <c:if test="${ pi.currentPage < pi.maxPage }">
-							<c:url var="after" value="reviewPhotoList.bo">
-								<c:param name="page" value="${ pi.currentPage + 1 }" />
-							</c:url>
-							<a href="${ after }"><button class="page_btn">></button></a>
-						</c:if>
+						<!-- [이전] --> 
+							<c:set var="loc" value="page=" />
+			
+			<c:if test='${searchList.writer ne "all" && searchList.chkNo eq 1  }'>
+			<c:set var="loc" value="writer=${searchList.writer }&page=" />
+			</c:if>
+			<c:if test='${searchList.title ne "all" && searchList.chkNo eq 2 }'>
+			<c:set var="loc" value="title=${searchList.title }&page=" />
+			</c:if>
+			<c:if test='${searchList.hashTag ne "all" && searchList.chkNo eq 3  }'>
+			<c:set var="loc" value="hashTag=${searchList.hashTag }&page=" />
+			</c:if>
+			<c:if test='${searchList.cate ne "all" && searchList.chkNo eq 4 }'>
+			<c:set var="loc" value="cate=${searchList.cate }&page=" />
+			</c:if>
+				<!-- [이전] -->
+				<c:if test="${ pi.currentPage <= 1 }">
+				
+				</c:if>
+				
+				<c:if test="${ pi.currentPage > 1 }">
+<%-- 					<c:url var="firstPage" value="reviewList.bo"> --%>
+<%-- 						<c:param name="page" value="${ pi.startPage }"/> --%>
+<%-- 					</c:url> --%>
+					<a href="reviewPhotoList.bo?${loc }${ pi.startPage }"><button class="page_btn">&lt;&lt;</button></a>
+					
+<%-- 					<c:url var="before" value="reviewList.bo"> --%>
+<%-- 						<c:param name="page" value="${ pi.currentPage-1 }"/> --%>
+<%-- 					</c:url> --%>
+					<a href="reviewPhotoList.bo?${loc }${ pi.currentPage-1 }"><button class="page_btn">&lt;</button></a>
+				</c:if>
+				
+				
+				<!-- 페이지 -->
+				
+				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+				
+					<c:if test="${ p eq pi.currentPage }">
+					<button class="page_btn"><b style=background-color:#eee;>${p}</b></button>
+					</c:if>
+					
+					<c:if test="${ p ne pi.currentPage }">
+<%-- 						<c:url var="pagination" value="reviewList.bo"> --%>
+<%-- 							<c:param name="page" value="${ p }"/> --%>
+<%-- 						</c:url> --%>
+						
+						<a href="reviewPhotoList.bo?${loc }${p }">
+						<button class="page_btn">${ p}</button>
+						</a>
+					
+					</c:if>
+				</c:forEach>
+				
+				<!-- [다음] -->
+				<c:if test="${ pi.currentPage >= pi.maxPage }">
+					
+				</c:if>
+				<c:if test="${ pi.currentPage < pi.maxPage }">
+<%-- 					<c:url var="after" value="reviewList.bo"> --%>
+<%-- 						<c:param name="page" value="${ pi.currentPage + 1 }"/> --%>
+<%-- 					</c:url>  --%>
+					<a href="reviewPhotoList.bo?${loc }${ pi.currentPage + 1 }"><button class="page_btn">&gt;</button></a>
+					
+<%-- 					<c:url var="lastPage" value="reviewList.bo"> --%>
+<%-- 						<c:param name="page" value="${ pi.endPage }"/> --%>
+<%-- 					</c:url> --%>
+					<a href="reviewPhotoList.bo?${loc }${ pi.endPage }"><button class="page_btn">&gt;&gt;</button></a>
+				</c:if>
 					</td>
+					
 					<td style="text-align: right;">
 
 						<button id="write_btn" onclick="location.href='reviewInsert.bo';">글쓰기</button>
@@ -259,26 +347,7 @@
 					</td>
 				</tr>
 
-				<tr>
-			
-				<td colspan="3" style="text-align:center;">
-					 <select id="select_search" name="search">
-    					 <option value="작성자">작성자</option>
-    					 <option value="제목">제목</option>
-   						 <option value="내용">내용</option>
-   						 <option value="해쉬태그">해쉬태그</option>
-					</select>
-					
-						
-   						   
-    					  <input type="search" id="search" placeholder="Search..." />
- 					
-  						<button id="search_btn" type="reset" class="search" id="search-btn">
-  							<span class="icon"><i class="fa fa-search"></i></span>
-  						</button>
-				</td>
-			
-			</tr>
+				
 			</table>
 
 

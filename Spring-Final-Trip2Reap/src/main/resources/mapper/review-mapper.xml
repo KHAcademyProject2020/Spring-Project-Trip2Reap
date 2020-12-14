@@ -2,10 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis/org//DTD Mapper 3.0/EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="reviewMapper">
 	
-  	<select id="getListCount" resultType="_int">
+  	<select id="getListCount" parameterType="hashmap" resultType="_int">
 		select count(*)
     	from board b
-  		where BO_DELETE_YN='N' AND B.CA_CODE=3 OR B.CA_CODE=4
+    	LEFT JOIN MEMBER M
+            ON B.MEMBER_ID = M.MEMBER_ID
+  		where BO_DELETE_YN='N' 
+  		<choose>
+	  		<when test="cate.equals('all')">
+	  			AND (B.CA_CODE=3 OR B.CA_CODE=4)
+	  		</when>
+  			<when test="cate.equals('code3')">
+					 AND  B.CA_CODE=3     
+			 </when>
+  			  <when test="cate.equals('code4')">
+				  AND B.CA_CODE=4    
+	         </when>
+  		</choose>
+  		
+  		<choose>
+  			<when test="!writer.equals('all')">
+  				AND NICKNAME LIKE '%' || #{writer} || '%'
+  			</when>
+  			<when test="!title.equals('all')">
+  				AND b.BO_TITLE LIKE '%' || #{title} || '%'
+  			</when>
+  			<when test="!hashTag.equals('all')">
+  				AND b.BO_TAG LIKE '%' || #{hashTag} || '%'
+  			</when>
+  			
+  		</choose>
   	</select>
   	
   	<select id="selectList" parameterType="hashmap" resultMap="reviewResultSet">
@@ -39,20 +65,17 @@
 	         <when test="search.equals('all')">
          	</when>
          	<when test="search.equals('writer')">
-         	AND NICKNAME like '%' || #{searchInput} || '%'
+         	AND m.NICKNAME like '%' || #{searchInput} || '%'
          	</when>
          	<when test="search.equals('title')">
-         	AND BO_TITLE like '%' || #{searchInput} || '%'
-         	</when>
-         	<when test="search.equals('content')">
-         	AND BO_CONTENT like '%' || #{searchInput} || '%'
+         	AND b.BO_TITLE like '%' || #{searchInput} || '%'
          	</when>
          	<when test="search.equals('hashTag')">
-         	AND BO_TAG like '%' || #{searchInput} || '%'
+         	AND b.BO_TAG like '%' || #{searchInput} || '%'
          	</when>
          </choose>
          
-   		 order by BO_NO desc       
+   		 order by b.BO_NO desc       
   		 <!-- select *
   		 from board
          JOIN CATEGORY USING(CA_CODE)
@@ -220,6 +243,8 @@
 		<result column="RE_DELETE_YN" property="reDeleteYN" />
 		<result column="NICKNAME" property="nickName"/>
    </resultMap>
+   
+   
   
   
 

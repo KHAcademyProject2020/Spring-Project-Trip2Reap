@@ -39,48 +39,53 @@ public class ReviewController {
 
 	// 리뷰 목록으로 이동
 	@RequestMapping("reviewList.bo")
-	public ModelAndView reviewList(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv, String hashTag, String title, String content, String writer, String cate) {
+	public ModelAndView reviewList(@RequestParam(value = "page", required = false) Integer page, 
+			HttpSession session,ModelAndView mv, String hashTag, String title, String content, 
+			String writer, String cate) {
+		
+		
 		HashMap<String, Object> searchList = new HashMap<String, Object>();
 
+		
 		String search = "all";
 		searchList.put("searchInput", "all");
 		searchList.put("searchLoc", "page");
+		
 		searchList.put("cate", "all");
 		searchList.put("chkNo", 0);
 
 		if(writer == null) {
 			writer = "all";
+			searchList.put("writer", "all");
 		} else {
 			search = "writer";
 			searchList.put("searchInput", writer);
 			searchList.put("chkNo", 1);
-			searchList.put("searchLoc", "wrtier%3D"+writer+"%26page");
+			searchList.put("writer", writer);
 		}
 		
 		if(title == null) {
 			title = "all";
+			searchList.put("title", "all");
+
 		} else {
 			search = "title";
 			searchList.put("searchInput", title);
 			searchList.put("chkNo", 2);
+			searchList.put("title", title);
 		}
-		
-		if(content == null) {
-			content = "all";
-		} else {
-			search = "content";
-			searchList.put("searchInput", content);
-//			searchList.put("chkNo", 3);
-		}
-		
+
 		if(hashTag == null) {
 			hashTag = "all";
+			searchList.put("hashTag", "all");
+
 		} else {
 			hashTag = "#" + hashTag;
 			search = "hashTag";
 			System.out.println(hashTag);
 			searchList.put("searchInput", hashTag);
 			searchList.put("chkNo", 3);
+			searchList.put("hashTag", hashTag);
 	
 		}
 		if(cate == null) {
@@ -104,7 +109,7 @@ public class ReviewController {
 			currentPage = page;
 		}
 
-		int listCount = rService.getListCount();
+		int listCount = rService.getListCount(searchList);
 
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 
@@ -129,6 +134,9 @@ public class ReviewController {
 		String search = "all";
 		searchList.put("searchInput", "all");
 		searchList.put("searchLoc", "page");
+		searchList.put("writer", "all");
+		searchList.put("title", "all");
+		searchList.put("hashTag", "all");
 		searchList.put("cate", "all");
 		searchList.put("chkNo", 0);
 
@@ -138,7 +146,8 @@ public class ReviewController {
 			search = "writer";
 			searchList.put("searchInput", writer);
 			searchList.put("chkNo", 1);
-			searchList.put("searchLoc", "wrtier%3D"+writer+"%26page");
+			searchList.put("writer", writer);
+
 		}
 		
 		if(title == null) {
@@ -147,15 +156,10 @@ public class ReviewController {
 			search = "title";
 			searchList.put("searchInput", title);
 			searchList.put("chkNo", 2);
+			searchList.put("title", title);
+
 		}
-		
-		if(content == null) {
-			content = "all";
-		} else {
-			search = "content";
-			searchList.put("searchInput", content);
-//			searchList.put("chkNo", 3);
-		}
+	
 		
 		if(hashTag == null) {
 			hashTag = "all";
@@ -165,6 +169,8 @@ public class ReviewController {
 			System.out.println(hashTag);
 			searchList.put("searchInput", hashTag);
 			searchList.put("chkNo", 3);
+			searchList.put("hashTag", hashTag);
+
 	
 		}
 		if(cate == null) {
@@ -188,7 +194,7 @@ public class ReviewController {
 			currentPage = page;
 		}
 
-		int listCount = rService.getListCount();
+		int listCount = rService.getListCount(searchList);
 
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 
