@@ -2,6 +2,7 @@ package trip.two.reap.member.model.service;
 
 
 import trip.two.reap.member.model.vo.Member;
+import trip.two.reap.member.model.vo.MyTravel;
 
 public interface MemberService {
 
@@ -38,5 +39,9 @@ public interface MemberService {
 	int changePwd(Member member);
 
 	int updateMember(Member member);
+
+	int selectTravel(MyTravel myTravel);
+
+	int insertTravel(MyTravel myTravel);
 
 }

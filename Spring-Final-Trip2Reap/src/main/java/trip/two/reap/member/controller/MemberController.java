@@ -24,6 +24,7 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import trip.two.reap.member.kakao.KakaoAPI;
 import trip.two.reap.member.model.service.MemberService;
 import trip.two.reap.member.model.vo.Member;
+import trip.two.reap.member.model.vo.MyTravel;
 import trip.two.reap.member.naver.NaverLoginBo;
 
 @SessionAttributes("loginUser")
@@ -58,8 +59,7 @@ public class MemberController {
 		m.setMemberPwd(pwd);
 		
 		Member loginUser = mService.memberLogin(m);
-		// String pwd = bcryptPasswordEncoder.encode(m.getMemberPwd());
-		// System.out.println("암호화 된 비밀번호 : " + pwd);
+
 		if(loginUser != null) {
 		boolean isPwdCorrect= bcryptPasswordEncoder.matches(m.getMemberPwd(),  loginUser.getMemberPwd());
 
@@ -488,6 +488,35 @@ public class MemberController {
 		}		
 		return changeOk;
 	}
-
-
+	
+	
+	// 마이페이지 - 내가 담은 여행지 등록하기
+	@RequestMapping("myTravel.me")
+	@ResponseBody
+	public String insertMyTravel(@RequestParam("boNo") String boNo2, @RequestParam("memberId") String memberId) {
+		String result = "";
+		
+		int boNo = Integer.parseInt(boNo2);
+		
+		MyTravel myTravel = new MyTravel();
+		myTravel.setBoNo(boNo);
+		myTravel.setMemberId(memberId);
+		
+		int selectTravel = mService.selectTravel(myTravel);
+		
+		if(selectTravel == 1) {
+			result = "E";
+		} else if(selectTravel == 0) {
+			int insertTravel = mService.insertTravel(myTravel);
+			
+			if(insertTravel == 1) {
+				result = "Y";
+			} else {
+				result = "N";
+			}
+		}
+		
+		return result;
+	}
+	
 } // 클래스 종료

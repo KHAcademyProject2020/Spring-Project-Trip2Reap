@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import trip.two.reap.member.model.vo.Mail;
 import trip.two.reap.member.model.vo.Member;
+import trip.two.reap.member.model.vo.MyTravel;
 
 @Repository("mDAO")
 public class MemberDAO {
@@ -86,6 +87,14 @@ public class MemberDAO {
 
 	public int updateMember(SqlSessionTemplate sqlSession, Member member) {
 		return sqlSession.update("memberMapper.updateMember", member);
+	}
+
+	public int selectTravel(SqlSessionTemplate sqlSession, MyTravel myTravel) {
+		return sqlSession.selectOne("memberMapper.selectMyTravel", myTravel);
+	}
+
+	public int insertTravel(SqlSessionTemplate sqlSession, MyTravel myTravel) {
+		return sqlSession.insert("memberMapper.insertMyTravel", myTravel);
 	}
 
 } // 클래스 종료
