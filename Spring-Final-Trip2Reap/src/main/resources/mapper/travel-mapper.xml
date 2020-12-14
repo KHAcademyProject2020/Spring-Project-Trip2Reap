@@ -93,12 +93,63 @@
 				and bo_delete_yn = 'N'
 	</select>
 	
-	<update id="updateTravel">
+<!-- 	<update id="updateTravel">
 		update board as b, update img_file as f
-		set b.bo_title = #{boTitle}, b.bo_content = #{boContent}, b.bo_delete_yn = sysdate, 
-			origin_name = #{originName}, change_name=#{changeName}
+		set b.bo_title = #{boTitle}, b.bo_content = #{boContent}, b.bo_delete_yn = sysdate, b.bo_tag=#{boTag}, 
+			f.origin_name = #{originName}, f.change_name=#{changeName}
 		where b.bo_no = #{boNo}
+	</update> -->
+		<!-- <update id="updateTravel">
+		update board b
+		set B.BO_TITLE=#{boTitle},
+			B.BO_CONTENT=#{boContent},
+   	        B.BO_TAG= #{boTag},  
+   	        B.REGDATE= sysdate
+   	    where b.bo_no = #${boNo}    
+	</update> -->
+<!-- 	<update id="updateTravel">
+	update (
+		select b.bo_content, b.bo_title, b.bo_delete_yn, b.bo_tag, t.tr_addr, t.tr_reg, t.tr_theme,
+		i.origin_name, i.change_name
+		from board b, img_file i, travel t
+		where b.bo_no = i.bo_no and
+		      t.bo_no = b.bo_no
+	)
+	set  b.bo_content = #{boContent}, b.bo_title = #{boTitle}, b.bo_delete_yn = sysdate, b.bo_tag=#{boTag}, t.tr_addr=#{trAddr}, t.tr_reg=#{trReg}, t.tr_theme=#{trTheme},
+			i.origin_name = #{originName}, i.change_name=#{changeName}
+		
+	</update> -->
+	
+	<update id="updateTravel">
+	update travel t
+	set t.tr_addr=#{trAddr}, t.tr_reg=#{trReg}, t.tr_theme=#{trTheme}
+	where t.bo_no = #{boNo}
 	</update>
+	
+	<update id="updateBoard">
+	update board b
+	set b.bo_content = #{boContent}, b.bo_title = #{boTitle}, b.bo_tag=#{boTag}
+	where b.bo_no = #{boNo}
+	</update>
+	
+	<update id="updateFile">
+	update img_file i
+	set i.origin_name = #{originName}, i.change_name=#{changeName}
+	where i.bo_no = #{boNo}
+	</update>
+	
+	
+	<update id="deleteTravel">
+       update board 
+       set BO_DELETE_YN='Y'
+       where BO_NO=#{boNo} 
+   </update> 
+   
+    <update id="deleteFile">
+       update img_file 
+       set FILE_DELETE_YN='Y'
+       where BO_NO=#{boNo} 
+   </update>  
 	
 
 </mapper>

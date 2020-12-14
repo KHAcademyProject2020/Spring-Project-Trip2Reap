@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/travel/travelList.css"/>
 <meta charset="UTF-8">
 <body>
@@ -20,7 +22,7 @@
 					<span id="menu">여행지</span>
 				</div>
 				<div id="menu_right_div">
-					<input type="text" id="input_search" />
+					<input type="text" id="input_search" placeholder="검색할 여행지명을 입력하세요"/>
 					
 					<button id="button_search" onclick="goSearchError()">검색</button>
 				</div>
@@ -56,8 +58,8 @@
 			<span id="cate_name">&nbsp;지역</span>
 				<span id="cate_icon">🚕</span>
 				<table id="local_table">
-					<tr>
-						<td>전체</td>
+					<tr class="localSelectTr">
+						<td id="selectAllTd">전체</td>
 						<td>서울</td>
 						<td>인천</td>
 						<td>대전</td>
@@ -67,7 +69,7 @@
 						<td>울산</td>
 						<td>세종</td>
 					</tr>
-					<tr>
+					<tr class="localSelectTr">
 						<td>경기</td>
 						<td>강원</td>
 						<td>충북</td>
@@ -122,23 +124,37 @@
 				
 				<div id="travel_name_writer_div">
 					<div id="travel_no">${ t.boNo }</div>
+					<input type="hidden" class="boNo_hidden" value="${ t.boNo }">
 					<c:url var="tdetail" value="tDetail.tv">
 						<c:param name="boNo" value="${ t.boNo }"/>
 						<c:param name="page" value="${ pi.currentPage }"/>
 					</c:url>	
 					<div id="travel_name">
-						<a href="${ tdetail }">${ t.boTitle }</a>
-						<c:if test="${ travel.boCount > 20 }"> <!-- 조회수가 20이상인 게시글은 아이콘표시 왜 안되는거지 -->
-								
-								<img src="resources/images/promotional.png" width="30px" height="30px"> 
-							
-						</c:if>
+						<a href="${ tdetail }">${ t.boTitle }
+							<c:if test="${ t.boCount > 30 }"> <!-- 조회수가 30이상인 게시글은 아이콘표시 왜 안되는거지 -->
+								<img src="resources/images/promotional.png" width="25px" height="25px"> 
+							</c:if>
+						</a>	
 					</div>
+					
 					<div id="travel_theme">${ t.trTheme }</div>
 					<div id="travel_writer">${ t.trReg }</div>
-					<div id="travel_tag">#${ t.boTag }</div>
+					<!-- <div id="travel_tag">#${ t.boTag }</div> -->
+				
+						  <div id="travel_tag">
+		                        	<%--해시태그 리스트가 존재한다면 --%>
+		                        	<c:if test="${!empty hashTagList.get(status.index) }">
+			        					<c:forEach var="hashTag" items="${hashTagList.get(status.index)}">
+			        						<span>
+			        							<i class="fas fa-hashtag hashtag_icon"></i>
+			        							<small class="hashtag_content">${hashTag }</small>
+			        						</span>
+			        					</c:forEach>
+		        					</c:if>
+		        					
+		                        </div>
 				</div>
-				<div id="list_etc"><a href="#modal">…</a></div>
+				<div id="list_etc" class="dotClass"><a href="#modal" id="list_etc_modal">…</a></div>
 			</div>
 			
 			</c:forEach>
@@ -204,7 +220,8 @@
                 
 			</div><!-- 페이징 div끝 -->
 			
-
+				<input type="hidden" id="travelUserInfo" value="${ loginUser.memberId }">
+	            <input type="hidden" id="travelBoInfo" value="">
 		
 		
 	</div><!-- 전체 div끝 -->
@@ -222,7 +239,7 @@
 		    <hr id="mo_hr">
 		    <div id="contain_div">
 		    	<i class="fas fa-download" ></i><span id="mo_contain">여행지 담기</span>
-		    	<button class="url_btn" onclick="containTravel()">추가하기</button>
+		    	<button class="url_btn" id="myTravel">추가하기</button>
 		    	<div id="contain_info">[마이페이지]-[담은 여행지]에서 확인할 수 있습니다.</div>
 		    </div>
 		</div>
@@ -231,6 +248,9 @@
    	 
    	 
 	<script>
+	
+		var dotNo;	
+	
 		function detailView(){
  		   location.href="<%= request.getContextPath() %>/tDetail.tv";
  	    }
@@ -239,19 +259,55 @@
 			location.href="<%= request.getContextPath() %>/tSearchError.tv";
 		}
 		
+		/* 
+		$('.dotClass').click(function(){
+			dotNo = $(this).find("#dotNo").val();
+			console.log(dotNo);
+		}) */
+		
 		
 		//modal창
-		$('a[href="#modal"]').click(function(event) {
-			event.preventDefault();
+		//$('a[href="#modal"]').click(function(event) {
+		$(document).on("click","#list_etc_modal",function(){
+         var current = $(this).parent().parent().find('#travel_no').text();
+         $('#travelBoInfo').val(current);
+      
+         event.preventDefault();
 
-			$(this).modal({
-				fadeDuration : 250
-			});
-		});
+         $(this).modal({
+            fadeDuration : 250
+         });
+      });
 		
-		function containTravel(){
-			swal("여행지를 담았습니다","마이페이지에서 확인하세요","success");//이미 담은 여행지이거나 로그인하지않은경우 담기지 않아야함.(추후수정필요) 
-		}
+		
+		//function travelContain(){}
+		$(document).on("click","#myTravel",function(){
+	         var memberId = $('#travelUserInfo').val();
+	         var boNo = $('#travelBoInfo').val();
+	         
+	         if(memberId == ""){
+	            swal("로그인 후 이용가능합니다🙋");
+	         } else {            
+	            $.ajax({
+	                   url : 'myTravel.me',
+	                  type : 'post',
+	                  data : {boNo:boNo,memberId:memberId},
+	                  success : function(data){
+	                     console.log("data : " + data);
+	                     if(data == "Y"){
+	                        swal("여행지 담기에 성공하였습니다.\n마이페이지에서 확인해주세요😊");      
+	                     } else if(data == "E") {
+	                        swal("이미 담긴 여행지입니다🙋");
+	                     } else {
+	                        swal("여행지 담기에 실패하였습니다🙋");
+	                      } 
+	                    },
+	                    error : function(data){
+	                       console.log("서버 실패");
+	                    }
+	                 });
+	         }                   
+	      });   
 		
 		
 		
@@ -309,6 +365,8 @@
 	   		 }); 
 		
 			
+			
+		
 	</script>
 	
 </section>

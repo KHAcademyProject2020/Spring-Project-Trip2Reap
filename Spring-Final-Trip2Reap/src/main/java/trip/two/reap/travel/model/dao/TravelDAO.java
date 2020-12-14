@@ -49,6 +49,24 @@ public class TravelDAO {
 	public int updateTravel(SqlSessionTemplate sqlSession, Travel t) {
 		return sqlSession.update("travelMapper.updateTravel", t);
 	}
+	
+	public int updateFile(SqlSessionTemplate sqlSession, Attachment a) {
+		return sqlSession.update("travelMapper.updateFile", a);
+	}
+
+	public int updateBoard(SqlSessionTemplate sqlSession, Travel t) {
+		return sqlSession.update("travelMapper.updateBoard", t);
+	}
+
+	public int deleteTravel(SqlSessionTemplate sqlSession, int boNo) {
+		return sqlSession.update("travelMapper.deleteTravel",boNo);
+	}
+
+	public int deleteFile(SqlSessionTemplate sqlSession, int boNo) {
+		return sqlSession.update("travelMapper.deleteFile",boNo);
+	}
+
+
 
 
 	/*

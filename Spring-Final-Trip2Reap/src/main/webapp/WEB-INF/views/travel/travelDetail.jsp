@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>여행지 상세보기</title>
 <link rel="stylesheet" type="text/css" href=" ${pageContext.request.contextPath}/resources/css/travel/travelDetail.css"/>
+<!-- 파비콘 -->
+   <link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
 <body>
@@ -24,7 +26,7 @@
 			<div id="travel_info">
 				<div id="cate_travel">${ travel.trTheme }</div>
 				<div id="name_travel">${ travel.boTitle }			
-							<c:if test="${ travel.boCount > 20 }"> <!-- 조회수가 20이상인 게시글은 아이콘표시 왜 안되는거지 -->
+							<c:if test="${ travel.boCount > 30 }"> <!-- 조회수가 30이상인 게시글은 아이콘표시 왜 안되는거지 -->
 								<img src="resources/images/promotional.png" width="30px" height="30px"> 
 							</c:if>
 				</div> <!-- 여행지 이름 -->
@@ -89,9 +91,8 @@
 					<div id="button_div">
 						<button id="button_update" onclick="location.href='${ tUpview }'">수정하기</button>
 								
-						<button id="button_delete" onclick="location.href='${ tDelete }'">삭제하기</button>
-								
-					</div>
+					<%-- 	<button id="button_delete" onclick="location.href='${ tDelete }'">삭제하기</button> --%>
+								<button id="button_delete" onclick="del(${ travel.boNo })">삭제하기</button>
 				</c:when>
 				<c:otherwise>
 					<div id="button_div2">
@@ -121,7 +122,13 @@
 			swal("여행지를 담았습니다","마이페이지에서 확인하세요","success");//이미 담은 여행지이거나 로그인하지않은경우 담기지 않아야함.(추후수정필요) 
 		}
 		
-		
+		function del(boNo) {
+			var chk = confirm("정말 삭제하시겠습니까?");
+			if (chk) {
+				location.href='tDelete.tv?boNo='+boNo;
+				alert("삭제되었습니다");
+			}
+		}
 		
 		//url복사하기
 		$(document).on("click", "#sh-link", function(e) { // 링크복사 시 화면 크기 고정 

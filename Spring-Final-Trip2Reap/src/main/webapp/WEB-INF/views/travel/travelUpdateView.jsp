@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- 파비콘 -->
+   <link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/travel/travelInsert.css"/>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -15,7 +17,7 @@
 	</header>
 	<!-- 전체 div -->
 	<div id="all_div">
-	<form action="tUpview.tv" method="post" enctype="Multipart/form-data" id="tUpview" onsubmit="return validate();"><!-- 첨부파일 등록을 위해 Multipart/form-data encType 지정  -->
+	<form action="tUpdate.tv" method="post" enctype="Multipart/form-data" id="tUpview" onsubmit="return validate();"><!-- 첨부파일 등록을 위해 Multipart/form-data encType 지정  -->
 		<input type="hidden" name="page" value="${ page }">
 		<input type="hidden" name="boNo" value="${ travel.boNo }">
 		<input type="hidden" name="changeName" value="${ travel.changeName }">
@@ -140,22 +142,167 @@
 			<!-- 해쉬태그 입력창 -->
 			<div class="insert-hashtag-wrapper">
 				<input type="text" id="input-hashtag"  placeholder="#해시태그를 입력해주세요." name="boTag">
-				<input type="button" id="input-hashtag-btn" onclick="insertHashTags();" value="✅"></div>
+				<input type="button" id="input-hashtag-btn"  value="✅"></div>
 	
-			<!-- 등록된 해시태그들을 모으는 곳. -->
+						<!-- 등록된 해시태그들을 모으는 곳. -->
 			<div class="saved-hashtags-wrapper">
+				<!-- 해시태그가 존재하지 않으면 -->
+				<p id="no-hashtag"><small>등록된 해시태그가 없습니다.</small></p>
+				<!-- 해시태그가 존재한다면 -->
 				<ul id="saved-hashtags">
-					<li><small>#${ travle.boTag } <button id="delete_hash">⛔</button></small></li>
-					<li><small>#${ travle.boTag }<button id="delete_hash">⛔</button></small></li>
-					<li><small>#${ travle.boTag }<button id="delete_hash">⛔</button></small></li>
+					<!-- <li><small>#해시태그1<button id="delete_hash">⛔</button></small></li>
+					<li><small>#해시태그2<button id="delete_hash">⛔</button></small></li>
+					<li><small>#해시태그3<button id="delete_hash">⛔</button></small></li> -->
 				</ul>
+				
+				<%--실제해시태그 등록 --%>
+				<input id="savedHashTagStrings" type="hidden" name="boTag"/>
 			</div>
+			<script>
+					
+						$(function(){
+							
+							//해시태그가 비어있는지 확인함.
+							function isEmptyHashTagsMsg(){
+								//해시태그 저장리스트
+								let savedHashTags = $('#saved-hashtags');
+								
+								// 저장된 해시태그들
+								let $hashTags= savedHashTags.children('li');	
+								
+								//실제 저장된 해시태그들을 문자열로 나타내서 저장(데이터베이스에 저장시킬 해시태그)
+								let savedHashTagString= $('#savedHashTagStrings');
+								
+								
+								if($hashTags.length==0){
+									// 저장된 해시태그가 존재하지 않는다면 (0개 )
+									// 해시태그 존재하지 않는다는 문구를 띄운다.
+									$('#no-hashtag').css('display', 'block');
+									savedHashTagString.val('');
+								}else{
+									//저장된 해시태그가 존재한다면(1개 이상 )
+									// 해시태그가 존재하지 않는다는 문구를 안보이게 한다.
+									$('#no-hashtag').css('display', 'none');
+									
+									let hashTagStr='';
+									for(var i=0; i<$hashTags.length; i++){
+										let hashtag= $hashTags[i].textContent.trim();
+										hashtag= hashtag.substring(1,);
+										
+										if(i==$hashTags.length-1){
+											hashTagStr+=hashtag;
+										}else{
+											hashTagStr+=hashtag+', ';
+										}
+									}
+									savedHashTagString.val(hashTagStr);
+								}
+								console.log(savedHashTagString.val())
+							}
+							
+							// 중복된 해시태그를 찾는다.
+							function isDuplicateHashTags(targetHashTag){
+								targetHashTag= '#'+targetHashTag;
+								let $hashTags= $('#saved-hashtags').children('li').children('.hashtag-content');	
+								//console.log($hashTags);
+								
+								//이미 등록된 해시태그 들을 콘솔에 출력한다.
+								for(var i=0; i<$hashTags.length; i++){
+									let now= $hashTags[i].innerText;
+									if(targetHashTag==now)
+										return true;
+								}
+								//이미 등록된 해시태그와 중복된다면  => true를 리턴
+								//중복되지 않은 해시태그라면 false를 리턴
+								return false;
+							}
+							
+							
+							// 해시태그 등록 버튼 클릭시  발생하는 함수- insert hashtag function
+							$('#input-hashtag-btn').on('click', function(){
+								//해시태그 저장리스트
+								let savedHashTags = $('#saved-hashtags');
+								
+								// 저장된 해시태그들 
+								let $hashTags= savedHashTags.children('li');	
+								
+								//입력받은 해시태그
+								let inputHashTag = $('#input-hashtag').val();
+								
+								//단순 공백문자를 입력할 수 있기 때문에 공백을 제거한다.
+								inputHashTag= inputHashTag.trim();
+								
+								if(inputHashTag.length==0){
+									// 입력한 글자수가 0자 
+									swal({
+										  title: "해시태그 등록 실패",
+										  text: '해시태그 내용을 입력해주세요!',
+										  icon: 'error',
+										  button: "확인",
+									});
+								}else{
+									// 입력한 글자수가 최소 1자 이상
+									//입력한 해시태그가 이미 등록한 해시태그와 겹친다면?
+									if(isDuplicateHashTags(inputHashTag)){
+										swal({
+											  title: "해시태그 등록 실패",
+											  text: '이미 등록된 해시태그입니다!',
+											  icon: 'error',
+											  button: "확인",
+										});
+										
+									}else{
+										//입력한 해시태그의 글자수가 10자를 넘는지 확인
+										if(inputHashTag.length>10){
+											swal({
+												  title: "해시태그 등록 실패",
+												  text: '해시태그 등록 가능한 글자수는 최대 10자입니다!',
+												  icon: 'error',
+												  button: "확인",
+											});
+										}else{
+											
+											if($hashTags.length<3){
+												//저장된 해시태그의 개수가 3개미만 => 추가
+												$hashtag_content='<li><span class="hashtag-content"> #'+inputHashTag+'</span><span><i class="remove-hashtag-btn fas fa-times"></i></span></li>'
+												savedHashTags.append($hashtag_content);
+												
+											}else{
+												//저장된 해시태그의 개수가 3개 이상이라면=> 경고창 
+												swal({
+												  title: "해시태그 등록 실패",
+												  text: '이미 최대 3개 해시태그를 등록했습니다!',
+												  icon: 'error',
+												  button: "확인",
+												});
+											}
+										}
+									}
+								}
+								//등록이 성공/실패 여부 상관없이  해시태그 입력값을 일단 비워둔다.
+								 $('#input-hashtag').val('');
+								isEmptyHashTagsMsg(); //해시태그가 비어있는지 확인
+							});
+							
+							
+							
+							// 해시태그 삭제 버튼을 클릭했을때 실행하는 함수. => 리로드를 함.
+							$(document).on('click', '.remove-hashtag-btn' , function(e){
+								// 가장 가까운 해시태그를 지운다.
+								$(e.currentTarget).closest('#saved-hashtags li').remove();
+								
+								//해시태그 삭제처리후, 해시태그가 없다는 메시지를 띄워야할지 말아야할지 결정
+								isEmptyHashTagsMsg(); //해시태그가 비어있는지 확인
+							});
+							
+						});
+					</script>
 			
 			 <div id="travel_content_div">
 				<textarea rows="20" cols="125" id="travel_content" name="boContent">${ travel.boContent }</textarea>
 				  <div id="text_count_div">
 					<span>현재 글자 수 </span>
-					<span id="text_count">8</span>
+					<span id="text_count">${ travel.boContent }</span>
 					<span>자 / 최대 글자 수 2000자</span>
 				 </div>
 			</div>
@@ -180,7 +327,7 @@
 		<!-- 버튼 div -->
 		<div id="button_div">
 			<button type="button" id="button_cancel" onclick= "location.href='tList.tv'">취소</button>
-			<button type="submit" id="button_write" onclick= "location.href='tUpdate.tv'">변경</button>
+			<button type="submit" id="button_write">등록</button>
 			<c:url var="tList" value="tList.tv">
 				<c:param name="page" value="${ page }"/>
 			</c:url>
@@ -227,7 +374,15 @@
    		}  
    		 
    		  
-   		  
+   		  //select옵션값 가져오기
+  		 $(function(){
+   			 $('#select_region').val('${ travel.trReg }');
+   		 })
+   		
+   		
+   		$(function(){
+   			 $('#select_theme').val('${ travel.trTheme }');
+   		 })
    		
    		 
    		
@@ -349,6 +504,7 @@
 		
 		return true;
 	};
+	
 
    </script>
 	

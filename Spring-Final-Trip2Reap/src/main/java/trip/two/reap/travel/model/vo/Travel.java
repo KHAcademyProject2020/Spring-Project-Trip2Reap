@@ -19,6 +19,7 @@ public class Travel {
 	private String trReg;		// 여행지 지역
 	private String trTitle;		// 여행지 내용 타이틀
 	private String trPhone;		// 여행지 번호
+	private String originName;	// 원본파일이름
 	private String changeName;	// 파일 이름
 	
 	private int fileNo;			// 파일 번호 -> 없애야 할 듯!
@@ -236,13 +237,26 @@ public class Travel {
 	}
 
 
+
+
+
+	public String getOriginName() {
+		return originName;
+	}
+
+
+	public void setOriginName(String originName) {
+		this.originName = originName;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Travel [boNo=" + boNo + ", caCode=" + caCode + ", boTitle=" + boTitle + ", boContent=" + boContent
 				+ ", memberId=" + memberId + ", boCount=" + boCount + ", boTag=" + boTag + ", boDeleteYN=" + boDeleteYN
 				+ ", regDate=" + regDate + ", trNo=" + trNo + ", trAddr=" + trAddr + ", trTheme=" + trTheme + ", trReg="
-				+ trReg + ", trTitle=" + trTitle + ", trPhone=" + trPhone + ", changeName=" + changeName + ", fileNo="
-				+ fileNo + "]";
+				+ trReg + ", trTitle=" + trTitle + ", trPhone=" + trPhone + ", originName=" + originName
+				+ ", changeName=" + changeName + ", fileNo=" + fileNo + "]";
 	}
 
 

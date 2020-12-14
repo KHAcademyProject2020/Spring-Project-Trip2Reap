@@ -5,6 +5,8 @@
 <html>
 <head>
 <link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/travel/travelInsert.css"/>
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -122,11 +124,11 @@
 						<span class="astro_span">*</span><span>주소</span>
 					</td>
 					<td colspan="6"> <!-- 카카오 주소 API -->
-						<input type="text" id="sample6_postcode" placeholder="우편번호">
+						<input type="text" id="sample6_postcode" placeholder="우측 버튼을 눌러주세요" readonly="readonly">
 						<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-						<input type="text" id="sample6_address" placeholder="주소" name="trAddr"><br>
-						<input type="text" id="sample6_detailAddress" placeholder="상세주소">
-						<input type="text" id="sample6_extraAddress" placeholder="참고항목">
+						<input type="text" id="sample6_address" placeholder="주소" name="trAddr" readonly="readonly">
+						<input type="hidden" id="sample6_detailAddress" placeholder="상세주소"> 
+						<input type="text" id="sample6_extraAddress" placeholder="상세주소">
 
 					</td>
 				</tr>
@@ -136,21 +138,44 @@
 			
 			<div id="menu_hash">해쉬태그</div>
 			
-			<!-- 해쉬태그 입력창 -->
-			<div class="insert-hashtag-wrapper">
-				<input type="text" id="input-hashtag"  placeholder="#해시태그를 입력해주세요." name="boTag">
-				<input type="button" id="input-hashtag-btn"
-					onclick="insertHashTags();" value="✅"></div>
-	
+			<!-- <div id="hashTag">
+			해쉬태그 입력창
+				<div class="insert-hashtag-wrapper">
+					<input type="text" id="input-hashtag"  placeholder="#해시태그를 입력해주세요." name="boTag" autocomplete="off">
+					<input type="button" id="input-hashtag-btn" value="등록">
+					<input type="hidden" name="boTag" id="hashtagInput" />
+				</div>	
+			</div> -->
+			<div class="hashTag">
+								
+								
+								<div  id="hashtag">
+						
+								<input type="text" 
+								id="tag" placeholder="태그를 입력해 주세요" />
+								<input type="hidden" 
+								name="boTag" id="hashtagInput" />
+								
+							</div>
+									
+						
+						</div>
 			<!-- 등록된 해시태그들을 모으는 곳. -->
-			<div class="saved-hashtags-wrapper">
-				<ul id="saved-hashtags">
-					<li><small>#해시태그1<button id="delete_hash">⛔</button></small></li>
+			<!-- <div class="saved-hashtags-wrapper"> -->
+				<!-- 해시태그가 존재하지 않으면 -->
+				<!-- <p id="no-hashtag"><small>등록된 해시태그가 없습니다.</small></p> -->
+				<!-- 해시태그가 존재한다면 -->
+				<!-- <div id="saved-hashtags"> -->
+					<!-- <li><small>#해시태그1<button id="delete_hash">⛔</button></small></li>
 					<li><small>#해시태그2<button id="delete_hash">⛔</button></small></li>
-					<li><small>#해시태그3<button id="delete_hash">⛔</button></small></li>
-				</ul>
-			</div>
-			
+					<li><small>#해시태그3<button id="delete_hash">⛔</button></small></li> -->
+			<!-- 	</div>
+			</div> -->	
+			<%-- 	
+				실제해시태그 등록
+				<input id="savedHashTagStrings" type="hidden" name="boTag"/>
+			</div> --%>
+	>
 			 <div id="travel_content_div">
 				<textarea rows="20" cols="125" id="travel_content" name="boContent"></textarea>
 				  <div id="text_count_div">
@@ -220,14 +245,58 @@
    		 
    		  
    		  
+ 
    		
    		 
-   		
-   		
-   		
-   		
-   		
-   		 
+	</script>
+	<script>
+ 
+	 //모든 페이지가 요청이 되었을 때
+    $(document).ready(function() {
+//    	 var hashTagNo = 0
+        // ID를 alpreah_input로 가지는 곳에서 키를 누를 경우
+        $("#tag").keydown(function(key) {
+            //키의 코드가 13번일 경우 (13번은 엔터키)
+            var tag = $("#tag").val();
+            if (key.keyCode == 13) {
+           	 $('#hashtag').append("<div class='hashtag'>" + "#" + tag +"</div>" + "&nbsp;&nbsp;");
+//            	 alert("작동")
+//				alert(hashTagNo)
+//            	 alert($('#hashtagInput'+hashTagNo).val())
+//            	 hashTagNo++
+//         		alert(hashTagNo)
+			//	alert($('#hashtagInput').val())
+           	 $('#tag').val("")
+           	 $('#hashtagInput').val($('#hashtagInput').val()+"#"+tag)
+           	 
+//         		var nanum = $('#hashtagInput').val().split("#")
+//        		$(nanum).each (function(index, item){
+//        			alert(item)
+       			
+//        		})
+
+
+            } 
+        });
+    });
+
+
+		// 엔터시 전송되는거 막는 코드
+		document.addEventListener('keydown', function(event) {
+			  if (event.keyCode === 13) {
+			    event.preventDefault();
+			  };
+			}, true);
+		
+		
+		//클릭시 배경 색 변환
+		$(function(){	
+			$('#tag').click(function(){$(this).css("background","#80ff80")})
+
+			
+		})
+	 
+		
 	</script>
 <!-- 주소 API -->
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

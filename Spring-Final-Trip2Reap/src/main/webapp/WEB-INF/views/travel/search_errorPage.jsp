@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 파비콘 -->
+   <link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" type="text/css" href="resources/css/travel/search_errorPage.css"/>
 <!-- <script src="https://kit.fontawesome.com/8828f475ef.js" crossorigin="anonymous"></script> -->
 </head>
