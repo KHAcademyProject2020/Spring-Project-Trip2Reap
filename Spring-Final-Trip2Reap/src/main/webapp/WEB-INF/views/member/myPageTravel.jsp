@@ -36,8 +36,11 @@
      <div id="list_all_div">
             <div id="up_space1"></div>			
 			<!-- 여행지 div -->
-			<c:if test = "${ list eq null }">
-				<div>등록하신 여행지 목록이 없습니다.</div>
+			<c:if test = "${ empty list }">
+				<div id="emptyTravel">내가 담은 여행지 목록이 없습니다.</div>
+				<div id="up_space1"></div>
+				<button id="myTravelBtn">여행지 보러가기</button>
+				<div id="up_space1"></div>
 			</c:if>
 			<c:forEach var="t" items="${ list }">
 			
@@ -113,6 +116,10 @@
                       console.log("서버 실패");
                    }
                 }); 
+          });
+          
+          $('#myTravelBtn').click(function(){
+        	  location.href="<%= request.getContextPath() %>/tList.tv";
           });
      </script>
 </body>

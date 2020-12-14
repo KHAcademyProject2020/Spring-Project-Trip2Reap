@@ -28,7 +28,7 @@
         <div>
             <div id="infor1"></div>
             <div id="infor2"></div>
-            <div id="infor3">개인정보 수정</div>            
+            <div id="infor3"><i class="fas fa-user-edit" id="myUpdateIcon"></i>개인정보 수정</div>            
         </div>
         <div id="up_space1"></div>    
         

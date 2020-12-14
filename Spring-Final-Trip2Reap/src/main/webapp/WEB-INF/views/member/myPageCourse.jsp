@@ -28,7 +28,7 @@
         <div>
             <div id="infor1"></div>
             <div id="infor2"></div>
-            <div id="infor3">나만의 여행코스</div>            
+            <div id="infor3"><i class="fas fa-map-signs" id="myCourseIcon"></i>나만의 여행코스</div>            
         </div>
         <div id="up_space1"></div>
      </div>

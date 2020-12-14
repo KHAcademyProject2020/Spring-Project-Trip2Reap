@@ -30,16 +30,16 @@
             <div id="menuSpace2"></div>
             <ul>
                 <li class="m1" onclick="mypageHotel();" onMouseOver="this.style.color='#123478';" onMouseOut="this.style.color=''">
-                <i class="fas fa-hotel" id="me1"></i>호텔 예약 정보</li>
+                <i class="fas fa-hotel" id="me2"></i>호텔 예약 정보</li>
                 
                 <li class="m1" id="myTravel" onclick="mypageTravel();" onMouseOver="this.style.color='#123478';" onMouseOut="this.style.color=''">
                 <i class="fas fa-suitcase-rolling" id="me1"></i>내가 담은 여행지</li>
                 
                 <li class="m1" onclick="mypageCourse();" onMouseOver="this.style.color='#123478';" onMouseOut="this.style.color=''">
-                <i class="fas fa-camera-retro" id="me1"></i>나만의 여행코스</li>
+                <i class="fas fa-map-signs" id="me1"></i>나만의 여행코스</li>
                 
                 <li class="m1" onclick="memberOut();" onMouseOver="this.style.color='#123478';" onMouseOut="this.style.color=''">
-                <i class="fas fa-user-slash" id="me1"></i>회원 탈퇴</li>
+                <i class="fas fa-user-slash" id="me3"></i>회원 탈퇴</li>
             </ul>
         </div> 
         <form action="myPageTravel.me" method="post" id="myTravelList">
