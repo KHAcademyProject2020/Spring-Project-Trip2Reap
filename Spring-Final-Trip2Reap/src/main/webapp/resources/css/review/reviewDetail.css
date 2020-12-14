@@ -7,12 +7,13 @@
 	--dark-gray: #515357;
 	--blue-gray: #cfe3e1;
 	--hash-gray: #c8cbcc;
-	--main-yellow: rgb(242,203,97);
+	
 	--review-blue: rgb(218,219,255);
-    --dark-blue: #a8a9cc;
+	--default-hover: #d3d3db;
+    --dark-blue: #b1a9d3;
     --danger-red: #ff8bad;
     --danger-red-hover: #cc2b60;
-    --dark-yellow: #bd9a31;
+    --dark-yellow: #c9a435;
 }
 
 
@@ -118,8 +119,8 @@ ul{
     color: var(--dark-gray);
     font-size: 1.2em;
     padding: 0 20px;
-    border-left: 5px solid var(--main-yellow);
-    border-right: 5px solid var(--main-yellow);
+    border-left: 3px solid var(--dark-yellow);
+    border-right: 3px solid var(--dark-yellow);
 }
 
 
@@ -200,7 +201,7 @@ ul{
     flex-basis: 50%;
     padding: 10px;
     text-align: right;
-    color: var(--dark-blue);
+    color: var(--dark-yellow);
     font-weight: bold;
 }
 
@@ -403,6 +404,8 @@ tr.review_reply{
     cursor:pointer;
 }
 
+/*작성버튼*/
+
 #write_review_btn{
     background-color: var(--review-blue);
 }
@@ -411,32 +414,29 @@ tr.review_reply{
     background-color: var(--dark-blue);
 }
 
-#update_review_btn{
-    background-color: var(--main-yellow);
-}
 
-#update_review_btn:hover{
-    background-color: var(--dark-yellow);
-    color: #fff;
-}
-
+/* 수정버튼 & 삭제버튼 */
+#update_review_btn,
 #delete_review_btn{
-    background-color:var(--danger-red);
+    background-color: #eee;
+    color: var(--dark-gray);
 }
 
+#update_review_btn:hover,
 #delete_review_btn:hover{
-    background-color: var(--danger-red-hover);
-    color: #fff;
+    background-color: var(--default-hover);
 }
+
+
+
 
 #go_review_list_btn,
 #go_top_btn{
-    background-color: var(--light-green);
+    background-color: var(--review-blue);
 }
 
 #go_review_list_btn:hover,
 #go_top_btn:hover{
-    background-color: var(--dark-green);
-    color: #fff;
+    background-color: var(--dark-blue);
 }
 
