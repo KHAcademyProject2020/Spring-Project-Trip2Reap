@@ -676,6 +676,8 @@
 					<script>
 					$(function(){
 						
+						
+						
 						function numberFormatterFunc(number){
 							let regNumber=/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/;
 							
@@ -686,6 +688,12 @@
 								number=number.replace(regNumber, '$1-$2');
 							}
 							$('#reservation_phone').val(number);
+						}
+						
+						//초기에 전화번호가 있는경우에는 자동으로 -을 달아준다.
+						if($('#reservation_phone').val().length>0){
+							let number=$('#reservation_phone').val();
+							numberFormatterFunc(number);
 						}
 						
 						$('#reservation_phone').on({
@@ -798,6 +806,9 @@ $(function(){
 		//실제가격
 		let hotelUsingPrice= Number( $('#_total_price').val()*reserveMap.get('reserveRoomCnt'));
 		console.log('호텔 이용가격=> '+ hotelUsingPrice);
+		reserveMap.set('hotelUsingPrice', hotelUsingPrice);
+		
+		
 		reserveMap.set('reserveTotalPrice', 100); //호텔이 너무 비싸서,,, 가격100 원으로 함. - 임시가격
 
 		reserveMap.set('memberId', $('#hotel_reserve_memberId').val().trim() ); //예약자 아이디
@@ -871,34 +882,16 @@ $(function(){
 				},function(rsp){
 					if(rsp.success){
 						//결제를 성공하면
-						/*
-						var msg='결제가 완료되었습니다!';
-						
-						msg+='고유id: '+ rsp.imp_uid; //아임포트 거래 고유번호
-						msg+='예약호텔 id'+ rsp.merchant_uid;//가맹점 생성/관리 고유주문번호
-						msg+='결제수단 : '+rsp.pay_method;//결제수단
-						msg+='결제금액: '+ rsp.paid_amount;//결제금액
-						msg+='카드 승인번호: '+ rsp.apply_num; //카드사 승인번호(신용카드결제에 한하여 제공한다.)
-						msg+='가상계좌 입금계좌번호: '+ rsp.vbank_num; //가상계좌 입금계좌번호
-						msg+='가상계좌 은행명: '+rsp.vbank_name; //가상계좌 은행명
-						msg+='가상계좌 예금주: '+rsp.vbank_holder; //가상계좌 예금주
-						msg+='가상계좌 입금기한: '+rsp.vbank_date; //가상계좌 입금기한
-						*/
-						
-						reserveMap.set('imp_uid', rsp.mip_uid);
-						reserveMap.set('merchant_uid', rsp.merchant_uid);
-						reserveMap.set('paid_amount', apid_amount);
-						reserveMap.set('apply_num', rsp.apply_num);
-						reserveMap.set('vbank_num', vbank_num);
-						reserveMap.set('vbank_name', vbank_name);
-						reserveMap.set('vbank_holder',vbank_holder);
-						reserveMap.set('vbank_date', vbank_date);
-						
 						//예약을 요청한다.
 						$.ajax({
-							url:'/hotelReservation.ho',
-							contentType: 'json',
-							data:JSON.stringify(reserveMap), // map형태로 데이터를 전달한다.
+							url:'hotelReservation.ho',
+							data:{
+								// map형태로 데이터를 전달한다.
+								imp_uid: rsp.uid,
+								merchant_uid: rsp.merchant_uid,
+								pay_amount: hotelUsingPrice
+								
+							},
 							type: post,
 							success:function(response){
 								if(response=='success'){
@@ -959,7 +952,7 @@ $(function(){
 						msg+='카드 승인번호: '+ rsp.apply_num;
 						
 						$.ajax({
-							url:'',
+							url:'hotelReservation.ho',
 							data:{},
 							success:function(){
 								if(response=='success'){
@@ -1016,7 +1009,7 @@ $(function(){
 						msg+='카드 승인번호: '+ rsp.apply_num;
 						
 						$.ajax({
-							url:'',
+							url:'hotelReservation.ho',
 							data:{},
 							success:function(){
 								if(response=='success'){
