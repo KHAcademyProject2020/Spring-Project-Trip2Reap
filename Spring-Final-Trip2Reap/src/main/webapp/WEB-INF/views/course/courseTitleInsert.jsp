@@ -4,8 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>나만의 여행코스</title>
-<link rel="stylesheet" type="text/css" href="resources/css/course/courseTitleInsert.css"/>
+<title>전국방방곡곡 | 여행코스</title>
+    <!--  courseTitleInsert.css -->
+    <link rel="stylesheet" type="text/css" href="resources/css/course/courseTitleInsert.css"/>
+    <link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
 </head>
 <body>	
 	<header>
@@ -104,6 +106,7 @@
             <input type="hidden" id="courseWriter" name="courseWriter" value="${ loginUser.memberId }"> 
             <input type="hidden" name="courseTheme" class="courseTheme" value="">
             <input type="hidden" name="courseSchedule" class="courseSchedule" value="">
+            <input type="hidden" name="distance" class="distance" value="">
            
            <!-- 코스1일차  -->
            <div id="tiSpace6"></div>
@@ -479,6 +482,7 @@
     	    // 총거리   
     	    $('#allDistance').val(allDistance);
     	    var aa = $('#allDistance').val();
+    	    $('.distance').val(aa);
         	
             // 새로운 div 만들기
             var newDiv = '<div id="courseSpace1"></div><div id="courseSpace2"></div>'

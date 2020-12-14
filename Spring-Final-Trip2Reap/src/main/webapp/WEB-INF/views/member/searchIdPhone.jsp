@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>아이디 찾기</title>
-   <!--  searchId.css -->
-      <link rel="stylesheet" href="resources/css/member/searchIdPhone.css">  
+<title>전국방방곡곡 | 아이디 찾기</title>
+      <!--  searchId.css -->
+      <link rel="stylesheet" href="resources/css/member/searchIdPhone.css"> 
+      <link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon"> 
 </head>
 <body>
     <header>

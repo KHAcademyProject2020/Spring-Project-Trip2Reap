@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>내가 담은 여행지</title>
+<title>전국방방곡곡 | 내가 담은 여행지</title>
       <!--  myPageTravel.css -->
       <link rel="stylesheet" href="resources/css/member/myPageTravel.css"> 
+      <link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header>

@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지</title>
-   <!--  insert_2.css -->
-      <link rel="stylesheet" href="resources/css/member/myPage.css">  
+<title>전국방방곡곡 | 마이페이지</title>
+      <!--  insert_2.css -->
+      <link rel="stylesheet" href="resources/css/member/myPage.css"> 
+      <link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon"> 
 </head>
 <body>
     <section>   

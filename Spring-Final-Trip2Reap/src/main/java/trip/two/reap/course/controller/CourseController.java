@@ -58,8 +58,9 @@ public class CourseController {
 	public ModelAndView courseInsert(HttpServletRequest request,
 			                        @RequestParam("courseTitle") String title, @RequestParam("courseWriter") String writer,
 			                        @RequestParam("courseTheme") String theme, @RequestParam("courseSchedule") String schedule,
-			                        @RequestParam("file") MultipartFile file, @ModelAttribute Course course, ModelAndView mv ) {		
-		
+			                        @RequestParam("distance") String distance, @RequestParam("file") MultipartFile file, 
+			                        @ModelAttribute Course course, ModelAndView mv ) {		
+		System.out.println("총거리 : " + distance);
         String root = request.getSession().getServletContext().getRealPath("resources"); 		  
         
         String originFileName = file.getOriginalFilename(); // 원본 파일 명 
@@ -150,12 +151,13 @@ public class CourseController {
 /*
  * 
  * <남은 기능들>
- * 0. 코스 인터셉터 적용시키기
  * 1. 여행코스 리스트 불러오기
  * 2. 여행코스 디테일뷰
  * 3. 본인만 수정, 삭제 가능
  * 4. 여행코스 삭제, 이동시키기
  * 5. 여행코스 1박2일, 2박3일
+ * 6. 페이징 처리
+ * 7. 검색처리
  * 
  * 1. 나의 호텔 예약 내역
  * 2. 내가 담은 여행지

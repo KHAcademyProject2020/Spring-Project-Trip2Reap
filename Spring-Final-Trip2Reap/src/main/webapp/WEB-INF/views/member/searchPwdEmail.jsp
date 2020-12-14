@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>비밀번호 변경</title>
-   <!--  searchId.css -->
-      <link rel="stylesheet" href="resources/css/member/searchPwdEmail.css">  
+<title>전국방방곡곡 | 비밀번호 변경</title>
+      <!--  searchId.css -->
+      <link rel="stylesheet" href="resources/css/member/searchPwdEmail.css">
+      <link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">  
 </head>
 <body>
     <header>

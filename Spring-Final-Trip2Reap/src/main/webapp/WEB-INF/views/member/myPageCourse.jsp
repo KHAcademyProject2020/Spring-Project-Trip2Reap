@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>나만의 여행코스</title>
+<title>전국방방곡곡 | 나만의 여행코스</title>
       <!--  myPageCourse.css -->
       <link rel="stylesheet" href="resources/css/member/myPageCourse.css">
+      <link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header>

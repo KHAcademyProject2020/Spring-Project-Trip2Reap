@@ -5,8 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>여행 코스 수정하기</title>
-<link rel="stylesheet" type="text/css" href="resources/css/course/courseUpdate.css"/>
+<title>전국방방곡곡 | 여행코스</title>
+    <!--  courseUpdate.css -->
+    <link rel="stylesheet" type="text/css" href="resources/css/course/courseUpdate.css"/>
+    <link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
 	<section>

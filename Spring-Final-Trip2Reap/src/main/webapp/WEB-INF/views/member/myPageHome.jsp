@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>호텔 예약 정보</title>
+<title>전국방방곡곡 | 호텔 예약 정보</title>
       <!--  myPageHotel.css -->
       <link rel="stylesheet" href="resources/css/member/myPageHotel.css">
+      <link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header>

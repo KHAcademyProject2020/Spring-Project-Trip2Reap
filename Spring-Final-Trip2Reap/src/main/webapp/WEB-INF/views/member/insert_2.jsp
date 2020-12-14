@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
-   <!--  insert_2.css -->
+<title>전국방방곡곡 | 회원가입</title>
+      <!--  insert_2.css -->
       <link rel="stylesheet" href="resources/css/member/insert_2.css">  
+      <link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header>

@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>개인정보 수정</title>
+<title>전국방방곡곡 | 개인정보 수정</title>
       <!--  updateMember.css -->
       <link rel="stylesheet" href="resources/css/member/updateMember.css">  
+      <link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header>

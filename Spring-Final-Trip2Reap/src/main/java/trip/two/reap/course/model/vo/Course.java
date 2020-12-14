@@ -20,6 +20,7 @@ public class Course {
 	private String courseName;
 	private String courseX;
 	private String courseY;
+	private String distance;
 	
 	private ArrayList<String> dayList;  // 0 : 당일치기, 1: 1박2일, 2 : 2박3일
 	private ArrayList<String> placeNameList;
@@ -33,7 +34,7 @@ public class Course {
 	
 	public Course(int boardNo, int courseCategory, String courseTitle, String courseWriter, String courseStatus,
 			Date makeCourse, int courseNo, String files, String theme, String schedule, String courseDay,
-			String courseName, String courseX, String courseY, String originName, String changeName) {
+			String courseName, String courseX, String courseY, String distance, String originName, String changeName) {
 		super();
 		this.boardNo = boardNo;
 		this.courseCategory = courseCategory;
@@ -49,6 +50,7 @@ public class Course {
 		this.courseName = courseName;
 		this.courseX = courseX;
 		this.courseY = courseY;
+		this.distance = distance;
 		this.originName = originName;
 		this.changeName = changeName;
 	}
@@ -220,9 +222,21 @@ public class Course {
 	public void setCourseY(String courseY) {
 		this.courseY = courseY;
 	}
+	
+	
 
+	public String getDistance() {
+		return distance;
+	}
 
+	
+	
+	public void setDistance(String distance) {
+		this.distance = distance;
+	}
 
+	
+	
 	public ArrayList<String> getDayList() {
 		return dayList;
 	}
@@ -293,16 +307,15 @@ public class Course {
 		this.changeName = changeName;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Course [boardNo=" + boardNo + ", courseCategory=" + courseCategory + ", courseTitle=" + courseTitle
 				+ ", courseWriter=" + courseWriter + ", courseStatus=" + courseStatus + ", makeCourse=" + makeCourse
 				+ ", courseNo=" + courseNo + ", files=" + files + ", theme=" + theme + ", schedule=" + schedule
 				+ ", courseDay=" + courseDay + ", courseName=" + courseName + ", courseX=" + courseX + ", courseY="
-				+ courseY + ", dayList=" + dayList + ", placeNameList=" + placeNameList + ", placeXList=" + placeXList
-				+ ", placeYList=" + placeYList + ", originName=" + originName + ", changeName=" + changeName + "]";
+				+ courseY + ", distance=" + distance + ", dayList=" + dayList + ", placeNameList=" + placeNameList
+				+ ", placeXList=" + placeXList + ", placeYList=" + placeYList + ", originName=" + originName
+				+ ", changeName=" + changeName + "]";
 	}
 
-	
 }

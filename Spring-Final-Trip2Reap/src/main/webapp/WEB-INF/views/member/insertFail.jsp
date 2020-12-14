@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입 실패</title>
+<title>전국방방곡곡 | 회원가입 실패</title>
       <!--  insertFail.css -->
       <link rel="stylesheet" href="resources/css/member/insertFail.css">  
+      <link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header>
