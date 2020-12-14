@@ -14,7 +14,7 @@
 
 </head>
 <body>
-	<section>
+	
 		<header>
 			<c:import url="../common/menubar.jsp" />
 		</header>
@@ -401,7 +401,7 @@ function getReplyList() {
 					}
 				} else {
 					$tr = $('<tr>');
-					$rContent = $('<td colspan="3">').text('등록된 댓글이 없습니다.');
+					$rContent = $('<td colspan="4">').text('등록된 댓글이 없습니다.');
 
 					$tr.append($reContent);
 					$tableBody.append($tr);
