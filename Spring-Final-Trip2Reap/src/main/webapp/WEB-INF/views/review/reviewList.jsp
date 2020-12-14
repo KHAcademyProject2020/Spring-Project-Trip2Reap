@@ -50,6 +50,7 @@
 			
 		}
 		
+		
 		location.href = "reviewList.bo?"+cate;
 		
 	})
@@ -152,10 +153,11 @@
 		</div>
 		<!-- text-align뿐만 아니라 대부분 div안에서 작동한다. -->
 			<div id="cate_btn" style="display: inline-block; width: 770px">
-				<button id="cate_btn1" class="cate_btn">전체보기</button>
-				<button id="cate_btn2" class="cate_btn">여행지</button>
-				<button id="cate_btn3" class="cate_btn">맛집</button>
+				<b id="cate_btn1" class="cate_btn">전체보기</b>
+				<b id="cate_btn2" class="cate_btn">여행지</b>
+				<b id="cate_btn3" class="cate_btn">맛집</b>
 			</div>
+			
 			<div id="bo_btn" style="display: inline-block;">
 				<button id="bo_btn1" class="bo_btn"  onclick="location.href='reviewPhotoList.bo';">
 					<i class="fas fa-th-large"></i>
@@ -169,7 +171,7 @@
 	    <div id="board">
 		<table id="board_table">
 		<tr class="board_list" align="center" bgcolor="#efefef">
-			<th colspan="2" class="board_list"></th>
+			<th class="board_list"></th>
 			<th class="board_list">제목</th>
 			<th class="board_list">작성자</th>
 			<th class="board_list">날짜</th>
@@ -179,20 +181,14 @@
 		
 		<c:forEach var="b" varStatus="tag" items="${list}">
 		<tr align="center" class="board_list">
-			<td class="board_list">${b.boNo}</td>
-				<td class="board_list">
+			<td class="board_list">
 				<c:if test="${b.changeName != null }">
-										<img id="review_img" class="center-block" src="resources/buploadFiles/${b.changeName}">
-										
-									</c:if> 
+					<img id="review_img" class="center-block" src="resources/buploadFiles/${b.changeName}">
+				</c:if> 
 								
-									<c:if test="${b.changeName == null }">
-										
-										
-										<img id="Not_img" class="center-block" src="resources/images/emoticon.png">
-										
-										
-									</c:if>
+				<c:if test="${b.changeName == null }">
+					<img id="Not_img" class="center-block" src="resources/images/emoticon.png">
+				</c:if>
 			</td>
 			
 			
@@ -206,7 +202,6 @@
 					</c:url>
 					<a href="${ reviewDetail}">[${b.caName}]</a><br><br>
 					<a href="${ reviewDetail}">${ b.boTitle }</a><br><br>
-					<a href="${ reviewDetail}">${ b.boContent }</a><br><br>
 					<p class="hashTag" id="hashTag${b.boNo }" style="display:none">${b.boTag }</p><br>
 					<input type="hidden" value=${b.boNo } id="hashTagVal${tag.index }" />
 				</c:if>
@@ -214,7 +209,6 @@
 				<c:if test="${ empty loginUser }">
 					[${b.caName}]<br><br>
 					${ b.boTitle }<br><br>
-					${b.boContent }<br><br>
 					${b.boTag }	<br><br>
 					
 					

@@ -9,7 +9,7 @@ section { margin: 0px auto; width:1300px; }
 
 #board{
 
-	margin-left:150px;
+	margin-left:125px;
 	width: 975px;
 	display: flex;
 	border-bottom: 4px solid #eee;
@@ -18,7 +18,8 @@ section { margin: 0px auto; width:1300px; }
 }
 #board_table{
 	
-    width: 950px;
+	border:1px solid black;
+    width: 1000px;
 
     border-collapse: collapse;
     
@@ -40,7 +41,6 @@ section { margin: 0px auto; width:1300px; }
 }
 
 .board_list{
-
     border-bottom: 2px solid #eee;
 
     padding: 15px;
@@ -99,16 +99,7 @@ section { margin: 0px auto; width:1300px; }
 #cate_btn{
 	padding-left:150px;
 }
-.cate_btn{
-	padding-right:5px;
-	width: 60px;
-	height: 30px;
-	border: none;
-	background: #77af82;
-	color: white;
-	border-radius: 3px;
-	margin-right:-7px;
-}
+
 button:hover{
 	font-weight:bold;
 	background: #77af82;
