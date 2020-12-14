@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import trip.two.reap.common.Attachment;
 import trip.two.reap.common.BoardException;
 import trip.two.reap.common.PageInfo;
+import trip.two.reap.travel.exception.TravelException;
 import trip.two.reap.travel.model.service.TravelService;
 import trip.two.reap.travel.model.vo.Pagination;
 import trip.two.reap.travel.model.vo.Travel;
@@ -40,7 +41,8 @@ public class TravelController {
 	private TravelService tService;
 	
 	@RequestMapping("tList.tv")
-	public ModelAndView goTravelList(@RequestParam(value="page", required=false) Integer page, HttpSession session, ModelAndView mv) { //파라미터는 url을 get방식으로 가져옴, 
+	public ModelAndView goTravelList(@RequestParam(value="page", required=false) Integer page, @RequestParam(value="addr", required=false) Integer addr, 
+									@RequestParam(value="theme", required=false) Integer theme ,HttpSession session, ModelAndView mv) { //파라미터는 url을 get방식으로 가져옴, 
 																	//page는 있을 수도 없을 수도 있는 변수임을 선언.
 		
 		
@@ -52,6 +54,14 @@ public class TravelController {
 			currentPage = page;	//현재 페이지에 page값을 집어넣음.
 		}
 		
+		if(addr != null) {
+			currentPage = addr;	//현재 페이지에 addr값을 집어넣음.
+		}
+		
+		if(theme != null) {
+			currentPage = theme;	//현재 페이지에 theme값을 집어넣음.
+		}
+		
 		int listCount = tService.getAllListCount(); //전체 게시글 갯수 가져오기.
 		
 		
@@ -59,14 +69,36 @@ public class TravelController {
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); // 페이징 관련 끝
 		
-		
+		//2020.12.13
+				//해시태그리스트의 리스트를 구한다.
+				// 리스트안에 구분자(,)로 split된 리스트를 저장.
+		ArrayList<ArrayList<String>> hashTagList= null;
 		
 		ArrayList<Travel> list = tService.selectList(pi);
 		
 		if(list != null) {
 			mv.addObject("list", list);
 			mv.addObject("pi", pi);
+			mv.addObject("hashTagList", hashTagList);
 			mv.setViewName("travelList");
+			
+			hashTagList= new ArrayList< ArrayList<String> >();
+			
+			for(Travel travel : list) {
+				if(travel.getBoTag()!=null) {
+					//boTag 컬럼이 null이 아니라면
+					//해시태그문자열을 구하여 -> split을하고 -> split한 리스트를 hashTagList에 넣는다.
+					ArrayList<String> oneTravelHashTagList= new ArrayList<String>();
+					String [] splitedHashTagStr= travel.getBoTag().split(", "); //해시태그 문자열을 ', ' 을 기준으로 split시켜서 문자열로 나타냄.
+					for(String hashTag: splitedHashTagStr) {
+						oneTravelHashTagList.add(hashTag);
+					}
+					hashTagList.add(oneTravelHashTagList);
+				}else {
+					//해시태그가 존재하지 않는다면 -> 일단 리스트에 널을 넣는다.
+					hashTagList.add(null);
+				}
+			}
 		} else {
 			throw new BoardException("여행지 전체 조회에 실패하였습니다.");
 		}
@@ -284,9 +316,8 @@ public class TravelController {
 	
 	
 	@RequestMapping("tUpdate.tv")
-	public String goTravelUpdate(@ModelAttribute Travel t, @ModelAttribute Attachment a, @RequestParam("page") int page, 
-									@RequestParam("reloadFile") MultipartFile reloadFile, 
-									HttpServletRequest request){
+	public ModelAndView goTravelUpdate(@ModelAttribute Travel t, @ModelAttribute Attachment a, @RequestParam("page") int page, 
+							@RequestParam("reloadFile") MultipartFile reloadFile, ModelAndView mv, HttpServletRequest request){
 				
 		
 		
@@ -301,18 +332,39 @@ public class TravelController {
 				a.setOriginName(reloadFile.getOriginalFilename());
 				a.setChangeName(changeName);
 			}
-			
+		}	
 			int result = tService.updateTravel(t);
+			int result2 = tService.updateFile(a);
+			int result3 = tService.updateBoard(t);
 			
-		}
 		
-		return null;
+		  if(result >  0 || result2 > 0 || result3 > 0) {
+			  mv.addObject("page", page).setViewName("redirect:tDetail.tv?boNo=" + t.getBoNo());
+		  } else {
+			  throw new BoardException("여행지 수정에 실패하였습니다.");
+		  }
+		
+		return mv;
 	}
 	
-	
 	 @RequestMapping("tDelete.tv")
-	 public String goTravelDelete() {
-		  return "travelDelete";
+	 public String goTravelDelete(@RequestParam("boNo") int boNo, @ModelAttribute Attachment a, HttpServletRequest request) {
+		 
+		 Travel t = tService.selectTravel(boNo);
+		 
+		 if(a.getOriginName() != null) {
+			 deleteFile(a.getChangeName(), request);
+		 }
+		 
+		 int result = tService.deleteTravel(boNo);
+		 int result2 = tService.deleteFile(boNo);
+		 if(result > 0 || result2 > 0) {
+			 return "redirect:tList.tv";
+		 } else {
+			 throw new BoardException("여행지 삭제에 실패하였습니다.");
+		 }
+		 
+		 
 	  }//여행지 삭제하기
 	
 	

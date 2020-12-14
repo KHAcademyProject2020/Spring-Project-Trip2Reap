@@ -1,11 +1,15 @@
 package trip.two.reap.member.model.dao;
 
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import trip.two.reap.member.model.vo.Mail;
 import trip.two.reap.member.model.vo.Member;
+import trip.two.reap.member.model.vo.MyTravel;
+import trip.two.reap.travel.model.vo.Travel;
 
 @Repository("mDAO")
 public class MemberDAO {
@@ -86,6 +90,22 @@ public class MemberDAO {
 
 	public int updateMember(SqlSessionTemplate sqlSession, Member member) {
 		return sqlSession.update("memberMapper.updateMember", member);
+	}
+
+	public int selectTravel(SqlSessionTemplate sqlSession, MyTravel myTravel) {
+		return sqlSession.selectOne("memberMapper.selectMyTravel", myTravel);
+	}
+
+	public int insertTravel(SqlSessionTemplate sqlSession, MyTravel myTravel) {
+		return sqlSession.insert("memberMapper.insertMyTravel", myTravel);
+	}
+
+	public ArrayList<Travel> selectTravelList(SqlSessionTemplate sqlSession, MyTravel myTravel) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectTravelList", myTravel);
+	}
+
+	public int deleteMyTravel(SqlSessionTemplate sqlSession, MyTravel myTravel) {
+		return sqlSession.delete("memberMapper.deleteMyTravel", myTravel);
 	}
 
 } // 클래스 종료

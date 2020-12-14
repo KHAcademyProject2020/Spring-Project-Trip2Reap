@@ -122,5 +122,39 @@
         set member_pwd=#{memberPwd}, member_names=#{memberName}, nickname=#{nickName}, member_email=#{email}, phone=#{phone}, gender=#{gender}
         where member_id=#{memberId} and m_category='member'
     </update>
+    
+    <select id="selectMyTravel" resultType="_int">
+        select count(*)
+        from mytravel
+        where bo_no=#{boNo} and member_id=#{memberId}
+    </select>
+    
+    <insert id="insertMyTravel">
+        insert into mytravel
+        values (#{boNo},#{memberId})
+    </insert>
+    
+    <select id="selectTravelList" resultMap="travelResultSet">
+        select bo_no, b.bo_title, b.bo_Tag, t.tr_theme, i.change_name, b.bo_count
+        from mytravel m
+             join board b using(bo_no)
+             join travel t using(bo_no)
+             join img_file i using(bo_no)
+        where m.member_id=#{memberId}
+    </select>
+    
+    <resultMap type="MyTravel" id="travelResultSet">
+        <id column="bo_no" property="boNo"></id>
+        <result column="bo_title" property="bo_title"/>
+        <result column="bo_Tag" property="bo_Tag"/>
+        <result column="tr_theme" property="tr_theme"/>
+        <result column="change_name" property="change_name"/>
+        <result column="bo_count" property="boCount"/>
+    </resultMap>
+    
+    <delete id="deleteMyTravel">
+        delete from mytravel
+        where bo_no=#{boNo} and member_id=#{memberId}
+    </delete>
 
 </mapper>

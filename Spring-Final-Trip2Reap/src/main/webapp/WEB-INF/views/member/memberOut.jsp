@@ -28,7 +28,7 @@
         <div>
             <div id="infor1"></div>
             <div id="infor2"></div>
-            <div id="infor3">회원 탈퇴</div>            
+            <div id="infor3"><i class="fas fa-user-slash" id="myDeleteIcon"></i>회원 탈퇴</div>            
         </div>
         <div id="up_space1"></div>    
         <div id="infoDiv1"></div>

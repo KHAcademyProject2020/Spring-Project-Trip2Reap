@@ -67,6 +67,26 @@ public class TravelServiceImpl implements TravelService{
 	public int updateTravel(Travel t) {
 		return tDAO.updateTravel(sqlSession, t);
 	}
+	
+	@Override
+	public int updateFile(Attachment a) {
+		return tDAO.updateFile(sqlSession, a);
+	}
+	
+	@Override
+	public int updateBoard(Travel t) {
+		return tDAO.updateBoard(sqlSession, t);
+	}
+
+	@Override
+	public int deleteTravel(int boNo) {
+		return tDAO.deleteTravel(sqlSession, boNo);
+	}
+
+	@Override
+	public int deleteFile(int boNo) {
+		return tDAO.deleteFile(sqlSession, boNo);
+	}
 
 
 	

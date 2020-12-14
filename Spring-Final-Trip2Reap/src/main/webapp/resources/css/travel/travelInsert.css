@@ -274,12 +274,13 @@
   
 #input-hashtag-btn:hover {
     background-color: snow;
+    cursor: pointer;
 }
 div.insert-common-container div {
     margin: 8px;
 }
 
-.insert-hashtag-wrapper, .saved-hashtags-wrapper {
+#insert-hashtag-wrapper, #saved-hashtags-wrapper {
     margin-left: 15px;
     display: inline-flex;
     vertical-align: middle;

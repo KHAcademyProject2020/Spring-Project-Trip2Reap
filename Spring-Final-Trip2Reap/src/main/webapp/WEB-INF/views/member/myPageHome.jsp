@@ -28,7 +28,7 @@
         <div>
             <div id="infor1"></div>
             <div id="infor2"></div>
-            <div id="infor3">호텔 예약 정보</div>            
+            <div id="infor3"><i class="fas fa-hotel" id="myHotelIcon"></i>호텔 예약 정보</div>            
         </div>
         <div id="up_space1"></div>
      </div>

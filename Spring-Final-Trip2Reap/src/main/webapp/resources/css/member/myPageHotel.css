@@ -10,6 +10,7 @@
           
      /* 호텔 예약 정보 설명란  */
      #infor1 { height: 50px; }
-     #infor2 { display: inline-block; width:560px; }
+     #infor2 { display: inline-block; width:540px; }
      #infor3 { display: inline-block; height: 50px; font-size: 30px; font-weight:bold; text-align: center; }
      #up_space1 { height : 30px; }
+     #myHotelIcon { font-size: 28px; margin-right: 8px; color: rgb(69,86,104); }

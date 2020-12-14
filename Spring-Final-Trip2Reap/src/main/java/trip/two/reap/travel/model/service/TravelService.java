@@ -22,6 +22,14 @@ public interface TravelService {
 
 	int updateTravel(Travel t);
 
+	int deleteTravel(int boNo);
+
+	int deleteFile(int boNo);
+
+	int updateFile(Attachment a);
+
+	int updateBoard(Travel t);
+
 	
 
 	/*
