@@ -133,5 +133,22 @@
         insert into mytravel
         values (#{boNo},#{memberId})
     </insert>
+    
+    <select id="selectTravelList" resultMap="travelResultSet">
+        select bo_no, b.bo_title, b.bo_Tag, t.tr_theme, i.change_name
+        from mytravel m
+             join board b using(bo_no)
+             join travel t using(bo_no)
+             join img_file i using(bo_no)
+        where m.member_id=#{memberId}
+    </select>
+    
+    <resultMap type="MyTravel" id="travelResultSet">
+        <id column="bo_no" property="boNo"></id>
+        <result column="bo_title" property="bo_title"/>
+        <result column="bo_Tag" property="bo_Tag"/>
+        <result column="tr_theme" property="tr_theme"/>
+        <result column="change_name" property="change_name"/>
+    </resultMap>
 
 </mapper>

@@ -1,8 +1,11 @@
 package trip.two.reap.member.model.service;
 
 
+import java.util.ArrayList;
+
 import trip.two.reap.member.model.vo.Member;
 import trip.two.reap.member.model.vo.MyTravel;
+import trip.two.reap.travel.model.vo.Travel;
 
 public interface MemberService {
 
@@ -43,5 +46,7 @@ public interface MemberService {
 	int selectTravel(MyTravel myTravel);
 
 	int insertTravel(MyTravel myTravel);
+
+	ArrayList<Travel> selectTravelList(MyTravel myTravel);
 
 }

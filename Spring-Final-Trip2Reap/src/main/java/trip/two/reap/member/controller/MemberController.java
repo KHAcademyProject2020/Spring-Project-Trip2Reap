@@ -1,6 +1,7 @@
 package trip.two.reap.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,6 +27,7 @@ import trip.two.reap.member.model.service.MemberService;
 import trip.two.reap.member.model.vo.Member;
 import trip.two.reap.member.model.vo.MyTravel;
 import trip.two.reap.member.naver.NaverLoginBo;
+import trip.two.reap.travel.model.vo.Travel;
 
 @SessionAttributes("loginUser")
 @Controller
@@ -259,8 +261,17 @@ public class MemberController {
 	
 	// 마이페이지 - 내가 담은 여행지
 	@RequestMapping("myPageTravel.me")
-	public String myPageTravel() {
-		return "myPageTravel";
+	public ModelAndView myPageTravel(ModelAndView mv, @RequestParam("hiddenId2") String memberId) {
+		MyTravel myTravel = new MyTravel();
+		myTravel.setMemberId(memberId);
+		
+		ArrayList<Travel> list = mService.selectTravelList(myTravel);
+		System.out.println("list : " + list);
+		
+		mv.addObject("list", list);
+		mv.setViewName("myPageTravel");
+	
+		return mv;
 	}
 	
 	

@@ -1,6 +1,7 @@
 package trip.two.reap.member.model.service;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 import javax.mail.MessagingException;
 
@@ -14,6 +15,7 @@ import trip.two.reap.member.mail.RandomKey;
 import trip.two.reap.member.model.dao.MemberDAO;
 import trip.two.reap.member.model.vo.Member;
 import trip.two.reap.member.model.vo.MyTravel;
+import trip.two.reap.travel.model.vo.Travel;
 
 @Service("mService")
 public class MemberServiceImpl implements MemberService{
@@ -144,6 +146,11 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int insertTravel(MyTravel myTravel) {
 		return mDAO.insertTravel(sqlSession, myTravel);
+	}
+	
+	@Override
+	public ArrayList<Travel> selectTravelList(MyTravel myTravel) {
+		return mDAO.selectTravelList(sqlSession, myTravel);
 	}
 
 } // 클래스 종료

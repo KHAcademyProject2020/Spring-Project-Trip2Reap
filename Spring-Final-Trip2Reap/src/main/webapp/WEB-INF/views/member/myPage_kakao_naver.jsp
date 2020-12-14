@@ -32,7 +32,7 @@
                 <li class="m1" onclick="mypageHotel();" onMouseOver="this.style.color='#123478';" onMouseOut="this.style.color=''">
                 <i class="fas fa-hotel" id="me1"></i>호텔 예약 정보</li>
                 
-                <li class="m1" onclick="mypageTravel();" onMouseOver="this.style.color='#123478';" onMouseOut="this.style.color=''">
+                <li class="m1" id="myTravel" onclick="mypageTravel();" onMouseOver="this.style.color='#123478';" onMouseOut="this.style.color=''">
                 <i class="fas fa-suitcase-rolling" id="me1"></i>내가 담은 여행지</li>
                 
                 <li class="m1" onclick="mypageCourse();" onMouseOver="this.style.color='#123478';" onMouseOut="this.style.color=''">
@@ -42,6 +42,9 @@
                 <i class="fas fa-user-slash" id="me1"></i>회원 탈퇴</li>
             </ul>
         </div> 
+        <form action="myPageTravel.me" method="post" id="myTravelList">
+            <input type="hidden" value="${ loginUser.memberId }" id="hiddenId2" name="hiddenId2"> 
+        </form>
      </section>
      
      <script>
@@ -49,9 +52,9 @@
     	 location.href="<%= request.getContextPath() %>/myPage.me";
      }
      
-     function mypageTravel(){
-    	 location.href="<%= request.getContextPath() %>/myPageTravel.me";
-     }
+     $("#myTravel").click(function(){
+    	 $('#myTravelList').submit(); 	 
+     });
      
      function mypageCourse(){
     	 location.href="<%= request.getContextPath() %>/myPageCourse.me";
