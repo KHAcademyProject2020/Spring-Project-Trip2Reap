@@ -266,7 +266,6 @@ public class MemberController {
 		myTravel.setMemberId(memberId);
 		
 		ArrayList<Travel> list = mService.selectTravelList(myTravel);
-		System.out.println("list : " + list);
 		
 		mv.addObject("list", list);
 		mv.setViewName("myPageTravel");
@@ -527,6 +526,24 @@ public class MemberController {
 			}
 		}
 		
+		return result;
+	}
+	
+	@RequestMapping("myTravelDelete.me")
+	@ResponseBody
+	public String deleteMyTravel(@RequestParam("boNo") String boNo2, @RequestParam("memberId") String memberId) {
+		String result = "";
+		int boNo = Integer.parseInt(boNo2);
+		
+		MyTravel myTravel = new MyTravel();
+		myTravel.setBoNo(boNo);
+		myTravel.setMemberId(memberId);
+		
+		int deleteResult = mService.deleteMyTravel(myTravel);
+		
+		if(deleteResult == 1) {
+			result = "Y";
+		} 
 		return result;
 	}
 	

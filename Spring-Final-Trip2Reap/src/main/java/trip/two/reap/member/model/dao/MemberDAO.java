@@ -104,4 +104,8 @@ public class MemberDAO {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectTravelList", myTravel);
 	}
 
+	public int deleteMyTravel(SqlSessionTemplate sqlSession, MyTravel myTravel) {
+		return sqlSession.delete("memberMapper.deleteMyTravel", myTravel);
+	}
+
 } // 클래스 종료

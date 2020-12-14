@@ -59,7 +59,13 @@
      }
      
      $("#myTravel").click(function(){
-    	 $('#myTravelList').submit(); 	 
+    	 var memberId = $('#hiddenId2').val();
+    	 
+    	 if(memberId==""){
+    		 swal("로그인 후 이용가능합니다🙋");
+    	 } else {
+    		 $('#myTravelList').submit();
+    	 }    	  	 
      });
      
      function mypageCourse(){

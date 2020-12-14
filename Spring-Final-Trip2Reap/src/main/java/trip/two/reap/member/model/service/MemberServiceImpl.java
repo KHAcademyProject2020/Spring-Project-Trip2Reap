@@ -152,5 +152,10 @@ public class MemberServiceImpl implements MemberService{
 	public ArrayList<Travel> selectTravelList(MyTravel myTravel) {
 		return mDAO.selectTravelList(sqlSession, myTravel);
 	}
+	
+	@Override
+	public int deleteMyTravel(MyTravel myTravel) {
+		return mDAO.deleteMyTravel(sqlSession, myTravel);
+	}
 
 } // 클래스 종료

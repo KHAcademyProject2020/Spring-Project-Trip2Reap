@@ -49,4 +49,6 @@ public interface MemberService {
 
 	ArrayList<Travel> selectTravelList(MyTravel myTravel);
 
+	int deleteMyTravel(MyTravel myTravel);
+
 }

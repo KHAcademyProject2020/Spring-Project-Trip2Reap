@@ -10,15 +10,19 @@
           
      /* 내가 담은 여행지 설명란  */
      #infor1 { height: 50px; }
-     #infor2 { display: inline-block; width:560px; }
+     #infor2 { display: inline-block; width:530px; }
      #infor3 { display: inline-block; height: 50px; font-size: 30px; font-weight:bold; text-align: center; }
      #up_space1 { height : 30px; }
+     #myTravelIcon { font-size: 32px; margin-right: 8px; color: rgb(69,86,104); }
      
      
      /* 리스트  */
      #list_all_div { margin: 20px auto 0px auto; padding: 10px 30px 1px 30px; width: 840px; background: #efefef; }
      #list_travel_div { width: 803px; padding: 15px 15px 13px 15px; background: white; display: flex; margin-bottom: 35px; }
      #travel_img{ width: 250px; height: 170px; }
+     #list_etc{ inline-flex; }
+     #travel_delete{ font-size: 20px; font-weight: 100; cursor: pointer; }
+     #travel_delete:hover{ font-size: 22px; font-weight: 900; }
      #travel_name_writer_div{ padding: 34px 91px 0px 35px; width: 404px; }
      #travel_no{ display : none; }
      #travel_name_writer_div{ padding: 34px 91px 0px 35px; width: 404px; }

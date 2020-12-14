@@ -151,5 +151,10 @@
         <result column="change_name" property="change_name"/>
         <result column="bo_count" property="boCount"/>
     </resultMap>
+    
+    <delete id="deleteMyTravel">
+        delete from mytravel
+        where bo_no=#{boNo} and member_id=#{memberId}
+    </delete>
 
 </mapper>
