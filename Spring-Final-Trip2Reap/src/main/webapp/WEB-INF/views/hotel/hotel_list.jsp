@@ -426,7 +426,7 @@
                                 <h5>호텔이름</h5>
                             </td>
                             <td>
-                                <input class="detail-search-option" name="hotel-name" id="hotel-name" type="text" autocomplete="off">
+                                <input class="detail-search-option" name="hotel-name" id="hotel-name" type="text" autocomplete="off" placeholder="호텔이름">
                             </td>
                         </tr>
                     </table>

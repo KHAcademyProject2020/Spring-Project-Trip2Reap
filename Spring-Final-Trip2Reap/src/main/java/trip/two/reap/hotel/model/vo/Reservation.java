@@ -20,27 +20,33 @@ public class Reservation {
 	private String refundCheck;		//환불확인 (필수)
 	
 	
-	//2020.12.13
+	//2020.12.15
+	//예약자 정보(이름, 전화번호, 이메일) 를 입력해야된다. 
+	//(카카오나 네이버 로그인의 경우에는 닉네임을 제외한 나머지정보가 null로 되어있다.
+	//컬럼이 중복되기는 하나, 멤버테이블에 영향을 주지않는다.
+	
+	private String reserveName; //예약자이름
+	private String reservePhone; //예약자전화번호
+	private String reserveEmail; //예약자 이메일
+	
+	//2020.12.15 
+	// 컬럼추가 (paymentUID, merchangUID, paymtentType, paymentAmount)
 	private String paymentUID; //고유id
 	
 	// 주문자 아이디(merchant_uid)
 	// 가맹점에서 생성/관리하는 고유주문번호
 	private String merchantUID;
 	private String paymentType; //결제수단종류
-	private int paymentAmount;//결제금액
-	private String cardApplyNumber;//카드승인번호
-	private String vBankNumber; //가상계좌 입금계좌 번호
-	private String vBankHolderName; //가상계좌 예금주
-	private Date vBankDepositPeriod; //가상계좌 입금기한
-	
+		
 	
 	public Reservation() {}
 
+
+
 	public Reservation(int reserveNo, String memberId, int boNo, int roomNo, int reservePrice, int reserveRoomCnt,
 			int reserveTotalPersonCnt, int reservePersonAdultCnt, int reservePersonChildCnt, Date checkInDate,
-			Date checkOutDate, String reserveCheck, String refundCheck, String paymentUID, String merchantUID,
-			String paymentType, int paymentAmount, String cardApplyNumber, String vBankNumber, String vBankHolderName,
-			Date vBankDepositPeriod) {
+			Date checkOutDate, String reserveCheck, String refundCheck, String reserveName, String reservePhone,
+			String reserveEmail, String paymentUID, String merchantUID, String paymentType) {
 		super();
 		this.reserveNo = reserveNo;
 		this.memberId = memberId;
@@ -55,131 +61,205 @@ public class Reservation {
 		this.checkOutDate = checkOutDate;
 		this.reserveCheck = reserveCheck;
 		this.refundCheck = refundCheck;
+		this.reserveName = reserveName;
+		this.reservePhone = reservePhone;
+		this.reserveEmail = reserveEmail;
 		this.paymentUID = paymentUID;
 		this.merchantUID = merchantUID;
 		this.paymentType = paymentType;
-		this.paymentAmount = paymentAmount;
-		this.cardApplyNumber = cardApplyNumber;
-		this.vBankNumber = vBankNumber;
-		this.vBankHolderName = vBankHolderName;
-		this.vBankDepositPeriod = vBankDepositPeriod;
+		
 	}
+
 
 
 	public int getReserveNo() {
 		return reserveNo;
 	}
 
+
+
 	public void setReserveNo(int reserveNo) {
 		this.reserveNo = reserveNo;
 	}
+
+
 
 	public String getMemberId() {
 		return memberId;
 	}
 
+
+
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
+
+
 
 	public int getBoNo() {
 		return boNo;
 	}
 
+
+
 	public void setBoNo(int boNo) {
 		this.boNo = boNo;
 	}
+
+
 
 	public int getRoomNo() {
 		return roomNo;
 	}
 
+
+
 	public void setRoomNo(int roomNo) {
 		this.roomNo = roomNo;
 	}
+
+
 
 	public int getReservePrice() {
 		return reservePrice;
 	}
 
+
+
 	public void setReservePrice(int reservePrice) {
 		this.reservePrice = reservePrice;
 	}
+
+
 
 	public int getReserveRoomCnt() {
 		return reserveRoomCnt;
 	}
 
+
+
 	public void setReserveRoomCnt(int reserveRoomCnt) {
 		this.reserveRoomCnt = reserveRoomCnt;
 	}
+
+
 
 	public int getReserveTotalPersonCnt() {
 		return reserveTotalPersonCnt;
 	}
 
+
+
 	public void setReserveTotalPersonCnt(int reserveTotalPersonCnt) {
 		this.reserveTotalPersonCnt = reserveTotalPersonCnt;
 	}
+
+
 
 	public int getReservePersonAdultCnt() {
 		return reservePersonAdultCnt;
 	}
 
+
+
 	public void setReservePersonAdultCnt(int reservePersonAdultCnt) {
 		this.reservePersonAdultCnt = reservePersonAdultCnt;
 	}
+
+
 
 	public int getReservePersonChildCnt() {
 		return reservePersonChildCnt;
 	}
 
+
+
 	public void setReservePersonChildCnt(int reservePersonChildCnt) {
 		this.reservePersonChildCnt = reservePersonChildCnt;
 	}
+
+
 
 	public Date getCheckInDate() {
 		return checkInDate;
 	}
 
+
+
 	public void setCheckInDate(Date checkInDate) {
 		this.checkInDate = checkInDate;
 	}
+
+
 
 	public Date getCheckOutDate() {
 		return checkOutDate;
 	}
 
+
+
 	public void setCheckOutDate(Date checkOutDate) {
 		this.checkOutDate = checkOutDate;
 	}
+
+
 
 	public String getReserveCheck() {
 		return reserveCheck;
 	}
 
+
+
 	public void setReserveCheck(String reserveCheck) {
 		this.reserveCheck = reserveCheck;
 	}
+
+
 
 	public String getRefundCheck() {
 		return refundCheck;
 	}
 
+
+
 	public void setRefundCheck(String refundCheck) {
 		this.refundCheck = refundCheck;
 	}
-	
-	
 
-	public String getPaymentType() {
-		return paymentType;
+
+
+	public String getReserveName() {
+		return reserveName;
 	}
 
 
 
-	public void setPaymentType(String paymentType) {
-		this.paymentType = paymentType;
+	public void setReserveName(String reserveName) {
+		this.reserveName = reserveName;
+	}
+
+
+
+	public String getReservePhone() {
+		return reservePhone;
+	}
+
+
+
+	public void setReservePhone(String reservePhone) {
+		this.reservePhone = reservePhone;
+	}
+
+
+
+	public String getReserveEmail() {
+		return reserveEmail;
+	}
+
+
+
+	public void setReserveEmail(String reserveEmail) {
+		this.reserveEmail = reserveEmail;
 	}
 
 
@@ -208,52 +288,18 @@ public class Reservation {
 
 
 
-	public int getPaymentAmount() {
-		return paymentAmount;
+	public String getPaymentType() {
+		return paymentType;
 	}
 
 
 
-	public void setPaymentAmount(int paymentAmount) {
-		this.paymentAmount = paymentAmount;
+	public void setPaymentType(String paymentType) {
+		this.paymentType = paymentType;
 	}
 
 
 
-	public String getCardApplyNumber() {
-		return cardApplyNumber;
-	}
-
-
-
-	public void setCardApplyNumber(String cardApplyNumber) {
-		this.cardApplyNumber = cardApplyNumber;
-	}
-
-
-	public String getvBankNumber() {
-		return vBankNumber;
-	}
-
-	public void setvBankNumber(String vBankNumber) {
-		this.vBankNumber = vBankNumber;
-	}
-
-	public String getvBankHolderName() {
-		return vBankHolderName;
-	}
-
-	public void setvBankHolderName(String vBankHolderName) {
-		this.vBankHolderName = vBankHolderName;
-	}
-
-	public Date getvBankDepositPeriod() {
-		return vBankDepositPeriod;
-	}
-
-	public void setvBankDepositPeriod(Date vBankDepositPeriod) {
-		this.vBankDepositPeriod = vBankDepositPeriod;
-	}
 
 	@Override
 	public String toString() {
@@ -262,11 +308,9 @@ public class Reservation {
 				+ ", reserveTotalPersonCnt=" + reserveTotalPersonCnt + ", reservePersonAdultCnt="
 				+ reservePersonAdultCnt + ", reservePersonChildCnt=" + reservePersonChildCnt + ", checkInDate="
 				+ checkInDate + ", checkOutDate=" + checkOutDate + ", reserveCheck=" + reserveCheck + ", refundCheck="
-				+ refundCheck + ", paymentUID=" + paymentUID + ", merchantUID=" + merchantUID + ", paymentType="
-				+ paymentType + ", paymentAmount=" + paymentAmount + ", cardApplyNumber=" + cardApplyNumber
-				+ ", vBankNumber=" + vBankNumber + ", vBankHolderName=" + vBankHolderName + ", vBankDepositPeriod="
-				+ vBankDepositPeriod + "]";
+				+ refundCheck + ", reserveName=" + reserveName + ", reservePhone=" + reservePhone + ", reserveEmail="
+				+ reserveEmail + ", paymentUID=" + paymentUID + ", merchantUID=" + merchantUID + ", paymentType="
+				+ paymentType + ", paymentAmount=" +  "]";
 	}
-
 	
 }

@@ -600,6 +600,14 @@ button.hotel-reserve-btn{
   margin-left: 10px;
 }
 
+
+#hotel-name{
+	padding: 8px 0;
+	padding-left: 2px;
+	margin-right: -2px;
+	width: 195px;
+}
+
 .detail-search-option:focus{
   outline: none;
 }

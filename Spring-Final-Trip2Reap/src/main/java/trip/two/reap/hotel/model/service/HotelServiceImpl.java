@@ -12,6 +12,7 @@ import trip.two.reap.common.PageInfo;
 import trip.two.reap.hotel.model.dao.HotelDAO;
 import trip.two.reap.hotel.model.vo.Hotel;
 import trip.two.reap.hotel.model.vo.Reply;
+import trip.two.reap.hotel.model.vo.Reservation;
 import trip.two.reap.hotel.model.vo.Room;
 
 @Service("hService")
@@ -214,12 +215,7 @@ public class HotelServiceImpl implements HotelService{
 		return hDAO.selectOneHotelMinPrice(sqlSession, hId);
 	}
 
-	
-	//2020.12.03 - 등급순 내림차순 정렬(폐기)
-	@Override
-	public ArrayList<Hotel> sortRankDescendent() {
-		return hDAO.sortRankDescendent(sqlSession);
-	}
+
 	
 	//2020.12.09 -등급순 내림차순 정렬
 	@Override
@@ -228,26 +224,13 @@ public class HotelServiceImpl implements HotelService{
 	}
 	
 	
-
-	//2020.12.03 - 평점순 내림차순 정렬(폐기)
-	@Override
-	public ArrayList<Hotel> sortPopularDescendent() {
-		return hDAO.sortPopularDescendent(sqlSession);
-	}
-	
 	//2020.12.09 - 평점순 내림차순 정렬
 	@Override
 	public ArrayList<Hotel> selectOrderedPopularityDescendent(PageInfo pi) {
 		return hDAO.selectOrderedPopularityDescendent(sqlSession, pi);
 	}
 	
-	
 
-	//2020.12.04 - 가격 높은 순 (폐기)
-//	@Override
-//	public ArrayList<Integer> getOrderedHighPriceBoNoList() {
-//		return hDAO.getOrderedHighPriceBoNoList(sqlSession);
-//	}
 	
 	//2020.12.09- 가격높은순
 	@Override
@@ -255,12 +238,7 @@ public class HotelServiceImpl implements HotelService{
 		return hDAO.selectOrderedHighPriceHotelList(sqlSession, pi);
 	}
 
-	
-	//2020.12.04 - 가격 낮은 순(폐기)
-//	@Override
-//	public ArrayList<Integer> getOrderedLowPriceBoNoList() {
-//		return hDAO.getOrderedLowPriceBoNoList(sqlSession);
-//	}
+
 	
 	//2020.12.09 -방가격 낮은순
 	@Override
@@ -333,10 +311,11 @@ public class HotelServiceImpl implements HotelService{
 		return hDAO.findHotelMaxPrice(sqlSession, boNo);
 	}
 
-
-
-	
-	
+	//2020.12.15 - 호텔예약등록하기
+	@Override
+	public int insertReservation(Reservation reservation) {
+		return hDAO.insertReservation(sqlSession, reservation);
+	}
 	
 
 }

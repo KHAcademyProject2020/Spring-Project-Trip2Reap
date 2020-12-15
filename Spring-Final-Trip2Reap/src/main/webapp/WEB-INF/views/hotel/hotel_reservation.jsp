@@ -776,55 +776,60 @@ $(function(){
 		let reserveMap=new Map();
 
 		//초기화 - 자동입력되어있는 항목
-		reserveMap.set('boNo', Number($('hotel_boNo').val()) )//호텔번호
+		reserveMap.set('boNo', Number($('#hotel_boNo').val()) )//호텔번호
 		reserveMap.set('hotel_name', $('#reserve_hotel_name').text().trim() ) //호텔이름
-		reserveMap.set('roomNo', Number($('hotel_roomNo').val()) )//객실번호
+		reserveMap.set('roomNo', Number($('#hotel_roomNo').val()) )//객실번호
 		reserveMap.set('room_name', $('#room_name').text().trim() )//객실이름
 		reserveMap.set('reserveRoomCnt', Number($('#reserve_room_cnt').text().trim()) )//예약 객실수
-		reserveMap.set('reserveAdultCnt', Number($('#reserve_adult_cnt').text().trim()) )//예약 성인수
-		reserveMap.set('reserveChildCnt', Number($('#reserve_child_cnt').text().trim()) )//예약 어린이수
+		reserveMap.set('reservePersonAdultCnt', Number($('#reserve_adult_cnt').text().trim()) )//예약 성인수
+		reserveMap.set('reservePersonChildCnt', Number($('#reserve_child_cnt').text().trim()) )//예약 어린이수
 		reserveMap.set('reserveTotalPersonCnt', Number($('#reserve_total_person_cnt').text().trim()) )//예약 총인원수
 		reserveMap.set('oneDayPrice', Number($('#_room_price_per_day').val()) ); // 1일 이용가격
 
+		
+		console.log(reserveMap.get('boNo'), reserveMap.get('roomNo'));
+		
 		//초기화 - 사용자가 직접입력해야되는 항목
 		//1. 체크인날짜
 		if($('#checkInSatePicker').val()!=''){
-			reserveMap.set('checkInDate', $('#checkInDatePicker').val());
+			//체크인 날짜가 존재하면
+			reserveMap.set('checkInDateStr', $('#checkInDatePicker').val() );
 		}else{
 			//체크인날짜가 존재하지 않음.
-			reserveMap.set('checkInDate', '') 
+			reserveMap.set('checkInDateStr', '') 
 		}
 		
 		//2. 체크아웃날짜
 		if($('#checkOutDatePicker').val()!=''){
-			reserveMap.set('checkOutDate', $('#checkOutDatePicker').val());
+			reserveMap.set('checkOutDateStr', $('#checkOutDatePicker').val() );
+			
 		}else{
 			//체크아웃 날짜가 존재하지 않는다면
-			reserveMap.set('checkOutDate', '');
+			reserveMap.set('checkOutDateStr', '');
 		}
 		
 		//실제가격
 		let hotelUsingPrice= Number( $('#_total_price').val()*reserveMap.get('reserveRoomCnt'));
 		console.log('호텔 이용가격=> '+ hotelUsingPrice);
-		reserveMap.set('hotelUsingPrice', hotelUsingPrice);
+		reserveMap.set('hotelUsingPrice', hotelUsingPrice); //호텔실제 이용가격
 		
 		
 		reserveMap.set('reserveTotalPrice', 100); //호텔이 너무 비싸서,,, 가격100 원으로 함. - 임시가격
 
 		reserveMap.set('memberId', $('#hotel_reserve_memberId').val().trim() ); //예약자 아이디
-		reserveMap.set('name',  $('#reservation_name').val() )//예약자이름
-		reserveMap.set('phone', $('#reservation_phone').val() )//예약자 전화번호
-		reserveMap.set('email', $('#reservation_email').val() )//예약자 이메일
+		reserveMap.set('reserveName',  $('#reservation_name').val() )//예약자이름
+		reserveMap.set('reservePhone', $('#reservation_phone').val() )//예약자 전화번호
+		reserveMap.set('reserveEmail', $('#reservation_email').val() )//예약자 이메일
 		
 		//체크인날짜, 체크아웃 날짜
 		//예약자이름, 전화번호, 이메일이 공백이 아닌지 확인.
-		let keyList=[ 'checkInDate', 'checkOutDate','name', 'phone', 'email'];
+		let keyList=[ 'checkInDateStr', 'checkOutDateStr','reserveName', 'reservePhone', 'reserveEmail'];
 		let keyMap=new Map([
-			['name', '이름'],
-			['phone', '전화번호'],
-			['email', '이메일'],
-			['checkInDate', '체크인 날짜'],
-			['checkOutDate', '체크아웃 날짜']
+			['reserveName', '이름'],
+			['reservePhone', '전화번호'],
+			['reserveEmail', '이메일'],
+			['checkInDateStr', '체크인 날짜'],
+			['checkOutDateStr', '체크아웃 날짜']
 		]);
 
 		let isAllWrite=true; //모두 작성됐는지 확인
@@ -841,7 +846,7 @@ $(function(){
 		if(!isAllWrite){
 			//입력사항 하나라도 누락했을때
 			//체크인/ 체크아웃 입력문제
-			if(errorKey=='checkOutDate' || errorKey=='checkInDate'){
+			if(errorKey=='checkOutDateStr' || errorKey=='checkInDateStr'){
 				swal({
 					title: '예약 실패',
 					icon: 'error',
@@ -864,6 +869,10 @@ $(function(){
 			//결제수단 선택
 			let select_payment_type=$('.payment_type:checked').val();
 			console.log('결제수단 :'+select_payment_type);
+			console.log(reserveMap.get('checkInDateStr'));
+			console.log(reserveMap.get('checkOutDateStr'));
+		
+			
 			
 			if(select_payment_type=='신용카드'){
 				//신용카드
@@ -875,24 +884,38 @@ $(function(){
 					merchant_uid: 'trip2reap_credit_'+new Date().getTime(), //주문번호
 					name: 'TRIP2REAP 호텔예약', //주문명
 					amount: reserveMap.get('reserveTotalPrice'), //판매가격
-					buyer_name: reserveMap.get('name'), //구매자 이름
-					buyer_email: reserveMap.get('email'), //구매자 email
-					buyer_tel: reserveMap.get('phone') //구매자 전화번호
+					buyer_name: reserveMap.get('reserveName'), //구매자 이름
+					buyer_email: reserveMap.get('reserveEmail'), //구매자 email
+					buyer_tel: reserveMap.get('reservePhone') //구매자 전화번호
 					
 				},function(rsp){
 					if(rsp.success){
-						//결제를 성공하면
+						//결제성공
+						
+						
 						//예약을 요청한다.
 						$.ajax({
 							url:'hotelReservation.ho',
+							type:'post',
 							data:{
-								// map형태로 데이터를 전달한다.
-								imp_uid: rsp.uid,
-								merchant_uid: rsp.merchant_uid,
-								pay_amount: hotelUsingPrice
+								boNo: reserveMap.get('boNo'),
+								roomNo: reserveMap.get('roomNo'),
+								reservePrice: reserveMap.get('hotelUsingPrice'),
+								reserveRoomCnt: reserveMap.get('reserveRoomCnt'),
+								reserveTotalPersonCnt: reserveMap.get('reserveTotalPersonCnt'),
+								reservePersonAdultCnt: reserveMap.get('reservePersonAdultCnt'),
+								reservePersonChildCnt: reserveMap.get('reservePersonChildCnt'),
 								
+								reserveName: reserveMap.get('reserveName'),
+								reservePhone: reserveMap.get('reservePhone'),
+								reserveEmail: reserveMap.get('reserveEmail'),
+								paymentUID: rsp.imp_uid,
+								merchantUID: rsp.merchant_uid,
+								paymentType: select_payment_type,
+								
+								checkInDateStr:  reserveMap.get('checkInDateStr'),
+								checkOutDateStr: reserveMap.get('checkOutDateStr'),
 							},
-							type: post,
 							success:function(response){
 								if(response=='success'){
 									swal({
@@ -902,6 +925,9 @@ $(function(){
 										button:'확인'
 										
 									});
+									
+									//결제성공하면 마이페이지 호텔예약정보로 리다이렉트
+									
 								}else{
 									swal({
 										icon:'error',
@@ -911,7 +937,8 @@ $(function(){
 									});
 								}
 							}
-						});
+						});//ajax코드 끝.
+						
 						
 					}else{
 						//결제실패
@@ -945,16 +972,30 @@ $(function(){
 				},function(rsp){
 					if(rsp.success){
 						//결제를 성공하면
-						var msg='결제가 완료되었습니다!';
-						msg+='고유id: '+ rsp.imp_uid;
-						msg+='예약호텔 id'+ rsp.merchant_uid;
-						msg+='결제금액: '+ rsp.paid_amound;
-						msg+='카드 승인번호: '+ rsp.apply_num;
-						
+						//예약을 요청한다.
 						$.ajax({
 							url:'hotelReservation.ho',
-							data:{},
-							success:function(){
+							type:'post',
+							data:{
+								boNo: reserveMap.get('boNo'),
+								roomNo: reserveMap.get('roomNo'),
+								reservePrice: reserveMap.get('hotelUsingPrice'),
+								reserveRoomCnt: reserveMap.get('reserveRoomCnt'),
+								reserveTotalPersonCnt: reserveMap.get('reserveTotalPersonCnt'),
+								reservePersonAdultCnt: reserveMap.get('reservePersonAdultCnt'),
+								reservePersonChildCnt: reserveMap.get('reservePersonChildCnt'),
+								
+								reserveName: reserveMap.get('reserveName'),
+								reservePhone: reserveMap.get('reservePhone'),
+								reserveEmail: reserveMap.get('reserveEmail'),
+								paymentUID: rsp.imp_uid,
+								merchantUID: rsp.merchant_uid,
+								paymentType: select_payment_type,
+								
+								checkInDateStr:  reserveMap.get('checkInDateStr'),
+								checkOutDateStr: reserveMap.get('checkOutDateStr'),
+							},
+							success:function(response){
 								if(response=='success'){
 									swal({
 										icon:'success',
@@ -963,6 +1004,9 @@ $(function(){
 										button:'확인'
 										
 									});
+									
+									//결제성공하면 마이페이지 호텔예약정보로 리다이렉트
+									
 								}else{
 									swal({
 										icon:'error',
@@ -972,7 +1016,7 @@ $(function(){
 									});
 								}
 							}
-						}); 
+						});//ajax코드 끝.
 					}else{
 						//결제실패
 						swal({
@@ -1002,16 +1046,30 @@ $(function(){
 				},function(rsp){
 					if(rsp.success){
 						//결제를 성공하면
-						var msg='결제가 완료되었습니다!';
-						msg+='고유id: '+ rsp.imp_uid;
-						msg+='예약호텔 id'+ rsp.merchant_uid;
-						msg+='결제금액: '+ rsp.paid_amound;
-						msg+='카드 승인번호: '+ rsp.apply_num;
-						
+						//예약을 요청한다.
 						$.ajax({
 							url:'hotelReservation.ho',
-							data:{},
-							success:function(){
+							type:'post',
+							data:{
+								boNo: reserveMap.get('boNo'),
+								roomNo: reserveMap.get('roomNo'),
+								reservePrice: reserveMap.get('hotelUsingPrice'),
+								reserveRoomCnt: reserveMap.get('reserveRoomCnt'),
+								reserveTotalPersonCnt: reserveMap.get('reserveTotalPersonCnt'),
+								reservePersonAdultCnt: reserveMap.get('reservePersonAdultCnt'),
+								reservePersonChildCnt: reserveMap.get('reservePersonChildCnt'),
+								
+								reserveName: reserveMap.get('reserveName'),
+								reservePhone: reserveMap.get('reservePhone'),
+								reserveEmail: reserveMap.get('reserveEmail'),
+								paymentUID: rsp.imp_uid,
+								merchantUID: rsp.merchant_uid,
+								paymentType: select_payment_type,
+								
+								checkInDateStr:  reserveMap.get('checkInDateStr'),
+								checkOutDateStr: reserveMap.get('checkOutDateStr'),
+							},
+							success:function(response){
 								if(response=='success'){
 									swal({
 										icon:'success',
@@ -1020,6 +1078,9 @@ $(function(){
 										button:'확인'
 										
 									});
+									
+									//결제성공하면 마이페이지 호텔예약정보로 리다이렉트
+									
 								}else{
 									swal({
 										icon:'error',
@@ -1029,7 +1090,7 @@ $(function(){
 									});
 								}
 							}
-						}); 
+						});//ajax코드 끝.
 					}else{
 						//결제실패
 						swal({
@@ -1040,10 +1101,10 @@ $(function(){
 						});
 					}
 				});
-			}
-		}
+			}//페이코끝
+		}//결제과정 모두끝.
 		
-	});
+	}); //버튼선택끝
 });
 
 

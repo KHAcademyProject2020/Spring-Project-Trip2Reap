@@ -434,4 +434,31 @@
 	FROM HOTEL_DETAIL_IMG_VIEW
 	WHERE BO_NO=#{boNo}
 	</select>
+	
+	<!--2020.12.15 - 호텔예약등록  -->
+	<insert id="insertReservation">
+	INSERT INTO 
+	HOTEL_RESERVATION 
+	VALUES(
+		SEQ_RESERVE_NO.NEXTVAL,
+		#{memberId},
+		#{boNo},
+		#{roomNo},
+		#{reservePrice},
+		#{reserveRoomCnt},
+		#{reserveTotalPersonCnt},
+		#{reservePersonAdultCnt},
+		#{reservePersonChildCnt},
+		#{checkInDate},
+		#{checkOutDate},
+		DEFAULT,
+		DEFAULT,
+		#{reserveName},
+		#{reservePhone},
+		#{reserveEmail},
+		#{paymentUID},
+		#{merchantUID},
+		#{paymentType}
+	)
+	</insert>
 </mapper>
