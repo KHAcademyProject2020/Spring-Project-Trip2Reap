@@ -927,6 +927,7 @@ $(function(){
 									});
 									
 									//결제성공하면 마이페이지 호텔예약정보로 리다이렉트
+									location.href="<%=request.getContextPath() %>/myPage.me";
 									
 								}else{
 									swal({
@@ -935,6 +936,8 @@ $(function(){
 										text:'호텔 예약을 실패하였습니다.',
 										button: '확인'
 									});
+									
+									location.href="hotelDetailView.ho?hId="+ reserveMap.get('boNo') +"&page=${page}"
 								}
 							}
 						});//ajax코드 끝.
@@ -948,6 +951,8 @@ $(function(){
 							text:'결제를 실패하였습니다.',
 							button: '확인'
 						});
+						
+						location.href="hotelDetailView.ho?hId="+ reserveMap.get('boNo') +"&page=${page}"
 					}
 						
 				});
@@ -1006,6 +1011,7 @@ $(function(){
 									});
 									
 									//결제성공하면 마이페이지 호텔예약정보로 리다이렉트
+									location.href="<%=request.getContextPath() %>/myPage.me";
 									
 								}else{
 									swal({
@@ -1014,6 +1020,8 @@ $(function(){
 										text:'호텔 예약을 실패하였습니다.',
 										button: '확인'
 									});
+									//예약실패 - 호텔 상세페이지로 이동
+									location.href="hotelDetailView.ho?hId="+ reserveMap.get('boNo') +"&page=${page}"
 								}
 							}
 						});//ajax코드 끝.
@@ -1025,6 +1033,8 @@ $(function(){
 							text:'결제를 실패하였습니다.',
 							button: '확인'
 						});
+						
+						location.href="hotelDetailView.ho?hId="+ reserveMap.get('boNo') +"&page=${page}"
 					}
 				});
 				
@@ -1080,7 +1090,7 @@ $(function(){
 									});
 									
 									//결제성공하면 마이페이지 호텔예약정보로 리다이렉트
-									
+									location.href="<%=request.getContextPath() %>/myPage.me";
 								}else{
 									swal({
 										icon:'error',
@@ -1088,6 +1098,9 @@ $(function(){
 										text:'호텔 예약을 실패하였습니다.',
 										button: '확인'
 									});
+									
+									//결제 실패시 호텔상세페이지로 리다이렉트
+									location.href="hotelDetailView.ho?hId="+ reserveMap.get('boNo') +"&page=${page}";
 								}
 							}
 						});//ajax코드 끝.
@@ -1099,6 +1112,8 @@ $(function(){
 							text:'결제를 실패하였습니다.',
 							button: '확인'
 						});
+						
+						location.href="hotelDetailView.ho?hId="+ reserveMap.get('boNo') +"&page=${page}"
 					}
 				});
 			}//페이코끝

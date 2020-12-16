@@ -276,7 +276,10 @@ public class HotelController {
 
 	// 호텔 디테일뷰 페이지로 이동
 	@RequestMapping("hotelDetailView.ho")
-	public ModelAndView goHotelDetailView(@RequestParam("hId") int hId, @RequestParam("page") int page, ModelAndView mv)throws HotelException {
+	public ModelAndView goHotelDetailView(@RequestParam("hId") int hId,
+			@RequestParam(value="page", required=false) int page, //12.17 추가
+			ModelAndView mv)throws HotelException 
+	{
 		//return "hotel_detail";
 
 		//hId에 해당하는 호텔을 구한다.
@@ -419,7 +422,10 @@ public class HotelController {
 	//2020.11.26
 	// 호텔 예약페이지로 이동
 	@RequestMapping("hotelReservationView.ho")
-	public ModelAndView goHotelReservationView(@RequestParam("hId") int hId, @RequestParam("roomId") int roomId, ModelAndView mv) throws HotelException {
+	public ModelAndView goHotelReservationView(@RequestParam("hId") int hId, 
+			@RequestParam("roomId") int roomId,
+			@RequestParam(value="page", required=false) int page,
+			ModelAndView mv) throws HotelException {
 		// hId에 해당하는 호텔정보가 존재하는지 확인한다.
 		Hotel hotelInfo=hService.selectOneHotel(hId);
 
@@ -438,6 +444,7 @@ public class HotelController {
 		}
 
 		mv.addObject("hotel", hotelInfo)
+		.addObject("page", page)
 		.addObject("room", roomInfo)
 		.setViewName("hotel_reservation");
 		return mv;

@@ -195,6 +195,7 @@
 					<c:if test="${loginUser.memberId!='admin' && roomCnt>0 && minPriceRoomId!=-1}">
 						<button id="go-reservation-btn">최저가 예약하기</button>
 						<input id="min-price-room-id" type="hidden" value="${minPriceRoomId }"/>
+						
 					</c:if>
 					<!--only administrator (관리자)  -->
 					<%--
@@ -333,6 +334,8 @@
 						                        		<div class="room-name-wrapper">
 						                        			<input id="room_no" type="hidden" value="${room.roomNo }"/>
 						                        			<input type="hidden" value="${room.boNo }"/>
+						                        			<%--12.17 --%>
+						                        			<input id="page_num" type="hidden" value="${page }"/>
 						                        			<h4>${room.roomName }</h4>
 						                        		</div>
 
@@ -369,17 +372,19 @@
    		$(function(){
    			let hId=$('#hotel-number').val();
    			let minPriceRoomId=$('#min-price-room-id').val();
+   			let page=$('#page_num').val();//12.17
 
    			//예약페이지로 이동하기
    			$('button.room-reservation-btn').click(function(){
 	   			let $targetContainer=$(this).closest('.one-room-price-info-container');
 	   			let roomId=$targetContainer.find('#room_no').val();
-	   			location.href="hotelReservationView.ho?hId="+hId+"&roomId="+roomId;
+	   			
+	   			location.href="hotelReservationView.ho?hId="+hId+"&roomId="+roomId+"&page="+page;
    			});
 
    			//최저가 예약페이지로 이동하기
    			$("#go-reservation-btn").click(function(){
-   				location.href="hotelReservationView.ho?hId="+hId+"&roomId="+minPriceRoomId;
+   				location.href="hotelReservationView.ho?hId="+hId+"&roomId="+minPriceRoomId+"&page="+page;
    			});
 
    		});
