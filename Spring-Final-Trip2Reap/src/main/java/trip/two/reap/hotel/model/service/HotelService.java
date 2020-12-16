@@ -7,6 +7,7 @@ import trip.two.reap.common.Attachment;
 import trip.two.reap.common.PageInfo;
 import trip.two.reap.hotel.model.vo.Hotel;
 import trip.two.reap.hotel.model.vo.Reply;
+import trip.two.reap.hotel.model.vo.Reservation;
 import trip.two.reap.hotel.model.vo.Room;
 
 
@@ -90,30 +91,20 @@ public interface HotelService {
 	//검색조건을 만족하는 호텔한개가 가진 방중 가장 싼 가격을 구한다.
 	int selectHotelMinPrice(int hId);
 
-	
-	//등급순 내림차순 정렬(폐기)
-	ArrayList<Hotel> sortRankDescendent();
+
 	//2020.12.09 - 등급순 내림차순 정렬
 	ArrayList<Hotel> selectOrderedRankDescendent(PageInfo pi);
 
-	
-	
-	//평점순 내림차순 정렬(폐기)
-	ArrayList<Hotel> sortPopularDescendent();	
+
 	//2020.12.09 - 평점순 내림차순 정렬
 	ArrayList<Hotel> selectOrderedPopularityDescendent(PageInfo pi);
 
 	
-	
-	
-	//가격이 가장 비싼 방가격 을 가진 호텔번호를 우선으로 정렬(폐기)
-	//ArrayList<Integer> getOrderedHighPriceBoNoList();
+
 	//2020.12.09 - 방가격 내림차순 정렬
 	ArrayList<Hotel> selectOrderedHighPriceHotelList(PageInfo pi);
 
 
-	//가격이 가장싼 방가격을 가진 호텔번호를 우선으로 정렬(폐기)
-	//ArrayList<Integer> getOrderedLowPriceBoNoList();
 	//2020.12.09- 방가격 오름차순 정렬
 	ArrayList<Hotel> selectOrderedLowPriceHotelList(PageInfo pi);
 
@@ -147,6 +138,9 @@ public interface HotelService {
 	//호텔리스트 수정피드백 반영
 	//2020.12.13 - 호텔리스트 - 가장비싼 객실가격을 구한다.
 	int findHotelMaxPrice(int boNo);
+
+	//2020.12.15 - 결제진행이 성공하면, 호텔예약테이블에 등록한다.
+	int insertReservation(Reservation reservation);
 
 
 

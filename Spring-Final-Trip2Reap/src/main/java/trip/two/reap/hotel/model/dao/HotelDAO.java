@@ -11,6 +11,7 @@ import trip.two.reap.common.Attachment;
 import trip.two.reap.common.PageInfo;
 import trip.two.reap.hotel.model.vo.Hotel;
 import trip.two.reap.hotel.model.vo.Reply;
+import trip.two.reap.hotel.model.vo.Reservation;
 import trip.two.reap.hotel.model.vo.Room;
 
 @Repository("hDAO")
@@ -276,6 +277,12 @@ public class HotelDAO {
 	//(1) 1개의 호텔이 보유한 객실중 가장 비싼 객실가격을 구한다.
 	public int findHotelMaxPrice(SqlSessionTemplate sqlSession, int boNo) {
 		return  sqlSession.selectOne("hotelMapper.findHotelMaxPrice", boNo);
+	}
+
+	//2020.12.15
+	//호텔예약하기
+	public int insertReservation(SqlSessionTemplate sqlSession, Reservation reservation) {
+		return sqlSession.insert("hotelMapper.insertReservation", reservation);
 	}
 
 	

@@ -3,8 +3,6 @@ package trip.two.reap.hotel.model.vo;
 import java.sql.Date;
 import java.util.ArrayList;
 
-import trip.two.reap.common.Attachment;
-
 public class Hotel {
 	// * 필수: NOT NULL
 	// * 선택: NULLABLE (NULL 가능) 

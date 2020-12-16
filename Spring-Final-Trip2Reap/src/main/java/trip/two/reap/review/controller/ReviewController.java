@@ -128,7 +128,9 @@ public class ReviewController {
 	}
 
 	@RequestMapping("reviewPhotoList.bo")
-	public ModelAndView reviewPhotoList(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv, String hashTag, String title, String content, String writer , String cate) {
+	public ModelAndView reviewPhotoList(@RequestParam(value = "page", required = false) Integer page,
+			HttpSession session, ModelAndView mv, String hashTag, String title, String content, 
+			String writer , String cate) {
 		HashMap<String, Object> searchList = new HashMap<String, Object>();
 
 		String search = "all";
@@ -203,7 +205,7 @@ public class ReviewController {
 		
 		if (list != null) {
 			mv.addObject("list", list);
-			mv.addObject("listSize", list.size());
+			mv.addObject("searchList", searchList);
 			mv.addObject("pi", pi);
 			mv.setViewName("reviewPhotoList");
 		} else {
