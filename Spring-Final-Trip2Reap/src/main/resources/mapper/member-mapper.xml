@@ -169,7 +169,7 @@
         join board b using(bo_no)
         join img_file i using(bo_no)
         where member_Id=#{memberId}
-        order by bo_no asc
+        order by bo_no desc
     </select>
     
     <resultMap type="Course" id="mCourseResultSet">
@@ -181,6 +181,25 @@
         <result column="course_day" property="courseDay"/>
         <result column="change_name" property="changeName"/>
         <result column="course_distance" property="distance"/>
+    </resultMap>
+    
+    <select id="selectReservation" resultMap="reservationResultSet">
+        select distinct bo_no,b.bo_title, r.reserve_price, r.reserve_total_person_cnt, r.check_in_date, r.check_out_date, r.reserve_name, i.change_name
+        from hotel_Reservation r
+        join img_file i using(bo_no)
+        join board b using(bo_no)
+        where r.member_id = #{memberId} and i.file_level = 1
+    </select>
+    
+    <resultMap type="MyHotel" id="reservationResultSet">
+        <id column="bo_no" property="boNo" />
+        <result column="bo_title" property="title"/>
+        <result column="reserve_price" property="price"/>
+        <result column="reserve_total_person_cnt" property="person"/>
+        <result column="check_in_date" property="checkIn"/>
+        <result column="check_out_date" property="checkOut"/>
+        <result column="reserve_name" property="name"/>
+        <result column="change_name" property="imageName"/>
     </resultMap>
 
 </mapper>

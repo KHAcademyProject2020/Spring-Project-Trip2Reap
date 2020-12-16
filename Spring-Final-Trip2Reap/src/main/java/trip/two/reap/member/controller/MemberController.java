@@ -29,6 +29,7 @@ import trip.two.reap.course.model.vo.CoursePagination;
 import trip.two.reap.member.kakao.KakaoAPI;
 import trip.two.reap.member.model.service.MemberService;
 import trip.two.reap.member.model.vo.Member;
+import trip.two.reap.member.model.vo.MyHotel;
 import trip.two.reap.member.model.vo.MyTravel;
 import trip.two.reap.member.naver.NaverLoginBo;
 import trip.two.reap.travel.model.vo.Travel;
@@ -210,10 +211,15 @@ public class MemberController {
 	}	
 	
 	
-	// 마이페이지 뷰로 이동
+	// 마이페이지 : 호텔예약내역 뷰로 이동
 	@RequestMapping("myPage.me")
-	public String myPageView() {
-		return "myPageHome";
+	@ResponseBody
+	public ModelAndView myPageView(ModelAndView mv, @RequestParam("hiddenId4") String memberId) {
+		ArrayList<MyHotel> list = mService.selectReservation(memberId);
+		mv.addObject("list", list);
+		mv.setViewName("myPageHome");
+	
+		return mv;
 	} // myPageView() 종료
 	
 	

@@ -16,6 +16,7 @@ import trip.two.reap.member.mail.MailHandler;
 import trip.two.reap.member.mail.RandomKey;
 import trip.two.reap.member.model.dao.MemberDAO;
 import trip.two.reap.member.model.vo.Member;
+import trip.two.reap.member.model.vo.MyHotel;
 import trip.two.reap.member.model.vo.MyTravel;
 import trip.two.reap.travel.model.vo.Travel;
 
@@ -168,6 +169,11 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public ArrayList<Course> selectCourseList(CoursePageInfo pi) {
 		return mDAO.selectCourseList(sqlSession, pi);
+	}
+	
+	@Override
+	public ArrayList<MyHotel> selectReservation(String memberId) {
+		return mDAO.selectReservation(sqlSession, memberId);
 	}
 
 } // 클래스 종료

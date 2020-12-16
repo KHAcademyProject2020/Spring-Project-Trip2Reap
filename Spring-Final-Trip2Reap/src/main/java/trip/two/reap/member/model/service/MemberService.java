@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import trip.two.reap.course.model.vo.Course;
 import trip.two.reap.course.model.vo.CoursePageInfo;
 import trip.two.reap.member.model.vo.Member;
+import trip.two.reap.member.model.vo.MyHotel;
 import trip.two.reap.member.model.vo.MyTravel;
 import trip.two.reap.travel.model.vo.Travel;
 
@@ -56,5 +57,7 @@ public interface MemberService {
 	int countList(String memberId);
 
 	ArrayList<Course> selectCourseList(CoursePageInfo pi);
+
+	ArrayList<MyHotel> selectReservation(String memberId);
 
 }

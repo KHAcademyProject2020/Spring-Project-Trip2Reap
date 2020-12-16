@@ -60,7 +60,7 @@
 							onMouseOver="this.style.color='#F2CA5E';"
 							onMouseOut="this.style.color=''">로그아웃</li>
 						<li class="topBar2_2" id="myPageBtn" onMouseOver="this.style.color='#F2CA5E';"
-							onMouseOut="this.style.color=''" onclick="myPage()">마이페이지</li>
+							onMouseOut="this.style.color=''">마이페이지</li>
 					</ul>
 				</div>
 			</c:if>
@@ -157,6 +157,9 @@
 	        <div id="login_spaceFoot"></div>
 		</div>
 		</div>
+		<form action="myPage.me" method="post" id="myReservation">
+            <input type="hidden" value="${ loginUser.memberId }" id="hiddenId4" name="hiddenId4"> 
+        </form>
 	</header>
 
 	<script>
@@ -172,9 +175,15 @@
       location.href="<%= request.getContextPath() %>/logout.me";
     }
       
-    function myPage(){
-      location.href="<%= request.getContextPath() %>/myPage.me";
-    } 
+    $("#myPageBtn").click(function(){  	 
+     var memberId = $('#hiddenId4').val();
+   	 
+   	 if(memberId==""){
+   		 swal("로그인 후 이용가능합니다🙋");
+   	 } else {
+   		 $('#myReservation').submit(); 
+   	 }    	 	 
+    }); 
     
     function searchId(){
   	   location.href="<%= request.getContextPath() %>/searchId.me";

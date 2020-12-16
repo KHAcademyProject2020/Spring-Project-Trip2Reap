@@ -17,8 +17,9 @@
      
      
      /* 리스트  */
-     #list_all_div { margin: 20px auto 0px auto; padding: 10px 30px 1px 30px; width: 840px; background: #efefef; }
-     #list_travel_div { width: 803px; padding: 15px 15px 13px 15px; background: white; display: flex; margin-bottom: 35px; }
+     #list_all_div { margin: 30px auto 0px auto; width: 840px; }
+     #list_travel_div { width: 803px; padding: 15px 15px 13px 15px; background: white; display: flex; margin-bottom: 35px; 
+                        box-shadow: 0 4px 10px 0 #bec2c9; transition : box-shadow .3s ease; }
      #travel_img{ width: 250px; height: 170px; }
      #list_etc{ inline-flex; }
      #travel_delete{ font-size: 20px; font-weight: 100; cursor: pointer; }

@@ -32,12 +32,20 @@
             <div id="infor3"><i class="fas fa-map-signs" id="myCourseIcon"></i>나만의 여행코스</div>            
         </div>
      </div>
-     
-     <div id="all_div">
+          
 	        <c:if test = "${ empty list }">
-				<div>조회결과가 없습니다.</div>
+	        <div id="all_div">
+	            <div id="emptyDiv">
+	            <div id="up_space1"></div>
+				<div id="emptyCourse">나의 여행코스 목록이 없습니다.</div>
+				<div id="up_space1"></div>
+				<button id="myCourseBtn">여행코스 보러가기</button>
+				<div id="up_space1"></div>
+				</div>
+			</div>
 			</c:if>
-			<c:forEach var="list" items="${ list }">
+			<div id="all_div2">
+			<c:forEach var="list" items="${ list }">			
 			    <div id="listDiv">
 			         <div id="listDiv2">
 			             <img src="resources/courseFiles/${ list.changeName }" id="listImg" />
@@ -103,5 +111,10 @@
      </section>
      
      <div style="height: 300px;"></div>
+     <script>
+          $('#myCourseBtn').click(function(){
+   	         location.href="<%= request.getContextPath() %>/courseList.co";
+          });
+     </script>
 </body>
 </html>

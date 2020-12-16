@@ -11,6 +11,7 @@ import trip.two.reap.course.model.vo.Course;
 import trip.two.reap.course.model.vo.CoursePageInfo;
 import trip.two.reap.member.model.vo.Mail;
 import trip.two.reap.member.model.vo.Member;
+import trip.two.reap.member.model.vo.MyHotel;
 import trip.two.reap.member.model.vo.MyTravel;
 import trip.two.reap.travel.model.vo.Travel;
 
@@ -119,6 +120,10 @@ public class MemberDAO {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("memberMapper.selectCourseList", pi, rowBounds);
+	}
+
+	public ArrayList<MyHotel> selectReservation(SqlSessionTemplate sqlSession, String memberId) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectReservation", memberId);
 	}
 
 

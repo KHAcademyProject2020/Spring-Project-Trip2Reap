@@ -20,7 +20,7 @@
         from course c
         join board b using(bo_no)
         join img_file i using(bo_no)
-        order by bo_no asc
+        order by bo_no desc
   </select>
   
   <resultMap type="Course" id="courseResultSet">
