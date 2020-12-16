@@ -211,7 +211,7 @@
    <update id="deleteReview">
        update board 
        set BO_DELETE_YN='Y'
-       where BO_NO=#{boNo} 
+       where bo_NO=#{boNo} 
    </update> 
    
    <insert id="insertReply">
@@ -222,7 +222,7 @@
     <update id="deleteReply">
        update reply 
        set RE_DELETE_YN='Y'
-       where BO_NO=#{boNo} 
+       where RE_NO=#{reNo} 
    </update> 
    
    <select id="selectReplyList" resultMap="replyResultSet">

@@ -11,11 +11,7 @@
  <script>
  $(document).ready(function(){
 	 
-// 	 alert(document.getElementById("hashTag57").innerHTML)
-// 	 alert($(".hashTag").length)
-// 	 alert("hashTag"+$('#hashTagVal0').val())
 	 var size = $(".hashTag").length
-// 	 alert(size)
 	 
 	 for(var i=0; i<size; i++){
 		 var hashTagName = document.getElementById(("hashTag"+$('#hashTagVal'+i).val())).innerHTML
@@ -28,11 +24,52 @@
 					var SpanId = ($('#hashTagVal'+i).val()+index)
 					
 					 $("#hashTag"+$('#hashTagVal'+i).val()).append("<span class='hashTagSpan' id="+SpanId+">#"+item+"</span>&nbsp;&nbsp;")
+			//	$('#cate_btn').append("<div>"+'hashParam'+"</div>" + "&nbsp;&nbsp;");
 				}
 				})
 
 		 
 	 }
+	 
+	 $(".hashTagSpan").click(function(){
+			var hashParam = document.getElementById($(this).attr('id')).innerHTML
+			hashParam = hashParam.split("#")
+			hashParam = hashParam[1]
+			
+			location.href = "reviewList.bo?hashTag="+hashParam;
+			alert(hashParam);
+			
+		
+
+			
+		})
+		
+	$(".search").click(function(){
+		
+		var search = $("select[name=search]").val()
+		if($('#search').val()== ""){
+			search = ""
+		} else{
+			
+		if(search == "작성자") {
+			search = "writer=" + $('#search').val()
+		}
+		if(search == "제목") {
+			search = "title=" + $('#search').val()
+			
+		}
+
+		if(search == "해쉬태그") {
+			search = "hashTag=" + $('#search').val()
+			
+		}
+
+		}
+		
+		location.href = "reviewList.bo?"+search;
+		
+	})
+		
 	$(".hashTag").css("display", "");
 	
 	$(".cate_btn").click(function(){
@@ -55,42 +92,9 @@
 		
 	})
 	
-	$(".hashTagSpan").click(function(){
-		var hashParam = document.getElementById($(this).attr('id')).innerHTML
-		hashParam = hashParam.split("#")
-		hashParam = hashParam[1]
-		
-		location.href = "reviewList.bo?hashTag="+hashParam;
-		
-	})
 	
-	$(".search").click(function(){
-		
-		var search = $("select[name=search]").val()
-// 		alert(search)
-		if($('#search').val()== ""){
-			search = ""
-		} else{
-			
-		if(search == "작성자") {
-			search = "writer=" + $('#search').val()
-		}
-		if(search == "제목") {
-			search = "title=" + $('#search').val()
-			
-		}
-
-		if(search == "해쉬태그") {
-			search = "hashTag=" + $('#search').val()
-			
-		}
-
-		}
-// 		alert(search)
-		
-		location.href = "reviewList.bo?"+search;
-		
-	})
+	
+	
 	
       $("#search").bind('keydown', function(key) {
                if (key.keyCode == 13) {
@@ -138,9 +142,9 @@
  
  </style>
 
-		
+<link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
 
-<title>Insert title here</title>
+<title>전국방방곡곡 | 여행후기</title>
 </head>
 <body>
 		<header>

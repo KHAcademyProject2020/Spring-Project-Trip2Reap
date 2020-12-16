@@ -26,7 +26,8 @@ public interface ReviewService {
 	int deleteReview(int boNo);
 
 	int addReply(Reply re);
-	int deleteReply(int boNo);
+	
+	int deleteReply(int reNo);
 
 	ArrayList<Reply> selectReply(int boNo);
 

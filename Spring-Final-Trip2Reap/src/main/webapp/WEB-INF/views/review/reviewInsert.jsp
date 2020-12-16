@@ -8,8 +8,8 @@
 <link rel="stylesheet" type="text/css"
 	href="resources/css/review/reviewInsert.css" />
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-
-<title>Insert title here</title>
+<link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
+<title>전국방방곡곡 | 여행후기</title>
 </head>
 <body>
 	<section>
@@ -32,13 +32,14 @@
 					<br> <br>
 					<div id="cate">
 
-						<select id="select_search" name="caCode" required="required">
+						 <select id="select_search" name="caCode" required="required">
 							<option>카테고리를 선택해주세요</option>
-							<option value="2">여행 코스</option>
+							
 							<option value="3">여행지</option>
 							<option value="4">맛집</option>
-							<option value="5">호텔</option>
-						</select>
+		
+						</select> 
+				
 
 					</div>
 					
@@ -63,12 +64,12 @@
 								<br>
 
 						<textarea id="contentForm" placeholder="내용을 입력해주세요" name="boContent" rows="40" cols="130" required="required"></textarea>
-							
+							<p>*태그는 최대 3개까지 등록가능합니다.</p>
 							<div class="hashTag">
 								
 								
 								<div  id="hashtag">
-						
+								
 								<input type="text" 
 								id="tag" placeholder="태그를 입력해 주세요" />
 								<input type="hidden" 
@@ -136,7 +137,7 @@
 		
 		//클릭시 배경 색 변환
 		$(function(){	
-			$('#tag').click(function(){$(this).css("background","#80ff80")})
+			$('#tag').click(function(){$(this).css("background","")})
 
 			
 		})

@@ -123,7 +123,7 @@ public class ReviewController {
 		} else {
 			throw new ReviewException("게시글 전체 조회에 실패 하였습니다.");
 		}
-		System.out.println(list);
+//		System.out.println(list);
 		return mv;
 	}
 
@@ -211,19 +211,24 @@ public class ReviewController {
 		} else {
 			throw new ReviewException("게시글 전체 조회에 실패 하였습니다.");
 		}
-		System.out.println(list);
+//		System.out.println(list);
 		return mv;
 	}
 
 	// 리뷰 상세보기로 이동
 
 	@RequestMapping("reviewDetail.bo")
-	public ModelAndView boardDetail(@RequestParam("boNo") int boNo, @RequestParam("page") int page, ModelAndView mv) {
+	public ModelAndView boardDetail(@RequestParam("boNo") int boNo, 
+									@RequestParam("page") int page, ModelAndView mv) {
 
 		Review review = rService.selectReview(boNo);
+		ArrayList<Reply> reply = rService.selectReply(boNo);
+		System.out.println(reply);
 
 		if (review != null) {
 			mv.addObject("review", review).addObject("page", page).setViewName("reviewDetail");
+//			mv.addObject("reply", reply).addObject("page", page).setViewName("reviewDetail");
+		
 		} else {
 			throw new ReviewException("게시글 상세보기에 실패하였습니다.");
 		}
@@ -324,7 +329,7 @@ public class ReviewController {
 		// int bId : requestParam 생략
 
 		ArrayList<Reply> list = rService.selectReply(boNo);
-
+//		System.out.println(list);
 		response.setContentType("application/json; charset=UTF-8");
 
 		GsonBuilder gb = new GsonBuilder();
@@ -356,8 +361,8 @@ public class ReviewController {
 		}
 
 		int result = rService.deleteReview(boNo);
-		int result2 = rService.deleteReply(boNo);
-		if (result > 0 || result2 > 0) {
+		
+		if (result > 0) {
 			return "redirect:reviewList.bo";
 		} else {
 			throw new ReviewException("게시물 삭제에 실패하였습니다.");
@@ -404,5 +409,20 @@ public class ReviewController {
 
 		return mv;
 	}
+	
+	@RequestMapping("deleteReply.bo")
+	public String deleteReply(@RequestParam("reNo") int reNo,HttpServletRequest request) {
+
+		
+		int result = rService.deleteReply(reNo);
+		System.out.println(result);
+		
+		if ( result > 0) {
+			return "redirect:reviewList.bo";
+		} else {
+			throw new ReviewException("게시물 삭제에 실패하였습니다.");
+		}
+	}
+
 
 }

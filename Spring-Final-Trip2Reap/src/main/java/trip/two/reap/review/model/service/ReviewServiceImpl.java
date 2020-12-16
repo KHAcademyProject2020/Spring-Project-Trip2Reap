@@ -78,8 +78,8 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 	
 	@Override
-	public int deleteReply(int boNo) {
-		return rDAO.deleteReview(sqlSession, boNo);
+	public int deleteReply(int reNo) {
+		return rDAO.deleteReply(sqlSession, reNo);
 	}
 
 	@Override

@@ -131,8 +131,8 @@
  
  </style>
 
-
-<title>Insert title here</title>
+<link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
+<title>전국방방곡곡 | 여행후기</title>
 </head>
 <body>
 
@@ -219,33 +219,29 @@
 									
 									<div class="top">
 									
-									<c:if test="${ !empty loginUser }">
+									
 									
 									<c:url var="reviewDetail" value="reviewDetail.bo">
 									<c:param name="boNo" value="${ b.boNo }"/>
 									<c:param name="page" value="${ pi.currentPage }"/>
 									</c:url>
-										
-										${ b.boTitle }<br>
-										<p class="hashTag" id="hashTag${b.boNo }" style="display:none">${b.boTag }</p><br>
-										<input type="hidden" value=${b.boNo } id="hashTagVal${tag.index }" />
-										
-						    		</c:if> 
+									
 						       
-						       		<c:if test="${ empty loginUser }">
+						       		
 											${ b.boTitle }<br>
-											${ b.boTag }
-									</c:if>
+										
+				
 									
 									</div>
 									
 									<div class="bottom">
+									<p class="hashTag" id="hashTag${b.boNo }" style="display:none">${b.boTag }</p><br>
+										<input type="hidden" value=${b.boNo } id="hashTagVal${tag.index }" />
 										
 									<i class="fas fa-eye"></i>&nbsp;${b.boCount}&nbsp;
 									<i class="fas fa-thumbs-up"></i>&nbsp;22&nbsp;
 									<i class="fas fa-comment-dots"></i>&nbsp;<b id="checkCount"></b>
-									<p class="hashTag" id="hashTag${b.boNo }" style="display:none">${b.boTag }</p><br>
-										<input type="hidden" value=${b.boNo } id="hashTagVal${tag.index }" />
+									
 									</div>
 									
 									<c:if test="${b.changeName != null }">

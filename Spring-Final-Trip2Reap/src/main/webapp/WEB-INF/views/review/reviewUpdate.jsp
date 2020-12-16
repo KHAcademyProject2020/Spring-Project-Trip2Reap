@@ -8,7 +8,8 @@
 <link rel="stylesheet" type="text/css"
 	href="resources/css/review/reviewInsert.css" />
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-<title>Insert title here</title>
+<link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
+<title>전국방방곡곡 | 여행후기</title>
 </head>
 <body>
 	<section>

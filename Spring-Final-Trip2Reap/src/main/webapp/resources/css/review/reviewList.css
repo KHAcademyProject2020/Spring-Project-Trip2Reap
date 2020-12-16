@@ -153,10 +153,18 @@ button:hover{
 }
 
 .hashTag{
-	color:#00ff00;
+	
+	color:darkblue;
 	font-weight:1000;
 	
 	
+}
+
+.hashTagSpan{
+	
+	border-radius:5px;
+	
+
 }
 
 #photozone{

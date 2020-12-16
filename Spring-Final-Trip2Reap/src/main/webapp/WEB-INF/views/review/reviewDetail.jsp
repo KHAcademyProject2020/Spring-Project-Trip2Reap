@@ -78,7 +78,7 @@
 		                <!--photo_container: 사진-->
 		                <c:if test="${review.changeName!=null }">
 			                <div id="photo_container" class="container">
-			                    <img src="resources/buploadFiles/${review.changeName}" width="600px;" height="500px;">
+			                    <img src="resources/buploadFiles/${review.changeName}" width="800px;" height="500px;">
 			                </div>
 		                </c:if>
 		
@@ -125,6 +125,8 @@
 		
 		                    <!--submit_reply: 덧글 작성버튼-->
 		                    <input id="submit_reply_btn" type="button" value="댓글작성">
+		                  
+		     
 		                </div>
 		            </div><!--reply_container: 댓글작성란 -->
 		
@@ -135,9 +137,13 @@
 		            <div id="write_review_container" class="container">
 		                <ul id="write_review_ul">
 		                    <li>
+		                     <c:if test="${loginUser.nickName eq review.nickName }">
 		                        <!--게시글 작성버튼 (회원 누구나)-->
-		                        <input id="write_review_btn" type="button" value="게시글 작성">
+		                       
+		                        <input id="write_review_btn" type="button" value="게시글 작성" onclick="location.href='reviewInsert.bo'">
+		          			</c:if>          
 		                    </li>
+		                    
 		                    
 		                    <c:url var="rupView" value="rupView.bo">
 		                    	<c:param name="boNo" value="${review.boNo }"/>
@@ -312,6 +318,7 @@
 	</section>
 	 --%>
 	
+
 	
 	
 <script>
@@ -322,6 +329,17 @@ function del(boNo) {
 		alert("삭제되었습니다");
 	}
 }
+
+function redel(reNo) {
+	var chk = confirm("정말 삭제하시겠습니까?");
+	if (chk) {
+		location.href='deleteReply.bo?reNo='+reNo;
+		alert("삭제되었습니다");
+		//alert('${reply.reNo}');
+		
+	}
+}
+
 
 </script>
 
@@ -340,7 +358,6 @@ $(function() {
 $('#submit_reply_btn').on('click', function() {
 	var reContent = $('#reply_content').val(); //댓글 내용	      
 	var boNo = ${review.boNo}; // 댓글이 달린 게시글 번호
-
 	// console.log("댓글 내용 : " + rContent);
 	// console.log("게시글 번호 : " + refBid);
 
@@ -376,6 +393,8 @@ function getReplyList() {
 				var $reDate;
 				var $delete
 				
+		
+				
 
 				$('#rCount').text('(' + data.length + ')');
 				$('#checkCount').text(+ data.length);
@@ -387,14 +406,18 @@ function getReplyList() {
 						$reContent = $('<td>').text(data[i].reContent);
 						$reDate = $('<td style="width:100px;>').text(data[i].reDate);
 						
+				
+						
+
 						//여기 코드 고쳐야될거같아요 규호씨!
 						//바로 밑에 줄에 있는 코드는 주석처리했어요!! del(${review.boNo}) 는 "댓글삭제"가 아니라 "게시글 삭제"인거같아요!
-						//$delete = $('<td>'+'<button onclick="del(${review.boNo})"></button>'+'</td>');
+					    $delete = $('<td>'+'<input type="button" id="deleteReplybtn" value="X" onclick="redel((\''+data[i].reNo+'\'))" />'+'</td>')
 						
 						
 						$tr.append($nickName);
 						$tr.append($reContent);
 						$tr.append($reDate);
+				    	$tr.append($delete);
 			
 						$tableBody.append($tr);
 						
