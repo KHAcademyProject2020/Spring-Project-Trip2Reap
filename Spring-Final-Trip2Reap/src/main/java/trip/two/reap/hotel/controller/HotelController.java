@@ -280,53 +280,32 @@ public class HotelController {
 			@RequestParam(value="page", required=false) int page, //12.17 추가
 			ModelAndView mv)throws HotelException 
 	{
-		//return "hotel_detail";
-
 		//hId에 해당하는 호텔을 구한다.
 		ArrayList<String>hashTagsList=null;
 		ArrayList<String>hotelOptionsList=null;
-
 		Hotel hotel=hService.selectOneHotel(hId);
 
-		
 		int roomCnt=0; 	// hId 호텔번호에 해당하는 호텔에 등록된 방 개수
 		int likeCnt=0;  // hId 호텔번호의 좋아요 개수 
 
 		//hId중 가장 싼 가격의 방번호를 구한다.
 		//여러개가 있다면 가장 첫번째꺼를 구하면된다.
 		int minPriceRoomId=-1; //초기화
-
-
-		//hId에 해당하는 방종류리스트를 구한다.
-		ArrayList<String>roomTypeList=null;
-
-		//방리스트맵 (키값: 방종류: roomType)
-		HashMap<String,ArrayList<Room>> roomMap=null;
-		
-		
-		// hId에 해당하는 리뷰댓글을 불러온다.
-		ArrayList<Reply> reviewList=null;
+		ArrayList<String>roomTypeList=null; //hId에 해당하는 방종류리스트를 구한다.
+		ArrayList<Reply> reviewList=null; // hId에 해당하는 리뷰댓글을 불러온다.
 		int reviewListCount =0; //리뷰개수
+		ArrayList<String> reviewNickNameList=null; // 리뷰작성자의 닉네임 리스트
+		Attachment thumbnailImg= null; //썸네일 이미지
+		ArrayList<Attachment> detailViewList= null; //디테일이미지 리스트
 		
-		// 리뷰작성자의 닉네임 리스트
-		ArrayList<String> reviewNickNameList=null;
-		
-		
-		//썸네일 이미지
-		Attachment thumbnailImg= null;
-		
-		//디테일이미지 리스트
-		ArrayList<Attachment> detailViewList= null;
+		HashMap<String,ArrayList<Room>> roomMap=null; //방리스트맵 (키값: 방종류: roomType)
 
 		if(hotel!=null) {
-			//hId에 해당하는 방의 개수를 구한다.
-			roomCnt= hService.getRoomListCount(hId);
-			
-			//hId에 해당하는 호텔의 좋아요 개수를 구한다.
-			likeCnt= hService.countHotelLike(hId);
+			roomCnt= hService.getRoomListCount(hId); //hId에 해당하는 방의 개수를 구한다.
+			likeCnt= hService.countHotelLike(hId); //hId에 해당하는 호텔의 좋아요 개수를 구한다.
 			
 			//해시태그 보여주기
-			if(hotel.getBoTag()!=null) {
+			if(hotel.getBoTag()!=null) { 
 				//해시태그가 null이 아니라면
 				hashTagsList=new ArrayList<String>();
 				String [] hashTagSplited= hotel.getBoTag().split(", ");
@@ -345,11 +324,9 @@ public class HotelController {
 			}
 
 			//호텔 방종류와 방
-			//방데이터가 존재한다면
-			if(roomCnt >0) {
+			if(roomCnt >0) { //방데이터가 존재한다면
 				//방종류 리스트를 구한다.
 				roomTypeList=hService.getRoomTypeList(hId); //방종류
-
 				roomMap=new HashMap<String, ArrayList<Room>>();
 
 				//방종류이름을 키값으로하고, 해당 방종류의 룸을 구한다.
@@ -357,46 +334,28 @@ public class HotelController {
 					HashMap<String, Object> roomInfoMap= new HashMap<String, Object>();
 					roomInfoMap.put("hId", hId);//방번호
 					roomInfoMap.put("type", type);//방종류
-
-					//방종류에 해당하는 방리스트를 구한다.
-					ArrayList<Room> roomList=hService.searchRoomTypeList(hId, roomInfoMap);
-
-					//방리스트를 맵에넣는다.
-					roomMap.put(type, roomList);
+					ArrayList<Room> roomList=hService.searchRoomTypeList(hId, roomInfoMap); //방종류에 해당하는 방리스트를 구한다.
+					roomMap.put(type, roomList); //방리스트를 맵에넣는다.
 				}
 
 				//2020.11.27
 				//가장 싼 방 데이터를 구한다.
-				//해당호텔에서 가장싼 가격을 구한다.
-				int minPrice= hService.findHotelMinPrice(hId);
-
-				//가장싼방의 개수가 여러개라면 그중 맨앞에꺼를 선택
-				HashMap <String, Object> minPriceInfoMap = new HashMap<String, Object>();
+				int minPrice= hService.findHotelMinPrice(hId); //해당호텔에서 가장싼 가격을 구한다.
+				HashMap <String, Object> minPriceInfoMap = new HashMap<String, Object>(); //가장싼방의 개수가 여러개라면 그중 맨앞에꺼를 선택
 				minPriceInfoMap.put("hId", hId);
 				minPriceInfoMap.put("minPrice", minPrice);
-
 				ArrayList<Integer> minPriceRoomList=hService.selectMinPriceRoomList(minPriceInfoMap);
 				minPriceRoomId= minPriceRoomList.get(0);
-
 			}
 			
-			
-			//리뷰리스트를 보여준다.
-			reviewList= hService.selectOneHotelReplyList(hId);
+			reviewList= hService.selectOneHotelReplyList(hId); //리뷰리스트를 보여준다.
 			if(reviewList!=null) {
 				reviewListCount=reviewList.size();
 			}
 			
-			
-			//리뷰작성자 닉네임 리스트 
-			reviewNickNameList= hService.selectOneHotelReplyNickNameList(hId);
-			
-		
-			//썸네일 이미지 보여주기
-			thumbnailImg= hService.selectOneHotelThumbnailImg(hotel.getBoNo());
-			
-			//디테일이미지 리스트보여주기
-			detailViewList=hService.selectDetailImgList(hotel.getBoNo());
+			reviewNickNameList= hService.selectOneHotelReplyNickNameList(hId); //리뷰작성자 닉네임 리스트 
+			thumbnailImg= hService.selectOneHotelThumbnailImg(hotel.getBoNo()); //썸네일 이미지 보여주기
+			detailViewList=hService.selectDetailImgList(hotel.getBoNo()); //디테일이미지 리스트보여주기
 			
 			mv.addObject("hotel", hotel)
 			.addObject("page",page)
