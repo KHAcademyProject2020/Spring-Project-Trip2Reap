@@ -1,6 +1,4 @@
 @charset "UTF-8";
-
-
 /* 전체 div */
 #all_div {
     margin: 80px auto 0px auto;
@@ -58,10 +56,10 @@
     padding-bottom: 1px;
 }
 
-#travel_table{
-	text-align: left;
-	margin: 15px 0px 0px 0px;
-	padding: 15px 0px 8px 15px;
+#travel_table {
+    text-align: left;
+    margin: 2px 0px 0px 13px;
+    padding: 15px 0px 8px 15px;
 }
 
 #travel_table td{
@@ -72,7 +70,7 @@
 
 #info_ment_div{
     height: 70px;
-    padding: 15px 15px 0 15px;
+    padding: 23px 15px 0 23px;
 }
 
 
@@ -112,10 +110,17 @@
 
 .hashtag {
     padding: 5px;
-    border-radius: 10px;
-    background: rgb(119, 175, 130);
-    color: white;
+    /* border-radius: 10px; */
+    /* background: gray; */
+    /* color: white; */
+    height: 14px;
+    border-bottom-style: solid;
+    border-bottom-color: mediumseagreen;
     font-size: small;
+    /* border-left-style: groove; */
+    /* border-right-style: groove; */
+    display: -webkit-inline-box;
+    margin-left: 10px;
 }
 
 
@@ -128,7 +133,7 @@
 #travel_content {
     resize: none;
     padding: 10px;
-    width: 828px;
+    width: 800px;
     color: #333;
     font-size: 15px;
     line-height: 1.7;
@@ -177,8 +182,6 @@
 }
 
 
-
-
 /* 사진 첨부하는 영역 */
 #pictureTable{
 	font-size: 18px;
@@ -187,18 +190,26 @@
 /* 첨부파일 테두리 */
 .pictureArea{
 	/* border: 2px dashed darkgray; */
-	width: 207px;
-	height: 150px;
+	width: 797px;
+	height: 206px;
 	/* margin: 0px; */
 	display: inline-flex;
-	margin: 10px 20px 10px 60px;
+	margin: 10px 20px 10px 42px;
 	background: url("../../../resources/images/noImage.png");
 	background-size: 30px;
 	background-repeat-x: no-repeat;
 	background-repeat-y: no-repeat;
 	background-position: center;
+	resize: none;
+	/* text-align: center; */
 	/* background-color: snow; */
 }
+
+.pictureArea:hover{
+
+     background-color: snow; 
+}
+
 
 /* 첨부파일 위에서 마우스 커서 바꾸기 */
 #titleImgArea:hover, 
@@ -222,8 +233,10 @@
 }
 
 #titleImg{
-	width: 207px;
-	height: 150px;
+	/* width: 903px; */
+	/* height: 180px; */
+	width: 797px;
+	height: 206px;
 }
 
 #contentImg1, #contentImg2, #contentImg3{
@@ -233,9 +246,10 @@
 	
 	
 #titleImgTxt{
-	display: inline-flex;
-	margin: 10px 23px 10px 122px;
-	width: 180px;
+	/* display: inline-flex; */
+	margin: 1px 23px 10px 38px;
+	width: 192px;
+	font-size: small;
 }	
 
 #contentImgTxt{
@@ -246,26 +260,24 @@
 
 .pictureName{
 	color: black;
+	width: 200px;
 	/* background-color: snow; */
 }
+
 
 /* 해쉬태그 시작 */
 
 #menu_hash{
 	display: inline-flex;
-	margin-left: 32px;
+	margin-left: 45px;
 }
 
 
 #input-hashtag {
     margin-left: -1px;
     padding: 5px;
-    /* border-radius: 1px; */
-    /* border-color: transparent; */
     width: 200px;
     position: absolute;
-    /* 
-    text-decoration: underline; */
     height: 12px;
 }
 
@@ -281,12 +293,13 @@
   
 #input-hashtag-btn:hover {
     background-color: snow;
+    cursor: pointer;
 }
 div.insert-common-container div {
     margin: 8px;
 }
 
-.insert-hashtag-wrapper, .saved-hashtags-wrapper {
+#insert-hashtag-wrapper, #saved-hashtags-wrapper {
     margin-left: 15px;
     display: inline-flex;
     vertical-align: middle;
@@ -314,6 +327,53 @@ div.insert-common-container div {
 #delete_hash:hover{
 	cursor: pointer;
 }
+
+.hashTag{
+	display: inline-flex;
+
+}
+
+input#sample6_address {
+    height: 19px;
+    border: none;
+    outline: none;
+}
+input[type="button"] {
+    height: 24px;
+    width: 100px;
+}
+input#sample6_postcode {
+    height: 19px;
+    /* background-color: #eee; */
+    outline: none;
+    border: none;
+}
+input#sample6_extraAddress {
+    height: 19px;
+    border: none;
+    outline: none;
+}
+#tag{
+		margin-left: 14px;
+		height:19px;
+		padding-left: 1px;
+		outline: none;
+		width: 166px;
+}
+
+
+#member_id{
+	display : none;
+}
+
+
+#search_region{
+	width: 250px;
+	height: 19px;
+	padding-left: 7px;
+}
+
+
 
 /* input이나 button 클릭 시 outline 제거 */
 #travel_name, #select_theme, #select_region, 

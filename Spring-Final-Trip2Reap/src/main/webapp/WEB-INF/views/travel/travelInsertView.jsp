@@ -4,11 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/travel/travelInsert.css"/>
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/travel/travelInsert.css"/>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>전국방방곡곡 | 여행지 작성</title>
 </head>
 <body>
 <section>
@@ -29,7 +29,6 @@
 		<!-- 작성하기 div 시작 -->
 		<div id="insert_div">
 			<div id="info_ment_div">
-		
 				<span class="astro_span">*은 필수 입력 사항입니다.</span>
 			</div>
 			
@@ -45,11 +44,11 @@
 				<img id="contentImg2"/>
 			</div> -->
 			
-			<!-- <div id="titleImgTxt">
+			<div id="titleImgTxt">
 				<div class="pictureName">
 					<span class="astro_span">*</span>대표이미지를 첨부해주세요.
 				</div>
-			</div> -->
+			</div>
 			<!-- <div id="contentImgTxt">
 				<div class="pictureName">내용이미지1</div>
 			</div>
@@ -59,16 +58,14 @@
 			
 			
 			<input type="text" id="member_id" name="memberId" value="${ loginUser.memberId }"/>
-			<!-- <input type="text" id="member_id" name="boDeleteYN" value=""/ -->
 			
 			
 			<!-- 작성하기 table 시작 -->	
 			<table id="travel_table">
 				<tr>
 			   		 <td>
-			   			 <span class="astro_span">*</span><span>사진첨부</span></td>
+			   			 <span class="astro_span">*</span><span>사진 첨부</span></td>
 			   		 <td colspan="6">
-			   			
 						<span id="span_text">&nbsp;&nbsp;&nbsp;&nbsp;이미지파일(PNG, JPG)만 첨부 가능합니다.</span>
 			   		 </td>
 				</tr>
@@ -125,10 +122,10 @@
 					</td>
 					<td colspan="6"> <!-- 카카오 주소 API -->
 						<input type="text" id="sample6_postcode" placeholder="우측 버튼을 눌러주세요" readonly="readonly">
-						<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br><br>
+						<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기🏠"><br><br>
 						<input type="text" id="sample6_address" placeholder="주소" name="trAddr" readonly="readonly">
 						<input type="hidden" id="sample6_detailAddress" placeholder="상세주소"> 
-						<input type="text" id="sample6_extraAddress" placeholder="상세주소">
+						<input type="text" id="sample6_extraAddress" placeholder="상세주소" readonly="readonly">
 
 					</td>
 				</tr>
@@ -136,43 +133,21 @@
 			</table>
 			
 			
+			<!-- 해쉬태그 입력창 -->
 			<div id="menu_hash">해쉬태그</div>
-			
-			<!-- <div id="hashTag">
-			해쉬태그 입력창
-				<div class="insert-hashtag-wrapper">
-					<input type="text" id="input-hashtag"  placeholder="#해시태그를 입력해주세요." name="boTag" autocomplete="off">
-					<input type="button" id="input-hashtag-btn" value="등록">
-					<input type="hidden" name="boTag" id="hashtagInput" />
-				</div>	
-			</div> -->
 			<div class="hashTag">
 				<div  id="hashtag">
 					<input type="text" id="tag" placeholder="#태그입력 후 enter로 추가" />
 					<input type="hidden" name="boTag" id="hashtagInput" />
 				</div>
 			</div>
-			<!-- 등록된 해시태그들을 모으는 곳. -->
-			<!-- <div class="saved-hashtags-wrapper"> -->
-				<!-- 해시태그가 존재하지 않으면 -->
-				<!-- <p id="no-hashtag"><small>등록된 해시태그가 없습니다.</small></p> -->
-				<!-- 해시태그가 존재한다면 -->
-				<!-- <div id="saved-hashtags"> -->
-					<!-- <li><small>#해시태그1<button id="delete_hash">⛔</button></small></li>
-					<li><small>#해시태그2<button id="delete_hash">⛔</button></small></li>
-					<li><small>#해시태그3<button id="delete_hash">⛔</button></small></li> -->
-			<!-- 	</div>
-			</div> -->	
-			<%-- 	
-				실제해시태그 등록
-				<input id="savedHashTagStrings" type="hidden" name="boTag"/>
-			</div> --%>
+
 	
 			 <div id="travel_content_div">
 				<textarea rows="20" cols="125" id="travel_content" name="boContent" maxlength="2000"></textarea>
 				  <div id="text_count_div">
 					<span>현재 글자 수 </span>
-					<span id="text_count">0</span>
+					<span id="text_count">$(${ travel.boContent }).length()</span>
 					<span>자 / 최대 글자 수 2000자</span>
 				 </div>
 			</div>
@@ -205,12 +180,12 @@
    			$("#titleImgArea").click(function(){
    				$("#thumbnailImg1").click();
    			});
-   			$("#contentImgArea1").click(function(){
+/*    			$("#contentImgArea1").click(function(){
    				$("#thumbnailImg2").click();
    			});
    			$("#contentImgArea2").click(function(){
    				$("#thumbnailImg3").click();
-   			});
+   			}); */
    		});
    		
    		  // 이미지 업로드 함수
@@ -347,6 +322,8 @@
 	</script>
    
     <script type="text/javascript">
+    
+    
  // 칸 미입력 시 뜨는 창 ------------------------------------------------------------------	
    
     	  
@@ -360,32 +337,32 @@
 			var theme = $('#select_theme');
 		
 			if(!thumbnail.val()){
-				swal("", "대표사진을 첨부해주세요", "info");
+				swal("대표사진을 첨부해주세요💦");
 				thumbnail.focus();
 				return false;
 			}
 			if(title.val().trim().length<1){
-				swal("","여행지명을 입력해주세요","info");
+				swal("여행지명을 입력해주세요💦");
 				title.focus();
 				return false;
 			}
 			if(addr.val() == 0){
-	   			swal("", "지역을 선택해주세요", "info");
+				swal("지역을 선택해주세요💦");
 	   			addr.focus();
 	   			return false;
 	   		}
 			if(theme.val() == 0){
-	   			swal("", "테마를 선택해주세요", "info");
+				swal("테마를 선택해주세요💦");
 	   			theme.focus();
 	   			return false;
 	   		}
 			if(add.val() == 0){
-	   			swal("", "주소를 입력해주세요", "info");
+				swal("주소를 입력해주세요💦");
 	   			add.focus();
 	   			return false;
 	   		}
 			if(content.val().trim().length<1){
-				swal("","내용을 입력해주세요","info");
+				swal("내용을 입력해주세요💦");
 				content.focus();
 				return false;
 			}
@@ -405,11 +382,6 @@
 			
 
    </script>
-	
-	
-
-
-
 </section>		
 </body>
 </html>

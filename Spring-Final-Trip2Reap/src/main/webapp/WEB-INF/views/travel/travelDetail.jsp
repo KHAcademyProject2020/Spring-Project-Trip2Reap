@@ -46,15 +46,12 @@
 			
 			<!-- 여행지 내용 부분 시작 -->
 			<div id="travel_content">
-		<%-- 		<c:forEach var="imageFileName" items="${ t.fileList }"> --%>
-				<!-- <img src="resources/images/송도.JPG" id="content_img"/> -->
-				
 				<img src="${ contextPath }/resources/travelFiles/${ travel.changeName }" id="content_img"/>
 					<!-- a태그 안에서 다운로드 받을 것이 있을 때 쓰는 속성 download, 얘는 download="fileName" 이라고 해서 fileName을 지정해줄 수 있다. -->
-				<!-- <img src="resources/images/송도2.JPG" id="content_img2"/> -->
-				<div id="content_img2">👍부담없이 감상하는 백만 불짜리 야경👍</div>
+				
+				<span id="content_img2">👍부담없이 감상하는 백만 불짜리 야경👍</span>
 				<div id="content_img3">${ travel.boContent }</div>
-				<%-- </c:forEach> --%>
+				
 				
 				
 					<div id="last_div">
@@ -65,22 +62,28 @@
 						<div id="info_left"><i class="fas fa-map-marker-alt"></i>  ${ travel.trAddr }</div>
 						<div id="info_right"><i class="fas fa-phone-alt"></i>  032-832-3031</div>
 					</div>
-			
-				<%--  <div id="hashtag_div">
-					<a href=" ${pageContext.request.contextPath}/tList.tv">${ travel.boTag } </a>&nbsp;&nbsp; --%>
-					<!-- 해시태그 -->
-		                        <c:if test="${travel.boTag !=null }">
-			                        <div id="hashtag_container" class="container">
-			                           	${travel.boTag }
-			                        </div>
-		                        </c:if>
-<%--						<a href=" ${pageContext.request.contextPath}/tList.tv">#${ travel.boTag }</a>&nbsp;&nbsp;
- 						<a href=" ${pageContext.request.contextPath}/tList.tv">#${ travel.boTag }</a>&nbsp;&nbsp;
-						<a href=" ${pageContext.request.contextPath}/tList.tv">#${ travel.boTag }</a>&nbsp;&nbsp;
-						<a href=" ${pageContext.request.contextPath}/tList.tv">#${ travel.boTag }</a>&nbsp;&nbsp; --%>
-				</div> 
-					<br><br>
-				<hr>
+				<!-- 해시태그 -->
+		                        
+			                        
+			                           	
+		          <c:if test="${travel.boTag !=null }">              
+					<div id="hashtag_container" class="container">
+						<p class="hashTag" id="hashTag${ travel.boNo }" style="display:none"></p>
+						<input type="hidden" value=${ travel.boNo } id="hashTagVal" />
+							<script>
+								var hashTag = "${ travel.boTag }";
+								var hash = hashTag.split('#');
+								var size = hash.length;
+								for(var i=1; i < size; i++){
+									console.log(hash[i]);
+									$('.hashTag').append("<span class='hashTagSpan'>#"+hash[i]+"</span>&nbsp;&nbsp;")
+								}
+								$(".hashTag").css("display", "");
+							</script>
+					</div>
+				</c:if>
+			</div> 
+			<hr>
 				
 				
 				<c:url var="tUpview" value="tUpview.tv">
@@ -92,33 +95,28 @@
 				</c:url>
 				
 				
-			<c:choose>	
-				<c:when test="${loginUser.memberId=='admin' }"> <!-- 관리자만 수정/삭제 할 수 있다. -->
-					<div id="button_div">
-						<button id="button_update" onclick="location.href='${ tUpview }'">수정하기</button>
-								
-					<%-- 	<button id="button_delete" onclick="location.href='${ tDelete }'">삭제하기</button> --%>
-								<button id="button_delete" onclick="del(${ travel.boNo })">삭제하기</button>
-					</div>			
-				</c:when>
-				<c:otherwise>
-					<div id="button_div2">
-						<img src="resources/images/btn_return_to_list.jpg" onclick="location.href='${pageContext.request.contextPath}/tList.tv'">
-					</div>
-				</c:otherwise>
-			</c:choose>	
+				
+				
+				<!-- 관리자만 수정/삭제 할 수 있다. -->
+				<c:choose>	
+					<c:when test="${loginUser.memberId=='admin' }"> 
+						<div id="button_div">
+							<button id="button_update" onclick="location.href='${ tUpview }'">수정하기</button>
+							<button id="button_delete" onclick="del(${ travel.boNo })">삭제하기</button>
+						</div>			
+						<div id="button_div2">
+							<img src="resources/images/btn_return_to_list.jpg" onclick="location.href='${pageContext.request.contextPath}/tList.tv'">
+						</div>
+					</c:when>
+					<c:otherwise>
+					</c:otherwise>
+				</c:choose>	
 			
-			</div>
-		</div>
+	</div> <!-- 전체div끝 -->
+		
 		
 	<script>
-		/* function updateView(){	//수정하기 뷰로 이동
-			location.href=" ${pageContext.request.contextPath}/tUpdate.tv"
-		} */
-		
-		/* function deleteView(){ //삭제하기 뷰로 이동
-			location.href=" ${pageContext.request.contextPath}/tList.tv"
-		} */
+
 		
 		function listView(){
 			location.href=" ${pageContext.request.contextPath}/tList.tv"
@@ -129,13 +127,27 @@
 			swal("여행지를 담았습니다","마이페이지에서 확인하세요","success");//이미 담은 여행지이거나 로그인하지않은경우 담기지 않아야함.(추후수정필요) 
 		}
 		
+		
+		//swal이용해서 삭제창만들기
 		function del(boNo) {
-			var chk = confirm("정말 삭제하시겠습니까?");
-			if (chk) {
+			swal('','정말 삭제하시겠습니까?😭','',{
+				closeOnEsc : false,
+				closeOnClickOutSide : false,
+				buttons : {
+					confirm : {
+						text : '확인',
+						value : true
+					}
+				}
+			}).then((result) => {
+				
+				swal("여행지가 삭제되었습니다😭");
 				location.href='tDelete.tv?boNo='+boNo;
-				alert("삭제되었습니다");
-			}
+			});
 		}
+		
+	
+		
 		
 		//url복사하기
 		$(document).on("click", "#sh-link", function(e) { // 링크복사 시 화면 크기 고정 
@@ -173,14 +185,14 @@
 				var successful = document.execCommand('copy'); 
 				input_clip.blur(); 
 				if (successful) { 				
-					swal("URL이 복사 되었습니다.", "원하시는 곳에 붙여넣기 해 주세요!", "success");
+					swal("URL이 복사 되었습니다. \n원하시는 곳에 붙여넣기 해 주세요!🌺");
 					// 링크복사 시 화면 크기 고정 
 					$('html').find('meta[name=viewport]').attr('content', 'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes'); 
 				} else { 				
-					swal("URL이 복사에 실패했습니다.", "이 브라우저는 지원하지 않습니다.", "error");
+					swal("URL이 복사에 실패했습니다. \n이 브라우저는 지원하지 않습니다.💦");
 					} 
 				} catch (err) { 
-					swal("URL이 복사에 실패했습니다.", "이 브라우저는 지원하지 않습니다.", "error");
+					swal("URL이 복사에 실패했습니다. \n이 브라우저는 지원하지 않습니다.💦");
 					} 
 				}); // 클립보드 복사
 	</script>

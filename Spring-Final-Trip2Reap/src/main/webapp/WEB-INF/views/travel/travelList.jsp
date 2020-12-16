@@ -1,163 +1,69 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <title>전국방방곡곡 | 여행지</title>
-<link rel="stylesheet" type="text/css" href=" ${pageContext.request.contextPath}/resources/css/travel/travelList.css"/>
+<link rel="stylesheet" type="text/css"
+	href=" ${pageContext.request.contextPath}/resources/css/travel/travelList.css" />
 <!-- 파비콘 -->
-<link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="resources/images/favicon.ico"
+	type="image/x-icon">
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-<!-- <script>
- $(document).ready(function(){
-	 
-// 	 alert(document.getElementById("hashTag57").innerHTML)
-// 	 alert($(".hashTag").length)
-// 	 alert("hashTag"+$('#hashTagVal0').val())
-	 var size = $(".hashTag").length
-// 	 alert(size)
-	 
-	 for(var i=0; i<size; i++){
-		 var hashTagName = document.getElementById(("hashTag"+$('#hashTagVal'+i).val())).innerHTML
-		, hashTagNameSplit = hashTagName.split("#")
-		 $("#hashTag"+$('#hashTagVal'+i).val()).html("")
-			$(hashTagNameSplit).each (function(index, item){
-				if(index == 0){
-					
-				}else {
-					var SpanId = ($('#hashTagVal'+i).val()+index)
-					
-					 $("#hashTag"+$('#hashTagVal'+i).val()).append("<span class='hashTagSpan' id="+SpanId+">#"+item+"</span>&nbsp;&nbsp;")
-				}
-				})
+<script>
 
-		 
-	 }
-	$(".hashTag").css("display", "");
-	
-	$(".cate_btn").click(function(){
-		var cate = $(this).attr('id')
-		
-		if(cate == "cate_btn1") {
-			cate = ""
-		}
-		if(cate == "cate_btn2") {
-			cate = "cate=code3"
-			
-		}
-		if(cate == "cate_btn3") {
-			cate = "cate=code4"
-			
-		}
-		
-		
-		location.href = "reviewList.bo?"+cate;
-		
-	})
-	
-	$(".hashTagSpan").click(function(){
-		var hashParam = document.getElementById($(this).attr('id')).innerHTML
-		hashParam = hashParam.split("#")
-		hashParam = hashParam[1]
-		
-		location.href = "reviewList.bo?hashTag="+hashParam;
-		
-	})
-	
-	$(".search").click(function(){
-		
-		var search = $("select[name=search]").val()
-// 		alert(search)
-		if($('#search').val()== ""){
-			search = ""
-		} else{
-			
-		if(search == "작성자") {
-			search = "writer=" + $('#search').val()
-		}
-		if(search == "제목") {
-			search = "title=" + $('#search').val()
-			
-		}
-		if(search == "내용") {
-			search = "content=" + $('#search').val()
-			
-		}
-		if(search == "해쉬태그") {
-			search = "hashTag=" + $('#search').val()
-			
-		}
 
-		}
-// 		alert(search)
-		
-		location.href = "reviewList.bo?"+search;
-		
-	})
-	
-      $("#search").bind('keydown', function(key) {
-               if (key.keyCode == 13) {
-            		$(".search").trigger('click')
-            		$("#search").unbind()
-
-             }
-      })
-
-             
- });
-
- </script> -->
+</script>
 </head>
 <body>
-<section>
-	<header>
-   	 <c:import url="../common/menubar.jsp" />
-	</header>
-	<div id="all_div">
-		<div id="menubar_div">
-			<div id="menu_div">
-				<div id="menu_left_div">
-					<i class="fas fa-suitcase-rolling" id="menu_img"></i>
-					<span id="menu">여행지</span>
+	<section>
+		<header>
+			<c:import url="../common/menubar.jsp" />
+		</header>
+		<div id="all_div">
+			<div id="menubar_div">
+				<div id="menu_div">
+					<div id="menu_left_div">
+						<i class="fas fa-suitcase-rolling" id="menu_img"></i> <span
+							id="menu">여행지</span>
+					</div>
+					<div id="menu_right_div">
+						<input type="text" id="input_search" placeholder="검색할 여행지명을 입력하세요" />
+
+						<button id="button_search" onclick="goSearchError()">검색</button>
+					</div>
 				</div>
-				<div id="menu_right_div">
-					<input type="text" id="input_search" placeholder="검색할 여행지명을 입력하세요"/>
-					
-					<button id="button_search" onclick="goSearchError()">검색</button>
+
+				<!-- 해쉬태그 카테고리 -->
+				<div id="hashtag_div">
+					<ul id="hashtag_ul">
+						<li><a
+							href=" ${pageContext.request.contextPath}/tList.tv?hashTag=전체">#전체</a>&nbsp;&nbsp;
+							<!-- 해당 해쉬태그 검색페이지로 이동하게 수정. 검색기능12/9까지--></li>
+						<li><a
+							href=" ${pageContext.request.contextPath}/tList.tv?hashTag=문화시설">#문화시설</a>&nbsp;&nbsp;
+						</li>
+						<li><a
+							href=" ${pageContext.request.contextPath}/tList.tv?hashTag=걷기좋은">#걷기좋은</a>&nbsp;&nbsp;
+						</li>
+						<li><a
+							href=" ${pageContext.request.contextPath}/tList.tv?hashTag=쇼핑">#쇼핑</a>&nbsp;&nbsp;
+						</li>
+						<li><a
+							href=" ${pageContext.request.contextPath}/tList.tv?hashTag=자연">#자연</a>&nbsp;&nbsp;
+						</li>
+						<li><a
+							href=" ${pageContext.request.contextPath}/tList.tv?hashTag=맛집">#맛집</a>&nbsp;&nbsp;
+						</li>
+					</ul>
 				</div>
 			</div>
-			
-			<!-- 해쉬태그 카테고리 -->
-			<div id="hashtag_div">
-				<ul id="hashtag_ul">
-					<li>
-						<a href=" ${pageContext.request.contextPath}/tList.tv">#전체</a>&nbsp;&nbsp; <!-- 해당 해쉬태그 검색페이지로 이동하게 수정. 검색기능12/9까지-->
-					</li>
-					<li>
-						<a href=" ${pageContext.request.contextPath}/tList.tv">#문화시설</a>&nbsp;&nbsp;
-					</li>
-					<li>
-						<a href=" ${pageContext.request.contextPath}/tList.tv">#레포츠</a>&nbsp;&nbsp;
-					</li>
-					<li>
-						<a href=" ${pageContext.request.contextPath}/tList.tv">#쇼핑</a>&nbsp;&nbsp;
-					</li>
-					<li>
-						<a href=" ${pageContext.request.contextPath}/tList.tv">#자연</a>&nbsp;&nbsp;
-					</li>
-					<li>
-						<a href=" ${pageContext.request.contextPath}/tList.tv">#축제</a>&nbsp;&nbsp;
-					</li>
-				</ul>
-			</div>
-		</div>
-		
-		<!-- 지역/테마 카테고리 -->
-		<div id="cate_table_div">
-			<span id="cate_name">&nbsp;지역</span>
-				<span id="cate_icon">🚕</span>
+
+			<!-- 지역/테마 카테고리 -->
+			<div id="cate_table_div">
+				<span id="cate_name">&nbsp;지역</span> <span id="cate_icon">🚕</span>
 				<table id="local_table">
 					<tr class="localSelectTr">
 						<td id="selectAllTd">전체</td>
@@ -182,9 +88,8 @@
 						<td>제주</td>
 					</tr>
 				</table>
-			
-			<span id="cate_name">&nbsp;테마</span>
-				<span id="cate_icon">🚗</span>
+
+				<span id="cate_name">&nbsp;테마</span> <span id="cate_icon">🚗</span>
 				<table id="theme_table">
 					<tr>
 						<td>전체</td>
@@ -195,176 +100,230 @@
 					</tr>
 				</table>
 			</div>
-		
-		
-		
-		<div id="list_all_div">
-			<div id="list_count_div">
-				총<span id="list_count">${ pi.listCount }</span>건
-			</div>
-			
-			
-			 
-			
-			<!-- 여행지 div -->
-			<c:if test = "${ list eq null }">
-				<div>조회결과가 없습니다.</div>
-			</c:if>
-			<c:forEach var="t" items="${ list }" varStatus="s" >
-			
-			<div id="list_travel_div">
-				<div id="travel_img_div">
-					<c:if test="${t.changeName != null }"> <!-- insert로 등록한 여행지 -->
-					 <img src="resources/travelFiles/${ t.changeName }" id="travel_img" /> 
-					</c:if>
-					
-					<c:if test="${t.changeName == null }"> <!-- db에 들어가있던 여행지 -->
-					<img src="resources/images/송도" id="travel_img" /> 
-					</c:if>
+
+
+
+			<div id="list_all_div">
+				<div id="list_count_div">
+					총<span id="list_count">${ pi.listCount }</span>건
 				</div>
-				
-				<div id="travel_name_writer_div">
-					<div id="travel_no">${ t.boNo }</div>
-					<input type="hidden" class="boNo_hidden" value="${ t.boNo }">
-					<c:url var="tdetail" value="tDetail.tv">
-						<c:param name="boNo" value="${ t.boNo }"/>
-						<c:param name="page" value="${ pi.currentPage }"/>
-					</c:url>	
-					<div id="travel_name">
-						<a href="${ tdetail }">${ t.boTitle }
-							<c:if test="${ t.boCount > 30 }"> <!-- 조회수가 30이상인 게시글은 아이콘표시 왜 안되는거지 -->
-								<img src="resources/images/promotional.png" width="25px" height="25px"> 
+
+
+
+
+				<!-- 여행지 div -->
+				<c:if test="${ list eq null }">
+					<div>조회결과가 없습니다.</div>
+				</c:if>
+				<c:forEach var="t" items="${ list }" varStatus="s">
+
+					<div id="list_travel_div">
+						<div id="travel_img_div">
+							<c:if test="${t.changeName != null }">
+								<!-- insert로 등록한 여행지 -->
+								<img src="resources/travelFiles/${ t.changeName }"
+									id="travel_img" />
 							</c:if>
-						</a>	
-					</div>
-					
-					<div id="travel_theme">${ t.trTheme }</div>
-					<div id="travel_writer">${ t.trReg }</div>
-					<div id="travel_tag">
-					
-						<p class="hashTag" id="hashTag${ t.boNo }" style="display:none"></p><br>
-						<input type="hidden" value=${ t.boNo } id="hashTagVal" />
-						<script>
+
+							<c:if test="${t.changeName == null }">
+								<!-- db에 들어가있던 여행지 -->
+								<img src="resources/images/송도" id="travel_img" />
+							</c:if>
+						</div>
+
+						<div id="travel_name_writer_div">
+							<div id="travel_no">${ t.boNo }</div>
+							<input type="hidden" class="boNo_hidden" value="${ t.boNo }">
+							<c:url var="tdetail" value="tDetail.tv">
+								<c:param name="boNo" value="${ t.boNo }" />
+								<c:param name="page" value="${ pi.currentPage }" />
+							</c:url>
+							<div id="travel_name">
+								<a href="${ tdetail }">${ t.boTitle } <c:if
+										test="${ t.boCount > 30 }">
+										<!-- 조회수가 30이상인 게시글은 아이콘표시 왜 안되는거지 -->
+										<img src="resources/images/promotional.png" width="25px"
+											height="25px">
+									</c:if>
+								</a>
+							</div>
+
+							<div id="travel_theme">${ t.trTheme }</div>
+							<div id="travel_writer">${ t.trReg }</div>
+							<div id="travel_tag">
+								<p class="hashTag" id="hashTag${ t.boNo }" style="display: none"></p>
+								<br> <input type="hidden" value=${ t.boNo } id="hashTagVal" />
+								<script>
 						var hashTag = "${ t.boTag }";
 						var hash = hashTag.split('#');
 						var size = hash.length;
 						for(var i=1; i < size; i++){
-							console.log(hash[i]);
+							
 							$('.hashTag').eq(${s.index}).append("<span class='hashTagSpan'>#"+hash[i]+"</span>&nbsp;&nbsp;")
 						}
 						$(".hashTag").css("display", "");
 					</script>
+							</div>
+						</div>
+						<div id="list_etc" class="dotClass">
+							<a href="#modal" id="list_etc_modal">…</a>
+						</div>
 					</div>
-				</div>
-				<div id="list_etc" class="dotClass"><a href="#modal" id="list_etc_modal">…</a></div>
+
+				</c:forEach>
+
+
 			</div>
-			
-			</c:forEach>
-			
-	
-			</div>
-		
-		
-		
-		
-		<!--  등록하기 버튼 (관리자만 보이게 ) --> 
-		
-			 <c:if test="${ loginUser.memberId == 'admin' }">  
+
+
+
+
+			<!--  등록하기 버튼 (관리자만 보이게 ) -->
+
+			<c:if test="${ loginUser.memberId == 'admin' }">
 				<div id="button_write_div">
-					<button id="button_write" onclick= "location.href='tInsertView.tv'">등록하기</button>
+					<button id="button_write" onclick="location.href='tInsertView.tv'">등록하기</button>
 				</div>
-		 	</c:if>
-	 	
-			
-			
+			</c:if>
+
+
+
 			<!-- 페이징 -->
 			<div class="paging">
-			
+
 				<!-- 이전 페이지 -->
 				<c:if test="${ pi.currentPage <= 1 }">이전페이지
 				</c:if>
 				<c:if test="${ pi.currentPage > 1 }">
 					<c:url var="before" value="tList.tv">
-						<c:param name="page" value="${ pi.currentPage - 1 }"/>
-					</c:url>	
-				<a href="${ before }" class="bt" id="beforeBtn">이전 페이지</a>
+						<c:param name="page" value="${ pi.currentPage - 1 }" />
+					</c:url>
+					<a href="${ before }" class="bt" id="beforeBtn">이전 페이지</a>
 				</c:if>
-				
+
 
 				<!-- 페이지 -->
-			
-					
+
+
 				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 					<c:if test="${ p eq pi.currentPage }">
 						<a href="${ pagination }" class="num on">${ p }</a> &nbsp;
 					</c:if>
-					
+
 					<c:if test="${ p ne pi.currentPage }">
 						<c:url var="pagination" value="tList.tv">
-							<c:param name="page" value="${ p }"/>
+							<c:param name="page" value="${ p }" />
 						</c:url>
 						<a href="${ pagination }" class="num">${ p }</a> &nbsp;
 					</c:if>
 				</c:forEach>
-				
-			
-                
-                <!-- [다음] -->
+
+
+
+				<!-- [다음] -->
 				<c:if test="${ pi.currentPage >= pi.maxPage }">
 					다음 페이지
 				</c:if>
 				<c:if test="${ pi.currentPage < pi.maxPage }">
 					<c:url var="after" value="tList.tv">
-						<c:param name="page" value="${ pi.currentPage + 1 }"/>
-					</c:url> 
+						<c:param name="page" value="${ pi.currentPage + 1 }" />
+					</c:url>
 					<a href="${ after }" class="bt" id="afterBtn">다음 페이지</a>
 				</c:if>
-                
-		</div><!-- 페이징 div끝 -->
-			
-				<input type="hidden" id="travelUserInfo" value="${ loginUser.memberId }">
-	            <input type="hidden" id="travelBoInfo" value="">
-		
-		
-	</div><!-- 전체 div끝 -->
-	
-	
-	
-	
-	
-	   <!-- modal 시작  -->
-		<div id="modal" class="modal">
-		    <div id="share_div">
-		    	<i class="fas fa-share-alt"></i><span id="mo_share">공유하기</span>
-		    	<button class="url_btn" id="sh-link">URL복사</button>
-		    </div>
-		    <hr id="mo_hr">
-		    <div id="contain_div">
-		    	<i class="fas fa-download" ></i><span id="mo_contain">여행지 담기</span>
-		    	<button class="url_btn" id="myTravel">추가하기</button>
-		    	<div id="contain_info">[마이페이지]-[담은 여행지]에서 확인할 수 있습니다.</div>
-		    </div>
-		</div>
-   
-   	 <!-- modal끝 -->
-   	 
 
-	<script>
+			</div>
+			<!-- 페이징 div끝 -->
+
+			<input type="hidden" id="travelUserInfo"
+				value="${ loginUser.memberId }"> <input type="hidden"
+				id="travelBoInfo" value="">
+
+
+		</div>
+		<!-- 전체 div끝 -->
+
+
+
+
+
+		<!-- modal 시작  -->
+		<div id="modal" class="modal">
+			<div id="share_div">
+				<i class="fas fa-share-alt"></i><span id="mo_share">공유하기</span>
+				<button class="url_btn" id="sh-link">URL복사</button>
+			</div>
+			<hr id="mo_hr">
+			<div id="contain_div">
+				<i class="fas fa-download"></i><span id="mo_contain">여행지 담기</span>
+				<button class="url_btn" id="myTravel">추가하기</button>
+				<div id="contain_info">[마이페이지]-[담은 여행지]에서 확인할 수 있습니다.</div>
+			</div>
+		</div>
+
+		<!-- modal끝 -->
+
+
+		<script>
 	
-		var dotNo;	
-	
+		
 		function detailView(){
- 		   location.href="<%= request.getContextPath() %>/tDetail.tv";
+ 		   location.href="<%=request.getContextPath()%>/tDetail.tv";
  	    }
 		
-		function goSearchError(){
+		<%-- function goSearchError(){
 			location.href="<%= request.getContextPath() %>/tSearchError.tv";
-		}
+		} --%>
 		
+		//등록하기 버튼 누르면 insert로 넘어감.
+		$("#button_write").click(function(){
+   			$('#tList').submit();
+   		 }); 
 	
 		
 		
-		//modal창
+		$("#button_search").click(function(){
+			
+			var search = $("select[name=search]").val()
+			if($('#search').val()== ""){
+				search = ""
+			} else{
+				
+				search = "title=" + $('#search').val()
+				
+			}
+
+			
+			
+			location.href = "tList.tv?"+search;
+			
+		})
+		
+	      $("#search").bind('keydown', function(key) {
+	               if (key.keyCode == 13) {
+	            		$(".search").trigger('click')
+	            		$("#search").unbind()
+
+	             }
+	      })
+	  
+			
+	      
+	      //해쉬태그 span을 누르면 해당 해시태그 검색창으로.
+		$(document).on("click",".hashTagSpan",function(){
+	         var hashParam = $(this).parent().parent().find('.hashTagSpan').text();
+	         hashParam = hashParam.split("#")
+	      	hashParam = hashParam[1]
+			
+         location.href = "tList.tv?hashTag="+hashParam;
+	
+		});
+			 	
+		
+		
+
+		
+		
+		//modal창 -----------------------------------------------------
 		//$('a[href="#modal"]').click(function(event) {
 		$(document).on("click","#list_etc_modal",function(){
          var current = $(this).parent().parent().find('#travel_no').text();
@@ -391,7 +350,7 @@
 	                  type : 'post',
 	                  data : {boNo:boNo,memberId:memberId},
 	                  success : function(data){
-	                     console.log("data : " + data);
+	                      console.log("data : " + data); 
 	                     if(data == "Y"){
 	                        swal("여행지 담기에 성공하였습니다.\n마이페이지에서 확인해주세요😊");      
 	                     } else if(data == "E") {
@@ -458,15 +417,11 @@
 
 		
 			
-			$("#button_write").click(function(){
-	   			$('#tList').submit();
-	   		 }); 
-		
 			
 			
 		
 	</script>
-	
-</section>
+
+	</section>
 </body>
 </html>

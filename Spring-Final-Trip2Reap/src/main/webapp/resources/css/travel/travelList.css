@@ -214,15 +214,23 @@
 
 #travel_tag{
 
-	display: inline-block;
-    overflow: hidden;
-    background: #fff;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 400;
-    color: #777;
-    border: 1px solid #d8d7d7;
-    border-radius: 5px;
+display: inline-block;
+
+/* overflow: hidden; */
+
+background: #fff;
+
+text-align: center;
+
+/* font-size: 16px; */
+
+font-weight: 400;
+
+color: #777;
+
+/* border: 1px solid #d8d7d7; */
+
+/* border-radius: 5px; */
 }
 .hashTagSpan:hover {
  
@@ -232,18 +240,18 @@
 }
 #travel_theme{
 
-	color: #497f55;
-	
-	font-weight: 700;
-	
-	margin-bottom: 22px;
-	
-	font-size: 17px;
+color: #497f55;
+
+font-weight: 700;
+
+margin-bottom: 22px;
+
+font-size: 17px;
 }
 
 #travel_writer{
-	margin-bottom: 10px;
-	font-size: 17px;
+	/* margin-bottom: 10px; */
+	/* font-size: 17px; */
 }
 
 
@@ -341,6 +349,10 @@
     border-radius: 4px;
 }
 
+.url_btn:hover{
+	cursor:pointer;
+}
+
 #mo_contain{
 	font-size : 15px;
 	margin-left : 7px;
@@ -366,8 +378,17 @@
 	margin-top: 10px;
 	color: gray;
 }
-
-
+.hashTagSpan{
+	font-weight: 400;
+	/* height: 25px; */
+	/* margin-top: 22px; */
+	color: #777;
+	border: 1px solid #d8d7d7;
+	/* border: 1px solid slategrey; */
+	border-radius: 5px;
+	padding: 2px;
+	font-size: 14px;
+}
 /* #menubar_div{
 	background: linear-gradient(180deg, #a7e1af, white);
 } */

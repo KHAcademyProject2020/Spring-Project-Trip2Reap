@@ -8,7 +8,7 @@
    <link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/travel/travelInsert.css"/>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>전국방방곡곡 | 여행지 수정</title>
 </head>
 <body>
 <section>
@@ -41,28 +41,27 @@
 			<div id="titleImgArea" class="pictureArea">
 				<img id="titleImg"/>
 			</div>
-			 <div id="contentImgArea1" class="pictureArea">
+<!-- 			  <div id="contentImgArea1" class="pictureArea">
 				<img id="contentImg1"/>
 			</div>
 			<div id="contentImgArea2" class="pictureArea">
 				<img id="contentImg2"/>
-			</div>
+			</div> -->
 			
 			<div id="titleImgTxt">
 				<div class="pictureName">
 					<span class="astro_span">*</span>대표이미지
 				</div>
 			</div>
-			<div id="contentImgTxt">
+<!-- 			<div id="contentImgTxt">
 				<div class="pictureName">내용이미지1</div>
 			</div>
 			<div id="contentImgTxt">
 				<div class="pictureName">내용이미지2</div>
 			</div>
-			
+	 -->		
 			
 			<input type="text" id="member_id" name="memberId" value="${ loginUser.memberId }"/>
-			<!-- <input type="text" id="member_id" name="boDeleteYN" value=""/ -->
 			
 			
 			<!-- 작성하기 table 시작 -->	
@@ -126,183 +125,37 @@
 						<span class="astro_span">*</span><span>주소</span>
 					</td>
 					<td colspan="6"> <!-- 카카오 주소 API -->
-						<input type="text" id="sample6_postcode" placeholder="우편번호">
-						<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-						<input type="text" id="sample6_address" placeholder="주소" name="trAddr" value="${ travel.trAddr }"><br>
-						<input type="text" id="sample6_detailAddress" placeholder="상세주소">
-						<input type="text" id="sample6_extraAddress" placeholder="참고항목">
+						<input type="text" id="sample6_postcode" placeholder="우측 버튼을 눌러주세요" readonly="readonly">
+						<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기🏠"><br><br>
+						<input type="text" id="sample6_address" placeholder="주소" name="trAddr" readonly="readonly">
+						<input type="hidden" id="sample6_detailAddress" placeholder="상세주소"> 
+						<input type="text" id="sample6_extraAddress" placeholder="상세주소" readonly="readonly">
 					</td>
 				</tr>
 				
 			</table>
 			
 			
-			<div id="menu_hash">해쉬태그</div>
-			
 			<!-- 해쉬태그 입력창 -->
-			<div class="insert-hashtag-wrapper">
-				<input type="text" id="input-hashtag"  placeholder="#해시태그를 입력해주세요." name="boTag">
-				<input type="button" id="input-hashtag-btn"  value="✅"></div>
-	
-						<!-- 등록된 해시태그들을 모으는 곳. -->
-			<div class="saved-hashtags-wrapper">
-				<!-- 해시태그가 존재하지 않으면 -->
-				<p id="no-hashtag"><small>등록된 해시태그가 없습니다.</small></p>
-				<!-- 해시태그가 존재한다면 -->
-				<ul id="saved-hashtags">
-					<!-- <li><small>#해시태그1<button id="delete_hash">⛔</button></small></li>
-					<li><small>#해시태그2<button id="delete_hash">⛔</button></small></li>
-					<li><small>#해시태그3<button id="delete_hash">⛔</button></small></li> -->
-				</ul>
-				
-				<%--실제해시태그 등록 --%>
-				<input id="savedHashTagStrings" type="hidden" name="boTag"/>
+			<div id="menu_hash">해쉬태그</div>
+			<div class="hashTag">
+				<div  id="hashtag">
+					<input type="text" id="tag" placeholder="#태그입력 후 enter로 추가" />
+					<input type="hidden" name="boTag" id="hashtagInput" />
+				</div>
 			</div>
-			<script>
-					
-						$(function(){
-							
-							//해시태그가 비어있는지 확인함.
-							function isEmptyHashTagsMsg(){
-								//해시태그 저장리스트
-								let savedHashTags = $('#saved-hashtags');
-								
-								// 저장된 해시태그들
-								let $hashTags= savedHashTags.children('li');	
-								
-								//실제 저장된 해시태그들을 문자열로 나타내서 저장(데이터베이스에 저장시킬 해시태그)
-								let savedHashTagString= $('#savedHashTagStrings');
-								
-								
-								if($hashTags.length==0){
-									// 저장된 해시태그가 존재하지 않는다면 (0개 )
-									// 해시태그 존재하지 않는다는 문구를 띄운다.
-									$('#no-hashtag').css('display', 'block');
-									savedHashTagString.val('');
-								}else{
-									//저장된 해시태그가 존재한다면(1개 이상 )
-									// 해시태그가 존재하지 않는다는 문구를 안보이게 한다.
-									$('#no-hashtag').css('display', 'none');
-									
-									let hashTagStr='';
-									for(var i=0; i<$hashTags.length; i++){
-										let hashtag= $hashTags[i].textContent.trim();
-										hashtag= hashtag.substring(1,);
-										
-										if(i==$hashTags.length-1){
-											hashTagStr+=hashtag;
-										}else{
-											hashTagStr+=hashtag+', ';
-										}
-									}
-									savedHashTagString.val(hashTagStr);
-								}
-								console.log(savedHashTagString.val())
-							}
-							
-							// 중복된 해시태그를 찾는다.
-							function isDuplicateHashTags(targetHashTag){
-								targetHashTag= '#'+targetHashTag;
-								let $hashTags= $('#saved-hashtags').children('li').children('.hashtag-content');	
-								//console.log($hashTags);
-								
-								//이미 등록된 해시태그 들을 콘솔에 출력한다.
-								for(var i=0; i<$hashTags.length; i++){
-									let now= $hashTags[i].innerText;
-									if(targetHashTag==now)
-										return true;
-								}
-								//이미 등록된 해시태그와 중복된다면  => true를 리턴
-								//중복되지 않은 해시태그라면 false를 리턴
-								return false;
-							}
-							
-							
-							// 해시태그 등록 버튼 클릭시  발생하는 함수- insert hashtag function
-							$('#input-hashtag-btn').on('click', function(){
-								//해시태그 저장리스트
-								let savedHashTags = $('#saved-hashtags');
-								
-								// 저장된 해시태그들 
-								let $hashTags= savedHashTags.children('li');	
-								
-								//입력받은 해시태그
-								let inputHashTag = $('#input-hashtag').val();
-								
-								//단순 공백문자를 입력할 수 있기 때문에 공백을 제거한다.
-								inputHashTag= inputHashTag.trim();
-								
-								if(inputHashTag.length==0){
-									// 입력한 글자수가 0자 
-									swal({
-										  title: "해시태그 등록 실패",
-										  text: '해시태그 내용을 입력해주세요!',
-										  icon: 'error',
-										  button: "확인",
-									});
-								}else{
-									// 입력한 글자수가 최소 1자 이상
-									//입력한 해시태그가 이미 등록한 해시태그와 겹친다면?
-									if(isDuplicateHashTags(inputHashTag)){
-										swal({
-											  title: "해시태그 등록 실패",
-											  text: '이미 등록된 해시태그입니다!',
-											  icon: 'error',
-											  button: "확인",
-										});
-										
-									}else{
-										//입력한 해시태그의 글자수가 10자를 넘는지 확인
-										if(inputHashTag.length>10){
-											swal({
-												  title: "해시태그 등록 실패",
-												  text: '해시태그 등록 가능한 글자수는 최대 10자입니다!',
-												  icon: 'error',
-												  button: "확인",
-											});
-										}else{
-											
-											if($hashTags.length<3){
-												//저장된 해시태그의 개수가 3개미만 => 추가
-												$hashtag_content='<li><span class="hashtag-content"> #'+inputHashTag+'</span><span><i class="remove-hashtag-btn fas fa-times"></i></span></li>'
-												savedHashTags.append($hashtag_content);
-												
-											}else{
-												//저장된 해시태그의 개수가 3개 이상이라면=> 경고창 
-												swal({
-												  title: "해시태그 등록 실패",
-												  text: '이미 최대 3개 해시태그를 등록했습니다!',
-												  icon: 'error',
-												  button: "확인",
-												});
-											}
-										}
-									}
-								}
-								//등록이 성공/실패 여부 상관없이  해시태그 입력값을 일단 비워둔다.
-								 $('#input-hashtag').val('');
-								isEmptyHashTagsMsg(); //해시태그가 비어있는지 확인
-							});
-							
-							
-							
-							// 해시태그 삭제 버튼을 클릭했을때 실행하는 함수. => 리로드를 함.
-							$(document).on('click', '.remove-hashtag-btn' , function(e){
-								// 가장 가까운 해시태그를 지운다.
-								$(e.currentTarget).closest('#saved-hashtags li').remove();
-								
-								//해시태그 삭제처리후, 해시태그가 없다는 메시지를 띄워야할지 말아야할지 결정
-								isEmptyHashTagsMsg(); //해시태그가 비어있는지 확인
-							});
-							
-						});
-					</script>
+			
+			<!-- <div class="insert-hashtag-wrapper">
+				<input type="text" id="input-hashtag"  placeholder="#해시태그를 입력해주세요." name="boTag">
+				<input type="button" id="input-hashtag-btn"  value="✅"></div> -->
+	
+		
 			
 			 <div id="travel_content_div">
 				<textarea rows="20" cols="125" id="travel_content" name="boContent">${ travel.boContent }</textarea>
 				  <div id="text_count_div">
 					<span>현재 글자 수 </span>
-					<span id="text_count">${ travel.boContent }</span>
+					<span id="text_count">$(${ travel.boContent }).length()</span>
 					<span>자 / 최대 글자 수 2000자</span>
 				 </div>
 			</div>
@@ -314,13 +167,11 @@
 		<div id="fileArea">	<!-- 파일 업로드 부분 -->
 	   			<input type="file" id="thumbnailImg1" multiple="multiple" name="reloadFile" onchange="LoadImg(this,1)"/>
 	   			
-	   					<br>현재 업로드한 파일 : 
+	   					<%-- <br>현재 업로드한 파일 : 
 						<span href="${ contextPath }/resources/travleFiles/${ travel.changeName }">
 							
-						</span>
+						</span> --%>
 				
-	   			 <!-- <input type="file" id="thumbnailImg2" multiple="multiple" name="uploadFile" onchange="LoadImg(this,2)"/> -->
-	   <!-- 			<input type="file" id="thumbnailImg3" multiple="multiple" name="uploadFile3" onchange="LoadImg(this,3)"/>  -->
 	   	</div>		
 		
 		
@@ -343,12 +194,12 @@
    			$("#titleImgArea").click(function(){
    				$("#thumbnailImg1").click();
    			});
-   			$("#contentImgArea1").click(function(){
+/*    			$("#contentImgArea1").click(function(){
    				$("#thumbnailImg2").click();
    			});
    			$("#contentImgArea2").click(function(){
    				$("#thumbnailImg3").click();
-   			});
+   			}); */
    		});
    		
    		  // 이미지 업로드 함수
@@ -386,12 +237,41 @@
    		
    		 
    		
-   		
-   		
-   		
-   		
-   		 
 	</script>
+		<script>
+ 
+	 //모든 페이지가 요청이 되었을 때
+    $(document).ready(function() {
+        $("#tag").keydown(function(key) {
+            //키의 코드가 13번일 경우 (13번은 엔터키)
+            var tag = $("#tag").val();
+            if (key.keyCode == 13) {
+           	 $('#hashtag').append("<div class='hashtag'>" + "#" + tag +"</div>" + "&nbsp;&nbsp;");
+           	 $('#tag').val("")
+           	 $('#hashtagInput').val($('#hashtagInput').val()+"#"+tag)
+			} 
+        });
+    });
+
+
+		// 엔터시 전송되는거 막는 코드
+		document.addEventListener('keydown', function(event) {
+			  if (event.keyCode === 13) {
+			    event.preventDefault();
+			  };
+			}, true);
+		
+		
+		//클릭시 배경 색 변환
+		$(function(){	
+			$('#tag').click(function(){$(this).css("background","#efefef")})
+
+			
+		})
+	 
+		
+	</script>
+	
 <!-- 주소 API -->
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
@@ -446,47 +326,48 @@
    
     <script type="text/javascript">
  
-      function validate(){
+ 
+ // 칸 미입력 시 뜨는 창 ------------------------------------------------------------------	    
+    
+     	$("#button_write").click(function(){
     	  
-    	  $("#button_write").click(function(){
-    	  
-		var title=$('#travel_name');
-		var content=$('#travel_content');
-		var thumbnail = $('#thumbnailImg1');
-		var addr = $('#select_region');
-		var add = $('#sample6_extraAddress');
-		var theme = $('#select_theme');
-	
-		if(!thumbnail.val()){
-			swal("", "대표사진을 첨부해주세요", "info");
-			thumbnail.focus();
-			return false;
-		}
-		if(title.val().trim().length<1){
-			swal("","여행지명을 입력해주세요","info");
-			title.focus();
-			return false;
-		}
-		if(addr.val() == 0){
-   			swal("", "지역을 선택해주세요", "info");
-   			addr.focus();
-   			return false;
-   		}
-		if(theme.val() == 0){
-   			swal("", "테마를 선택해주세요", "info");
-   			theme.focus();
-   			return false;
-   		}
-		if(add.val() == 0){
-   			swal("", "주소를 입력해주세요", "info");
-   			add.focus();
-   			return false;
-   		}
-		if(content.val().trim().length<1){
-			swal("","내용을 입력해주세요","info");
-			content.focus();
-			return false;
-		}
+			var title=$('#travel_name');
+			var content=$('#travel_content');
+			var thumbnail = $('#thumbnailImg1');
+			var addr = $('#select_region');
+			var add = $('#sample6_extraAddress');
+			var theme = $('#select_theme');
+		
+			if(!thumbnail.val()){
+				swal("대표사진을 첨부해주세요💦");
+				thumbnail.focus();
+				return false;
+			}
+			if(title.val().trim().length<1){
+				swal("여행지명을 입력해주세요💦");
+				title.focus();
+				return false;
+			}
+			if(addr.val() == 0){
+				swal("지역을 선택해주세요💦");
+	   			addr.focus();
+	   			return false;
+	   		}
+			if(theme.val() == 0){
+				swal("테마를 선택해주세요💦");
+	   			theme.focus();
+	   			return false;
+	   		}
+			if(add.val() == 0){
+				swal("주소를 입력해주세요💦");
+	   			add.focus();
+	   			return false;
+	   		}
+			if(content.val().trim().length<1){
+				swal("내용을 입력해주세요💦");
+				content.focus();
+				return false;
+			}
 		
 		 swal({
 			title : "게시글 등록 성공", 
@@ -496,22 +377,13 @@
 				if(ok){
 					//등록하기 버튼시 insert 이동
 			   		$('#tInsert').submit();
-			   		 });
-			   		 
-				}
-			}); 
-			
-		
-		return true;
-	};
+			   		 }
+				}); 
+				return true;
+			});
 	
 
    </script>
-	
-	
-
-
-
 </section>		
 </body>
 </html>
