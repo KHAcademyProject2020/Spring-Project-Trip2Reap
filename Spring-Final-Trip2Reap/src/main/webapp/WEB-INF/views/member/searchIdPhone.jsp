@@ -63,6 +63,12 @@
     </div>
     
     <div style="height: 500px;"></div>
-    </section>	        
+    </section>	
+    
+    <script>
+       function searchPwd(){
+    	   location.href="<%= request.getContextPath() %>/searchId.me";
+       }
+    </script>        
 </body>
 </html>

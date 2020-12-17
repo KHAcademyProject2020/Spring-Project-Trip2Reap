@@ -480,7 +480,7 @@
     	    var courseDistanceInfo = (parseFloat(distance.getLength())/1000).toFixed(1) + "km";   
     	    allDistance += courseDistanceNum;
     	    // 총거리   
-    	    $('#allDistance').val(allDistance);
+    	    $('#allDistance').val(allDistance.toFixed(1));
     	    var aa = $('#allDistance').val();
     	    $('.distance').val(aa);
         	

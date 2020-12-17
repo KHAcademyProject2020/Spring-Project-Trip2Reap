@@ -53,6 +53,7 @@ public class CourseController {
 		CoursePageInfo pi = CoursePagination.getPageInfo(currentPage, listCount);
 		
 		ArrayList<Course> list = cService.selectCourseList(pi);		
+		System.out.println("list : " + list);
 		
 		ArrayList<String[]> day = new ArrayList<String[]>();
 		ArrayList<String> dayList = new ArrayList<String>();
