@@ -182,9 +182,7 @@
         <result column="change_name" property="changeName"/>
         <result column="course_distance" property="distance"/>
     </resultMap>
-    
-    
-    <!--[은강]  2020.12.18 - sql수정 및 컬럼 추가 -->
+     
     <select id="selectReservation" resultMap="reservationResultSet">
         SELECT *
         FROM MY_HOTEL
@@ -205,31 +203,24 @@
         <result column="MEMBER_ID" property="memberId"/>
     </resultMap>
     
-    
-    <!-- [은강] 방이름 찾기 -->
     <select id="findOneRoomName" resultType="string">
     	SELECT ROOM_NAME
     	FROM ROOM
     	WHERE ROOM_NO=#{roomNo}
     </select>
     
-    
-    <!-- [은강] 환불처리 -->
     <update id="updateRefundCheck">
      UPDATE HOTEL_RESERVATION
      SET REFUND_CHECK='Y'
      WHERE RESERVE_NO=#{reserveNo}
     </update>
-    
-	
+    	
 	<select id="findReservationInfo" resultMap="hotelReservationResultSet">
 	SELECT *
 	FROM HOTEL_RESERVATION
 	WHERE RESERVE_NO=#{reserveNo}
 	</select>
-	
-	
-	<!-- 2020.12.18 - 예약/ 호텔/ 방 resultset-->
+		
 	<resultMap type="Reservation" id="hotelReservationResultSet">
 		<id column="RESERVE_NO" property="reserveNo"/>
 		<result column="MEMBER_ID" property="memberId"/>
@@ -252,7 +243,4 @@
 		<result column="PAYMENT_TYPE" property="paymentType"/>
 	</resultMap>
 	
-	
-	<!-- 2020.12.18 - 예약/ 호텔/ 방 resultset 끝-->
-
 </mapper>

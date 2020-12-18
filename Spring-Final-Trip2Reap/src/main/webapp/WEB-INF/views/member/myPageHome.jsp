@@ -42,9 +42,7 @@
 				<button id="myHotelBtn">호텔 보러가기</button>
 				<div id="up_space1"></div>
 		    </div>
-			</c:if>
-			
-			
+			</c:if>						
 			
 			<c:forEach var="t" items="${ list}" varStatus="tIdx">
 				
@@ -70,30 +68,29 @@
 						<div id="hotel_name">
 							<a href="${ tdetail }">${ t.title }</a>	
 						</div>
-						<div id="hotel_room">${t.roomName}</div>	
+						<div id="hotel_room">[${t.roomName}]</div>	
 						<div class="hotelCheck">
 							<ul id="hotelCheckUl">
 								<li>
-									<div class="ck_label">체크인</div>
-									<label id="checkInLabel"> ${t.checkIn}</label>
+									<div class="ck_label1">체크인</div>
+									<label id="blueBar">|</label>
+									<label id="checkInLabel">${t.checkIn}</label>
 								</li>
 								<li>
-									<div class="ck_label">체크아웃</div>
+									<div class="ck_label2">체크아웃</div>
+									<label id="blueBar">|</label>
 									<label id="checkOutLabel">${t.checkOut}</label>
 								</li>
 							</ul>
 							
-							<div id="detail_wrapper">
 								<div id="hotel_price">
 						    		₩ <fmt:formatNumber value="${t.price}" type="number"/>
-							    </div> 
-							    <button id="detailReservation">자세히 보기</button>  
-						    </div>
+							    </div> 							      						    
 						</div>
+						<button id="detailReservation">자세히 보기</button>
 
 					</div>			
-				</div>
-			
+				</div>			
 			</c:forEach>
 			 
 			

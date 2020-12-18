@@ -470,15 +470,21 @@
 				 function twoDigits(n) {
 					 return (n <= 9 ? "0" + n : n);
 				 }
-				 
+
 				 function updateTimer(){
 					 msLeft = endTime - (+new Date);
-					 if(msLeft < 1000){
-						 swal("인증번호가 만료되었습니다!", "이메일 인증을 다시 진행해주세요. 감사합니다.");								 
-						 $("" + elementName).remove();
-						 $('#confirmDiv').css("display","none");
-						 $("#emailText").attr("readonly",false);
-						 $('#sendMessage').css("display","inline-block");
+					 if(msLeft < 1000){						 					 
+						 if($("#certificationOk").css("display") == "none"){
+							 swal("인증번호가 만료되었습니다!", "이메일 인증을 다시 진행해주세요. 감사합니다.");								 
+							 $("" + elementName).css("display","none");
+							 $('#confirmDiv').css("display","none");
+							 $("#emailText").attr("readonly",false);
+							 $('#sendMessage').css("display","inline-block");
+						 } else {
+							 $("" + elementName).css("display","none");
+							 $('#confirmDiv').css("display","none");
+							 $("#emailText").attr("readonly",false);
+						 }
 					 } else {
 						 time = new Date(msLeft);
 						 hours = time.getUTCHours();
@@ -488,11 +494,12 @@
 						 setTimeout(updateTimer,time.getUTCMilliseconds() + 500);
 					 }
 				 }
+				 
 				 endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
 				 updateTimer();
 			 }
 			 $("<div id='sendMessage2'</div>").insertAfter($("#email"));
-			 countdown("#sendMessage2",10,0);
+			 countdown("#sendMessage2",0,20);
 			 
   		   // 인증메일 보내기
   		   $.ajax({
@@ -512,7 +519,7 @@
   							swal("메일 인증이 완료되었습니다😊");	
   							
   							$('#confirmDiv').css("display","none");
-  							$("#sendMessage2").remove();
+  							$("#sendMessage2").css("display","none");
   							$("#certificationOk").css("display","inline-block");
   							$("#emailText").attr("readonly",true);
   						} else {

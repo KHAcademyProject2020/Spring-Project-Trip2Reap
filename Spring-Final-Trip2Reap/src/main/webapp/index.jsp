@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="resources/css/common/home.css">
     <!-- 파비콘 -->
 	<link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
+	<!-- 글꼴  -->
+	<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
 		<!-- 메뉴바 -->
@@ -38,20 +42,32 @@
              <ul id="slider">
                  <li>
                      <img src="resources/images/메인배너4.png">
+                     <label id="slide_img_label1_0">Green Barley Festival</label>
+                     <label id="slide_img_label1_2">#고창 &nbsp; #청보리밭 &nbsp; #축제 &nbsp; #소풍 &nbsp; #힐링</label>
                  </li>
 
-                 <li>
+                 <li id="slide_img_li">
                      <img src="resources/images/메인배너2.png">
+                     <label id="slide_img_label2">구례 산수유 꽃 축제</label>
+                     <label id="slide_img_label1_2">"샛노란 꽃 풍경을 만나다"</label>
                  </li>
 
                  <li>
                      <img src="resources/images/메인배너1.png">
+                     <label id="slide_img_label1">See You in Busan</label>
+                     <label id="slide_img_label2_2">푸르른 광안리의 바다와 함께~!</label>
                  </li>
 
                  <li>
                      <img src="resources/images/메인배너3.png">
+                     <label id="slide_img_label2_1">별빛야경투어❋</label>
+                     <label id="slide_img_label1_3_0">별 하나에 </label>
+                     <label id="slide_img_label1_4">추억</label>
+                     <label id="slide_img_label1_3_1">과 별 하나에 </label>
+                     <label id="slide_img_label1_5">사랑</label>
+                     <label id="slide_img_label1_3_2">을</label>
                  </li>
-             </ul>
+             </ul>             
 
              <div class="slider-btns" id="next"><span>▶</span></div>
              <div class="slider-btns" id="previous"><span>◀</span></div>

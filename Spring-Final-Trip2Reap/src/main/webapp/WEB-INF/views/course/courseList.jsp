@@ -186,17 +186,17 @@
 	   
 	   var category = '${selectCategory}';
 	   if(category == 0){
-		   $('#coSelect0').css('background','lightgray');
+		   $('#coSelect0').css({'background':'rgb(116,116,116)','color':'white'});
 	   } else if(category == 1){
-		   $('#coSelect1').css('background','lightgray');
+		   $('#coSelect1').css({'background':'rgb(116,116,116)','color':'white'});
 	   } else if(category == 2){
-		   $('#coSelect2').css('background','lightgray');
+		   $('#coSelect2').css({'background':'rgb(116,116,116)','color':'white'});
 	   } else if(category == 3){
-		   $('#coSelect3').css('background','lightgray');
+		   $('#coSelect3').css({'background':'rgb(116,116,116)','color':'white'});
 	   } else if(category == 4){
-		   $('#coSelect4').css('background','lightgray');
+		   $('#coSelect4').css({'background':'rgb(116,116,116)','color':'white'});
 	   } else if(category == 5){
-		   $('#coSelect5').css('background','lightgray');
+		   $('#coSelect5').css({'background':'rgb(116,116,116)','color':'white'});
 	   }
 	
 		function detailView(){
