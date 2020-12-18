@@ -168,6 +168,9 @@
 		<form action="myPage.me" method="post" id="myReservation">
             <input type="hidden" value="${ loginUser.memberId }" id="hiddenId4" name="hiddenId4"> 
         </form>
+        <form action="courseList.co" method="post" id="menuCourseList">
+	        <input type="hidden" id="selectCategory" name="selectCategory" value="0">
+	    </form>
 	</header>
 
 	<script>
@@ -251,7 +254,7 @@
     });
     
     $('#menu_course').click(function(){
-    	location.href="<%= request.getContextPath() %>/courseList.co";
+    	$('#menuCourseList').submit();
     });
     
     $('#menu_review').click(function(){
