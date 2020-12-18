@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,38 +43,59 @@
 				<div id="up_space1"></div>
 		    </div>
 			</c:if>
-			<c:forEach var="t" items="${ list }">
 			
-			<div id="list_hotel_div">			    
-				<div id="hotel_img_div">
-					<c:if test="${t.imageName != null }"> <!-- insert로 등록한 여행지 -->
-					 <img src="resources/buploadFiles/${ t.imageName }" id="hotel_img" /> 
-					</c:if>
-					<c:url var="tdetail" value="hotelDetailView.ho">
-						<c:param name="hId" value="${ t.boNo }"/>
-						<c:param name="page" value="1"/>
-					</c:url>
-					<div id="hotel_r1"><a id="hotel_a" href="${ tdetail }">이용후기 작성하기</a></div>
-					<div id="hotel_r2">|</div>
-					<div id="hotel_r3">환불하기</div>
-				</div>
+			
+			
+			<c:forEach var="t" items="${ list}" varStatus="tIdx">
 				
-				<div id="hotel_name_writer_div">
-				    <input type="hidden" id="hId" name="hId" value="${ t.boNo }">						
-					
-					<div id="hotel_name">
-						<a href="${ tdetail }">${ t.title }</a>	
+				<div id="list_hotel_div">	
+					<input id="reserveNo" type="hidden" value="${t.reserveNo }">		    
+					<div id="hotel_img_div">
+						<c:if test="${t.imageName != null }"> <!-- insert로 등록한 여행지 -->
+						 <img src="resources/buploadFiles/${ t.imageName }" id="hotel_img" /> 
+						</c:if>
+						
+						<c:url var="tdetail" value="hotelDetailView.ho">
+							<c:param name="hId" value="${ t.boNo }"/>
+							<c:param name="page" value="1"/>
+						</c:url>
+						<div id="hotel_r1"><a id="hotel_a" href="${ tdetail }">이용후기 작성하기</a></div>
+						<div id="hotel_r2">|</div>
+						<div id="hotel_r3">환불하기</div>
 					</div>
-					<div class="hotelCheck">체크인  <label id="checkInLabel">/  ${t.checkIn}</label></div>
-					<div class="hotelCheck">체크아웃 /   ${t.checkOut}</div>
-				    
-				    <div id="hotel_room">${t.roomName}</div>
-				    <div id="hotel_price">₩ ${t.price}</div> 
-				    <button id="detailReservation">자세히 보기</button>  
-				</div>			
-			</div>
+					
+					<div id="hotel_name_writer_div">
+					    <input type="hidden" id="hId" name="hId" value="${ t.boNo }">	
+					    
+						<div id="hotel_name">
+							<a href="${ tdetail }">${ t.title }</a>	
+						</div>
+						<div id="hotel_room">${t.roomName}</div>	
+						<div class="hotelCheck">
+							<ul id="hotelCheckUl">
+								<li>
+									<div class="ck_label">체크인</div>
+									<label id="checkInLabel"> ${t.checkIn}</label>
+								</li>
+								<li>
+									<div class="ck_label">체크아웃</div>
+									<label id="checkOutLabel">${t.checkOut}</label>
+								</li>
+							</ul>
+							
+							<div id="detail_wrapper">
+								<div id="hotel_price">
+						    		₩ <fmt:formatNumber value="${t.price}" type="number"/>
+							    </div> 
+							    <button id="detailReservation">자세히 보기</button>  
+						    </div>
+						</div>
+
+					</div>			
+				</div>
 			
 			</c:forEach>
+			 
 			
 			<input type="hidden" id="hiddenId" value="${ loginUser.memberId }">
 		</div>
@@ -82,8 +104,67 @@
      <div style="height: 300px;"></div>
      
      <script>
-          $('#myHotelBtn').click(function(){
-   	         location.href="<%= request.getContextPath() %>/hotelList.ho";
+          
+          $(function(){
+        	  //예약호텔이 존재하지 않을때
+        	  $('#myHotelBtn').click(function(){
+        	         location.href="<%= request.getContextPath() %>/hotelList.ho";
+               });
+        	  
+        	  //환불하기
+        	  $('#hotel_r3').click(function(){
+        		  
+        		  let reserveNo= Number($('#reserveNo').val());
+        		  console.log(reserveNo);
+        		  
+        		  swal({
+        			  title: "환불 요청",
+        			  text: "해당 예약내역이 삭제될 수 있습니다. 환불 하시겠습니까?",
+        			  icon: "warning",
+        			  buttons: ['취소', '확인'],
+        			  dangerMode: true,
+        			})
+        			.then((willDelete) => {
+        			  if (willDelete) {
+        			    
+        			    
+        			    $.ajax({
+      			    	  url:'refundReservation.me',
+      			    	  type:'post',
+      			    	  data:{reserveNo: reserveNo},
+      			    	  success:function(response){
+      			    		  console.log(response);
+      			    		  
+      			    		  if(response=='success'){
+      			    			swal({
+      			    				title: "환불 처리 성공", 
+      			    				icon: "success",
+      			    				text: '성공적으로 환불처리 되었습니다.',
+      			    				button: '확인'
+      	        			    });
+      			    			
+      			    			
+      			    			
+      			    		  }else{
+      			    			swal({
+      			    				title: "환불 처리 실패", 
+        	        			    icon: "error",
+        	        			    text: '환불처리 중 문제가 발생하였습니다.',
+        	        			    button: '확인'
+        	        			 });
+      			    		  }
+      			    	  }
+      			      	});
+      			    
+        			    location.reload();
+        			  } else {
+        			    swal("환불처리를 취소합니다.");
+        			  }
+        			  
+        			});
+        	  });
+        	  
+        	  
           });
      </script>
 </body>

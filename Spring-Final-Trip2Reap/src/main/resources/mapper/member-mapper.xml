@@ -183,23 +183,67 @@
         <result column="course_distance" property="distance"/>
     </resultMap>
     
+    
+    <!--[은강]  2020.12.18 - sql수정 및 컬럼 추가 -->
     <select id="selectReservation" resultMap="reservationResultSet">
-        select distinct bo_no,b.bo_title, r.reserve_price, r.reserve_total_person_cnt, r.check_in_date, r.check_out_date, r.reserve_name, i.change_name
-        from hotel_Reservation r
-        join img_file i using(bo_no)
-        join board b using(bo_no)
-        where r.member_id = #{memberId} and i.file_level = 1
+        SELECT *
+        FROM MY_HOTEL
+        WHERE MEMBER_ID=#{memberId}
+        ORDER BY CHECK_IN_DATE
     </select>
     
     <resultMap type="MyHotel" id="reservationResultSet">
-        <id column="bo_no" property="boNo" />
-        <result column="bo_title" property="title"/>
-        <result column="reserve_price" property="price"/>
-        <result column="reserve_total_person_cnt" property="person"/>
-        <result column="check_in_date" property="checkIn"/>
-        <result column="check_out_date" property="checkOut"/>
-        <result column="reserve_name" property="name"/>
-        <result column="change_name" property="imageName"/>
+        <id column="RESERVE_NO" property="reserveNo" />
+        <result column="BO_NO" property="boNo"/>
+        <result column="BO_TITLE" property="title"/>
+        <result column="ROOM_NO" property="roomNo"/>
+        <result column="RESERVE_PRICE" property="price"/>
+        <result column="RESERVE_TOTAL_PERSON_CNT" property="person"/>
+        <result column="CHECK_IN_DATE" property="checkIn"/>
+        <result column="CHECK_OUT_DATE" property="checkOut"/>   
+        <result column="CHANGE_NAME" property="imageName"/>
+        <result column="MEMBER_ID" property="memberId"/>
     </resultMap>
+    
+    
+    <!-- [은강] 방이름 찾기 -->
+    <select id="findOneRoomName" resultType="string">
+    	SELECT ROOM_NAME
+    	FROM ROOM
+    	WHERE ROOM_NO=#{roomNo}
+    </select>
+    
+    
+    <!-- [은강] 환불처리 -->
+    <update id="updateRefundCheck">
+     UPDATE HOTEL_RESERVATION
+     SET REFUND_CHECK='Y'
+     WHERE RESERVE_NO=#{reserveNo}
+    </update>
+    
+	<!-- 2020.12.18 - 호텔 전체 예약 resultset-->    
+	<resultMap type="Reservation" id="hotelReservationResultSet">
+		<id column="RESERVE_NO" property="reserveNo"/>
+		<result column="MEMBER_ID" property="memberId"/>
+		<result column="BO_NO" property="boNo"/>
+		<result column="ROOM_NO" property="roomNo"/>
+		<result column="RESERVE_PRICE" property="reservePrice"/>
+		<result column="RESERVE_ROOM_CNT" property="reserveRoomCnt"/>
+		<result column="RESERVE_TOTAL_PERSON_CNT" property="reserveTotalPersonCnt"/>
+		<result column="RESERVE_PERSON_ADULT_CNT" property="reservePersonAdultCnt"/>
+		<result column="RESERVE_PERSON_CHILD_CNT" property="reservePersounChildCnt"/>
+		<result column="CHECK_IN_DATE" property="checkInDate"/>
+		<result column="CHECK_OUT_DATE" property="checkOutDate"/>
+		<result column="RESERVE_CHECK" property="reserveCheck"/>
+		<result column="REFUND_CHECK" property="refundCheck"/>
+		<result column="RESERVE_NAME" property="reserveName"/>
+		<result column="RESERVE_PHONE" property="reservePhone"/>
+		<result column="RESERVE_EMAIL" property="reserveEmail"/>
+		<result column="PAYMENT_UID" property="paymentUID"/>
+		<result column="MERCHANT_UID" property="merchantUID"/>
+		<result column="PAYMENT_TYPE" property="paymentType"/>
+	</resultMap>
+
+
 
 </mapper>

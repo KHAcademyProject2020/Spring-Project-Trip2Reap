@@ -216,11 +216,28 @@ public class MemberController {
 	@ResponseBody
 	public ModelAndView myPageView(ModelAndView mv, @RequestParam("hiddenId4") String memberId) {
 		ArrayList<MyHotel> list = mService.selectReservation(memberId);
-		mv.addObject("list", list);
+		for(MyHotel mh : list) {
+			int roomNo= mh.getRoomNo();
+			String roomName=mService.findRoomName(roomNo); //방이름 찾기
+			mh.setRoomName(roomName);
+		}
+		mv.addObject("list", list); //예약이 된 리스트 (환불x)
 		mv.setViewName("myPageHome");
 	
 		return mv;
 	} // myPageView() 종료
+	
+	//2020.12.18- 호텔환불처리
+	@RequestMapping("refundReservation.me")
+	@ResponseBody
+	public String refundReservation(@RequestParam int reserveNo) {
+		int result=mService.updateRefundCheck(reserveNo);
+		if(result>0) {
+			return "success";
+		}
+		return "fail";
+	}
+	
 	
 	
 	// 마이페이지 : 정보수정 뷰로 이동

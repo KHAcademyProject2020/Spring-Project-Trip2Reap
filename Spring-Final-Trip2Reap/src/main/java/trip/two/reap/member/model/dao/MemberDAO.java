@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import trip.two.reap.course.model.vo.Course;
 import trip.two.reap.course.model.vo.CoursePageInfo;
+import trip.two.reap.hotel.model.vo.Reservation;
 import trip.two.reap.member.model.vo.Mail;
 import trip.two.reap.member.model.vo.Member;
 import trip.two.reap.member.model.vo.MyHotel;
@@ -125,6 +126,18 @@ public class MemberDAO {
 	public ArrayList<MyHotel> selectReservation(SqlSessionTemplate sqlSession, String memberId) {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectReservation", memberId);
 	}
+
+	
+	//[은강] 2020.12.18
+	public String findRoomName(SqlSessionTemplate sqlSession, int roomNo) {
+		return sqlSession.selectOne("memberMapper.findOneRoomName", roomNo);
+	}
+
+	public int updateRefundCheck(SqlSessionTemplate sqlSession, int reserveNo) {
+		return sqlSession.update("memberMapper.updateRefundCheck", reserveNo);
+	}
+
+
 
 
 } // 클래스 종료

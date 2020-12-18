@@ -2,9 +2,11 @@ package trip.two.reap.member.model.service;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import trip.two.reap.course.model.vo.Course;
 import trip.two.reap.course.model.vo.CoursePageInfo;
+import trip.two.reap.hotel.model.vo.Reservation;
 import trip.two.reap.member.model.vo.Member;
 import trip.two.reap.member.model.vo.MyHotel;
 import trip.two.reap.member.model.vo.MyTravel;
@@ -59,5 +61,13 @@ public interface MemberService {
 	ArrayList<Course> selectCourseList(CoursePageInfo pi);
 
 	ArrayList<MyHotel> selectReservation(String memberId);
+	
+	//[은강] 2020.12.18 - 은강
+	String findRoomName(int roomNo); //방이름 찾기
+
+	int updateRefundCheck(int reserveNo); //환불처리
+
+
+
 
 }

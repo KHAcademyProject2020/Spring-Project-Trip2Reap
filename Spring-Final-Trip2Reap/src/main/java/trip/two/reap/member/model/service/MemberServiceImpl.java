@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import trip.two.reap.course.model.vo.Course;
 import trip.two.reap.course.model.vo.CoursePageInfo;
+import trip.two.reap.hotel.model.vo.Reservation;
 import trip.two.reap.member.mail.MailHandler;
 import trip.two.reap.member.mail.RandomKey;
 import trip.two.reap.member.model.dao.MemberDAO;
@@ -175,5 +176,23 @@ public class MemberServiceImpl implements MemberService{
 	public ArrayList<MyHotel> selectReservation(String memberId) {
 		return mDAO.selectReservation(sqlSession, memberId);
 	}
+	
+	
+	//[은강] 2020.12.18 -은강
+	//방이름 찾기
+	@Override
+	public String findRoomName(int roomNo) {
+		return mDAO.findRoomName(sqlSession, roomNo);
+	}
+
+	//환불처리
+	@Override
+	public int updateRefundCheck(int reserveNo) {
+		return mDAO.updateRefundCheck(sqlSession, reserveNo);
+	}
+
+
+
+	
 
 } // 클래스 종료
