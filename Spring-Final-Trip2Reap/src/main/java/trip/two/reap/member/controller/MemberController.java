@@ -26,6 +26,10 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import trip.two.reap.course.model.vo.Course;
 import trip.two.reap.course.model.vo.CoursePageInfo;
 import trip.two.reap.course.model.vo.CoursePagination;
+import trip.two.reap.hotel.exception.HotelException;
+import trip.two.reap.hotel.model.vo.Hotel;
+import trip.two.reap.hotel.model.vo.Reservation;
+import trip.two.reap.hotel.model.vo.Room;
 import trip.two.reap.member.kakao.KakaoAPI;
 import trip.two.reap.member.model.service.MemberService;
 import trip.two.reap.member.model.vo.Member;
@@ -241,8 +245,27 @@ public class MemberController {
 	//2020.12.18- 호텔예약정보 불러오기
 	@RequestMapping("reservationDetailView.me")
 	public ModelAndView reservationDetailView(ModelAndView mv, 
-			@RequestParam int reserveNo) {
-		mv.setViewName("reservationDetailView");
+			@RequestParam int reserveNo,
+			@RequestParam int roomNo,
+			@RequestParam int hId) throws HotelException{
+		
+		//예약정보를 불러온다.
+		/*
+		예약정보: 예약자 이름, 예약자 전화번호, 예약자 이메일, 예약객실 수 , 예약총인원수, 체크인날짜, 체크아웃 날짜,이용금액
+		예약 호텔정보: 호텔이름, 호텔주소, 호텔 오픈시각, 호텔 종료시각, 호텔 체크인 시각, 호텔 체크아웃 시각, 호텔전화번호
+	 	예약 객실정보: 객실이름, 객실종류
+		*/
+		Reservation reservation= mService.findReserveInfo(reserveNo);
+		Hotel hotel= mService.findHotelInfo(hId);
+		Room room=mService.findRoomInfo(roomNo);
+		if(reservation==null || hotel==null || room==null) {
+			throw new HotelException("존재하지 않습니다!");
+		}
+		
+		mv.addObject("reservation", reservation)
+		.addObject("hotel", hotel)
+		.addObject("room", room)
+		.setViewName("reservationDetailView");
 		return mv;
 	}
 	

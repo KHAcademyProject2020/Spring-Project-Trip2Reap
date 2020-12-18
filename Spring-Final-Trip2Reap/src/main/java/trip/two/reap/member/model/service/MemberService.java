@@ -6,7 +6,9 @@ import java.util.HashMap;
 
 import trip.two.reap.course.model.vo.Course;
 import trip.two.reap.course.model.vo.CoursePageInfo;
+import trip.two.reap.hotel.model.vo.Hotel;
 import trip.two.reap.hotel.model.vo.Reservation;
+import trip.two.reap.hotel.model.vo.Room;
 import trip.two.reap.member.model.vo.Member;
 import trip.two.reap.member.model.vo.MyHotel;
 import trip.two.reap.member.model.vo.MyTravel;
@@ -66,6 +68,12 @@ public interface MemberService {
 	String findRoomName(int roomNo); //방이름 찾기
 
 	int updateRefundCheck(int reserveNo); //환불처리
+
+	Reservation findReserveInfo(int reserveNo); //예약정보불러오기
+
+	Hotel findHotelInfo(int hId);//호텔정보 불러오기
+
+	Room findRoomInfo(int roomNo);//방정보 불러오기
 
 
 

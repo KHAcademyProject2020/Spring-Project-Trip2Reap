@@ -221,7 +221,15 @@
      WHERE RESERVE_NO=#{reserveNo}
     </update>
     
-	<!-- 2020.12.18 - 호텔 전체 예약 resultset-->    
+	
+	<select id="findReservationInfo" resultMap="hotelReservationResultSet">
+	SELECT *
+	FROM HOTEL_RESERVATION
+	WHERE RESERVE_NO=#{reserveNo}
+	</select>
+	
+	
+	<!-- 2020.12.18 - 예약/ 호텔/ 방 resultset-->
 	<resultMap type="Reservation" id="hotelReservationResultSet">
 		<id column="RESERVE_NO" property="reserveNo"/>
 		<result column="MEMBER_ID" property="memberId"/>
@@ -231,7 +239,7 @@
 		<result column="RESERVE_ROOM_CNT" property="reserveRoomCnt"/>
 		<result column="RESERVE_TOTAL_PERSON_CNT" property="reserveTotalPersonCnt"/>
 		<result column="RESERVE_PERSON_ADULT_CNT" property="reservePersonAdultCnt"/>
-		<result column="RESERVE_PERSON_CHILD_CNT" property="reservePersounChildCnt"/>
+		<result column="RESERVE_PERSON_CHILD_CNT" property="reservePersonChildCnt"/>
 		<result column="CHECK_IN_DATE" property="checkInDate"/>
 		<result column="CHECK_OUT_DATE" property="checkOutDate"/>
 		<result column="RESERVE_CHECK" property="reserveCheck"/>
@@ -243,7 +251,8 @@
 		<result column="MERCHANT_UID" property="merchantUID"/>
 		<result column="PAYMENT_TYPE" property="paymentType"/>
 	</resultMap>
-
-
+	
+	
+	<!-- 2020.12.18 - 예약/ 호텔/ 방 resultset 끝-->
 
 </mapper>

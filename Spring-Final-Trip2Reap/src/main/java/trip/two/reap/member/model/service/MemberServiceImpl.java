@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import trip.two.reap.course.model.vo.Course;
 import trip.two.reap.course.model.vo.CoursePageInfo;
+import trip.two.reap.hotel.model.vo.Hotel;
 import trip.two.reap.hotel.model.vo.Reservation;
+import trip.two.reap.hotel.model.vo.Room;
 import trip.two.reap.member.mail.MailHandler;
 import trip.two.reap.member.mail.RandomKey;
 import trip.two.reap.member.model.dao.MemberDAO;
@@ -189,6 +191,21 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int updateRefundCheck(int reserveNo) {
 		return mDAO.updateRefundCheck(sqlSession, reserveNo);
+	}
+
+	@Override
+	public Reservation findReserveInfo(int reserveNo) {
+		return mDAO.findReservationInfo(sqlSession, reserveNo);
+	}
+
+	@Override
+	public Hotel findHotelInfo(int hId) {
+		return mDAO.findHotelInfo(sqlSession, hId);
+	}
+
+	@Override
+	public Room findRoomInfo(int roomNo) {
+		return mDAO.findRoomInfo(sqlSession, roomNo);
 	}
 
 

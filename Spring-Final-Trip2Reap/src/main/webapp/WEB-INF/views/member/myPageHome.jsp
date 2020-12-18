@@ -66,7 +66,7 @@
 					
 					<div id="hotel_name_writer_div">
 					    <input type="hidden" id="hId" name="hId" value="${ t.boNo }">	
-					    
+					    <input type="hidden" id="roomNo" name="roomNo" value="${t.roomNo }">
 						<div id="hotel_name">
 							<a href="${ tdetail }">${ t.title }</a>	
 						</div>
@@ -168,7 +168,9 @@
         	  //자세히보기
         	  $('#detailReservation').click(function(){
         		  let reserveNo= Number($('#reserveNo').val());
-        		  location.href="reservationDetailView.me?reserveNo="+reserveNo;
+        		  let roomNo=Number($('#roomNo').val());
+        		  let boNo=Number($('#hId').val());
+        		  location.href="reservationDetailView.me?reserveNo="+reserveNo+"&hId="+boNo+"&roomNo="+roomNo;
         	  });
         	  
           });

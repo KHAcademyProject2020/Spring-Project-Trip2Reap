@@ -1,6 +1,7 @@
 @charset "UTF-8";
 :root{
 	--bright-gray: rgb(243,243,243);
+	--salmon-pink: #FF84A1;
 }
 
 section{
@@ -24,9 +25,14 @@ section{
   position: relative;
   left: 50%;
   display: inline-block;
-/*   min-width: 500px; */
-  max-width: 100%;
-  width: auto;
+  
+/*   
+ max-width: 100%;
+min-width: 500px; 
+width: auto;
+*/
+ 
+  width: 500px;
   margin: 10px auto 25px;
   padding: 5px 0;
   
@@ -53,6 +59,7 @@ section{
   border-top: 1px solid var(--bright-gray);
   border-left: 1px solid var(--bright-gray);
   border-right: 1px solid var(--bright-gray);
+ 
 }
 
 .paypal__logo-wrapper {
@@ -73,13 +80,15 @@ section{
 .paypal__date,
 .paypal__ref {
   display: block;
-  font-size: 19px;
+  font-size: small;
   color: #aaa;
   font-weight: 300;
+  text-align: right;
 }
 
 .paypal__date {
   margin-bottom: 5px;
+  font-size: 0.5em;
 }
 
 .paypal__subheader-wrapper {
@@ -88,18 +97,19 @@ section{
 
   border-left: 1px solid var(--bright-gray);
   border-right: 1px solid var(--bright-gray);
+   border-bottom: 1px dashed var(--salmon-pink);
   
 }
 
 .paypal__subheader {
   padding: 0 45px 0 40px;
-  border-left: 5px solid #FF84A1;
+  border-left: 5px solid var(--salmon-pink);
 
 }
 
 .paypal__username {
   margin: 0 0 10px 0;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
 }
 
@@ -117,15 +127,23 @@ section{
 }
 
 .paypal__cart-title {
+	font-size: 20px;
   display: block;
   margin-top: 0;
   margin-bottom: 25px;
   text-align: center;
 }
 
+.paypal__cart-title > a,
+.paypal__cart-title > a:hover{
+	text-decoration: none;
+}
+
 .paypal__cart-list {
+	position: relative;
   margin: 0;
   padding: 0 15px;
+  width: 90%;
   list-style: none;
 }
 
@@ -161,6 +179,7 @@ section{
 .paypal__item-price {
   float: right;
   letter-spacing: 1px;
+  font-weight: bold;
 }
 
 .paypal__cart-total {
@@ -171,7 +190,7 @@ section{
 .paypal__footer {
   position: relative;
   padding: 30px 20px;
-  border-top: 2px dashed #FF84A1;
+  border-top: 2px dashed var(--salmon-pink);
   
   border-bottom: 1px solid var(--bright-gray);
   border-left: 1px solid var(--bright-gray);
@@ -204,12 +223,16 @@ section{
   border-right: 7px solid #ff85a1;
 }
 
-.paypal__barcode {
+.detail-info{
+	color: #aaa;
+}
+
+/* .paypal__barcode {
   display: block;
   margin: 0 auto;
   max-width: 300px;
   height: auto;
-}
+} */
 
 /**
  * Paypal Animations

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,8 +9,7 @@
 	<link rel="stylesheet" href="resources/css/member/reservationDetailView.css">
     <link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
 	
-	
-	<link rel="shortcut icon" href="paypal.png">
+
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet">
 </head>
 
@@ -31,8 +31,12 @@
 	        </div>
 	
 	        <div class="paypal__header-info">
-	          <span class="paypal__date">25.04.2016</span>
-	          <span class="paypal__ref">0f-113</span>
+	          <span class="paypal__date">
+	          	[ 전국방방곡곡  | 호텔 예약 | ${reservation.paymentType} ]
+	          </span>
+	          
+	          <%--호텔예약자 이름--%>
+	          <span class="paypal__ref">예약자명 : ${reservation.reserveName}</span>
 	        </div>
 	      </div>
 	
@@ -40,46 +44,78 @@
 	        <div class="paypal__subheader">
 	        
 	          <%--예약 호텔 이름 --%>
-	          <h1 class="paypal__username">VladysLav, Hi</h1>
+	          <h1 class="paypal__username">
+	          	<c:if test="${hotel.hotelSite !=null}">
+	        		<a href="${hotel.hotelSite }" target="_blank">${hotel.boTitle}</a>
+	        	</c:if>
+	        	<c:if test="${hotel.hotelSite ==null}">
+	        		${hotel.boTitle}
+	        	</c:if>
+	          </h1>
 	          
 	          <%--예약호텔 주소 --%>
-	          <span class="paypal__help-text">you've purchased three (3) items in our store:</span>
+	          <span class="paypal__help-text">${hotel.hotelAddr }</span>
 	        </div>
 	      </div>
 	
 	      <div class="paypal__cart">
-	        <h2 class="paypal__cart-title">예약 내역</h2>
-	
-	        <ul class="paypal__cart-list">
-	        
+	      
+	      	<%--예약 객실 이름 --%>
+	        <h2 class="paypal__cart-title">${room.roomName }</h2>
+
+	       	 <ul class="paypal__cart-list">	        
 	          <%--예약호텔의 예약객실 --%>
 	          <li class="paypal__cart-item">
 	            <span class="paypal__index">1</span>
-	            <span class="paypal__item-name">t-Shirt Lacoste</span>
-	            <span class="paypal__item-price">$48.00</span>
+	            <span class="paypal__item-name">예약 객실수</span>
+	            <span class="paypal__item-price">${reservation.reserveRoomCnt } 실</span>
 	          </li>
 	
+			  <%--예약 인원수 --%>
 	          <li class="paypal__cart-item">
 	            <span class="paypal__index">2</span>
-	            <span class="paypal__item-name">Snickers Nike</span>
-	            <span class="paypal__item-price">$125.00</span>
+	            <span class="paypal__item-name">예약 인원수</span>
+	            <span class="paypal__item-price">${reservation.reserveTotalPersonCnt} 명</span>
 	          </li>
 	
+			  <%--체크인날짜/ 체크인시각 --%>
 	          <li class="paypal__cart-item">
 	            <span class="paypal__index">3</span>
-	            <span class="paypal__item-name">All Stars</span>
-	            <span class="paypal__item-price">$95.00</span>
+	            <span class="paypal__item-name">체크인</span>
+	            <span class="paypal__item-price">${reservation.checkInDate} (${hotel.hotelCheckInTime} 시)</span>
+	          </li>
+	          
+	           <%--체크아웃날짜/ 체크아웃 시각 --%>
+	           <li class="paypal__cart-item">
+	            <span class="paypal__index">4</span>
+	            <span class="paypal__item-name">체크아웃</span>
+	            <span class="paypal__item-price">${reservation.checkOutDate} (${hotel.hotelCheckOutTime} 시)</span>
 	          </li>
 	
+			  <%--예약 이용가격 --%>
 	          <li class="paypal__cart-item">
-	            <span class="paypal__cart-total">Total</span>
-	            <span class="paypal__item-price">$268.00</span>
+	            <span class="paypal__cart-total">이용 가격</span>
+	            <span class="paypal__item-price"><fmt:formatNumber value="${reservation.reservePrice }" type="number"/>원</span>
 	          </li>
 	        </ul>
 	      </div>
 	
 	      <div class="paypal__footer">
-	        <img src="https://i.ibb.co/c8CQvBq/barcode.png" alt="Paypal Barcode" class="paypal__barcode">
+	        <!-- <img src="https://i.ibb.co/c8CQvBq/barcode.png" alt="Paypal Barcode" class="paypal__barcode"> -->
+	      	 <ul class="paypal__cart-list">
+		          <%--예약호텔의 예약객실 --%>
+		          <li class="paypal__cart-item">
+		            <small class="paypal__item-name">호텔 전화번호</small>
+		            <small class="paypal__item-price detail-info">${hotel.hotelTel}</small>
+		          </li>
+		          
+		           <li class="paypal__cart-item">
+		            <small class="paypal__item-name">호텔 운영시간</small>
+		            <small class="paypal__item-price detail-info">${hotel.hotelOpenTime}시 ~ ${hotel.hotelCloseTime}시</small>
+		          </li>
+	
+	        </ul>
+	      	
 	      </div>
 	    </div>
 	

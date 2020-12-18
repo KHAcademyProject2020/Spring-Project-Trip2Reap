@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 
 import trip.two.reap.course.model.vo.Course;
 import trip.two.reap.course.model.vo.CoursePageInfo;
+import trip.two.reap.hotel.model.vo.Hotel;
 import trip.two.reap.hotel.model.vo.Reservation;
+import trip.two.reap.hotel.model.vo.Room;
 import trip.two.reap.member.model.vo.Mail;
 import trip.two.reap.member.model.vo.Member;
 import trip.two.reap.member.model.vo.MyHotel;
@@ -135,6 +137,18 @@ public class MemberDAO {
 
 	public int updateRefundCheck(SqlSessionTemplate sqlSession, int reserveNo) {
 		return sqlSession.update("memberMapper.updateRefundCheck", reserveNo);
+	}
+
+	public Reservation findReservationInfo(SqlSessionTemplate sqlSession, int reserveNo) {
+		return sqlSession.selectOne("memberMapper.findReservationInfo", reserveNo);
+	}
+
+	public Hotel findHotelInfo(SqlSessionTemplate sqlSession, int hId) {
+		return sqlSession.selectOne("hotelMapper.selectOneHotel", hId);
+	}
+
+	public Room findRoomInfo(SqlSessionTemplate sqlSession, int roomId) {
+		return sqlSession.selectOne("hotelMapper.selectOneRoomInfo", roomId);
 	}
 
 
