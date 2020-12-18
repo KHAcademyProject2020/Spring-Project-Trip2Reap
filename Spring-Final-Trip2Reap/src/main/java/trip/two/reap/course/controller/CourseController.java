@@ -33,7 +33,8 @@ public class CourseController {
 	// 여행코스 리스트
 	@RequestMapping("courseList.co")
 	public ModelAndView goCourseList(@RequestParam(value="page", required=false) Integer page, @RequestParam(value="addr", required=false) Integer addr, 
-			                         @RequestParam(value="theme", required=false) Integer theme , ModelAndView mv){
+			                         @RequestParam(value="theme", required=false) Integer theme , ModelAndView mv,
+			                         @RequestParam("selectCategory") String category){
 		
 		int currentPage = 1;
 		if(page != null) {
@@ -48,12 +49,39 @@ public class CourseController {
 			currentPage = theme;
 		}
 		
-		int listCount = cService.countList();
+		int listCount = 0;
+		if(category.equals("0")) {
+			listCount = cService.countList();
+		} else if(category.equals("1")) {
+			listCount = cService.countList1();
+		} else if(category.equals("2")) {
+			listCount = cService.countList2();
+		} else if(category.equals("3")) {
+			listCount = cService.countList3();
+		} else if(category.equals("4")) {
+			listCount = cService.countList4();
+		} else if(category.equals("5")) {
+			listCount = cService.countList5();
+		} 
 		
 		CoursePageInfo pi = CoursePagination.getPageInfo(currentPage, listCount);
 		
-		ArrayList<Course> list = cService.selectCourseList(pi);		
-		System.out.println("list : " + list);
+		// ArrayList<Course> list = cService.selectCourseList(pi);	
+		ArrayList<Course> list = new ArrayList<Course>();
+				
+		if(category.equals("0")) {
+			list = cService.selectCourseList(pi);
+		} else if(category.equals("1")) {
+			list = cService.selectCourseList1(pi);
+		} else if(category.equals("2")) {
+			list = cService.selectCourseList2(pi);
+		} else if(category.equals("3")) {
+			list = cService.selectCourseList3(pi);
+		} else if(category.equals("4")) {
+			list = cService.selectCourseList4(pi);
+		} else if(category.equals("5")) {
+			list = cService.selectCourseList5(pi);
+		}
 		
 		ArrayList<String[]> day = new ArrayList<String[]>();
 		ArrayList<String> dayList = new ArrayList<String>();
@@ -112,6 +140,7 @@ public class CourseController {
 			// mv.addObject("xList", xList);
 			// mv.addObject("yList", yList);
 			mv.addObject("pi", pi);
+			mv.addObject("selectCategory", category);
 			mv.setViewName("courseList");
 		}
 	    
@@ -247,20 +276,15 @@ public class CourseController {
 
 /*
  * 
- * <당장 해야할 일>
- * 1. 발표 피피티 ☆★☆★☆★
- * 2. 발표 준비 완료 ☆★☆★☆★
  * 
  * <남은 기능들>
  * 1. 여행코스 디테일뷰
  * 2. 본인만 수정, 삭제 가능
  * 3. 여행코스 삭제, 이동시키기
  * 4. 여행코스 1박2일, 2박3일
- * 5. 검색처리
  * 
  * <이번주 할 것>
  * 1. alert창 수정
- * 2. 전체적인 뷰 수정
- * 3. 전체 피피티 완료
+ * 2. 전체 피피티 완료
  * 
 */

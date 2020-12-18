@@ -15,18 +15,99 @@
         from course
   </select>
   
+  <select id="countList1" resultType="_int">
+        select count(*)
+        from course
+        where theme = '가족'
+  </select>
+  
+  <select id="countList2" resultType="_int">
+        select count(*)
+        from course
+        where theme = '나홀로'
+  </select>
+  
+  <select id="countList3" resultType="_int">
+        select count(*)
+        from course
+        where theme = '커플'
+  </select>
+  
+  <select id="countList4" resultType="_int">
+        select count(*)
+        from course
+        where theme = '우정'
+  </select>
+  
+  <select id="countList5" resultType="_int">
+        select count(*)
+        from course
+        where theme = '액티비티'
+  </select>
+  
   <select id="selectCourseList" resultMap="courseResultSet">
-        select c.course_no, bo_no, b.member_id, b.bo_title, c.course_name, c.course_day,i.change_name,c.course_distance  
+        select c.course_no, bo_no, m.nickname, b.bo_title, c.course_name, c.course_day,i.change_name,c.course_distance  
         from course c
         join board b using(bo_no)
         join img_file i using(bo_no)
+        join member m using(member_id)
+        order by bo_no desc
+  </select>
+  
+  <select id="selectCourseList1" resultMap="courseResultSet">
+        select c.course_no, bo_no, m.nickname, b.bo_title, c.course_name, c.course_day,i.change_name,c.course_distance  
+        from course c
+        join board b using(bo_no)
+        join img_file i using(bo_no)
+        join member m using(member_id)
+        where c.theme = '가족'
+        order by bo_no desc
+  </select>
+  
+  <select id="selectCourseList2" resultMap="courseResultSet">
+        select c.course_no, bo_no, m.nickname, b.bo_title, c.course_name, c.course_day,i.change_name,c.course_distance  
+        from course c
+        join board b using(bo_no)
+        join img_file i using(bo_no)
+        join member m using(member_id)
+        where c.theme = '나홀로'
+        order by bo_no desc
+  </select>
+  
+  <select id="selectCourseList3" resultMap="courseResultSet">
+        select c.course_no, bo_no, m.nickname, b.bo_title, c.course_name, c.course_day,i.change_name,c.course_distance  
+        from course c
+        join board b using(bo_no)
+        join img_file i using(bo_no)
+        join member m using(member_id)
+        where c.theme = '커플'
+        order by bo_no desc
+  </select>
+  
+  <select id="selectCourseList4" resultMap="courseResultSet">
+        select c.course_no, bo_no, m.nickname, b.bo_title, c.course_name, c.course_day,i.change_name,c.course_distance  
+        from course c
+        join board b using(bo_no)
+        join img_file i using(bo_no)
+        join member m using(member_id)
+        where c.theme = '우정'
+        order by bo_no desc
+  </select>
+  
+  <select id="selectCourseList5" resultMap="courseResultSet">
+        select c.course_no, bo_no, m.nickname, b.bo_title, c.course_name, c.course_day,i.change_name,c.course_distance  
+        from course c
+        join board b using(bo_no)
+        join img_file i using(bo_no)
+        join member m using(member_id)
+        where c.theme = '액티비티'
         order by bo_no desc
   </select>
   
   <resultMap type="Course" id="courseResultSet">
         <id column="course_no" property="courseNo" />
         <result column="bo_no" property="boardNo"/>
-        <result column="member_id" property="courseWriter"/>
+        <result column="nickname" property="courseWriter"/>
         <result column="bo_title" property="courseTitle"/>
         <result column="course_name" property="courseName"/>
         <result column="course_day" property="courseDay"/>

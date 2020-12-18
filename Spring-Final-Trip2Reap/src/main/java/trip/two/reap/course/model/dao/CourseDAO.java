@@ -20,11 +20,66 @@ public class CourseDAO {
 		return sqlSession.selectOne("courseMapper.countList");
 	}
 
+	public int countList1(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("courseMapper.countList1");
+	}
+	
+	public int countList2(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("courseMapper.countList2");
+	}
+	
+	public int countList3(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("courseMapper.countList3");
+	}
+	
+	public int countList4(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("courseMapper.countList4");
+	}
+	
+	public int countList5(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("courseMapper.countList5");
+	}
+	
 	public ArrayList<Course> selectCourseList(SqlSessionTemplate sqlSession, CoursePageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		return (ArrayList)sqlSession.selectList("courseMapper.selectCourseList", null, rowBounds);
+	}
+
+	public ArrayList<Course> selectCourseList1(SqlSessionTemplate sqlSession, CoursePageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("courseMapper.selectCourseList1", null, rowBounds);
+	}
+	
+	public ArrayList<Course> selectCourseList2(SqlSessionTemplate sqlSession, CoursePageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("courseMapper.selectCourseList2", null, rowBounds);
+	}
+	
+	public ArrayList<Course> selectCourseList3(SqlSessionTemplate sqlSession, CoursePageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("courseMapper.selectCourseList3", null, rowBounds);
+	}
+	
+	public ArrayList<Course> selectCourseList4(SqlSessionTemplate sqlSession, CoursePageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("courseMapper.selectCourseList4", null, rowBounds);
+	}
+	
+	public ArrayList<Course> selectCourseList5(SqlSessionTemplate sqlSession, CoursePageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("courseMapper.selectCourseList5", null, rowBounds);
 	}
 
 }
