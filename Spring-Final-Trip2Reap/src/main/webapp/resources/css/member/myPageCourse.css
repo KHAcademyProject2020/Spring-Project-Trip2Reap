@@ -46,13 +46,3 @@ input[type=button]:focus{ outline: none; }
                color: white; font-weight: 600; margin-left: 370px; }
 #myCourseBtn:hover { background: rgb(119,136,154); }
 #myCourseBtn:focus{ outline: none; }
-
-/* 페이징 */
-.paging{ text-align: center; }
-#pagination{ clear: both; text-align: center; }	
-.paging a{ display: inline-block; border-radius: 5px; font-size: 12px; width: 28px; height: 28px; 
-           vertical-align: middle; line-height: 27px; }	
-a{ text-decoration: none; }
-.paging a.bt{ border: 1px solid darkslategrey; margin-left: 2px; margin-right: 2px; }
-.paging a.num{ border: 1px solid darkslategrey; font-weight: 600; margin-left: 2px; margin-right: 2px; }
-.paging a.num.on{ background: lightslategray; color: white; border: 1px solid lightslategray; margin-left: 2px; margin-right: 2px; } 

@@ -73,38 +73,7 @@
                      <div id="detailBtn"><label id="detailLabel">자세히보기</label></div>                    
                      </div>                  
 			     </div>
-			</c:forEach>
-			
-			<div class="paging">
-				<c:if test="${ pi.currentPage <= 1 }"></c:if>
-				<c:if test="${ pi.currentPage > 1 }">
-					<c:url var="before" value="myPageCourse.me">
-						<c:param name="page" value="${ pi.currentPage - 1 }"/>
-					</c:url>	
-				    <a href="${ before }" class="bt" id="beforeBtn">&lt;</a>
-			    </c:if>
-
-				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-					<c:if test="${ p eq pi.currentPage }">
-						<a href="${ pagination }" class="num on">${ p }</a> 
-					</c:if>
-					
-					<c:if test="${ p ne pi.currentPage }">
-						<c:url var="pagination" value="myPageCourse.me">
-							<c:param name="page" value="${ p }"/>
-						</c:url>
-						<a href="${ pagination }" class="num">${ p }</a>
-					</c:if>
-				</c:forEach>				
-			
-				<c:if test="${ pi.currentPage >= pi.maxPage }"></c:if>
-				<c:if test="${ pi.currentPage < pi.maxPage }">
-					<c:url var="after" value="myPageCourse.me">
-						<c:param name="page" value="${ pi.currentPage + 1 }"/>
-					</c:url> 
-					<a href="${ after }" class="bt" id="afterBtn">&gt;</a>
-				</c:if>
-			</div>
+			</c:forEach>			
 	
 	    </div>
 	    <div style="height: 100px;"></div>

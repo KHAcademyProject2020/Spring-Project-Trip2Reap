@@ -764,7 +764,11 @@
 			<button id="go_payment">결제하기 </button> <%-- 체크한 부분에서 결제 api로 이동  --%>
 		</div>
 	</div>
+	    <form action="myPage.me" method="post" id="myHotels">
+            <input type="hidden" value="${ loginUser.memberId }" id="hiddenId4" name="hiddenId4"> 
+        </form>
 </div>
+        
 
 
 <%--아임포트 라이브러리 --%>
@@ -927,7 +931,7 @@ $(function(){
 									});
 									
 									//결제성공하면 마이페이지 호텔예약정보로 리다이렉트
-									location.href="<%=request.getContextPath() %>/myPage.me";
+									$('#myHotels').submit();
 									
 								}else{
 									swal({
@@ -1011,7 +1015,7 @@ $(function(){
 									});
 									
 									//결제성공하면 마이페이지 호텔예약정보로 리다이렉트
-									location.href="<%=request.getContextPath() %>/myPage.me";
+									$('#myHotels').submit();
 									
 								}else{
 									swal({
@@ -1090,7 +1094,7 @@ $(function(){
 									});
 									
 									//결제성공하면 마이페이지 호텔예약정보로 리다이렉트
-									location.href="<%=request.getContextPath() %>/myPage.me";
+									$('#myHotels').submit();
 								}else{
 									swal({
 										icon:'error',
