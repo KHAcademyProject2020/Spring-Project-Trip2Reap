@@ -32,9 +32,17 @@
 		         </div>
 		     </div>
 		     
-		     <div>		          
+		     <div>		     		          
 		          <div id="coSpace4"></div>
 		          <div id="coSpace3"></div>
+		          <div class="coSelect" id="coSelect0">
+		              <div id="coSpace8"></div>
+		              <i class="fas fa-map-marked-alt" id="coIcon0"></i>
+		              <div id="coSpace8"></div>
+		              <label class="commonLabel">전체 코스</label>
+		          </div>
+		          <div id="coSpace5"></div>
+		          
 		          <div class="coSelect" id="coSelect1">
 		              <div><img src="resources/images/family.png" id="coIcon1"></div>    
 		              <label class="commonLabel">가족 코스</label>
@@ -64,19 +72,11 @@
 		              <div id="coSpace7"></div>
 		              <label class="commonLabel">우정 코스</label>
 		          </div>
-		          <div id="coSpace5"></div>
+		          <div id="coSpace5"></div>		          		        
 		          
 		          <div class="coSelect" id="coSelect5">
 		              <div id="coSpace6"></div>
-		              <i class="fas fa-campground" id="coIcon5"></i>
-		              <div id="coSpace7"></div>
-		              <label class="commonLabel">캠핑 코스</label>
-		          </div>
-		          <div id="coSpace5"></div>
-		          
-		          <div class="coSelect" id="coSelect6">
-		              <div id="coSpace6"></div>
-		              <i class="fas fa-biking" id="coIcon6"></i>
+		              <i class="fas fa-biking" id="coIcon5"></i>
 		              <div id="coSpace7"></div>
 		              <label class="commonLabel">액티비티</label>
 		          </div>
@@ -84,20 +84,7 @@
 		
 		</div>
 		<div id="coMenu">
-		    <div id="coSpace8"></div>
-		    <div id="coSpace3"></div>
-		    <span class="coMenuLabel" onMouseOver="this.style.color='#F2CA5E';"
-				  onMouseOut="this.style.color=''">전체</span>
-		    <span class="coMenuLabel2">|</span>
-		    <span class="coMenuLabel" onMouseOver="this.style.color='#F2CA5E';"
-				  onMouseOut="this.style.color=''">당일여행</span>
-		    <span class="coMenuLabel2">|</span>
-		    <span class="coMenuLabel" onMouseOver="this.style.color='#F2CA5E';"
-				  onMouseOut="this.style.color=''">1박2일</span>
-		    <span class="coMenuLabel2">|</span>
-		    <span class="coMenuLabel" onMouseOver="this.style.color='#F2CA5E';"
-				  onMouseOut="this.style.color=''">2박3일</span>
-		</div>
+		    <div id="coSpace8"></div></div>
 		
 		<div id="all_div">
 	         <div style="height: 20px;"></div>
@@ -140,6 +127,7 @@
 				<c:if test="${ pi.currentPage > 1 }">
 					<c:url var="before" value="courseList.co">
 						<c:param name="page" value="${ pi.currentPage - 1 }"/>
+						<c:param name="selectCategory" value="${ selectCategory }" />
 					</c:url>	
 				    <a href="${ before }" class="bt" id="beforeBtn">&lt;</a>
 			    </c:if>
@@ -152,6 +140,7 @@
 					<c:if test="${ p ne pi.currentPage }">
 						<c:url var="pagination" value="courseList.co">
 							<c:param name="page" value="${ p }"/>
+							<c:param name="selectCategory" value="${ selectCategory }" />
 						</c:url>
 						<a href="${ pagination }" class="num">${ p }</a>
 					</c:if>
@@ -161,6 +150,7 @@
 				<c:if test="${ pi.currentPage < pi.maxPage }">
 					<c:url var="after" value="courseList.co">
 						<c:param name="page" value="${ pi.currentPage + 1 }"/>
+						<c:param name="selectCategory" value="${ selectCategory }" />
 					</c:url> 
 					<a href="${ after }" class="bt" id="afterBtn">&gt;</a>
 				</c:if>
@@ -168,11 +158,45 @@
 	
 	    </div>
 	    <div style="height: 100px;"></div>
-	
+	    <form action="courseList.co" method="post" id="courseLists">
+	        <input type="hidden" name="selectCategory" value="0">
+	    </form>
+	    <form action="courseList.co" method="post" id="courseLists1">
+	        <input type="hidden" name="selectCategory" value="1">
+	    </form>
+	    <form action="courseList.co" method="post" id="courseLists2">
+	        <input type="hidden" name="selectCategory" value="2">
+	    </form>
+	    <form action="courseList.co" method="post" id="courseLists3">
+	        <input type="hidden" name="selectCategory" value="3">
+	    </form>
+	    <form action="courseList.co" method="post" id="courseLists4">
+	        <input type="hidden" name="selectCategory" value="4">
+	    </form>
+	    <form action="courseList.co" method="post" id="courseLists5">
+	        <input type="hidden" name="selectCategory" value="5">
+	    </form>
+	    <input type="hidden" id="selectCategory" name="selectCategory" value="0">
+	    
 	<script>
 	   var message = '${msg}'; 
 	   if(message!=""){
 		   swal(message);
+	   }
+	   
+	   var category = '${selectCategory}';
+	   if(category == 0){
+		   $('#coSelect0').css('background','lightgray');
+	   } else if(category == 1){
+		   $('#coSelect1').css('background','lightgray');
+	   } else if(category == 2){
+		   $('#coSelect2').css('background','lightgray');
+	   } else if(category == 3){
+		   $('#coSelect3').css('background','lightgray');
+	   } else if(category == 4){
+		   $('#coSelect4').css('background','lightgray');
+	   } else if(category == 5){
+		   $('#coSelect5').css('background','lightgray');
 	   }
 	
 		function detailView(){
@@ -187,6 +211,35 @@
 			location.href="<%= request.getContextPath() %>/searchError.co";
 		}
 		
+		$('#coSelect0').click(function(){
+			$('#selectCategory').val("0");
+			$('#courseLists').submit();
+		});
+		
+		$('#coSelect1').click(function(){
+			$('#selectCategory').val("1");
+			$('#courseLists1').submit();
+		});
+		
+		$('#coSelect2').click(function(){
+			$('#selectCategory').val("2");
+			$('#courseLists2').submit();
+		});
+		
+		$('#coSelect3').click(function(){
+			$('#selectCategory').val("3");
+			$('#courseLists3').submit();
+		});
+		
+		$('#coSelect4').click(function(){
+			$('#selectCategory').val("4");			
+			$('#courseLists4').submit();
+		});
+		
+		$('#coSelect5').click(function(){
+			$('#selectCategory').val("5");			
+			$('#courseLists5').submit();
+		});
 	</script>
 	</section>
 </body>

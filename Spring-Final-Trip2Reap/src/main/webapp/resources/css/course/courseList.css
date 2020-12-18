@@ -19,16 +19,26 @@
 #coSpace5{ display: inline-block; width: 10px; }
 
 /* 아이콘  */
-.coSelect{ display: inline-block; width: 110px; height: 110px; text-align : center; cursor : pointer;
-		   background: white; border-radius: 5px; border: 1px solid rgb(205,178,179); }
-.commonLabel { font-weight: bold; cursor : pointer; }
-#coSelect2,#coSelect3,#coSelect4,#coSelect5,#coSelect6{ vertical-align: top; }
+#coSelect0{ display: inline-block; width: 110px; height: 110px; text-align : center; cursor : pointer;
+		   background: white; border-radius: 5px; border: 1px solid lightgray; }
+#coSelect1{ display: inline-block; width: 110px; height: 110px; text-align : center; cursor : pointer;
+            background: white; border-radius: 5px; border: 1px solid lightgray; }
+#coSelect2{ display: inline-block; width: 110px; height: 110px; text-align : center; cursor : pointer;
+		   background: white; border-radius: 5px; border: 1px solid lightgray; }
+#coSelect3{ display: inline-block; width: 110px; height: 110px; text-align : center; cursor : pointer;
+		   background: white; border-radius: 5px; border: 1px solid lightgray; }
+#coSelect4{ display: inline-block; width: 110px; height: 110px; text-align : center; cursor : pointer;
+		   background: white; border-radius: 5px; border: 1px solid lightgray; }
+#coSelect5{ display: inline-block; width: 110px; height: 110px; text-align : center; cursor : pointer;
+		   background: white; border-radius: 5px; border: 1px solid lightgray; }
+.commonLabel { font-weight: bold; cursor : pointer; }		   
+#coSelect0,#coSelect2,#coSelect3,#coSelect4,#coSelect5{ vertical-align: top; }
+#coIcon0 { font-size: 50px; color: rgb(238,97,91); }
 #coIcon1{ width: 72px; }
 #coIcon2 { font-size: 50px; color: rgb(206,242,121); }
 #coIcon3 { font-size: 45px; color: pink; }
 #coIcon4 { font-size: 50px; color: orange; }
-#coIcon5 { font-size: 50px; color: red; }
-#coIcon6 { font-size: 50px; color: rgb(178,235,244); }
+#coIcon5 { font-size: 50px; color: rgb(178,235,244); }
 #coSpace6{ height : 20px; }
 #coSpace7{ height : 10px; }
 #coSpace8{ height : 15px; }
@@ -36,8 +46,6 @@
 
 /* 메뉴바  */
 #coMenu{ height: 50px; background: rgb(238,97,91); box-shadow: 3px 3px 3px 3px rgba(128, 46, 34, 0.4); }
-.coMenuLabel{ color: white; font-size: 17px; margin-right: 10px; cursor: pointer; }
-.coMenuLabel2{ color: white; font-size: 17px; margin-right: 10px; }
 #coSpace8{ height: 14px; }
 
 
