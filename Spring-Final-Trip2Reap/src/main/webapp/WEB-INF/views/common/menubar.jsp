@@ -61,6 +61,14 @@
 							onMouseOut="this.style.color=''">로그아웃</li>
 						<li class="topBar2_2" id="myPageBtn" onMouseOver="this.style.color='#F2CA5E';"
 							onMouseOut="this.style.color=''">마이페이지</li>
+						
+						<%--(은강) notification - 알람(시작) --%>
+						<li>
+							<i class="fas fa-bell"></i>
+							<i class="far fa-bell"></i>
+							
+						</li>
+						<%--(은강) notification - 알람(끝) --%>
 					</ul>
 				</div>
 			</c:if>
