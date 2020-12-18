@@ -238,6 +238,14 @@ public class MemberController {
 		return "fail";
 	}
 	
+	//2020.12.18- 호텔예약정보 불러오기
+	@RequestMapping("reservationDetailView.me")
+	public ModelAndView reservationDetailView(ModelAndView mv, 
+			@RequestParam int reserveNo) {
+		mv.setViewName("reservationDetailView");
+		return mv;
+	}
+	
 	
 	
 	// 마이페이지 : 정보수정 뷰로 이동

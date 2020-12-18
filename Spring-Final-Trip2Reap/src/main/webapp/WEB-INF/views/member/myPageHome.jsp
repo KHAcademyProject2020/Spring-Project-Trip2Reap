@@ -165,6 +165,12 @@
         	  });
         	  
         	  
+        	  //자세히보기
+        	  $('#detailReservation').click(function(){
+        		  let reserveNo= Number($('#reserveNo').val());
+        		  location.href="reservationDetailView.me?reserveNo="+reserveNo;
+        	  });
+        	  
           });
      </script>
 </body>
