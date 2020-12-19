@@ -805,7 +805,6 @@ public class HotelController {
 	
 		LinkedHashSet<Hotel> hotelInfoCookieList= null;			//호텔 리스트
 		Cookie[] cookieArr= request.getCookies();//쿠키배열을 구한다.
-		System.out.println(cookieArr.length);
 		
 		if(cookieArr!=null) {
 			hotelInfoCookieList=new LinkedHashSet<Hotel>();

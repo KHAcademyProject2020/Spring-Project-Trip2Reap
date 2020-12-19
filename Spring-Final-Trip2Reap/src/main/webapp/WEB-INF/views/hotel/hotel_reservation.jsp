@@ -791,7 +791,7 @@ $(function(){
 		reserveMap.set('oneDayPrice', Number($('#_room_price_per_day').val()) ); // 1일 이용가격
 
 		
-		console.log(reserveMap.get('boNo'), reserveMap.get('roomNo'));
+		//console.log(reserveMap.get('boNo'), reserveMap.get('roomNo'));
 		
 		//초기화 - 사용자가 직접입력해야되는 항목
 		//1. 체크인날짜
@@ -814,7 +814,7 @@ $(function(){
 		
 		//실제가격
 		let hotelUsingPrice= Number( $('#_total_price').val()*reserveMap.get('reserveRoomCnt'));
-		console.log('호텔 이용가격=> '+ hotelUsingPrice);
+		//console.log('호텔 이용가격=> '+ hotelUsingPrice);
 		reserveMap.set('hotelUsingPrice', hotelUsingPrice); //호텔실제 이용가격
 		
 		

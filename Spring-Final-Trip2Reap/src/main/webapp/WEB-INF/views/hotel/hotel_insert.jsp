@@ -178,7 +178,7 @@
 							
 							$('#detail_img').get(0).files= $totalUploadImgs;
 							
-							console.log($('#detail_img').get(0).files);
+							//console.log($('#detail_img').get(0).files);
 							
 						}
 						
@@ -452,7 +452,7 @@
 							// 등록한 객실정보개수
 							let $insertedRoomCount = $('.one-room-info-insert').length;
 							
-							console.log('==> 등록된 객실정보는 '+$insertedRoomCount+'개 입니다');
+							//console.log('==> 등록된 객실정보는 '+$insertedRoomCount+'개 입니다');
 							let $latestIndex= $insertedRoomCount;
 							
 							
@@ -509,7 +509,7 @@
 							// 클릭한 (-) 버튼에 해당하는 호텔객실 정보 1개를 지운다.
 							
 							let currentRoomInfo= $(e.currentTarget).closest('.one-room-info-insert');
-							console.log(currentRoomInfo);
+							//console.log(currentRoomInfo);
 							
 							//삭제 확인창 
 							swal({
@@ -536,7 +536,7 @@
 									let roomPricePerDay= $(this).find('.price_perday');
 									
 									//각 객실의 종류, 이름, 1박이용가격을 출력
-									console.log(roomName.val()+'-'+roomType.val()+'-'+roomPricePerDay.val()+'원');
+									//console.log(roomName.val()+'-'+roomType.val()+'-'+roomPricePerDay.val()+'원');
 									
 									//name을 reSorting
 									roomName.attr('name', 'roomList['+i+'].roomName');
@@ -705,7 +705,7 @@
 								*/
 								//console.log('전체전화번호: '+ totalPhoneNumber);
 								$('#total_phone_number').val(totalPhoneNumber);
-								console.log(totalPhoneNumber);
+								//console.log(totalPhoneNumber);
 							}
 							
 							$('#real_call_number').on({
@@ -1078,7 +1078,7 @@
 								}
 							}
 							selectedHotelOptionsStr.val(optionStr);
-							console.log(selectedHotelOptionsStr.val());
+							//console.log(selectedHotelOptionsStr.val());
 							
 						});
 					});
@@ -1163,7 +1163,7 @@
 									}
 									savedHashTagString.val(hashTagStr);
 								}
-								console.log(savedHashTagString.val())
+								//console.log(savedHashTagString.val())
 							}
 							
 							// 중복된 해시태그를 찾는다.
@@ -1288,7 +1288,7 @@
 $(function(){
 	$('#insert-hotel-btn').click(function(){
 		//버튼등록 클릭
-		console.log('등록버튼 클릭');
+		//console.log('등록버튼 클릭');
 		//2020.12.13 - 피드백 반영
 		//필수사항들이 다 기재되어있는지 확인
 		let mustInputInfo=new Map();
@@ -1373,7 +1373,7 @@ $(function(){
 		//빠짐없이 입력되었는가?
 		let error='';
 		for(var key of checkInputInfo.keys()){
-			console.log(key)
+			//console.log(key)
 			if(mustInputInfo.get(key)=="" || mustInputInfo.get(key)=="-1"  ){ //하나라도 입력이 안되어있다면
 				isAllInput=false;
 				error=checkInputInfo.get(key);

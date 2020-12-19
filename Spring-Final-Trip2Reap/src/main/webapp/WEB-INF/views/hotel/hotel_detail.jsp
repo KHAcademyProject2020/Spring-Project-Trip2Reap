@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -984,7 +985,7 @@
 				if(loginUserObj){
 					//로그인되어있는 유저라면
 					let loginUserId= '${loginUser.memberId}';
-					console.log(loginUserId);
+					//console.log(loginUserId);
 					
 					let reviewScore= Number($('#review_score > option:selected').val());
 					let reviewContent=$('#review_content').val();
@@ -1177,7 +1178,7 @@ $(function(){
 	
 	$('#review_more_btn').click(function(){
 		
-		console.log('더보기 버튼을 클릭하였습니다.');
+		//console.log('더보기 버튼을 클릭하였습니다.');
 		//아직 댓글더보기를 수행하기 전
 		if($(this).hasClass('review_more_closed')){
 			$(this).removeClass('review_more_closed');

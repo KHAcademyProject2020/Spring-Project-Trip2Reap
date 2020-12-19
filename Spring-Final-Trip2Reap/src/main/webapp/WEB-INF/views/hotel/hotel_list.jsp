@@ -1,5 +1,3 @@
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -440,10 +438,9 @@
         </div>
     </div>
     <!-- modal끝 -->
-
-
-
-
+    
+    
+    
 
 </body>
 <script>
@@ -552,10 +549,10 @@ $(function(){
 	       	let $search_hotel_name= $('#hotel-name').val().trim();
 	       	
 	       	//검색조건 내용 출력해보기.
-	       	console.log('호텔지역코드 => ' + $search_hotel_local_code);
-	       	console.log('호텔등급 => ' + $search_hotel_rank);
-	       	console.log('호텔 1일 이용가격 => '+ $search_hotel_price_per_day_type);
-	       	console.log('호텔이름 => '+ $search_hotel_name);
+	       	//console.log('호텔지역코드 => ' + $search_hotel_local_code);
+	       	//console.log('호텔등급 => ' + $search_hotel_rank);
+	       	//console.log('호텔 1일 이용가격 => '+ $search_hotel_price_per_day_type);
+	       	//console.log('호텔이름 => '+ $search_hotel_name);
 	       	
 			if($search_hotel_name!=''){
 				location.href='hotelList.ho?searchTypeDetail='+ orderNumber+'&searchHotelRank='+$search_hotel_rank
@@ -578,7 +575,7 @@ $(function(){
 	
 	//상세검색결과
 	$(document).on('click','#detail-hotel-search',function(){
-	       	console.log('어머나~ 호텔상세검색 버튼을 클릭하셨군요?');
+	       	//console.log('어머나~ 호텔상세검색 버튼을 클릭하셨군요?');
 	       	
 	      	//검색조건에 맞는 호텔 리스트를 구한다.
         	orderBy(5);	       	
@@ -618,13 +615,13 @@ $(function(){
 		//좋아요 선택한 호텔번호를 구한다.
 		let likeHotelNo= Number(targetHeartBtn.closest('div.one-hotel-info-container').find('.hotelNO').val());
 
-		console.log('어머 좋아요를 누르셨군요?');
+		//console.log('어머 좋아요를 누르셨군요?');
 
 		if(loginUserObj){
 			//로그인 상태
 
 			let tmp=targetHeartBtn.hasClass('unlike');
-			console.log(tmp);
+			//console.log(tmp);
 
 			//unlike 라는 이름의 클래스를 가지고있다. : unlike->클릭->like
 			if( targetHeartBtn.hasClass('unlike') ){
@@ -683,7 +680,7 @@ $(function(){
 
 		}else{
 			//로그아웃상태
-			console.log('로그아웃 상태입니다.');
+			//console.log('로그아웃 상태입니다.');
 			swal({
 				  title: "좋아요 반영 실패",
 				  text: "로그인을 하신 후에 이용해주세요.",
