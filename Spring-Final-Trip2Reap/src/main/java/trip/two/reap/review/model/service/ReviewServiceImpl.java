@@ -44,16 +44,16 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 	
 	@Override
-	public Review selectReview(int boNo) {
-		Review r = null;
+	public Review selectReview(Review r) {
+		Review tmpR = null;
 	      
-	    int result = rDAO.addReadCount(sqlSession, boNo);   // 조회수
+	    int result = rDAO.addReadCount(sqlSession, r);   // 조회수
 	    
 	    if(result > 0) {
-	    	r = rDAO.selectReview(sqlSession, boNo);
+	    	tmpR = rDAO.selectReview(sqlSession, r);
 	    }
 	      
-	    return r;
+	    return tmpR;
 	}
 
 	@Override
@@ -78,8 +78,8 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 	
 	@Override
-	public int deleteReply(int reNo) {
-		return rDAO.deleteReply(sqlSession, reNo);
+	public int deleteReply(Reply re) {
+		return rDAO.deleteReply(sqlSession, re);
 	}
 
 	@Override
@@ -87,6 +87,49 @@ public class ReviewServiceImpl implements ReviewService{
 		return rDAO.selectReply(sqlSession, boNo);
 	}
 
+
+	//디테일이미지 한개  테이블에 등록
+	@Override
+	public int insertDetailView(Attachment oneDetailImg) {
+		return rDAO.insertDetailView(sqlSession, oneDetailImg);
+	}
+
+	
+	//디테일 이미지 뷰에 뿌려주기.
+	@Override
+	public ArrayList<Attachment> selectDetailList(int boNo) {
+		return rDAO.selectDetailList(sqlSession, boNo);
+	}
+
+	@Override
+	public int isCanceledLikeBtn(HashMap<String, Object> map) {
+		return rDAO.isCanceledLikeBtn(sqlSession, map);
+	}
+
+	@Override
+	public int updateLikeReview(HashMap<String, Object> map) {
+		return rDAO.updateLikeHotel(sqlSession, map);
+	}
+
+	@Override
+	public int insertLikeReview(HashMap<String, Object> map) {
+		return rDAO.insertLikeHotel(sqlSession, map);
+	}
+
+	@Override
+	public int isSmashedLikeBtn(HashMap<String, Object> map) {
+		return rDAO.isSmashedLikeBtn(sqlSession, map);
+	}
+
+	@Override
+	public int cancelLikeReview(HashMap<String, Object> map) {
+		return rDAO.cancelLikeHotel(sqlSession, map);
+	}
+
+	@Override
+	public int countReviewLike(int boNo) {
+		return rDAO.countReviewLike(sqlSession, boNo);
+	}
 
 	
 }

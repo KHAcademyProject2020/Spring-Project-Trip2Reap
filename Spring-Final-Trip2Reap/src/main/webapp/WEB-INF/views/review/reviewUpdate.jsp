@@ -36,11 +36,11 @@
 					<div id="cate">
 
 						<select id="select_search" name="caCode">
-							<option>카테고리를 선택해주세요</option>
-							<option value="2">여행 코스</option>
-							<option value="3">여행지</option>
-							<option value="4">맛집</option>
-							<option value="5">호텔</option>
+							<option>카테고리를 선택해주세요</option>				
+							<option <c:if test="${review.caCode == 3}">selected</c:if> 
+								value="3" >여행지</option>
+							<option <c:if test="${review.caCode == 4}">selected</c:if>
+								value="4">맛집</option>
 						</select>
 
 					</div>
@@ -50,9 +50,10 @@
 
 					<div class="writeForm" id="writer">
 						<input type="file" id="photo_btn" name="reloadFile"> 
+						<input type="file" id="detail_img_btn" name="detailFile" multiple="multiple">
 						<c:if test="${ !empty review.originName }">
 						<br>현재 업로드한 파일 : 
-						<a href="${ contextPath }/resources/buploadFiles/${ review.changeName }" download="${ review.originName }">
+						<a href="/resources/buploadFiles/${ review.changeName }" download="${ review.originName }">
 							${ review.originName }
 						</a>
 					</c:if>
@@ -79,9 +80,9 @@
 								
 								<div  id="hashtag">
 						
-								<input type="text" 
-								name="boTag" id="tag" value="${review.boTag }" />
 								
+								<input type="text" class="tag" id="tag" value="" placeholder="해쉬태그를 입력해주세요."/>
+								<input type="hidden" class="hashtagInput"  name="boTag" value=${b.boNo } id="hashTagVal${tag.index }" />
 							</div>
 									
 						
@@ -101,37 +102,114 @@
 
 		</div>
 		
+		<form method="post" onsubmit="false;" action="download.do" enctype="Multipart/form-data">
+				<input type="file" id="photo_btn" name="reloadFile"> 	
+				<input type="submit" id="submit" value="등록"
+						style="width: 50px; height: 30px;">
+		</form>
+		
 		<br><br><br><br><br><br><br><br>
 		
 	<script>
-     //모든 페이지가 요청이 되었을 때
-     $(document).ready(function() {
-         // ID를 alpreah_input로 가지는 곳에서 키를 누를 경우
-         $("#tag").keydown(function(key) {
-             //키의 코드가 13번일 경우 (13번은 엔터키)
-             var $tag = $("#tag").val();
-             if (key.keyCode == 13) {
-            	 $('#hashtag').prepend("<div class='hashtag'>" + "#" + $tag +"</div>" + " ");
-             }
-         });
-     });
+	//모든 페이지가 요청이 되었을 때
+    $(document).ready(function() {
+    	//해쉬태그 초기화
+    	initHashTag();
+    	
+//    	 var hashTagNo = 0
+        // ID를 alpreah_input로 가지는 곳에서 키를 누를 경우
+        $(".tag").keydown(function(key) {
+            //키의 코드가 13번일 경우 (13번은 엔터키)
+            var tag = $(".tag").val();
+            if (key.keyCode == 13) {
+           	 $('#hashtag').append("<div class='hashtag'>" + "#" + tag +"</div>" + "<input class='deleteHash' onclick='deleteHash(this)' type='button' value='X'/>");
+           	 
+           	 
+//            	 alert("작동")
+//				alert(hashTagNo)
+//            	 alert($('#hashtagInput'+hashTagNo).val())
+//            	 hashTagNo++
+//         		alert(hashTagNo)
+			//	alert($('#hashtagInput').val())
+           	 $('.tag').val("")
+           	 $('.hashtagInput').val($('.hashtagInput').val()+"#"+tag);
+           	 
+//         		var nanum = $('#hashtagInput').val().split("#")
+//        		$(nanum).each (function(index, item){
+//        			alert(item)
+       			
+//        		})
 
 
-		// 엔터시 전송되는거 막는 코드
-		document.addEventListener('keydown', function(event) {
-			  if (event.keyCode === 13) {
-			    event.preventDefault();
-			  };
-			}, true);
+            } 
+        });
+        
+        
+        
+       
+
+    
+/* 	var size=$('.tag').length;
+    var hashtag = $('.tag').val();
+    alert(hashtag);
+    alert(size);
+    
+    hashtag = hashtag.split("#");
+    
+    console.log(hashtag[1]); // 결과값 : 11
+    console.log(hashtag[2]); // 결과값 : 01
+    console.log(hashtag[3]); // 결과값 : 01
+     */
+    
+	
+
+
+    });
+	
+	function initHashTag(){
+		var tmpHashTag = "${review.boTag }";
+		var splitHashTagArray = tmpHashTag.split("#");
 		
+		splitHashTagArray.forEach(function(i, s){
+			var $this = i.toString();
+			if( $this != "" ){
+				$('#hashtag').append("<div class='hashtag'>" + "#" + $this +"</div>" + " <input class='deleteHash' onclick='deleteHash(this)' type='button' value='X'/>");		
+			}
+	
+		});
 		
-		//클릭시 배경 색 변환
-		$(function(){	
-			$('#tag').click(function(){$(this).css("background","#eff0f2")})
-			
-			
-			
-		})
+      	$('.hashtagInput').val(tmpHashTag);
+	}
+	
+    function deleteHash(obj) {
+    	var $this = obj;
+
+		var delHashTag = $($this).prev().text();
+		var hashtagInput = $('.hashtagInput').val();
+		
+		hashtagInput = hashtagInput.replace(delHashTag, "");
+		$('.hashtagInput').val(hashtagInput);
+		
+		$($this).prev().remove();
+		$($this).remove();
+	}
+	
+
+	// 엔터시 전송되는거 막는 코드
+	document.addEventListener('keydown', function(event) {
+		  if (event.keyCode === 13) {
+		    event.preventDefault();
+		  };
+		}, true);
+	
+	
+	//클릭시 배경 색 변환
+	$(function(){	
+		$('#tag').click(function(){$(this).css("background","")})
+
+		
+	})
+	
 		
 
 		

@@ -47,8 +47,11 @@
 					<br>
 
 					<div class="writeForm" id="writer">
-						<input type="file" id="photo_btn" name="uploadFile"> 
 
+						<input type="file" id="photo_btn" name="uploadFile"> 
+						
+						<input type="file" id="detail_img_btn" name="detailFile" multiple="multiple"> 
+						
 						<input type="hidden" name="memberId" value="${loginUser.memberId }">
 					</div>
 					
@@ -70,10 +73,8 @@
 								
 								<div  id="hashtag">
 								
-								<input type="text" 
-								id="tag" placeholder="태그를 입력해 주세요" />
-								<input type="hidden" 
-								name="boTag" id="hashtagInput" />
+								<input type="text" id="tag" placeholder="태그를 입력해 주세요" />
+								<input type="hidden" name="boTag" id="hashtagInput" />
 								
 							</div>
 									
@@ -85,7 +86,8 @@
 						
 					</div>
 
-					<br> <input type="submit" id="submit" value="등록"
+					<br>
+						<input type="submit" id="submit" value="등록"
 						style="width: 50px; height: 30px;">
 				</div>
 
@@ -137,9 +139,23 @@
 		
 		//클릭시 배경 색 변환
 		$(function(){	
-			$('#tag').click(function(){$(this).css("background","")})
-
-			
+			//$('#tag').click(function(){$(this).css("background","")})
+			/*
+			$('#submit').click(function(){
+				let detailFiles= $('#detail_img_btn').get(0).files;
+				if(detailFiles.length==0){
+					swal({
+						  title: "등록 실패",
+						  text:"썸네일 사진이 없습니다!",
+						  icon: "error",
+						  button: "확인",
+						});
+					location.href='rInsert.bo';
+				}else{
+					
+				}
+			});
+			*/
 		})
 		
 	

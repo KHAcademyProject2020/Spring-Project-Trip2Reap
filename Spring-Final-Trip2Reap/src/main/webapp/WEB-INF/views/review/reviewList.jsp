@@ -211,11 +211,12 @@
 			<th class="board_list" id="like">좋아요</th>
 		</tr>
 		
-		<c:forEach var="b" varStatus="tag" items="${list}">
+		<c:forEach var="b" begin="0" varStatus="tag" items="${list}">
 		<tr align="center" class="board_list">
 			<td class="board_list">
 				<c:if test="${b.changeName != null }">
 					<img id="review_img" class="center-block" src="resources/buploadFiles/${b.changeName}">
+						
 				</c:if> 
 								
 				<c:if test="${b.changeName == null }">
@@ -243,7 +244,7 @@
 			<td class="board_list">${b.nickName }</td>
 			<td class="board_list">${b.regDate }</td>
 			<td class="board_list">${b.boCount }</td>
-			<td class="board_list">like${ pi.startPage }</td>
+			<td class="board_list">${b.likeCnt }</td>
 
 		
 		</tr>

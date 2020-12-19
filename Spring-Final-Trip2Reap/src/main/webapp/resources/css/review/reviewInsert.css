@@ -90,6 +90,7 @@
 
 
 	border-radius: 4px;
+	margin-right: 4px;
 }
 
 #tag{
@@ -98,7 +99,7 @@
 	font-weight:800;
 	display:inline-block;
 	border:none;
-	width:150px;
+	width:250px;
 	height:30px;
 	
 }
@@ -138,6 +139,22 @@ input::-webkit-input-placeholder { font-size: 90%; }
 
 input:focus {outline:none;}
 textarea:focus {outline:none;}
+
+.deleteHash:hover{
+	cursor: pointer;
+	
+}
+.deleteHash{
+	    background-color: red;
+    opacity: 0.5;
+    border-radius: 50px;
+    height: 13px;
+    font-size: 7px;
+    /* top: 18px; */
+    position: relative;
+    top: -6px;
+    right: 3px;
+}
 
 
 

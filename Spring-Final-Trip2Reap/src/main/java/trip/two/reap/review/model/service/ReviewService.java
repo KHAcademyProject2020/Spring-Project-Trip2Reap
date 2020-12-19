@@ -14,7 +14,7 @@ public interface ReviewService {
 	
 	ArrayList<Review> selectList(PageInfo pi, HashMap<String, Object> searchList);
 	
-	Review selectReview(int boNO);
+	Review selectReview(Review r);
 	
 	int insertReview(Review r);
 	
@@ -27,9 +27,29 @@ public interface ReviewService {
 
 	int addReply(Reply re);
 	
-	int deleteReply(int reNo);
+	int deleteReply(Reply re);
 
 	ArrayList<Reply> selectReply(int boNo);
+
+
+	
+	int insertDetailView(Attachment oneDetailImg);
+
+	//디테일이미지뷰에  뿌려주기
+	ArrayList<Attachment> selectDetailList(int boNo);
+
+	int isCanceledLikeBtn(HashMap<String, Object> map);
+
+	int updateLikeReview(HashMap<String, Object> map);
+	
+	int insertLikeReview(HashMap<String, Object> map);
+
+	int isSmashedLikeBtn(HashMap<String, Object> map);
+
+	int cancelLikeReview(HashMap<String, Object> map);
+	
+	int countReviewLike(int boNo);
+
 
 
 
