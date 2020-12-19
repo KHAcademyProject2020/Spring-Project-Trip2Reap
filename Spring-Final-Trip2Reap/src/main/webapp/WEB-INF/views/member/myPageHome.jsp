@@ -91,14 +91,14 @@
 
 					</div>			
 				</div>			
-			</c:forEach>
-			 
-			
+			</c:forEach>	
 			<input type="hidden" id="hiddenId" value="${ loginUser.memberId }">
 		</div>
      </section>
-     
-     <div style="height: 300px;"></div>
+     <div id="footerSpaces"></div>
+     <footer>
+   	        <c:import url="../common/footer.jsp" />
+	 </footer>
      
      <script>
           

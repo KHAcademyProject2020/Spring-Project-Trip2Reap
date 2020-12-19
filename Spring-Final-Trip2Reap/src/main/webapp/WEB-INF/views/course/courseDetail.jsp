@@ -122,8 +122,11 @@
 	        <input type="hidden" id="selectCategory" name="selectCategory" value="0">
 	    </form>
 	</div>
-	<div style="height: 300px;"></div>
 	</section>
+	<div id="footerSpaces"></div>
+    <footer>
+   	        <c:import url="../common/footer.jsp" />
+	</footer>
 	
 	<script>
 	// 목록보기

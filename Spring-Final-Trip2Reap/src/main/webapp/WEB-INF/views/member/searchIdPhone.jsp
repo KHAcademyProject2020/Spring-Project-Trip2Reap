@@ -61,9 +61,11 @@
        </c:if>
         </div>  
     </div>
-    
-    <div style="height: 500px;"></div>
-    </section>	
+    </section>
+    <div id="footerSpaces"></div>
+    <footer>
+   	        <c:import url="../common/footer.jsp" />
+	</footer>	
     
     <script>
        function searchPwd(){

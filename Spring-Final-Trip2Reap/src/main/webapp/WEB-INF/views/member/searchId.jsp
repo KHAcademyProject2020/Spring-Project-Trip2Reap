@@ -125,7 +125,10 @@
 	    </div>	  	    
 	    </div>
 	    </section>
-	    <div style="height:500px;"></div>        
+	    <div id="footerSpaces"></div>
+        <footer>
+   	        <c:import url="../common/footer.jsp" />
+	    </footer>        
        
        <script>
            $(function(){

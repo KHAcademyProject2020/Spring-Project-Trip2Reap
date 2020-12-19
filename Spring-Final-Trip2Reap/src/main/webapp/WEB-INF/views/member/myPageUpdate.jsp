@@ -155,7 +155,10 @@
         <input type="hidden" value="${ loginUser.phone }" id="hiddenPhone">
     </div>
     </section>
-    <div style="height : 1000px;"></div>
+    <div id="footerSpaces"></div>
+    <footer>
+   	        <c:import url="../common/footer.jsp" />
+	</footer>
     
     <script>
        var manClick = false; 

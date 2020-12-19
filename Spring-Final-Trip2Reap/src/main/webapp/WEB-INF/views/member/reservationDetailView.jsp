@@ -104,8 +104,12 @@
 	        </ul>	      	
 	      </div>
 	    </div>	
-	    <div id="hotelPaySpace1"></div>
+	    <!-- <div id="hotelPaySpace1"></div> -->
 	</section>
+	<div id="footerSpaces"></div>
+    <footer>
+   	        <c:import url="../common/footer.jsp" />
+	</footer>
 
 </body>
 </html>

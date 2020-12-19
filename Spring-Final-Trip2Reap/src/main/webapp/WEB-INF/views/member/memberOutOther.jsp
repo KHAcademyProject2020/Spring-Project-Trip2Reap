@@ -91,9 +91,10 @@
 		</div>	
 		<input type="hidden" id="delId" value="${ loginUser.memberId }">
     </section>
-    <div style="height : 300px;"></div>
-    
-
+    <div id="footerSpaces"></div>
+    <footer>
+   	        <c:import url="../common/footer.jsp" />
+	</footer>
 
     <script>    
        function cancel(){

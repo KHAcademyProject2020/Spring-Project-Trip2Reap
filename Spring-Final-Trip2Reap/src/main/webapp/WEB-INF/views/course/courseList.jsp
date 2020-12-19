@@ -162,7 +162,6 @@
 			</div>
 	
 	    </div>
-	    <div style="height: 100px;"></div>
 	    <form action="courseList.co" method="post" id="courseLists">
 	        <input type="hidden" name="selectCategory" value="0">
 	    </form>
@@ -182,7 +181,12 @@
 	        <input type="hidden" name="selectCategory" value="5">
 	    </form>
 	    <input type="hidden" id="selectCategory" name="selectCategory" value="0">
-	    
+	    </section>
+	    <div id="footerSpaces"></div>
+        <footer>
+   	        <c:import url="../common/footer.jsp" />
+	    </footer>
+	
 	<script>
 	   var message = '${msg}'; 
 	   if(message!=""){
@@ -246,7 +250,6 @@
 			$('#courseLists5').submit();
 		});
 
-	</script>
-	</section>
+	</script>	
 </body>
 </html>

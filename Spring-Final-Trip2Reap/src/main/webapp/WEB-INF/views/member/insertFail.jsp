@@ -46,9 +46,11 @@
             <div id="space_5"></div>
             <div id="fail8"><input type="button" id=failBtn value="회원가입" onclick="join();"></div>
         </div>
-        <div style="height : 500px;"></div>
-
       </div>
       </section>
+      <div id="footerSpaces"></div>
+      <footer>
+   	        <c:import url="../common/footer.jsp" />
+	  </footer>
 </body>
 </html>

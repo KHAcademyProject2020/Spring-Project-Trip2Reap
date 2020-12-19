@@ -93,9 +93,10 @@
 		<input type="hidden" id="delId" value="${ loginUser.memberId }">
 		<input type="hidden" id="delPwd" value="${ loginUser.memberPwd }">
     </section>
-    <div style="height : 300px;"></div>
-    
-
+    <div id="footerSpaces"></div>
+    <footer>
+   	        <c:import url="../common/footer.jsp" />
+	</footer>
 
     <script>    
        function cancel(){

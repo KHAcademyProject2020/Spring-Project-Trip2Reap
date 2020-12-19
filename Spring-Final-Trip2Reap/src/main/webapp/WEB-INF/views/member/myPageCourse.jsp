@@ -73,13 +73,14 @@
                      <div id="detailBtn"><label id="detailLabel">자세히보기</label></div>                    
                      </div>                  
 			     </div>
-			</c:forEach>			
-	
+			</c:forEach>				
 	    </div>
-	    <div style="height: 100px;"></div>
      </section>
-     
-     <div style="height: 300px;"></div>
+     <div id="footerSpaces"></div>
+     <footer>
+   	        <c:import url="../common/footer.jsp" />
+	 </footer>
+
      <script>
           $('#myCourseBtn').click(function(){
    	         location.href="<%= request.getContextPath() %>/courseList.co";

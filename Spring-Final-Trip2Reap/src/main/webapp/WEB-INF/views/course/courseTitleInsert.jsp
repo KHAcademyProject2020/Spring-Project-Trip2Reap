@@ -139,10 +139,11 @@
         <div id="courseSpace5"></div>
         <input type="button" id="courseBtn2" value="등록하기">
     </div>   
-
-    <div style="height: 300px;"></div>
-    <div class=""></div>
     </section>
+    <div id="footerSpaces"></div>
+    <footer>
+   	        <c:import url="../common/footer.jsp" />
+	</footer>
 
     <script>
     $('#titleImgDiv').click(function (e) {

@@ -35,11 +35,13 @@
      <div id="list_all_div">           			
 			<!-- 여행지 div -->
 			<c:if test = "${ empty list }">
+			<div id="list_empty_div">
 			    <div id="up_space1"></div>
 				<div id="emptyTravel">내가 담은 여행지 목록이 없습니다.</div>
 				<div id="up_space1"></div>
 				<button id="myTravelBtn">여행지 보러가기</button>
 				<div id="up_space1"></div>
+		    </div>
 			</c:if>
 			<c:forEach var="t" items="${ list }">
 			
@@ -84,8 +86,10 @@
 			<input type="hidden" id="hiddenId" value="${ loginUser.memberId }">
 		</div>
      </section>
-     
-     <div style="height: 300px;"></div>
+     <div id="footerSpaces"></div>
+     <footer>
+   	        <c:import url="../common/footer.jsp" />
+	 </footer>
      
      <script>
           $(document).on("click","#travel_delete",function(){

@@ -49,10 +49,12 @@
             <div id="space_5"></div>
             <div id="success9"><input type="button" id=successBtn value="메인으로" onclick="main();"></div>
         </div>
-        <div style="height : 500px;"></div>
-
       </div>
       </section>
+      <div id="footerSpaces"></div>
+      <footer>
+   	        <c:import url="../common/footer.jsp" />
+	  </footer>
 
 </body>
 </html>

@@ -139,7 +139,10 @@
         <input type="button" id="applyBtn2" value="회원가입">
     </div>
     </section>
-    <div style="height : 1000px;"></div>
+    <div id="footerSpaces"></div>
+    <footer>
+   	        <c:import url="../common/footer.jsp" />
+	</footer>
     
     <script>
        var manClick = false; 
