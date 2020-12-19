@@ -171,6 +171,7 @@
         <form action="courseList.co" method="post" id="menuCourseList">
 	        <input type="hidden" id="selectCategory" name="selectCategory" value="0">
 	    </form>
+	    <%@ include file="remote_control.jsp" %>
 	</header>
 
 	<script>
@@ -335,8 +336,6 @@
 		});  
     
     </script>
-	
-	<%--2020.12.20. 리모컨 넣기--%>
-    <c:import url="WEB-INF/views/common/remote_control.jsp" />
+    
 </body>
 </html>
