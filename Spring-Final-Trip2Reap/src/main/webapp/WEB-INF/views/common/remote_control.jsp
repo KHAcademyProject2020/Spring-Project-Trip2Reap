@@ -22,9 +22,9 @@
 					<li class="remote_li">
 						<a>
 							<span>
-								<img src="resources/images/sample_hotel.jpg" alt="호텔이미지" style="width:100px; height:50px;"/>
+								<img src="resources/images/sample_hotel.jpg" alt="호텔이미지" class="remoteImg" />
 							</span>
-							<span>호텔이름</span>
+							<span class="remoteName">호텔이름</span>
 						</a>
 					</li>
 				</ul>
@@ -44,9 +44,9 @@
 					<li class="remote_li">
 						<a>
 							<span>
-								<img src="resources/images/sample_hotel.jpg" alt="호텔이미지" style="width:100px; height:50px;"/>
+								<img src="resources/images/sample_hotel.jpg" alt="호텔이미지" class="remoteImg"/>
 							</span>
-							<span>코스이름</span>
+							<span class="remoteName">코스이름</span>
 						</a>
 					</li>
 				</ul>
