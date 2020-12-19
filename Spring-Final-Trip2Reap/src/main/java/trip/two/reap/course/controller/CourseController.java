@@ -146,11 +146,7 @@ public class CourseController {
 	    
 		return mv;
 	}
-	
-	@RequestMapping("courseDetail.co")
-	public String detailView() {
-		return "courseDetail";
-	}
+
 	
 	// 여행코스 등록하기 뷰
 	@RequestMapping("courseTitle.co")
@@ -252,9 +248,11 @@ public class CourseController {
         
         
         int result = cService.insertBoard(course);
+        String selectCategory = "0";
         
         if(result == 3) {
         	mv.addObject("msg", "여행코스 등록에 성공하였습니다.");
+        	mv.addObject("selectCategory",selectCategory);
 			mv.setViewName("redirect:courseList.co");
         } else {
         	mv.addObject("msg", "여행코스 등록에 실패하였습니다.");
@@ -263,26 +261,31 @@ public class CourseController {
       return mv;
 	}
 	
-	@RequestMapping("courseUpdate.co")
-	public String updateView() {
-		return "courseUpdate";
+	@RequestMapping("courseDetail.co")
+	public ModelAndView detailView(@RequestParam("coNo") int coNo, @RequestParam("page") int page, ModelAndView mv) {
+		Course course = cService.selectCourse(coNo);
+		
+		if(course != null) {
+			mv.addObject("course", course);
+			mv.addObject("page", page);
+			mv.setViewName("courseDetail");
+		}
+		
+		return mv;
 	}
 	
-	@RequestMapping("searchError.co")
-	public String errorView() {
-		return "searchErrorPage";
-	}
 }
 
 /*
  * 
  * 
  * <남은 기능들>
- * 1. 여행코스 디테일뷰
- * 2. 본인만 수정, 삭제 가능
- * 3. 여행코스 삭제, 이동시키기
- * 4. 여행코스 1박2일, 2박3일
- * 5. 전체 뷰 수정
+ * 1. footer
+ * 2. 마이페이지 : 본인만 삭제 가능
+ * 3. 여행코스 1박2일, 2박3일 등록 & 입력 안했을 시 거르기
+ * 4. 여행코스 1박2일. 2박3일 디테일뷰
+ * 5. 여행코스 삭제, 이동시키기
+ * 6. 전체 뷰 수정
  * 
  * <이번주 할 것>
  * 1. alert창 수정

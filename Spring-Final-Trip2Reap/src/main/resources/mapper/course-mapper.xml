@@ -115,10 +115,14 @@
         <result column="course_distance" property="distance"/>
   </resultMap>
   
+  <select id="selectCourse" resultMap="courseResultSet2">
+      select course_no, bo_no, theme, schedule, course_Day, course_name, course_x, course_y, course_distance, board.bo_title, img_file.change_name
+      from course
+      join board using(bo_no)
+      join img_file using(bo_no)
+      where course_no = #{coNo}
+  </select>
   
-  
-  
-  <!--
   <resultMap type="Course" id="courseResultSet2">
         <id column="COURSE_NO" property="courseNo" />
         <result column="BO_NO" property="boardNo"/>
@@ -129,8 +133,8 @@
         <result column="COURSE_X" property="courseX"/>
         <result column="COURSE_Y" property="courseY"/>
         <result column="COURSE_DISTANCE" property="distance"/>
+        <result column="bo_title" property="courseTitle"/>
+        <result column="change_name" property="changeName"/>
   </resultMap>
-  -->
-  
   
   </mapper>

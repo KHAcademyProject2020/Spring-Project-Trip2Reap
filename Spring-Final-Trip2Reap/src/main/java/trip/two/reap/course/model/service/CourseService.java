@@ -34,4 +34,6 @@ public interface CourseService {
 	
 	ArrayList<Course> selectCourseList5(CoursePageInfo pi);
 
+	Course selectCourse(int coNo);
+
 }

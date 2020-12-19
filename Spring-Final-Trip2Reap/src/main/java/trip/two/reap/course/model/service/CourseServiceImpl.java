@@ -83,5 +83,10 @@ public class CourseServiceImpl implements CourseService{
 	public ArrayList<Course> selectCourseList5(CoursePageInfo pi) {
 		return cDAO.selectCourseList5(sqlSession, pi);
 	}
+	
+	@Override
+	public Course selectCourse(int coNo) {
+		return cDAO.selectCourse(sqlSession, coNo);
+	}
 
 }

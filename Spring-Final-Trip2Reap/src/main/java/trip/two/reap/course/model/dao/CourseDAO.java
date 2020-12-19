@@ -82,4 +82,8 @@ public class CourseDAO {
 		return (ArrayList)sqlSession.selectList("courseMapper.selectCourseList5", null, rowBounds);
 	}
 
+	public Course selectCourse(SqlSessionTemplate sqlSession, int coNo) {
+		return (Course)sqlSession.selectOne("courseMapper.selectCourse", coNo);
+	}
+
 }

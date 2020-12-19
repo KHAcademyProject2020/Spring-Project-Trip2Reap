@@ -99,6 +99,11 @@
 			             <label id="listTitle">${ list.courseTitle }</label> 
 			             <label id="listId">@${ list.courseWriter }</label>
 			             <label id="listDistance">총 거리 : ${ list.distance }km</label>
+			             <input type="hidden" id="courseNo" value="${ list.courseNo }">
+			             <c:url var="cdetail" value="courseDetail.co">
+								<c:param name="coNo" value="${ list.courseNo }" />
+								<c:param name="page" value="${ pi.currentPage }" />
+						</c:url>
 			         </div>
 			         
 			         <div id="day1">
@@ -117,7 +122,7 @@
                          <div id="nameLabel2">${ nameArr[i] }</div>
                          <div></div>
                      </c:forEach>
-                     <div id="detailBtn"><label id="detailLabel">자세히보기</label></div>                    
+                     <div id="detailBtn" onClick="location.href ='${ cdetail }'"><a id="detailLabel" href="${ cdetail }">자세히보기</a></div>                    
                      </div>                  
 			     </div>
 			</c:forEach>
@@ -186,17 +191,17 @@
 	   
 	   var category = '${selectCategory}';
 	   if(category == 0){
-		   $('#coSelect0').css({'background':'rgb(116,116,116)','color':'white'});
+		   $('#coSelect0').css({'background':'rgb(93,52,30)','color':'white'});
 	   } else if(category == 1){
-		   $('#coSelect1').css({'background':'rgb(116,116,116)','color':'white'});
+		   $('#coSelect1').css({'background':'rgb(93,52,30)','color':'white'});
 	   } else if(category == 2){
-		   $('#coSelect2').css({'background':'rgb(116,116,116)','color':'white'});
+		   $('#coSelect2').css({'background':'rgb(93,52,30)','color':'white'});
 	   } else if(category == 3){
-		   $('#coSelect3').css({'background':'rgb(116,116,116)','color':'white'});
+		   $('#coSelect3').css({'background':'rgb(93,52,30)','color':'white'});
 	   } else if(category == 4){
-		   $('#coSelect4').css({'background':'rgb(116,116,116)','color':'white'});
+		   $('#coSelect4').css({'background':'rgb(93,52,30)','color':'white'});
 	   } else if(category == 5){
-		   $('#coSelect5').css({'background':'rgb(116,116,116)','color':'white'});
+		   $('#coSelect5').css({'background':'rgb(93,52,30)','color':'white'});
 	   }
 	
 		function detailView(){
@@ -240,6 +245,7 @@
 			$('#selectCategory').val("5");			
 			$('#courseLists5').submit();
 		});
+
 	</script>
 	</section>
 </body>

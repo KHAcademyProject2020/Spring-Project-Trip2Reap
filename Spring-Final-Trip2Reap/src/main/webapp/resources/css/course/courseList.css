@@ -53,17 +53,17 @@
 #listDiv{ display: inline-block; width: 280px; height: 400px; border: 1px solid lightgray; 
           margin-left: 40px; margin-bottom: 70px; position: relative; overflow: hidden; }
 #listDiv2 { text-align: center; }
-#listImg{ width: 280px; height : 150px; filter: brightness(75%); }
+#listImg{ width: 280px; height : 150px; filter: brightness(80%); }
 #listTitle{ position: absolute; color: white; top: 16%; left: 50%; font-size: 18px; font-weight: bold; 
             transform: translate( -50%, 0% ); width: 200px; }
 #listId{ position: absolute;  top : 30%; right: 3%; color: white; font-weight: bold; font-size: 14px; }
 #listDistance{ position: absolute; top : 30%; left : 3%; color: white; font-weight: bold; font-size: 13px; }
-#day1{ display: inline-block; width: 22px; height: 22px; border-radius: 15px; background: rgb(242,203,97); 
+#day1{ display: inline-block; width: 20px; height: 20px; border-radius: 15px; background: rgb(242,203,97); 
        text-align: center; margin-top: 10px; margin-left: 10px; margin-bottom: 5px; }
-#dayLabel{ color: white; font-size: 19px; font-weight: bold; vertical-align: middle; line-height: 21px; }
+#dayLabel{ color: white; font-size: 15px; font-weight: bold; vertical-align: top; line-height: 19px; }
 #dayLabel2{ font-size: 13px; font-weight: bold; margin-left: 4px; margin-top: 10px; }
 #nameLabel{ display: inline-block; width: 17px; height: 17px; border-radius: 15px; background: lightgray; 
-            text-align: center; margin-top: 10px; margin-left: 10px; }
+            text-align: center; margin-top: 10px; margin-left: 33px; }
 #nameLabel2{ display : inline-block; font-size: 13px; font-weight: bold; margin-left: 4px; margin-top: 10px; }
 #dayLabel3{ color: white; font-size: 12px; font-weight: bold; vertical-align: top; line-height: 16px; }
 #nameDiv{ position: relative; height: 142px; }
