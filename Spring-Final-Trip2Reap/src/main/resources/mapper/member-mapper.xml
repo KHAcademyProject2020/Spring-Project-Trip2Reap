@@ -243,4 +243,9 @@
 		<result column="PAYMENT_TYPE" property="paymentType"/>
 	</resultMap>
 	
+	<delete id="deleteMyCourse">
+        delete from course
+        where course_no=#{courseNo}
+    </delete>
+	
 </mapper>

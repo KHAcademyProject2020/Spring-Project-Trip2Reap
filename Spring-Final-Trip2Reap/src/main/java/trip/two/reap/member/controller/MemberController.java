@@ -231,7 +231,7 @@ public class MemberController {
 		return mv;
 	} // myPageView() 종료
 	
-	//2020.12.18- 호텔환불처리
+	
 	@RequestMapping("refundReservation.me")
 	@ResponseBody
 	public String refundReservation(@RequestParam int reserveNo) {
@@ -241,6 +241,7 @@ public class MemberController {
 		}
 		return "fail";
 	}
+	
 	
 	//2020.12.18- 호텔예약정보 불러오기
 	@RequestMapping("reservationDetailView.me")
@@ -641,6 +642,7 @@ public class MemberController {
 		return result;
 	}
 	
+	
 	@RequestMapping("myTravelDelete.me")
 	@ResponseBody
 	public String deleteMyTravel(@RequestParam("boNo") String boNo2, @RequestParam("memberId") String memberId) {
@@ -656,6 +658,27 @@ public class MemberController {
 		if(deleteResult == 1) {
 			result = "Y";
 		} 
+		return result;
+	}
+	
+	
+	@RequestMapping("myCourseDelete.me")
+	@ResponseBody
+	public String deleteMyCourse(@RequestParam("boNo") String boNo2, @RequestParam("memberId") String memberId) {
+		String result="";
+		int coNo = Integer.parseInt(boNo2);
+		
+		Course course = new Course();
+		course.setCourseNo(coNo);
+		
+		int deleteResult = 0;
+		if(memberId != null) {
+		   deleteResult = mService.deleteMyCourse(course);
+		}
+		
+		if(deleteResult == 1) {
+			result = "Y";
+		}
 		return result;
 	}
 	

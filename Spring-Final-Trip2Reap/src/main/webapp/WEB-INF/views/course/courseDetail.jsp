@@ -200,7 +200,6 @@
     	    courseDistanceNum = Number(courseDistanceNum);
     	    
     	    var courseDistanceInfo = (parseFloat(distance.getLength())/1000).toFixed(1) + "km";
-    	    console.log("courseDistanceInfo : " + courseDistanceInfo);
     	    $("#courseDistance"+j).val(courseDistanceInfo);
     	    
     	    beforeY = document.getElementById(distanceY).value;

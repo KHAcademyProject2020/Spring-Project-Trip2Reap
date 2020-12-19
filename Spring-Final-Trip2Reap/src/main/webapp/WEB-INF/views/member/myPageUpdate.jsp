@@ -407,14 +407,12 @@
   		     $('#emailInfoBox').css('display', 'block');
   		     $('#confirmDiv').css("display","none");
          } else if(!test){
-        	 console.log("확인해주세요");
    		     $("#email1").css('height','70px');
    		     $("#email2").css('height','70px');
    		     $('#emailInfoBox').text("이메일의 형식에 맞게 입력해주세요.");
    		     $('#emailInfoBox').css('display', 'block');
    		     $('#confirmDiv').css("display","none");
    	     } else {  
-   	    	 console.log("이메일 완료");
    		     $("#email1").css('height','50px');
   		     $("#email2").css('height','50px');
   		     $('#emailInfoBox').css('display', 'none');

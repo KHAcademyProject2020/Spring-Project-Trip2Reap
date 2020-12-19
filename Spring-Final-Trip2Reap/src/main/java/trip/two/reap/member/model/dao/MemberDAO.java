@@ -129,8 +129,6 @@ public class MemberDAO {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectReservation", memberId);
 	}
 
-	
-	//[은강] 2020.12.18
 	public String findRoomName(SqlSessionTemplate sqlSession, int roomNo) {
 		return sqlSession.selectOne("memberMapper.findOneRoomName", roomNo);
 	}
@@ -151,7 +149,8 @@ public class MemberDAO {
 		return sqlSession.selectOne("hotelMapper.selectOneRoomInfo", roomId);
 	}
 
-
-
+	public int deleteMyCourse(SqlSessionTemplate sqlSession, Course course) {
+		return sqlSession.delete("memberMapper.deleteMyCourse", course);
+	}
 
 } // 클래스 종료

@@ -26,6 +26,9 @@ input[type=button]:focus{ outline: none; }
 #listImg{ width: 280px; height : 150px; filter: brightness(75%); }
 #listTitle{ position: absolute; color: white; top: 16%; left: 50%; font-size: 18px; font-weight: bold; 
             transform: translate( -50%, 0% ); width: 200px; }
+#list_etc{ position: absolute; top: 1%; right: 3%; }
+#course_delete{ font-size: 20px; font-weight: 500; color: white; cursor: pointer; }
+#course_delete:hover{ font-size: 22px; font-weight: 900; }
 #listId{ position: absolute;  top : 30%; right: 3%; color: white; font-weight: bold; font-size: 14px; }
 #listDistance{ position: absolute; top : 30%; left : 3%; color: white; font-weight: bold; font-size: 13px; }
 #day1{ display: inline-block; width: 22px; height: 22px; border-radius: 15px; background: rgb(242,203,97); 

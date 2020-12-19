@@ -49,9 +49,15 @@
 			    <div id="listDiv">
 			         <div id="listDiv2">
 			             <img src="resources/courseFiles/${ list.changeName }" id="listImg" />
+				         <div id="list_etc"><div id="course_delete">✕</div></div>
 			             <label id="listTitle">${ list.courseTitle }</label> 
 			             <label id="listId">@${ list.courseWriter }</label>
 			             <label id="listDistance">총 거리 : ${ list.distance }km</label>
+			             <input type="hidden" id="courseNo" value="${ list.courseNo }">
+			             <c:url var="cdetail" value="courseDetail.co">
+								<c:param name="coNo" value="${ list.courseNo }" />
+								<c:param name="page" value="${ pi.currentPage }" />
+						</c:url>
 			         </div>
 			         
 			         <div id="day1">
@@ -70,7 +76,7 @@
                          <div id="nameLabel2">${ nameArr[i] }</div>
                          <div></div>
                      </c:forEach>
-                     <div id="detailBtn"><label id="detailLabel">자세히보기</label></div>                    
+                     <div id="detailBtn" onClick="location.href ='${ cdetail }'"><a id="detailLabel" href="${ cdetail }">자세히보기</a></div>                    
                      </div>                  
 			     </div>
 			</c:forEach>				
@@ -84,6 +90,35 @@
      <script>
           $('#myCourseBtn').click(function(){
    	         location.href="<%= request.getContextPath() %>/courseList.co";
+          });
+          
+          
+          $(document).on("click","#course_delete",function(){
+        	  var boNo = $(this).parent().parent().find('#courseNo').val();
+        	  var memberId = $('#hiddenId').val();
+
+        	  $.ajax({
+                 url : 'myCourseDelete.me',
+                 type : 'post',
+                 data : {boNo:boNo,memberId:memberId},
+                 success : function(data){
+                    if(data == "Y"){
+                    	swal("여행코스가 삭제되었습니다🙋"); 
+                    	 $(".swal-button").click(function(){
+                    		 $('#myCourseList').submit();
+					     });
+					
+					     $(".swal-overlay").click(function(){
+					    	 $('#myCourseList').submit();
+					     });
+                    } else {
+                    	swal("삭제에 실패하였습니다🙋");
+                     } 
+                   },
+                   error : function(data){
+                      console.log("서버 실패");
+                   }
+                }); 
           });
      </script>
 </body>

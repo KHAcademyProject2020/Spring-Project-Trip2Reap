@@ -109,10 +109,8 @@
                });
         	  
         	  //환불하기
-        	  $('#hotel_r3').click(function(){
-        		  
+        	  $('#hotel_r3').click(function(){      		  
         		  let reserveNo= Number($('#reserveNo').val());
-        		  console.log(reserveNo);
         		  
         		  swal({
         			  title: "환불 요청",
@@ -130,8 +128,6 @@
       			    	  type:'post',
       			    	  data:{reserveNo: reserveNo},
       			    	  success:function(response){
-      			    		  console.log(response);
-      			    		  
       			    		  if(response=='success'){
       			    			swal({
       			    				title: "환불 처리 성공", 

@@ -179,15 +179,11 @@ public class MemberServiceImpl implements MemberService{
 		return mDAO.selectReservation(sqlSession, memberId);
 	}
 	
-	
-	//[은강] 2020.12.18 -은강
-	//방이름 찾기
 	@Override
 	public String findRoomName(int roomNo) {
 		return mDAO.findRoomName(sqlSession, roomNo);
 	}
 
-	//환불처리
 	@Override
 	public int updateRefundCheck(int reserveNo) {
 		return mDAO.updateRefundCheck(sqlSession, reserveNo);
@@ -208,8 +204,9 @@ public class MemberServiceImpl implements MemberService{
 		return mDAO.findRoomInfo(sqlSession, roomNo);
 	}
 
-
-
-	
+	@Override
+	public int deleteMyCourse(Course course) {
+		return mDAO.deleteMyCourse(sqlSession, course);
+	}
 
 } // 클래스 종료

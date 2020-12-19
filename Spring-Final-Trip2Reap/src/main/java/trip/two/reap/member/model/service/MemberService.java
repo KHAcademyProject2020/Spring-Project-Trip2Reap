@@ -2,7 +2,6 @@ package trip.two.reap.member.model.service;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import trip.two.reap.course.model.vo.Course;
 import trip.two.reap.course.model.vo.CoursePageInfo;
@@ -64,18 +63,15 @@ public interface MemberService {
 
 	ArrayList<MyHotel> selectReservation(String memberId);
 	
-	//[은강] 2020.12.18 - 은강
-	String findRoomName(int roomNo); //방이름 찾기
+	String findRoomName(int roomNo);
 
-	int updateRefundCheck(int reserveNo); //환불처리
+	int updateRefundCheck(int reserveNo);
 
-	Reservation findReserveInfo(int reserveNo); //예약정보불러오기
+	Reservation findReserveInfo(int reserveNo);
 
-	Hotel findHotelInfo(int hId);//호텔정보 불러오기
+	Hotel findHotelInfo(int hId);
 
-	Room findRoomInfo(int roomNo);//방정보 불러오기
+	Room findRoomInfo(int roomNo);
 
-
-
-
+	int deleteMyCourse(Course course);
 }

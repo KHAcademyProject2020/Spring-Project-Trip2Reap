@@ -145,7 +145,6 @@
         			 type : 'post',
         			 data : {userId:userId,userPwd1:userPwd1},
         			 success : function(data){
-        				 console.log("data : " + data);
         				 if(data == "Y"){     										
         					swal("비밀번호가 변경되었습니다.");
         					$(".swal-button").click(function(){

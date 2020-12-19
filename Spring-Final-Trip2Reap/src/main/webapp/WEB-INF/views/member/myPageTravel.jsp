@@ -101,7 +101,6 @@
                  type : 'post',
                  data : {boNo:boNo,memberId:memberId},
                  success : function(data){
-                    console.log("data : " + data);
                     if(data == "Y"){
                     	swal("내가 담은 여행지 목록에서 삭제되었습니다🙋"); 
                     	 $(".swal-button").click(function(){
