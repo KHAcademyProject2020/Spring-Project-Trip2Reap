@@ -389,5 +389,64 @@
     
     </script>
     
+ <script>
+ // 호텔 리모컨 코드 //
+$(function(){
+	$.ajax({
+		url:'hotelCookies.ho',
+		type:'post',
+		success:function(response){
+			console.log(response);
+			let rHotel_Container= $('#hotel_remote_control');
+			let rHotel_ul= $('#hotel_remote_ul');
+			
+			rHotel_ul.html(''); //초기화 싹다 비워줌.
+			
+			if(response.length<=0){
+				//조회한 호텔개수가 0개면
+				//최근에 본 호텔부분을 보여주지 않음.
+				rHotel_Container.css('display', 'none');	
+			}else{
+				rHotel_Container.css('display', 'flex');
+				if(response.length>=3){
+					for(var i=response.length-1; i>=response.length-3; i--){
+						
+						let li_code='';
+						li_code+='<li class="remote_li">'
+						li_code+='<a href="hotelDetailView.ho?hId='+response[i].boNo+'&page=1" target="_blank">'
+						li_code+='<span>'
+						li_code+='<img src="resources/buploadFiles/'+response[i].hotelThumbnailImg+'" class="remoteImg" /> '
+						li_code+='</span>'
+						li_code+='<span class="remoteName">'+response[i].boTitle+'</span>'
+						li_code+='</a>'
+						li_code+='</li>'
+						
+						rHotel_ul.append(li_code);
+					}
+				}else{
+					for(var i=response.length-1; i>=0; i--){
+						
+						let li_code='';
+						li_code+='<li class="remote_li">'
+						li_code+='<a href="hotelDetailView.ho?hId='+response[i].boNo+'&page=1" target="_blank">'
+						li_code+='<span>'
+						li_code+='<img src="resources/buploadFiles/'+response[i].hotelThumbnailImg+'" class="remoteImg" /> '
+						li_code+='</span>'
+						li_code+='<span class="remoteName">'+response[i].boTitle+'</span>'
+						li_code+='</a>'
+						li_code+='</li>'
+						
+						rHotel_ul.append(li_code);
+					}
+				}
+				
+			}
+			
+		}
+	});
+});
+ //호텔 리모컨 코드 끝//
+</script>
+    
 </body>
 </html>
