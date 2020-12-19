@@ -108,9 +108,9 @@
            <div id="tiSpace6"></div>
            <div id="tiSpace7"></div>
            <div id="day1">
-               <label id="dayLabel">D-1</label>
+               <label id="dayLabel">★</label>
            </div>
-           <label id="dayLabel2">여행 1일차</label>
+           <label id="dayLabel2">여행 코스</label>
            
            <div id="tiSpace9"></div>
            <div id="tiSpace8"></div>

@@ -20,17 +20,17 @@
 
 /* 아이콘  */
 #coSelect0{ display: inline-block; width: 110px; height: 110px; text-align : center; cursor : pointer;
-		   background: white; border-radius: 5px; border: 1px solid rgb(166,166,166); }
+		   background: white; border-radius: 5px; border: 1px solid rgb(234,234,234); }
 #coSelect1{ display: inline-block; width: 110px; height: 110px; text-align : center; cursor : pointer;
-            background: white; border-radius: 5px; border: 1px solid rgb(166,166,166); }
+            background: white; border-radius: 5px; border: 1px solid rgb(234,234,234); }
 #coSelect2{ display: inline-block; width: 110px; height: 110px; text-align : center; cursor : pointer;
-		   background: white; border-radius: 5px; border: 1px solid rgb(166,166,166); }
+		   background: white; border-radius: 5px; border: 1px solid rgb(234,234,234); }
 #coSelect3{ display: inline-block; width: 110px; height: 110px; text-align : center; cursor : pointer;
-		   background: white; border-radius: 5px; border: 1px solid rgb(166,166,166); }
+		   background: white; border-radius: 5px; border: 1px solid rgb(234,234,234); }
 #coSelect4{ display: inline-block; width: 110px; height: 110px; text-align : center; cursor : pointer;
-		   background: white; border-radius: 5px; border: 1px solid rgb(166,166,166); }
+		   background: white; border-radius: 5px; border: 1px solid rgb(234,234,234); }
 #coSelect5{ display: inline-block; width: 110px; height: 110px; text-align : center; cursor : pointer;
-		   background: white; border-radius: 5px; border: 1px solid rgb(166,166,166); }
+		   background: white; border-radius: 5px; border: 1px solid rgb(234,234,234); }
 .commonLabel { font-weight: bold; cursor : pointer; }		   
 #coSelect0,#coSelect2,#coSelect3,#coSelect4,#coSelect5{ vertical-align: top; }
 #coIcon0 { font-size: 50px; color: rgb(238,97,91); }

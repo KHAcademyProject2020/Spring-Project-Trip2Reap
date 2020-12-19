@@ -39,7 +39,7 @@
 		              <div id="coSpace8"></div>
 		              <i class="fas fa-map-marked-alt" id="coIcon0"></i>
 		              <div id="coSpace8"></div>
-		              <label class="commonLabel">전체 코스</label>
+		              <label class="commonLabel">전체</label>
 		          </div>
 		          <div id="coSpace5"></div>
 		          
@@ -195,17 +195,17 @@
 	   
 	   var category = '${selectCategory}';
 	   if(category == 0){
-		   $('#coSelect0').css({'background':'rgb(93,52,30)','color':'white'});
+		   $('#coSelect0').css('background','rgb(234,234,234)');
 	   } else if(category == 1){
-		   $('#coSelect1').css({'background':'rgb(93,52,30)','color':'white'});
+		   $('#coSelect1').css('background','rgb(234,234,234)');
 	   } else if(category == 2){
-		   $('#coSelect2').css({'background':'rgb(93,52,30)','color':'white'});
+		   $('#coSelect2').css('background','rgb(234,234,234)');
 	   } else if(category == 3){
-		   $('#coSelect3').css({'background':'rgb(93,52,30)','color':'white'});
+		   $('#coSelect3').css('background','rgb(234,234,234)');
 	   } else if(category == 4){
-		   $('#coSelect4').css({'background':'rgb(93,52,30)','color':'white'});
+		   $('#coSelect4').css('background','rgb(234,234,234)');
 	   } else if(category == 5){
-		   $('#coSelect5').css({'background':'rgb(93,52,30)','color':'white'});
+		   $('#coSelect5').css('background','rgb(234,234,234)');
 	   }
 	
 		function detailView(){

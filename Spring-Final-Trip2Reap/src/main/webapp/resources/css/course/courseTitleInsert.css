@@ -84,10 +84,10 @@
 
 /* 코스 1일차  */
 #tiSpace6{ height: 30px; }
-#tiSpace7{ display : inline-block; width: 590px; }
-#day1{ display: inline-block; width: 25px; height: 25px; border-radius: 15px; background: rgb(242,203,97); 
+#tiSpace7{ display : inline-block; width: 605px; }
+#day1{ display: inline-block; width: 20px; height: 20px; border-radius: 15px; background: rgb(242,203,97); 
        text-align: center; }
-#dayLabel{ color: white; font-size: 12px; font-weight: bold; vertical-align: middle; line-height: 25px; }
+#dayLabel{ color: white; font-size: 15px; font-weight: bold; vertical-align: top; line-height: 19px; }
 #dayLabel2{ font-size: 14px; font-weight: bold; margin-left: 5px; margin-right: 10px; }
 #courseAll{ display:inline-block; width: 343px; }
 #course0{ display:inline-block; width: 340px; height: 40px; border: 1px dashed rgb(242,203,97); 
