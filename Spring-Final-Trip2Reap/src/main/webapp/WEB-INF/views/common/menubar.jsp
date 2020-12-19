@@ -63,12 +63,51 @@
 							onMouseOut="this.style.color=''">마이페이지</li>
 						
 						<%--(은강) notification - 알람(시작) --%>
-						<li>
-							<i class="fas fa-bell"></i>
-							<i class="far fa-bell"></i>
+						<li class="topBar2_2">
+						
+							<%--알람이 존재할때 --%>
+							<div>
+								<i class="fas fa-bell alarm-btn alarm-on"></i>
+								<span id="alarm-wrapper">
+									<span id="alarm-cnt">1</span>
+								</span>
+							</div>
 							
-						</li>
-						<%--(은강) notification - 알람(끝) --%>
+							<%--알람이 존재하지 않을때 --%>
+							<div>
+								<i class="far fa-bell  alarm-btn alarm-off"></i>
+							</div>
+							
+							
+							<!--알람이 존재할때 컨테이너  -->
+							<div class="alarm-on-container alarm-closed">
+								<ul id="alarm-ul">
+									<li>
+										<div class="alarm-detail-container">
+											<div class="alarm-title">여행 후기 | 댓글</div>
+											<div class="alarm-content-wrapper">
+												<div class="alarm-target">게시판 제목</div>
+												<div class="alarm-content">
+													<b>은강(닉네임)</b> 님이 덧글을 등록하였습니다.
+												</div>
+											</div>
+										</div>
+									</li>
+									
+									<li>
+										<div class="alarm-detail-container">
+											<div class="alarm-title">여행 후기 | 좋아요</div>
+											<div class="alarm-content-wrapper">
+												<div class="alarm-target">게시판 제목</div>
+												<div class="alarm-content">
+													<b>규호짱(닉네임)</b> 님이 좋아요를 눌렀습니다.
+												</div>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</li><%--(은강) notification - 알람(끝) --%>
 					</ul>
 				</div>
 			</c:if>
@@ -333,7 +372,20 @@
 	        }
 			return unescape(cookieValue);
 		}	
-		});  
+		});
+    
+    //알람이 존재할때, 알람을 클릭하면 => 알람컨테이너가 뜬다.
+    $(document).on('click','.alarm-on',  function(){
+    	console.log('알람창이 켜졌습니다.')
+    	let alarm_container= $('.alarm-on-container');
+    	if(alarm_container.hasClass('alarm-closed')){
+    		alarm_container.removeClass('alarm-closed');
+    		alarm_container.css('display', 'flex');
+    	}else{
+    		alarm_container.addClass('alarm-closed');
+    		alarm_container.css('display', 'none');
+    	}
+    });
     
     </script>
     

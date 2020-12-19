@@ -20,6 +20,97 @@
     .topBar2_2{ display: inline-block; font-size: 13px; vertical-align: top; padding-right: 10px; cursor:pointer; }
     
     
+    /* 알람 버튼 */
+    .alarm-btn{
+    	font-size: 1.5em;
+    	cursor:pointer;
+    }
+    
+     .alarm-on{
+    	color: rgb(242,203,97);
+    }
+    
+    
+    #alarm-wrapper{
+    	position: relative;
+    	display: inline-block;
+    	background-color: #bd3951;
+    	text-align:center;
+    	vertical-align:center;
+    	width:15px;
+    	height:15px;
+    	border-radius:100%;
+    	bottom: 10px;
+    	right: 5px;
+    }
+    
+    #alarm-cnt{
+    	position:relative;
+    	color: #fff;
+    	font-size: 0.5em;
+    }
+    
+    
+    .alarm-on-container{
+    	position: absolute;
+    	right: 50px;
+    	display: none;
+    	flex-direction: row;
+    	justify-content: space-around;
+    	align-items: center;
+    }
+    
+
+   
+    #alarm-ul{
+    	margin:0;
+    	padding:0;
+    	list-style:none;
+    	width: 450px;
+    	background-color: #fff;
+    	border: 1px solid rgb(242,203,97);
+    	border-radius: 3px;
+    }
+    
+    
+    #alarm-ul li{
+    	padding: 10px 0;
+    	border-bottom: 1px solid rgb(242,203,97);
+    }
+    
+    #alarm-ul li:nth-last-child(1){
+    	border-color: transparent;
+    }
+    
+    .alarm-detail-container{
+    	display:flex;
+    	flex-direction: row;
+    	justify-content: flex-start;
+    	align-items: center;
+    	position: relative;
+    }
+    
+    .alarm-title{
+    	width: 132px;
+    	font-size: 1.2em;
+    	font-weight: bolder;
+    	padding: 8px;
+    	position: relative;
+    	text-align:center;
+    	border-right: 3px solid rgb(242,203,97);
+    }
+    
+    .alarm-content-wrapper{
+    	display:flex;
+    	flex-direction: column;
+    	align-items: flex-start;
+    	position: relative;
+    	padding-left: 10px;
+    }
+    
+    
+    
+    
     /*  메인로고(전국방방곡곡)  */
     #mainLogo { width: 300px; cursor: pointer; }
       

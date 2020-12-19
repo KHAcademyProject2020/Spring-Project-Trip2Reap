@@ -142,6 +142,10 @@ public interface HotelService {
 	//2020.12.15 - 결제진행이 성공하면, 호텔예약테이블에 등록한다.
 	int insertReservation(Reservation reservation);
 
+	//2020.12.20 - 리모컨 기능
+	//호텔 한개 정보를 찾는다.
+	Hotel selectOnlyOneHotel(int hId);
+
 
 
 	

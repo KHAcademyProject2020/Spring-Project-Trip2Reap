@@ -52,6 +52,14 @@ public class HotelServiceImpl implements HotelService{
 		}
 		return hotel;
 	}
+	
+	//2020.12.20 - 리모컨 - 호텔번호에 해당하는 호텔을 구한다.
+	@Override
+	public Hotel selectOnlyOneHotel(int hId) {
+		return hDAO.selectOneHotel(sqlSession, hId);
+	}
+	
+	
 
 	//방개수를 구한다.
 	@Override
@@ -316,6 +324,8 @@ public class HotelServiceImpl implements HotelService{
 	public int insertReservation(Reservation reservation) {
 		return hDAO.insertReservation(sqlSession, reservation);
 	}
+
+	
 	
 
 }

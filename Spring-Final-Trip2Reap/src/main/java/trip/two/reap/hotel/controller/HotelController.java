@@ -1,11 +1,16 @@
 package trip.two.reap.hotel.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,6 +24,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 
 import trip.two.reap.common.Attachment;
 import trip.two.reap.common.PageInfo;
@@ -48,8 +57,7 @@ public class HotelController {
 			@RequestParam(value="searchHotelLocalCode", required=false, defaultValue="0") int searchHotelLocalCode,
 			@RequestParam(value="searchHotelPricePerDayType", required=false, defaultValue="0") int searchHotelPricePerDayType,
 			@RequestParam(value="searchHotelName", required=false) String searchHotelName,
-			HttpSession session, ModelAndView mv)throws HotelException
-	{
+			HttpSession session, ModelAndView mv)throws HotelException{
 		//httpSession
 		//searchTypeDetail:검색조건
 		//0: BO_NO 순서대로
@@ -259,7 +267,7 @@ public class HotelController {
 			}
 
 		}
-
+		
 		mv.addObject("hotelList", hotelList);
 		mv.addObject("pi", pi);
 		mv.addObject("minRoomPricePerDayList", minRoomPricePerDayList);
@@ -278,8 +286,21 @@ public class HotelController {
 	@RequestMapping("hotelDetailView.ho")
 	public ModelAndView goHotelDetailView(@RequestParam("hId") int hId,
 			@RequestParam(value="page", required=false) int page, //12.17 추가
+			HttpServletResponse response, //12.20 추가 
 			ModelAndView mv)throws HotelException 
 	{
+		//12.20 쿠키 코드 추가 /////
+		try {
+			//쿠키생성 - 호텔넘버(hId)를 문자열로 변환시켜서 쿠키생성..
+			String cookieName= "hotelNo"+Integer.toString(hId);
+			Cookie cookie= new Cookie(cookieName, URLEncoder.encode( Integer.toString(hId), "utf-8"));
+			cookie.setMaxAge(60*60*24); //24시간 유지
+			response.addCookie(cookie);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		//////////////////////
+		
 		//hId에 해당하는 호텔을 구한다.
 		ArrayList<String>hashTagsList=null;
 		ArrayList<String>hotelOptionsList=null;
@@ -777,7 +798,43 @@ public class HotelController {
 		return "fail";//예약실패
 	}
 	
+	//2020.12.19 - 내가본 호텔 리모컨기능
+	@RequestMapping("hotelCookies.ho")
+	public void hotelCookies(HttpServletRequest request, HttpServletResponse response) throws JsonIOException, IOException{
+		response.setContentType("application/json; charset=UTF-8");
 	
+		LinkedHashSet<Hotel> hotelInfoCookieList= null;			//호텔 리스트
+		Cookie[] cookieArr= request.getCookies();//쿠키배열을 구한다.
+		System.out.println(cookieArr.length);
+		
+		if(cookieArr!=null) {
+			hotelInfoCookieList=new LinkedHashSet<Hotel>();
+			
+			for(Cookie cookie : cookieArr) {
+				//쿠키이름 구하기
+				String cookieName= cookie.getName();
+
+				//쿠키이름이 hotelNo인지 확인
+				String subHotelNo= cookieName.substring(0, 7);
+				if(subHotelNo.equals("hotelNo")) {
+					//이때 쿠키값(cookie.getValue(), 리턴타입: 문자열)을 구하여 int로 바꾼다.
+					//cookieValue값은 호텔번호이다.
+					int cookieValue= Integer.parseInt(cookie.getValue());
+					
+					//cookieValue에 해당하는 호텔 썸네일 이미지와, 호텔이름을 구한다.
+					Hotel hotel= hService.selectOnlyOneHotel(cookieValue);
+					
+					//호텔썸네일 이미지 1개 구한뒤에, bupload에 로드된 호텔이름(changeName)을 구한다.
+					Attachment thumbnailImg= hService.selectOneHotelThumbnailImg(cookieValue);
+					hotel.setHotelThumbnailImg(thumbnailImg.getChangeName());
+					hotelInfoCookieList.add(hotel); //호텔쿠키리스트에 호텔객체를 추가
+				}
+			}
+		}
+		Gson gson =new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(hotelInfoCookieList, response.getWriter());
+				
+	}
 	
 	
 	//only admin(관리자용)
