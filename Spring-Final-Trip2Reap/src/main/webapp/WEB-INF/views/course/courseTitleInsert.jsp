@@ -63,12 +63,8 @@
         <div id="tiSpace5"></div>
         <div id="cotitle">
             <label id="starLabel">*</label>
-            <label id="coTitleLabel2">일정</label>
-            <select id="coSchedule" name="schedule">
-                <option value = "당일치기">당일치기</option>
-                <option value = "1박2일">1박2일</option>
-				<option value = "2박3일">2박3일</option>
-            </select>
+            <label id="coTitleLabel2">메모</label>
+            <input type="text" value="" id="memoText">
         </div>                      
         
         <!-- 카카오 지도  -->
@@ -105,8 +101,8 @@
             <input type="hidden" name="courseTitle" class="courseTitle" value="">
             <input type="hidden" id="courseWriter" name="courseWriter" value="${ loginUser.memberId }"> 
             <input type="hidden" name="courseTheme" class="courseTheme" value="">
-            <input type="hidden" name="courseSchedule" class="courseSchedule" value="">
-            <input type="hidden" name="distance" class="distance" value="">
+            <input type="hidden" name="memo" class="courseMemo" value="">
+            <input type="hidden" name="distance" class="distance" value="0">
            
            <!-- 코스1일차  -->
            <div id="tiSpace6"></div>
@@ -172,20 +168,30 @@
         location.href="<%= request.getContextPath() %>/courseList.co";
     }
     
-    $('#courseBtn2').click(function(){
-    	// 빈값 확인
-    	
+    $('#courseBtn2').click(function(){  	
     	var title = $('#titleText').val();
     	var writer = $('#courseWriter').val();
     	var theme = $("select[name=theme]").val();
-    	var schedule = $("select[name=schedule]").val();
+    	var memo = $("#memoText").val();
+    	var courseFirst = $('#yesCourse').val();
     	
     	$('.courseTitle').val(title);
     	$('.courseTheme').val(theme);
-    	$('.courseSchedule').val(schedule);
+    	$('.courseMemo').val(memo);
+    	$('.courseMemo').val(memo);
     	
-    	$('#courseInsertForm').submit();
-    });  
+    	if(title==""){
+    		swal("여행제목을 입력해주세요");
+    		$("#titleText").focus();
+    	} else if(writer == ""){
+    		swal("로그인 후 이용해주세요");
+    	} else if(courseFirst == ""){
+    		swal("하나 이상의 여행코스를 추가해주세요");
+    		$("#day1").focus();
+    	} else {
+    		$('#courseInsertForm').submit();
+    	}   	
+    });
     
     </script>
     

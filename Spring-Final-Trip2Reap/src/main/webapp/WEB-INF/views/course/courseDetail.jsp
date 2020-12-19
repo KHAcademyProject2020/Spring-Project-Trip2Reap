@@ -51,8 +51,8 @@
         <div id="tiSpace2"></div>
         <div id="cotitle">
             <label id="starLabel">*</label>
-            <label id="coTitleLabel">일정</label>
-            <input type="text" value="${ course.schedule }" id="titleText" readonly="readonly">
+            <label id="coTitleLabel">메모</label>
+            <input type="text" value="${ course.memo }" id="memoText" readonly="readonly">
         </div>
         
         
@@ -82,9 +82,9 @@
            <div id="tiSpace6"></div>
            <div id="tiSpace7"></div>
            <div id="day1">
-               <label id="dayLabel">D-1</label>
+               <label id="dayLabel">★</label>
            </div>
-           <label id="dayLabel2">여행 1일차</label> 
+           <label id="dayLabel2">여행 코스</label> 
            <div id="tiSpace1"></div>                    
            <div id="tiSpace8"></div>
            <div id="courseAll">
@@ -116,7 +116,8 @@
                </div>
            </div>             
            </c:forEach>
-           
+        
+        <div id="courseDetailSpace0"></div>   
 	    </div>
 	    <form action="courseList.co" method="post" id="detailCourseList">
 	        <input type="hidden" id="selectCategory" name="selectCategory" value="0">

@@ -14,7 +14,7 @@ public class Course {
 	private int courseNo; // 코스번호		
 	private String files; // 표지
 	private String theme; // 테마
-	private String schedule; // 일정
+	private String memo; // 메모
 	
 	private String courseDay;
 	private String courseName;
@@ -33,7 +33,7 @@ public class Course {
 	public Course() { }
 	
 	public Course(int boardNo, int courseCategory, String courseTitle, String courseWriter, String courseStatus,
-			Date makeCourse, int courseNo, String files, String theme, String schedule, String courseDay,
+			Date makeCourse, int courseNo, String files, String theme, String memo, String courseDay,
 			String courseName, String courseX, String courseY, String distance, String originName, String changeName) {
 		super();
 		this.boardNo = boardNo;
@@ -45,7 +45,7 @@ public class Course {
 		this.courseNo = courseNo;
 		this.files = files;
 		this.theme = theme;
-		this.schedule = schedule;
+		this.memo = memo;
 		this.courseDay = courseDay;
 		this.courseName = courseName;
 		this.courseX = courseX;
@@ -165,14 +165,14 @@ public class Course {
 
 
 
-	public String getSchedule() {
-		return schedule;
+	public String getMemo() {
+		return memo;
 	}
 
 
 
-	public void setSchedule(String schedule) {
-		this.schedule = schedule;
+	public void setMemo(String memo) {
+		this.memo = memo;
 	}
 
 
@@ -311,7 +311,7 @@ public class Course {
 	public String toString() {
 		return "Course [boardNo=" + boardNo + ", courseCategory=" + courseCategory + ", courseTitle=" + courseTitle
 				+ ", courseWriter=" + courseWriter + ", courseStatus=" + courseStatus + ", makeCourse=" + makeCourse
-				+ ", courseNo=" + courseNo + ", files=" + files + ", theme=" + theme + ", schedule=" + schedule
+				+ ", courseNo=" + courseNo + ", files=" + files + ", theme=" + theme + ", memo=" + memo
 				+ ", courseDay=" + courseDay + ", courseName=" + courseName + ", courseX=" + courseX + ", courseY="
 				+ courseY + ", distance=" + distance + ", dayList=" + dayList + ", placeNameList=" + placeNameList
 				+ ", placeXList=" + placeXList + ", placeYList=" + placeYList + ", originName=" + originName

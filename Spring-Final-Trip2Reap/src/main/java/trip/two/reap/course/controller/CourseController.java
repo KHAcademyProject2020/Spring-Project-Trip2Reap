@@ -66,7 +66,6 @@ public class CourseController {
 		
 		CoursePageInfo pi = CoursePagination.getPageInfo(currentPage, listCount);
 		
-		// ArrayList<Course> list = cService.selectCourseList(pi);	
 		ArrayList<Course> list = new ArrayList<Course>();
 				
 		if(category.equals("0")) {
@@ -107,38 +106,10 @@ public class CourseController {
 			nameList.add(Arrays.toString(name.get(i)));
 		}
 		
-		/*
-		ArrayList<String[]> x = new ArrayList<String[]>();
-		ArrayList<String> xList = new ArrayList<String>();
-		
-		for(int i=0; i<listCount; i++) {
-			String[] xArr = list.get(i).getCourseX().split(",");			
-			x.add(xArr);
-		}
-		
-		for(int i=0; i<x.size(); i++) {
-			xList.add(Arrays.toString(x.get(i)));
-		}
-		
-		ArrayList<String[]> y = new ArrayList<String[]>();
-		ArrayList<String> yList = new ArrayList<String>();
-		
-		for(int i=0; i<listCount; i++) {
-			String[] yArr = list.get(i).getCourseY().split(",");			
-			y.add(yArr);
-		}
-		
-		for(int i=0; i<y.size(); i++) {
-			yList.add(Arrays.toString(y.get(i)));
-		}	*/	
-		
-		
 		if(list != null) {
 			mv.addObject("list", list);
 			mv.addObject("daysList", dayList);
 			mv.addObject("nameList", nameList);
-			// mv.addObject("xList", xList);
-			// mv.addObject("yList", yList);
 			mv.addObject("pi", pi);
 			mv.addObject("selectCategory", category);
 			mv.setViewName("courseList");
@@ -166,7 +137,7 @@ public class CourseController {
 	@ResponseBody
 	public ModelAndView courseInsert(HttpServletRequest request,
 			                        @RequestParam("courseTitle") String title, @RequestParam("courseWriter") String writer,
-			                        @RequestParam("courseTheme") String theme, @RequestParam("courseSchedule") String schedule,
+			                        @RequestParam("courseTheme") String theme, @RequestParam("memo") String memo,
 			                        @RequestParam("distance") String distance, @RequestParam("file") MultipartFile file, 
 			                        @ModelAttribute Course course, ModelAndView mv ) {		
 
@@ -195,7 +166,7 @@ public class CourseController {
 
         // 코스 저장
         course.setTheme(theme);
-        course.setSchedule(schedule);     
+        course.setMemo(memo);     
         
         int size = course.getPlaceXList().size();
         
@@ -275,14 +246,3 @@ public class CourseController {
 	}
 
 }
-
-/*
- *  
- * <남은 기능들>
- * 1. 여행코스 등록 시 입력 안했을 시 거르기
- * 2. 여행코스 1박2일. 2박3일 등록하기 & 디테일뷰 
- * 3. alert창 수정
- * 4. 여행코스 뷰에서 삭제,이동시키기
- * 
- * 
-*/

@@ -476,7 +476,7 @@
 					 msLeft = endTime - (+new Date);
 					 if(msLeft < 1000){						 					 
 						 if($("#certificationOk").css("display") == "none"){
-							 swal("인증번호가 만료되었습니다!", "이메일 인증을 다시 진행해주세요. 감사합니다.");								 
+							 swal("인증번호가 만료되었습니다! \n이메일 인증을 다시 진행해주세요💌 감사합니다.");								 
 							 $("" + elementName).css("display","none");
 							 $('#confirmDiv').css("display","none");
 							 $("#emailText").attr("readonly",false);
