@@ -335,6 +335,8 @@
 		});  
     
     </script>
-
+	
+	<%--2020.12.20. 리모컨 넣기--%>
+    <c:import url="../common/remote_control.jsp" />
 </body>
 </html>
