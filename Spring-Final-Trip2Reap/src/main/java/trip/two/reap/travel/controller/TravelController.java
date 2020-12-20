@@ -43,22 +43,27 @@ public class TravelController {
 	private TravelService tService;
 	
 	@RequestMapping("tList.tv")
-	public ModelAndView goTravelList(@RequestParam(value="page", required=false) Integer page,HttpSession session, ModelAndView mv,String hashTag, String reg, String tm, String title) throws TravelException{ //파라미터는 url을 get방식으로 가져옴, 
+	public ModelAndView goTravelList(@RequestParam(value="page", required=false) Integer page,
+			HttpSession session, ModelAndView mv,@RequestParam(value="hashTag", required=false)String hashTag, 
+			@RequestParam(value="reg", required=false)String reg, @RequestParam(value="tm", required=false)String tm, 
+			@RequestParam(value="title", required=false)String title) throws TravelException{ //파라미터는 url을 get방식으로 가져옴, 
 																	//page는 있을 수도 없을 수도 있는 변수임을 선언.  @RequestParam(value="addr", required=false) Integer addr, 
 		/* @RequestParam(value="theme", required=false) Integer theme */
 		HashMap<String, Object> searchList = new HashMap<String, Object>();
 
 		String search = "all";
-		searchList.put("searchInput", "all");
-		searchList.put("searchLoc", "page");
-		searchList.put("reg", "all");
-		searchList.put("chkNo", 0);
+		
+		  searchList.put("searchInput", "all"); 
+		  searchList.put("searchLoc", "page");
+		  searchList.put("reg", "all"); 
+		  searchList.put("chkNo", "0");
+		 
 
 		
 		
 		if(title == null) {
 			title = "all";
-			searchList.put("title", "all");
+			searchList.put("title","all");
 			
 		} else {
 			search = "title";
@@ -71,29 +76,31 @@ public class TravelController {
 		
 		if(hashTag == null) {
 			hashTag = "all";
-			searchList.put("hashTag", "all");
+			searchList.put("hashTag", hashTag);
 
 		} else {
 			hashTag = "#" + hashTag;
 			search = "hashTag";
-			System.out.println(hashTag);
 			searchList.put("searchInput", hashTag);
-			searchList.put("chkNo", 3);
+			searchList.put("chkNo", 2);
 			searchList.put("hashTag", hashTag);
 	
 		}
 		if(reg == null) {
 			reg = "all";
-		} else {
-			search = "content";
 			searchList.put("reg", reg);
-//			searchList.put("chkNo", 3);
+		} else {
+			search = "reg";
+			searchList.put("chkNo", 3);
+			searchList.put("reg", reg);
 		}
 		if(tm == null) {
 			tm = "all";
-		} else {
 			searchList.put("tm", tm);
+		} else {
+			search = "tm";
 			searchList.put("chkNo", 4);
+			searchList.put("tm", tm);
 		}
 	
 		searchList.put("search", search);
@@ -106,14 +113,8 @@ public class TravelController {
 			currentPage = page;	//현재 페이지에 page값을 집어넣음.
 		}
 		
-/*		if(addr != null) {
-			currentPage = addr;	//현재 페이지에 addr값을 집어넣음.
-		}
-		
-		if(theme != null) {
-			currentPage = theme;	//현재 페이지에 theme값을 집어넣음.
-		}*/
-		
+
+		System.out.println(searchList.toString());
 		int listCount = tService.getListCount(searchList); //전체 게시글 갯수 가져오기.
 		
 		int travelListCount=0;
@@ -121,6 +122,7 @@ public class TravelController {
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); // 페이징 관련 끝
 		
 		ArrayList<Integer> likeTravelList= new ArrayList<Integer>();
+		
 		ArrayList<Travel> list = tService.selectList(pi, searchList);
 		
 		for(int i=0; i<travelListCount; i++) {
@@ -131,6 +133,8 @@ public class TravelController {
 		if(list != null) {
 			mv.addObject("list", list);
 			mv.addObject("likeTravelList", likeTravelList);
+			mv.addObject("reg", reg);
+			mv.addObject("tm", tm);
 			
 			mv.addObject("pi", pi);
 			mv.addObject("searchList", searchList);

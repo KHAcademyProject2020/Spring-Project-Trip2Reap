@@ -67,7 +67,7 @@
 				<span id="cate_name">&nbsp;지역</span> <span id="cate_icon">🚕</span>
 				<table id="local_table">
 					<tr class="localSelectTr">
-						<td id="selectAllTd">전체</td>
+						<td class="selectAllTd">전체</td>
 						<td id="서울">서울</td>
 						<td id="인천">인천</td>
 						<td id="대전">대전</td>
@@ -93,7 +93,7 @@
 				<span id="cate_name">&nbsp;테마</span> <span id="cate_icon">🚗</span>
 				<table id="theme_table">
 					<tr>
-						<td>전체</td>
+						<td class="selectAllTd">전체</td>
 						<td id="관광지">관광지</td>
 						<td id="음식점">음식점</td>
 						<td id="명소">명소</td>
@@ -162,7 +162,6 @@
 						var hash = hashTag.split('#');
 						var size = hash.length;
 						for(var i=1; i < size; i++){
-							
 							$('.hashTag').eq(${s.index}).append("<span class='hashTagSpan'>#"+hash[i]+"</span>&nbsp;&nbsp;")
 						}
 						$(".hashTag").css("display", "");
@@ -194,15 +193,26 @@
 
 			<!-- 페이징 -->
 			<div class="paging">
-
+			<c:set var="loc" value="page=" />
+			<c:if test='${searchList.title ne "all" && searchList.chkNo eq 1  }'>
+			<c:set var="loc" value="title=${searchList.title }&page=" />
+			</c:if>
+			<c:if test='${searchList.hashTag ne "all" && searchList.chkNo eq 2 }'>
+			<c:set var="loc" value="hashTag=${searchList.hashTag }&page=" />
+			</c:if>
+			<c:if test='${searchList.reg ne "all" && searchList.chkNo eq 3  }'>
+			<c:set var="loc" value="reg=${searchList.reg }&page=" />
+			</c:if>
+			<c:if test='${searchList.tm ne "all" && searchList.chkNo eq 4 }'>
+			<c:set var="loc" value="tm=${searchList.tm }&page=" />
+			</c:if>
+			
 				<!-- 이전 페이지 -->
 				<c:if test="${ pi.currentPage <= 1 }">이전페이지
 				</c:if>
 				<c:if test="${ pi.currentPage > 1 }">
-					<c:url var="before" value="tList.tv">
-						<c:param name="page" value="${ pi.currentPage - 1 }" />
-					</c:url>
-					<a href="${ before }" class="bt" id="beforeBtn">이전 페이지</a>
+					<a href="tList.tv?${loc }${ pi.currentPage-1 }" class="bt" id="beforeBtn">이전페이지</a>
+					
 				</c:if>
 
 
@@ -215,10 +225,9 @@
 					</c:if>
 
 					<c:if test="${ p ne pi.currentPage }">
-						<c:url var="pagination" value="tList.tv">
-							<c:param name="page" value="${ p }" />
-						</c:url>
-						<a href="${ pagination }" class="num">${ p }</a> &nbsp;
+						
+						<a href="tList.tv?${loc }${p }">${ p }</a>
+						
 					</c:if>
 				</c:forEach>
 
@@ -229,10 +238,9 @@
 					다음 페이지
 				</c:if>
 				<c:if test="${ pi.currentPage < pi.maxPage }">
-					<c:url var="after" value="tList.tv">
-						<c:param name="page" value="${ pi.currentPage + 1 }" />
-					</c:url>
-					<a href="${ after }" class="bt" id="afterBtn">다음 페이지</a>
+					
+					<a href="tList.tv?${loc }${ pi.currentPage + 1 }" class="bt" id="afterBtn">다음 페이지</a>
+					
 				</c:if>
 
 			</div>
@@ -269,134 +277,6 @@
 
 		<script>
 	
-		
-		function detailView(){
- 		   location.href="<%=request.getContextPath()%>/tDetail.tv";
- 	    }
-		
-		<%-- function goSearchError(){
-			location.href="<%= request.getContextPath() %>/tSearchError.tv";
-		} --%>
-		
-		//등록하기 버튼 누르면 insert로 넘어감.
-		$("#button_write").click(function(){
-   			$('#tList').submit();
-   		 }); 
-	
-		
-		
-		
-	      
-	    $("#local_table td").click(function(){
-		var reg = $(this).attr('id')
-		
-		if(reg == "서울") {
-			reg = "서울"
-		}
-		if(reg == "인천") {
-			reg = "인천"
-		}
-		if(reg == "대전") {
-			reg = "대전"
-		}
-		if(reg == "대구") {
-			reg = "대구"
-		}
-		if(reg == "광주") {
-			reg = "광주"
-		}
-		if(reg == "부산") {
-			reg = "부산"
-		}
-		if(reg == "울산") {
-			reg = "울산"
-		}
-		if(reg == "세종") {
-			reg = "세종"
-		}
-		if(reg == "경기") {
-			reg = "경기"
-		}
-		if(reg == "강원") {
-			reg = "강원"
-		}
-		if(reg == "충북") {
-			reg = "충북"
-		}
-		if(reg == "충남") {
-			reg = "충남"
-		}
-		if(reg == "경북") {
-			reg = "경북"
-		}
-		if(reg == "경남") {
-			reg = "경남"
-		}
-		if(reg == "전북") {
-			reg = "전북"
-		}
-		if(reg == "전남") {
-			reg = "전남"
-		}
-		if(reg == "제주") {
-			reg = "제주"
-		}
-		
-		
-		
-		
-		location.href = "tList.tv?"+reg;
-		
-	})
-	
-	  $("#theme_table td").click(function(){
-		var tm = $(this).attr('id')
-		
-		if(tm == "관광지") {
-			tm = "관광지"
-		}
-		if(tm == "음식점") {
-			tm = "음식점"
-		}
-		if(tm == "명소") {
-			tm = "명소"
-		}
-		if(tm == "축제") {
-			tm = "축제"
-		}
-		location.href = "tList.tv?"+tm;
-	  })	
-	      
-	      //해쉬태그 span을 누르면 해당 해시태그 검색창으로.
-		$(document).on("click",".hashTagSpan",function(){
-	         var hashParam = $(this).parent().parent().find('.hashTagSpan').text();
-	         hashParam = hashParam.split("#")
-	      	hashParam = hashParam[1]
-			
-        	 location.href = "tList.tv?hashTag="+hashParam;
-			});
-			 	
-		
-	    //검색창
-	    $("#button_search").click(function(){
-			var search = $('#input_search').val()
-			if($('#input_search').val()== ""){
-				search = "title" = $('#input_search').val()
-			}
-			location.href = "tList.tv?"+search;
-			
-		})
-		
-	    /*   $("#search").bind('keydown', function(key) {
-	               if (key.keyCode == 13) {
-	            		$(".search").trigger('click')
-	            		$("#search").unbind()
-
-	             }
-	      }) */
-	      
-
-		
 		
 		//modal창 -----------------------------------------------------
 		//$('a[href="#modal"]').click(function(event) {
@@ -489,12 +369,193 @@
 						swal("URL이 복사에 실패했습니다.", "이 브라우저는 지원하지 않습니다.", "error");
 						} 
 			}); //클립보드 복사 기능 끝
+	
+		
+	</script>
+	<script>
+	
+/* 	$(function(){
+		if(reg == )
+			
+	}) */
+	
+	
+	
+	
+	
+	
+	
+	
+    //해쉬태그 span을 누르면 해당 해시태그 검색창으로.
+	$(document).on("click",".hashTagSpan",function(){
+         var hashParam = $(this).text();
+         hashParam = hashParam.split("#")
+      	hashParam = hashParam[1]
+		
+    	 location.href = "tList.tv?hashTag="+hashParam;
+		})
+	
+	
+/* 	$(document).on("click","#local_table td",function(){
+		var reg = $(this).text();
+		
+		location.href = "tList.tv?reg="+reg;
+	})
+	
+	$(document).on("click","#theme_table td",function(){
+		var tm = $(this).text();
+		
+		location.href = "tList.tv?tm="+tm;
+	}) */
+	 
+	
+	
+	
+	
+	
+ 	$(document).on("click","#local_table td",function(){
+		var reg = $(this).text();
+		if(reg == "전체"){
+			location.href = "tList.tv";
+		}else{
+			location.href = "tList.tv?reg="+reg;
+		}
+		
+		
+	})
+	
+	$(document).on("click","#theme_table td",function(){
+		var tm = $(this).text();
+		if(tm == "전체"){
+			location.href = "tList.tv";
+		}else{
+			location.href = "tList.tv?tm="+tm;
+		}
+
+	}) 
+	
+	
+		
+    //검색창
+    $("#button_search").click(function(){
+		var search = $('#input_search').val();
+		/* if($('#input_search').val()== ""){
+			search = "title=" + $('#input_search').val()
+		} */
+		location.href = "tList.tv?title="+search;
+		
+	});
+	
+	
+	function detailView(){
+		   location.href="<%=request.getContextPath()%>/tDetail.tv";
+	    }
+
+	
+	
+	//등록하기 버튼 누르면 insert로 넘어감.
+	$("#button_write").click(function(){
+			$('#tList').submit();
+	})
+
+	
+	$(".selectAllTd").click(function(){
+		location.href="<%=request.getContextPath()%>/tList.tv"	
+	})
+	
+	
+	
+   /*  $("#local_table td").click(function(){
+	var reg = $(this).attr('id')
+	
+	if(reg == "서울") {
+		reg = "서울"
+	}
+	if(reg == "인천") {
+		reg = "인천"
+	}
+	if(reg == "대전") {
+		reg = "대전"
+	}
+	if(reg == "대구") {
+		reg = "대구"
+	}
+	if(reg == "광주") {
+		reg = "광주"
+	}
+	if(reg == "부산") {
+		reg = "부산"
+	}
+	if(reg == "울산") {
+		reg = "울산"
+	}
+	if(reg == "세종") {
+		reg = "세종"
+	}
+	if(reg == "경기") {
+		reg = "경기"
+	}
+	if(reg == "강원") {
+		reg = "강원"
+	}
+	if(reg == "충북") {
+		reg = "충북"
+	}
+	if(reg == "충남") {
+		reg = "충남"
+	}
+	if(reg == "경북") {
+		reg = "경북"
+	}
+	if(reg == "경남") {
+		reg = "경남"
+	}
+	if(reg == "전북") {
+		reg = "전북"
+	}
+	if(reg == "전남") {
+		reg = "전남"
+	}
+	if(reg == "제주") {
+		reg = "제주"
+	}
+	
+	location.href = "tList.tv?"+reg;
+	
+}) */
+
+ /*  $("#theme_table td").click(function(){
+	var tm = $(this).attr('id')
+	
+	if(tm == "관광지") {
+		tm = "관광지"
+	}
+	if(tm == "음식점") {
+		tm = "음식점"
+	}
+	if(tm == "명소") {
+		tm = "명소"
+	}
+	if(tm == "축제") {
+		tm = "축제"
+	}
+	location.href = "tList.tv?"+tm;
+  })	
+       */
+
+		 	
 
 		
-			
-			
-			
-		
+	
+    /*   $("#search").bind('keydown', function(key) {
+               if (key.keyCode == 13) {
+            		$(".search").trigger('click')
+            		$("#search").unbind()
+
+             }
+      }) */
+      
+
 	</script>
 
 	</section>

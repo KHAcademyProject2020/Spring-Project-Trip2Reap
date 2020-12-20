@@ -21,14 +21,14 @@
 				AND BO_TAG LIKE '%' || #{hashTag} || '%'
 			</when>
 		</choose>
-<!-- 		<choose>	
+ 	 	<choose>	
 			<when test="!reg.equals('all')">
 				AND TR_REG LIKE '%' || #{reg} || '%'
 			</when>
 			<when test="!tm.equals('all')">
 				AND TR_THEME LIKE '%' || #{tm} || '%'
 			</when>       
-        </choose> -->
+        </choose> 
        
 	</select>
 	
@@ -40,7 +40,8 @@
 		where ca_code = 1
 				and bo_delete_yn = 'N'
 				
-		       <choose>
+		 
+	      <choose>
 	     	<when test="!title.equals('all')">
 			AND BO_TITLE LIKE '%' || #{title} || '%'
 			</when>
@@ -48,15 +49,15 @@
 				AND BO_TAG LIKE '%' || #{hashTag} || '%'
 			</when>
 		</choose>
-<!-- 		<choose>	
+ 	 	<choose>	
 			<when test="!reg.equals('all')">
 				AND TR_REG LIKE '%' || #{reg} || '%'
 			</when>
 			<when test="!tm.equals('all')">
 				AND TR_THEME LIKE '%' || #{tm} || '%'
 			</when>       
-        </choose>		 -->
-				
+        </choose>        
+      		 
 		order by bo_no desc
 	</select>
 	

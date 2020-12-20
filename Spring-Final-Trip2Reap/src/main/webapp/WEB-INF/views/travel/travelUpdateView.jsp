@@ -41,7 +41,7 @@
 			<div id="titleImgArea" class="pictureArea">
 				<img id="titleImg"/>
 			</div>
-<!-- 			  <div id="contentImgArea1" class="pictureArea">
+ 			  <div id="contentImgArea1" class="pictureArea">
 				<img id="contentImg1"/>
 			</div>
 			<div id="contentImgArea2" class="pictureArea">
@@ -53,7 +53,7 @@
 					<span class="astro_span">*</span>대표이미지
 				</div>
 			</div>
-<!-- 			<div id="contentImgTxt">
+ 			<div id="contentImgTxt">
 				<div class="pictureName">내용이미지1</div>
 			</div>
 			<div id="contentImgTxt">
@@ -153,11 +153,11 @@
 			
 			 <div id="travel_content_div">
 				<textarea rows="20" cols="125" id="travel_content" name="boContent">${ travel.boContent }</textarea>
-				  <div id="text_count_div">
+				  <%-- <div id="text_count_div">
 					<span>현재 글자 수 </span>
 					<span id="text_count">$(${ travel.boContent }).length()</span>
 					<span>자 / 최대 글자 수 2000자</span>
-				 </div>
+				 </div> --%>
 			</div>
 			
 			
@@ -194,12 +194,12 @@
    			$("#titleImgArea").click(function(){
    				$("#thumbnailImg1").click();
    			});
-/*    			$("#contentImgArea1").click(function(){
+    			$("#contentImgArea1").click(function(){
    				$("#thumbnailImg2").click();
    			});
    			$("#contentImgArea2").click(function(){
    				$("#thumbnailImg3").click();
-   			}); */
+   			}); 
    		});
    		
    		  // 이미지 업로드 함수

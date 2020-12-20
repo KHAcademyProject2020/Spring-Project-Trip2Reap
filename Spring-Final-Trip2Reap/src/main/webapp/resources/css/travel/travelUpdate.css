@@ -235,8 +235,8 @@
 #titleImg{
 	/* width: 903px; */
 	/* height: 180px; */
-	width: 797px;
-	height: 206px;
+	width: 207px;
+	height: 150px;
 }
 
 #contentImg1, #contentImg2, #contentImg3{
@@ -250,12 +250,13 @@
 	margin: 1px 23px 10px 38px;
 	width: 192px;
 	font-size: small;
+	display: inline-flex;
 }	
 
 #contentImgTxt{
 	display: inline-flex;
-    margin: 10px 10px 10px 90px;
-    width: 180px;
+	margin: 10px 10px 10px 107px;
+	width: 180px;
 }
 
 .pictureName{
