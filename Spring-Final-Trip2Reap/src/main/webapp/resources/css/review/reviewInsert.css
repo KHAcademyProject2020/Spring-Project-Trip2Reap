@@ -74,6 +74,16 @@ p{
  font-weight: 700;
 
 }
+#submit{
+	
+	border:none;
+	background-color:#1e8df2;
+	border-radius: 5px;
+}
+
+#submit:hover{
+	cursor: pointer;
+}
 
 #hashTag{
 
@@ -91,8 +101,8 @@ p{
 display : inline-block; 
 cursor: pointer; }
 .titleImg{  width: 300px; height : 300px; border: 4px solid #efefef; }
-#titleIcon{ color: white; font-size: 100px; position: absolute; top: 60%; left: 46%; }
-#titleLabel{  color: white; font-size: 25px; position: absolute; top: 70%; left: 45%; font-weight: 500; }
+#titleIcon{ color: white; font-size: 100px; position: absolute; top: 55%; left: 47%; }
+#titleLabel{  color: white; font-size: 25px; position: absolute; top: 65%; left: 47%; font-weight: 500; }
 /* #file{ display:none; }
  */
 #wrapImg{
