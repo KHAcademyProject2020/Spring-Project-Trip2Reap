@@ -387,7 +387,7 @@ $(function(){
 			if(response!=null){
 				let li_code='';
 				li_code+='<li class="remote_li">'
-				li_code+='<a href="courseDetail.co?coNo='+response.boardNo+'&page=1" target="_blank">'
+				li_code+='<a href="courseDetail.co?coNo='+response.courseNo+'&page=1" target="_blank">'
 				li_code+='<span>'
 				li_code+='<img src="resources/courseFiles/'+response.changeName+'" class="remoteImg" /> '
 				li_code+='</span>'

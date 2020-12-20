@@ -13,7 +13,7 @@
 	
 		<div class="remote_container" id="hotel_remote_control">
 			<div class="remote_banner_container">
-				<i class="fas fa-hotel remote_icon"></i>&nbsp; 내가 본 호텔
+				<i class="fas fa-hotel remote_icon" id="remoteHotelIcon"></i>&nbsp; 내가 본 호텔
 			</div>
 			<ul class="remote_ul" id="hotel_remote_ul">
 			</ul>
@@ -22,19 +22,29 @@
 		
 		<div class="remote_container"  id="course_remote_control">
 			<div class="remote_banner_container">
-				<i class="fas fa-map-signs remote_icon"></i>&nbsp; 내가 본 코스
+				<i class="fas fa-map-signs remote_icon" id="remoteCourseIcon"></i>&nbsp; 내가 본 코스
 			</div>
 			<ul class="remote_ul" id="course_remote_ul">
 			</ul>
 		</div>
-
+    </div>
 
 		<%--기쁨- 카카오 채팅방 시작--%>
-		<div class="remote_container">
-			<div class="remote_banner_container kakao_chat">카카오 상담</div>
+		<div id="remote_kakao_div">
+			<div id="kakao-talk-channel-button"></div>
 		</div>
 		<%--기쁨 카카오 채팅방 끝 --%>
-	</div> <%--div.total_remote (리모컨전체 끝)--%>
-</body>
+	 
+	
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script type='text/javascript'>
+    Kakao.init('37dc981b741ae67d53f183d4daf2b8c3');
 
+    Kakao.Channel.createChatButton({
+        container: '#kakao-talk-channel-button',
+        channelPublicId: '_KTXxaK'
+    });
+	</script>
+	
+</body>
 </html>

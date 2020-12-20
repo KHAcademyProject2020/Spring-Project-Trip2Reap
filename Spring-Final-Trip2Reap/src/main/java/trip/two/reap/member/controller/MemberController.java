@@ -83,7 +83,7 @@ public class MemberController {
 		} else {
 			return "N";
 		}
-	  } // login() 종료
+	  } 
 	
 	
 	// 로그아웃
@@ -94,7 +94,7 @@ public class MemberController {
 		status.setComplete(); // 세션 초기화
 		
 		return "redirect:/";
-	} // logout() 종료
+	} 
 	
 	
 	// 카카오톡 로그인
@@ -191,14 +191,14 @@ public class MemberController {
 	@RequestMapping("searchId.me")
 	public String searchId() {
 		return "searchId";
-	} // searchId() 종료
+	} 
 	
 	
 	// 비밀번호찾기 뷰로 이동
 	@RequestMapping("searchPwd.me")
 	public String searchPwd() {
 		return "searchPwd";
-	} // searchPwd() 종료
+	} 
 	
 	
 	// 회원가입 뷰로 이동
@@ -217,7 +217,7 @@ public class MemberController {
 	
 	// 마이페이지 : 호텔예약내역 뷰로 이동
 	@RequestMapping("myPage.me")
-	@ResponseBody
+	@ResponseBody 
 	public ModelAndView myPageView(ModelAndView mv, @RequestParam("hiddenId4") String memberId) {
 		ArrayList<MyHotel> list = mService.selectReservation(memberId);
 		for(MyHotel mh : list) {
@@ -229,7 +229,7 @@ public class MemberController {
 		mv.setViewName("myPageHome");
 	
 		return mv;
-	} // myPageView() 종료
+	} 
 	
 	
 	@RequestMapping("refundReservation.me")
@@ -243,19 +243,12 @@ public class MemberController {
 	}
 	
 	
-	//2020.12.18- 호텔예약정보 불러오기
 	@RequestMapping("reservationDetailView.me")
 	public ModelAndView reservationDetailView(ModelAndView mv, 
 			@RequestParam int reserveNo,
 			@RequestParam int roomNo,
 			@RequestParam int hId) throws HotelException{
 		
-		//예약정보를 불러온다.
-		/*
-		예약정보: 예약자 이름, 예약자 전화번호, 예약자 이메일, 예약객실 수 , 예약총인원수, 체크인날짜, 체크아웃 날짜,이용금액
-		예약 호텔정보: 호텔이름, 호텔주소, 호텔 오픈시각, 호텔 종료시각, 호텔 체크인 시각, 호텔 체크아웃 시각, 호텔전화번호
-	 	예약 객실정보: 객실이름, 객실종류
-		*/
 		Reservation reservation= mService.findReserveInfo(reserveNo);
 		Hotel hotel= mService.findHotelInfo(hId);
 		Room room=mService.findRoomInfo(roomNo);
@@ -270,8 +263,7 @@ public class MemberController {
 		return mv;
 	}
 	
-	
-	
+		
 	// 마이페이지 : 정보수정 뷰로 이동
 	@RequestMapping("myPageUpdate.me")
 	public String myPageUpdate() {	

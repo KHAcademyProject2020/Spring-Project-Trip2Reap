@@ -11,10 +11,11 @@
   --kakao-yellow: #f0cd07;
 }
 
+/* 내가 본 호텔, 내가 본 코스  */
 .total_remote{
 	position: fixed;
 	
-	top:65%;
+	top:67%;
 	right: 30px;
 	z-index:1;
 	
@@ -27,8 +28,21 @@
 	border: 1px solid var(--blue-gray);
 }
 
+/* 카카오톡 상담 버튼  */
+#remote_kakao_div{
+	position: fixed;
+	
+	top:63%;
+	right: 43px;
+	z-index:1;
+	background : none;
+	
+	display: flex;
+	margin:0;
+	padding:0;
+	overflow-y: auto;
+}
 
-/* 호텔 리모컨(은강) 내가 본 호텔 리모컨 만들기*/
 .remote_container{
 	position: relative;
 	
@@ -47,7 +61,7 @@
 }
 
 .remote_banner_container{
-	width: 160px;
+	width: 95px;
 	height : 23px;
 	text-align: center;
 	vertical-align : bottom;
@@ -58,18 +72,9 @@
 	font-weight: bolder;
 }
 
-
-.kakao_chat{
-	background-color: var(--kakao-yellow);
-	color: var(--dark-gray);
-	margin:0;
-}
-
-
 .remote_ul{
 	list-style-type: none;
 }
-
 
 .remote_li a{
 	display:flex;
@@ -79,9 +84,8 @@
 	cursor: pointer;
 }
 
-
 .remoteImg { 
-    width: 160px; 
+    width: 95px; 
     height: 60px;
     cursor: pointer;
 }
@@ -89,7 +93,7 @@
 .remoteName {
 	height : 20px;
 	vertical-align : bottom;
-	line-height : 20px;
+	line-height : 18px;
 	font-size: 6px;
 	font-weight: bold;
 	
@@ -98,4 +102,18 @@
 
 .remote_icon{
 	color: var(--dark-gray);
+}
+
+#remoteHotelIcon {
+	font-size: 10px;
+}
+
+#remoteCourseIcon{
+	font-size: 11px;
+}
+
+#kakao-talk-channel-button a img {
+	width: 70px;
+	height: 30px;
+	vertical-align: text-top;
 }
