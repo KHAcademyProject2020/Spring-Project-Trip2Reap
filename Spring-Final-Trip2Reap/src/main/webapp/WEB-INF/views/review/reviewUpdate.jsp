@@ -103,13 +103,14 @@
 								<input type="hidden" class="hashtagInput"  name="boTag" value=${b.boNo } id="hashTagVal${tag.index }" />
 							</div>
 									
-						
 						</div>
 
 
 						
 						
 					</div>
+						<input type="submit" id="submit" value="수정"
+						style="width: 50px; height: 30px;">
 
 					
 				</div>
