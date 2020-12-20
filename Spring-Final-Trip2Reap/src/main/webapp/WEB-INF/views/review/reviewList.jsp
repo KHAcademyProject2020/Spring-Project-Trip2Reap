@@ -233,7 +233,7 @@
 						<c:param name="boNo" value="${ b.boNo }"/>
 						<c:param name="page" value="${ pi.currentPage }"/>
 					</c:url>
-					<a href="${ reviewDetail}">| ${b.caName} |</a><br><br>
+					<a href="${ reviewDetail}"><b>| ${b.caName} |</b></a><br><br>
 					<a href="${ reviewDetail}" >${ b.boTitle }</a><br><br>
 					<p class="hashTag" id="hashTag${b.boNo }" style="display:none">${b.boTag }</p><br>
 					<input type="hidden" value=${b.boNo } id="hashTagVal${tag.index }" />

@@ -31,6 +31,7 @@ import com.google.gson.JsonIOException;
 import trip.two.reap.common.Attachment;
 import trip.two.reap.common.PageInfo;
 import trip.two.reap.common.Pagination;
+import trip.two.reap.course.model.vo.Course;
 import trip.two.reap.hotel.exception.HotelException;
 import trip.two.reap.hotel.model.vo.Hotel;
 import trip.two.reap.member.model.vo.Member;
@@ -453,8 +454,10 @@ public class ReviewController {
 	public ModelAndView boardUpdateView(@ModelAttribute Review r, @RequestParam("page") int page,
 			ModelAndView mv) {
 		Review review = rService.selectReview(r);
-
+		ArrayList<Attachment> detailList = rService.selectDetailList(r.getBoNo());
+		
 		mv.addObject("review", review).addObject("page", page).setViewName("reviewUpdate");
+		mv.addObject("detailList", detailList);
 
 		return mv;
 	}
@@ -596,6 +599,8 @@ public class ReviewController {
 			} else {
 			}
 		}
+		
+		
 }
 
 
