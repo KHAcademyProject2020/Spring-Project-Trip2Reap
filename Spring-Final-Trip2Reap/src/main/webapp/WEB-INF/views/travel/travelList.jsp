@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -30,9 +31,9 @@
 							id="menu">여행지</span>
 					</div>
 					<div id="menu_right_div">
-						<input type="text" id="input_search" placeholder="검색할 여행지명을 입력하세요" />
+						<input type="search" id="input_search" placeholder="검색할 여행지명을 입력하세요" />
 
-						<button id="button_search" onclick="goSearchError()">검색</button>
+						<button id="button_search" type="reset">검색</button> <!--  onclick="goSearchError()" -->
 					</div>
 				</div>
 
@@ -41,7 +42,7 @@
 					<ul id="hashtag_ul">
 						<li><a
 							href=" ${pageContext.request.contextPath}/tList.tv?hashTag=전체">#전체</a>&nbsp;&nbsp;
-							<!-- 해당 해쉬태그 검색페이지로 이동하게 수정. 검색기능12/9까지--></li>
+						</li>
 						<li><a
 							href=" ${pageContext.request.contextPath}/tList.tv?hashTag=문화시설">#문화시설</a>&nbsp;&nbsp;
 						</li>
@@ -67,25 +68,25 @@
 				<table id="local_table">
 					<tr class="localSelectTr">
 						<td id="selectAllTd">전체</td>
-						<td>서울</td>
-						<td>인천</td>
-						<td>대전</td>
-						<td>대구</td>
-						<td>광주</td>
-						<td>부산</td>
-						<td>울산</td>
-						<td>세종</td>
+						<td id="서울">서울</td>
+						<td id="인천">인천</td>
+						<td id="대전">대전</td>
+						<td id="대구">대구</td>
+						<td id="광주">광주</td>
+						<td id="부산">부산</td>
+						<td id="울산">울산</td>
+						<td id="세종">세종</td>
 					</tr>
 					<tr class="localSelectTr">
-						<td>경기</td>
-						<td>강원</td>
-						<td>충북</td>
-						<td>충남</td>
-						<td>경북</td>
-						<td>경남</td>
-						<td>전북</td>
-						<td>전남</td>
-						<td>제주</td>
+						<td id="경기">경기</td>
+						<td id="강원">강원</td>
+						<td id="충북">충북</td>
+						<td id="충남">충남</td>
+						<td id="경북">경북</td>
+						<td id="경남">경남</td>
+						<td id="전북">전북</td>
+						<td id="전남">전남</td>
+						<td id="제주">제주</td>
 					</tr>
 				</table>
 
@@ -93,10 +94,10 @@
 				<table id="theme_table">
 					<tr>
 						<td>전체</td>
-						<td>관광지</td>
-						<td>음식점</td>
-						<td>명소</td>
-						<td>축제</td>
+						<td id="관광지">관광지</td>
+						<td id="음식점">음식점</td>
+						<td id="명소">명소</td>
+						<td id="축제">축제</td>
 					</tr>
 				</table>
 			</div>
@@ -116,13 +117,16 @@
 					<div>조회결과가 없습니다.</div>
 				</c:if>
 				<c:forEach var="t" items="${ list }" varStatus="s">
-
+				   <c:set var="Img" value="${ t.changeName }"></c:set>
+                    <c:set var="ImgAr" value="${fn:split(Img,',')}">
+                    </c:set>
 					<div id="list_travel_div">
 						<div id="travel_img_div">
 							<c:if test="${t.changeName != null }">
 								<!-- insert로 등록한 여행지 -->
-								<img src="resources/travelFiles/${ t.changeName }"
+								<img src="resources/travelFiles/${ ImgAr[0] }"
 									id="travel_img" />
+							
 							</c:if>
 
 							<c:if test="${t.changeName == null }">
@@ -281,32 +285,87 @@
 	
 		
 		
-		$("#button_search").click(function(){
-			
-			var search = $("select[name=search]").val()
-			if($('#search').val()== ""){
-				search = ""
-			} else{
-				
-				search = "title=" + $('#search').val()
-				
-			}
-
-			
-			
-			location.href = "tList.tv?"+search;
-			
-		})
 		
-	      $("#search").bind('keydown', function(key) {
-	               if (key.keyCode == 13) {
-	            		$(".search").trigger('click')
-	            		$("#search").unbind()
-
-	             }
-	      })
-	  
-			
+	      
+	    $("#local_table td").click(function(){
+		var reg = $(this).attr('id')
+		
+		if(reg == "서울") {
+			reg = "서울"
+		}
+		if(reg == "인천") {
+			reg = "인천"
+		}
+		if(reg == "대전") {
+			reg = "대전"
+		}
+		if(reg == "대구") {
+			reg = "대구"
+		}
+		if(reg == "광주") {
+			reg = "광주"
+		}
+		if(reg == "부산") {
+			reg = "부산"
+		}
+		if(reg == "울산") {
+			reg = "울산"
+		}
+		if(reg == "세종") {
+			reg = "세종"
+		}
+		if(reg == "경기") {
+			reg = "경기"
+		}
+		if(reg == "강원") {
+			reg = "강원"
+		}
+		if(reg == "충북") {
+			reg = "충북"
+		}
+		if(reg == "충남") {
+			reg = "충남"
+		}
+		if(reg == "경북") {
+			reg = "경북"
+		}
+		if(reg == "경남") {
+			reg = "경남"
+		}
+		if(reg == "전북") {
+			reg = "전북"
+		}
+		if(reg == "전남") {
+			reg = "전남"
+		}
+		if(reg == "제주") {
+			reg = "제주"
+		}
+		
+		
+		
+		
+		location.href = "tList.tv?"+reg;
+		
+	})
+	
+	  $("#theme_table td").click(function(){
+		var tm = $(this).attr('id')
+		
+		if(tm == "관광지") {
+			tm = "관광지"
+		}
+		if(tm == "음식점") {
+			tm = "음식점"
+		}
+		if(tm == "명소") {
+			tm = "명소"
+		}
+		if(tm == "축제") {
+			tm = "축제"
+		}
+		location.href = "tList.tv?"+tm;
+	  })	
 	      
 	      //해쉬태그 span을 누르면 해당 해시태그 검색창으로.
 		$(document).on("click",".hashTagSpan",function(){
@@ -314,12 +373,28 @@
 	         hashParam = hashParam.split("#")
 	      	hashParam = hashParam[1]
 			
-         location.href = "tList.tv?hashTag="+hashParam;
-	
-		});
+        	 location.href = "tList.tv?hashTag="+hashParam;
+			});
 			 	
 		
+	    //검색창
+	    $("#button_search").click(function(){
+			var search = $('#input_search').val()
+			if($('#input_search').val()== ""){
+				search = "title" = $('#input_search').val()
+			}
+			location.href = "tList.tv?"+search;
+			
+		})
 		
+	    /*   $("#search").bind('keydown', function(key) {
+	               if (key.keyCode == 13) {
+	            		$(".search").trigger('click')
+	            		$("#search").unbind()
+
+	             }
+	      }) */
+	      
 
 		
 		

@@ -121,6 +121,7 @@ div#info_right {
 	background: url(../../images/backImg.JPG) no-repeat -5px 50% / auto;
 	background-position-y: center;
 	background-size: cover;
+	DISPLAY: INLINE-TABLE;
 }
 
 #content_img3{
@@ -276,3 +277,4 @@ div#info_right {
  	font-weight: bolder;
  	cursor: pointer;
 }
+/*-----------------------*/

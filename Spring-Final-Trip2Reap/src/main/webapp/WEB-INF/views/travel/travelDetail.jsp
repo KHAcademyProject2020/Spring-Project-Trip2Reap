@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>        
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,10 @@
 <link rel="stylesheet" type="text/css" href=" ${pageContext.request.contextPath}/resources/css/travel/travelDetail.css"/>
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+	<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
 <body>
@@ -44,11 +49,20 @@
 					</div>
 				</div>	
 			
+			
 			<!-- 여행지 내용 부분 시작 -->
+			<c:set var="Img" value="${ travel.changeName }"></c:set>
+            <c:set var="ImgAr" value="${fn:split(Img,',')}"></c:set>
 			<div id="travel_content">
-				<img src="${ contextPath }/resources/travelFiles/${ travel.changeName }" id="content_img"/>
+				<%-- <img src="${ contextPath }/resources/travelFiles/${ travel.changeName }" id="content_img"/> --%>
 					<!-- a태그 안에서 다운로드 받을 것이 있을 때 쓰는 속성 download, 얘는 download="fileName" 이라고 해서 fileName을 지정해줄 수 있다. -->
-				
+				<c:if test="${travel.changeName != null }">
+					<!-- insert로 등록한 여행지 -->
+					<img src="resources/travelFiles/${ ImgAr[0] }"id="travel_img" />
+					<img src="resources/travelFiles/${ ImgAr[1] }"id="travel_img" />
+					<img src="resources/travelFiles/${ ImgAr[2] }"id="travel_img" />
+				</c:if>
+							
 				<span id="content_img2">👍부담없이 감상하는 백만 불짜리 야경👍</span>
 				<div id="content_img3">${ travel.boContent }</div>
 				
@@ -91,7 +105,7 @@
 							<c:param name="page" value="${ page }"/>
 				</c:url>
 				<c:url var="tDelete" value="tDelete.tv">	
-								<c:param name="boNo" value="${ travel.boNo }"/>
+							<c:param name="boNo" value="${ travel.boNo }"/>
 				</c:url>
 				
 				
@@ -109,6 +123,9 @@
 						</div>
 					</c:when>
 					<c:otherwise>
+					<div id="button_div2">
+							<img src="resources/images/btn_return_to_list.jpg" onclick="location.href='${pageContext.request.contextPath}/tList.tv'">
+						</div>
 					</c:otherwise>
 				</c:choose>	
 			
@@ -149,18 +166,20 @@
 	
 		
 		
-		//url복사하기
+		//(크롬에서) url복사하기
 		$(document).on("click", "#sh-link", function(e) { // 링크복사 시 화면 크기 고정 
-			$('html').find('meta[name=viewport]').attr('content', 'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no'); 
-			var html = "<input id='clip_target' type='text' value='' style='position:absolute;top:-9999em;'/>"; 
-			$(this).append(html); 
+			$('html').find('meta[name=viewport]').attr('content', 
+							'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no'); 
+			var html = "<input id='clip_target' type='text' value='' style='position:absolute;top:-9999em;'/>"; //style을 주어 보이지 않게 설정
+																												
+			$(this).append(html); //공유하기 버튼이 클릭될 때 화면에 보이게 함.
 			
 			var input_clip = document.getElementById("clip_target"); 
 				//현재 url 가져오기 
 				var _url = $(location).attr('href'); 
-			$("#clip_target").val(_url); 
+			$("#clip_target").val(_url); //input태그에 복사가 되어 질 url값을 넣는다.
 				
-			if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) { 
+			if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) { //해당 기기에서 열릴 때 설정
 				var editable = input_clip.contentEditable; 
 				var readOnly = input_clip.readOnly; 
 				
@@ -177,24 +196,25 @@
 				
 				input_clip.contentEditable = editable; 
 				input_clip.readOnly = readOnly; 
-			} else { 
-				input_clip.select(); 
+			} else { 									
+				input_clip.select(); 	// 해당 태그의 text를 선택(select).
 			} 
 			
 			try { 
-				var successful = document.execCommand('copy'); 
-				input_clip.blur(); 
+				var successful = document.execCommand('copy'); //copy 라는 명령어로 선택되어진 택스트를 복사
+				input_clip.blur(); // 다시 input 태그를 화면에 보이지 않게 처리.
 				if (successful) { 				
 					swal("URL이 복사 되었습니다. \n원하시는 곳에 붙여넣기 해 주세요!🌺");
 					// 링크복사 시 화면 크기 고정 
-					$('html').find('meta[name=viewport]').attr('content', 'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes'); 
+					$('html').find('meta[name=viewport]').attr('content', 
+								'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes'); 
 				} else { 				
 					swal("URL이 복사에 실패했습니다. \n이 브라우저는 지원하지 않습니다.💦");
 					} 
 				} catch (err) { 
 					swal("URL이 복사에 실패했습니다. \n이 브라우저는 지원하지 않습니다.💦");
 					} 
-				}); // 클립보드 복사
+				}); // 클립보드 복사 기능 끝
 	</script>
 	
 	

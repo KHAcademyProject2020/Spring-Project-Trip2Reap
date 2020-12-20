@@ -396,7 +396,7 @@ $(function(){
 		url:'hotelCookies.ho',
 		type:'post',
 		success:function(response){
-			console.log(response);
+			/* console.log(response); */
 			let rHotel_Container= $('#hotel_remote_control');
 			let rHotel_ul= $('#hotel_remote_ul');
 			

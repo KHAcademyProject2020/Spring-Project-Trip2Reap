@@ -1,7 +1,7 @@
 package trip.two.reap.travel.model.service;
 
 import java.util.ArrayList;
-
+import java.util.HashMap;
 
 import trip.two.reap.common.Attachment;
 import trip.two.reap.common.PageInfo;
@@ -10,9 +10,7 @@ import trip.two.reap.travel.model.vo.Travel;
 public interface TravelService {
 
 	int getAllListCount();
-
-	ArrayList<Travel> selectList(PageInfo pi);
-
+	ArrayList<Travel> selectList(PageInfo pi, HashMap<String, Object> searchList);
 
 	int insertTravel(Travel t);
 
@@ -30,6 +28,9 @@ public interface TravelService {
 
 	int updateBoard(Travel t);
 
+	int getListCount(HashMap<String, Object> searchList);
+
+	
 	
 
 	/*

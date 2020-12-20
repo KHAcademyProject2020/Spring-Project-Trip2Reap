@@ -1,20 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="travelMapper">
-	<select id="getAllListCount" resultType="_int">
+<!-- 	<select id="getAllListCount" resultType="_int">
 		select count(*)
         from tlist
         where ca_code = 1
               and bo_delete_yn = 'N'
+	</select> -->
+	
+	<select id="getListCount" resultType="_int" parameterType="hashmap">
+		select count(*)
+        from tlist
+        where ca_code = 1
+              and bo_delete_yn = 'N'
+       <choose>
+	     	<when test="!title.equals('all')">
+			AND BO_TITLE LIKE '%' || #{title} || '%'
+			</when>
+			<when test="!hashTag.equals('all')">
+				AND BO_TAG LIKE '%' || #{hashTag} || '%'
+			</when>
+		</choose>
+<!-- 		<choose>	
+			<when test="!reg.equals('all')">
+				AND TR_REG LIKE '%' || #{reg} || '%'
+			</when>
+			<when test="!tm.equals('all')">
+				AND TR_THEME LIKE '%' || #{tm} || '%'
+			</when>       
+        </choose> -->
+       
 	</select>
 	
 	
 	
-	<select id="selectList" resultMap="travelResultSet">
+	<select id="selectList" resultMap="travelResultSet" parameterType="hashmap">
 		select *
 		from tlist
 		where ca_code = 1
 				and bo_delete_yn = 'N'
+				
+		       <choose>
+	     	<when test="!title.equals('all')">
+			AND BO_TITLE LIKE '%' || #{title} || '%'
+			</when>
+			<when test="!hashTag.equals('all')">
+				AND BO_TAG LIKE '%' || #{hashTag} || '%'
+			</when>
+		</choose>
+<!-- 		<choose>	
+			<when test="!reg.equals('all')">
+				AND TR_REG LIKE '%' || #{reg} || '%'
+			</when>
+			<when test="!tm.equals('all')">
+				AND TR_THEME LIKE '%' || #{tm} || '%'
+			</when>       
+        </choose>		 -->
+				
 		order by bo_no desc
 	</select>
 	

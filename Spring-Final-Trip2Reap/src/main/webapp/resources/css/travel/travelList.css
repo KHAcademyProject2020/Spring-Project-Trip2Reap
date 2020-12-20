@@ -195,7 +195,7 @@
 } 
 
 #travel_name_writer_div{
-	padding: 34px 91px 0px 35px;
+	padding: 24px 91px 0px 35px;
 	/* flex: 1; */
 	width: 404px;
 }
@@ -244,13 +244,13 @@ color: #497f55;
 
 font-weight: 700;
 
-margin-bottom: 22px;
+margin-bottom: 7px;
 
 font-size: 17px;
 }
 
 #travel_writer{
-	/* margin-bottom: 10px; */
+	margin-bottom: 22px;
 	/* font-size: 17px; */
 }
 

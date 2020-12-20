@@ -1,6 +1,7 @@
 package trip.two.reap.travel.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -17,14 +18,21 @@ public class TravelDAO {
 		return sqlSession.selectOne("travelMapper.getAllListCount");
 	}
 
-	public ArrayList<Travel> selectList(SqlSessionTemplate sqlSession, PageInfo pi) { //영속성 프레임워크 MyBatis
 	
+	public int getListCount(SqlSessionTemplate sqlSession, HashMap<String, Object> searchList) {
+		return sqlSession.selectOne("travelMapper.getListCount", searchList);
+	}
+
+	public ArrayList<Travel> selectList(SqlSessionTemplate sqlSession, PageInfo pi,
+			HashMap<String, Object> searchList) {
+		
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit()); //몇개씩 건너뛸건지.
 		
-		return (ArrayList)sqlSession.selectList("travelMapper.selectList", null , rowBounds); //3개짜리 list(statement,건네줄 파라미터,넘겨줄것) rowBounds때문에 ArrayList로 형변환
+		return (ArrayList)sqlSession.selectList("travelMapper.selectList", searchList , rowBounds); //3개짜리 list(statement,건네줄 파라미터,넘겨줄것) rowBounds때문에 ArrayList로 형변환
 		
 	}
+
 
 
 	public int insertTravel(SqlSessionTemplate sqlSession, Travel t) {
@@ -65,6 +73,8 @@ public class TravelDAO {
 	public int deleteFile(SqlSessionTemplate sqlSession, int boNo) {
 		return sqlSession.update("travelMapper.deleteFile",boNo);
 	}
+
+
 
 
 

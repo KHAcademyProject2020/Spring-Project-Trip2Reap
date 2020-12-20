@@ -22,14 +22,19 @@ public class TravelServiceImpl implements TravelService{
 	private TravelDAO tDAO;
 	
 	@Override
+	public int getListCount(HashMap<String, Object> searchList) {
+		return tDAO.getListCount(sqlSession, searchList);
+	}
+
+	@Override
+	public ArrayList<Travel> selectList(PageInfo pi, HashMap<String, Object> searchList) {
+		return tDAO.selectList(sqlSession, pi, searchList);
+	}
+	@Override
 	public int getAllListCount() {
 		return tDAO.getAllListCount(sqlSession);
 	}
 
-	@Override
-	public ArrayList<Travel> selectList(PageInfo pi) {
-		return tDAO.selectList(sqlSession, pi);
-	}
 
 	/*
 	 * @Override public int insertBoard(Travel t) { return
@@ -87,6 +92,8 @@ public class TravelServiceImpl implements TravelService{
 	public int deleteFile(int boNo) {
 		return tDAO.deleteFile(sqlSession, boNo);
 	}
+
+
 
 
 	

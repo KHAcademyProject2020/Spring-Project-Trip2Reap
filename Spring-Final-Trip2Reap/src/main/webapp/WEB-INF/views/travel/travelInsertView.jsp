@@ -37,24 +37,24 @@
 			<div id="titleImgArea" class="pictureArea">
 				<img id="titleImg"/>
 			</div>
-			<!--  <div id="contentImgArea1" class="pictureArea">
+			  <div id="contentImgArea1" class="pictureArea">
 				<img id="contentImg1"/>
 			</div>
 			<div id="contentImgArea2" class="pictureArea">
 				<img id="contentImg2"/>
-			</div> -->
+			</div>
 			
 			<div id="titleImgTxt">
 				<div class="pictureName">
 					<span class="astro_span">*</span>대표이미지를 첨부해주세요.
 				</div>
 			</div>
-			<!-- <div id="contentImgTxt">
+			 <div id="contentImgTxt">
 				<div class="pictureName">내용이미지1</div>
 			</div>
 			<div id="contentImgTxt">
 				<div class="pictureName">내용이미지2</div>
-			</div> -->
+			</div> 
 			
 			
 			<input type="text" id="member_id" name="memberId" value="${ loginUser.memberId }"/>
@@ -146,9 +146,9 @@
 			 <div id="travel_content_div">
 				<textarea rows="20" cols="125" id="travel_content" name="boContent" maxlength="2000"></textarea>
 				  <div id="text_count_div">
-					<span>현재 글자 수 </span>
+					<%-- <span>현재 글자 수 </span>
 					<span id="text_count">$(${ travel.boContent }).length()</span>
-					<span>자 / 최대 글자 수 2000자</span>
+					<span>자 / 최대 글자 수 2000자</span> --%>
 				 </div>
 			</div>
 			
@@ -157,9 +157,9 @@
 		
 		
 		<div id="fileArea">	<!-- 파일 업로드 부분 -->
-	   			<input type="file" id="thumbnailImg1" multiple="multiple" name="uploadFile" onchange="LoadImg(this,1)"/>
-	   			 <!-- <input type="file" id="thumbnailImg2" multiple="multiple" name="uploadFile" onchange="LoadImg(this,2)"/> -->
-	   <!-- 			<input type="file" id="thumbnailImg3" multiple="multiple" name="uploadFile3" onchange="LoadImg(this,3)"/>  -->
+	   			<input type="file" id="thumbnailImg1" multiple="multiple" name="uploadFile1" onchange="LoadImg(this,1)"/>
+	   			 <input type="file" id="thumbnailImg2" multiple="multiple" name="uploadFile2" onchange="LoadImg(this,2)"/>
+	   			<input type="file" id="thumbnailImg3" multiple="multiple" name="uploadFile3" onchange="LoadImg(this,3)"/> 
 	   	</div>		
 		
 		
@@ -180,12 +180,12 @@
    			$("#titleImgArea").click(function(){
    				$("#thumbnailImg1").click();
    			});
-/*    			$("#contentImgArea1").click(function(){
+			$("#contentImgArea1").click(function(){
    				$("#thumbnailImg2").click();
    			});
    			$("#contentImgArea2").click(function(){
    				$("#thumbnailImg3").click();
-   			}); */
+   			}); 
    		});
    		
    		  // 이미지 업로드 함수
@@ -333,7 +333,7 @@
 			var content=$('#travel_content');
 			var thumbnail = $('#thumbnailImg1');
 			var addr = $('#select_region');
-			var add = $('#sample6_extraAddress');
+			var add = $('#sample6_address');
 			var theme = $('#select_theme');
 		
 			if(!thumbnail.val()){
