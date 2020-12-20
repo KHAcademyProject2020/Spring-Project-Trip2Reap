@@ -42,7 +42,7 @@ public class CourseController {
 	@RequestMapping("courseList.co")
 	public ModelAndView goCourseList(@RequestParam(value="page", required=false) Integer page, @RequestParam(value="addr", required=false) Integer addr, 
 			                         @RequestParam(value="theme", required=false) Integer theme , ModelAndView mv,
-			                         @RequestParam("selectCategory") String category){
+			                         @RequestParam(value="selectCategory", defaultValue = "0") String category){
 		
 		int currentPage = 1;
 		if(page != null) {
@@ -241,10 +241,11 @@ public class CourseController {
 	}
 	
 	@RequestMapping("courseDetail.co")
-	public ModelAndView detailView(@RequestParam("coNo") int coNo, @RequestParam(value="page", required=false) int page, HttpServletResponse response, ModelAndView mv) {
+	public ModelAndView detailView(@RequestParam("coNo") int coNo, @RequestParam(value="page", required=false) Integer page, 
+			                       HttpServletResponse response, ModelAndView mv) {
 		Course course = cService.selectCourse(coNo);
 		
-		//코스 쿠키를 만든다//
+		// 쿠키 만들기
 		try {
 			Cookie cookie= new Cookie("courseNo", URLEncoder.encode( Integer.toString(coNo) , "utf-8"));
 			cookie.setMaxAge(60*10);
@@ -263,7 +264,7 @@ public class CourseController {
 		return mv;
 	}
 	
-	//코스 리모컨//
+	// 코스 리모컨
 	@RequestMapping("courseCookies.co")
 	public void courseCookies(HttpServletRequest request, HttpServletResponse response) throws JsonIOException, IOException {
 		response.setContentType("application/json; charset=UTF-8");
