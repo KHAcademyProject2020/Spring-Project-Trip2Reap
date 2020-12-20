@@ -47,17 +47,33 @@
 					
 					<br>
 					<br>
+				<div id="wrapImg">
+					<%-- <div id="titleImgDiv" class="titleImgDiv">
+		   				 <img src="resources/buploadFiles/${ review.changeName }" id="titleImg" class="titleImg">
+		   				
+		   				 <i class="far fa-images" id="titleIcon"></i>		    
+		    			<label id="titleLabel">썸네일 이미지 변경</label>	     
+		    			<input type="hidden" name = "target_url"><br>
+					    <input type="file" id="file" name="reloadFile" accept="image/*">
+					</div> --%>
+					<c:forEach var="detailImg"  items="${detailList}">
+            				 <div id="titleImgDiv">
+								<img src="resources/buploadFiles/${detailImg.changeName}" id="titleImg" class="titleImg">
+							<i class="far fa-images" id="titleIcon"></i>		    
+		    				<label id="titleLabel">썸네일 이미지 변경</label>	
+		    				<input type="hidden" name = "target_url"><br>
+					  		<input type="file" id="file" name="reloadFile" accept="image/*">
+		    				
+							</div>
+				    </c:forEach>
+            		
+            		
+            		 
+				</div>
+
+
 
 					<div class="writeForm" id="writer">
-						<input type="file" id="photo_btn" name="reloadFile"> 
-						<input type="file" id="detail_img_btn" name="detailFile" multiple="multiple">
-						
-						<c:if test="${ !empty review.originName }">
-						<br>현재 업로드한 파일 : 
-						<a href="/resources/buploadFiles/${ review.changeName }" download="${ review.originName }">
-							${ review.originName }
-						</a>
-					</c:if>
 						
 
 						<input type="hidden" name="memberId" value="${loginUser.memberId }">
@@ -94,7 +110,7 @@
 						
 					</div>
 
-					<br> <input type="submit" id="submit" value="등록"
+					<br> <input type="submit" id="submit" value="수정"
 						style="width: 50px; height: 30px;">
 				</div>
 
@@ -106,6 +122,32 @@
 		<br><br><br><br><br><br><br><br>
 		
 	<script>
+	
+    $('#titleImgDiv').click(function (e) {
+    	    // 현재 이미지 소스
+            document.signform.target_url.value = document.getElementById('#titleImg').src;           
+             e.preventDefault();
+              $('#file').click();
+    }); 
+    
+    var imgFile = document.querySelector("#file");
+   
+    
+    imgFile.onchange = function(){
+    	var fileList = file.files;
+    	
+    	// 읽기
+    	var reader = new FileReader();
+    	reader.readAsDataURL(fileList[0]);
+    	
+    	// 로드 후
+    	reader.onload = function(){
+    		document.querySelector('#titleImg').src = reader.result;
+    	}
+    }	
+ 
+	
+	
 	//모든 페이지가 요청이 되었을 때
     $(document).ready(function() {
     	//해쉬태그 초기화
@@ -204,6 +246,15 @@
 
 		
 	})
+	
+	// text라는 id를 가진 요소의 값
+	var text = $(".textarea_input").val();
+		
+	  // 미입력 또는 공백 입력 방지
+	  if (text.replace(/\s|　/gi, "").length == 0) {
+	    alert("내용을 입력해주세요.");
+	    $(".textarea_input").focus();
+	  }
 	
 		
 
