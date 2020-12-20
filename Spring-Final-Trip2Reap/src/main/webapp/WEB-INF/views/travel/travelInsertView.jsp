@@ -215,7 +215,7 @@
  
 	 //모든 페이지가 요청이 되었을 때
     $(document).ready(function() {
-
+.
         // ID를 alpreah_input로 가지는 곳에서 키를 누를 경우
         $("#tag").keydown(function(key) {
             //키의 코드가 13번일 경우 (13번은 엔터키)
@@ -363,5 +363,9 @@
 
    </script>
 </section>		
+ <div id="footerSpaces"></div>
+        <footer>
+              <c:import url="../common/footer.jsp" />
+       </footer>
 </body>
 </html>
