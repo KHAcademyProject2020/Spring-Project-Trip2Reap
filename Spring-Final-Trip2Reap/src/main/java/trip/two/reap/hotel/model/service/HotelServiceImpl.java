@@ -326,17 +326,6 @@ public class HotelServiceImpl implements HotelService{
 	}
 
 	
-	//2020.12.20 - 호텔수정
-	//호텔 hId에 해당하는 방들을 구한다.
-	@Override
-	public ArrayList<Room> selectRoomList(int hId) {
-		return hDAO.selectRoomList(sqlSession, hId);
-	}
-
-	@Override
-	public int updateHotel(Hotel hotel) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 	
+
 }

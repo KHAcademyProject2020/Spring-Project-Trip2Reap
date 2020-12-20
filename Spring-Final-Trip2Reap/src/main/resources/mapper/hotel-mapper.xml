@@ -461,11 +461,4 @@
 		#{paymentType}
 	)
 	</insert>
-	
-	
-	<select id="selectRoomList" resultMap="roomResultSet">
-	SELECT *
-	FROM ROOM
-	WHERE BO_NO=#{hId}
-	</select>
 </mapper>

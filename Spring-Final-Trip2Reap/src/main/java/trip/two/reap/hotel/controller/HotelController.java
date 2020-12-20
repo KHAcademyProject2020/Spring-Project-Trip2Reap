@@ -826,41 +826,13 @@ public class HotelController {
 	@RequestMapping("hotelEditView.ho")
 	public ModelAndView goEditHotelView(@RequestParam("hId") int hId, ModelAndView mv){
 		Hotel hotel= hService.selectOneHotel(hId); //호텔정보를 불러온다.
-		LinkedHashSet<String> hashTags=null;
-		String hotelLocalCallNum="";
-		String hotelCallNumber="";
 		
-		if(hotel!=null) {
-			//해시태그
-			if(hotel.getBoTag()!=null) {
-				hashTags=new LinkedHashSet<String>();
-				String []hashTagArr= hotel.getBoTag().split(", ");
-				for(String hashTag: hashTagArr) {
-					hashTags.add(hashTag);
-				}
-			}
-			
-			//전화번호
-			if(hotel.getHotelTel()!=null) {
-				String[] hotelTelArr=hotel.getHotelTel().split("-");
-				hotelLocalCallNum=hotelTelArr[0];
-				hotelCallNumber=hotelTelArr[1]+"-"+hotelTelArr[2];
-			}
-		}
-		
-		ArrayList<Room> roomList=hService.selectRoomList(hId);
-	
 		
 		mv.addObject("hotel", hotel)
-		.addObject("hashTags", hashTags)
-		.addObject("roomList", roomList)
-		.addObject("hotelLocalCallNum", hotelLocalCallNum)
-		.addObject("hotelCallNumber", hotelCallNumber)
 		.setViewName("hotel_edit");
 		return mv;
 	}
-	
-	
+
 // 은강><
 
 }

@@ -34,7 +34,7 @@
 		</div>
 
 		<div>
-			<form action="hotelUpdate.ho" method="post" enctype="multipart/form-data">
+			<form action="hotelInsert.ho" method="post" enctype="multipart/form-data">
 				<div id="sub-title-container">
 					<h1>호텔 수정</h1>
 				</div>
@@ -57,7 +57,7 @@
 					</div>
 					<div id="hotel-rank-container">
 						<select name="rank" id="hotelRank">
-							<option value="-1">등급선택</option>
+							<option value="0">등급선택</option>
 							<option value="0">등급없음</option>
 							<option value="1">1등급</option>
 							<option value="2">2등급</option>
@@ -66,12 +66,6 @@
 							<option value="5">5등급</option>
 						</select>
 					</div>
-					<script>
-					//호텔등급 자동으로 선택되도록 설정
-					$(function(){
-						$('#hotelRank option[value=${hotel.hotelRank}]').attr('selected', 'selected');
-					});
-					</script>
 				</div>
 				
 				
@@ -394,67 +388,190 @@
 					</div>
 
 					<div class="insert-hotel-info-wrapper" id="insert_hotel_info_list">
-						<c:if test="${roomList!=null }">
-							<c:forEach var="roomInfo" items="${roomList}" varStatus="rIdx">
-									<!-- 호텔객실 정보 입력창 1 (disable delete)-->
-									<div class="one-room-info-insert">
-										<div class="room_btn_remote_controller_wrapper">
-											<div class="insert_room_name">
-												<input name="roomList[${rIdx.index }].roomName" type="text" class="room_name" 
-												placeholder="객실 이름 입력" value="${roomInfo.roomName }" autocomplete="off">
-											</div>
-			
-											<!-- 
-											<div>
-												<ul class="room_btn_remote_controller">
-													<li class="hotel-info-remove-disable"><i class="fas fa-times"></i></li>
-												</ul>
-											</div>
-											-->
-										</div>
-			
-										<div class="insert_hotel_details">
-											<div class="insert_room_kinds">
-												<span class="room_kind_label">등록 객실 종류</span> 
-												<select class="roomKinds" name="roomList[${rIdx.index }].roomType">
-													<option value="">객실 종류 선택</option>
-													<option value="싱글룸">싱글룸</option>
-													<option value="더블룸">더블룸</option>
-													<option value="트윈룸">트윈룸</option>
-													<option value="스탠다드룸">스탠다드룸</option>
-													<option value="패밀리룸">패밀리룸</option>
-													<option value="디럭스룸">디럭스룸</option>
-													<option value="스위트룸">스위트룸</option>
-													<option value="스튜디오룸">스튜디오룸</option>
-													<option value="트리플룸">트리플룸</option>
-													<option value="온돌룸">온돌룸</option>
-													<option value="슈페리어룸">슈페리어룸</option>
-													<option value="이그제큐티브룸">이그제큐티브룸</option>
-													<option value="커넥팅룸">커넥팅룸</option>
-													<option value="프리미어룸">프리미어룸</option>
-													<option value="이코노미룸">이코노미룸</option>
-												</select>
-											</div>
-											
-											
-											<div class="insert_room_price_perday">
-												<span class="room_price_label">1박 이용 가격</span>
-												<input type="text" value="${roomInfo.pricePerDay }" name="roomList[${rIdx.index }].pricePerDay" class="price_perday" placeholder="1박 이용가격(숫자)"  autocomplete="off">
-											</div>
-										</div>
-									</div>
-							</c:forEach>
-						</c:if>
+
+						<!-- 호텔객실 정보 입력창 1 (disable delete)-->
+						<div class="one-room-info-insert">
+							<div class="room_btn_remote_controller_wrapper">
+								<div class="insert_room_name">
+									<input name="roomList[0].roomName" type="text" class="room_name" placeholder="객실 이름 입력"  autocomplete="off">
+								</div>
+
+								<div>
+									<ul class="room_btn_remote_controller">
+										<li class="hotel-info-remove-disable"><i class="fas fa-times"></i></li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="insert_hotel_details">
+								<div class="insert_room_kinds">
+									<span class="room_kind_label">등록 객실 종류</span> 
+									<select class="roomKinds" name="roomList[0].roomType">
+										<option value="">객실 종류 선택</option>
+										<option value="싱글룸">싱글룸</option>
+										<option value="더블룸">더블룸</option>
+										<option value="트윈룸">트윈룸</option>
+										<option value="스탠다드룸">스탠다드룸</option>
+										<option value="패밀리룸">패밀리룸</option>
+										<option value="디럭스룸">디럭스룸</option>
+										<option value="스위트룸">스위트룸</option>
+										<option value="스튜디오룸">스튜디오룸</option>
+										<option value="트리플룸">트리플룸</option>
+										<option value="온돌룸">온돌룸</option>
+										<option value="슈페리어룸">슈페리어룸</option>
+										<option value="이그제큐티브룸">이그제큐티브룸</option>
+										<option value="커넥팅룸">커넥팅룸</option>
+										<option value="프리미어룸">프리미어룸</option>
+										<option value="이코노미룸">이코노미룸</option>
+									</select>
+								</div>
+								
+								
+								<div class="insert_room_price_perday">
+									<span class="room_price_label">1박 이용 가격</span>
+									<input type="text" name="roomList[0].pricePerDay" class="price_perday" placeholder="1박 이용가격(숫자)"  autocomplete="off">
+								</div>
+							</div>
+						</div>
+
+					
+
 					</div> <%-- id="insert_hotel_info_list" --%>
-					<!-- 
 					<div class="insert-hotel-btn-container">
-						<i class="fas fa-plus" id="add_room_btn"></i>
+							<i class="fas fa-plus" id="add_room_btn"></i>
 					</div>
-					 -->
 					
 					<script>
-						
 					$(function(){
+						
+						
+						$('#add_room_btn').on('click',function(){
+							let $hotelInfoContainer= $('#insert_hotel_info_list');
+							let $info=''
+							
+							// 등록한 객실정보개수
+							let $insertedRoomCount = $('.one-room-info-insert').length;
+							
+							console.log('==> 등록된 객실정보는 '+$insertedRoomCount+'개 입니다');
+							let $latestIndex= $insertedRoomCount;
+							
+							
+							$info+='<div class="one-room-info-insert">';
+							$info+='<div class="room_btn_remote_controller_wrapper">';
+							$info+='<div class="insert_room_name">'
+							$info+='<input type="text" name="roomList['+$latestIndex+'].roomName" class="room_name" placeholder="객실 이름 입력" autocomplete="off">'
+							$info+='</div>'
+							$info+='<div>'
+							$info+='<ul class="room_btn_remote_controller">';
+							$info+='<li class="hotel-info-remove"><i class="fas fa-times"></i></li>'
+							$info+='</ul>';
+							$info+='</div>';
+							$info+='</div>';
+								
+							$info+='<div class="insert_hotel_details">';
+							$info+='<div class="insert_room_kinds">';
+							$info+='<span class="room_kind_label">등록 객실 종류</span> ';
+							$info+='<select class="roomKinds" name="roomList['+$latestIndex+'].roomType">';
+							$info+='<option value="">객실 종류 선택</option>';
+							$info+='<option value="싱글룸">싱글룸</option>'
+							
+							$info+='<option value="더블룸">더블룸</option>';
+							$info+='<option value="트윈룸">트윈룸</option>';
+							$info+='<option value="스탠다드룸">스탠다드룸</option>';
+							$info+='<option value="패밀리룸">패밀리룸</option>';
+							$info+='<option value="디럭스룸">디럭스룸</option>';
+							$info+='<option value="스위트룸">스위트룸</option>';
+							$info+='<option value="스튜디오룸">스튜디오룸</option>';
+							$info+='<option value="트리플룸">트리플룸</option>';	
+							$info+='<option value="온돌룸">온돌룸</option>;'
+							$info+='<option value="슈페리어룸">슈페리어룸</option>';
+							$info+='<option value="이그제큐티브룸">이그제큐티브룸</option>';
+							$info+='<option value="커넥팅룸">커넥팅룸</option>';
+							$info+='<option value="프리미어룸">프리미어룸</option>';
+							$info+='<option value="이코노미룸">이코노미룸</option>';
+							$info+='</select>';
+							$info+='</div>';
+							$info+='<div class="insert_room_price_perday">';
+							$info+='<span class="room_price_label">1박 이용 가격</span>';
+							$info+='<input name="roomList['+$latestIndex+'].pricePerDay" type="text" class="price_perday" placeholder="1박 이용가격(숫자)" autocomplete="off">';
+							$info+='</div>'
+							$info+='</div>'
+							$info+='</div>'
+								
+							$hotelInfoContainer.append($info);
+							
+						});
+						
+						
+
+						$(document).on('click', '.hotel-info-remove',function(e){
+							//(-)버튼: 호텔 객실정보 삭제 버튼 
+							// 클릭한 (-) 버튼에 해당하는 호텔객실 정보 1개를 지운다.
+							
+							let currentRoomInfo= $(e.currentTarget).closest('.one-room-info-insert');
+							console.log(currentRoomInfo);
+							
+							//삭제 확인창 
+							swal({
+							  title: "정말로 삭제하시겠습니까?",
+							  text: "작성한 내용은 복구할 수 없습니다. 정말로 삭제하시겠습니까?",
+							  icon: "warning",
+							  buttons: ['취소','삭제'],
+							  dangerMode: true,
+							})
+							.then((willDelete) =>{
+							  if (willDelete) {
+								//삭제버튼에 해당하는 호텔 객실정보를 지운다.
+								currentRoomInfo.remove();
+								
+								//객실정보를 지운뒤에 나머지의 순서를 다시 정렬시킨다. name정렬
+								
+								
+								let $insertedRooms= $('.one-room-info-insert'); //삭제버튼을 클릭후, 등록한 방의 개수
+								let $insertedRoomCount = $insertedRooms.length; // 등록한 객실정보개수
+								var i=0;
+								$insertedRooms.each(function(){
+									let roomName= $(this).find('.room_name');
+									let roomType= $(this).find('.roomKinds');
+									let roomPricePerDay= $(this).find('.price_perday');
+									
+									//각 객실의 종류, 이름, 1박이용가격을 출력
+									console.log(roomName.val()+'-'+roomType.val()+'-'+roomPricePerDay.val()+'원');
+									
+									//name을 reSorting
+									roomName.attr('name', 'roomList['+i+'].roomName');
+									roomType.attr('name', 'roomList['+i+'].roomType');
+									roomPricePerDay.attr('name', 'roomList['+i+'].pricePerDay');
+									i++;
+									
+								});
+								
+								
+							    
+							  } else {
+								    swal({
+								    	text: "삭제를 취소했습니다.",
+								    	button:'확인'
+								    });
+							  }
+							});
+						});
+						
+						//객실가격입력 자바스크립트
+						/* 
+						$('input.price_perday').on({
+							'keyup': function(){
+								$(this).val($(this).val().replace(/[^0-9]/g,''));
+							},
+							'keydown':function(){
+								$(this).val($(this).val().replace(/[^0-9]/g,''));
+							},
+							'keypress':function(){
+								$(this).val($(this).val().replace(/[^0-9]/g,''));
+							}
+						});
+						 */
+						
 						$(document).on('keypress','input.price_perday',function(e){
 							$(this).val($(this).val().replace(/[^0-9]/g,''));
 						});
@@ -465,8 +582,10 @@
 						
 						$(document).on('keydown', 'input.price_perday', function(e){
 							$(this).val($(this).val().replace(/[^0-9]/g,''));
-						});
+						}); 
+						
 					});
+						
 					</script>
 				</div>
 
@@ -500,18 +619,11 @@
 								<option value="064">064</option>
 								<option value="010">010</option>
 							</select>
-							
-							<script>
-							$(function(){
-								$('#local_call_number option[value=${hotelLocalCallNumber}]').attr('selected', 'selected');
-								
-							}
-							</script>
 						</div>
 
 						<!-- 나머지 번호 입력 -->
 						<div class="phone-call-wrapper">
-							<input class="phone-call" type="tel" value="${hotelCallNumber }"  autocomplete="off" id="real_call_number">
+							<input class="phone-call" type="tel" autocomplete="off" id="real_call_number">
 						</div>
 						<input type="hidden" name="hotelTel" id="total_phone_number"></input>
 
@@ -752,16 +864,6 @@
 
 					</div>
 				</div>
-				<script>
-				$(function(){
-					// 운영시작시각, 운영종료시각, 체크인시각, 체크아웃 시각 자동선택 코드 넣는다.
-					$('#hotel_open_time option[value=${hotel.hotelOpenTime}]').attr('selected', 'selected');
-					$('#hotel_close_time option[value=${hotel.hotelCloseTime}]').attr('selected', 'selected');
-					$('#hotel_checkIn_time option[value=${hotel.hotelCheckInTime}]').attr('selected', 'selected');
-					$('#hotel_checkOut_time option[value=${hotel.hotelCheckOutTime}]').attr('selected', 'selected');
-					
-				});
-				</script>
 				
 
 				<!-- 호텔 옵션 선택 8-->
@@ -970,12 +1072,7 @@
 				<div class="insert-common-container">
 					<div>
 						<h3>&nbsp;&nbsp;호텔 사이트</h3>
-						<c:if test="${!empty hotel.hotelSite }">
-							<input name="hotelSite" id="hotel_url" type="url"  autocomplete="off" placeholder="https://" value="${hotel.hotelSite }">
-						</c:if>
-						<c:if test="${empty hotel.hotelSite }">
-							<input name="hotelSite" id="hotel_url" type="url"  autocomplete="off" placeholder="https://">
-						</c:if>
+						<input name="hotelSite" id="hotel_url" type="url"  autocomplete="off" placeholder="https://">
 					</div>
 				</div>
 
@@ -1005,14 +1102,6 @@
 						
 						<%-- 해시태그가 존재한다면  --%>
 						<ul id="saved-hashtags">
-							<c:if test="${!empty hashTags }">
-								<c:forEach var="init_hashtag" items="${hashTags}">
-									<li>
-										<span class="hashtag-content"> #${init_hashtag }</span>
-										<span><i class="remove-hashtag-btn fas fa-times"></i></span>
-									</li>
-								</c:forEach>
-							</c:if>
 						</ul>
 						
 						<%--실제해시태그 등록 --%>
@@ -1060,8 +1149,6 @@
 								console.log(savedHashTagString.val())
 							}
 							
-							
-							
 							// 중복된 해시태그를 찾는다.
 							function isDuplicateHashTags(targetHashTag){
 								targetHashTag= '#'+targetHashTag;
@@ -1079,8 +1166,6 @@
 								return false;
 							}
 							
-							
-							isEmptyHashTagsMsg(); //초기화...
 							
 							// 해시태그 등록 버튼 클릭시  발생하는 함수- insert hashtag function
 							$('#input-hashtag-btn').on('click', function(){
@@ -1170,7 +1255,7 @@
 					</div>
 					
 					<div id="hotel-introduce-content-container">
-						<textarea name="boContent" id="boContent" rows="15" cols="45.75" placeholder="호텔소개내용을 입력해주세요.">${hotel.boContent }</textarea>
+						<textarea name="boContent" id="boContent" rows="15" cols="45.75" placeholder="호텔소개내용을 입력해주세요." ></textarea>
 					</div>
 				
 				</div>
@@ -1184,6 +1269,14 @@
 		</div>
 	</div>
 <script>
+$(function(){
+	$('#insert-hotel-btn').click(function(){
+		//버튼등록 클릭
+		//필수사항들이 다 기재되어있는지 확인
+		//location.href="hotelInsert.ho";
+		console.log('호텔 수정완료');
+	});
+});
 </script>
 </body>
 </html>
