@@ -68,11 +68,11 @@
 	text-decoration:none;
 	color:black;
 }
-#hashtag_div a:hover{
+/* #hashtag_div a:hover{
     	text-decoration:none;
-    	color: #497f55; *;
+    	color: #497f55;
     	font-weight: 800;
-}
+} */
 
 #hashtag_div li{
 		float: left;
@@ -119,14 +119,14 @@
 }
 
 
-#local_table td:hover {
+/* #local_table td:hover {
     border: 1px solid black;
     width: 100px;
     height: 39px;
     background-color: #77af82;
     color: white;
     cursor: pointer;
-}
+} */
 
 
 #theme_table{
@@ -143,14 +143,14 @@
 	height: 39px;
 }
 
-#theme_table td:hover{
+/* #theme_table td:hover{
 	border: 1px solid black;
 	width: 129px;
 	height: 39px;
 	background-color: #77af82;
     color: white;
     cursor: pointer;
-}
+} */
 
 
 #list_all_div {
@@ -244,14 +244,14 @@ color: #497f55;
 
 font-weight: 700;
 
-margin-bottom: 22px;
+margin-bottom: 6px;
 
 font-size: 17px;
 }
 
 #travel_writer{
-	/* margin-bottom: 10px; */
-	/* font-size: 17px; */
+	margin-bottom: 17px;
+	font-size: 14px;
 }
 
 

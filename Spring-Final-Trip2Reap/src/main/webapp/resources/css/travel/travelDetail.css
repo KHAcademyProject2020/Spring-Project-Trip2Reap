@@ -278,3 +278,6 @@ div#info_right {
  	cursor: pointer;
 }
 /*-----------------------*/
+img#travel_img {
+    width: 100%;
+}

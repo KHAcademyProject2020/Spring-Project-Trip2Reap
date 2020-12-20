@@ -189,10 +189,8 @@
 
 /* 첨부파일 테두리 */
 .pictureArea{
-	/* border: 2px dashed darkgray; */
-	width: 797px;
-	height: 206px;
-	/* margin: 0px; */
+	width: 207px;
+	height: 150px;
 	display: inline-flex;
 	margin: 10px 20px 10px 42px;
 	background: url("../../../resources/images/noImage.png");
@@ -201,8 +199,6 @@
 	background-repeat-y: no-repeat;
 	background-position: center;
 	resize: none;
-	/* text-align: center; */
-	/* background-color: snow; */
 }
 
 .pictureArea:hover{
@@ -233,8 +229,6 @@
 }
 
 #titleImg{
-	/* width: 903px; */
-	/* height: 180px; */
 	width: 207px;
 	height: 150px;
 }
@@ -246,23 +240,23 @@
 	
 	
 #titleImgTxt{
-	/* display: inline-flex; */
-	margin: 1px 23px 10px 38px;
+	display: inline-flex;
+	margin: 1px 23px 10px 105px;
 	width: 192px;
 	font-size: small;
-	display: inline-flex;
 }	
 
 #contentImgTxt{
 	display: inline-flex;
-	margin: 10px 10px 10px 107px;
+	margin: 10px 10px 10px 68px;
 	width: 180px;
+	font-size: small;
 }
 
 .pictureName{
 	color: black;
 	width: 200px;
-	/* background-color: snow; */
+	display: inline-flex;
 }
 
 
