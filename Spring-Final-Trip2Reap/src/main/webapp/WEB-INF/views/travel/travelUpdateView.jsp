@@ -385,5 +385,9 @@
 
    </script>
 </section>		
+ <div id="footerSpaces"></div>
+        <footer>
+              <c:import url="../common/footer.jsp" />
+       </footer>
 </body>
 </html>
