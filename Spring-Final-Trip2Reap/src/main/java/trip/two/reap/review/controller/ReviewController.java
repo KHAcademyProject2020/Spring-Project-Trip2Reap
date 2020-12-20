@@ -6,14 +6,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -384,18 +388,19 @@ public class ReviewController {
 
 	@RequestMapping("addReply.bo")
 	@ResponseBody
-	public String addReply(Reply re, HttpSession session) {
+	public String addReply(Reply re, HttpSession session){
 		Member loginUser = (Member) session.getAttribute("loginUser");
-		String rWriter = loginUser.getMemberId();
+		String rWriter = Optional.ofNullable(loginUser).orElse(new Member()).getMemberId();
 
 		re.setMemberId(rWriter);
 
 		int result = rService.addReply(re);
-
-		if (result > 0) {
-			return "success";
+		if (rWriter != null && result > 0) {
+			
+				return "success";
+		
 		} else {
-			throw new ReviewException("댓글 등록에 실패했습니다.");
+			return "error";
 		}
 	}
 
@@ -455,8 +460,11 @@ public class ReviewController {
 	}
 
 	@RequestMapping("rupdate.bo")
-	public ModelAndView reviewUpdate(@ModelAttribute Review r, @RequestParam("page") int page,
-			@RequestParam("reloadFile") MultipartFile reloadFile, HttpServletRequest request, ModelAndView mv) {
+	public ModelAndView reviewUpdate(@ModelAttribute Review r, 
+			@RequestParam("page") int page,	
+			@RequestParam(value = "reloadFile") MultipartFile reloadFile,
+			@RequestParam(value = "detailFile", required = false) ArrayList<MultipartFile> detailFile,
+			HttpServletRequest request, ModelAndView mv) {
 
 		String changeName = saveFile(reloadFile, request);
 
@@ -561,4 +569,33 @@ public class ReviewController {
 		}
 
 
+		@RequestMapping("uploadFile.bo")
+		public void uploadFile(@ModelAttribute Review r,
+				@RequestParam(value = "reloadFile") MultipartFile uploadFile,
+				HttpServletRequest request) {
+			int result;
+			System.out.println("보드" + r);
+			System.out.println("첨부파일 : " + r);
+			System.out.println("첨부파일 : " + uploadFile);
+			System.out.println("파일이름 : " + uploadFile.getOriginalFilename());
+			// 파일을 집어넣지 않으면 empty값이 반환. 파일을 넣으면 파일이름이 반환됨.
+
+			// if(!uploadFile.getOriginalFilename().equals("")) {
+			if (uploadFile != null && !uploadFile.isEmpty()) {
+				String changeName = saveFile(uploadFile, request);
+				Attachment oneDetailImg= new Attachment();
+				oneDetailImg.setOriginName(uploadFile.getOriginalFilename());
+				oneDetailImg.setChangeName(changeName);
+				oneDetailImg.setFileLevel(2);
+				//데이터베이스 IMG_FILE테이블에 디테일이미지 한개씩 등록한다.
+				result= rService.insertDetailView(oneDetailImg);
+				if(result==0) {
+					//등록실패
+					throw new ReviewException("디테일 이미지 등록에 실패하였습니다.");
+				}
+			} else {
+			}
+		}
 }
+
+

@@ -37,7 +37,7 @@
 			hashParam = hashParam[1]
 			
 			location.href = "reviewList.bo?hashTag="+hashParam;
-			alert(hashParam);
+		//	alert(hashParam);
 			
 		
 
