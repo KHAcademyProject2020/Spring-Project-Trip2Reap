@@ -146,6 +146,14 @@ public interface HotelService {
 	//호텔 한개 정보를 찾는다.
 	Hotel selectOnlyOneHotel(int hId);
 
+	
+	//2020.12.20 - 호텔 수정
+	//hId번 호텔이 갖고있는 방들을 구한다.
+	ArrayList<Room> selectRoomList(int hId);
+
+	//2020.12.21 -호텔 업데이트
+	int updateHotel(Hotel hotel);
+
 
 
 	
