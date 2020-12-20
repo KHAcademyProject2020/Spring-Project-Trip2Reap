@@ -13,11 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,9 +28,6 @@ import com.google.gson.JsonIOException;
 import trip.two.reap.common.Attachment;
 import trip.two.reap.common.PageInfo;
 import trip.two.reap.common.Pagination;
-import trip.two.reap.course.model.vo.Course;
-import trip.two.reap.hotel.exception.HotelException;
-import trip.two.reap.hotel.model.vo.Hotel;
 import trip.two.reap.member.model.vo.Member;
 import trip.two.reap.review.model.service.ReviewService;
 import trip.two.reap.review.model.vo.Reply;
@@ -53,13 +47,7 @@ public class ReviewController {
 		
 		
 		HashMap<String, Object> searchList = new HashMap<String, Object>();
-		
-		
-	
-		
-		
-
-		
+			
 		String search = "all";
 		searchList.put("searchInput", "all");
 		searchList.put("searchLoc", "page");
@@ -95,7 +83,6 @@ public class ReviewController {
 		} else {
 			hashTag = "#" + hashTag;
 			search = "hashTag";
-			System.out.println(hashTag);
 			searchList.put("searchInput", hashTag);
 			searchList.put("chkNo", 3);
 			searchList.put("hashTag", hashTag);
@@ -107,13 +94,7 @@ public class ReviewController {
 			searchList.put("cate", cate);
 			searchList.put("chkNo", 4);
 		}
-		
-//		System.out.println("난작성자"+writer);
-//		System.out.println("난제목"+title);
-//		System.out.println("난내용"+content);
-		
-//		System.out.println("값없나요"+hashTag);
-		
+
 		
 		searchList.put("search", search);
 		
@@ -147,7 +128,6 @@ public class ReviewController {
 		} else {
 			throw new ReviewException("게시글 전체 조회에 실패 하였습니다.");
 		}
-		System.out.println(list);
 		return mv;
 	}
 
@@ -192,7 +172,6 @@ public class ReviewController {
 		} else {
 			hashTag = "#" + hashTag;
 			search = "hashTag";
-			System.out.println(hashTag);
 			searchList.put("searchInput", hashTag);
 			searchList.put("chkNo", 3);
 			searchList.put("hashTag", hashTag);
@@ -206,13 +185,7 @@ public class ReviewController {
 			searchList.put("chkNo", 4);
 		}
 		
-//		System.out.println("난작성자"+writer);
-//		System.out.println("난제목"+title);
-//		System.out.println("난내용"+content);
-//		
-//		System.out.println("값없나요"+hashTag);
-		
-		
+
 		searchList.put("search", search);
 		
 		int currentPage = 1;
@@ -235,7 +208,6 @@ public class ReviewController {
 		} else {
 			throw new ReviewException("게시글 전체 조회에 실패 하였습니다.");
 		}
-//		System.out.println(list);
 		return mv;
 	}
 
@@ -252,9 +224,7 @@ public class ReviewController {
 		}
 		
 		Review review = rService.selectReview(r);
-		System.out.println(review);
 		ArrayList<Reply> reply = rService.selectReply(boNo);
-		System.out.println(reply);
 		int reviewListCount=0;
 		
 		ArrayList<Attachment> detailList = rService.selectDetailList(boNo);
@@ -266,7 +236,6 @@ public class ReviewController {
 		}
 
 		
-		System.out.println("sadsad:"+detailList);
 		int likeCnt=0;
 		likeCnt= rService.countReviewLike(boNo);
 
@@ -305,17 +274,12 @@ public class ReviewController {
 			@RequestParam(value = "detailFile", required = false) ArrayList<MultipartFile> detailFile,
 			HttpServletRequest request) {
 		int result;
-		System.out.println("보드" + r);
-		System.out.println("첨부파일 : " + r);
-		System.out.println("첨부파일 : " + uploadFile);
-		System.out.println("파일이름 : " + uploadFile.getOriginalFilename());
 		// 파일을 집어넣지 않으면 empty값이 반환. 파일을 넣으면 파일이름이 반환됨.
 
 		// if(!uploadFile.getOriginalFilename().equals("")) {
 		if (uploadFile != null && !uploadFile.isEmpty()) {
 			String changeName = saveFile(uploadFile, request);
 			// saveFile() : 파일을 저장할 경로 지정
-			System.out.println(changeName);
 
 			if (changeName != null) {
 				r.setOriginName(uploadFile.getOriginalFilename());
@@ -328,7 +292,6 @@ public class ReviewController {
 			return "redirect:reviewList.bo";
 		}
 
-		System.out.println(result);
 		if (result > 0) {
 //			return "redirect:reviewList.bo";
 			int result2;
@@ -363,7 +326,6 @@ public class ReviewController {
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
 		// saveFile() : 파일을 저장할 경로 지정
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		// System.out.println("루트 : " + root);
 		String savePath = root + "\\buploadFiles";
 
 		File folder = new File(savePath);
@@ -381,7 +343,6 @@ public class ReviewController {
 		try {
 			file.transferTo(new File(renamePath));
 		} catch (IOException e) {
-			System.out.println("파일 전송 에러 : " + e.getMessage());
 			e.printStackTrace();
 		}
 		return changeName;
@@ -410,7 +371,6 @@ public class ReviewController {
 		// int bId : requestParam 생략
 
 		ArrayList<Reply> list = rService.selectReply(boNo);
-//		System.out.println(list);
 		response.setContentType("application/json; charset=UTF-8");
 
 		GsonBuilder gb = new GsonBuilder();
@@ -471,7 +431,6 @@ public class ReviewController {
 
 		String changeName = saveFile(reloadFile, request);
 
-		System.out.println("리네임 파일 : " + changeName);
 
 		if (reloadFile != null && !reloadFile.isEmpty()) {
 			if (r.getChangeName() != null) {
@@ -506,7 +465,6 @@ public class ReviewController {
 
 		re.getMemberId();
 		int result = rService.deleteReply(re);
-		System.out.println(result);
 		
 		if ( result > 0) {
 			return "success";
@@ -577,11 +535,6 @@ public class ReviewController {
 				@RequestParam(value = "reloadFile") MultipartFile uploadFile,
 				HttpServletRequest request) {
 			int result;
-			System.out.println("보드" + r);
-			System.out.println("첨부파일 : " + r);
-			System.out.println("첨부파일 : " + uploadFile);
-			System.out.println("파일이름 : " + uploadFile.getOriginalFilename());
-			// 파일을 집어넣지 않으면 empty값이 반환. 파일을 넣으면 파일이름이 반환됨.
 
 			// if(!uploadFile.getOriginalFilename().equals("")) {
 			if (uploadFile != null && !uploadFile.isEmpty()) {

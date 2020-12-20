@@ -192,8 +192,9 @@
 				</div>
 				<div id="goto_wrapper" class="container">
 					<ul id="goto_wraper_ul">
-						<li><input id="go_review_list_btn" type="button" value="목록"></li>
-						<li><input id="go_top_btn" type="button" value="맨위로"></li>
+
+						<li><a href="reviewList.bo"><input id="go_top_btn" type="button" value="목록"></a></li>
+						<li><a href="#"> <input id="go_review_list_btn" type="button" value="맨위로"></a></li>
 					</ul>
 				</div>
 			</div>
@@ -208,8 +209,7 @@
 		var chk = confirm("정말 삭제하시겠습니까?");
 		if (chk) {
 			location.href='rdelete.bo?boNo='+boNo;
-			alert("삭제되었습니다");
-			alert(location.href);
+			
 		}
 	}
 

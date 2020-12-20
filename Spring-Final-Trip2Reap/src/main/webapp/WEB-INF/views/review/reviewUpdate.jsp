@@ -32,9 +32,10 @@
 			<input type="hidden" name="boNo" value="${ review.boNo }">
 			<input type="hidden" name="changeName" value="${ review.changeName }">
 				<div id="wrapperForm">
-					<br> <br>
 					<div id="cate">
-
+					<br><hr><br>
+						<p><b>*카테고리*</b></p>
+						
 						<select id="select_search" name="caCode">
 							<option>카테고리를 선택해주세요</option>				
 							<option <c:if test="${review.caCode == 3}">selected</c:if> 
@@ -44,9 +45,8 @@
 						</select>
 
 					</div>
-					
-					<br>
-					<br>
+					<br><hr><br>
+		
 				<div id="wrapImg">
 					<%-- <div id="titleImgDiv" class="titleImgDiv">
 		   				 <img src="resources/buploadFiles/${ review.changeName }" id="titleImg" class="titleImg">
@@ -56,11 +56,12 @@
 		    			<input type="hidden" name = "target_url"><br>
 					    <input type="file" id="file" name="reloadFile" accept="image/*">
 					</div> --%>
+					<p><b>*이미지 업로드 수정*</b></p>
 					<c:forEach var="detailImg"  items="${detailList}">
             				 <div id="titleImgDiv">
 								<img src="resources/buploadFiles/${detailImg.changeName}" id="titleImg" class="titleImg">
 							<i class="far fa-images" id="titleIcon"></i>		    
-		    				<label id="titleLabel">썸네일 이미지 변경</label>	
+		    				<label id="titleLabel">이미지 변경</label>	
 		    				<input type="hidden" name = "target_url"><br>
 					  		<input type="file" id="file" name="reloadFile" accept="image/*">
 		    				
@@ -71,7 +72,7 @@
             		 
 				</div>
 
-
+<br><hr><br>
 
 					<div class="writeForm" id="writer">
 						
@@ -79,17 +80,17 @@
 						<input type="hidden" name="memberId" value="${loginUser.memberId }">
 					</div>
 					
-					<br>
 					
+					<p><b>*제목 수정*</b></p>
 					<div class="writeForm" id="title">
 						<textarea name="boTitle" 
 							class="textarea_input" style="height: 40px;">${review.boTitle}</textarea>
 					</div>
-					<br> <br>
+					<br><hr><br>
 
 					<div id="content">
 								<br>
-
+						<p><b>*내용 수정*</b></p>
 						<textarea id="contentForm" name="boContent" rows="40" cols="130">${review.boContent}</textarea>
 							
 							<div class="hashTag">
@@ -106,12 +107,11 @@
 						</div>
 
 
-						<br>
+						
 						
 					</div>
 
-					<br> <input type="submit" id="submit" value="수정"
-						style="width: 50px; height: 30px;">
+					
 				</div>
 
 
