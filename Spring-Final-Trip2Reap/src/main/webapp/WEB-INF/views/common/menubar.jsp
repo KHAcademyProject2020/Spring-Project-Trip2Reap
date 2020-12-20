@@ -61,53 +61,6 @@
 							onMouseOut="this.style.color=''">로그아웃</li>
 						<li class="topBar2_2" id="myPageBtn" onMouseOver="this.style.color='#F2CA5E';"
 							onMouseOut="this.style.color=''">마이페이지</li>
-						
-						<%--(은강) notification - 알람(시작) --%>
-						<li class="topBar2_2">
-						
-							<%--알람이 존재할때 --%>
-							<div>
-								<i class="fas fa-bell alarm-btn alarm-on"></i>
-								<span id="alarm-wrapper">
-									<span id="alarm-cnt">1</span>
-								</span>
-							</div>
-							
-							<%--알람이 존재하지 않을때 --%>
-							<div>
-								<i class="far fa-bell  alarm-btn alarm-off"></i>
-							</div>
-							
-							
-							<!--알람이 존재할때 컨테이너  -->
-							<div class="alarm-on-container alarm-closed">
-								<ul id="alarm-ul">
-									<li>
-										<div class="alarm-detail-container">
-											<div class="alarm-title">여행 후기 | 댓글</div>
-											<div class="alarm-content-wrapper">
-												<div class="alarm-target">게시판 제목</div>
-												<div class="alarm-content">
-													<b>은강(닉네임)</b> 님이 덧글을 등록하였습니다.
-												</div>
-											</div>
-										</div>
-									</li>
-									
-									<li>
-										<div class="alarm-detail-container">
-											<div class="alarm-title">여행 후기 | 좋아요</div>
-											<div class="alarm-content-wrapper">
-												<div class="alarm-target">게시판 제목</div>
-												<div class="alarm-content">
-													<b>규호짱(닉네임)</b> 님이 좋아요를 눌렀습니다.
-												</div>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</div>
-						</li><%--(은강) notification - 알람(끝) --%>
 					</ul>
 				</div>
 			</c:if>
@@ -390,8 +343,9 @@
     </script>
     
  <script>
- // 호텔 리모컨 코드 //
+ 
 $(function(){
+	// 호텔 리모컨 코드 //
 	$.ajax({
 		url:'hotelCookies.ho',
 		type:'post',
@@ -402,50 +356,56 @@ $(function(){
 			
 			rHotel_ul.html(''); //초기화 싹다 비워줌.
 			
-			if(response.length<=0){
-				//조회한 호텔개수가 0개면
-				//최근에 본 호텔부분을 보여주지 않음.
-				rHotel_Container.css('display', 'none');	
-			}else{
+			if(response!=null){
 				rHotel_Container.css('display', 'flex');
-				if(response.length>=3){
-					for(var i=response.length-1; i>=response.length-3; i--){
-						
-						let li_code='';
-						li_code+='<li class="remote_li">'
-						li_code+='<a href="hotelDetailView.ho?hId='+response[i].boNo+'&page=1" target="_blank">'
-						li_code+='<span>'
-						li_code+='<img src="resources/buploadFiles/'+response[i].hotelThumbnailImg+'" class="remoteImg" /> '
-						li_code+='</span>'
-						li_code+='<span class="remoteName">'+response[i].boTitle+'</span>'
-						li_code+='</a>'
-						li_code+='</li>'
-						
-						rHotel_ul.append(li_code);
-					}
-				}else{
-					for(var i=response.length-1; i>=0; i--){
-						
-						let li_code='';
-						li_code+='<li class="remote_li">'
-						li_code+='<a href="hotelDetailView.ho?hId='+response[i].boNo+'&page=1" target="_blank">'
-						li_code+='<span>'
-						li_code+='<img src="resources/buploadFiles/'+response[i].hotelThumbnailImg+'" class="remoteImg" /> '
-						li_code+='</span>'
-						li_code+='<span class="remoteName">'+response[i].boTitle+'</span>'
-						li_code+='</a>'
-						li_code+='</li>'
-						
-						rHotel_ul.append(li_code);
-					}
-				}
-				
+				let li_code='';
+				li_code+='<li class="remote_li">'
+				li_code+='<a href="hotelDetailView.ho?hId='+response.boNo+'&page=1" target="_blank">'
+				li_code+='<span>'
+				li_code+='<img src="resources/buploadFiles/'+response.hotelThumbnailImg+'" class="remoteImg" /> '
+				li_code+='</span>'
+				li_code+='<span class="remoteName">'+response.boTitle+'</span>'
+				li_code+='</a>'
+				li_code+='</li>'
+				rHotel_ul.append(li_code);
 			}
-			
 		}
 	});
+	 //호텔 리모컨 코드 끝//
+	 
+	 //코스 리모컨 코드 시작//
+	 $.ajax({
+		url:'courseCookies.co',
+		type:'post',
+		success:function(response){
+			console.log(response);
+			let rCourse_Container= $('#course_remote_control');
+			let rCourse_ul= $('#course_remote_ul');
+			
+			rCourse_ul.html(''); //초기화 싹다 비워줌.
+			
+			if(response!=null){
+				let li_code='';
+				li_code+='<li class="remote_li">'
+				li_code+='<a href="courseDetail.co?coNo='+response.boardNo+'&page=1" target="_blank">'
+				li_code+='<span>'
+				li_code+='<img src="resources/courseFiles/'+response.changeName+'" class="remoteImg" /> '
+				li_code+='</span>'
+				li_code+='<span class="remoteName">'+response.courseTitle+'</span>'
+				li_code+='</a>'
+				li_code+='</li>'
+				rCourse_ul.append(li_code);
+			}
+		}
+	 });
+	 //코스 리모컨 코드 끝 //
+	 
+	 
+	 //여행지 리모컨 코드시작//
+	 
+	 //여행지 리모컨 코드끝//
 });
- //호텔 리모컨 코드 끝//
+
 </script>
     
 </body>

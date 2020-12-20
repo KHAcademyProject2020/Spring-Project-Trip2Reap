@@ -160,33 +160,7 @@
  		VALUES(SEQ_BO_NO.NEXTVAL,#{memberId},#{caCode},#{boTitle},#{boTag},#{boContent})
   </insert>
   
-   <update id="updateReview">
-   		<!-- 
-   		UPDATE BOARD 
-   		
-   		SET BO_TITLE=#{boTitle}, 
-   			BO_CONTENT=#{boContent},
-   	  		CA_CODE=#{caCode}, 
-   	  		BO_TAG=#{boTag}
-   	  		REGDATE=SYSDATE
-        
-   		WHERE BO_NO= #{boNo} 
-   		
-   	
-   	  update (
-   	  		select b.ca_code,b.bo_title,b.bo_content,b.bo_tag,b.regdate,i.origin_name,i.change_name
-   	  		from board b
-   	  			,img_file i
-   	  		where b.bo_no=i.bo_no	
-   	  	)
-   	  	set BO_TITLE=#{boTitle}, BO_CONTENT=#{boContent},
-   	  	CA_CODE=#{caCode}, BO_TAG=#{boTag},
-   	  	<if test="originName != null">
-         ORIGIN_NAME=#{originName},
-         </if>
-         CHANGE_NAME=#{changeName}, REGDATE=sysdate
-         where bo_no=#{boNo}-->
-         
+   <update id="updateReview">   
          UPDATE BOARD B 
 			SET B.CA_CODE=#{caCode}, 
 			B.BO_TITLE=#{boTitle}, 
@@ -194,15 +168,6 @@
    	        B.BO_TAG= #{boTag},  
    	        B.REGDATE= sysdate
          where B.bo_no = #{boNo}
-         
-     <!--  update BOARD(BO_NO,MEMBER_ID,CA_CODE,BO_TITLE,BO_TAG,BO_CONTENT)
-      set BO_TITLE=#{boTitle},BO_CONTENT=#{boContent},CA_CODE=#{caCode},BO_TAG=#{boTag}
-         <if test="originName != null">
-         ORIGIN_NAME=#{originName},
-         </if>
-         CHANGE_NAME=#{changeName}, REGDATE=sysdate
-      where b.BO_NO=#{boNo} -->
-
    </update>
    
    <update id="updateReviewPhoto">
@@ -214,6 +179,8 @@
          		CHANGE_NAME=#{changeName}
          	where I.bo_no=#{boNo}	
    </update>
+   
+   
    
    <update id="deleteReview">
        update board 

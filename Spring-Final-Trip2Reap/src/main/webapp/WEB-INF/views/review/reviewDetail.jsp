@@ -74,16 +74,16 @@
 				<div id="review_body_container" class="container">
 					<!--photo_container: 사진-->
 					<!-- 썸네일 사진 -->
-					<c:if test="${review.changeName!=null }">
+					<%-- c:if test="${review.changeName!=null }">
 						<div id="photo_container" class="container">
 							<img src="resources/buploadFiles/${review.changeName}"
 								width="800px;" height="500px;">
 						</div>
-					</c:if>
+					</c:if> --%>
 					<!-- 디테일사진 자리 -->
 					<c:if test="${review.changeName!=null }">
 						<div id="photo_container" class="container">
-							<c:forEach var="detailImg" begin="0" items="${detailList}">
+							<c:forEach var="detailImg"  items="${detailList}">
 								<img src="resources/buploadFiles/${detailImg.changeName}"
 									width="800px;" height="500px;">
 								<br>
@@ -221,6 +221,9 @@
 	$(function() {
 		// 댓글은 계속 갱신되어야 하므로 소스 추가
 		getReplyList();
+		setInterval(function() {
+			getReplyList();
+		}, 1000); // 1초에 1번씩 업데이트  
 	});
 	
 	// 덧글등록- #rSubmit / #submit_reply_btn
@@ -235,10 +238,11 @@
 			url : 'addReply.bo',
 			data : {reContent : reContent,boNo : boNo},
 			success : function(data) {
-				if (data == 'success') {
+				if (data == 'success' && $('#reply_content') != null) {
 					$('#reply_content').val("");
-					getReplyList();
+					
 				}
+				
 				swal({
 					  title: "댓글등록 성공",
 					  text: "성공적으로 댓글을 등록하였습니다.",
@@ -250,7 +254,6 @@
 				console.log("댓글 등록 에러");
 				swal({
 					  title: "댓글등록 실패",
-					  text: "로그인 후 이용해주세요",
 					  icon: "error",
 					  button: "확인",
 				});
@@ -307,7 +310,6 @@
 								console.log("댓글 등록 에러");
 								swal({
 									  title: "댓글삭제 실패",
-									  text: "로그인 후 이용해주세요",
 									  icon: "error",
 									  button: "확인",
 								});

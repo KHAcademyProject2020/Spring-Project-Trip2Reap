@@ -27,7 +27,7 @@
 				</div>
 			</div>
 
-			<form method="post" onsubmit="false;" action="rupdate.bo"  enctype="Multipart/form-data">
+			<form id="create_form" method="post" onsubmit="false;" action="rupdate.bo"  enctype="Multipart/form-data">
 			<input type="hidden" name="page" value="${ page }">
 			<input type="hidden" name="boNo" value="${ review.boNo }">
 			<input type="hidden" name="changeName" value="${ review.changeName }">
@@ -51,6 +51,7 @@
 					<div class="writeForm" id="writer">
 						<input type="file" id="photo_btn" name="reloadFile"> 
 						<input type="file" id="detail_img_btn" name="detailFile" multiple="multiple">
+						
 						<c:if test="${ !empty review.originName }">
 						<br>현재 업로드한 파일 : 
 						<a href="/resources/buploadFiles/${ review.changeName }" download="${ review.originName }">
@@ -101,12 +102,6 @@
 			</form>
 
 		</div>
-		
-		<form method="post" onsubmit="false;" action="download.do" enctype="Multipart/form-data">
-				<input type="file" id="photo_btn" name="reloadFile"> 	
-				<input type="submit" id="submit" value="등록"
-						style="width: 50px; height: 30px;">
-		</form>
 		
 		<br><br><br><br><br><br><br><br>
 		
