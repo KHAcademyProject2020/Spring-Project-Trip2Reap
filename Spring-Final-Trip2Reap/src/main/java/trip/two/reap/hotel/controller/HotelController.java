@@ -284,7 +284,7 @@ public class HotelController {
 		try {
 			//쿠키생성 - 호텔넘버(hId)를 문자열로 변환시켜서 쿠키생성..
 			Cookie cookie= new Cookie("hotelNo", URLEncoder.encode( Integer.toString(hId), "utf-8"));
-			cookie.setMaxAge(60*10); //10분유지
+			cookie.setMaxAge(60*40); //40분유지
 			response.addCookie(cookie);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();

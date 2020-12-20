@@ -248,7 +248,7 @@ public class CourseController {
 		// 쿠키 만들기
 		try {
 			Cookie cookie= new Cookie("courseNo", URLEncoder.encode( Integer.toString(coNo) , "utf-8"));
-			cookie.setMaxAge(60*10);
+			cookie.setMaxAge(60*40);
 			response.addCookie(cookie);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
