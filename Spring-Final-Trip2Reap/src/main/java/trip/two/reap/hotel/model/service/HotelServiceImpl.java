@@ -325,6 +325,11 @@ public class HotelServiceImpl implements HotelService{
 		return hDAO.insertReservation(sqlSession, reservation);
 	}
 
+	@Override
+	public ArrayList<Room> selectRoomList(int hId) {
+		return hDAO.selectRoomList(sqlSession, hId);
+	}
+
 	
 	
 

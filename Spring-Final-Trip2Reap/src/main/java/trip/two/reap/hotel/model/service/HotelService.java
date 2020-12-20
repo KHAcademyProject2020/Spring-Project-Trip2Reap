@@ -146,6 +146,8 @@ public interface HotelService {
 	//호텔 한개 정보를 찾는다.
 	Hotel selectOnlyOneHotel(int hId);
 
+	ArrayList<Room> selectRoomList(int hId);
+
 
 
 	

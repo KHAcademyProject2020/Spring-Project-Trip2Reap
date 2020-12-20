@@ -285,6 +285,11 @@ public class HotelDAO {
 		return sqlSession.insert("hotelMapper.insertReservation", reservation);
 	}
 
+	//2020.12.21
+	public ArrayList<Room> selectRoomList(SqlSessionTemplate sqlSession, int hId) {
+		return(ArrayList) sqlSession.selectList("hotelMapper.selectRoomList", hId);
+	}
+
 	
 
 }
