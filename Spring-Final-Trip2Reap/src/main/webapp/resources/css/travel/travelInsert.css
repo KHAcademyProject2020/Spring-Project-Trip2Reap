@@ -39,136 +39,242 @@
 	top: 10px;
 }
 
-
-/* 작성하기 창 div 시작 */
-
-.astro_span{
-	color : red;
-	font-size: 15px;
+#input_search {
+    width: 200px;
+    height: 26px;
 }
 
-#insert_div {
-    text-align: left;
-    margin: 20px auto 40px auto;
-    width: 900px;
-    background: #efefef;
-    border-radius: 10px;
-    padding-bottom: 1px;
+#button_search:hover{
+	cursor: pointer;
 }
 
-#travel_table {
-    text-align: left;
-    margin: 2px 0px 0px 13px;
-    padding: 15px 0px 8px 15px;
-}
-
-#travel_table td{
-	padding: 8px; /* 게시판 페이지 테이블 td간격 통일 되었나 추후에 확인필요 */
-}
-
-
-
-#info_ment_div{
-    height: 70px;
-    padding: 23px 15px 0 23px;
-}
-
-
-
-#insert_ment_div {
-    text-align: left;
-    margin: 20px auto;
-    width: 900px;
-    background: #efefef;
-    border-radius: 10px;
-}
-
-#travel_name{
-	width: 250px;
-	height: 19px;
-	padding-left: 7px;
-}
-
-
-
-#select_region{
-	height: 25px;
-	padding: 3px;
-}
-
-#select_theme{
-	height: 25px;
-	padding: 3px;
-}
-
-/* 해쉬태그 입력창 */
-#input_travel_tag{
-	width: 200px;
-	height: 19px;
-	padding-left: 7px; /* 이 부분 수진이랑 맞추기 */
-}
-
-.hashtag {
-    padding: 5px;
-    /* border-radius: 10px; */
-    /* background: gray; */
-    /* color: white; */
-    height: 14px;
-    border-bottom-style: solid;
-    border-bottom-color: mediumseagreen;
-    font-size: small;
-    /* border-left-style: groove; */
-    /* border-right-style: groove; */
-    display: -webkit-inline-box;
-    margin-left: 10px;
-}
-
-
-#travel_content_div{
-	margin: 20px auto;
-	width: 900px;
-	text-align: center;
-}
-
-#travel_content {
-    resize: none;
-    padding: 10px;
-    width: 800px;
-    color: #333;
-    font-size: 15px;
-    line-height: 1.7;
-    letter-spacing: -1px;
-}
-
-
-#text_count_div {
-    text-align: right;
-    margin-bottom: 30px;
-    margin-right: 40px;
-    font-size: smaller;
-}
-
-#text_count{
-	color: rgb(119, 175, 130);
-	font-weight: 600;
-}
-
-/* 취소, 등록 버튼 div */
-#button_div{
-	text-align: center;
-	margin: 20px 0px;
-}
-
-#button_cancel{
+#menu_right_div button{
 	width: 60px;
 	height: 30px;
 	border: none;
-	background: #EAEAEA;
-	border-radius: 5px;
+	background: #77af82;
+	color: white;
+	border-radius: 5px;		
+}
+
+
+/* 해쉬태그 div  */
+#hashtag_div{
+	padding: 10px;
+	text-color : #a7e1af;
+}
+
+#hashtag_div a{
+	text-decoration:none;
+	color:black;
+}
+#hashtag_div a:hover{
+    	text-decoration:none;
+    	color: #497f55; *;
+    	font-weight: 800;
+}
+
+#hashtag_div li{
+		float: left;
+		list-style: none;
+		padding: 5px;
+}
+
+
+
+
+/* 카테고리 테이블 div */
+#cate_name {
+    font-size: 20px;
+    font-weight: bold;
+    /* border-left: inset; */
+    /* border-left-color: springgreen; */
+}
+
+#cate_icon{
+	height: 10px;
+	width: 10px;
+	font-size: large;
+	vertical-align: 4px;
+}
+
+#cate_table_div {
+    width: 900px;
+    margin: 0px auto;
+    padding: 60px 0px 30px 0px;
+}
+
+#local_table{
+	border: 1px solid black;
+	border-collapse: collapse;
+	text-align: center;
+	margin: 16px 0px 30px 0px;
+	width: 900px;
+}
+
+#local_table td{
+	border: 1px solid black;
+	width: 100px;
+	height: 39px;
+}
+
+
+#local_table td:hover {
+    border: 1px solid black;
+    width: 100px;
+    height: 39px;
+    background-color: #77af82;
+    color: white;
+    cursor: pointer;
+}
+
+
+#theme_table{
+	border: 1px solid black;
+	border-collapse: collapse;
+	text-align: center;
+	margin: 16px 0px 30px 0px;
+	width: 900px;
+}
+
+#theme_table td{
+	border: 1px solid black;
+	width: 129px;
+	height: 39px;
+}
+
+#theme_table td:hover{
+	border: 1px solid black;
+	width: 129px;
+	height: 39px;
+	background-color: #77af82;
+    color: white;
+    cursor: pointer;
+}
+
+
+#list_all_div {
+    margin: 20px auto 0px auto;
+    padding: 10px 30px 1px 30px;
+    width: 840px;
+    background: #efefef;
+}
+
+#list_count_div{
+	font-weight: 600;
+	margin: 10px 0px 30px 0px;
+}
+
+#list_count{
+	color: #497f55;
+	margin: 0px 10px;
+}
+
+#list_etc{
+	font-weight: bold;
+    font-size: xx-large;
+    display: inline-flex;
+}
+
+
+#list_travel_div {
+    width: 803px;
+    padding: 15px 15px 13px 15px;
+    background: white;
+    display: flex;
+    margin-bottom: 35px;
+}
+
+#travel_img{
+	width: 250px;
+	height: 170px;
+}
+
+ #travel_no{
+	display : none;
+} 
+
+#travel_name_writer_div{
+	padding: 24px 91px 0px 35px;
+	/* flex: 1; */
+	width: 404px;
+}
+
+#travel_name:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+
+#travel_name {
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+#travel_tag{
+
+display: inline-block;
+
+/* overflow: hidden; */
+
+background: #fff;
+
+text-align: center;
+
+/* font-size: 16px; */
+
+font-weight: 400;
+
+color: #777;
+
+/* border: 1px solid #d8d7d7; */
+
+/* border-radius: 5px; */
+}
+.hashTagSpan:hover {
+ 
+ 	text-decoration: underline;
+ 	font-weight: bolder;
+ 	cursor: pointer;
+}
+#travel_theme{
+
+color: #497f55;
+
+font-weight: 700;
+
+margin-bottom: 7px;
+
+font-size: 17px;
+}
+
+#travel_writer{
+	margin-bottom: 22px;
+	/* font-size: 17px; */
+}
+
+
+
+#travel_cate_tag_div{
+	padding: 40px 20px;
+	/* flex: 1; */
+}
+
+#travel_cate{
+	margin: 20px 0px;
+}
+
+
+/* 등록하기 버튼 div */
+#button_write_div{
+	width: 900px;
+	margin: 30px auto;
+	text-align: right;
 }
 
 #button_write{
-	width: 60px;
+	width: 70px;
 	height: 30px;
 	border: none;
 	background: #77af82;
@@ -176,207 +282,120 @@
 	border-radius: 5px;
 }
 
-#span_text{
-	font-size: small;
-	color: gray;
-}
-
-
-/* 사진 첨부하는 영역 */
-#pictureTable{
-	font-size: 18px;
-}
-
-/* 첨부파일 테두리 */
-.pictureArea{
-	/* border: 2px dashed darkgray; */
-	width: 797px;
-	height: 206px;
-	/* margin: 0px; */
-	display: inline-flex;
-	margin: 10px 20px 10px 42px;
-	background: url("../../../resources/images/noImage.png");
-	background-size: 30px;
-	background-repeat-x: no-repeat;
-	background-repeat-y: no-repeat;
-	background-position: center;
-	resize: none;
-	/* text-align: center; */
-	/* background-color: snow; */
-}
-
-.pictureArea:hover{
-
-     background-color: snow; 
-}
-
-
-/* 첨부파일 위에서 마우스 커서 바꾸기 */
-#titleImgArea:hover, 
-#contentImgArea1:hover, 
-#contentImgArea2:hover, 
-#contentImgArea3:hover {
-	cursor:pointer;
-}
-
-/* 썸네일과 일반 사진 간격 조절칸 */
-#space1{
-	width: 30px; height: 100px;
-}
-
-#space2{
-	width: 50px; height: 100px;
-}
-
-#space3{
-	width: 30px; height: 100px;
-}
-
-#titleImg{
-	/* width: 903px; */
-	/* height: 180px; */
-	width: 797px;
-	height: 206px;
-}
-
-#contentImg1, #contentImg2, #contentImg3{
-	width: 207px;
-	height: 150px;
-}
-	
-	
-#titleImgTxt{
-	/* display: inline-flex; */
-	margin: 1px 23px 10px 38px;
-	width: 192px;
-	font-size: small;
-}	
-
-#contentImgTxt{
-	display: inline-flex;
-    margin: 10px 10px 10px 90px;
-    width: 180px;
-}
-
-.pictureName{
-	color: black;
-	width: 200px;
-	/* background-color: snow; */
-}
-
-
-/* 해쉬태그 시작 */
-
-#menu_hash{
-	display: inline-flex;
-	margin-left: 45px;
-}
-
-
-#input-hashtag {
-    margin-left: -1px;
-    padding: 5px;
-    width: 200px;
-    position: absolute;
-    height: 12px;
-}
-
-#input-hashtag-btn {
-    font-size: 17px;
-    font-weight: bold;
-    z-index: 1;
-    margin-left: 188px;
-    border: 0;
-    background-color: white;
-    margin-top: 1px;
-}
-  
-#input-hashtag-btn:hover {
-    background-color: snow;
-    cursor: pointer;
-}
-div.insert-common-container div {
-    margin: 8px;
-}
-
-#insert-hashtag-wrapper, #saved-hashtags-wrapper {
-    margin-left: 15px;
-    display: inline-flex;
-    vertical-align: middle;
-}
-
- #saved-hashtags {
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    text-decoration: underline;
-}
-
-#saved-hashtags li {
-    color: gray;
-    padding: 0px 12px;
-    /* font-style: italic; */
-}
-
-#delete_hash {
-    border: 0;
-    font-size: x-small;
-    vertical-align: super;
-}
-
-#delete_hash:hover{
+#button_write:hover{
 	cursor: pointer;
 }
 
-.hashTag{
-	display: inline-flex;
 
+   
+    /* 이전, 다음 페이지 영역 */
+	.paging{
+		clear: both;
+	    padding: 70px 0px 50px 0px; 
+	    text-align: center;
+	    font-size: 0;
+	}
+	
+	.paging a{
+	    display: inline-block;
+	    margin-left: 10px;
+	    padding: 5px 10px;
+	    border-radius: 100px;
+	    font-size: 12px;
+	}
+	
+	a{
+		 text-decoration: none;
+	}
+	
+	.paging a:first-child{
+    	margin-left: 0;
+	}
+
+	.paging a.bt{
+	    border: 1px solid #eee;
+	    background: #eee;.
+	}
+
+	.paging a.num{
+	    border: 1px solid darkslategrey;
+	    font-weight: 600;
+	}
+
+	.paging a.num.on{
+		background: lightslategray;
+		color: white;
+	}
+
+
+#modal {
+    width: 323px;
+    height: 173px;
+    padding: 40px;
 }
 
-input#sample6_address {
-    height: 19px;
-    border: none;
-    outline: none;
+#mo_share{
+	font-size: 15px;
+	margin-left: 10px;
+	margin-right: 93px;
 }
-input[type="button"] {
-    height: 24px;
-    width: 100px;
+
+.url_btn {
+    width: 64px;
+    height: 25px;
+    background-color: #77af82;
+    color: white;
+    border-style: none;
+    border-radius: 4px;
 }
-input#sample6_postcode {
-    height: 19px;
-    /* background-color: #eee; */
-    outline: none;
-    border: none;
+
+.url_btn:hover{
+	cursor:pointer;
 }
-input#sample6_extraAddress {
-    height: 19px;
-    border: none;
-    outline: none;
-}
-#tag{
-		margin-left: 14px;
-		height:19px;
-		padding-left: 1px;
-		outline: none;
-		width: 166px;
+
+#mo_contain{
+	font-size : 15px;
+	margin-left : 7px;
+	margin-right: 75px;
 }
 
 
-#member_id{
-	display : none;
+#mo_hr{
+	border-style: dotted;
 }
 
 
-#search_region{
-	width: 250px;
-	height: 19px;
-	padding-left: 7px;
+#share_div{
+	margin-bottom: 10px;
 }
+
+#contain_div{
+	margin-top: 10px;
+}
+
+#contain_info{
+	font-size: 11px;
+	margin-top: 10px;
+	color: gray;
+}
+.hashTagSpan{
+	font-weight: 400;
+	/* height: 25px; */
+	/* margin-top: 22px; */
+	color: #777;
+	border: 1px solid #d8d7d7;
+	/* border: 1px solid slategrey; */
+	border-radius: 5px;
+	padding: 2px;
+	font-size: 14px;
+}
+/* #menubar_div{
+	background: linear-gradient(180deg, #a7e1af, white);
+} */
 
 
 
 /* input이나 button 클릭 시 outline 제거 */
-#travel_name, #select_theme, #select_region, 
-#input_travel_tag, #travel_content, #button_cancel, #input-hashtag, #input-hashtag-btn, #button_write:focus{
+#input_search, #button_search, #button_write, #paging_div, .url_btn button{
 	outline: none;
 }
