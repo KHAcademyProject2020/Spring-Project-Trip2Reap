@@ -161,7 +161,10 @@
 	
 		
 	</script>
-
+<footer>
+              <c:import url="../common/footer.jsp" />
+       </footer>
+		
 
 </section>
 </body>

@@ -122,6 +122,11 @@
 		
 		<br><br><br><br><br><br><br><br>
 		
+		<div id="footerSpaces"></div>
+        <footer>
+              <c:import url="../common/footer.jsp" />
+       </footer>
+		
 	<script>
 	
     $('#titleImgDiv').click(function (e) {
@@ -263,6 +268,10 @@
 	</script>
 
 </section>
+<footer>
+              <c:import url="../common/footer.jsp" />
+       </footer>
+		
 
 </body>
 </html>

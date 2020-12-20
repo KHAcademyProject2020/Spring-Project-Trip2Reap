@@ -372,9 +372,15 @@
 
 		</div>
 		
+		<div id="footerSpaces"></div>
+        
 		
 
 	</section>
+	<footer>
+              <c:import url="../common/footer.jsp" />
+       </footer>
+		
 
 
 </body>

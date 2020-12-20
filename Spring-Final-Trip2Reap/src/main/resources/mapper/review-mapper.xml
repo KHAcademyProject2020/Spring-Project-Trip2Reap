@@ -78,7 +78,7 @@
          	</when>
          </choose>
          
-   		 order by b.BO_NO desc       
+   
   		 <!-- select *
   		 from board
          JOIN CATEGORY USING(CA_CODE)
