@@ -46,14 +46,14 @@
 			
 			<div id="titleImgTxt">
 				<div class="pictureName">
-					<span class="astro_span">*</span>대표이미지를 첨부해주세요.
+					<span class="astro_span">*</span>대표이미지
 				</div>
 			</div>
 			 <div id="contentImgTxt">
 				<div class="pictureName">내용이미지1</div>
 			</div>
 			<div id="contentImgTxt">
-				<div class="pictureName">내용이미지2</div>
+				<div class="pictureName">&nbsp;&nbsp;내용이미지2</div>
 			</div> 
 			
 			
@@ -146,9 +146,6 @@
 			 <div id="travel_content_div">
 				<textarea rows="20" cols="125" id="travel_content" name="boContent" maxlength="2000"></textarea>
 				  <div id="text_count_div">
-					<%-- <span>현재 글자 수 </span>
-					<span id="text_count">$(${ travel.boContent }).length()</span>
-					<span>자 / 최대 글자 수 2000자</span> --%>
 				 </div>
 			</div>
 			
@@ -211,31 +208,14 @@
    		}  
    		 
    		  
-   	// 하고 싶은 말 글자 수 카운트 및 글자 수 제한
-   		/* $(document).ready(function(){
-			$('#travel_content').keyup(function(e){
-				$('#text-count').text($(this).val().length);
-				$('#text-count').css('color', 'black');
-			})
-   		}); */
-   		/* $(function() {
-   	      $('#travel_content').keyup(function (e){
-   	          var content = $(this).val();
-   	          
-   	       $(this).height(((content.split('\n').length + 1) * 1.5) + 'em');
-           $('#text-count').html(content.length + "/최대 글자수 2000제한");
-       });
-       
-   	   $('#travel_content').keyup();
- }); */
-   		
+   
    		 
 	</script>
 	<script>
  
 	 //모든 페이지가 요청이 되었을 때
     $(document).ready(function() {
-//    	 var hashTagNo = 0
+
         // ID를 alpreah_input로 가지는 곳에서 키를 누를 경우
         $("#tag").keydown(function(key) {
             //키의 코드가 13번일 경우 (13번은 엔터키)

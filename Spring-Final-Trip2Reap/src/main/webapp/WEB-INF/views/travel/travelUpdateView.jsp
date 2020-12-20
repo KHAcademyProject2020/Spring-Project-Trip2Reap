@@ -46,7 +46,7 @@
 			</div>
 			<div id="contentImgArea2" class="pictureArea">
 				<img id="contentImg2"/>
-			</div> -->
+			</div>
 			
 			<div id="titleImgTxt">
 				<div class="pictureName">
@@ -57,9 +57,9 @@
 				<div class="pictureName">내용이미지1</div>
 			</div>
 			<div id="contentImgTxt">
-				<div class="pictureName">내용이미지2</div>
+				<div class="pictureName">&nbsp;&nbsp;내용이미지2</div>
 			</div>
-	 -->		
+	 		
 			
 			<input type="text" id="member_id" name="memberId" value="${ loginUser.memberId }"/>
 			

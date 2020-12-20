@@ -54,7 +54,7 @@
 			<c:set var="Img" value="${ travel.changeName }"></c:set>
             <c:set var="ImgAr" value="${fn:split(Img,',')}"></c:set>
 			<div id="travel_content">
-				<%-- <img src="${ contextPath }/resources/travelFiles/${ travel.changeName }" id="content_img"/> --%>
+				
 					<!-- a태그 안에서 다운로드 받을 것이 있을 때 쓰는 속성 download, 얘는 download="fileName" 이라고 해서 fileName을 지정해줄 수 있다. -->
 				<c:if test="${travel.changeName != null }">
 					<!-- insert로 등록한 여행지 -->

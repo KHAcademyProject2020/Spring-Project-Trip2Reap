@@ -31,9 +31,9 @@
 							id="menu">여행지</span>
 					</div>
 					<div id="menu_right_div">
-						<input type="search" id="input_search" placeholder="검색할 여행지명을 입력하세요" />
+						<input type="search" id="input_search" placeholder="검색할 여행지명을 입력하세요!" />
 
-						<button id="button_search" type="reset">검색</button> <!--  onclick="goSearchError()" -->
+						<button id="button_search" type="reset">검색</button> 
 					</div>
 				</div>
 
@@ -41,22 +41,17 @@
 				<div id="hashtag_div">
 					<ul id="hashtag_ul">
 						<li><a
-							href=" ${pageContext.request.contextPath}/tList.tv">#전체</a>&nbsp;&nbsp;
+							 id="selectTag">#전체</a>&nbsp;&nbsp;
 						</li>
-						<li><a
-							href=" ${pageContext.request.contextPath}/tList.tv?hashTag=문화시설">#문화시설</a>&nbsp;&nbsp;
+						<li>#<a>문화시설</a>&nbsp;&nbsp;
 						</li>
-						<li><a
-							href=" ${pageContext.request.contextPath}/tList.tv?hashTag=걷기좋은">#걷기좋은</a>&nbsp;&nbsp;
+						<li>#<a>걷기좋은</a>&nbsp;&nbsp;
 						</li>
-						<li><a
-							href=" ${pageContext.request.contextPath}/tList.tv?hashTag=쇼핑">#쇼핑</a>&nbsp;&nbsp;
+						<li>#<a>쇼핑</a>&nbsp;&nbsp;
 						</li>
-						<li><a
-							href=" ${pageContext.request.contextPath}/tList.tv?hashTag=자연">#자연</a>&nbsp;&nbsp;
+						<li>#<a>자연</a>&nbsp;&nbsp;
 						</li>
-						<li><a
-							href=" ${pageContext.request.contextPath}/tList.tv?hashTag=맛집">#맛집</a>&nbsp;&nbsp;
+						<li>#<a>맛집</a>&nbsp;&nbsp;
 						</li>
 					</ul>
 				</div>
@@ -68,25 +63,25 @@
 				<table id="local_table">
 					<tr class="localSelectTr">
 						<td class="selectAllTd">전체</td>
-						<td id="서울">서울</td>
-						<td id="인천">인천</td>
-						<td id="대전">대전</td>
-						<td id="대구">대구</td>
-						<td id="광주">광주</td>
-						<td id="부산">부산</td>
-						<td id="울산">울산</td>
-						<td id="세종">세종</td>
+						<td id="서울" class="regTd">서울</td>
+						<td id="인천"  class="regTd">인천</td>
+						<td id="대전"  class="regTd">대전</td>
+						<td id="대구"  class="regTd">대구</td>
+						<td id="광주"  class="regTd">광주</td>
+						<td id="부산"  class="regTd">부산</td>
+						<td id="울산"  class="regTd">울산</td>
+						<td id="세종"  class="regTd">세종</td>
 					</tr>
 					<tr class="localSelectTr">
-						<td id="경기">경기</td>
-						<td id="강원">강원</td>
-						<td id="충북">충북</td>
-						<td id="충남">충남</td>
-						<td id="경북">경북</td>
-						<td id="경남">경남</td>
-						<td id="전북">전북</td>
-						<td id="전남">전남</td>
-						<td id="제주">제주</td>
+						<td id="경기"  class="regTd">경기</td>
+						<td id="강원"  class="regTd">강원</td>
+						<td id="충북"  class="regTd">충북</td>
+						<td id="충남"  class="regTd">충남</td>
+						<td id="경북"  class="regTd">경북</td>
+						<td id="경남"  class="regTd">경남</td>
+						<td id="전북"  class="regTd">전북</td>
+						<td id="전남"  class="regTd">전남</td>
+						<td id="제주"  class="regTd">제주</td>
 					</tr>
 				</table>
 
@@ -94,10 +89,10 @@
 				<table id="theme_table">
 					<tr>
 						<td class="selectAllTd">전체</td>
-						<td id="관광지">관광지</td>
-						<td id="음식점">음식점</td>
-						<td id="명소">명소</td>
-						<td id="축제">축제</td>
+						<td id="관광지" class="tmTd">관광지</td>
+						<td id="음식점" class="tmTd">음식점</td>
+						<td id="명소" class="tmTd">명소</td>
+						<td id="축제" class="tmTd">축제</td>
 					</tr>
 				</table>
 			</div>
@@ -374,10 +369,93 @@
 	</script>
 	<script>
 	
-/* 	$(function(){
-		if(reg == )
+  	$(function(){
+  		console.log("${hashTag}");
+  		console.log("${reg}");
+  		console.log("${tm}");
+ 		 if("${hashTag}" == "all"){ //hashtag가 선택되지않았을때 전체에 style추가.
+ 			 $("#selectTag").css({'font-weight': '800'});
+ 		 };
+ 		 var tag = $("#hashtag_div").children().children().children();
+ 		 $.each(tag, function(index, item){
+ 			if("${hashTag}" == item.innerHTML){			 
+			item.style.fontWeight = "800";
+			item.setAttribute("class", "selected");
+ 			}
+ 		});
+ 		 
+ 		 
+ 		 $("#hashtag_ul").children().hover(function(){
+ 			$(this).css('cursor', 'pointer');
+		 }, function(){
+				$(this).css('cursor', 'none');
+ 		 });
+ 		
+ 		 if("${hashTag}" != "all"){
+ 			$("hashtag_ul").children().hover(function(){
+ 	 			$(this).css({'cursor': 'pointer', 'color': '#497f55', 'font-weight': '800','text-decoration': 'underline'});
+ 				}, function(){
+ 					$(this).css({'cursor': 'none', 'background':'#eee', 'color':'black'});
+ 	 		 });
+		 };
+		 
+		  $('.selected').hover(function(){
+				$(this).css({'cursor':'pointer', 'font-weight': '800', 'text-decoration': 'underline'});
+			}, function(){
+				$(this).css({'cursor':'pointer', 'font-weight': '800', 'text-decoration': 'underline'});
+			}); 
+ 	  
+		 //---------------------------
+		 
+	
 			
-	}) */
+			if("${reg}" == "all"){
+					/* $(".selectAllTd").css({'background-color': 'rgb(202,240,170)'}); //전체 버튼에만 style */
+			}else{
+				var reg = $('.regTd');
+				for(var i=0; i<reg.length; i++){
+					if("${reg}"==reg[i].innerHTML){
+						reg[i].style.background = "rgb(202,240,170)";
+					
+					}
+					
+				}
+			};
+
+	 		 
+	 		 $(".localSelectTr").children().hover(function(){
+	 			$(this).css('cursor', 'pointer');
+			 }, function(){
+					$(this).css('cursor', 'none');
+	 		 });
+	 		
+		 
+			 
+			 //----------------
+			 
+			if("${tm}" == "all"){
+					/* $(".selectAllTd").css({'background-color': 'rgb(202,240,170)'}); //전체 버튼에만 style */
+			}else{
+				var tm = $('.tmTd');
+				for(var i=0; i<tm.length; i++){
+					if("${tm}"==tm[i].innerHTML){
+						tm[i].style.background = "rgb(202,240,170)";
+					
+					}
+					
+				}
+			};
+			
+			 $("#theme_table").children().children().hover(function(){
+		 			$(this).css('cursor', 'pointer');
+				 }, function(){
+						$(this).css('cursor', 'none');
+		 		 });
+		 
+			 
+
+		
+		});
 	
 	
 	
@@ -393,32 +471,20 @@
       	hashParam = hashParam[1]
 		
     	 location.href = "tList.tv?hashTag="+hashParam;
-		})
-	
-	
-/* 	$(document).on("click","#local_table td",function(){
-		var reg = $(this).text();
-		
-		location.href = "tList.tv?reg="+reg;
-	})
-	
-	$(document).on("click","#theme_table td",function(){
-		var tm = $(this).text();
-		
-		location.href = "tList.tv?tm="+tm;
-	}) */
-	 
-	
-	
-	
-	
+		});
+    $("#hashtag_ul").find("a").click(function(){
+    	var hashTag = $(this).text();
+    	location.href="tList.tv?hashTag="+hashTag+"&reg="+"${reg}"+"&tm="+"${tm}";
+    
+   	});
+    
 	
  	$(document).on("click","#local_table td",function(){
 		var reg = $(this).text();
 		if(reg == "전체"){
 			location.href = "tList.tv";
 		}else{
-			location.href = "tList.tv?reg="+reg;
+			location.href = "tList.tv?reg="+reg+"&hashTag="+"${hashTag}"+"&tm="+"${tm}";
 		}
 		
 		
@@ -429,7 +495,7 @@
 		if(tm == "전체"){
 			location.href = "tList.tv";
 		}else{
-			location.href = "tList.tv?tm="+tm;
+			location.href = "tList.tv?tm="+tm+"&reg="+"${reg}"+"&hashTag="+"${hashTag}";
 		}
 
 	}) 
@@ -439,9 +505,7 @@
     //검색창
     $("#button_search").click(function(){
 		var search = $('#input_search').val();
-		/* if($('#input_search').val()== ""){
-			search = "title=" + $('#input_search').val()
-		} */
+	
 		location.href = "tList.tv?title="+search;
 		
 	});
@@ -464,96 +528,6 @@
 	})
 	
 	
-	
-   /*  $("#local_table td").click(function(){
-	var reg = $(this).attr('id')
-	
-	if(reg == "서울") {
-		reg = "서울"
-	}
-	if(reg == "인천") {
-		reg = "인천"
-	}
-	if(reg == "대전") {
-		reg = "대전"
-	}
-	if(reg == "대구") {
-		reg = "대구"
-	}
-	if(reg == "광주") {
-		reg = "광주"
-	}
-	if(reg == "부산") {
-		reg = "부산"
-	}
-	if(reg == "울산") {
-		reg = "울산"
-	}
-	if(reg == "세종") {
-		reg = "세종"
-	}
-	if(reg == "경기") {
-		reg = "경기"
-	}
-	if(reg == "강원") {
-		reg = "강원"
-	}
-	if(reg == "충북") {
-		reg = "충북"
-	}
-	if(reg == "충남") {
-		reg = "충남"
-	}
-	if(reg == "경북") {
-		reg = "경북"
-	}
-	if(reg == "경남") {
-		reg = "경남"
-	}
-	if(reg == "전북") {
-		reg = "전북"
-	}
-	if(reg == "전남") {
-		reg = "전남"
-	}
-	if(reg == "제주") {
-		reg = "제주"
-	}
-	
-	location.href = "tList.tv?"+reg;
-	
-}) */
-
- /*  $("#theme_table td").click(function(){
-	var tm = $(this).attr('id')
-	
-	if(tm == "관광지") {
-		tm = "관광지"
-	}
-	if(tm == "음식점") {
-		tm = "음식점"
-	}
-	if(tm == "명소") {
-		tm = "명소"
-	}
-	if(tm == "축제") {
-		tm = "축제"
-	}
-	location.href = "tList.tv?"+tm;
-  })	
-       */
-
-		 	
-
-		
-	
-    /*   $("#search").bind('keydown', function(key) {
-               if (key.keyCode == 13) {
-            		$(".search").trigger('click')
-            		$("#search").unbind()
-
-             }
-      }) */
       
 
 	</script>

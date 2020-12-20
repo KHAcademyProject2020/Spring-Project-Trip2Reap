@@ -27,8 +27,6 @@ import org.springframework.web.servlet.ModelAndView;
 import trip.two.reap.common.Attachment;
 import trip.two.reap.common.BoardException;
 import trip.two.reap.common.PageInfo;
-import trip.two.reap.review.controller.ReviewException;
-import trip.two.reap.review.model.vo.Review;
 import trip.two.reap.travel.exception.TravelException;
 import trip.two.reap.travel.model.service.TravelService;
 import trip.two.reap.travel.model.vo.Pagination;
@@ -76,10 +74,9 @@ public class TravelController {
 		
 		if(hashTag == null) {
 			hashTag = "all";
-			searchList.put("hashTag", hashTag);
+			searchList.put("hashTag", "all");
 
 		} else {
-			hashTag = "#" + hashTag;
 			search = "hashTag";
 			searchList.put("searchInput", hashTag);
 			searchList.put("chkNo", 2);
@@ -88,7 +85,7 @@ public class TravelController {
 		}
 		if(reg == null) {
 			reg = "all";
-			searchList.put("reg", reg);
+			searchList.put("reg", "all");
 		} else {
 			search = "reg";
 			searchList.put("chkNo", 3);
@@ -96,7 +93,7 @@ public class TravelController {
 		}
 		if(tm == null) {
 			tm = "all";
-			searchList.put("tm", tm);
+			searchList.put("tm", "all");
 		} else {
 			search = "tm";
 			searchList.put("chkNo", 4);
@@ -135,6 +132,7 @@ public class TravelController {
 			mv.addObject("likeTravelList", likeTravelList);
 			mv.addObject("reg", reg);
 			mv.addObject("tm", tm);
+			mv.addObject("hashTag", hashTag);
 			
 			mv.addObject("pi", pi);
 			mv.addObject("searchList", searchList);
@@ -142,7 +140,7 @@ public class TravelController {
 			mv.setViewName("travelList");
 			
 		} else {
-			throw new BoardException("여행지 전체 조회에 실패하였습니다.");
+			throw new TravelException("여행지 전체 조회에 실패하였습니다.");
 		}
 		
 		return mv;
@@ -156,11 +154,9 @@ public class TravelController {
 		
 		
 		Travel travel = tService.selectTravel(boNo);
-		/* Attachment attachment = tService.select */
 		
 		if(travel != null) {
 			mv.addObject("travel", travel)
-					/* .addObject("attachment", attachment) */
 				.addObject("page", page)
 				.setViewName("travelDetail");
 		} else {
@@ -177,16 +173,14 @@ public class TravelController {
 	   
 	@RequestMapping("tInsert.tv")
 	public String travelInsert(@ModelAttribute Travel t, @ModelAttribute Attachment a,
-			/* @RequestParam("uploadFile") MultipartFile[] uploadFile, */@RequestParam("uploadFile1") MultipartFile uploadFile1,
+			@RequestParam("uploadFile1") MultipartFile uploadFile1,
 										   @RequestParam("uploadFile2") MultipartFile uploadFile2,
 										   @RequestParam("uploadFile3") MultipartFile uploadFile3,
-			/* @RequestParam("tCategory") String tCategory, */
+			
 								HttpSession session, HttpServletRequest request) throws Exception{
 		
 		
-		System.out.println("uploadFile1"+ uploadFile1);
-		System.out.println("uploadFile2 " + uploadFile2);
-		System.out.println("uploadFile3" + uploadFile3);
+		
 		
 		MultipartFile[] multiFile = {uploadFile1,uploadFile2,uploadFile3};
 		
@@ -196,13 +190,13 @@ public class TravelController {
 		
 		if(uploadFile1 != null)
 			for(int count=0; count<multiFile.length; count++) {
-			/*for(MultipartFile mf : multiFile) {*/
+			
 				a.setOriginName(multiFile[count].getOriginalFilename()); //원본 파일 명
 
 				String renameFileName2 = saveFile(multiFile[count], request);
 				
 				if(renameFileName != null) {
-					/* a.setChangeName(renameFileName+count); */
+					
 					renameFileName += renameFileName2 + ",";
 				}
 
@@ -211,7 +205,7 @@ public class TravelController {
 				
 				
 			}
-		/* } */
+	
 		a.setChangeName(renameFileName);
 		result2 = tService.insertFiles(a);
 		
@@ -231,38 +225,6 @@ public class TravelController {
 
 
 	  
-		/* @RequestMapping("tInsert.tv") */
-//		public String travelInsert(@ModelAttribute Travel t, @ModelAttribute Attachment a, 
-//									@RequestParam("uploadFile") MultipartFile uploadFile, 
-//									HttpServletRequest request) throws Exception {
-//		 
-//			
-//		if(uploadFile != null && !uploadFile.isEmpty()) { 
-//		  String changeName = saveFile(uploadFile, request); // 파일 저장 경로 지정
-//		  
-//		  
-//		  if(changeName != null) {
-//			  a.setOriginName(uploadFile.getOriginalFilename()); //원본파일명
-//			  a.setChangeName(changeName);
-//			  
-//		  }
-//		}
-//		  
-//		  int result = tService.insertTravel(t);
-//		  int result2 = tService.insertFiles(a);
-//		  
-//		  
-//		  
-//		  if(result> 0 && result2>0) {
-//			  return "redirect:tList.tv"; 
-//		  } else {
-//			  throw new BoardException("여행지 등록에 실패하였습니다.");
-//		 }
-//		  
-//		}
-	
-			
-
 	
 	  public String saveFile(MultipartFile file, HttpServletRequest request) {
 		  
