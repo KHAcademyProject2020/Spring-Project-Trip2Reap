@@ -390,8 +390,9 @@
     </script>
     
  <script>
- // 호텔 리모컨 코드 //
+ 
 $(function(){
+	// 호텔 리모컨 코드 //
 	$.ajax({
 		url:'hotelCookies.ho',
 		type:'post',
@@ -402,50 +403,65 @@ $(function(){
 			
 			rHotel_ul.html(''); //초기화 싹다 비워줌.
 			
-			if(response.length<=0){
+			if(response==null){
 				//조회한 호텔개수가 0개면
 				//최근에 본 호텔부분을 보여주지 않음.
 				rHotel_Container.css('display', 'none');	
 			}else{
 				rHotel_Container.css('display', 'flex');
-				if(response.length>=3){
-					for(var i=response.length-1; i>=response.length-3; i--){
-						
-						let li_code='';
-						li_code+='<li class="remote_li">'
-						li_code+='<a href="hotelDetailView.ho?hId='+response[i].boNo+'&page=1" target="_blank">'
-						li_code+='<span>'
-						li_code+='<img src="resources/buploadFiles/'+response[i].hotelThumbnailImg+'" class="remoteImg" /> '
-						li_code+='</span>'
-						li_code+='<span class="remoteName">'+response[i].boTitle+'</span>'
-						li_code+='</a>'
-						li_code+='</li>'
-						
-						rHotel_ul.append(li_code);
-					}
-				}else{
-					for(var i=response.length-1; i>=0; i--){
-						
-						let li_code='';
-						li_code+='<li class="remote_li">'
-						li_code+='<a href="hotelDetailView.ho?hId='+response[i].boNo+'&page=1" target="_blank">'
-						li_code+='<span>'
-						li_code+='<img src="resources/buploadFiles/'+response[i].hotelThumbnailImg+'" class="remoteImg" /> '
-						li_code+='</span>'
-						li_code+='<span class="remoteName">'+response[i].boTitle+'</span>'
-						li_code+='</a>'
-						li_code+='</li>'
-						
-						rHotel_ul.append(li_code);
-					}
-				}
-				
+				let li_code='';
+				li_code+='<li class="remote_li">'
+				li_code+='<a href="hotelDetailView.ho?hId='+response.boNo+'&page=1" target="_blank">'
+				li_code+='<span>'
+				li_code+='<img src="resources/buploadFiles/'+response.hotelThumbnailImg+'" class="remoteImg" /> '
+				li_code+='</span>'
+				li_code+='<span class="remoteName">'+response.boTitle+'</span>'
+				li_code+='</a>'
+				li_code+='</li>'
+				rHotel_ul.append(li_code);
 			}
-			
 		}
 	});
+	 //호텔 리모컨 코드 끝//
+	 
+	 //코스 리모컨 코드 시작//
+	 $.ajax({
+		url:'courseCookies.co',
+		type:'post',
+		success:function(response){
+			console.log(response);
+			let rCourse_Container= $('#course_remote_control');
+			let rCourse_ul= $('#course_remote_ul');
+			
+			rCourse_ul.html(''); //초기화 싹다 비워줌.
+			
+			if(!response){
+				//조회한 호텔개수가 0개면
+				//최근에 본 호텔부분을 보여주지 않음.
+				rCourse_Container.css('display', 'none');	
+			}else{
+				rCourse_Container.css('display', 'flex');
+				let li_code='';
+				li_code+='<li class="remote_li">'
+				li_code+='<a href="courseDetailView.co?coNo='+response.boardNo+'&page=1" target="_blank">'
+				li_code+='<span>'
+				li_code+='<img src="resources/courseFiles/'+response.changeName+'" class="remoteImg" /> '
+				li_code+='</span>'
+				li_code+='<span class="remoteName">'+response.courseTitle+'</span>'
+				li_code+='</a>'
+				li_code+='</li>'
+				rCourse_ul.append(li_code);
+			}
+		}
+	 });
+	 //코스 리모컨 코드 끝 //
+	 
+	 
+	 //여행지 리모컨 코드시작//
+	 
+	 //여행지 리모컨 코드끝//
 });
- //호텔 리모컨 코드 끝//
+
 </script>
     
 </body>

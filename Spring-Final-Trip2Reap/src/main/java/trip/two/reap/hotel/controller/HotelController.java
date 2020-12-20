@@ -292,8 +292,7 @@ public class HotelController {
 		//12.20 쿠키 코드 추가 /////
 		try {
 			//쿠키생성 - 호텔넘버(hId)를 문자열로 변환시켜서 쿠키생성..
-			String cookieName= "hotelNo"+Integer.toString(hId);
-			Cookie cookie= new Cookie(cookieName, URLEncoder.encode( Integer.toString(hId), "utf-8"));
+			Cookie cookie= new Cookie("hotelNo", URLEncoder.encode( Integer.toString(hId), "utf-8"));
 			cookie.setMaxAge(60*10); //10분유지
 			response.addCookie(cookie);
 		} catch (UnsupportedEncodingException e) {
@@ -803,35 +802,33 @@ public class HotelController {
 	public void hotelCookies(HttpServletRequest request, HttpServletResponse response) throws JsonIOException, IOException{
 		response.setContentType("application/json; charset=UTF-8");
 	
-		LinkedHashSet<Hotel> hotelInfoCookieList= null;			//호텔 리스트
+		Hotel hotel= null;			//호텔 리스트
 		Cookie[] cookieArr= request.getCookies();//쿠키배열을 구한다.
 		
 		if(cookieArr!=null) {
-			hotelInfoCookieList=new LinkedHashSet<Hotel>();
+			
 			
 			for(Cookie cookie : cookieArr) {
 				//쿠키이름 구하기
 				String cookieName= cookie.getName();
 
 				//쿠키이름이 hotelNo인지 확인
-				String subHotelNo= cookieName.substring(0, 7);
-				if(subHotelNo.equals("hotelNo")) {
+				if(cookieName.equals("hotelNo")) {
 					//이때 쿠키값(cookie.getValue(), 리턴타입: 문자열)을 구하여 int로 바꾼다.
 					//cookieValue값은 호텔번호이다.
 					int cookieValue= Integer.parseInt(cookie.getValue());
 					
 					//cookieValue에 해당하는 호텔 썸네일 이미지와, 호텔이름을 구한다.
-					Hotel hotel= hService.selectOnlyOneHotel(cookieValue);
+					hotel= hService.selectOnlyOneHotel(cookieValue);
 					
 					//호텔썸네일 이미지 1개 구한뒤에, bupload에 로드된 호텔이름(changeName)을 구한다.
 					Attachment thumbnailImg= hService.selectOneHotelThumbnailImg(cookieValue);
 					hotel.setHotelThumbnailImg(thumbnailImg.getChangeName());
-					hotelInfoCookieList.add(hotel); //호텔쿠키리스트에 호텔객체를 추가
 				}
 			}
 		}
 		Gson gson =new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-		gson.toJson(hotelInfoCookieList, response.getWriter());
+		gson.toJson(hotel, response.getWriter());
 				
 	}
 	

@@ -2,10 +2,14 @@ package trip.two.reap.course.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 
 import trip.two.reap.course.model.service.CourseService;
 import trip.two.reap.course.model.vo.Course;
@@ -233,8 +241,18 @@ public class CourseController {
 	}
 	
 	@RequestMapping("courseDetail.co")
-	public ModelAndView detailView(@RequestParam("coNo") int coNo, @RequestParam("page") int page, ModelAndView mv) {
+	public ModelAndView detailView(@RequestParam("coNo") int coNo, @RequestParam(value="page", required=false) int page, HttpServletResponse response, ModelAndView mv) {
 		Course course = cService.selectCourse(coNo);
+		
+		//코스 쿠키를 만든다//
+		try {
+			Cookie cookie= new Cookie("courseNo", URLEncoder.encode( Integer.toString(coNo) , "utf-8"));
+			cookie.setMaxAge(60*10);
+			response.addCookie(cookie);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
 		
 		if(course != null) {
 			mv.addObject("course", course);
@@ -243,6 +261,26 @@ public class CourseController {
 		}
 		
 		return mv;
+	}
+	
+	//코스 리모컨//
+	@RequestMapping("courseCookies.co")
+	public void courseCookies(HttpServletRequest request, HttpServletResponse response) throws JsonIOException, IOException {
+		response.setContentType("application/json; charset=UTF-8");
+		Course courseInfo=null;
+		Cookie[] cookieArr= request.getCookies();
+		if(cookieArr!=null) {
+
+			for(Cookie cookie : cookieArr) { //쿠키이름이 courseNo 일때
+				String cookieName= cookie.getName();
+				if(cookieName.equals("courseNo")) {
+					int cookieValue= Integer.parseInt(cookie.getValue());
+					courseInfo= cService.selectCourse(cookieValue);
+				}
+			}
+		}
+		Gson gson=new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(courseInfo, response.getWriter());
 	}
 
 }

@@ -14,7 +14,7 @@
 .total_remote{
 	position: fixed;
 	
-	top:35%;
+	top:65%;
 	right: 30px;
 	z-index:1;
 	
@@ -24,7 +24,7 @@
 	margin:0;
 	padding:0;
 	overflow-y: auto;
-	
+	border: 1px solid var(--blue-gray);
 }
 
 
@@ -76,17 +76,26 @@
 	flex-direction: column;
 	justify-content: space-around;
 	align-items: center;
+	cursor: pointer;
 }
+
 
 .remoteImg { 
     width: 160px; 
     height: 60px;
+    cursor: pointer;
 }
 
 .remoteName {
 	height : 20px;
 	vertical-align : bottom;
 	line-height : 20px;
-	font-size: 8px;
+	font-size: 6px;
 	font-weight: bold;
+	
+	cursor:pointer;
+}
+
+.remote_icon{
+	color: var(--dark-gray);
 }
