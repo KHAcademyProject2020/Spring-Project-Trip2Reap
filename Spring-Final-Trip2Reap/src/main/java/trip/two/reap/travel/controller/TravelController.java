@@ -171,7 +171,7 @@ public class TravelController {
 
 	
 	   
-	@RequestMapping(value="tInsert.tv")
+	@RequestMapping("tInsert.tv")
 	public String travelInsert(@ModelAttribute Travel t, @ModelAttribute Attachment a,
 			/* @RequestParam("uploadFile") MultipartFile[] uploadFile, */@RequestParam("uploadFile1") MultipartFile uploadFile1,
 										   @RequestParam("uploadFile2") MultipartFile uploadFile2,
@@ -212,7 +212,7 @@ public class TravelController {
 		result2 = tService.insertFiles(a);
 		
 		if(result1 > 0 && result2 > 0) {
-			return "travelList";
+			return "redirect:tList.tv";
 		}else {
 			throw new BoardException("여행지 등록에 실패하였습니다.");
 		}

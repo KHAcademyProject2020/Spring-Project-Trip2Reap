@@ -41,7 +41,7 @@
 				<div id="hashtag_div">
 					<ul id="hashtag_ul">
 						<li><a
-							href=" ${pageContext.request.contextPath}/tList.tv?hashTag=전체">#전체</a>&nbsp;&nbsp;
+							href=" ${pageContext.request.contextPath}/tList.tv">#전체</a>&nbsp;&nbsp;
 						</li>
 						<li><a
 							href=" ${pageContext.request.contextPath}/tList.tv?hashTag=문화시설">#문화시설</a>&nbsp;&nbsp;
