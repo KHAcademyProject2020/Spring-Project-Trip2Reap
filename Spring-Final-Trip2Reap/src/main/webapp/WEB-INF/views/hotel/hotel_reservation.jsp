@@ -821,9 +821,34 @@ $(function(){
 		reserveMap.set('reserveTotalPrice', 100); //호텔이 너무 비싸서,,, 가격100 원으로 함. - 임시가격
 
 		reserveMap.set('memberId', $('#hotel_reserve_memberId').val().trim() ); //예약자 아이디
-		reserveMap.set('reserveName',  $('#reservation_name').val() )//예약자이름
-		reserveMap.set('reservePhone', $('#reservation_phone').val() )//예약자 전화번호
-		reserveMap.set('reserveEmail', $('#reservation_email').val() )//예약자 이메일
+		
+		
+		//예약자 이름을 잘 넣었는지확인
+		let inputName=$('#reservation_name').val();
+		if(inputName.length>=2){
+			reserveMap.set('reserveName',  $('#reservation_name').val() )//예약자이름
+		}else{
+			reserveMap.set('reserveName', '')//예약자이름
+		}
+		
+		//예약자 전화번호를 잘넣었는지 확인
+		let inputPhoneNum= $('#reservation_phone').val();
+		let phoneValidReg=/^\d{3}-\d{3,4}-\d{4}/;
+		if(phoneValidReg.test(inputPhoneNum)==true){
+			reserveMap.set('reservePhone', $('#reservation_phone').val() )//예약자 전화번호
+		}else{
+			reserveMap.set('reservePhone', '' )//예약자 전화번호
+		}
+		
+		//예약자 이메일 양식을 지켰는지 확인
+		let inputEmail= $('#reservation_email').val();
+		let emailValidReg= /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+		if(emailValidReg.test(inputEmail)==false){
+			reserveMap.set('reserveEmail', '')//예약자 이메일
+		}else{
+			reserveMap.set('reserveEmail', $('#reservation_email').val() )//예약자 이메일
+		}
+		
 		
 		//체크인날짜, 체크아웃 날짜
 		//예약자이름, 전화번호, 이메일이 공백이 아닌지 확인.

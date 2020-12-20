@@ -515,6 +515,7 @@ button.hotel-reserve-btn{
   text-decoration: none;
   color: var(--dark-gray);
   position: relative;
+  cursor:pointer;
 }
 
 #pagination-ul li{
@@ -530,6 +531,10 @@ button.hotel-reserve-btn{
 #pagination-ul li:nth-last-child(1){
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+#pagination-ul li:hover{
+  	font-weight: bold;
 }
 
 /*

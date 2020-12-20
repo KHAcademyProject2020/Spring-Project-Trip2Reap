@@ -242,8 +242,8 @@
 					<!-- [1] 이전페이지 -->
 					<%--현재페이지가 맨 앞페이지라면 --%>
 					<c:if test="${pi.currentPage<=1 }">
-						<li><a>&lt;&lt;</a></li>
-						<li><a>&lt;</a></li>
+						<a><li>&lt;&lt;</li></a>
+						<a><li>&lt;</li></a>
 					</c:if>
 
 					<%--현재페이지가 맨앞페이지가 아니라면 --%>
@@ -256,7 +256,10 @@
                     		<c:param name="searchHotelPricePerDayType" value="${ searchHotelPricePerDayType}"/>
                     		<c:param name="searchHotelName" value="${searchHotelName }"/>
 						</c:url>
-						<li style="cursor:pointer;"><a href="${firstPage }">&lt;&lt;</a></li>
+						
+						<a href="${firstPage }">
+						<li style="cursor:pointer;">&lt;&lt;</li>
+						</a>
 
 
 						<c:url var="before" value="hotelList.ho">
@@ -267,7 +270,10 @@
                     		<c:param name="searchHotelPricePerDayType" value="${ searchHotelPricePerDayType}"/>
                     		<c:param name="searchHotelName" value="${searchHotelName }"/>
 						</c:url>
-						<li style="cursor:pointer;"><a href="${before }">&lt;</a></li>
+						
+						<a href="${before }">
+							<li style="cursor:pointer;">&lt;</li>
+						</a>
 
 					</c:if>
 
@@ -276,9 +282,9 @@
                     <c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
                     	<%-- p가 현재페이지와 같다면 --%>
                     	<c:if test="${p eq pi.currentPage }">
-                    		<li  style="background-color: var(--blue-gray);">
-                    			<a style="font-weight:bold; ">${p}</a>
-                    		</li>
+                    		<a style="font-weight:bold; ">
+                    		<li  style="background-color: var(--mid-green);color:#fff;">${p}</li>
+                    		</a>
                     	</c:if>
 
                     	<%--p가 현재페이지와 다르다면.. --%>
@@ -292,9 +298,11 @@
 	                    		<c:param name="searchHotelName" value="${searchHotelName }"/>
                     		</c:url>
 
-                    		<li style="cursor:pointer;">
-                    			<a href="${pagination }">${p }</a>
-                    		</li>
+							<a href="${pagination }">
+	                    		<li style="cursor:pointer;">
+	                    			${p }
+	                    		</li>
+                    		</a>
                     	</c:if>
                     </c:forEach>
 
@@ -305,8 +313,8 @@
                      --%>
                     <%--현재페이지가 maxPage보다 더 크면..(다음페이지가 존재하지 않음) --%>
                     <c:if test="${pi.currentPage>=pi.maxPage }">
-                    	<li><a>&gt;</a></li>
-                    	<li><a>&gt;&gt;</a>
+                    	<a><li>&gt;</li></a>
+                    	<a><li>&gt;&gt;</li></a>
                     </c:if>
 
                     <%--현재페이지가 maxPage보다 작으면.. (다음페이지가 존재)--%>
@@ -321,7 +329,7 @@
                     		<c:param name="searchHotelPricePerDayType" value="${ searchHotelPricePerDayType}"/>
                     		<c:param name="searchHotelName" value="${searchHotelName }"/>
                     	</c:url>
-                    	<li style="cursor:pointer;"><a href="${after }">&gt;</a></li>
+                    	<a href="${after }"><li style="cursor:pointer;">&gt;</li></a>
 
                     	<!-- 마지막 페이지 -->
                     	<c:url var="lastPage" value="hotelList.ho">
@@ -332,7 +340,7 @@
                     		<c:param name="searchHotelPricePerDayType" value="${ searchHotelPricePerDayType}"/>
                     		<c:param name="searchHotelName" value="${searchHotelName }"/>
 	                    </c:url>
-	                    <li style="cursor:pointer;"><a href="${lastPage }">&gt;&gt;</a></li>
+	                    <a href="${lastPage }"><li style="cursor:pointer;">&gt;&gt;</li></a>
                     </c:if>
 
                 </ul>

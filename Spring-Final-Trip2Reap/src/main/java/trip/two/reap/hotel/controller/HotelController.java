@@ -72,15 +72,6 @@ public class HotelController {
 		.addObject("searchHotelPricePerDayType", searchHotelPricePerDayType)
 		.addObject("searchHotelName", searchHotelName);
 		
-		//상세검색조건 가져오기
-		if(searchHotelLocalCode>0)
-			System.out.println("검색 호텔 지역코드: "+ searchHotelLocalCode);
-		if(searchHotelRank>0)
-			System.out.println("검색 호텔 등급: "+ searchHotelRank);
-		if(searchHotelPricePerDayType>0)
-			System.out.println("검색 호텔 1일숙박비용 종류(숫자): "+ searchHotelPricePerDayType);
-		if(searchHotelName!=null && searchHotelName!="")
-			System.out.println("검색 호텔 이름: "+ searchHotelName);
 		
 		//검색호텔이름이 존재하지않으면 null로한다.
 		if(searchHotelName=="") {
@@ -779,9 +770,6 @@ public class HotelController {
 		response.setContentType("application/json; charset=UTF-8"); 
 		Member loginUser= (Member)session.getAttribute("loginUser");
 		reservation.setMemberId(loginUser.getMemberId());
-		
-		System.out.println("체크인 날짜: "+checkInDateStr);
-		System.out.println("체크아웃 날짜: "+checkOutDateStr);
 		
 		java.sql.Date checkInDate= java.sql.Date.valueOf(checkInDateStr);
 		java.sql.Date checkOutDate= java.sql.Date.valueOf(checkOutDateStr);

@@ -356,11 +356,7 @@ $(function(){
 			
 			rHotel_ul.html(''); //초기화 싹다 비워줌.
 			
-			if(response==null){
-				//조회한 호텔개수가 0개면
-				//최근에 본 호텔부분을 보여주지 않음.
-				rHotel_Container.css('display', 'none');	
-			}else{
+			if(response!=null){
 				rHotel_Container.css('display', 'flex');
 				let li_code='';
 				li_code+='<li class="remote_li">'
@@ -388,12 +384,7 @@ $(function(){
 			
 			rCourse_ul.html(''); //초기화 싹다 비워줌.
 			
-			if(!response){
-				//조회한 호텔개수가 0개면
-				//최근에 본 호텔부분을 보여주지 않음.
-				rCourse_Container.css('display', 'none');	
-			}else{
-				rCourse_Container.css('display', 'flex');
+			if(response!=null){
 				let li_code='';
 				li_code+='<li class="remote_li">'
 				li_code+='<a href="courseDetailView.co?coNo='+response.boardNo+'&page=1" target="_blank">'
