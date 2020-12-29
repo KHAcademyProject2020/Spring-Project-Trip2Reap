@@ -23,7 +23,7 @@ input[type=button]:focus{ outline: none; }
 /* 리스트  */
 #list_all_div { margin: 30px auto 0px auto; width: 840px; }
 #list_empty_div { width: 840px; background: #efefef; margin-right: 30px; }
-#list_hotel_div { width: 840px; display: flex; margin-bottom: 35px; background : white;
+.list_hotel_div { width: 840px; display: flex; margin-bottom: 35px; background : white;
                   box-shadow: 0 4px 10px 0 #bec2c9; transition : box-shadow .3s ease; }
 #hotel_img_div{ width: 280px; }
 #hotel_img{ width: 250px; height: 170px; margin-left: 10px; margin-top: 10px; margin-bottom: 10px; }
@@ -48,12 +48,14 @@ input[type=button]:focus{ outline: none; }
 #hotel_a{ color: rgb(108,151,249); }
 #hotel_r2{ display: inline-block; font-size: 13px; font-weight: bold; color: rgb(108,151,249);
            margin-bottom: 15px; cursor: pointer; vertical-align: middle; }
-#hotel_r3{ display: inline-block; font-size: 13px; font-weight: bold; color: rgb(108,151,249);
+.hotel_r3{ display: inline-block; font-size: 13px; font-weight: bold; color: rgb(108,151,249);
            margin-bottom: 15px; margin-left: 10px; cursor: pointer; vertical-align: middle; }
-#detailReservation{ font-size: 13px; border: 1px solid #5392f9; background: rgb(108,151,249);
+.detailReservation{ font-size: 13px; border: 1px solid #5392f9; background: rgb(108,151,249);
                     width : 85px; height: 30px; color: white; border-radius: 5px; cursor: pointer; font-weight: bold;
                     margin-bottom: 20px; margin-left: 431px; }
-#detailReservation:hover{ background: rgb(118,161,259); }
+                    
+.detailReservation:focus{outline:none;}
+.detailReservation:hover{ background: rgb(118,161,259); }
 #myHotelBtn { margin-left: 370px; height: 30px; width: 120px; background: rgb(109,126,144); cursor: pointer; border: none; 
                color: white; font-weight: 600; }
 #myHotelBtn:hover { background: rgb(119,136,154); }

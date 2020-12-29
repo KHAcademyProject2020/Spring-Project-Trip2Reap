@@ -46,8 +46,8 @@
 			
 			<c:forEach var="t" items="${ list}" varStatus="tIdx">
 				
-				<div id="list_hotel_div">	
-					<input id="reserveNo" type="hidden" value="${t.reserveNo }">		    
+				<div class="list_hotel_div">	
+					<input class="reserveNo" type="hidden" value="${t.reserveNo }">		    
 					<div id="hotel_img_div">
 						<c:if test="${t.imageName != null }"> <!-- insert로 등록한 여행지 -->
 						 <img src="resources/buploadFiles/${ t.imageName }" id="hotel_img" /> 
@@ -59,12 +59,12 @@
 						</c:url>
 						<div id="hotel_r1"><a id="hotel_a" href="${ tdetail }">이용후기 작성하기</a></div>
 						<div id="hotel_r2">|</div>
-						<div id="hotel_r3">환불하기</div>
+						<div class="hotel_r3">환불하기</div>
 					</div>
 					
 					<div id="hotel_name_writer_div">
-					    <input type="hidden" id="hId" name="hId" value="${ t.boNo }">	
-					    <input type="hidden" id="roomNo" name="roomNo" value="${t.roomNo }">
+					    <input type="hidden" class="hId" name="hId" value="${ t.boNo }">	
+					    <input type="hidden" class="roomNo" name="roomNo" value="${t.roomNo }">
 						<div id="hotel_name">
 							<a href="${ tdetail }">${ t.title }</a>	
 						</div>
@@ -87,7 +87,7 @@
 						    		₩ <fmt:formatNumber value="${t.price}" type="number"/>
 							    </div> 							      						    
 						</div>
-						<button id="detailReservation">자세히 보기</button>
+						<button class="detailReservation">자세히 보기</button>
 
 					</div>			
 				</div>			
@@ -109,8 +109,14 @@
                });
         	  
         	  //환불하기
-        	  $('#hotel_r3').click(function(){      		  
-        		  let reserveNo= Number($('#reserveNo').val());
+        	 
+        	  //$('#hotel_r3').click(
+        	  $(document).on('click','.hotel_r3',function(){
+        		  let d= $(this).closest('.list_hotel_div');
+        			
+        		  //let reserveNo= Number($('.reserveNo').val());
+        		  let reserveNo= d.find('.reserveNo').val();
+        		  console.log(reserveNo)
         		  
         		  swal({
         			  title: "환불 요청",
@@ -159,10 +165,16 @@
         	  
         	  
         	  //자세히보기
-        	  $('#detailReservation').click(function(){
-        		  let reserveNo= Number($('#reserveNo').val());
-        		  let roomNo=Number($('#roomNo').val());
-        		  let boNo=Number($('#hId').val());
+        	  //$('#detailReservation').click(
+        	  $(document).on('click','.detailReservation',function(){
+        		  let d= $(this).closest('.list_hotel_div');
+        		  //let reserveNo= Number($('.reserveNo').val());
+        		  //let roomNo=Number($('.roomNo').val());
+        		  //let boNo=Number($('.hId').val());
+        		  let reserveNo= d.find('.reserveNo').val();
+        		  let roomNo= d.find('.roomNo').val();
+        		  let boNo=d.find('.hId').val();
+        		  
         		  location.href="reservationDetailView.me?reserveNo="+reserveNo+"&hId="+boNo+"&roomNo="+roomNo;
         	  });
         	  
