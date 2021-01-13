@@ -237,8 +237,10 @@ ul#saved-hashtags > li{
   #hotel_name{
     border-color: transparent;
     border-bottom-color: var(--hash-gray);
-    width: 500px;
+    width: 80%;
     font-size: 2em;
+    
+    text-align:center;
     /* text-align: center; */
     padding-left: 10px;
     padding-top: 20px;
@@ -493,6 +495,7 @@ li.upload-img-name-li{
   flex-direction: column;
   /* align-items: center; */
   justify-content: space-between;
+  align-items: center;
   margin-left: 10px;
 }
 
@@ -998,9 +1001,9 @@ input[type="checkbox"].option-checkboxes:checked + label.fake-checkbox-label:aft
  	margin-left: 20px;
  }
  
+ 
  textarea#boContent{
  	border-color: transparent;
- 
  	border-top: 2px solid var(--blue-gray) ;
  	resize:none;
  	padding: 20px 4px;
@@ -1010,20 +1013,4 @@ input[type="checkbox"].option-checkboxes:checked + label.fake-checkbox-label:aft
  textarea:focus{
  	outline:none;
  }
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
  

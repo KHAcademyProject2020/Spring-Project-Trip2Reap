@@ -830,6 +830,20 @@ public class HotelController {
 		String hotelLocalCallNum="";
 		String hotelCallNumber="";
 		
+		//호텔썸네일 & 디테일 이미지 이름을 찾는다.
+		//호텔 썸네일 이미지 이름
+		Attachment hotelThumbnailImg=hService.selectOneHotelThumbnailImg(hId);
+		hotel.setHotelThumbnailImg(hotelThumbnailImg.getChangeName());
+		
+		//호텔 디테일 이미지 이름
+		ArrayList<Attachment> hotelDetailViewImgs= hService.selectDetailImgList(hId);
+		ArrayList<String> hotelDetailViewImgNames=new ArrayList<String>();
+		for(Attachment dImg: hotelDetailViewImgs) {
+			hotelDetailViewImgNames.add(dImg.getChangeName());
+		}
+
+		hotel.setHotelDetailViewImgs(hotelDetailViewImgNames);
+		
 		if(hotel!=null) {
 			//해시태그
 			if(hotel.getBoTag()!=null) {
@@ -847,6 +861,7 @@ public class HotelController {
 				hotelCallNumber=hotelTelArr[1]+"-"+hotelTelArr[2];
 			}
 		}
+		
 		
 		ArrayList<Room> roomList=hService.selectRoomList(hId);
 	

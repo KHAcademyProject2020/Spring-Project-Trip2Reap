@@ -226,7 +226,7 @@
 						});
 						
 						
-						//선택된 이미지를 삭제한다.(아직 )
+						//선택된 이미지를 삭제한다.
 						$('#remove-select-detail-img-btn').click(function(){
 							//선택된 체크박스들을 구한다.
 							let selectedCheckBoxes= $('input[name="select_detail_img"].upload-image-checkbox:checked');
@@ -1272,7 +1272,7 @@
 					</div>
 					
 					<div id="hotel-introduce-content-container">
-						<textarea name="boContent" id="boContent" rows="15" cols="45.75" placeholder="호텔소개내용을 입력해주세요." ></textarea>
+						<textarea name="boContent" id="boContent" style="width:80%" rows="15" placeholder="호텔소개내용을 입력해주세요." ></textarea>
 					</div>
 				
 				</div>
