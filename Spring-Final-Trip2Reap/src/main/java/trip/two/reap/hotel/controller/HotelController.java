@@ -1,6 +1,7 @@
 package trip.two.reap.hotel.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -824,25 +826,14 @@ public class HotelController {
 	//only admin(관리자용)
 	// 호텔 수정페이지뷰로 이동
 	@RequestMapping("hotelEditView.ho")
-	public ModelAndView goEditHotelView(@RequestParam("hId") int hId, ModelAndView mv){
+	public ModelAndView goEditHotelView(@RequestParam("hId") int hId,
+			HttpServletRequest request,
+			ModelAndView mv)
+	{
 		Hotel hotel= hService.selectOneHotel(hId); //호텔정보를 불러온다.
 		LinkedHashSet<String> hashTags=null;
-		String hotelLocalCallNum="";
-		String hotelCallNumber="";
-		
-		//호텔썸네일 & 디테일 이미지 이름을 찾는다.
-		//호텔 썸네일 이미지 이름
-		Attachment hotelThumbnailImg=hService.selectOneHotelThumbnailImg(hId);
-		hotel.setHotelThumbnailImg(hotelThumbnailImg.getChangeName());
-		
-		//호텔 디테일 이미지 이름
-		ArrayList<Attachment> hotelDetailViewImgs= hService.selectDetailImgList(hId);
-		ArrayList<String> hotelDetailViewImgNames=new ArrayList<String>();
-		for(Attachment dImg: hotelDetailViewImgs) {
-			hotelDetailViewImgNames.add(dImg.getChangeName());
-		}
-
-		hotel.setHotelDetailViewImgs(hotelDetailViewImgNames);
+		String hotelLocalCallNum=""; //지역번호
+		String hotelCallNumber="";//지역번호를 제외한 나머지 전화번호
 		
 		if(hotel!=null) {
 			//해시태그
@@ -861,9 +852,65 @@ public class HotelController {
 				hotelCallNumber=hotelTelArr[1]+"-"+hotelTelArr[2];
 			}
 		}
-		
-		
 		ArrayList<Room> roomList=hService.selectRoomList(hId);
+		
+		
+		//썸네일 이미지 & 디테일 이미지 
+		//호텔썸네일 & 디테일 이미지 이름을 찾는다.
+		Attachment hotelThumbnailImg=hService.selectOneHotelThumbnailImg(hId);
+		//Hotel클래스의 썸네일이미지 필드에 넣는다.
+		hotel.setHotelThumbnailImg(hotelThumbnailImg.getChangeName());
+		
+		
+		ArrayList<Attachment> hotelDetailViewImgs= hService.selectDetailImgList(hId);
+		ArrayList<String> dImgNames=new ArrayList<String>();
+		for(Attachment dImg: hotelDetailViewImgs)
+			dImgNames.add(dImg.getChangeName());
+		
+		hotel.setHotelDetailViewImgs(dImgNames);
+
+				
+		// 이미지 저장 루트		
+		String root=request.getSession().getServletContext().getRealPath("resources");
+		String imgSavePath= root;
+		String fileName, filePath;
+		
+		MultipartFile thumbnailImg=null;
+		ArrayList<MultipartFile> detailImgs=new ArrayList<MultipartFile>();
+		
+		if(isWindows()){//os: window
+			imgSavePath= root+"\\buploadFiles";
+			
+			//썸네일 이미지
+			fileName=hotelThumbnailImg.getChangeName();
+			filePath= imgSavePath+"\\"+fileName;
+			thumbnailImg= getImgFile(fileName, filePath);
+			
+			//디테일이미지
+			for(Attachment dImg:hotelDetailViewImgs) {
+				fileName=dImg.getChangeName();
+				filePath=imgSavePath+"\\"+fileName;
+				detailImgs.add(getImgFile(fileName, filePath));
+			}
+			
+		}else if(isMac() ) {//os: mac
+			imgSavePath=root+"/buploadFiles";
+			
+			//썸네일 이미지
+			fileName=hotelThumbnailImg.getChangeName();
+			filePath= imgSavePath+"/"+fileName;
+			thumbnailImg= getImgFile(fileName, filePath);
+			
+			//디테일이미지
+			for(Attachment dImg:hotelDetailViewImgs) {
+				fileName=dImg.getChangeName();
+				filePath=imgSavePath+"/"+fileName;
+				detailImgs.add(getImgFile(fileName, filePath));
+			}
+		}
+			
+//		mv.addObject("detailImgFiles", detailImgs)
+//		.addObject("thumbnailImgFile", thumbnailImg);
 	
 		
 		mv.addObject("hotel", hotel)
@@ -873,6 +920,20 @@ public class HotelController {
 		.addObject("hotelCallNumber", hotelCallNumber)
 		.setViewName("hotel_edit");
 		return mv;
+	}
+	
+	
+	public MultipartFile getImgFile(String fileName, String filePath) {
+		MultipartFile multipartFile=null;
+		try {
+			File file= new File(filePath);
+			multipartFile=new MockMultipartFile(fileName, new FileInputStream(file));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return multipartFile;
 	}
 
 // 은강><

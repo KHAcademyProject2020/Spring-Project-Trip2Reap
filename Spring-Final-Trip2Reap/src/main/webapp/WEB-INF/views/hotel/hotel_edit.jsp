@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -10,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- css -->
-<link rel="stylesheet" href="resources/css/hotel/hotel_insert.css">
+<link rel="stylesheet" href="resources/css/hotel/hotel_edit.css">
 <link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
 
 <title>전국방방곡곡 | 호텔</title>
@@ -84,15 +85,26 @@
 					</div>
 					<div class="hotel-insert-content-container">
 						<input type="file" name="thumbnailImgFile" id="thumbnail_img" accept="image/*" /> 
-						<label id="thumbnail_img_label" for="thumbnail_img">썸네일 이미지 찾아보기</label> 
-						<span class="img_upload_status_info" id="thumbnail_img_name">썸네일 이미지를 업로드 해주세요!</span>
+						<label id="thumbnail_img_label" for="thumbnail_img">썸네일 이미지 찾아보기</label>
+						
+						<c:if test="${hotel.hotelThumbnailImg eq null }">
+							<span class="img_upload_status_info" id="thumbnail_img_name">썸네일 이미지를 업로드 해주세요!</span>
+						</c:if>
+						<c:if test="${hotel.hotelThumbnailImg != null }">
+							<span class="img_upload_status_info" id="thumbnail_img_name">${hotel.hotelThumbnailImg }</span>
+						</c:if>
 					</div>
 					<script>
+					$(function(){
+						
+							
 						$('#thumbnail_img').on('change',function(){
 							let $thumbnailName= $(this).get(0).files;
 							$('#thumbnail_img_name').text($thumbnailName[0]['name']);
 							$('#thumbnail_img_name').css('color', '#515357');
 						});
+					});
+						
 					</script>
 
 				</div>
@@ -107,7 +119,7 @@
 						<label id="detail_img_label" for="detail_img">디테일 이미지 찾아보기</label> 
 						
 						<span class="img_upload_status_info" id="detail_img_name"> 
-							<span id="uploaded_img_cnt">0</span>개의 사진을 업로드 했습니다.
+							<span id="uploaded_img_cnt">${fn:length(hotel.hotelDetailViewImgs) }</span>개의 사진을 업로드 했습니다.
 						</span>
 
 						<div id="hotel-detail-images-container">
@@ -128,13 +140,23 @@
 							</div> <%--hotel-detail-images-head-container --%>
 							
 							<div id="hotel-detail-images-body-container">
-								<ul class="uploaded-img-names-ul">						
+								<ul class="uploaded-img-names-ul">
+									<c:forEach var="name" items="${hotel.hotelDetailViewImgs }" varStatus="status">
+										<li class="upload-img-name-li">
+											<div class="upload-image-checkbox-wrapper">
+												<input id="upload_img_${status.index }" class="upload-image-checkbox" type="checkbox" name="select_detail_img"/>
+												<label for="upload_img_${status.index }" class="upload-image-label"></label>
+											</div>
+											<div class="upload-image-filename-wrapper">${name}</div>
+										</li>
+									</c:forEach>						
 								</ul>
 							</div> <%--hotel-detail-images-body-container --%>
 						</div> <%--hotel-detail-images-container --%>
 					</div><%-- hotel-insert-content-container --%>
 					
 					<script>
+					
 					$(function(){
 						//디테일이미지 컨테이너
 						let detailImgContainer= $('#hotel-detail-images-container');
@@ -151,7 +173,7 @@
 								detailImgContainer.css('display', 'flex');
 								
 								//비우고 다시 넣는다.
-								$('ul.uploaded-img-names-ul').empty();
+								//$('ul.uploaded-img-names-ul').empty();
 								
 								// 방금 등록한 이미지 개수만큼 ul에 넣는다.
 								for(var i=0; i<totalUploadImgs.length; i++){
@@ -184,7 +206,7 @@
 							
 							$('#detail_img').get(0).files= $totalUploadImgs;
 							
-							console.log($('#detail_img').get(0).files);
+							//console.log($('#detail_img').get(0).files);
 							
 						}
 						
@@ -195,11 +217,6 @@
 							let nowUploadImgs= $(this).get(0).files;  //현재 업로드한 이미지 파일
 							//let nowUploadImgCnt=nowUploadImgs.length; //현재 업로드한 이미지 개수
 							//리스트에 등록한 이미지를 넣는다.
-							/*
-							for(var i=0; i<nowUploadImgCnt; i++){
-								totalUploadImgs.push(nowUploadImgs[i]);
-							}
-							*/
 							Array.prototype.push.apply(totalUploadImgs, nowUploadImgs);
 							
 							reOrderingUploadedImgs();
@@ -404,13 +421,15 @@
 												placeholder="객실 이름 입력" value="${roomInfo.roomName }" autocomplete="off">
 											</div>
 			
+											
 											<!-- 
 											<div>
 												<ul class="room_btn_remote_controller">
 													<li class="hotel-info-remove-disable"><i class="fas fa-times"></i></li>
 												</ul>
-											</div>
+											</div> 
 											-->
+											
 										</div>
 			
 										<div class="insert_hotel_details">
@@ -418,21 +437,21 @@
 												<span class="room_kind_label">등록 객실 종류</span> 
 												<select class="roomKinds" name="roomList[${rIdx.index }].roomType">
 													<option value="">객실 종류 선택</option>
-													<option value="싱글룸">싱글룸</option>
-													<option value="더블룸">더블룸</option>
-													<option value="트윈룸">트윈룸</option>
-													<option value="스탠다드룸">스탠다드룸</option>
-													<option value="패밀리룸">패밀리룸</option>
-													<option value="디럭스룸">디럭스룸</option>
-													<option value="스위트룸">스위트룸</option>
-													<option value="스튜디오룸">스튜디오룸</option>
-													<option value="트리플룸">트리플룸</option>
-													<option value="온돌룸">온돌룸</option>
-													<option value="슈페리어룸">슈페리어룸</option>
-													<option value="이그제큐티브룸">이그제큐티브룸</option>
-													<option value="커넥팅룸">커넥팅룸</option>
-													<option value="프리미어룸">프리미어룸</option>
-													<option value="이코노미룸">이코노미룸</option>
+													<option value="싱글룸" <c:if test="${roomInfo.roomType eq '싱글룸'}">selected</c:if>>싱글룸</option>
+													<option value="더블룸" <c:if test="${roomInfo.roomType eq '더블룸'}">selected</c:if>>더블룸</option>
+													<option value="트윈룸" <c:if test="${roomInfo.roomType eq '트윈룸'}">selected</c:if>>트윈룸</option>
+													<option value="스탠다드룸" <c:if test="${roomInfo.roomType eq '스탠다드룸'}">selected</c:if>>스탠다드룸</option>
+													<option value="패밀리룸" <c:if test="${roomInfo.roomType eq '패밀리룸'}">selected</c:if>>패밀리룸</option>
+													<option value="디럭스룸" <c:if test="${roomInfo.roomType eq '디럭스룸'}">selected</c:if> >디럭스룸</option>
+													<option value="스위트룸" <c:if test="${roomInfo.roomType eq '스위트룸'}">selected</c:if>>스위트룸</option>
+													<option value="스튜디오룸"<c:if test="${roomInfo.roomType eq '스튜디오룸'}">selected</c:if>>스튜디오룸</option>
+													<option value="트리플룸"<c:if test="${roomInfo.roomType eq '트리플룸'}">selected</c:if>>트리플룸</option>
+													<option value="온돌룸" <c:if test="${roomInfo.roomType eq '온돌룸'}">selected</c:if>>온돌룸</option>
+													<option value="슈페리어룸" <c:if test="${roomInfo.roomType eq '슈페리어룸'}">selected</c:if>>슈페리어룸</option>
+													<option value="이그제큐티브룸" <c:if test="${roomInfo.roomType eq '이그제큐티브룸'}">selected</c:if>>이그제큐티브룸</option>
+													<option value="커넥팅룸" <c:if test="${roomInfo.roomType eq '커넥팅룸'}">selected</c:if>>커넥팅룸</option>
+													<option value="프리미어룸" <c:if test="${roomInfo.roomType eq '프리미어룸'}">selected</c:if>>프리미어룸</option>
+													<option value="이코노미룸" <c:if test="${roomInfo.roomType eq '이코노미룸'}">selected</c:if>>이코노미룸</option>
 												</select>
 											</div>
 											
@@ -446,15 +465,23 @@
 							</c:forEach>
 						</c:if>
 					</div> <%-- id="insert_hotel_info_list" --%>
-					<!-- 
+					
+					<%--
 					<div class="insert-hotel-btn-container">
 						<i class="fas fa-plus" id="add_room_btn"></i>
 					</div>
-					 -->
+					 --%>
+					
 					
 					<script>
 						
 					$(function(){
+						//이미 기록된 방종류정보 불러오기.
+						$('.roomKinds').each(function(){
+							
+						});
+						
+						
 						$(document).on('keypress','input.price_perday',function(e){
 							$(this).val($(this).val().replace(/[^0-9]/g,''));
 						});
@@ -466,7 +493,10 @@
 						$(document).on('keydown', 'input.price_perday', function(e){
 							$(this).val($(this).val().replace(/[^0-9]/g,''));
 						});
+						
 					});
+					
+					
 					</script>
 				</div>
 
@@ -503,9 +533,9 @@
 							
 							<script>
 							$(function(){
-								$('#local_call_number option[value=${hotelLocalCallNumber}]').attr('selected', 'selected');
-								
-							}
+								console.log('지역번호: '+ ${hotelLocalCallNum});
+								$('#local_call_number option[value=${hotelLocalCallNum}]').attr('selected', 'selected');
+							});
 							</script>
 						</div>
 
@@ -847,11 +877,13 @@
 										<label class="fake-checkbox-label" for="option10">미용실</label>
 									</td>
 								</tr>
+								
 							</table>
 
 
 							<!-- 테이블2 -->
 							<table>
+								
 								<tr>
 									<td>선택</td>
 									<td class="table_option_name">옵션명</td>
@@ -937,9 +969,12 @@
 						//호텔 초기 옵션을 구하여 => 체크한다.
 						let initHotelOptionStr=$('#selectedHotelOptionsStr').val();
 						let initHotelOptionList= initHotelOptionStr.split(', ');
-						console.log(initHotelOptionList);
+						
+						initHotelOptionList.forEach(option=>{
+						
+							$('.option-checkboxes[value="'+option+'"]').attr('checked', 'checked');
+						});
 						let hotelOptions= $('.option-checkboxes');
-						console.log(hotelOptions);
 						
 						
 						$('input[type="checkbox"].option-checkboxes').click(function(){
@@ -1168,9 +1203,9 @@
 					<div class="hotel-insert-subtitle-container">
 						<h3>* 호텔 소개 작성</h3>
 					</div>
-					
+		
 					<div id="hotel-introduce-content-container">
-						<textarea name="boContent" id="boContent" rows="15" cols="45.75" placeholder="호텔소개내용을 입력해주세요.">${hotel.boContent }</textarea>
+						<textarea name="boContent" id="boContent" rows="15" style="width:80%;" placeholder="호텔소개내용을 입력해주세요.">${hotel.boContent }</textarea>
 					</div>
 				
 				</div>
