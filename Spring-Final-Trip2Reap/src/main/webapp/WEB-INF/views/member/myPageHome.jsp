@@ -59,7 +59,7 @@
 						</c:url>
 						<div id="hotel_r1"><a id="hotel_a" href="${ tdetail }">이용후기 작성하기</a></div>
 						<div id="hotel_r2">|</div>
-						<div class="hotel_r3">환불하기</div>
+						<div class="hotel_r3">예약 취소하기</div>
 					</div>
 					
 					<div id="hotel_name_writer_div">
@@ -119,8 +119,8 @@
         		  console.log(reserveNo)
         		  
         		  swal({
-        			  title: "환불 요청",
-        			  text: "해당 예약내역이 삭제될 수 있습니다. 환불 하시겠습니까?",
+        			  title: "예약 취소 요청",
+        			  text: "해당 예약내역이 삭제될 수 있습니다. 예약을 취소 하시겠습니까?",
         			  icon: "warning",
         			  buttons: ['취소', '확인'],
         			  dangerMode: true,
@@ -136,9 +136,9 @@
       			    	  success:function(response){
       			    		  if(response=='success'){
       			    			swal({
-      			    				title: "환불 처리 성공", 
+      			    				title: "예약취소 처리 성공", 
       			    				icon: "success",
-      			    				text: '성공적으로 환불처리 되었습니다.',
+      			    				text: '성공적으로 해당 예약이 취소되었습니다.',
       			    				button: '확인'
       	        			    });
       			    			
@@ -146,9 +146,9 @@
       			    			
       			    		  }else{
       			    			swal({
-      			    				title: "환불 처리 실패", 
+      			    				title: "예약취소 처리 실패", 
         	        			    icon: "error",
-        	        			    text: '환불처리 중 문제가 발생하였습니다.',
+        	        			    text: '예약취소 처리 중 문제가 발생하였습니다.',
         	        			    button: '확인'
         	        			 });
       			    		  }
